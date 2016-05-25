@@ -22,4 +22,6 @@ namespace math
 	point3d operator +(const point3d&, const vector3d&);
 	point3d operator +(const vector3d&, const point3d&);
 	vector3d operator -(const point3d&, const point3d&);
+
+	double distance(const point3d&, const point3d&);
 }

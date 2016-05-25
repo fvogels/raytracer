@@ -24,3 +24,8 @@ vector3d math::operator -(const point3d& p, const point3d& q)
 
 	return vector3d(x, y, z);
 }
+
+double math::distance(const point3d& p, const point3d& q)
+{
+	return (q - p).norm();
+}
