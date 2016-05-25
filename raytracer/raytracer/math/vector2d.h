@@ -19,6 +19,8 @@ namespace math
 		vector2d& operator =(const vector2d&) = default;
 
 		double dot(const vector2d&) const;
+
+		double norm_sqr() const;
 	};
 
 	vector2d operator +(const vector2d&, const vector2d&);

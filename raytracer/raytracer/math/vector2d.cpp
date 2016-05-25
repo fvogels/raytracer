@@ -50,3 +50,8 @@ double math::vector2d::dot(const vector2d& v) const
 
 	return result;
 }
+
+double math::vector2d::norm_sqr() const
+{
+	return dot(*this);
+}
