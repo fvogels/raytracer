@@ -17,6 +17,8 @@ namespace math
 		vector3d(const vector3d& v) = default;
 
 		vector3d& operator =(const vector3d&) = default;
+
+		double dot(const vector3d&) const;
 	};
 
 	vector3d operator +(const vector3d&, const vector3d&);

@@ -43,3 +43,14 @@ std::ostream& math::operator <<(std::ostream& out, const vector3d& v)
 {
 	return out << "(" << v.x << "," << v.y << "," << v.z << ")";
 }
+
+double math::vector3d::dot(const vector3d& v) const
+{
+	double result = 0;
+
+	result += x * v.x;
+	result += y * v.y;
+	result += z * v.z;
+
+	return result;
+}
