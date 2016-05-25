@@ -1,5 +1,4 @@
- #ifndef BITMAP_H
-#define BITMAP_H
+#pragma once
 
 #include "color.h"
 #include "util/position.h"
@@ -27,5 +26,3 @@ public:
 
     void clear(const color&);
 };
-
-#endif

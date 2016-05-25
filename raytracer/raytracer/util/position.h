@@ -1,5 +1,4 @@
-#ifndef POSITION_H
-#define POSITION_H
+#pragma once
 
 #include <vector>
 
@@ -53,5 +52,3 @@ struct position final
         return result;
     }
 };
-
-#endif

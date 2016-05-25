@@ -1,5 +1,4 @@
-#ifndef COLOR_H
-#define COLOR_H
+#pragma once
 
 struct color final
 {
@@ -36,5 +35,3 @@ namespace colors
     inline color magenta() { return color{ 1, 0, 1 }; }
     inline color cyan()    { return color{ 0, 1, 1 }; }
 }
-
-#endif

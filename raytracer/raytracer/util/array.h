@@ -1,5 +1,4 @@
-#ifndef ARRAY_H
-#define ARRAY_H
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -92,5 +91,3 @@ T* reinterpret(array<uint8_t> buffer)
         return reinterpret_cast<T*>(buffer.ptr());
     }
 }
-
-#endif
