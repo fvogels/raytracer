@@ -4,7 +4,7 @@
 
 namespace math
 {
-	struct vector3d
+	struct vector3d final
 	{
 		double x, y, z;
 
