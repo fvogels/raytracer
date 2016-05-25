@@ -3,6 +3,7 @@
 #include "color.h"
 #include "util/position.h"
 #include <memory>
+#include <string>
 
 class Bitmap final
 {
@@ -26,3 +27,6 @@ public:
 
     void clear(const color&);
 };
+
+Bitmap load_bitmap(const std::string& path);
+void save_bitmap(const std::string& path, const Bitmap& bitmap);

@@ -38,9 +38,6 @@
     <ClInclude Include="imaging\color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="imaging\formats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="util\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -1,4 +1,4 @@
-#include "formats.h"
+#include "imaging/bitmap.h"
 #include "util/array.h"
 #include <stdint.h>
 #include <fstream>

@@ -1,4 +1,4 @@
-#include "color.h"
+#include "imaging/color.h"
 
 
 double clamp(double x)

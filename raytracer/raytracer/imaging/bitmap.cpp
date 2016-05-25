@@ -1,4 +1,4 @@
-#include "bitmap.h"
+#include "imaging/bitmap.h"
 #include <assert.h>
 
 

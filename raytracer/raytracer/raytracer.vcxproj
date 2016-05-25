@@ -157,7 +157,6 @@
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
-    <ClInclude Include="imaging\formats.h" />
     <ClInclude Include="math\point3d.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\vector3d.h" />
