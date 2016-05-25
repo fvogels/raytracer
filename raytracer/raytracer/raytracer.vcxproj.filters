@@ -39,6 +39,9 @@
     <ClCompile Include="math\subspace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\rasteriser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\subspace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\rasteriser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
