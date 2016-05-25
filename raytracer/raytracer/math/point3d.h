@@ -4,7 +4,7 @@
 
 namespace math
 {
-	struct point3d
+	struct point3d final
 	{
 		double x, y, z;
 
