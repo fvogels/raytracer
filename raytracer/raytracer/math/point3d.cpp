@@ -2,16 +2,16 @@
 
 using namespace math;
 
-vector3d math::operator +(const point3d& p, const vector3d& v)
+point3d math::operator +(const point3d& p, const vector3d& v)
 {
 	double x = p.x + v.x;
 	double y = p.y + v.y;
 	double z = p.z + v.z;
 
-	return vector3d(x, y, z);
+	return point3d(x, y, z);
 }
 
-vector3d math::operator +(const vector3d& v, const point3d& p)
+point3d math::operator +(const vector3d& v, const point3d& p)
 {
 	return p + v;
 }
