@@ -13,5 +13,8 @@ namespace math
 
 		double size() const;
 		bool contains(double x) const;
+
+		double to_relative(double x) const;
+		double from_relative(double t) const;
 	};
 }
