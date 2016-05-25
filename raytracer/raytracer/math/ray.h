@@ -5,7 +5,7 @@
 
 namespace math
 {
-	struct ray
+	struct ray final
 	{
 		point3d origin;
 		vector3d direction;
