@@ -1,4 +1,4 @@
-#include "point3d.h"
+#include "math/point3d.h"
 
 using namespace math;
 

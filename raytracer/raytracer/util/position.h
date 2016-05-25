@@ -21,34 +21,4 @@ struct position final
         copy.move(dx, dy);
         return copy;
     }
-
-    std::vector<position> around4() const
-    {
-        std::vector<position> result;
-
-        result.push_back(this->moved(-1, 0));
-        result.push_back(this->moved(1, 0));
-        result.push_back(this->moved(0, -1));
-        result.push_back(this->moved(0, 1));
-
-        return result;
-    }
-
-    std::vector<position> around8() const
-    {
-        std::vector<position> result;
-
-        for (int dy = -1; dy <= 1; ++dy)
-        {
-            for (int dx = -1; dx <= 1; ++dx)
-            {
-                if (dx != 0 || dy != 0)
-                {
-                    result.push_back(this->moved(dx, dy));
-                }
-            }
-        }
-
-        return result;
-    }
 };
