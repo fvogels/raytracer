@@ -20,6 +20,8 @@ namespace math
 
 		double dot(const vector3d&) const;
 		vector3d cross(const vector3d&) const;
+
+		double norm_sqr() const;
 	};
 
 	vector3d operator +(const vector3d&, const vector3d&);

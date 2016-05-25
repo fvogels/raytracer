@@ -63,3 +63,8 @@ vector3d math::vector3d::cross(const vector3d& v) const
 
 	return vector3d(x, y, z);
 }
+
+double math::vector3d::norm_sqr() const
+{
+	return dot(*this);
+}
