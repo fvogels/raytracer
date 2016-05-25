@@ -22,3 +22,8 @@ vector2d math::operator -(const point2d& p, const point2d& q)
 
 	return vector2d(x, y);
 }
+
+double math::distance(const point2d& p, const point2d& q)
+{
+	return (q - p).norm();
+}
