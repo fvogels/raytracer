@@ -152,6 +152,7 @@
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\formats.cpp" />
     <ClCompile Include="math\interval.cpp" />
+    <ClCompile Include="math\interval_mapper.cpp" />
     <ClCompile Include="math\point2d.cpp" />
     <ClCompile Include="math\point3d.cpp" />
     <ClCompile Include="math\rasteriser.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="math\interval.h" />
+    <ClInclude Include="math\interval_mapper.h" />
     <ClInclude Include="math\point2d.h" />
     <ClInclude Include="math\point3d.h" />
     <ClInclude Include="math\rasteriser.h" />
