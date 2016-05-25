@@ -1,0 +1,8 @@
+#include "math/rectangle.h"
+
+using namespace math;
+
+point3d math::rectangle::project(const point2d& p) const
+{
+	return origin + x_axis * p.x + y_axis * p.y;
+}
