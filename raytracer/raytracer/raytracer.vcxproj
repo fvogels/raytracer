@@ -155,6 +155,7 @@
     <ClCompile Include="math\vector3d.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cameras\Camera.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="math\point3d.h" />
