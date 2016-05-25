@@ -151,11 +151,13 @@
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\formats.cpp" />
+    <ClCompile Include="math\vector3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\formats.h" />
+    <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="util\array.h" />
     <ClInclude Include="util\position.h" />
   </ItemGroup>
