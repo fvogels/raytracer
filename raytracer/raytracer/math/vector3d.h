@@ -22,6 +22,7 @@ namespace math
 		vector3d cross(const vector3d&) const;
 
 		double norm_sqr() const;
+		double norm() const;
 	};
 
 	vector3d operator +(const vector3d&, const vector3d&);

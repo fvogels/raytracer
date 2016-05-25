@@ -1,4 +1,5 @@
 #include "math/vector3d.h"
+#include <math.h>
 
 using namespace math;
 
@@ -67,4 +68,9 @@ vector3d math::vector3d::cross(const vector3d& v) const
 double math::vector3d::norm_sqr() const
 {
 	return dot(*this);
+}
+
+double math::vector3d::norm() const
+{
+	return std::sqrt(norm_sqr());
 }
