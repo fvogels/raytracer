@@ -1,4 +1,5 @@
 #include "math/vector2d.h"
+#include <math.h>
 
 using namespace math;
 
@@ -54,4 +55,9 @@ double math::vector2d::dot(const vector2d& v) const
 double math::vector2d::norm_sqr() const
 {
 	return dot(*this);
+}
+
+double math::vector2d::norm() const
+{
+	return std::sqrt(norm_sqr());
 }
