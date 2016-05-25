@@ -30,6 +30,9 @@
     <ClCompile Include="math\point3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\vector2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -47,13 +50,16 @@
     <ClInclude Include="math\vector3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\point3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cameras\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\point3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
