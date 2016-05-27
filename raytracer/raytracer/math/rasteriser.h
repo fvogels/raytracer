@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/rectangle.h"
+#include "math/rectangle3d.h"
 #include "util/position.h"
 
 namespace math
@@ -8,18 +8,18 @@ namespace math
 	class rasteriser
 	{
 	private:
-		rectangle rect;
+		rectangle3d rect;
 		unsigned horizontal_subdivisions;
 		unsigned vertical_subdivisions;
 
 	public:
-		rasteriser(const rectangle& rect, unsigned horizontal_subdivisions, unsigned vertical_subdivisions)
+		rasteriser(const rectangle3d& rect, unsigned horizontal_subdivisions, unsigned vertical_subdivisions)
 			: rect(rect), horizontal_subdivisions(horizontal_subdivisions), vertical_subdivisions(vertical_subdivisions) { }
 
 		rasteriser(const rasteriser&) = default;
 
 		rasteriser& operator =(const rasteriser&) = default;
 
-		rectangle operator [](const position&) const;
+		rectangle3d operator [](const position&) const;
 	};
 }
