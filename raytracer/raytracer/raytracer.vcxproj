@@ -171,6 +171,7 @@
     <ClInclude Include="math\rasteriser.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle.h" />
+    <ClInclude Include="math\util.h" />
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="util\array.h" />
