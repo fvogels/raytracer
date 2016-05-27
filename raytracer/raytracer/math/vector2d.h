@@ -22,14 +22,13 @@ namespace math
 
 		double norm_sqr() const;
 		double norm() const;
+		void normalize();
+		vector2d normalized() const;
 
 		vector2d& operator +=(const vector2d&);
 		vector2d& operator -=(const vector2d&);
 		vector2d& operator *=(double);
 		vector2d& operator /=(double);
-
-		void normalize();
-		vector2d normalized() const;
 	};
 
 	vector2d operator +(const vector2d&, const vector2d&);
