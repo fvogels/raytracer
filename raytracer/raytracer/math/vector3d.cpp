@@ -74,3 +74,33 @@ double math::vector3d::norm() const
 {
 	return std::sqrt(norm_sqr());
 }
+
+void math::vector3d::normalize()
+{
+	*this = normalized();
+}
+
+vector3d math::vector3d::normalized() const
+{
+	return *this / norm();
+}
+
+vector3d& math::vector3d::operator+=(const vector3d& v)
+{
+	return *this = *this + v;
+}
+
+vector3d& math::vector3d::operator-=(const vector3d& v)
+{
+	return *this = *this - v;
+}
+
+vector3d& math::vector3d::operator*=(double factor)
+{
+	return *this = *this * factor;
+}
+
+vector3d& math::vector3d::operator/=(double factor)
+{
+	return *this = *this / factor;
+}

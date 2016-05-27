@@ -23,6 +23,13 @@ namespace math
 
 		double norm_sqr() const;
 		double norm() const;
+		void normalize();
+		vector3d normalized() const;
+
+		vector3d& operator +=(const vector3d&);
+		vector3d& operator -=(const vector3d&);
+		vector3d& operator *=(double);
+		vector3d& operator /=(double);
 	};
 
 	vector3d operator +(const vector3d&, const vector3d&);
