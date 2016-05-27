@@ -169,6 +169,7 @@
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
+    <ClCompile Include="primitives\Union.cpp" />
     <ClCompile Include="rendering\GridSampler.cpp" />
     <ClCompile Include="rendering\SingleSampler.cpp" />
   </ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="primitives\Hit.h" />
     <ClInclude Include="primitives\Primitive.h" />
     <ClInclude Include="primitives\Sphere.h" />
+    <ClInclude Include="primitives\Union.h" />
     <ClInclude Include="rendering\GridSampler.h" />
     <ClInclude Include="rendering\Sampler.h" />
     <ClInclude Include="rendering\SingleSampler.h" />
