@@ -24,6 +24,7 @@ namespace math
 		double norm() const;
 		void normalize();
 		vector2d normalized() const;
+		bool is_unit() const;
 
 		vector2d& operator +=(const vector2d&);
 		vector2d& operator -=(const vector2d&);

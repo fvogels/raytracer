@@ -1,4 +1,5 @@
 #include "math/vector2d.h"
+#include "math/util.h"
 #include <math.h>
 
 using namespace math;
@@ -90,4 +91,9 @@ vector2d& math::vector2d::operator*=(double factor)
 vector2d& math::vector2d::operator/=(double factor)
 {
 	return *this = *this / factor;
+}
+
+bool math::vector2d::is_unit() const
+{
+	return norm() == approx(1);
 }
