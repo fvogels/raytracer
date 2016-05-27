@@ -162,7 +162,7 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
-    <ClCompile Include="rendering\rectangle2d.cpp" />
+    <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="rendering\SingleSampler.cpp" />
   </ItemGroup>
   <ItemGroup>

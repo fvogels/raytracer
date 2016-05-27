@@ -60,7 +60,7 @@
     <ClCompile Include="rendering\SingleSampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\rectangle2d.cpp">
+    <ClCompile Include="math\rectangle2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
