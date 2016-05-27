@@ -35,6 +35,7 @@ namespace math
 	};
 
 	vector2d operator +(const vector2d&, const vector2d&);
+	vector2d operator -(const vector2d&);
 	vector2d operator -(const vector2d&, const vector2d&);
 	vector2d operator *(const vector2d&, double factor);
 	vector2d operator *(double factor, const vector2d&);

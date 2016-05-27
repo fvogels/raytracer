@@ -12,6 +12,15 @@ vector2d math::operator +(const vector2d& u, const vector2d& v)
 	return vector2d(x, y);
 }
 
+vector2d math::operator -(const vector2d& v)
+{
+	double x = - v.x;
+	double y = - v.y;
+
+	return vector2d(x, y);
+}
+
+
 vector2d math::operator -(const vector2d& u, const vector2d& v)
 {
 	double x = u.x - v.x;
