@@ -30,6 +30,8 @@ namespace math
 		vector2d& operator -=(const vector2d&);
 		vector2d& operator *=(double);
 		vector2d& operator /=(double);
+
+		bool is_perpendicular_on(const vector2d&) const;
 	};
 
 	vector2d operator +(const vector2d&, const vector2d&);

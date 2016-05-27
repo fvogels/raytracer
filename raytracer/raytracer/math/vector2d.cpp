@@ -97,3 +97,8 @@ bool math::vector2d::is_unit() const
 {
 	return norm() == approx(1);
 }
+
+bool math::vector2d::is_perpendicular_on(const vector2d& v) const
+{
+	return dot(v) == approx(0);
+}
