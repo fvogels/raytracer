@@ -13,5 +13,7 @@ namespace math
 
 		rectangle2d(const point2d& origin, const vector2d& x_axis, const vector2d& y_axis)
 			: origin(origin), x_axis(x_axis), y_axis(y_axis) { }
+
+		point2d center() const;
 	};
 }
