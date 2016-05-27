@@ -22,6 +22,7 @@ namespace math
 	point2d operator +(const point2d&, const vector2d&);
 	point2d operator +(const vector2d&, const point2d&);
 	vector2d operator -(const point2d&, const point2d&);
+	point2d operator -(const point2d&, const vector2d&);
 
 	double distance(const point2d&, const point2d&);
 }
