@@ -166,6 +166,7 @@
     <ClCompile Include="math\point3d.cpp" />
     <ClCompile Include="math\rasteriser.cpp" />
     <ClCompile Include="math\rectangle3d.cpp" />
+    <ClCompile Include="math\transformation.cpp" />
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="math\rasteriser.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
+    <ClInclude Include="math\transformation.h" />
     <ClInclude Include="math\util.h" />
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />

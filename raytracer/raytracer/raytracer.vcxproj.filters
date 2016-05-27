@@ -72,6 +72,9 @@
     <ClCompile Include="math\matrix4d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\transformation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -150,6 +153,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\matrix4d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\transformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
