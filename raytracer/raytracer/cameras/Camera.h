@@ -1,6 +1,8 @@
 #pragma once
 
 #include "math/ray.h"
+#include "math/point2d.h"
+#include "math/ray.h"
 #include <functional>
 
 namespace raytracer
@@ -8,6 +10,6 @@ namespace raytracer
 	class Camera
 	{
 	public:
-		virtual void each_ray(std::function<void(const math::ray&)>) const = 0;
+		virtual math::ray create_ray(const math::point2d&) const = 0;
 	};
 }
