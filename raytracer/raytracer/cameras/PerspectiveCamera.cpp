@@ -33,7 +33,7 @@ ray PerspectiveCamera::create_ray(const point2d& point) const
 	return ray(eye, p);
 }
 
-std::shared_ptr<Camera> raytracer::createPerspectiveCamera(
+std::shared_ptr<Camera> raytracer::create_perspective_camera(
 	const math::point3d& eye,
 	const math::point3d& look_at,
 	const math::vector3d& up,

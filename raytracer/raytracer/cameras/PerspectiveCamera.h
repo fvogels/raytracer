@@ -7,7 +7,7 @@
 
 namespace raytracer
 {
-	std::shared_ptr<Camera> createPerspectiveCamera(
+	std::shared_ptr<Camera> create_perspective_camera(
 		const math::point3d& eye,
 		const math::point3d& look_at,
 		const math::vector3d& up,
