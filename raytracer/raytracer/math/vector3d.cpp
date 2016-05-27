@@ -68,9 +68,11 @@ double math::vector3d::dot(const vector3d& v) const
 
 vector3d math::vector3d::cross(const vector3d& v) const
 {
-	double x = y * v.z - z * v.y;
-	double y = -(x * v.z - z * v.x);
-	double z = x * v.y - y * v.x;
+	const vector3d& u = *this;
+
+	double x = u.y * v.z - u.z * v.y;
+	double y = -(u.x * v.z - u.z * v.x);
+	double z = u.x * v.y - u.y * v.x;
 
 	return vector3d(x, y, z);
 }
