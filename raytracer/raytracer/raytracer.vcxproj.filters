@@ -107,5 +107,8 @@
     <ClInclude Include="primitives\Hit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="util\misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

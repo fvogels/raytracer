@@ -179,6 +179,7 @@
     <ClInclude Include="primitives\Hit.h" />
     <ClInclude Include="primitives\Primitive.h" />
     <ClInclude Include="util\array.h" />
+    <ClInclude Include="util\misc.h" />
     <ClInclude Include="util\position.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
