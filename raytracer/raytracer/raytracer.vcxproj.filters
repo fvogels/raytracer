@@ -69,6 +69,9 @@
     <ClCompile Include="primitives\Union.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\matrix4d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -144,6 +147,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\Union.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix4d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
