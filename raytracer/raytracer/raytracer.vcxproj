@@ -184,6 +184,7 @@
     <ClInclude Include="util\array.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="util\position.h" />
+    <ClInclude Include="math\rectangle2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
