@@ -110,3 +110,8 @@ bool math::vector3d::is_unit() const
 {
 	return norm() == approx(1);
 }
+
+bool math::vector3d::is_perpendicular_on(const vector3d& v) const
+{
+	return dot(v) == approx(0);
+}

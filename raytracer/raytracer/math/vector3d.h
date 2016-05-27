@@ -31,6 +31,8 @@ namespace math
 		vector3d& operator -=(const vector3d&);
 		vector3d& operator *=(double);
 		vector3d& operator /=(double);
+
+		bool is_perpendicular_on(const vector3d&) const;
 	};
 
 	vector3d operator +(const vector3d&, const vector3d&);
