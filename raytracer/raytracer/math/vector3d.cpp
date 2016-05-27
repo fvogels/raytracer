@@ -1,4 +1,5 @@
 #include "math/vector3d.h"
+#include "math/util.h"
 #include <math.h>
 
 using namespace math;
@@ -103,4 +104,9 @@ vector3d& math::vector3d::operator*=(double factor)
 vector3d& math::vector3d::operator/=(double factor)
 {
 	return *this = *this / factor;
+}
+
+bool math::vector3d::is_unit() const
+{
+	return norm() == approx(1);
 }
