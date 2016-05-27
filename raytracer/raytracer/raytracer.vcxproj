@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cameras\PerspectiveCamera.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\formats.cpp" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cameras\Camera.h" />
+    <ClInclude Include="cameras\PerspectiveCamera.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="math\interval.h" />
