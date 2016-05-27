@@ -3,7 +3,7 @@
 #include "cameras/PerspectiveCamera.h"
 #include "math/rectangle2d.h"
 #include "math/rasteriser.h"
-#include "rendering/SingleSampler.h"
+#include "rendering/GridSampler.h"
 
 using namespace math;
 using namespace raytracer;
@@ -15,7 +15,7 @@ int main()
 	Sphere sphere;
 	rectangle2d window(point2d(0, 1), vector2d(1, 0), vector2d(0, -1));
 	rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
-	
+	GridSampler sampler(3, 3);
 
 	bitmap.clear(colors::black());
 
@@ -24,14 +24,22 @@ int main()
 		for (int i = 0; i != bitmap.width(); ++i)
 		{
 			rectangle2d pixel_rectangle = window_rasteriser[position(i, j)];
+			color c = colors::black();
+			int sample_count = 0;
 
-			auto r = camera->create_ray(pixel_rectangle.center());
+			sampler.sample(pixel_rectangle, [&camera, &sphere, &c, &sample_count](const point2d& p) {
+				auto r = camera->create_ray(p);
 
-			Hit hit;
-			if (sphere.find_hit(r, &hit))
-			{
-				bitmap[position(i, j)] = colors::red();
-			}
+				Hit hit;
+				if (sphere.find_hit(r, &hit))
+				{
+					c += colors::red();
+				}
+
+				++sample_count;
+			});
+
+			bitmap[position(i, j)] = c / sample_count;
 		}
 	}
 

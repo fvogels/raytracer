@@ -105,6 +105,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,6 +123,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,6 +143,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,6 +169,7 @@
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
+    <ClCompile Include="rendering\GridSampler.cpp" />
     <ClCompile Include="rendering\SingleSampler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +190,7 @@
     <ClInclude Include="primitives\Hit.h" />
     <ClInclude Include="primitives\Primitive.h" />
     <ClInclude Include="primitives\Sphere.h" />
+    <ClInclude Include="rendering\GridSampler.h" />
     <ClInclude Include="rendering\Sampler.h" />
     <ClInclude Include="rendering\SingleSampler.h" />
     <ClInclude Include="util\array.h" />
