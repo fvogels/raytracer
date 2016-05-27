@@ -61,3 +61,33 @@ double math::vector2d::norm() const
 {
 	return std::sqrt(norm_sqr());
 }
+
+void math::vector2d::normalize()
+{
+	*this = normalized();
+}
+
+vector2d math::vector2d::normalized() const
+{
+	return *this / norm();
+}
+
+vector2d& math::vector2d::operator+=(const vector2d& v)
+{
+	return *this = *this + v;
+}
+
+vector2d& math::vector2d::operator-=(const vector2d& v)
+{
+	return *this = *this - v;
+}
+
+vector2d& math::vector2d::operator*=(double factor)
+{
+	return *this = *this * factor;
+}
+
+vector2d& math::vector2d::operator/=(double factor)
+{
+	return *this = *this / factor;
+}
