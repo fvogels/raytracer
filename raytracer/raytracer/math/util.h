@@ -9,12 +9,12 @@ struct approx
 	approx(double value) : value(value) { }	
 };
 
-bool operator ==(approx x, double y)
+inline bool operator ==(approx x, double y)
 {
 	return fabs(y - x.value) < 0.00001;
 }
 
-bool operator ==(double x, approx y)
+inline bool operator ==(double x, approx y)
 {
 	return y == x;
 }
