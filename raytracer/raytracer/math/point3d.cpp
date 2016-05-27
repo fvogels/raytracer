@@ -25,6 +25,15 @@ vector3d math::operator -(const point3d& p, const point3d& q)
 	return vector3d(x, y, z);
 }
 
+point3d math::operator -(const point3d& p, const vector3d& v)
+{
+	double x = p.x - v.x;
+	double y = p.y - v.y;
+	double z = p.z - v.z;
+
+	return point3d(x, y, z);
+}
+
 double math::distance(const point3d& p, const point3d& q)
 {
 	return (q - p).norm();
