@@ -36,6 +36,7 @@ namespace math
 	};
 
 	vector3d operator +(const vector3d&, const vector3d&);
+	vector3d operator -(const vector3d&);
 	vector3d operator -(const vector3d&, const vector3d&);
 	vector3d operator *(const vector3d&, double factor);
 	vector3d operator *(double factor, const vector3d&);

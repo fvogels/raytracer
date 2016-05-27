@@ -13,6 +13,15 @@ vector3d math::operator +(const vector3d& u, const vector3d& v)
 	return vector3d(x, y, z);
 }
 
+vector3d math::operator -(const vector3d& v)
+{
+	double x = - v.x;
+	double y = - v.y;
+	double z = - v.z;
+
+	return vector3d(x, y, z);
+}
+
 vector3d math::operator -(const vector3d& u, const vector3d& v)
 {
 	double x = u.x - v.x;
