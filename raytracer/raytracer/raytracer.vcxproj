@@ -162,6 +162,8 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
+    <ClCompile Include="rendering\rectangle2d.cpp" />
+    <ClCompile Include="rendering\SingleSampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cameras\Camera.h" />
@@ -181,6 +183,8 @@
     <ClInclude Include="primitives\Hit.h" />
     <ClInclude Include="primitives\Primitive.h" />
     <ClInclude Include="primitives\Sphere.h" />
+    <ClInclude Include="rendering\Sampler.h" />
+    <ClInclude Include="rendering\SingleSampler.h" />
     <ClInclude Include="util\array.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="util\position.h" />
