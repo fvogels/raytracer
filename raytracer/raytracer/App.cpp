@@ -10,6 +10,7 @@
 #include "rendering/GridSampler.h"
 #include "materials/UniformMaterial.h"
 #include "materials/CheckeredMaterial.h"
+#include <assert.h>
 
 using namespace math;
 using namespace raytracer;
@@ -41,6 +42,9 @@ color determine_color(const ray& r)
 			vector3d hit_to_light = (light->position - hit.position).normalized();
 			double cos_angle = hit_to_light.dot(hit.normal);
 
+			assert(hit.normal.is_unit());
+			assert(-1 <= cos_angle && cos_angle <= 1);
+
 			if (cos_angle > 0)
 			{
 				c += hit.c * cos_angle;
@@ -67,49 +71,56 @@ color render_pixel(const rasteriser& window_rasteriser, int i, int j)
 	return c / sample_count;
 }
 
-void create_root()
+void create_root(double t)
 {
 	auto sphere = std::make_shared<Sphere>();
 	auto material = std::make_shared<CheckeredMaterial>(colors::white(), colors::black());
 	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
-	scene.root = std::make_shared<Transformer>(scale(2, 2, 2), decorated_sphere);
+	scene.root = std::make_shared<Transformer>(scale(t + 1, t + 1, t + 1), decorated_sphere);
 }
 
-void create_lights()
+void create_lights(double t)
 {
+	scene.lights.clear();
 	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, 5)));
 }
 
-void create_scene()
+void create_scene(double t)
 {
-	create_root();
-	create_lights();
+	create_root(t);
+	create_lights(t);
 }
 
 #ifndef TEST_BUILD
 int main()
 {
-	Bitmap bitmap(500, 500);
-	camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
-	create_scene();
-
-	rectangle2d window(point2d(0, 0), vector2d(1, 0), vector2d(0, 1));
-	rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
-
-	bitmap.clear(colors::black());
-
-	for (int j = 0; j != bitmap.height(); ++j)
-	{
-		for (int i = 0; i != bitmap.width(); ++i)
-		{
-			color c = render_pixel(window_rasteriser, i, j);
-
-			bitmap[position(i, j)] = c;
-		}
-	}
-
-	save_bitmap("e:/temp/output/test.bmp", bitmap);
+	const int FRAME_COUNT = 30;
 	WIF wif("e:/temp/output/test.wif");
-	wif.write_frame(bitmap);
+
+	for (int frame = 0; frame != FRAME_COUNT; ++frame)
+	{
+		std::cout << "Rendering frame " << frame << std::endl;
+
+		Bitmap bitmap(500, 500);
+		camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
+		create_scene(double(frame) / FRAME_COUNT);
+
+		rectangle2d window(point2d(0, 0), vector2d(1, 0), vector2d(0, 1));
+		rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
+
+		bitmap.clear(colors::black());
+
+		for (int j = 0; j != bitmap.height(); ++j)
+		{
+			for (int i = 0; i != bitmap.width(); ++i)
+			{
+				color c = render_pixel(window_rasteriser, i, j);
+
+				bitmap[position(i, j)] = c;
+			}
+		}
+
+		wif.write_frame(bitmap);
+	}
 }
 #endif
