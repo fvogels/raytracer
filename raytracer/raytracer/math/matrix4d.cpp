@@ -30,18 +30,22 @@ matrix4d math::operator *(const matrix4d& a, const matrix4d& b)
 
 vector3d math::operator *(const matrix4d& a, const vector3d& v)
 {
-#define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 2 * v.z
+#define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 3 * v.z
 
 	return vector3d{ AUX(1), AUX(2), AUX(3) };
 
 #undef AUX
 }
 
-point3d math::operator *(const matrix4d& a, const point3d& v)
+point3d math::operator *(const matrix4d& a, const point3d& p)
 {
-#define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 2 * v.z + a.x ## row ## 3
+#define AUX(row) a.x ## row ## 1 * p.x + a.x ## row ## 2 * p.y + a.x ## row ## 3 * p.z + a.x ## row ## 4
 
-	return point3d{ AUX(1), AUX(2), AUX(3) };
+	double x = AUX(1);
+	double y = AUX(2);
+	double z = AUX(3);
+
+	return point3d{ x, y, z };
 
 #undef AUX
 }
