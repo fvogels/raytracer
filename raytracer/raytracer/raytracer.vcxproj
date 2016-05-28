@@ -222,7 +222,7 @@
     <ClCompile Include="cameras\PerspectiveCamera.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
-    <ClCompile Include="imaging\formats.cpp" />
+    <ClCompile Include="imaging\bmp_format.cpp" />
     <ClCompile Include="materials\CheckeredMaterial.cpp" />
     <ClCompile Include="materials\UniformMaterial.cpp" />
     <ClCompile Include="math\interval.cpp" />
