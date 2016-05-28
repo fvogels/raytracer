@@ -79,6 +79,7 @@ void create_scene()
 	create_lights();
 }
 
+#ifndef TEST_BUILD
 int main()
 {
 	Bitmap bitmap(500, 500);
@@ -102,3 +103,4 @@ int main()
 
 	save_bitmap("e:/temp/output/test.bmp", bitmap);
 }
+#endif
