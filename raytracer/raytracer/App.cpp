@@ -1,5 +1,6 @@
 #include "imaging/bitmap.h"
 #include "primitives/Sphere.h"
+#include "primitives/Transformer.h"
 #include "cameras/PerspectiveCamera.h"
 #include "math/rectangle2d.h"
 #include "math/rasteriser.h"
@@ -8,14 +9,75 @@
 using namespace math;
 using namespace raytracer;
 
+struct Light
+{
+	vector3d position;
+
+	Light(const vector3d& position) : position(position) { }
+};
+
+struct Scene
+{
+	std::shared_ptr<Primitive> root;
+	std::vector<std::shared_ptr<Light>> lights;
+} scene;
+
+std::shared_ptr<Camera> camera = nullptr;
+
+color determine_color(const ray& r)
+{
+	Hit hit;
+	if (scene.root->find_hit(r, &hit))
+	{
+		return colors::red();
+	}
+	else
+	{
+		return colors::black();
+	}
+}
+
+color render_pixel(const rasteriser& window_rasteriser, int i, int j)
+{
+	GridSampler sampler(1, 1);
+	rectangle2d pixel_rectangle = window_rasteriser[position(i, j)];
+	color c = colors::black();
+	int sample_count = 0;
+
+	sampler.sample(pixel_rectangle, [&c, &sample_count](const point2d& p) {
+		auto r = camera->create_ray(p);
+		c += determine_color(r);
+		++sample_count;
+	});
+
+	return c / sample_count;
+}
+
+void create_root()
+{
+	auto sphere = std::make_shared<Sphere>();
+	scene.root = std::make_shared<Transformer>(scale(2, 3, 1), sphere);
+}
+
+void create_lights()
+{
+	scene.lights.push_back(std::make_shared<Light>(vector3d(0, 5, 5)));
+}
+
+void create_scene()
+{
+	create_root();
+	create_lights();
+}
+
 int main()
 {
-	Bitmap bitmap(500, 500);	
-	auto camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
-	Sphere sphere;
+	Bitmap bitmap(500, 500);
+	camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
+	create_scene();
+
 	rectangle2d window(point2d(0, 1), vector2d(1, 0), vector2d(0, -1));
 	rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
-	GridSampler sampler(3, 3);
 
 	bitmap.clear(colors::black());
 
@@ -23,25 +85,11 @@ int main()
 	{
 		for (int i = 0; i != bitmap.width(); ++i)
 		{
-			rectangle2d pixel_rectangle = window_rasteriser[position(i, j)];
-			color c = colors::black();
-			int sample_count = 0;
+			color c = render_pixel(window_rasteriser, i, j);
 
-			sampler.sample(pixel_rectangle, [&camera, &sphere, &c, &sample_count](const point2d& p) {
-				auto r = camera->create_ray(p);
-
-				Hit hit;
-				if (sphere.find_hit(r, &hit))
-				{
-					c += colors::red();
-				}
-
-				++sample_count;
-			});
-
-			bitmap[position(i, j)] = c / sample_count;
+			bitmap[position(i, j)] = c;
 		}
 	}
 
-	save_bitmap("e:/temp/test.bmp", bitmap);
+	save_bitmap("e:/temp/output/test.bmp", bitmap);
 }
