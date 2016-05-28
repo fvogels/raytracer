@@ -1,5 +1,6 @@
 #include "imaging/bitmap.h"
 #include "primitives/Sphere.h"
+#include "primitives/Plane.h"
 #include "primitives/Transformer.h"
 #include "cameras/PerspectiveCamera.h"
 #include "math/rectangle2d.h"
@@ -39,7 +40,7 @@ color determine_color(const ray& r)
 			if (cos_angle > 0)
 			{
 				c += colors::red() * cos_angle;
-			}			
+			}
 		}
 	}
 
@@ -64,13 +65,13 @@ color render_pixel(const rasteriser& window_rasteriser, int i, int j)
 
 void create_root()
 {
-	auto sphere = std::make_shared<Sphere>();
+	auto sphere = std::make_shared<Plane>(point3d(0, 0, 0), vector3d(0, 1, 0));
 	scene.root = std::make_shared<Transformer>(translation(vector3d(0, 1, 0)), sphere);
 }
 
 void create_lights()
 {
-	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, 5)));
+	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, -5)));
 }
 
 void create_scene()
