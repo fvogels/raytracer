@@ -65,12 +65,12 @@ color render_pixel(const rasteriser& window_rasteriser, int i, int j)
 void create_root()
 {
 	auto sphere = std::make_shared<Sphere>();
-	scene.root = std::make_shared<Transformer>(scale(2, 3, 1), sphere);
+	scene.root = std::make_shared<Transformer>(translation(vector3d(0, 1, 0)), sphere);
 }
 
 void create_lights()
 {
-	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, 0)));
+	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, 5)));
 }
 
 void create_scene()
@@ -86,7 +86,7 @@ int main()
 	camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
 	create_scene();
 
-	rectangle2d window(point2d(0, 1), vector2d(1, 0), vector2d(0, -1));
+	rectangle2d window(point2d(0, 0), vector2d(1, 0), vector2d(0, 1));
 	rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
 
 	bitmap.clear(colors::black());
