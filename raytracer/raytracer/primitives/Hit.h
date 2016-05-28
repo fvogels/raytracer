@@ -1,6 +1,14 @@
 #pragma once
 
-struct Hit
+#include "math/vector3d.h"
+#include "math/point3d.h"
+
+namespace raytracer
 {
-	double t;
-};
+	struct Hit
+	{
+		double t;
+		math::point3d position;
+		math::vector3d normal;
+	};
+}

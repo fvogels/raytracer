@@ -30,11 +30,17 @@ bool Sphere::find_hit(const ray& ray, Hit* hit) const
 		if (t1 > 0)
 		{
 			hit->t = t1;
+			hit->position = ray.at(hit->t);
+			hit->normal = hit->position - point3d();
+
 			return true;
 		}
 		else if (t2 > 0)
 		{
 			hit->t = t2;
+			hit->position = ray.at(hit->t);
+			hit->normal = hit->position - point3d();
+
 			return true;
 		}
 		else
