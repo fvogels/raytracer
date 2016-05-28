@@ -2,6 +2,7 @@
 
 #include "math/vector3d.h"
 #include "math/point3d.h"
+#include "math/matrix4d.h"
 
 namespace math
 {
@@ -19,5 +20,7 @@ namespace math
 		ray(const ray&) = default;
 
 		point3d at(double t) const { return origin + direction * t; }
+
+		ray transform(const matrix4d&) const;
 	};
 }

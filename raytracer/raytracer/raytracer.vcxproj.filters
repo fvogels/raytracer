@@ -75,6 +75,9 @@
     <ClCompile Include="math\transformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
