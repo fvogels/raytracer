@@ -15,4 +15,5 @@ namespace math
 	};
 
 	transformation translation(const vector3d&);
+	transformation scale(double, double, double);
 }
