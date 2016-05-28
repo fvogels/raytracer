@@ -2,6 +2,7 @@
 
 #include "math/vector3d.h"
 #include "math/point3d.h"
+#include <limits>
 
 namespace raytracer
 {
@@ -10,5 +11,7 @@ namespace raytracer
 		double t;
 		math::point3d position;
 		math::vector3d normal;
+
+		Hit() : t( std::numeric_limits<double>::infinity()) { }
 	};
 }
