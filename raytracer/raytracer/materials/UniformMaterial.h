@@ -2,7 +2,7 @@
 
 #include "materials/Material3D.h"
 
-namespace raytracer
+namespace Raytracer
 {
 	class UniformMaterial : public Material3D
 	{

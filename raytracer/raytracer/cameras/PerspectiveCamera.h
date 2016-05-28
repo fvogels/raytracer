@@ -5,7 +5,7 @@
 #include "math/point3d.h"
 #include <memory>
 
-namespace raytracer
+namespace Raytracer
 {
 	std::shared_ptr<Camera> create_perspective_camera(
 		const math::point3d& eye,

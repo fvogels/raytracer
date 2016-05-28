@@ -3,7 +3,7 @@
 
 using namespace math;
 
-void raytracer::GridSampler::sample(const rectangle2d& rectangle, std::function<void(const point2d&)> function) const
+void Raytracer::GridSampler::sample(const rectangle2d& rectangle, std::function<void(const point2d&)> function) const
 {
 	rasteriser raster(rectangle, this->columns, this->rows);
 	

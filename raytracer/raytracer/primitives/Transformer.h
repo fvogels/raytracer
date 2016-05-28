@@ -4,7 +4,7 @@
 #include "math/transformation.h"
 #include <memory>
 
-namespace raytracer
+namespace Raytracer
 {
 	class Transformer : public Primitive
 	{
@@ -12,7 +12,7 @@ namespace raytracer
 		Transformer(const math::transformation& transformer, std::shared_ptr<const Primitive> transformee)
 			: transformer(transformer), transformee(transformee) { }
 
-		virtual bool find_hit(const math::ray&, Hit*) const override;
+		virtual bool find_hit(const math::Ray&, Hit*) const override;
 
 	private:
 		math::transformation transformer;

@@ -6,21 +6,21 @@
 
 namespace math
 {
-	struct ray final
+	struct Ray final
 	{
 		point3d origin;
 		vector3d direction;
 
-		ray(const point3d& origin, const vector3d& direction)
+		Ray(const point3d& origin, const vector3d& direction)
 			: origin(origin), direction(direction) { }
 
-		ray(const point3d& origin, const point3d& through)
-			: ray(origin, through - origin) { }
+		Ray(const point3d& origin, const point3d& through)
+			: Ray(origin, through - origin) { }
 
-		ray(const ray&) = default;
+		Ray(const Ray&) = default;
 
 		point3d at(double t) const { return origin + direction * t; }
 
-		ray transform(const matrix4d&) const;
+		Ray transform(const matrix4d&) const;
 	};
 }

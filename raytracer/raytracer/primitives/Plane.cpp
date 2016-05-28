@@ -2,29 +2,29 @@
 #include "math/util.h"
 #include <assert.h>
 
-using namespace raytracer;
+using namespace Raytracer;
 using namespace math;
 
-raytracer::Plane::Plane(const point3d& point, const vector3d& normal)
+Raytracer::Plane::Plane(const point3d& point, const vector3d& normal)
 	: point(point), normal(normal)
 {
 	assert(normal.is_unit());
 }
 
-bool raytracer::Plane::find_hit(const ray& r, Hit* hit) const
+bool Raytracer::Plane::find_hit(const Ray& ray, Hit* hit) const
 {
-	double denominator = r.direction.dot(this->normal);
+	double denominator = ray.direction.dot(this->normal);
 
 	if (denominator != approx(0))
 	{
-		double numerator = (r.origin - this->point).dot(this->normal);
+		double numerator = (ray.origin - this->point).dot(this->normal);
 		double t = numerator / denominator;
 
 		if (0 <= t && t < hit->t)
 		{
 			hit->t = t;
 			hit->normal = this->normal;
-			hit->position = r.at(t);
+			hit->position = ray.at(t);
 
 			return true;
 		}

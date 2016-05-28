@@ -3,16 +3,16 @@
 #include <assert.h>
 #include <math.h>
 
-using namespace raytracer;
+using namespace Raytracer;
 using namespace math;
 
-bool Sphere::find_hit(const ray& ray, Hit* hit) const
+bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 {
 	assert(hit != nullptr);
 
-	double a = ray.direction.dot(ray.direction);
-	double b = 2 * ray.direction.dot(ray.origin - point3d());
-	double c = (ray.origin - point3d()).norm_sqr() - 1;
+	double a = Ray.direction.dot(Ray.direction);
+	double b = 2 * Ray.direction.dot(Ray.origin - point3d());
+	double c = (Ray.origin - point3d()).norm_sqr() - 1;
 	double d = b * b - 4 * a * c;
 
 	if (d >= 0)
@@ -30,7 +30,7 @@ bool Sphere::find_hit(const ray& ray, Hit* hit) const
 		if (t1 > 0)
 		{
 			hit->t = t1;
-			hit->position = ray.at(hit->t);
+			hit->position = Ray.at(hit->t);
 			hit->normal = hit->position - point3d();
 
 			return true;
@@ -38,7 +38,7 @@ bool Sphere::find_hit(const ray& ray, Hit* hit) const
 		else if (t2 > 0)
 		{
 			hit->t = t2;
-			hit->position = ray.at(hit->t);
+			hit->position = Ray.at(hit->t);
 			hit->normal = hit->position - point3d();
 
 			return true;

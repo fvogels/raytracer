@@ -4,14 +4,14 @@
 #include "materials/Material3D.h"
 #include <memory>
 
-namespace raytracer
+namespace Raytracer
 {
 	class Decorator : public Primitive
 	{
 	public:
 		Decorator(std::shared_ptr<const Material3D>, std::shared_ptr<const Primitive>);
 
-		virtual bool find_hit(const math::ray&, Hit*) const override;
+		virtual bool find_hit(const math::Ray&, Hit*) const override;
 
 	private:
 		std::shared_ptr<const Material3D> material;

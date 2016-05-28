@@ -5,11 +5,11 @@
 #include "math/ray.h"
 #include <functional>
 
-namespace raytracer
+namespace Raytracer
 {
 	class Camera
 	{
 	public:
-		virtual math::ray create_ray(const math::point2d&) const = 0;
+		virtual math::Ray create_Ray(const math::point2d&) const = 0;
 	};
 }

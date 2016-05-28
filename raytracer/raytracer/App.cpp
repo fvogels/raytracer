@@ -13,7 +13,7 @@
 #include <assert.h>
 
 using namespace math;
-using namespace raytracer;
+using namespace Raytracer;
 
 struct Light
 {
@@ -30,7 +30,7 @@ struct Scene
 
 std::shared_ptr<Camera> camera = nullptr;
 
-color determine_color(const ray& r)
+color determine_color(const Ray& r)
 {
 	Hit hit;
 	color c = colors::black();
@@ -63,8 +63,8 @@ color render_pixel(const rasteriser& window_rasteriser, int i, int j)
 	int sample_count = 0;
 
 	sampler.sample(pixel_rectangle, [&c, &sample_count](const point2d& p) {
-		auto r = camera->create_ray(p);
-		c += determine_color(r);
+		auto ray = camera->create_Ray(p);
+		c += determine_color(ray);
 		++sample_count;
 	});
 
