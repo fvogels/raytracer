@@ -11,9 +11,9 @@ using namespace raytracer;
 
 struct Light
 {
-	vector3d position;
+	point3d position;
 
-	Light(const vector3d& position) : position(position) { }
+	Light(const point3d& position) : position(position) { }
 };
 
 struct Scene
@@ -27,14 +27,23 @@ std::shared_ptr<Camera> camera = nullptr;
 color determine_color(const ray& r)
 {
 	Hit hit;
+	color c = colors::black();
+
 	if (scene.root->find_hit(r, &hit))
 	{
-		return colors::red();
+		for (auto light : scene.lights)
+		{
+			vector3d hit_to_light = (light->position - hit.position).normalized();
+			double cos_angle = hit_to_light.dot(hit.normal);
+
+			if (cos_angle > 0)
+			{
+				c += colors::red() * cos_angle;
+			}			
+		}
 	}
-	else
-	{
-		return colors::black();
-	}
+
+	return c;
 }
 
 color render_pixel(const rasteriser& window_rasteriser, int i, int j)
@@ -61,7 +70,7 @@ void create_root()
 
 void create_lights()
 {
-	scene.lights.push_back(std::make_shared<Light>(vector3d(0, 5, 5)));
+	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, 0)));
 }
 
 void create_scene()
