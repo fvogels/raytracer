@@ -46,6 +46,16 @@ point3d math::operator *(const matrix4d& a, const point3d& v)
 #undef AUX
 }
 
+matrix4d math::identity_matrix()
+{
+	return matrix4d{
+		1, 0 ,0 , 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+}
+
 matrix4d math::translation_matrix(const vector3d& v)
 {
 	return matrix4d{

@@ -18,5 +18,6 @@ namespace math
 	vector3d operator *(const matrix4d&, const vector3d&);
 	point3d operator *(const matrix4d&, const point3d&);
 
+	matrix4d identity_matrix();
 	matrix4d translation_matrix(const vector3d&);
 }
