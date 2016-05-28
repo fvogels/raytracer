@@ -1,8 +1,15 @@
 #include "primitives/Plane.h"
 #include "math/util.h"
+#include <assert.h>
 
 using namespace raytracer;
 using namespace math;
+
+raytracer::Plane::Plane(const point3d& point, const vector3d& normal)
+	: point(point), normal(normal)
+{
+	assert(normal.is_unit());
+}
 
 bool raytracer::Plane::find_hit(const ray& r, Hit* hit) const
 {
