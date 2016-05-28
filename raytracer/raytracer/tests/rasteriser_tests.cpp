@@ -9,4 +9,7 @@ TEST_CASE("Rasterising [0,1]-[1,0] in 2x2", "[rasteriser]")
 	rasteriser r(rect, 2, 2);
 	
 	REQUIRE(r[position(0, 0)] == rectangle2d(point2d(0, 1), vector2d(0.5, 0), vector2d(0, -0.5)));
+	REQUIRE(r[position(1, 0)] == rectangle2d(point2d(0.5, 1), vector2d(0.5, 0), vector2d(0, -0.5)));
+	REQUIRE(r[position(0, 1)] == rectangle2d(point2d(0, 0.5), vector2d(0.5, 0), vector2d(0, -0.5)));
+	REQUIRE(r[position(1, 1)] == rectangle2d(point2d(0.5, 0.5), vector2d(0.5, 0), vector2d(0, -0.5)));
 }
