@@ -5,13 +5,15 @@
 struct approx
 {
 	double value;
+	double delta;
 
-	approx(double value) : value(value) { }	
+	approx(double value, double delta = 0.00001) 
+		: value(value), delta(delta) { }	
 };
 
 inline bool operator ==(approx x, double y)
 {
-	return fabs(y - x.value) < 0.00001;
+	return fabs(y - x.value) < x.delta;
 }
 
 inline bool operator ==(double x, approx y)
