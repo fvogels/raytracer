@@ -16,4 +16,7 @@ namespace math
 
 		point2d center() const;
 	};
+
+	bool operator ==(const rectangle2d&, const rectangle2d&);
+	bool operator !=(const rectangle2d&, const rectangle2d&);
 }
