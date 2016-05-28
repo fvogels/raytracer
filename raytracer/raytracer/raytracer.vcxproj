@@ -234,6 +234,7 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
+    <ClCompile Include="primitives\Plane.cpp" />
     <ClCompile Include="primitives\Sphere.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="primitives\Transformer.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="primitives\Hit.h" />
+    <ClInclude Include="primitives\Plane.h" />
     <ClInclude Include="primitives\Primitive.h" />
     <ClInclude Include="primitives\Sphere.h" />
     <ClInclude Include="primitives\Transformer.h" />
