@@ -1,3 +1,5 @@
+#ifdef TEST_BUILD
+
 #include "math/rasteriser.h"
 #include "Catch.h"
 
@@ -13,3 +15,5 @@ TEST_CASE("Rasterising [0,1]-[1,0] in 2x2", "[rasteriser]")
 	REQUIRE(r[position(0, 1)] == rectangle2d(point2d(0, 0.5), vector2d(0.5, 0), vector2d(0, -0.5)));
 	REQUIRE(r[position(1, 1)] == rectangle2d(point2d(0.5, 0.5), vector2d(0.5, 0), vector2d(0, -0.5)));
 }
+
+#endif
