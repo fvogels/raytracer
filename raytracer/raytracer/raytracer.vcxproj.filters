@@ -209,5 +209,8 @@
     <ClInclude Include="imaging\wif_format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="animation\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

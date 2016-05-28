@@ -249,6 +249,7 @@
     <ClCompile Include="tests\rasteriser_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation\Animation.h" />
     <ClInclude Include="cameras\Camera.h" />
     <ClInclude Include="cameras\PerspectiveCamera.h" />
     <ClInclude Include="Catch.h" />
