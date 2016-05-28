@@ -69,3 +69,13 @@ matrix4d math::translation_matrix(const vector3d& v)
 		0, 0, 0, 1
 	};
 }
+
+matrix4d math::scale_matrix(double sx, double sy, double sz)
+{
+	return matrix4d{
+		sx, 0 ,0 , 0,
+		0, sy, 0, 0,
+		0, 0, sz, 0,
+		0, 0, 0, 1
+	};
+}

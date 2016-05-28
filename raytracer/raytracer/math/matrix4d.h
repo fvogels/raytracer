@@ -20,4 +20,5 @@ namespace math
 
 	matrix4d identity_matrix();
 	matrix4d translation_matrix(const vector3d&);
+	matrix4d scale_matrix(double sx, double sy, double sz);
 }
