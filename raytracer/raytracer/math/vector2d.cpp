@@ -14,8 +14,8 @@ vector2d math::operator +(const vector2d& u, const vector2d& v)
 
 vector2d math::operator -(const vector2d& v)
 {
-	double x = - v.x;
-	double y = - v.y;
+	double x = -v.x;
+	double y = -v.y;
 
 	return vector2d(x, y);
 }
@@ -110,4 +110,14 @@ bool math::vector2d::is_unit() const
 bool math::vector2d::is_perpendicular_on(const vector2d& v) const
 {
 	return dot(v) == approx(0);
+}
+
+bool math::operator ==(const vector2d& u, const vector2d& v)
+{
+	return u.x == approx(v.x) && u.y == approx(v.y);
+}
+
+bool math::operator !=(const vector2d& u, const vector2d& v)
+{
+	return !(u == v);
 }
