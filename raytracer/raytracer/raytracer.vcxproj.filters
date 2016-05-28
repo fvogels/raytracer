@@ -99,6 +99,9 @@
     <ClCompile Include="imaging\bmp_format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imaging\wif_format.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\CheckeredMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\wif_format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

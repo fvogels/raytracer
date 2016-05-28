@@ -223,6 +223,7 @@
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\bmp_format.cpp" />
+    <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\CheckeredMaterial.cpp" />
     <ClCompile Include="materials\UniformMaterial.cpp" />
     <ClCompile Include="math\interval.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="Catch.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
+    <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="materials\Material3D.h" />
     <ClInclude Include="materials\UniformMaterial.h" />
     <ClInclude Include="math\interval.h" />

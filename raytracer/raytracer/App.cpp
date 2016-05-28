@@ -1,4 +1,5 @@
 #include "imaging/bitmap.h"
+#include "imaging/wif_format.h"
 #include "primitives/Sphere.h"
 #include "primitives/Plane.h"
 #include "primitives/Transformer.h"
@@ -108,5 +109,7 @@ int main()
 	}
 
 	save_bitmap("e:/temp/output/test.bmp", bitmap);
+	WIF wif("e:/temp/output/test.wif");
+	wif.write_frame(bitmap);
 }
 #endif
