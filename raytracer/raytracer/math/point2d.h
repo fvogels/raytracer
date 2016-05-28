@@ -24,5 +24,8 @@ namespace math
 	vector2d operator -(const point2d&, const point2d&);
 	point2d operator -(const point2d&, const vector2d&);
 
+	bool operator ==(const point2d&, const point2d&);
+	bool operator !=(const point2d&, const point2d&);
+
 	double distance(const point2d&, const point2d&);
 }

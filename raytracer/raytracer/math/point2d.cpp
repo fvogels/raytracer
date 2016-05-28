@@ -1,4 +1,5 @@
 #include "math/point2d.h"
+#include "math/util.h"
 
 using namespace math;
 
@@ -34,4 +35,9 @@ point2d math::operator -(const point2d& p, const vector2d& v)
 double math::distance(const point2d& p, const point2d& q)
 {
 	return (q - p).norm();
+}
+
+bool math::operator ==(const point2d& p, const point2d& q)
+{
+	return p.x == approx(q.x) && p.y == approx(q.y);
 }
