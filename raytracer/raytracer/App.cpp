@@ -8,6 +8,7 @@
 #include "math/rasteriser.h"
 #include "rendering/GridSampler.h"
 #include "materials/UniformMaterial.h"
+#include "materials/CheckeredMaterial.h"
 
 using namespace math;
 using namespace raytracer;
@@ -68,9 +69,9 @@ color render_pixel(const rasteriser& window_rasteriser, int i, int j)
 void create_root()
 {
 	auto sphere = std::make_shared<Sphere>();
-	auto material = std::make_shared<UniformMaterial>(colors::white());
+	auto material = std::make_shared<CheckeredMaterial>(colors::white(), colors::black());
 	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
-	scene.root = std::make_shared<Transformer>(translation(vector3d(0, 0, 0)), decorated_sphere);
+	scene.root = std::make_shared<Transformer>(scale(2, 2, 2), decorated_sphere);
 }
 
 void create_lights()

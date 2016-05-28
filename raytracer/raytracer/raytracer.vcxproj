@@ -223,6 +223,7 @@
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\formats.cpp" />
+    <ClCompile Include="materials\CheckeredMaterial.cpp" />
     <ClCompile Include="materials\UniformMaterial.cpp" />
     <ClCompile Include="math\interval.cpp" />
     <ClCompile Include="math\interval_mapper.cpp" />
@@ -266,6 +267,7 @@
     <ClInclude Include="math\util.h" />
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
+    <ClInclude Include="materials\CheckeredMaterial.h" />
     <ClInclude Include="primitives\Decorator.h" />
     <ClInclude Include="primitives\Hit.h" />
     <ClInclude Include="primitives\Plane.h" />
