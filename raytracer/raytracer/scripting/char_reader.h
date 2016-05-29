@@ -1,19 +1,20 @@
 #pragma once
 
+#include "scripting/reader.h"
 #include <istream>
 #include <string>
 
 namespace scripting
 {
-	class CharReader
+	class CharReader : Reader<char, unsigned>
 	{
 	public:
 		CharReader(const std::string&);
 
-		char current() const;
-		unsigned index() const;
-		bool end_reached() const;
-		void next();
+		const char& current() const override;
+		const unsigned& location() const override;
+		bool end_reached() const override;
+		void next() override;
 
 	private:
 		const std::string& m_in;
