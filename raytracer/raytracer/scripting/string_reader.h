@@ -6,7 +6,7 @@
 
 namespace scripting
 {
-	class StringReader : Reader<char, unsigned>
+	class StringReader : public Reader<char, unsigned>
 	{
 	public:
 		StringReader(const std::string&);

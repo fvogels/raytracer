@@ -6,7 +6,7 @@
 
 namespace scripting
 {
-	class StreamLineReader : Reader<std::string, unsigned>
+	class StreamLineReader : public Reader<std::string, unsigned>
 	{
 	public:
 		StreamLineReader(std::istream&);

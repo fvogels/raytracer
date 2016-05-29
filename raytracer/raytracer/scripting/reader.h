@@ -1,5 +1,4 @@
 #pragma once
-
 namespace scripting
 {
 	template<typename T, typename LOC>
