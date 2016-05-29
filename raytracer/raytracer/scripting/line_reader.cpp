@@ -4,9 +4,9 @@
 using namespace scripting;
 
 scripting::LineReader::LineReader(std::istream& in)
-	: m_in(in), m_line_index(0), m_end_reached(false)
+	: m_in(in), m_line_index(0)
 {
-	next();
+	m_end_reached = std::getline(m_in, m_line).good();
 }
 
 void scripting::LineReader::next()
