@@ -20,7 +20,7 @@ namespace scripting
 
 	private:
 		std::istream& m_in;
-		unsigned m_line_index;
+		unsigned m_index;
 		std::string m_line;
 		bool m_end_reached;
 	};

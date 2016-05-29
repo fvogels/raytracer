@@ -4,17 +4,24 @@
 using namespace scripting;
 
 scripting::StreamLineReader::StreamLineReader(std::istream& in)
-	: m_in(in), m_line_index(0)
+	: m_in(in), m_index(0)
 {
-	m_end_reached = std::getline(m_in, m_line).good();
+	if (in)
+	{
+		m_end_reached = !std::getline(m_in, m_line);
+	}
+	else
+	{
+		m_end_reached = true;
+	}
 }
 
 void scripting::StreamLineReader::next()
 {	
 	assert(!end_reached());
 
-	m_end_reached = std::getline(m_in, m_line).good();
-	m_line_index++;
+	m_end_reached = !std::getline(m_in, m_line);
+	m_index++;
 }
 
 std::string scripting::StreamLineReader::current() const
@@ -28,7 +35,7 @@ unsigned scripting::StreamLineReader::location() const
 {
 	assert(!end_reached());
 
-	return m_line_index;
+	return m_index;
 }
 
 bool scripting::StreamLineReader::end_reached() const
