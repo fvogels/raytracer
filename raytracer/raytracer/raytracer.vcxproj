@@ -245,6 +245,7 @@
     <ClCompile Include="primitives\Union.cpp" />
     <ClCompile Include="rendering\GridSampler.cpp" />
     <ClCompile Include="rendering\SingleSampler.cpp" />
+    <ClCompile Include="scripting\line_reader.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\rasteriser_tests.cpp" />
   </ItemGroup>
@@ -281,6 +282,7 @@
     <ClInclude Include="rendering\GridSampler.h" />
     <ClInclude Include="rendering\Sampler.h" />
     <ClInclude Include="rendering\SingleSampler.h" />
+    <ClInclude Include="scripting\line_reader.h" />
     <ClInclude Include="util\array.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="util\position.h" />
