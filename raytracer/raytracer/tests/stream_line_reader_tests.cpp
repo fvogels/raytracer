@@ -59,4 +59,32 @@ TEST_CASE("Single line stream, newline at end", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
+TEST_CASE("Two lines, second not ending with newline", "[StreamLineReader]")
+{
+	std::stringstream ss("abc\nxyz");
+	StreamLineReader reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "abc");
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "xyz");
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("Two lines, second ending with newline", "[StreamLineReader]")
+{
+	std::stringstream ss("abc\nxyz\n");
+	StreamLineReader reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "abc");
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "xyz");
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
 #endif
