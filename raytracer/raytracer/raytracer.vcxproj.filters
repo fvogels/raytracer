@@ -230,5 +230,8 @@
     <ClInclude Include="scripting\char_reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scripting\reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

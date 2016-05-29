@@ -286,6 +286,7 @@
     <ClInclude Include="rendering\SingleSampler.h" />
     <ClInclude Include="scripting\char_reader.h" />
     <ClInclude Include="scripting\line_reader.h" />
+    <ClInclude Include="scripting\reader.h" />
     <ClInclude Include="scripting\tokens.h" />
     <ClInclude Include="util\array.h" />
     <ClInclude Include="util\misc.h" />
