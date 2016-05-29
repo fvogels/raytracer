@@ -7,20 +7,20 @@
 namespace scripting
 {
 	template<typename R1, typename R2, typename LOC>
-	class CombinedReader : Reader<R1::datum_t, LOC>
+	class CombinedReader : public Reader<typename R2::datum_t, LOC>
 	{
 	public:
-		CombinedReader(R1::datum_t in)
+		CombinedReader(typename R1::source_t& in)
 		{
 			r1 = std::make_unique<R1>(in);
 
-			if (!r1->endReached())
+			if (!r1->end_reached())
 			{
 				r2 = std::make_unique<R2>(r1->current());
 			}
 		}
 
-		const R2::datum_t& current() const override
+		typename R2::datum_t current() const override
 		{
 			return r2->current();
 		}
