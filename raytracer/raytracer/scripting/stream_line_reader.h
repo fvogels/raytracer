@@ -6,10 +6,10 @@
 
 namespace scripting
 {
-	class LineReader : Reader<std::string, unsigned>
+	class StreamLineReader : Reader<std::string, unsigned>
 	{
 	public:
-		LineReader(std::istream&);
+		StreamLineReader(std::istream&);
 
 		const std::string& current() const override;
 		const unsigned& location() const override;
