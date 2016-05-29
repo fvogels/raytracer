@@ -105,10 +105,10 @@
     <ClCompile Include="scripting\tokens.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\char_reader.cpp">
+    <ClCompile Include="scripting\stream_line_reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\stream_line_reader.cpp">
+    <ClCompile Include="scripting\string_reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -224,13 +224,13 @@
     <ClInclude Include="scripting\tokens.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scripting\char_reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scripting\reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\stream_line_reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\string_reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

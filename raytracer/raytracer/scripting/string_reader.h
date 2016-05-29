@@ -6,10 +6,10 @@
 
 namespace scripting
 {
-	class CharReader : Reader<char, unsigned>
+	class StringReader : Reader<char, unsigned>
 	{
 	public:
-		CharReader(const std::string&);
+		StringReader(const std::string&);
 
 		const char& current() const override;
 		const unsigned& location() const override;
