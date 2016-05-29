@@ -11,10 +11,12 @@ namespace scripting
 	public:
 		StreamLineReader(std::istream&);
 
-		const std::string& current() const override;
-		const unsigned& location() const override;
+		std::string current() const override;
+		unsigned location() const override;
 		bool end_reached() const override;
 		void next() override;
+
+		typedef std::istream source_t;
 
 	private:
 		std::istream& m_in;

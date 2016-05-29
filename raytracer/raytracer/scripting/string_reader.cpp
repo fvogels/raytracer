@@ -16,14 +16,14 @@ void scripting::StringReader::next()
 	m_index++;
 }
 
-const char& scripting::StringReader::current() const
+char scripting::StringReader::current() const
 {
 	assert(!end_reached());
 
 	return m_in[m_index];
 }
 
-const unsigned& scripting::StringReader::location() const
+unsigned scripting::StringReader::location() const
 {
 	assert(!end_reached());
 

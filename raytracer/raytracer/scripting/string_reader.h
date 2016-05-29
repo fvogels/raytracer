@@ -11,10 +11,12 @@ namespace scripting
 	public:
 		StringReader(const std::string&);
 
-		const char& current() const override;
-		const unsigned& location() const override;
+		char current() const override;
+		unsigned location() const override;
 		bool end_reached() const override;
 		void next() override;
+
+		typedef std::string source_t;
 
 	private:
 		const std::string& m_in;

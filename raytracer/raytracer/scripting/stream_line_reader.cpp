@@ -17,14 +17,14 @@ void scripting::StreamLineReader::next()
 	m_line_index++;
 }
 
-const std::string& scripting::StreamLineReader::current() const
+std::string scripting::StreamLineReader::current() const
 {
 	assert(!end_reached());
 
 	return m_line;
 }
 
-const unsigned& scripting::StreamLineReader::location() const
+unsigned scripting::StreamLineReader::location() const
 {
 	assert(!end_reached());
 
