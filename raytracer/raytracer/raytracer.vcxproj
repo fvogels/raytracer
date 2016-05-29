@@ -284,6 +284,7 @@
     <ClInclude Include="rendering\GridSampler.h" />
     <ClInclude Include="rendering\Sampler.h" />
     <ClInclude Include="rendering\SingleSampler.h" />
+    <ClInclude Include="scripting\combined_reader.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
     <ClInclude Include="scripting\reader.h" />
