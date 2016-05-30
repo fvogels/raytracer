@@ -9,6 +9,7 @@ scripting::StreamLineReader::StreamLineReader(std::istream& in)
 	if (in)
 	{
 		m_end_reached = !std::getline(m_in, m_line);
+		m_line += "\n";
 	}
 	else
 	{
@@ -21,6 +22,7 @@ void scripting::StreamLineReader::next()
 	assert(!end_reached());
 
 	m_end_reached = !std::getline(m_in, m_line);
+	m_line += "\n";
 	m_index++;
 }
 

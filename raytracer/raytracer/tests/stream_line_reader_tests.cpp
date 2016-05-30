@@ -32,7 +32,7 @@ TEST_CASE("Single empty line", "[StreamLineReader]")
 	StreamLineReader reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "");
+	REQUIRE(reader.current() == "\n");
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
@@ -43,7 +43,7 @@ TEST_CASE("Single line stream, no newline at end", "[StreamLineReader]")
 	StreamLineReader reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "abc");
+	REQUIRE(reader.current() == "abc\n");
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
@@ -54,7 +54,7 @@ TEST_CASE("Single line stream, newline at end", "[StreamLineReader]")
 	StreamLineReader reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "abc");
+	REQUIRE(reader.current() == "abc\n");
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
@@ -65,10 +65,10 @@ TEST_CASE("Two lines, second not ending with newline", "[StreamLineReader]")
 	StreamLineReader reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "abc");
+	REQUIRE(reader.current() == "abc\n");
 	reader.next();
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "xyz");
+	REQUIRE(reader.current() == "xyz\n");
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
@@ -79,10 +79,27 @@ TEST_CASE("Two lines, second ending with newline", "[StreamLineReader]")
 	StreamLineReader reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "abc");
+	REQUIRE(reader.current() == "abc\n");
 	reader.next();
 	REQUIRE(!reader.end_reached());
-	REQUIRE(reader.current() == "xyz");
+	REQUIRE(reader.current() == "xyz\n");
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("Three lines, second line empty", "[StreamLineReader]")
+{
+	std::stringstream ss("abc\n\nxyz");
+	StreamLineReader reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "abc\n");
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "\n");
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == "xyz\n");
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
