@@ -8,6 +8,6 @@ namespace Raytracer
 	class Sampler
 	{
 	public:
-		virtual void sample(const math::rectangle2d& rectangle, std::function<void(const math::point2d&)> function) const = 0;
+		virtual void sample(const math::rectangle2d& rectangle, std::function<void(const math::Point2D&)> function) const = 0;
 	};
 }

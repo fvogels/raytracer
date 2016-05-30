@@ -4,28 +4,28 @@
 
 namespace math
 {
-	struct point2d final
+	struct Point2D final
 	{
 		double x, y;
 
-		point2d()
+		Point2D()
 			: x(0), y(0) { }
 
-		point2d(double x, double y)
+		Point2D(double x, double y)
 			: x(x), y(y) { }
 
-		point2d(const point2d& v) = default;
+		Point2D(const Point2D& v) = default;
 
-		point2d& operator =(const point2d&) = default;
+		Point2D& operator =(const Point2D&) = default;
 	};
 
-	point2d operator +(const point2d&, const vector2d&);
-	point2d operator +(const vector2d&, const point2d&);
-	vector2d operator -(const point2d&, const point2d&);
-	point2d operator -(const point2d&, const vector2d&);
+	Point2D operator +(const Point2D&, const vector2d&);
+	Point2D operator +(const vector2d&, const Point2D&);
+	vector2d operator -(const Point2D&, const Point2D&);
+	Point2D operator -(const Point2D&, const vector2d&);
 
-	bool operator ==(const point2d&, const point2d&);
-	bool operator !=(const point2d&, const point2d&);
+	bool operator ==(const Point2D&, const Point2D&);
+	bool operator !=(const Point2D&, const Point2D&);
 
-	double distance(const point2d&, const point2d&);
+	double distance(const Point2D&, const Point2D&);
 }

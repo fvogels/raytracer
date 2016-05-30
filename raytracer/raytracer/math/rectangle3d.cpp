@@ -2,7 +2,7 @@
 
 using namespace math;
 
-point3d math::rectangle3d::project(const point2d& p) const
+point3d math::rectangle3d::project(const Point2D& p) const
 {
 	return origin + x_axis * p.x + y_axis * p.y;
 }

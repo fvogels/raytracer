@@ -62,7 +62,7 @@ color render_pixel(const rasteriser& window_rasteriser, int i, int j)
 	color c = colors::black();
 	int sample_count = 0;
 
-	sampler.sample(pixel_rectangle, [&c, &sample_count](const point2d& p) {
+	sampler.sample(pixel_rectangle, [&c, &sample_count](const Point2D& p) {
 		auto ray = camera->create_Ray(p);
 		c += determine_color(ray);
 		++sample_count;
@@ -105,7 +105,7 @@ int main()
 		camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
-		rectangle2d window(point2d(0, 0), vector2d(1, 0), vector2d(0, 1));
+		rectangle2d window(Point2D(0, 0), vector2d(1, 0), vector2d(0, 1));
 		rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
 
 		bitmap.clear(colors::black());

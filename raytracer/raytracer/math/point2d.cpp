@@ -1,22 +1,22 @@
-#include "math/point2d.h"
+#include "math/Point2D.h"
 #include "math/util.h"
 
 using namespace math;
 
-point2d math::operator +(const point2d& p, const vector2d& v)
+Point2D math::operator +(const Point2D& p, const vector2d& v)
 {
 	double x = p.x + v.x;
 	double y = p.y + v.y;
 
-	return point2d(x, y);
+	return Point2D(x, y);
 }
 
-point2d math::operator +(const vector2d& v, const point2d& p)
+Point2D math::operator +(const vector2d& v, const Point2D& p)
 {
 	return p + v;
 }
 
-vector2d math::operator -(const point2d& p, const point2d& q)
+vector2d math::operator -(const Point2D& p, const Point2D& q)
 {
 	double x = p.x - q.x;
 	double y = p.y - q.y;
@@ -24,20 +24,20 @@ vector2d math::operator -(const point2d& p, const point2d& q)
 	return vector2d(x, y);
 }
 
-point2d math::operator -(const point2d& p, const vector2d& v)
+Point2D math::operator -(const Point2D& p, const vector2d& v)
 {
 	double x = p.x - v.x;
 	double y = p.y - v.y;
 
-	return point2d(x, y);
+	return Point2D(x, y);
 }
 
-double math::distance(const point2d& p, const point2d& q)
+double math::distance(const Point2D& p, const Point2D& q)
 {
 	return (q - p).norm();
 }
 
-bool math::operator ==(const point2d& p, const point2d& q)
+bool math::operator ==(const Point2D& p, const Point2D& q)
 {
 	return p.x == approx(q.x) && p.y == approx(q.y);
 }

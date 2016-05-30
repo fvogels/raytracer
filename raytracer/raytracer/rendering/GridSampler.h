@@ -10,7 +10,7 @@ namespace Raytracer
 		GridSampler(int rows, int columns)
 			: rows(rows), columns(columns) { }
 
-		void sample(const math::rectangle2d& rectangle, std::function<void(const math::point2d&)> function) const override;
+		void sample(const math::rectangle2d& rectangle, std::function<void(const math::Point2D&)> function) const override;
 
 	private:
 		int rows, columns;

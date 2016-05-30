@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/point2d.h"
+#include "math/Point2D.h"
 #include "math/point3d.h"
 
 namespace math
@@ -14,6 +14,6 @@ namespace math
 		rectangle3d(const point3d& origin, const vector3d& x_axis, const vector3d& y_axis)
 			: origin(origin), x_axis(x_axis), y_axis(y_axis) { }
 
-		point3d project(const point2d&) const;
+		point3d project(const Point2D&) const;
 	};
 }

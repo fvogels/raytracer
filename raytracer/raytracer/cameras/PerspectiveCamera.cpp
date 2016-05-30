@@ -10,7 +10,7 @@ class PerspectiveCamera : public Camera
 public:
 	PerspectiveCamera(const point3d& eye, const rectangle3d& view_window);
 
-	virtual Ray create_Ray(const point2d&) const override;
+	virtual Ray create_Ray(const Point2D&) const override;
 
 private:
 	point3d eye;
@@ -23,7 +23,7 @@ PerspectiveCamera::PerspectiveCamera(const point3d& eye, const rectangle3d& view
 	// NOP
 }
 
-Ray PerspectiveCamera::create_Ray(const point2d& point) const
+Ray PerspectiveCamera::create_Ray(const Point2D& point) const
 {
 	assert(0 <= point.x && point.x <= 1);
 	assert(0 <= point.y && point.y <= 1);
