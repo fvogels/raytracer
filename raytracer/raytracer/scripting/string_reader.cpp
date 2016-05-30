@@ -1,4 +1,4 @@
-#include "string_reader.h"
+#include "scripting/string_reader.h"
 #include <assert.h>
 
 using namespace scripting;
