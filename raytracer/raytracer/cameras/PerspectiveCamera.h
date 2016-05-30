@@ -2,7 +2,7 @@
 
 #include "cameras/Camera.h"
 #include "math/vector3d.h"
-#include "math/point3D.h"
+#include "math/point3d.h"
 #include <memory>
 
 namespace Raytracer

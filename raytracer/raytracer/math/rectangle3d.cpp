@@ -1,4 +1,4 @@
-#include "math/rectangle3D.h"
+#include "math/rectangle3d.h"
 
 using namespace math;
 

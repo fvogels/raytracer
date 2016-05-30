@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/rectangle2D.h"
+#include "math/rectangle2d.h"
 #include <functional>
 
 namespace Raytracer

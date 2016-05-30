@@ -5,7 +5,7 @@
 #include "primitives/transformer.h"
 #include "primitives/Decorator.h"
 #include "cameras/PerspectiveCamera.h"
-#include "math/rectangle2D.h"
+#include "math/rectangle2d.h"
 #include "math/Rasterizer.h"
 #include "rendering/GridSampler.h"
 #include "materials/UniformMaterial.h"

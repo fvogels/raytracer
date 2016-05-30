@@ -1,4 +1,4 @@
-#include "math/point2D.h"
+#include "math/point2d.h"
 #include "math/util.h"
 
 using namespace math;

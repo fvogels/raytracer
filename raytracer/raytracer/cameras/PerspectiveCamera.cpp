@@ -1,5 +1,5 @@
 #include "cameras/PerspectiveCamera.h"
-#include "math/rectangle3D.h"
+#include "math/rectangle3d.h"
 #include <assert.h>
 
 using namespace Raytracer;

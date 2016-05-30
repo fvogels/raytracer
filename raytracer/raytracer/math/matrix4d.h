@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/vector3d.h"
-#include "math/point3D.h"
+#include "math/point3d.h"
 
 namespace math
 {
