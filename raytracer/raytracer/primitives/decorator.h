@@ -1,7 +1,7 @@
 #pragma once
 
-#include "primitives/Primitive.h"
-#include "materials/Material3d.h"
+#include "primitives/primitive.h"
+#include "materials/material3d.h"
 #include <memory>
 
 namespace Raytracer

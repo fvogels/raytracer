@@ -1,4 +1,4 @@
-#include "math/Rasterizer.h"
+#include "math/rasterizer.h"
 
 using namespace math;
 

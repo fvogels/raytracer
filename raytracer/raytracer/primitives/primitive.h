@@ -1,6 +1,6 @@
 #pragma once
 
-#include "primitives/Hit.h"
+#include "primitives/hit.h"
 #include "math/ray.h"
 
 namespace Raytracer

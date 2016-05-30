@@ -2,7 +2,7 @@
 
 #include "math/vector3d.h"
 #include "math/point3d.h"
-#include "math/Matrix4d.h"
+#include "math/matrix4d.h"
 
 namespace math
 {

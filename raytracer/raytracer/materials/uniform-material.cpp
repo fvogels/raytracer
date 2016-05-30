@@ -1,4 +1,4 @@
-#include "materials/UniformMaterial.h"
+#include "materials/uniform-material.h"
 
 using namespace math;
 

@@ -1,4 +1,4 @@
-#include "SingleSampler.h"
+#include "rendering/single-sampler.h"
 
 using namespace math;
 

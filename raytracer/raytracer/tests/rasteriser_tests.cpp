@@ -1,6 +1,6 @@
 #ifdef TEST_BUILD
 
-#include "math/Rasterizer.h"
+#include "math/rasterizer.h"
 #include "Catch.h"
 
 using namespace math;

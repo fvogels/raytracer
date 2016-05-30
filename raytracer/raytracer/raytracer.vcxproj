@@ -218,14 +218,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\bmp_format.cpp" />
     <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\checkered-material.cpp" />
-    <ClCompile Include="materials\UniformMaterial.cpp" />
+    <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="math\interval.cpp" />
     <ClCompile Include="math\interval-mapper.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
@@ -237,14 +237,14 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
-    <ClCompile Include="primitives\Decorator.cpp" />
-    <ClCompile Include="primitives\Plane.cpp" />
-    <ClCompile Include="primitives\Sphere.cpp" />
+    <ClCompile Include="primitives\decorator.cpp" />
+    <ClCompile Include="primitives\plane.cpp" />
+    <ClCompile Include="primitives\sphere.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
-    <ClCompile Include="primitives\Transformer.cpp" />
-    <ClCompile Include="primitives\Union.cpp" />
-    <ClCompile Include="rendering\GridSampler.cpp" />
-    <ClCompile Include="rendering\SingleSampler.cpp" />
+    <ClCompile Include="primitives\transformer.cpp" />
+    <ClCompile Include="primitives\union.cpp" />
+    <ClCompile Include="rendering\grid-sampler.cpp" />
+    <ClCompile Include="rendering\single-sampler.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
     <ClCompile Include="scripting\stream_line_reader.cpp" />
     <ClCompile Include="scripting\tokenizer.cpp" />
@@ -264,8 +264,8 @@
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
-    <ClInclude Include="materials\Material3D.h" />
-    <ClInclude Include="materials\UniformMaterial.h" />
+    <ClInclude Include="materials\material3d.h" />
+    <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
@@ -280,16 +280,16 @@
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="materials\checkered-material.h" />
-    <ClInclude Include="primitives\Decorator.h" />
-    <ClInclude Include="primitives\Hit.h" />
-    <ClInclude Include="primitives\Plane.h" />
-    <ClInclude Include="primitives\Primitive.h" />
-    <ClInclude Include="primitives\Sphere.h" />
-    <ClInclude Include="primitives\Transformer.h" />
-    <ClInclude Include="primitives\Union.h" />
-    <ClInclude Include="rendering\GridSampler.h" />
-    <ClInclude Include="rendering\Sampler.h" />
-    <ClInclude Include="rendering\SingleSampler.h" />
+    <ClInclude Include="primitives\decorator.h" />
+    <ClInclude Include="primitives\hit.h" />
+    <ClInclude Include="primitives\plane.h" />
+    <ClInclude Include="primitives\primitive.h" />
+    <ClInclude Include="primitives\sphere.h" />
+    <ClInclude Include="primitives\transformer.h" />
+    <ClInclude Include="primitives\union.h" />
+    <ClInclude Include="rendering\grid-sampler.h" />
+    <ClInclude Include="rendering\sampler.h" />
+    <ClInclude Include="rendering\single-sampler.h" />
     <ClInclude Include="scripting\combined_reader.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />

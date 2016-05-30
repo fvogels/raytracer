@@ -1,4 +1,4 @@
-#include "primitives/Plane.h"
+#include "primitives/plane.h"
 #include "math/util.h"
 #include <assert.h>
 

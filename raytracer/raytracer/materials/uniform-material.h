@@ -1,6 +1,6 @@
 #pragma once
 
-#include "materials/Material3d.h"
+#include "materials/material3d.h"
 
 namespace Raytracer
 {

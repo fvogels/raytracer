@@ -1,6 +1,6 @@
 #pragma once
 
-#include "primitives/Primitive.h"
+#include "primitives/primitive.h"
 
 namespace Raytracer
 {

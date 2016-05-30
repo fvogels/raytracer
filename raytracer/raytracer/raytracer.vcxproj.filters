@@ -39,25 +39,25 @@
     <ClCompile Include="cameras\perspective-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\Sphere.cpp">
+    <ClCompile Include="primitives\sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
+    <ClCompile Include="app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\rectangle3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\SingleSampler.cpp">
+    <ClCompile Include="rendering\single-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\rectangle2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\GridSampler.cpp">
+    <ClCompile Include="rendering\grid-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\Union.cpp">
+    <ClCompile Include="primitives\union.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\matrix4d.cpp">
@@ -69,7 +69,7 @@
     <ClCompile Include="math\ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\Transformer.cpp">
+    <ClCompile Include="primitives\transformer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\main.cpp">
@@ -78,16 +78,16 @@
     <ClCompile Include="tests\rasteriser_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\Plane.cpp">
+    <ClCompile Include="primitives\plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\UniformMaterial.cpp">
+    <ClCompile Include="materials\uniform-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\Decorator.cpp">
+    <ClCompile Include="primitives\decorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\CheckeredMaterial.cpp">
+    <ClCompile Include="materials\checkered-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\bmp_format.cpp">
@@ -164,16 +164,16 @@
     <ClInclude Include="cameras\perspective-camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Primitive.h">
+    <ClInclude Include="primitives\primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Hit.h">
+    <ClInclude Include="primitives\hit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="util\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Sphere.h">
+    <ClInclude Include="primitives\sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\rectangle3d.h">
@@ -182,16 +182,16 @@
     <ClInclude Include="math\rectangle2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\Sampler.h">
+    <ClInclude Include="rendering\sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\SingleSampler.h">
+    <ClInclude Include="rendering\single-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\GridSampler.h">
+    <ClInclude Include="rendering\grid-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Union.h">
+    <ClInclude Include="primitives\union.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\matrix4d.h">
@@ -200,22 +200,22 @@
     <ClInclude Include="math\transformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Transformer.h">
+    <ClInclude Include="primitives\transformer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Plane.h">
+    <ClInclude Include="primitives\plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials\Material3D.h">
+    <ClInclude Include="materials\material3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials\UniformMaterial.h">
+    <ClInclude Include="materials\uniform-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\Decorator.h">
+    <ClInclude Include="primitives\decorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\checkered-material.h">

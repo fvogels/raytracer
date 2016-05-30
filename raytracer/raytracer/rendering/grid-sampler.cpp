@@ -1,5 +1,5 @@
-#include "GridSampler.h"
-#include "math/Rasterizer.h"
+#include "rendering/grid-sampler.h"
+#include "math/rasterizer.h"
 
 using namespace math;
 
