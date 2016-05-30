@@ -8,7 +8,7 @@ namespace scripting
 
 	struct Location
 	{
-		unsigned line, start;
+		unsigned line_index, char_index;
 	};
 
 	class Token
