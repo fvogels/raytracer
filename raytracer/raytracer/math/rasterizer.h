@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/rectangle2d.h"
+#include "math/rectangle2D.h"
 #include "util/position.h"
 
 namespace math
@@ -8,18 +8,18 @@ namespace math
 	class Rasterizer
 	{
 	private:
-		rectangle2d rect;
+		Rectangle2D rect;
 		unsigned horizontal_subdivisions;
 		unsigned vertical_subdivisions;
 
 	public:
-		Rasterizer(const rectangle2d& rect, unsigned horizontal_subdivisions, unsigned vertical_subdivisions)
+		Rasterizer(const Rectangle2D& rect, unsigned horizontal_subdivisions, unsigned vertical_subdivisions)
 			: rect(rect), horizontal_subdivisions(horizontal_subdivisions), vertical_subdivisions(vertical_subdivisions) { }
 
 		Rasterizer(const Rasterizer&) = default;
 
 		Rasterizer& operator =(const Rasterizer&) = default;
 
-		rectangle2d operator [](const position&) const;
+		Rectangle2D operator [](const position&) const;
 	};
 }

@@ -5,7 +5,7 @@
 #include "primitives/Transformer.h"
 #include "primitives/Decorator.h"
 #include "cameras/PerspectiveCamera.h"
-#include "math/rectangle2d.h"
+#include "math/rectangle2D.h"
 #include "math/Rasterizer.h"
 #include "rendering/GridSampler.h"
 #include "materials/UniformMaterial.h"
@@ -58,7 +58,7 @@ color determine_color(const Ray& r)
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
 	GridSampler sampler(1, 1);
-	rectangle2d pixel_rectangle = window_rasteriser[position(i, j)];
+	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
 
@@ -105,7 +105,7 @@ int main()
 		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), vector3d(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
-		rectangle2d window(Point2D(0, 0), vector2d(1, 0), vector2d(0, 1));
+		Rectangle2D window(Point2D(0, 0), vector2d(1, 0), vector2d(0, 1));
 		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
 		bitmap.clear(colors::black());

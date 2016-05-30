@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/rectangle2d.h"
+#include "math/rectangle2D.h"
 #include <functional>
 
 namespace Raytracer
@@ -8,6 +8,6 @@ namespace Raytracer
 	class Sampler
 	{
 	public:
-		virtual void sample(const math::rectangle2d& rectangle, std::function<void(const math::Point2D&)> function) const = 0;
+		virtual void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const = 0;
 	};
 }
