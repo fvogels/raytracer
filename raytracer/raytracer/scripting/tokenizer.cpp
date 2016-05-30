@@ -7,8 +7,8 @@
 
 using namespace scripting;
 
-scripting::Tokenizer::Tokenizer(std::istream& in)
-	: m_reader(in)
+scripting::Tokenizer::Tokenizer(std::istream& in, std::vector<std::shared_ptr<const TokenRecognizer>>& recognizers)
+	: m_reader(in), m_recognizers(recognizers)
 {
 	if (!m_reader.end_reached())
 	{
@@ -29,126 +29,21 @@ void scripting::Tokenizer::tokenize()
 		assert(!isspace(c));
 		assert(!m_reader.end_reached());
 
-		if (c == '(')
+		for (auto recognizer : m_recognizers)
 		{
-			tokenize_lparen();
+			if (recognizer->is_valid_start(c))
+			{
+				m_current_token = recognizer->tokenize(m_reader);
+				return;
+			}
 		}
-		else if (c == ')')
-		{
-			tokenize_rparen();
-		}
-		else if (c == '"')
-		{
-			tokenize_string();
-		}
-		else if (c == '-' || std::isdigit(c))
-		{
-			tokenize_number();
-		}
-		else
-		{
-			throw std::runtime_error("Unrecognized character " + c);
-		}
+		
+		throw std::runtime_error("Unrecognized character " + c);
 	}
 	else
 	{
 		m_current_token = nullptr;
 	}
-}
-
-void scripting::Tokenizer::tokenize_lparen()
-{
-	assert(!m_reader.end_reached());
-	assert(m_reader.current() == '(');
-
-	m_current_token = std::make_shared<LeftParenthesisToken>(m_reader.location());
-	m_reader.next();
-}
-
-void scripting::Tokenizer::tokenize_rparen()
-{
-	assert(!m_reader.end_reached());
-	assert(m_reader.current() == ')');
-
-	m_current_token = std::make_shared<RightParenthesisToken>(m_reader.location());
-	m_reader.next();
-}
-
-void scripting::Tokenizer::tokenize_string()
-{
-	assert(!m_reader.end_reached());
-	assert(m_reader.current() == '"');
-
-	std::string buffer;
-	Location start_location = m_reader.location();
-
-	m_reader.next();
-	while (!m_reader.end_reached())
-	{
-		if (m_reader.current() == '"')
-		{
-			goto tokenize_string_success;
-		}
-		else
-		{
-			buffer += m_reader.current();
-			m_reader.next();
-		}
-	}
-
-	assert(m_reader.end_reached());
-	throw std::runtime_error("Unexpected eof while reading string");
-
-tokenize_string_success:
-	assert(!m_reader.end_reached());
-	assert(m_reader.current() == '"');
-
-	m_reader.next();
-	m_current_token = std::make_shared<StringToken>(start_location, buffer);
-}
-
-void scripting::Tokenizer::tokenize_number()
-{
-	assert(!m_reader.end_reached());
-
-	Location start_location = m_reader.location();
-	std::string buffer;
-	bool encountered_dot = false;
-	auto accumulate = [&buffer](char c) { buffer += c; };
-	
-	accumulate(m_reader.current());
-	m_reader.next();
-
-	while (!m_reader.end_reached())
-	{
-		char c = m_reader.current();
-
-		if (c == '.')
-		{
-			if (encountered_dot)
-			{
-				throw std::runtime_error("Encountered second dot in number literal");
-			}
-			else
-			{
-				encountered_dot = true;
-				accumulate('.');
-			}
-		}
-		else if (std::isdigit(c))
-		{
-			accumulate(c);
-		}
-		else
-		{
-			break;
-		}
-
-		m_reader.next();
-	}
-
-	double value = std::stod(buffer);
-	m_current_token = std::make_shared<NumberToken>(start_location, value);
 }
 
 void scripting::Tokenizer::skip_whitespace()
@@ -220,4 +115,124 @@ Location scripting::Tokenizer::location() const
 	assert(!end_reached());
 
 	return m_reader.location();
+}
+
+bool scripting::LeftParenthesisRecognizer::is_valid_start(char c) const
+{
+	return c == '(';
+}
+
+std::shared_ptr<Token> scripting::LeftParenthesisRecognizer::tokenize(Reader<char, Location>& reader) const
+{
+	assert(!reader.end_reached());
+	assert(is_valid_start(reader.current()));
+
+	Location location = reader.location();
+	reader.next();
+
+	return std::make_shared<LeftParenthesisToken>(location);
+}
+
+bool scripting::RightParenthesisRecognizer::is_valid_start(char c) const
+{
+	return c == ')';
+}
+
+std::shared_ptr<Token> scripting::RightParenthesisRecognizer::tokenize(Reader<char, Location>& reader) const
+{
+	assert(!reader.end_reached());
+	assert(is_valid_start(reader.current()));
+
+	Location location = reader.location();
+	reader.next();
+
+	return std::make_shared<RightParenthesisToken>(location);
+}
+
+bool scripting::StringRecognizer::is_valid_start(char c) const
+{
+	return c == '"';
+}
+
+std::shared_ptr<Token> scripting::StringRecognizer::tokenize(Reader<char, Location>& reader) const
+{
+	assert(!reader.end_reached());
+	assert(is_valid_start(reader.current()));
+
+	std::string buffer;
+	Location start_location = reader.location();
+
+	reader.next();
+	while (!reader.end_reached())
+	{
+		if (reader.current() == '"')
+		{
+			goto tokenize_string_success;
+		}
+		else
+		{
+			buffer += reader.current();
+			reader.next();
+		}
+	}
+
+	assert(reader.end_reached());
+	throw std::runtime_error("Unexpected eof while reading string");
+
+tokenize_string_success:
+	assert(!reader.end_reached());
+	assert(reader.current() == '"');
+
+	reader.next();
+	return std::make_shared<StringToken>(start_location, buffer);
+}
+
+bool scripting::NumberRecognizer::is_valid_start(char c) const
+{
+	return c == '-' || c == '.' || std::isdigit(c);
+}
+
+std::shared_ptr<Token> scripting::NumberRecognizer::tokenize(Reader<char, Location>& reader) const
+{
+	assert(!reader.end_reached());
+	assert(is_valid_start(reader.current()));
+
+	Location start_location = reader.location();
+	std::string buffer;
+	bool encountered_dot = false;
+	auto accumulate = [&buffer](char c) { buffer += c; };
+
+	accumulate(reader.current());
+	reader.next();
+
+	while (!reader.end_reached())
+	{
+		char c = reader.current();
+
+		if (c == '.')
+		{
+			if (encountered_dot)
+			{
+				throw std::runtime_error("Encountered second dot in number literal");
+			}
+			else
+			{
+				encountered_dot = true;
+				accumulate('.');
+			}
+		}
+		else if (std::isdigit(c))
+		{
+			accumulate(c);
+		}
+		else
+		{
+			break;
+		}
+
+		reader.next();
+	}
+
+	double value = std::stod(buffer);
+	return std::make_shared<NumberToken>(start_location, value);
 }
