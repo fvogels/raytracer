@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -36,7 +36,7 @@
     <ClCompile Include="math\interval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cameras\PerspectiveCamera.cpp">
+    <ClCompile Include="cameras\perspective-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\Sphere.cpp">
@@ -146,9 +146,6 @@
     <ClInclude Include="math\ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cameras\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\vector2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -164,7 +161,7 @@
     <ClInclude Include="math\util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cameras\PerspectiveCamera.h">
+    <ClInclude Include="cameras\perspective-camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\Primitive.h">
@@ -221,7 +218,7 @@
     <ClInclude Include="primitives\Decorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials\CheckeredMaterial.h">
+    <ClInclude Include="materials\checkered-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\wif_format.h">
@@ -255,6 +252,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cameras\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "materials/CheckeredMaterial.h"
+#include "materials/checkered-material.h"
 
 using namespace math;
 

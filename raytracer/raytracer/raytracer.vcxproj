@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -219,12 +219,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="cameras\PerspectiveCamera.cpp" />
+    <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\bmp_format.cpp" />
     <ClCompile Include="imaging\wif_format.cpp" />
-    <ClCompile Include="materials\CheckeredMaterial.cpp" />
+    <ClCompile Include="materials\checkered-material.cpp" />
     <ClCompile Include="materials\UniformMaterial.cpp" />
     <ClCompile Include="math\interval.cpp" />
     <ClCompile Include="math\interval-mapper.cpp" />
@@ -258,8 +258,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
-    <ClInclude Include="cameras\Camera.h" />
-    <ClInclude Include="cameras\PerspectiveCamera.h" />
+    <ClInclude Include="cameras\camera.h" />
+    <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
@@ -279,7 +279,7 @@
     <ClInclude Include="math\util.h" />
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
-    <ClInclude Include="materials\CheckeredMaterial.h" />
+    <ClInclude Include="materials\checkered-material.h" />
     <ClInclude Include="primitives\Decorator.h" />
     <ClInclude Include="primitives\Hit.h" />
     <ClInclude Include="primitives\Plane.h" />

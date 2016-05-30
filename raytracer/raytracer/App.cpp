@@ -4,12 +4,12 @@
 #include "primitives/Plane.h"
 #include "primitives/transformer.h"
 #include "primitives/Decorator.h"
-#include "cameras/PerspectiveCamera.h"
+#include "cameras/perspective-camera.h"
 #include "math/rectangle2d.h"
 #include "math/Rasterizer.h"
 #include "rendering/GridSampler.h"
 #include "materials/UniformMaterial.h"
-#include "materials/CheckeredMaterial.h"
+#include "materials/checkered-material.h"
 #include <assert.h>
 
 using namespace math;

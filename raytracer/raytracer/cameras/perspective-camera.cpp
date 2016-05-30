@@ -1,4 +1,4 @@
-#include "cameras/PerspectiveCamera.h"
+#include "cameras/perspective-camera.h"
 #include "math/rectangle3d.h"
 #include <assert.h>
 
