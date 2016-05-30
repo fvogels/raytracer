@@ -236,3 +236,30 @@ std::shared_ptr<Token> scripting::NumberRecognizer::tokenize(Reader<char, Locati
 	double value = std::stod(buffer);
 	return std::make_shared<NumberToken>(start_location, value);
 }
+
+bool scripting::SymbolRecognizer::is_valid_start(char c) const
+{
+	return is_symbol_char(c);
+}
+
+bool scripting::SymbolRecognizer::is_symbol_char(char c) const
+{
+	return isalnum(c) || std::string("+-*/!?@#$%^&|[]{}.,<>=").find(c) != std::string::npos;
+}
+
+std::shared_ptr<Token> scripting::SymbolRecognizer::tokenize(Reader<char, Location>& reader) const
+{
+	assert(!reader.end_reached());
+	assert(is_valid_start(reader.current()));
+
+	Location start_location = reader.location();
+	std::string buffer;
+
+	while (!reader.end_reached() && is_symbol_char(reader.current()))
+	{
+		buffer += reader.current();
+		reader.next();
+	}
+
+	return std::make_shared<SymbolToken>(start_location, buffer);
+}

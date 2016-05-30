@@ -45,6 +45,16 @@ namespace scripting
 		std::shared_ptr<Token> tokenize(Reader<char, Location>& reader) const override;
 	};
 
+	class SymbolRecognizer : public TokenRecognizer
+	{
+	public:
+		bool is_valid_start(char c) const override;
+		std::shared_ptr<Token> tokenize(Reader<char, Location>& reader) const override;
+
+	private:
+		bool is_symbol_char(char) const;
+	};
+
 	class Tokenizer : public Reader<std::shared_ptr<Token>, Location>
 	{
 	public:

@@ -50,13 +50,13 @@ namespace scripting
 	class SymbolToken : public Token
 	{
 	public:
-		SymbolToken(const Location& location, const std::string& symbol)
-			: Token(location), symbol(symbol) { }
+		SymbolToken(const Location& location, const std::string& name)
+			: Token(location), name(name) { }
 
 		void accept(TokenVisitor&) override;
 		void accept(TokenVisitor&) const override;
 
-		std::string symbol;
+		std::string name;
 	};
 
 	class StringToken : public Token
