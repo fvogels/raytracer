@@ -7,17 +7,6 @@
 
 using namespace scripting;
 
-struct Loc
-{
-	Loc(unsigned line, unsigned ch)
-		: line(line), ch(ch)
-	{
-		// NOP
-	}
-
-	unsigned line, ch;
-};
-
 TEST_CASE("Empty stream", "[StreamLineReader]")
 {
 	std::stringstream ss("");
