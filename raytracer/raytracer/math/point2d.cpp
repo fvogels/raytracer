@@ -41,3 +41,8 @@ bool math::operator ==(const Point2D& p, const Point2D& q)
 {
 	return p.x == approx(q.x) && p.y == approx(q.y);
 }
+
+bool math::operator !=(const Point2D& p, const Point2D& q)
+{
+	return !(p == q);
+}
