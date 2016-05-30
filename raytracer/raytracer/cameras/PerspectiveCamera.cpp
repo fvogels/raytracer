@@ -36,16 +36,16 @@ Ray PerspectiveCamera::create_Ray(const Point2D& point) const
 std::shared_ptr<Camera> Raytracer::create_perspective_camera(
 	const math::Point3D& eye,
 	const math::Point3D& look_at,
-	const math::vector3d& up,
+	const math::Vector3D& up,
 	double distance,
 	double aspect_ratio)
 {
 	assert(up.is_unit());
 
-	vector3d look_direction = (look_at - eye).normalized();
+	Vector3D look_direction = (look_at - eye).normalized();
 	Point3D view_window_center = eye + look_direction;
 
-	vector3d right = look_direction.cross(up);
+	Vector3D right = look_direction.cross(up);
 
 	assert(right.is_unit());
 	assert(up.is_perpendicular_on(right));
@@ -53,8 +53,8 @@ std::shared_ptr<Camera> Raytracer::create_perspective_camera(
 	assert(look_direction.is_perpendicular_on(up));
 
 	Point3D view_window_origin = view_window_center + up / 2 - right / 2 * aspect_ratio;
-	vector3d view_window_down = -up;
-	vector3d view_window_right = right * aspect_ratio;
+	Vector3D view_window_down = -up;
+	Vector3D view_window_right = right * aspect_ratio;
 
 	Rectangle3D view_window(view_window_origin, view_window_right, view_window_down);
 

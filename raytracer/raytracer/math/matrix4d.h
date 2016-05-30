@@ -15,10 +15,10 @@ namespace math
 	};
 
 	Matrix4D operator *(const Matrix4D&, const Matrix4D&);
-	vector3d operator *(const Matrix4D&, const vector3d&);
+	Vector3D operator *(const Matrix4D&, const Vector3D&);
 	Point3D operator *(const Matrix4D&, const Point3D&);
 
 	Matrix4D identity_matrix();
-	Matrix4D translation_matrix(const vector3d&);
+	Matrix4D translation_matrix(const Vector3D&);
 	Matrix4D scale_matrix(double sx, double sy, double sz);
 }

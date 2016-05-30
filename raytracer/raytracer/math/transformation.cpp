@@ -2,7 +2,7 @@
 
 using namespace math;
 
-Transformation math::translation(const vector3d& v)
+Transformation math::translation(const Vector3D& v)
 {
 	Matrix4D tm = translation_matrix(v);
 	Matrix4D itm = translation_matrix(-v);

@@ -28,11 +28,11 @@ Matrix4D math::operator *(const Matrix4D& a, const Matrix4D& b)
 #undef AUX
 }
 
-vector3d math::operator *(const Matrix4D& a, const vector3d& v)
+Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
 {
 #define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 3 * v.z
 
-	return vector3d{ AUX(1), AUX(2), AUX(3) };
+	return Vector3D{ AUX(1), AUX(2), AUX(3) };
 
 #undef AUX
 }
@@ -60,7 +60,7 @@ Matrix4D math::identity_matrix()
 	};
 }
 
-Matrix4D math::translation_matrix(const vector3d& v)
+Matrix4D math::translation_matrix(const Vector3D& v)
 {
 	return Matrix4D{
 		1, 0 ,0 , v.x,

@@ -39,7 +39,7 @@ color determine_color(const Ray& r)
 	{
 		for (auto light : scene.lights)
 		{
-			vector3d hit_to_light = (light->position - hit.position).normalized();
+			Vector3D hit_to_light = (light->position - hit.position).normalized();
 			double cos_angle = hit_to_light.dot(hit.normal);
 
 			assert(hit.normal.is_unit());
@@ -102,7 +102,7 @@ int main()
 		std::cout << "Rendering frame " << frame << std::endl;
 
 		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), vector3d(0, 1, 0), 1, 1);
+		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
 		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));

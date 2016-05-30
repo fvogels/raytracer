@@ -19,10 +19,10 @@ namespace math
 		Point3D& operator =(const Point3D&) = default;
 	};
 
-	Point3D operator +(const Point3D&, const vector3d&);
-	Point3D operator +(const vector3d&, const Point3D&);
-	vector3d operator -(const Point3D&, const Point3D&);
-	Point3D operator -(const Point3D&, const vector3d&);
+	Point3D operator +(const Point3D&, const Vector3D&);
+	Point3D operator +(const Vector3D&, const Point3D&);
+	Vector3D operator -(const Point3D&, const Point3D&);
+	Point3D operator -(const Point3D&, const Vector3D&);
 
 	double distance(const Point3D&, const Point3D&);
 }

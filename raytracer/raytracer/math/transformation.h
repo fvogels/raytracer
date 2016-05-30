@@ -14,6 +14,6 @@ namespace math
 		Matrix4D inverse_Transformation_matrix;
 	};
 
-	Transformation translation(const vector3d&);
+	Transformation translation(const Vector3D&);
 	Transformation scale(double, double, double);
 }

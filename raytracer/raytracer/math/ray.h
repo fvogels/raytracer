@@ -9,9 +9,9 @@ namespace math
 	struct Ray final
 	{
 		Point3D origin;
-		vector3d direction;
+		Vector3D direction;
 
-		Ray(const Point3D& origin, const vector3d& direction)
+		Ray(const Point3D& origin, const Vector3D& direction)
 			: origin(origin), direction(direction) { }
 
 		Ray(const Point3D& origin, const Point3D& through)

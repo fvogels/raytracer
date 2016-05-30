@@ -11,7 +11,7 @@ namespace Raytracer
 	{
 		double t;
 		math::Point3D position;
-		math::vector3d normal;
+		math::Vector3D normal;
 		color c;
 
 		Hit() : t( std::numeric_limits<double>::infinity()) { }

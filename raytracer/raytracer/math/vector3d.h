@@ -4,43 +4,43 @@
 
 namespace math
 {
-	struct vector3d final
+	struct Vector3D final
 	{
 		double x, y, z;
 
-		vector3d()
+		Vector3D()
 			: x(0), y(0), z(0) { }
 
-		vector3d(double x, double y, double z)
+		Vector3D(double x, double y, double z)
 			: x(x), y(y), z(z) { }
 
-		vector3d(const vector3d& v) = default;
+		Vector3D(const Vector3D& v) = default;
 
-		vector3d& operator =(const vector3d&) = default;
+		Vector3D& operator =(const Vector3D&) = default;
 
-		double dot(const vector3d&) const;
-		vector3d cross(const vector3d&) const;
+		double dot(const Vector3D&) const;
+		Vector3D cross(const Vector3D&) const;
 
 		double norm_sqr() const;
 		double norm() const;
 		void normalize();
-		vector3d normalized() const;
+		Vector3D normalized() const;
 		bool is_unit() const;
 
-		vector3d& operator +=(const vector3d&);
-		vector3d& operator -=(const vector3d&);
-		vector3d& operator *=(double);
-		vector3d& operator /=(double);
+		Vector3D& operator +=(const Vector3D&);
+		Vector3D& operator -=(const Vector3D&);
+		Vector3D& operator *=(double);
+		Vector3D& operator /=(double);
 
-		bool is_perpendicular_on(const vector3d&) const;
+		bool is_perpendicular_on(const Vector3D&) const;
 	};
 
-	vector3d operator +(const vector3d&, const vector3d&);
-	vector3d operator -(const vector3d&);
-	vector3d operator -(const vector3d&, const vector3d&);
-	vector3d operator *(const vector3d&, double factor);
-	vector3d operator *(double factor, const vector3d&);
-	vector3d operator /(const vector3d&, double factor);
+	Vector3D operator +(const Vector3D&, const Vector3D&);
+	Vector3D operator -(const Vector3D&);
+	Vector3D operator -(const Vector3D&, const Vector3D&);
+	Vector3D operator *(const Vector3D&, double factor);
+	Vector3D operator *(double factor, const Vector3D&);
+	Vector3D operator /(const Vector3D&, double factor);
 
-	std::ostream& operator <<(std::ostream& out, const vector3d&);
+	std::ostream& operator <<(std::ostream& out, const Vector3D&);
 }
