@@ -249,6 +249,7 @@
     <ClCompile Include="scripting\string_reader.cpp" />
     <ClCompile Include="scripting\stream_line_reader.cpp" />
     <ClCompile Include="scripting\tokens.cpp" />
+    <ClCompile Include="tests\combined_reader_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\rasteriser_tests.cpp" />
     <ClCompile Include="tests\stream_line_reader_tests.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="rendering\GridSampler.h" />
     <ClInclude Include="rendering\Sampler.h" />
     <ClInclude Include="rendering\SingleSampler.h" />
+    <ClInclude Include="scripting\combined_reader.h" />
     <ClInclude Include="scripting\comment_removing_reader.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
