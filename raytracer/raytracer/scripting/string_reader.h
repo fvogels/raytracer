@@ -19,7 +19,7 @@ namespace scripting
 		typedef std::string source_t;
 
 	private:
-		const std::string& m_in;
+		std::string m_in;
 		unsigned m_index;
 	};
 }
