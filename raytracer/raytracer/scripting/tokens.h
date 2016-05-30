@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 namespace scripting
 {
@@ -97,4 +98,16 @@ namespace scripting
 		virtual void visit(const StringToken&) = 0;
 		virtual void visit(const NumberToken&) = 0;
 	};
+
+	template<typename T>
+	bool has_token_type(const Token* p)
+	{
+		return dynamic_cast<const T*>(p) != nullptr;
+	}
+
+	template<typename T>
+	bool has_token_type(std::shared_ptr<const Token> p)
+	{
+		return std::dynamic_pointer_cast<const T>(p) != nullptr;
+	}
 }

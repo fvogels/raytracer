@@ -46,6 +46,10 @@ void scripting::Tokenizer::tokenize()
 			throw std::runtime_error("Unrecognized character " + c);
 		}
 	}
+	else
+	{
+		m_current_token = nullptr;
+	}
 }
 
 void scripting::Tokenizer::tokenize_lparen()
@@ -100,7 +104,7 @@ tokenize_string_success:
 
 void scripting::Tokenizer::skip_whitespace()
 {
-	while (!m_reader.end_reached() && isspace(m_reader.end_reached()))
+	while (!m_reader.end_reached() && isspace(m_reader.current()))
 	{
 		m_reader.next();
 	}
