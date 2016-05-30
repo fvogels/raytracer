@@ -1,5 +1,6 @@
 #pragma once
 
+#include "scripting/location.h"
 #include <string>
 #include <memory>
 
@@ -7,18 +8,9 @@ namespace scripting
 {
 	class TokenVisitor;
 
-	struct Location
-	{
-		unsigned line_index, char_index;
-
-		Location(unsigned line_index, unsigned char_index)
-			: line_index(line_index), char_index(char_index) { }
-	};
-
 	class Token
 	{
 	public:
-		virtual void accept(TokenVisitor&) = 0;
 		virtual void accept(TokenVisitor&) const = 0;
 
 		Location location;
@@ -33,7 +25,6 @@ namespace scripting
 		LeftParenthesisToken(const Location& location)
 			: Token(location) { }
 
-		void accept(TokenVisitor&) override;
 		void accept(TokenVisitor&) const override;
 	};
 
@@ -43,7 +34,6 @@ namespace scripting
 		RightParenthesisToken(const Location& location)
 			: Token(location) { }
 
-		void accept(TokenVisitor&) override;
 		void accept(TokenVisitor&) const override;
 	};
 
@@ -53,7 +43,6 @@ namespace scripting
 		SymbolToken(const Location& location, const std::string& name)
 			: Token(location), name(name) { }
 
-		void accept(TokenVisitor&) override;
 		void accept(TokenVisitor&) const override;
 
 		std::string name;
@@ -65,7 +54,6 @@ namespace scripting
 		StringToken(const Location& location, const std::string& string)
 			: Token(location), string(string) { }
 
-		void accept(TokenVisitor&) override;
 		void accept(TokenVisitor&) const override;
 
 		std::string string;
@@ -77,7 +65,6 @@ namespace scripting
 		NumberToken(const Location& location, double value)
 			: Token(location), value(value) { }
 
-		void accept(TokenVisitor&) override;
 		void accept(TokenVisitor&) const override;
 
 		double value;
@@ -86,12 +73,6 @@ namespace scripting
 	class TokenVisitor
 	{
 	public:
-		virtual void visit(LeftParenthesisToken&) = 0;		
-		virtual void visit(RightParenthesisToken&) = 0;
-		virtual void visit(SymbolToken&) = 0;
-		virtual void visit(StringToken&) = 0;
-		virtual void visit(NumberToken&) = 0;
-
 		virtual void visit(const LeftParenthesisToken&) = 0;
 		virtual void visit(const RightParenthesisToken&) = 0;
 		virtual void visit(const SymbolToken&) = 0;
