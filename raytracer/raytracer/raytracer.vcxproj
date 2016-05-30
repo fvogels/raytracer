@@ -227,7 +227,7 @@
     <ClCompile Include="materials\CheckeredMaterial.cpp" />
     <ClCompile Include="materials\UniformMaterial.cpp" />
     <ClCompile Include="math\interval.cpp" />
-    <ClCompile Include="math\interval_mapper.cpp" />
+    <ClCompile Include="math\interval-mapper.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
     <ClCompile Include="math\point2d.cpp" />
     <ClCompile Include="math\point3d.cpp" />
@@ -268,7 +268,7 @@
     <ClInclude Include="materials\UniformMaterial.h" />
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\interval.h" />
-    <ClInclude Include="math\interval_mapper.h" />
+    <ClInclude Include="math\interval-mapper.h" />
     <ClInclude Include="math\matrix4d.h" />
     <ClInclude Include="math\point2d.h" />
     <ClInclude Include="math\point3d.h" />

@@ -1,4 +1,4 @@
-#include "interval_mapper.h"
+#include "interval-mapper.h"
 
 using namespace math;
 

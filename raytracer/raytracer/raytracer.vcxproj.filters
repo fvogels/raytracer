@@ -39,9 +39,6 @@
     <ClCompile Include="math\interval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\interval_mapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cameras\PerspectiveCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -126,6 +123,9 @@
     <ClCompile Include="tests\tokenizer_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\interval-mapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -162,9 +162,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\interval.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\interval_mapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\util.h">
@@ -255,6 +252,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\angle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\interval-mapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
