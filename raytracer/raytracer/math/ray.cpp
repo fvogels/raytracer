@@ -2,7 +2,7 @@
 
 using namespace math;
 
-Ray math::Ray::transform(const matrix4d& m) const
+Ray math::Ray::transform(const Matrix4D& m) const
 {
 	auto transformed_origin = m * origin;
 	auto transformed_direction = m * direction;

@@ -1,12 +1,12 @@
-#include "math/matrix4d.h"
+#include "math/Matrix4D.h"
 
 using namespace math;
 
-matrix4d math::operator *(const matrix4d& a, const matrix4d& b)
+Matrix4D math::operator *(const Matrix4D& a, const Matrix4D& b)
 {
 #define AUX(row, col) a.x ## row ## 1 * b.x1 ## col + a.x ## row ## 2 * b.x2 ## col + a.x ## row ## 3 * b.x3 ## col + a.x ## row ## 4 * b.x4 ## col
 
-	return matrix4d{
+	return Matrix4D{
 		AUX(1, 1),
 		AUX(1, 2),
 		AUX(1, 3),
@@ -28,7 +28,7 @@ matrix4d math::operator *(const matrix4d& a, const matrix4d& b)
 #undef AUX
 }
 
-vector3d math::operator *(const matrix4d& a, const vector3d& v)
+vector3d math::operator *(const Matrix4D& a, const vector3d& v)
 {
 #define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 3 * v.z
 
@@ -37,7 +37,7 @@ vector3d math::operator *(const matrix4d& a, const vector3d& v)
 #undef AUX
 }
 
-point3d math::operator *(const matrix4d& a, const point3d& p)
+point3d math::operator *(const Matrix4D& a, const point3d& p)
 {
 #define AUX(row) a.x ## row ## 1 * p.x + a.x ## row ## 2 * p.y + a.x ## row ## 3 * p.z + a.x ## row ## 4
 
@@ -50,9 +50,9 @@ point3d math::operator *(const matrix4d& a, const point3d& p)
 #undef AUX
 }
 
-matrix4d math::identity_matrix()
+Matrix4D math::identity_matrix()
 {
-	return matrix4d{
+	return Matrix4D{
 		1, 0 ,0 , 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
@@ -60,9 +60,9 @@ matrix4d math::identity_matrix()
 	};
 }
 
-matrix4d math::translation_matrix(const vector3d& v)
+Matrix4D math::translation_matrix(const vector3d& v)
 {
-	return matrix4d{
+	return Matrix4D{
 		1, 0 ,0 , v.x,
 		0, 1, 0, v.y,
 		0, 0, 1, v.z,
@@ -70,9 +70,9 @@ matrix4d math::translation_matrix(const vector3d& v)
 	};
 }
 
-matrix4d math::scale_matrix(double sx, double sy, double sz)
+Matrix4D math::scale_matrix(double sx, double sy, double sz)
 {
-	return matrix4d{
+	return Matrix4D{
 		sx, 0 ,0 , 0,
 		0, sy, 0, 0,
 		0, 0, sz, 0,

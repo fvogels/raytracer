@@ -5,7 +5,7 @@
 
 namespace math
 {
-	struct matrix4d
+	struct Matrix4D
 	{
 		double
 			x11, x12, x13, x14,
@@ -14,11 +14,11 @@ namespace math
 			x41, x42, x43, x44;
 	};
 
-	matrix4d operator *(const matrix4d&, const matrix4d&);
-	vector3d operator *(const matrix4d&, const vector3d&);
-	point3d operator *(const matrix4d&, const point3d&);
+	Matrix4D operator *(const Matrix4D&, const Matrix4D&);
+	vector3d operator *(const Matrix4D&, const vector3d&);
+	point3d operator *(const Matrix4D&, const point3d&);
 
-	matrix4d identity_matrix();
-	matrix4d translation_matrix(const vector3d&);
-	matrix4d scale_matrix(double sx, double sy, double sz);
+	Matrix4D identity_matrix();
+	Matrix4D translation_matrix(const vector3d&);
+	Matrix4D scale_matrix(double sx, double sy, double sz);
 }
