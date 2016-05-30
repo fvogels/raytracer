@@ -9,13 +9,13 @@ namespace Raytracer
 	class Transformer : public Primitive
 	{
 	public:
-		Transformer(const math::transformation& transformer, std::shared_ptr<const Primitive> transformee)
+		Transformer(const math::Transformation& transformer, std::shared_ptr<const Primitive> transformee)
 			: transformer(transformer), transformee(transformee) { }
 
 		virtual bool find_hit(const math::Ray&, Hit*) const override;
 
 	private:
-		math::transformation transformer;
+		math::Transformation transformer;
 		std::shared_ptr<const Primitive> transformee;
 	};
 }

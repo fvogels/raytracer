@@ -2,7 +2,7 @@
 #include "imaging/wif_format.h"
 #include "primitives/Sphere.h"
 #include "primitives/Plane.h"
-#include "primitives/Transformer.h"
+#include "primitives/transformer.h"
 #include "primitives/Decorator.h"
 #include "cameras/PerspectiveCamera.h"
 #include "math/rectangle2D.h"
