@@ -27,6 +27,7 @@ namespace scripting
 		void tokenize_lparen();
 		void tokenize_rparen();
 		void tokenize_string();
+		void tokenize_number();
 
 		void skip_whitespace();
 		void skip_comments();

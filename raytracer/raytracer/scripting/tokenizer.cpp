@@ -41,6 +41,10 @@ void scripting::Tokenizer::tokenize()
 		{
 			tokenize_string();
 		}
+		else if (c == '-' || std::isdigit(c))
+		{
+			tokenize_number();
+		}
 		else
 		{
 			throw std::runtime_error("Unrecognized character " + c);
@@ -77,7 +81,7 @@ void scripting::Tokenizer::tokenize_string()
 
 	std::string buffer;
 	Location start_location = m_reader.location();
-	
+
 	m_reader.next();
 	while (!m_reader.end_reached())
 	{
@@ -101,6 +105,50 @@ tokenize_string_success:
 
 	m_reader.next();
 	m_current_token = std::make_shared<StringToken>(start_location, buffer);
+}
+
+void scripting::Tokenizer::tokenize_number()
+{
+	assert(!m_reader.end_reached());
+
+	Location start_location = m_reader.location();
+	std::string buffer;
+	bool encountered_dot = false;
+	auto accumulate = [&buffer](char c) { buffer += c; };
+	
+	accumulate(m_reader.current());
+	m_reader.next();
+
+	while (!m_reader.end_reached())
+	{
+		char c = m_reader.current();
+
+		if (c == '.')
+		{
+			if (encountered_dot)
+			{
+				throw std::runtime_error("Encountered second dot in number literal");
+			}
+			else
+			{
+				encountered_dot = true;
+				accumulate('.');
+			}
+		}
+		else if (std::isdigit(c))
+		{
+			accumulate(c);
+		}
+		else
+		{
+			break;
+		}
+
+		m_reader.next();
+	}
+
+	double value = std::stod(buffer);
+	m_current_token = std::make_shared<NumberToken>(start_location, value);
 }
 
 void scripting::Tokenizer::skip_whitespace()
