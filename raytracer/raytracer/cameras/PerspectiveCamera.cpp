@@ -1,5 +1,5 @@
 #include "cameras/PerspectiveCamera.h"
-#include "math/rectangle3d.h"
+#include "math/rectangle3D.h"
 #include <assert.h>
 
 using namespace Raytracer;
@@ -8,16 +8,16 @@ using namespace math;
 class PerspectiveCamera : public Camera
 {
 public:
-	PerspectiveCamera(const Point3D& eye, const rectangle3d& view_window);
+	PerspectiveCamera(const Point3D& eye, const Rectangle3D& view_window);
 
 	virtual Ray create_Ray(const Point2D&) const override;
 
 private:
 	Point3D eye;
-	rectangle3d view_window;
+	Rectangle3D view_window;
 };
 
-PerspectiveCamera::PerspectiveCamera(const Point3D& eye, const rectangle3d& view_window)
+PerspectiveCamera::PerspectiveCamera(const Point3D& eye, const Rectangle3D& view_window)
 	: eye(eye), view_window(view_window)
 {
 	// NOP
@@ -56,7 +56,7 @@ std::shared_ptr<Camera> Raytracer::create_perspective_camera(
 	vector3d view_window_down = -up;
 	vector3d view_window_right = right * aspect_ratio;
 
-	rectangle3d view_window(view_window_origin, view_window_right, view_window_down);
+	Rectangle3D view_window(view_window_origin, view_window_right, view_window_down);
 
 	return std::make_shared<PerspectiveCamera>(eye, view_window);
 }
