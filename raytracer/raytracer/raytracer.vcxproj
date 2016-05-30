@@ -231,7 +231,7 @@
     <ClCompile Include="math\matrix4d.cpp" />
     <ClCompile Include="math\point2d.cpp" />
     <ClCompile Include="math\point3d.cpp" />
-    <ClCompile Include="math\rasteriser.cpp" />
+    <ClCompile Include="math\rasterizer.cpp" />
     <ClCompile Include="math\rectangle3d.cpp" />
     <ClCompile Include="math\transformation.cpp" />
     <ClCompile Include="math\vector2d.cpp" />
@@ -272,7 +272,7 @@
     <ClInclude Include="math\matrix4d.h" />
     <ClInclude Include="math\point2d.h" />
     <ClInclude Include="math\point3d.h" />
-    <ClInclude Include="math\rasteriser.h" />
+    <ClInclude Include="math\rasterizer.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
     <ClInclude Include="math\transformation.h" />

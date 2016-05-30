@@ -1,11 +1,11 @@
 #include "GridSampler.h"
-#include "math/rasteriser.h"
+#include "math/Rasterizer.h"
 
 using namespace math;
 
 void Raytracer::GridSampler::sample(const rectangle2d& rectangle, std::function<void(const Point2D&)> function) const
 {
-	rasteriser raster(rectangle, this->columns, this->rows);
+	Rasterizer raster(rectangle, this->columns, this->rows);
 	
 	for (int y = 0; y != this->rows; ++y)
 	{

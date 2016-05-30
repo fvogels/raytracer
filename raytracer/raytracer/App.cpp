@@ -6,7 +6,7 @@
 #include "primitives/Decorator.h"
 #include "cameras/PerspectiveCamera.h"
 #include "math/rectangle2d.h"
-#include "math/rasteriser.h"
+#include "math/Rasterizer.h"
 #include "rendering/GridSampler.h"
 #include "materials/UniformMaterial.h"
 #include "materials/CheckeredMaterial.h"
@@ -55,7 +55,7 @@ color determine_color(const Ray& r)
 	return c;
 }
 
-color render_pixel(const rasteriser& window_rasteriser, int i, int j)
+color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
 	GridSampler sampler(1, 1);
 	rectangle2d pixel_rectangle = window_rasteriser[position(i, j)];
@@ -106,7 +106,7 @@ int main()
 		create_scene(double(frame) / FRAME_COUNT);
 
 		rectangle2d window(Point2D(0, 0), vector2d(1, 0), vector2d(0, 1));
-		rasteriser window_rasteriser(window, bitmap.width(), bitmap.height());
+		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
 		bitmap.clear(colors::black());
 

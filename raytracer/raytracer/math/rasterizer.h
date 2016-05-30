@@ -5,7 +5,7 @@
 
 namespace math
 {
-	class rasteriser
+	class Rasterizer
 	{
 	private:
 		rectangle2d rect;
@@ -13,12 +13,12 @@ namespace math
 		unsigned vertical_subdivisions;
 
 	public:
-		rasteriser(const rectangle2d& rect, unsigned horizontal_subdivisions, unsigned vertical_subdivisions)
+		Rasterizer(const rectangle2d& rect, unsigned horizontal_subdivisions, unsigned vertical_subdivisions)
 			: rect(rect), horizontal_subdivisions(horizontal_subdivisions), vertical_subdivisions(vertical_subdivisions) { }
 
-		rasteriser(const rasteriser&) = default;
+		Rasterizer(const Rasterizer&) = default;
 
-		rasteriser& operator =(const rasteriser&) = default;
+		Rasterizer& operator =(const Rasterizer&) = default;
 
 		rectangle2d operator [](const position&) const;
 	};

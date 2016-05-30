@@ -33,9 +33,6 @@
     <ClCompile Include="math\point2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\rasteriser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\interval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -126,6 +123,9 @@
     <ClCompile Include="math\interval-mapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\rasterizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -156,9 +156,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\point2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\rasteriser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\interval.h">
@@ -255,6 +252,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\interval-mapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\rasterizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

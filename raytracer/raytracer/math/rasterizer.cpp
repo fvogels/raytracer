@@ -1,8 +1,8 @@
-#include "math/rasteriser.h"
+#include "math/Rasterizer.h"
 
 using namespace math;
 
-rectangle2d math::rasteriser::operator [](const position& pos) const
+rectangle2d math::Rasterizer::operator [](const position& pos) const
 {
 	vector2d x_axis = this->rect.x_axis / this->horizontal_subdivisions;
 	vector2d y_axis = this->rect.y_axis / this->vertical_subdivisions;
