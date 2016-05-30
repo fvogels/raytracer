@@ -17,9 +17,9 @@ using namespace Raytracer;
 
 struct Light
 {
-	point3d position;
+	Point3D position;
 
-	Light(const point3d& position) : position(position) { }
+	Light(const Point3D& position) : position(position) { }
 };
 
 struct Scene
@@ -82,7 +82,7 @@ void create_root(double t)
 void create_lights(double t)
 {
 	scene.lights.clear();
-	scene.lights.push_back(std::make_shared<Light>(point3d(0, 5, 5)));
+	scene.lights.push_back(std::make_shared<Light>(Point3D(0, 5, 5)));
 }
 
 void create_scene(double t)
@@ -102,7 +102,7 @@ int main()
 		std::cout << "Rendering frame " << frame << std::endl;
 
 		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(point3d(0, 0, 5), point3d(0, 0, 0), vector3d(0, 1, 0), 1, 1);
+		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), vector3d(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
 		rectangle2d window(Point2D(0, 0), vector2d(1, 0), vector2d(0, 1));

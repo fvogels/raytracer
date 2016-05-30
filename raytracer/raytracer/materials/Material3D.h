@@ -1,13 +1,13 @@
 #pragma once
 
 #include "imaging/color.h"
-#include "math/point3d.h"
+#include "math/Point3D.h"
 
 namespace Raytracer 
 {
 	class Material3D
 	{
 	public:
-		virtual color at(const math::point3d&) const = 0;
+		virtual color at(const math::Point3D&) const = 0;
 	};
 }

@@ -1,19 +1,19 @@
 #pragma once
 
 #include "math/Point2D.h"
-#include "math/point3d.h"
+#include "math/Point3D.h"
 
 namespace math
 {
 	struct rectangle3d
 	{
-		point3d origin;
+		Point3D origin;
 		vector3d x_axis;
 		vector3d y_axis;
 
-		rectangle3d(const point3d& origin, const vector3d& x_axis, const vector3d& y_axis)
+		rectangle3d(const Point3D& origin, const vector3d& x_axis, const vector3d& y_axis)
 			: origin(origin), x_axis(x_axis), y_axis(y_axis) { }
 
-		point3d project(const Point2D&) const;
+		Point3D project(const Point2D&) const;
 	};
 }

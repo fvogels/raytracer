@@ -11,8 +11,8 @@ bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 	assert(hit != nullptr);
 
 	double a = Ray.direction.dot(Ray.direction);
-	double b = 2 * Ray.direction.dot(Ray.origin - point3d());
-	double c = (Ray.origin - point3d()).norm_sqr() - 1;
+	double b = 2 * Ray.direction.dot(Ray.origin - Point3D());
+	double c = (Ray.origin - Point3D()).norm_sqr() - 1;
 	double d = b * b - 4 * a * c;
 
 	if (d >= 0)
@@ -31,7 +31,7 @@ bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 		{
 			hit->t = t1;
 			hit->position = Ray.at(hit->t);
-			hit->normal = hit->position - point3d();
+			hit->normal = hit->position - Point3D();
 
 			return true;
 		}
@@ -39,7 +39,7 @@ bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 		{
 			hit->t = t2;
 			hit->position = Ray.at(hit->t);
-			hit->normal = hit->position - point3d();
+			hit->normal = hit->position - Point3D();
 
 			return true;
 		}

@@ -1,22 +1,22 @@
-#include "math/point3d.h"
+#include "math/Point3D.h"
 
 using namespace math;
 
-point3d math::operator +(const point3d& p, const vector3d& v)
+Point3D math::operator +(const Point3D& p, const vector3d& v)
 {
 	double x = p.x + v.x;
 	double y = p.y + v.y;
 	double z = p.z + v.z;
 
-	return point3d(x, y, z);
+	return Point3D(x, y, z);
 }
 
-point3d math::operator +(const vector3d& v, const point3d& p)
+Point3D math::operator +(const vector3d& v, const Point3D& p)
 {
 	return p + v;
 }
 
-vector3d math::operator -(const point3d& p, const point3d& q)
+vector3d math::operator -(const Point3D& p, const Point3D& q)
 {
 	double x = p.x - q.x;
 	double y = p.y - q.y;
@@ -25,16 +25,16 @@ vector3d math::operator -(const point3d& p, const point3d& q)
 	return vector3d(x, y, z);
 }
 
-point3d math::operator -(const point3d& p, const vector3d& v)
+Point3D math::operator -(const Point3D& p, const vector3d& v)
 {
 	double x = p.x - v.x;
 	double y = p.y - v.y;
 	double z = p.z - v.z;
 
-	return point3d(x, y, z);
+	return Point3D(x, y, z);
 }
 
-double math::distance(const point3d& p, const point3d& q)
+double math::distance(const Point3D& p, const Point3D& q)
 {
 	return (q - p).norm();
 }

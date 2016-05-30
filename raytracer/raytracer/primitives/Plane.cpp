@@ -5,7 +5,7 @@
 using namespace Raytracer;
 using namespace math;
 
-Raytracer::Plane::Plane(const point3d& point, const vector3d& normal)
+Raytracer::Plane::Plane(const Point3D& point, const vector3d& normal)
 	: point(point), normal(normal)
 {
 	assert(normal.is_unit());

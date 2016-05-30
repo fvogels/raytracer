@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/vector3d.h"
-#include "math/point3d.h"
+#include "math/Point3D.h"
 
 namespace math
 {
@@ -16,7 +16,7 @@ namespace math
 
 	Matrix4D operator *(const Matrix4D&, const Matrix4D&);
 	vector3d operator *(const Matrix4D&, const vector3d&);
-	point3d operator *(const Matrix4D&, const point3d&);
+	Point3D operator *(const Matrix4D&, const Point3D&);
 
 	Matrix4D identity_matrix();
 	Matrix4D translation_matrix(const vector3d&);

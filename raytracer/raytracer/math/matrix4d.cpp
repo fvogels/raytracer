@@ -37,7 +37,7 @@ vector3d math::operator *(const Matrix4D& a, const vector3d& v)
 #undef AUX
 }
 
-point3d math::operator *(const Matrix4D& a, const point3d& p)
+Point3D math::operator *(const Matrix4D& a, const Point3D& p)
 {
 #define AUX(row) a.x ## row ## 1 * p.x + a.x ## row ## 2 * p.y + a.x ## row ## 3 * p.z + a.x ## row ## 4
 
@@ -45,7 +45,7 @@ point3d math::operator *(const Matrix4D& a, const point3d& p)
 	double y = AUX(2);
 	double z = AUX(3);
 
-	return point3d{ x, y, z };
+	return Point3D{ x, y, z };
 
 #undef AUX
 }

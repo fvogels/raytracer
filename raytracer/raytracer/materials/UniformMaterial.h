@@ -9,7 +9,7 @@ namespace Raytracer
 	public:
 		UniformMaterial(const color& c) : c(c) { }
 
-		color at(const math::point3d&) const override;
+		color at(const math::Point3D&) const override;
 
 	private:
 		color c;

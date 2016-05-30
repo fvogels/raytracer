@@ -4,25 +4,25 @@
 
 namespace math
 {
-	struct point3d final
+	struct Point3D final
 	{
 		double x, y, z;
 
-		point3d()
+		Point3D()
 			: x(0), y(0), z(0) { }
 
-		point3d(double x, double y, double z)
+		Point3D(double x, double y, double z)
 			: x(x), y(y), z(z) { }
 
-		point3d(const point3d& v) = default;
+		Point3D(const Point3D& v) = default;
 
-		point3d& operator =(const point3d&) = default;
+		Point3D& operator =(const Point3D&) = default;
 	};
 
-	point3d operator +(const point3d&, const vector3d&);
-	point3d operator +(const vector3d&, const point3d&);
-	vector3d operator -(const point3d&, const point3d&);
-	point3d operator -(const point3d&, const vector3d&);
+	Point3D operator +(const Point3D&, const vector3d&);
+	Point3D operator +(const vector3d&, const Point3D&);
+	vector3d operator -(const Point3D&, const Point3D&);
+	Point3D operator -(const Point3D&, const vector3d&);
 
-	double distance(const point3d&, const point3d&);
+	double distance(const Point3D&, const Point3D&);
 }
