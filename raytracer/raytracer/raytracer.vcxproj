@@ -245,6 +245,7 @@
     <ClCompile Include="primitives\Union.cpp" />
     <ClCompile Include="rendering\GridSampler.cpp" />
     <ClCompile Include="rendering\SingleSampler.cpp" />
+    <ClCompile Include="scripting\comment_removing_reader.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
     <ClCompile Include="scripting\stream_line_reader.cpp" />
     <ClCompile Include="scripting\tokens.cpp" />
@@ -285,6 +286,7 @@
     <ClInclude Include="rendering\GridSampler.h" />
     <ClInclude Include="rendering\Sampler.h" />
     <ClInclude Include="rendering\SingleSampler.h" />
+    <ClInclude Include="scripting\comment_removing_reader.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
     <ClInclude Include="scripting\reader.h" />
