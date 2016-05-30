@@ -4,45 +4,45 @@
 
 namespace math
 {
-	struct vector2d final
+	struct Vector2D final
 	{
 		double x, y;
 
-		vector2d()
+		Vector2D()
 			: x(0), y(0) { }
 
-		vector2d(double x, double y)
+		Vector2D(double x, double y)
 			: x(x), y(y) { }
 
-		vector2d(const vector2d& v) = default;
+		Vector2D(const Vector2D& v) = default;
 
-		vector2d& operator =(const vector2d&) = default;
+		Vector2D& operator =(const Vector2D&) = default;
 
-		double dot(const vector2d&) const;
+		double dot(const Vector2D&) const;
 
 		double norm_sqr() const;
 		double norm() const;
 		void normalize();
-		vector2d normalized() const;
+		Vector2D normalized() const;
 		bool is_unit() const;
 
-		vector2d& operator +=(const vector2d&);
-		vector2d& operator -=(const vector2d&);
-		vector2d& operator *=(double);
-		vector2d& operator /=(double);
+		Vector2D& operator +=(const Vector2D&);
+		Vector2D& operator -=(const Vector2D&);
+		Vector2D& operator *=(double);
+		Vector2D& operator /=(double);
 
-		bool is_perpendicular_on(const vector2d&) const;
+		bool is_perpendicular_on(const Vector2D&) const;
 	};
 
-	vector2d operator +(const vector2d&, const vector2d&);
-	vector2d operator -(const vector2d&);
-	vector2d operator -(const vector2d&, const vector2d&);
-	vector2d operator *(const vector2d&, double factor);
-	vector2d operator *(double factor, const vector2d&);
-	vector2d operator /(const vector2d&, double factor);
+	Vector2D operator +(const Vector2D&, const Vector2D&);
+	Vector2D operator -(const Vector2D&);
+	Vector2D operator -(const Vector2D&, const Vector2D&);
+	Vector2D operator *(const Vector2D&, double factor);
+	Vector2D operator *(double factor, const Vector2D&);
+	Vector2D operator /(const Vector2D&, double factor);
 
-	bool operator ==(const vector2d&, const vector2d&);
-	bool operator !=(const vector2d&, const vector2d&);
+	bool operator ==(const Vector2D&, const Vector2D&);
+	bool operator !=(const Vector2D&, const Vector2D&);
 
-	std::ostream& operator <<(std::ostream& out, const vector2d&);
+	std::ostream& operator <<(std::ostream& out, const Vector2D&);
 }

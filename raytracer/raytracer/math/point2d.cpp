@@ -3,7 +3,7 @@
 
 using namespace math;
 
-Point2D math::operator +(const Point2D& p, const vector2d& v)
+Point2D math::operator +(const Point2D& p, const Vector2D& v)
 {
 	double x = p.x + v.x;
 	double y = p.y + v.y;
@@ -11,20 +11,20 @@ Point2D math::operator +(const Point2D& p, const vector2d& v)
 	return Point2D(x, y);
 }
 
-Point2D math::operator +(const vector2d& v, const Point2D& p)
+Point2D math::operator +(const Vector2D& v, const Point2D& p)
 {
 	return p + v;
 }
 
-vector2d math::operator -(const Point2D& p, const Point2D& q)
+Vector2D math::operator -(const Point2D& p, const Point2D& q)
 {
 	double x = p.x - q.x;
 	double y = p.y - q.y;
 
-	return vector2d(x, y);
+	return Vector2D(x, y);
 }
 
-Point2D math::operator -(const Point2D& p, const vector2d& v)
+Point2D math::operator -(const Point2D& p, const Vector2D& v)
 {
 	double x = p.x - v.x;
 	double y = p.y - v.y;

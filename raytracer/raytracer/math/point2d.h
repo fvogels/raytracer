@@ -19,10 +19,10 @@ namespace math
 		Point2D& operator =(const Point2D&) = default;
 	};
 
-	Point2D operator +(const Point2D&, const vector2d&);
-	Point2D operator +(const vector2d&, const Point2D&);
-	vector2d operator -(const Point2D&, const Point2D&);
-	Point2D operator -(const Point2D&, const vector2d&);
+	Point2D operator +(const Point2D&, const Vector2D&);
+	Point2D operator +(const Vector2D&, const Point2D&);
+	Vector2D operator -(const Point2D&, const Point2D&);
+	Point2D operator -(const Point2D&, const Vector2D&);
 
 	bool operator ==(const Point2D&, const Point2D&);
 	bool operator !=(const Point2D&, const Point2D&);

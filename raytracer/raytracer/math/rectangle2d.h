@@ -8,10 +8,10 @@ namespace math
 	struct Rectangle2D
 	{
 		Point2D origin;
-		vector2d x_axis;
-		vector2d y_axis;
+		Vector2D x_axis;
+		Vector2D y_axis;
 
-		Rectangle2D(const Point2D& origin, const vector2d& x_axis, const vector2d& y_axis)
+		Rectangle2D(const Point2D& origin, const Vector2D& x_axis, const Vector2D& y_axis)
 			: origin(origin), x_axis(x_axis), y_axis(y_axis) { }
 
 		Point2D center() const;

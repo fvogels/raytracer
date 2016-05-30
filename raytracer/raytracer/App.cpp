@@ -105,7 +105,7 @@ int main()
 		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), vector3d(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
-		Rectangle2D window(Point2D(0, 0), vector2d(1, 0), vector2d(0, 1));
+		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
 		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
 		bitmap.clear(colors::black());
