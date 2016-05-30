@@ -1,7 +1,7 @@
 #pragma once
 
 #include "primitives/Primitive.h"
-#include "math/Point3D.h"
+#include "math/point3D.h"
 
 namespace Raytracer
 {
