@@ -7,7 +7,7 @@
 
 using namespace scripting;
 
-TEST_CASE("Empty stream", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Empty stream", "[StreamLineReader]")
 {
 	std::stringstream ss("");
 	StreamLineReader reader(ss);
@@ -15,7 +15,7 @@ TEST_CASE("Empty stream", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("Single empty line", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Single empty line", "[StreamLineReader]")
 {
 	std::stringstream ss("\n");
 	StreamLineReader reader(ss);
@@ -26,7 +26,7 @@ TEST_CASE("Single empty line", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("Single line stream, no newline at end", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Single line stream, no newline at end", "[StreamLineReader]")
 {
 	std::stringstream ss("abc");
 	StreamLineReader reader(ss);
@@ -37,7 +37,7 @@ TEST_CASE("Single line stream, no newline at end", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("Single line stream, newline at end", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Single line stream, newline at end", "[StreamLineReader]")
 {
 	std::stringstream ss("abc\n");
 	StreamLineReader reader(ss);
@@ -48,7 +48,7 @@ TEST_CASE("Single line stream, newline at end", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("Two lines, second not ending with newline", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Two lines, second not ending with newline", "[StreamLineReader]")
 {
 	std::stringstream ss("abc\nxyz");
 	StreamLineReader reader(ss);
@@ -62,7 +62,7 @@ TEST_CASE("Two lines, second not ending with newline", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("Two lines, second ending with newline", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Two lines, second ending with newline", "[StreamLineReader]")
 {
 	std::stringstream ss("abc\nxyz\n");
 	StreamLineReader reader(ss);
@@ -76,7 +76,7 @@ TEST_CASE("Two lines, second ending with newline", "[StreamLineReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("Three lines, second line empty", "[StreamLineReader]")
+TEST_CASE("[StreamLineReader] Three lines, second line empty", "[StreamLineReader]")
 {
 	std::stringstream ss("abc\n\nxyz");
 	StreamLineReader reader(ss);
