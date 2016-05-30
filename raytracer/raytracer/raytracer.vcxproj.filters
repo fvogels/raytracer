@@ -260,5 +260,8 @@
     <ClInclude Include="scripting\location.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scripting\s-expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
