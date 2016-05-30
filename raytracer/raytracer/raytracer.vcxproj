@@ -253,6 +253,7 @@
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\rasteriser_tests.cpp" />
     <ClCompile Include="tests\stream_line_reader_tests.cpp" />
+    <ClCompile Include="tests\string_reader_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\Animation.h" />
