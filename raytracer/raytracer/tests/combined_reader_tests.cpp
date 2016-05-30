@@ -28,7 +28,7 @@ TEST_CASE("[CombinedReader] Empty stream", "[CombinedReader]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("[CombinedReader] Single line", "[CombinedReader]")
+TEST_CASE("[CombinedReader] Single line, without newline", "[CombinedReader]")
 {
 	std::istringstream ss("abc");
 	CombinedReader<StreamLineReader, StringReader, Loc> reader(ss);
@@ -41,6 +41,46 @@ TEST_CASE("[CombinedReader] Single line", "[CombinedReader]")
 	reader.next();
 	REQUIRE(!reader.end_reached());
 	REQUIRE(reader.current() == 'c');
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == '\n');
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[CombinedReader] Single line, with newline", "[CombinedReader]")
+{
+	std::istringstream ss("abc\n");
+	CombinedReader<StreamLineReader, StringReader, Loc> reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == 'a');
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == 'b');
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == 'c');
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == '\n');
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[CombinedReader] Two lines", "[CombinedReader]")
+{
+	std::istringstream ss("a\nb");
+	CombinedReader<StreamLineReader, StringReader, Loc> reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == 'a');
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == '\n');
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(reader.current() == 'b');
 	reader.next();
 	REQUIRE(!reader.end_reached());
 	REQUIRE(reader.current() == '\n');
