@@ -266,6 +266,7 @@
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="materials\Material3D.h" />
     <ClInclude Include="materials\UniformMaterial.h" />
+    <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval_mapper.h" />
     <ClInclude Include="math\matrix4d.h" />
