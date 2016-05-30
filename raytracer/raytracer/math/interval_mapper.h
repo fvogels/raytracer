@@ -4,14 +4,14 @@
 
 namespace math
 {
-	struct Interval_mapper
+	struct IntervalMapper
 	{
 		Interval from, to;
 
-		Interval_mapper(const Interval& from, const Interval& to)
+		IntervalMapper(const Interval& from, const Interval& to)
 			: from(from), to(to) { }
 
-		Interval_mapper(const Interval_mapper&) = default;
+		IntervalMapper(const IntervalMapper&) = default;
 
 		double operator [](double) const;
 	};
