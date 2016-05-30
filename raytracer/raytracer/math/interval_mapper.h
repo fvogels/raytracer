@@ -1,17 +1,17 @@
 #pragma once
 
-#include "interval.h"
+#include "Interval.h"
 
 namespace math
 {
-	struct interval_mapper
+	struct Interval_mapper
 	{
-		interval from, to;
+		Interval from, to;
 
-		interval_mapper(const interval& from, const interval& to)
+		Interval_mapper(const Interval& from, const Interval& to)
 			: from(from), to(to) { }
 
-		interval_mapper(const interval_mapper&) = default;
+		Interval_mapper(const Interval_mapper&) = default;
 
 		double operator [](double) const;
 	};

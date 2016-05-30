@@ -1,23 +1,23 @@
-#include "interval.h"
+#include "Interval.h"
 
 using namespace math;
 
-double math::interval::size() const
+double math::Interval::size() const
 {
 	return upper - lower;
 }
 
-bool math::interval::contains(double x) const
+bool math::Interval::contains(double x) const
 {
 	return lower <= x && x <= upper;
 }
 
-double math::interval::to_relative(double x) const
+double math::Interval::to_relative(double x) const
 {
 	return (x - lower) / size();
 }
 
-double math::interval::from_relative(double t) const
+double math::Interval::from_relative(double t) const
 {
 	return t * size() + lower;
 }

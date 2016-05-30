@@ -2,14 +2,14 @@
 
 namespace math
 {
-	struct interval
+	struct Interval
 	{
 		double lower, upper;
 
-		interval(double lower, double upper)
+		Interval(double lower, double upper)
 			: lower(lower), upper(upper) { }
 
-		interval(const interval&) = default;
+		Interval(const Interval&) = default;
 
 		double size() const;
 		bool contains(double x) const;
