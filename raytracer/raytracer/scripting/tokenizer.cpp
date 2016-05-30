@@ -20,7 +20,7 @@ void scripting::Tokenizer::tokenize()
 {
 	assert(!m_reader.end_reached());
 
-	skip_whitespace();
+	skip_whitespace_and_comments();
 
 	if (!m_reader.end_reached())
 	{
@@ -88,6 +88,7 @@ void scripting::Tokenizer::tokenize_string()
 		else
 		{
 			buffer += m_reader.current();
+			m_reader.next();
 		}
 	}
 
@@ -107,6 +108,42 @@ void scripting::Tokenizer::skip_whitespace()
 	while (!m_reader.end_reached() && isspace(m_reader.current()))
 	{
 		m_reader.next();
+	}
+}
+
+void scripting::Tokenizer::skip_comments()
+{
+	assert(!m_reader.end_reached());
+	assert(m_reader.current() == ';');
+
+	while (!m_reader.end_reached())
+	{
+		if (m_reader.current() == '\n')
+		{
+			m_reader.next();
+			return;
+		}
+		else
+		{
+			m_reader.next();
+		}
+	}
+}
+
+void scripting::Tokenizer::skip_whitespace_and_comments()
+{
+	while (true)
+	{
+		skip_whitespace();
+
+		if (!m_reader.end_reached() && m_reader.current() == ';')
+		{
+			skip_comments();
+		}
+		else
+		{
+			return;
+		}
 	}
 }
 

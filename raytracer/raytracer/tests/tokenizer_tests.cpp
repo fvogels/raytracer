@@ -6,6 +6,30 @@
 
 using namespace scripting;
 
+bool is_lparen(std::shared_ptr<const Token> token)
+{
+	return has_token_type<LeftParenthesisToken>(token);
+}
+
+bool is_rparen(std::shared_ptr<const Token> token)
+{
+	return has_token_type<RightParenthesisToken>(token);
+}
+
+bool is_string(std::shared_ptr<const Token> token, std::string string)
+{
+	if (has_token_type<StringToken>(token))
+	{
+		auto string_token = std::dynamic_pointer_cast<const StringToken>(token);
+
+		return string_token->string == string;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 TEST_CASE("[Tokenizer] Empty stream", "[Tokenizer]")
 {
 	std::stringstream ss("");
@@ -14,38 +38,119 @@ TEST_CASE("[Tokenizer] Empty stream", "[Tokenizer]")
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("[Tokenizer] Tokenizing \"(\"", "[Tokenizer]")
+TEST_CASE("[Tokenizer] Tokenizing (", "[Tokenizer]")
 {
 	std::stringstream ss("(");
 	Tokenizer reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(has_token_type<LeftParenthesisToken>(reader.current()));
+	REQUIRE(is_lparen(reader.current()));
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("[Tokenizer] Tokenizing \")\"", "[Tokenizer]")
+TEST_CASE("[Tokenizer] Tokenizing )", "[Tokenizer]")
 {
 	std::stringstream ss(")");
 	Tokenizer reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(has_token_type<RightParenthesisToken>(reader.current()));
+	REQUIRE(is_rparen(reader.current()));
 	reader.next();
 	REQUIRE(reader.end_reached());
 }
 
-TEST_CASE("[Tokenizer] Tokenizing \"()\"", "[Tokenizer]")
+TEST_CASE("[Tokenizer] Tokenizing ()", "[Tokenizer]")
 {
 	std::stringstream ss("()");
 	Tokenizer reader(ss);
 
 	REQUIRE(!reader.end_reached());
-	REQUIRE(has_token_type<LeftParenthesisToken>(reader.current()));
+	REQUIRE(is_lparen(reader.current()));
 	reader.next();
 	REQUIRE(!reader.end_reached());
-	REQUIRE(has_token_type<RightParenthesisToken>(reader.current()));
+	REQUIRE(is_rparen(reader.current()));
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing \"abc\"", "[Tokenizer]")
+{
+	std::stringstream ss("\"abc\"");
+	Tokenizer reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "abc"));
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing \"abc\" \"xyz\"", "[Tokenizer]")
+{
+	std::stringstream ss("\"abc\" \"xyz\"");
+	Tokenizer reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "abc"));
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "xyz"));
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing \"abc\"     \"xyz\"", "[Tokenizer]")
+{
+	std::stringstream ss("\"abc\"     \"xyz\"");
+	Tokenizer reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "abc"));
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "xyz"));
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing \"abc\"\\n\"xyz\"", "[Tokenizer]")
+{
+	std::stringstream ss("\"abc\"\n\"xyz\"");
+	Tokenizer reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "abc"));
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "xyz"));
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing \"abc\" ; Hello\\n\"xyz\"", "[Tokenizer]")
+{
+	std::stringstream ss("\"abc\" ; Hello\n\"xyz\"");
+	Tokenizer reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "abc"));
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "xyz"));
+	reader.next();
+	REQUIRE(reader.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing \"abc\" ; Hello\\n     \"xyz\"", "[Tokenizer]")
+{
+	std::stringstream ss("\"abc\" ; Hello\n     \"xyz\"");
+	Tokenizer reader(ss);
+
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "abc"));
+	reader.next();
+	REQUIRE(!reader.end_reached());
+	REQUIRE(is_string(reader.current(), "xyz"));
 	reader.next();
 	REQUIRE(reader.end_reached());
 }

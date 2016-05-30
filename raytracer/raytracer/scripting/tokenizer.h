@@ -29,5 +29,7 @@ namespace scripting
 		void tokenize_string();
 
 		void skip_whitespace();
+		void skip_comments();
+		void skip_whitespace_and_comments();
 	};
 }
