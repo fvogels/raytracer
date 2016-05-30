@@ -45,13 +45,28 @@ bool is_number(std::shared_ptr<const Token> token, double value)
 	}
 }
 
+bool is_symbol(std::shared_ptr<const Token> token, std::string string)
+{
+	if (has_token_type<SymbolToken>(token))
+	{
+		auto symbol_token = std::dynamic_pointer_cast<const SymbolToken>(token);
+
+		return symbol_token->name == string;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 Tokenizer create_tokenizer(std::istream& in)
 {
 	std::vector<std::shared_ptr<const TokenRecognizer>> recognizers { 
 		std::make_shared<LeftParenthesisRecognizer>(),
 		std::make_shared<RightParenthesisRecognizer>(),
 		std::make_shared<StringRecognizer>(),
-		std::make_shared<NumberRecognizer>()
+		std::make_shared<NumberRecognizer>(),
+		std::make_shared<SymbolRecognizer>()
 	};
 
 	return Tokenizer(in, recognizers);
@@ -214,6 +229,51 @@ TEST_CASE("[Tokenizer] Tokenizing 1 2", "[Tokenizer]")
 	tokenizer.next();
 	REQUIRE(!tokenizer.end_reached());
 	REQUIRE(is_number(tokenizer.current(), 2));
+	tokenizer.next();
+	REQUIRE(tokenizer.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing abc", "[Tokenizer]")
+{
+	std::stringstream ss("abc");
+	Tokenizer tokenizer = create_tokenizer(ss);
+
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_symbol(tokenizer.current(), "abc"));
+	tokenizer.next();
+	REQUIRE(tokenizer.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing +", "[Tokenizer]")
+{
+	std::stringstream ss("+");
+	Tokenizer tokenizer = create_tokenizer(ss);
+
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_symbol(tokenizer.current(), "+"));
+	tokenizer.next();
+	REQUIRE(tokenizer.end_reached());
+}
+
+TEST_CASE("[Tokenizer] Tokenizing (+ 5 3)", "[Tokenizer]")
+{
+	std::stringstream ss("(+ 5 3)");
+	Tokenizer tokenizer = create_tokenizer(ss);
+
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_lparen(tokenizer.current()));
+	tokenizer.next();
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_symbol(tokenizer.current(), "+"));
+	tokenizer.next();
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_number(tokenizer.current(), 5));
+	tokenizer.next();
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_number(tokenizer.current(), 3));
+	tokenizer.next();
+	REQUIRE(!tokenizer.end_reached());
+	REQUIRE(is_rparen(tokenizer.current()));
 	tokenizer.next();
 	REQUIRE(tokenizer.end_reached());
 }
