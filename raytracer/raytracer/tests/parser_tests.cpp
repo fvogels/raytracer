@@ -82,7 +82,7 @@ TEST_CASE("[Parser] Parsing ()", "[Parser]")
 	auto parser = create_parser(ss);
 
 	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == List(std::vector<std::shared_ptr<const SExpression>>()));
+	REQUIRE(*parser->current() == *LIST());
 	parser->next();
 	REQUIRE(parser->end_reached());
 }
@@ -116,6 +116,34 @@ TEST_CASE("[Parser] Parsing (+ (* 1 2) 3)", "[Parser]")
 
 	REQUIRE(!parser->end_reached());
 	REQUIRE(*parser->current() == *LIST(symbol("+"), LIST(symbol("*"), number(1), number(2)), number(3)));
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
+
+TEST_CASE("[Parser] Parsing () ()", "[Parser]")
+{
+	std::istringstream ss("() ()");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == *LIST());
+	parser->next();
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == *LIST());
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
+
+TEST_CASE("[Parser] Parsing ()()", "[Parser]")
+{
+	std::istringstream ss("()()");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == *LIST());
+	parser->next();
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == *LIST());
 	parser->next();
 	REQUIRE(parser->end_reached());
 }
