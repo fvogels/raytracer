@@ -29,6 +29,28 @@ std::shared_ptr<Parser> create_parser(std::istream& ss)
 	return std::make_shared<Parser>(tokenizer);
 }
 
+std::shared_ptr<const SExpression> number(double x)
+{
+	return std::make_shared<Number>(x);
+}
+
+std::shared_ptr<const SExpression> string(const std::string& str)
+{
+	return std::make_shared<String>(str);
+}
+
+std::shared_ptr<const SExpression> symbol(const std::string& str)
+{
+	return std::make_shared<Symbol>(str);
+}
+
+std::shared_ptr<const SExpression> list(const std::vector<std::shared_ptr<const SExpression>>& elts)
+{
+	return std::make_shared<List>(elts);
+}
+
+#define LIST(...) list(std::vector<std::shared_ptr<const SExpression>> { __VA_ARGS__ } )
+
 TEST_CASE("[Parser] Parsing 4", "[Parser]")
 {
 	std::istringstream ss("4");
@@ -71,7 +93,18 @@ TEST_CASE("[Parser] Parsing (5)", "[Parser]")
 	auto parser = create_parser(ss);
 
 	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == List(std::vector<std::shared_ptr<const SExpression>> { std::make_shared<const Number>(5) } ));
+	REQUIRE(*parser->current() == *LIST(number(5)));
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
+
+TEST_CASE("[Parser] Parsing (+ 2 3)", "[Parser]")
+{
+	std::istringstream ss("(+ 2 3)");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == *LIST(symbol("+"), number(2), number(3)));
 	parser->next();
 	REQUIRE(parser->end_reached());
 }
