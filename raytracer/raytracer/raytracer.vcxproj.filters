@@ -132,7 +132,7 @@
     <ClCompile Include="tests\parser_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="s-expression.cpp">
+    <ClCompile Include="scripting\s-expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

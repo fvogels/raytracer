@@ -14,6 +14,8 @@ namespace scripting
 	public:
 		virtual void accept(SExpressionVisitor&) const = 0;
 
+		virtual bool operator ==(const SExpression&) const = 0;
+
 	protected:
 		SExpression(const Location& location)
 			: m_location(location) { }
@@ -37,6 +39,8 @@ namespace scripting
 
 		void accept(SExpressionVisitor&) const override;
 
+		bool operator ==(const SExpression&) const override;
+
 	private:
 		std::vector<std::shared_ptr<const SExpression>> elements;
 	};
@@ -48,6 +52,8 @@ namespace scripting
 			: Atom(location), name(name) { }
 
 		void accept(SExpressionVisitor&) const override;
+
+		bool operator ==(const SExpression&) const override;
 
 	private:
 		std::string name;
@@ -61,6 +67,8 @@ namespace scripting
 
 		void accept(SExpressionVisitor&) const override;
 
+		bool operator ==(const SExpression&) const override;
+
 	private:
 		double value;
 	};
@@ -72,6 +80,8 @@ namespace scripting
 			: Atom(location), string(string) { }
 
 		void accept(SExpressionVisitor&) const override;
+
+		bool operator ==(const SExpression&) const override;
 
 	private:
 		std::string string;
@@ -85,4 +95,18 @@ namespace scripting
 		virtual void visit(const Symbol&) = 0;
 		virtual void visit(const List&) = 0;
 	};
+
+	bool operator !=(const SExpression& a, const SExpression& b);
+
+	template<typename T>
+	bool has_sexpression_type(const SExpression& sexpr)
+	{
+		return dynamic_cast<const SExpression*>(&sexpr) != nullptr;
+	}
+
+	template<typename T>
+	bool has_sexpression_type(std::shared_ptr<const SExpression> sexpr)
+	{
+		return std::dynamic_ptr_cast<const SExpression>(sexpr) != nullptr;
+	}
 }

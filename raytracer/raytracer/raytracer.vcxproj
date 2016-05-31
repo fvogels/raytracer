@@ -245,7 +245,7 @@
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="rendering\grid-sampler.cpp" />
     <ClCompile Include="rendering\single-sampler.cpp" />
-    <ClCompile Include="s-expression.cpp" />
+    <ClCompile Include="scripting\s-expression.cpp" />
     <ClCompile Include="scripting\parser.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
     <ClCompile Include="scripting\stream_line_reader.cpp" />
