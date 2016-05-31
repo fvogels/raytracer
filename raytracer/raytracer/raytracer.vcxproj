@@ -245,12 +245,14 @@
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="rendering\grid-sampler.cpp" />
     <ClCompile Include="rendering\single-sampler.cpp" />
+    <ClCompile Include="scripting\parser.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
     <ClCompile Include="scripting\stream_line_reader.cpp" />
     <ClCompile Include="scripting\tokenizer.cpp" />
     <ClCompile Include="scripting\tokens.cpp" />
     <ClCompile Include="tests\combined_reader_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="tests\parser_tests.cpp" />
     <ClCompile Include="tests\rasteriser_tests.cpp" />
     <ClCompile Include="tests\stream_line_reader_tests.cpp" />
     <ClCompile Include="tests\string_reader_tests.cpp" />
@@ -292,6 +294,7 @@
     <ClInclude Include="rendering\single-sampler.h" />
     <ClInclude Include="scripting\combined_reader.h" />
     <ClInclude Include="scripting\location.h" />
+    <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\s-expression.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
