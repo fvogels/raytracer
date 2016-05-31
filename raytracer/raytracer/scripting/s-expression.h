@@ -7,10 +7,12 @@
 
 namespace scripting
 {
+	class SExpressionVisitor;
+
 	class SExpression
 	{
 	public:
-		virtual ~SExpression() { }
+		virtual void accept(SExpressionVisitor&) const = 0;
 
 	protected:
 		SExpression(const Location& location)
@@ -33,6 +35,8 @@ namespace scripting
 		List(const Location& location, const std::vector<std::shared_ptr<const SExpression>>& elements)
 			: SExpression(location), elements(elements) { }
 
+		void accept(SExpressionVisitor&) const override;
+
 	private:
 		std::vector<std::shared_ptr<const SExpression>> elements;
 	};
@@ -42,6 +46,8 @@ namespace scripting
 	public:
 		Symbol(const Location& location, const std::string& name)
 			: Atom(location), name(name) { }
+
+		void accept(SExpressionVisitor&) const override;
 
 	private:
 		std::string name;
@@ -53,6 +59,8 @@ namespace scripting
 		Number(const Location& location, double value)
 			: Atom(location), value(value) { }
 
+		void accept(SExpressionVisitor&) const override;
+
 	private:
 		double value;
 	};
@@ -63,7 +71,18 @@ namespace scripting
 		String(const Location& location, const std::string& string)
 			: Atom(location), string(string) { }
 
+		void accept(SExpressionVisitor&) const override;
+
 	private:
 		std::string string;
+	};
+
+	class SExpressionVisitor
+	{
+	public:
+		virtual void visit(const String&) = 0;
+		virtual void visit(const Number&) = 0;
+		virtual void visit(const Symbol&) = 0;
+		virtual void visit(const List&) = 0;
 	};
 }
