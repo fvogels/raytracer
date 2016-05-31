@@ -275,5 +275,8 @@
     <ClInclude Include="scripting\parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="util\maybe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

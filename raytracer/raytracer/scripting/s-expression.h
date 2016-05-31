@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scripting/location.h"
+#include "util/maybe.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -20,8 +21,11 @@ namespace scripting
 		SExpression(const Location& location)
 			: m_location(location) { }
 
+		SExpression()
+			: m_location() { }
+
 	private:
-		Location m_location;
+		Maybe<Location> m_location;
 	};
 
 	class Atom : public SExpression
@@ -29,6 +33,8 @@ namespace scripting
 	protected:
 		Atom(const Location& location)
 			: SExpression(location) { }
+
+		Atom() { }
 	};
 
 	class List : public SExpression
@@ -36,6 +42,9 @@ namespace scripting
 	public:
 		List(const Location& location, const std::vector<std::shared_ptr<const SExpression>>& elements)
 			: SExpression(location), elements(elements) { }
+
+		List(const std::vector<std::shared_ptr<const SExpression>>& elements)
+			: elements(elements) { }
 
 		void accept(SExpressionVisitor&) const override;
 
@@ -51,6 +60,9 @@ namespace scripting
 		Symbol(const Location& location, const std::string& name)
 			: Atom(location), name(name) { }
 
+		Symbol(const std::string& name)
+			: name(name) { }
+
 		void accept(SExpressionVisitor&) const override;
 
 		bool operator ==(const SExpression&) const override;
@@ -65,6 +77,9 @@ namespace scripting
 		Number(const Location& location, double value)
 			: Atom(location), value(value) { }
 
+		Number(double value)
+			: value(value) { }
+
 		void accept(SExpressionVisitor&) const override;
 
 		bool operator ==(const SExpression&) const override;
@@ -78,6 +93,9 @@ namespace scripting
 	public:
 		String(const Location& location, const std::string& string)
 			: Atom(location), string(string) { }
+
+		String(const std::string& string)
+			: string(string) { }
 
 		void accept(SExpressionVisitor&) const override;
 

@@ -35,7 +35,7 @@ TEST_CASE("[Parser] Parsing 4", "[Parser]")
 	auto parser = create_parser("4");
 
 	REQUIRE(!parser->end_reached());
-	
+	REQUIRE(*parser->current() == Number(4));
 }
 
 
