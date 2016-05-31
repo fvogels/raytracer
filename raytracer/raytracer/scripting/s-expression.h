@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <ostream>
 
 namespace scripting
 {
@@ -14,7 +15,7 @@ namespace scripting
 	{
 	public:
 		virtual void accept(SExpressionVisitor&) const = 0;
-
+		virtual void write(std::ostream&) const = 0;
 		virtual bool operator ==(const SExpression&) const = 0;
 
 	protected:
@@ -47,7 +48,7 @@ namespace scripting
 			: elements(elements) { }
 
 		void accept(SExpressionVisitor&) const override;
-
+		void write(std::ostream&) const override;
 		bool operator ==(const SExpression&) const override;
 
 	private:
@@ -64,7 +65,7 @@ namespace scripting
 			: name(name) { }
 
 		void accept(SExpressionVisitor&) const override;
-
+		void write(std::ostream&) const override;
 		bool operator ==(const SExpression&) const override;
 
 	private:
@@ -81,7 +82,7 @@ namespace scripting
 			: value(value) { }
 
 		void accept(SExpressionVisitor&) const override;
-
+		void write(std::ostream&) const override;
 		bool operator ==(const SExpression&) const override;
 
 	private:
@@ -98,7 +99,7 @@ namespace scripting
 			: string(string) { }
 
 		void accept(SExpressionVisitor&) const override;
-
+		void write(std::ostream&) const override;
 		bool operator ==(const SExpression&) const override;
 
 	private:
@@ -115,6 +116,7 @@ namespace scripting
 	};
 
 	bool operator !=(const SExpression& a, const SExpression& b);
+	std::ostream& operator <<(std::ostream&, const SExpression&);
 
 	template<typename T>
 	bool has_sexpression_type(const SExpression& sexpr)

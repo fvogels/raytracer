@@ -52,5 +52,75 @@ bool scripting::List::operator==(const SExpression& other) const
 {
 	auto that = dynamic_cast<const List*>(&other);
 
-	return that != nullptr && this->elements == that->elements;
+	if (that != nullptr)
+	{
+		if (this->elements.size() == that->elements.size())
+		{
+			for (size_t i = 0; i != this->elements.size(); ++i)
+			{
+				auto& x = *this->elements[i];
+				auto& y = *that->elements[i];
+
+				if (x != y)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void scripting::Symbol::write(std::ostream& out) const
+{
+	out << this->name;
+}
+
+void scripting::Number::write(std::ostream& out) const
+{
+	out << this->value;
+}
+
+void scripting::String::write(std::ostream& out) const
+{
+	out << '"' << this->string << '"';
+}
+
+void scripting::List::write(std::ostream& out) const
+{
+	bool first = true;
+
+	out << '(';
+
+	for (auto& element : this->elements)
+	{
+		if (first)
+		{
+			first = false;
+		}
+		else
+		{
+			out << ' ';
+		}
+
+		element->write(out);
+	}
+
+	out << ')';
+}
+
+std::ostream& scripting::operator <<(std::ostream& out, const SExpression& sexpr)
+{
+	sexpr.write(out);
+
+	return out;
 }

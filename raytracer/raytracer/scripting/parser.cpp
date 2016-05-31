@@ -64,7 +64,7 @@ void scripting::ParsingVisitor::visit(const NumberToken& number_token)
 
 bool scripting::ParsingVisitor::has_next() const
 {
-	return m_stack.top().size() == 1;
+	return m_stack.top().size() == 1 && m_stack.size() == 1;
 }
 
 std::shared_ptr<const SExpression> scripting::ParsingVisitor::current() const
@@ -104,7 +104,14 @@ void scripting::Parser::next()
 {
 	assert(!end_reached());
 
-	extract_next_sexpression();
+	if (m_reader->end_reached())
+	{
+		m_sexpr = nullptr;
+	}
+	else
+	{
+		extract_next_sexpression();
+	}
 }
 
 Location scripting::Parser::location() const
@@ -126,7 +133,9 @@ void scripting::Parser::extract_next_sexpression()
 		}
 		else
 		{
-			m_reader->current()->accept(*m_visitor);
+			auto current_token = m_reader->current();
+			current_token->accept(*m_visitor);
+			m_reader->next();
 		}
 	}
 

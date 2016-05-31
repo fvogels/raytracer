@@ -22,9 +22,8 @@ std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> create_tokenizer
 	return std::make_shared<Tokenizer>(in, recognizers);
 }
 
-std::shared_ptr<Parser> create_parser(const std::string& string)
+std::shared_ptr<Parser> create_parser(std::istream& ss)
 {
-	std::istringstream ss("4");
 	auto tokenizer = create_tokenizer(ss);
 
 	return std::make_shared<Parser>(tokenizer);
@@ -32,11 +31,49 @@ std::shared_ptr<Parser> create_parser(const std::string& string)
 
 TEST_CASE("[Parser] Parsing 4", "[Parser]")
 {
-	auto parser = create_parser("4");
+	std::istringstream ss("4");
+	auto parser = create_parser(ss);
 
 	REQUIRE(!parser->end_reached());
 	REQUIRE(*parser->current() == Number(4));
+	parser->next();
+	REQUIRE(parser->end_reached());
 }
 
+TEST_CASE("[Parser] Parsing 45 12", "[Parser]")
+{
+	std::istringstream ss("45 12");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == Number(45));
+	parser->next();
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == Number(12));
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
+
+TEST_CASE("[Parser] Parsing ()", "[Parser]")
+{
+	std::istringstream ss("()");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == List(std::vector<std::shared_ptr<const SExpression>>()));
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
+
+TEST_CASE("[Parser] Parsing (5)", "[Parser]")
+{
+	std::istringstream ss("(5)");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == List(std::vector<std::shared_ptr<const SExpression>> { std::make_shared<const Number>(5) } ));
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
 
 #endif
