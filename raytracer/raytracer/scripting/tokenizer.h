@@ -66,7 +66,7 @@ namespace scripting
 		Location location() const;
 
 	private:
-		CombinedReader<StreamLineReader, StringReader, Location> m_reader;
+		CombinedReader<StreamLineReader, StringReader, LocationFactory> m_reader;
 		std::vector<std::shared_ptr<const TokenRecognizer>> m_recognizers;
 		std::shared_ptr<const Token> m_current_token;
 

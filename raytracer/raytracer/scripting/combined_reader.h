@@ -7,7 +7,7 @@
 namespace scripting
 {
 	template<typename R1, typename R2, typename LOC>
-	class CombinedReader : public Reader<typename R2::datum_t, LOC>
+	class CombinedReader : public Reader<typename R2::datum_t, typename LOC::t>
 	{
 	public:
 		CombinedReader(typename R1::source_t& in)
@@ -45,9 +45,9 @@ namespace scripting
 			return r2->current();
 		}
 
-		LOC location() const override
+		typename LOC::t location() const override
 		{
-			return LOC(r1->location(), r2->location());
+			return LOC::create(r1->location(), r2->location());
 		}
 
 	private:
