@@ -90,7 +90,7 @@ void scripting::Tokenizer::skip_whitespace_and_comments()
 	}
 }
 
-std::shared_ptr<Token> scripting::Tokenizer::current() const
+std::shared_ptr<const Token> scripting::Tokenizer::current() const
 {
 	assert(!end_reached());
 	assert(m_current_token != nullptr);

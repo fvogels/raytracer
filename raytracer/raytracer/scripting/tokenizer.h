@@ -55,20 +55,20 @@ namespace scripting
 		bool is_symbol_char(char) const;
 	};
 
-	class Tokenizer : public Reader<std::shared_ptr<Token>, Location>
+	class Tokenizer : public Reader<std::shared_ptr<const Token>, Location>
 	{
 	public:
 		Tokenizer(std::istream&, std::vector<std::shared_ptr<const TokenRecognizer>>& recognizers);
 
 		void next() override;
 		bool end_reached() const override;
-		std::shared_ptr<Token> current() const override;
+		std::shared_ptr<const Token> current() const override;
 		Location location() const;
 
 	private:
 		CombinedReader<StreamLineReader, StringReader, Location> m_reader;
 		std::vector<std::shared_ptr<const TokenRecognizer>> m_recognizers;
-		std::shared_ptr<Token> m_current_token;
+		std::shared_ptr<const Token> m_current_token;
 
 		void tokenize();
 
