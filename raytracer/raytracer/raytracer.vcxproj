@@ -245,6 +245,8 @@
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="rendering\grid-sampler.cpp" />
     <ClCompile Include="rendering\single-sampler.cpp" />
+    <ClCompile Include="scripting\environment.cpp" />
+    <ClCompile Include="scripting\interpreter.cpp" />
     <ClCompile Include="scripting\s-expression.cpp" />
     <ClCompile Include="scripting\parser.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
@@ -294,6 +296,8 @@
     <ClInclude Include="rendering\sampler.h" />
     <ClInclude Include="rendering\single-sampler.h" />
     <ClInclude Include="scripting\combined_reader.h" />
+    <ClInclude Include="scripting\environment.h" />
+    <ClInclude Include="scripting\interpreter.h" />
     <ClInclude Include="scripting\location.h" />
     <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\s-expression.h" />

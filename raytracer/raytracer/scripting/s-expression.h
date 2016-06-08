@@ -42,34 +42,39 @@ namespace scripting
 	{
 	public:
 		List(const Location& location, const std::vector<std::shared_ptr<const SExpression>>& elements)
-			: SExpression(location), elements(elements) { }
+			: SExpression(location), m_elements(elements) { }
 
 		List(const std::vector<std::shared_ptr<const SExpression>>& elements)
-			: elements(elements) { }
+			: m_elements(elements) { }
 
 		void accept(SExpressionVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const SExpression&) const override;
 
+		size_t size() const { return m_elements.size(); }
+		std::shared_ptr<const SExpression> nth_element(size_t index) const { return m_elements[index]; }
+
 	private:
-		std::vector<std::shared_ptr<const SExpression>> elements;
+		std::vector<std::shared_ptr<const SExpression>> m_elements;
 	};
 
 	class Symbol : public Atom
 	{
 	public:
 		Symbol(const Location& location, const std::string& name)
-			: Atom(location), name(name) { }
+			: Atom(location), m_name(name) { }
 
 		Symbol(const std::string& name)
-			: name(name) { }
+			: m_name(name) { }
 
 		void accept(SExpressionVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const SExpression&) const override;
 
+		std::string name() const { return m_name; }
+
 	private:
-		std::string name;
+		std::string m_name;
 	};
 
 	class Number : public Atom
@@ -105,6 +110,14 @@ namespace scripting
 	private:
 		std::string string;
 	};
+
+	//class Callable : public Atom
+	//{
+	//public:
+	//	void write(std::ostream& out) const override { out << "<Callable>"; }
+	//	bool operator ==(const SExpression&) const override { return false; }
+
+	//};
 
 	class SExpressionVisitor
 	{

@@ -38,7 +38,7 @@ bool scripting::Symbol::operator==(const SExpression& other) const
 {
 	auto that = dynamic_cast<const Symbol*>(&other);
 
-	return that != nullptr && this->name == that->name;
+	return that != nullptr && this->m_name == that->m_name;
 }
 
 bool scripting::String::operator==(const SExpression& other) const
@@ -54,12 +54,12 @@ bool scripting::List::operator==(const SExpression& other) const
 
 	if (that != nullptr)
 	{
-		if (this->elements.size() == that->elements.size())
+		if (this->m_elements.size() == that->m_elements.size())
 		{
-			for (size_t i = 0; i != this->elements.size(); ++i)
+			for (size_t i = 0; i != this->m_elements.size(); ++i)
 			{
-				auto& x = *this->elements[i];
-				auto& y = *that->elements[i];
+				auto& x = *this->m_elements[i];
+				auto& y = *that->m_elements[i];
 
 				if (x != y)
 				{
@@ -82,7 +82,7 @@ bool scripting::List::operator==(const SExpression& other) const
 
 void scripting::Symbol::write(std::ostream& out) const
 {
-	out << this->name;
+	out << this->m_name;
 }
 
 void scripting::Number::write(std::ostream& out) const
@@ -101,7 +101,7 @@ void scripting::List::write(std::ostream& out) const
 
 	out << '(';
 
-	for (auto& element : this->elements)
+	for (auto& element : this->m_elements)
 	{
 		if (first)
 		{
