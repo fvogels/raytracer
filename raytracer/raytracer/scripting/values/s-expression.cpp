@@ -27,33 +27,33 @@ void scripting::Function::accept(SExpressionVisitor& visitor) const
 	visitor.visit(*this);
 }
 
-bool scripting::operator !=(const SExpression& a, const SExpression& b)
+bool scripting::operator !=(const Object& a, const Object& b)
 {
 	return !(a == b);
 }
 
-bool scripting::Number::operator==(const SExpression& other) const
+bool scripting::Number::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const Number*>(&other);
 
 	return that != nullptr && this->value == that->value;
 }
 
-bool scripting::Symbol::operator==(const SExpression& other) const
+bool scripting::Symbol::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const Symbol*>(&other);
 
 	return that != nullptr && this->m_name == that->m_name;
 }
 
-bool scripting::String::operator==(const SExpression& other) const
+bool scripting::String::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const String*>(&other);
 
 	return that != nullptr && this->string == that->string;
 }
 
-bool scripting::List::operator==(const SExpression& other) const
+bool scripting::List::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const List*>(&other);
 
@@ -123,7 +123,7 @@ void scripting::List::write(std::ostream& out) const
 	out << ')';
 }
 
-std::ostream& scripting::operator <<(std::ostream& out, const SExpression& sexpr)
+std::ostream& scripting::operator <<(std::ostream& out, const Object& sexpr)
 {
 	sexpr.write(out);
 

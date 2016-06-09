@@ -11,20 +11,20 @@ namespace scripting
 {
 	class ParsingVisitor;
 
-	class Parser : public Reader<std::shared_ptr<const SExpression>, Location>
+	class Parser : public Reader<std::shared_ptr<const Object>, Location>
 	{
 	public:
 		Parser(std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>>);
 		~Parser();
 
 		bool end_reached() const override;
-		std::shared_ptr<const SExpression> current() const override;
+		std::shared_ptr<const Object> current() const override;
 		void next() override;
 		Location location() const override;
 
 	private:
 		std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> m_reader;
-		std::shared_ptr<const SExpression> m_sexpr;
+		std::shared_ptr<const Object> m_sexpr;
 		std::unique_ptr<ParsingVisitor> m_visitor;
 
 		void extract_next_sexpression();

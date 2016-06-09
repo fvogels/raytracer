@@ -7,7 +7,7 @@ bool scripting::Environment::contains(const Symbol& symbol) const
 	return m_bindings.find(symbol.name()) != m_bindings.end();
 }
 
-std::shared_ptr<const SExpression> scripting::Environment::lookup(const Symbol& symbol) const
+std::shared_ptr<const Object> scripting::Environment::lookup(const Symbol& symbol) const
 {
 	if (!contains(symbol))
 	{
@@ -19,7 +19,7 @@ std::shared_ptr<const SExpression> scripting::Environment::lookup(const Symbol& 
 	}
 }
 
-void scripting::Environment::bind(const Symbol& symbol, std::shared_ptr<const SExpression> value)
+void scripting::Environment::bind(const Symbol& symbol, std::shared_ptr<const Object> value)
 {
 	m_bindings[symbol.name()] = value;
 }

@@ -6,7 +6,7 @@ using namespace scripting;
 class EvaluationVisitor : public SExpressionVisitor
 {
 public:
-	EvaluationVisitor(std::shared_ptr<const SExpression> visited, std::shared_ptr<const Environment> environment)
+	EvaluationVisitor(std::shared_ptr<const Object> visited, std::shared_ptr<const Environment> environment)
 		: m_visited(visited), m_environment(environment) { }
 
 	void visit(const String&) override;
@@ -15,12 +15,12 @@ public:
 	void visit(const List&) override;
 	void visit(const Function&) override;
 
-	std::shared_ptr<const SExpression> result() const { return m_result; }
+	std::shared_ptr<const Object> result() const { return m_result; }
 
 private:
 	std::shared_ptr<const Environment> m_environment;
-	std::shared_ptr<const SExpression> m_visited;
-	std::shared_ptr<const SExpression> m_result;
+	std::shared_ptr<const Object> m_visited;
+	std::shared_ptr<const Object> m_result;
 };
 
 void EvaluationVisitor::visit(const String& string)
@@ -58,7 +58,7 @@ void EvaluationVisitor::visit(const Function&)
 	abort();
 }
 
-std::shared_ptr<const SExpression> scripting::evaluate(std::shared_ptr<const SExpression> value, std::shared_ptr<Environment> environment)
+std::shared_ptr<const Object> scripting::evaluate(std::shared_ptr<const Object> value, std::shared_ptr<Environment> environment)
 {
 	EvaluationVisitor visitor(value, environment);
 

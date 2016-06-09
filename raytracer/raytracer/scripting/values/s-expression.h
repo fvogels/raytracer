@@ -11,51 +11,51 @@ namespace scripting
 {
 	class SExpressionVisitor;
 
-	class SExpression
+	class Object
 	{
 	public:
 		virtual void accept(SExpressionVisitor&) const = 0;
 		virtual void write(std::ostream&) const = 0;
-		virtual bool operator ==(const SExpression&) const = 0;
+		virtual bool operator ==(const Object&) const = 0;
 
 	protected:
-		SExpression(const Location& location)
+		Object(const Location& location)
 			: m_location(location) { }
 
-		SExpression()
+		Object()
 			: m_location() { }
 
 	private:
 		Maybe<Location> m_location;
 	};
 
-	class Atom : public SExpression
+	class Atom : public Object
 	{
 	protected:
 		Atom(const Location& location)
-			: SExpression(location) { }
+			: Object(location) { }
 
 		Atom() { }
 	};
 
-	class List : public SExpression
+	class List : public Object
 	{
 	public:
-		List(const Location& location, const std::vector<std::shared_ptr<const SExpression>>& elements)
-			: SExpression(location), m_elements(elements) { }
+		List(const Location& location, const std::vector<std::shared_ptr<const Object>>& elements)
+			: Object(location), m_elements(elements) { }
 
-		List(const std::vector<std::shared_ptr<const SExpression>>& elements)
+		List(const std::vector<std::shared_ptr<const Object>>& elements)
 			: m_elements(elements) { }
 
 		void accept(SExpressionVisitor&) const override;
 		void write(std::ostream&) const override;
-		bool operator ==(const SExpression&) const override;
+		bool operator ==(const Object&) const override;
 
 		size_t size() const { return m_elements.size(); }
-		std::shared_ptr<const SExpression> nth_element(size_t index) const { return m_elements[index]; }
+		std::shared_ptr<const Object> nth_element(size_t index) const { return m_elements[index]; }
 
 	private:
-		std::vector<std::shared_ptr<const SExpression>> m_elements;
+		std::vector<std::shared_ptr<const Object>> m_elements;
 	};
 
 	class Symbol : public Atom
@@ -69,7 +69,7 @@ namespace scripting
 
 		void accept(SExpressionVisitor&) const override;
 		void write(std::ostream&) const override;
-		bool operator ==(const SExpression&) const override;
+		bool operator ==(const Object&) const override;
 
 		std::string name() const { return m_name; }
 
@@ -88,7 +88,7 @@ namespace scripting
 
 		void accept(SExpressionVisitor&) const override;
 		void write(std::ostream&) const override;
-		bool operator ==(const SExpression&) const override;
+		bool operator ==(const Object&) const override;
 
 	private:
 		double value;
@@ -105,7 +105,7 @@ namespace scripting
 
 		void accept(SExpressionVisitor&) const override;
 		void write(std::ostream&) const override;
-		bool operator ==(const SExpression&) const override;
+		bool operator ==(const Object&) const override;
 
 	private:
 		std::string string;
@@ -115,9 +115,9 @@ namespace scripting
 	{
 	public:
 		void write(std::ostream& out) const override { out << "<Callable>"; }
-		bool operator ==(const SExpression&) const override { return false; }
+		bool operator ==(const Object&) const override { return false; }
 
-		virtual std::shared_ptr<SExpression> call(const std::vector<SExpression>&) const = 0;
+		virtual std::shared_ptr<Object> call(const std::vector<Object>&) const = 0;
 	};
 
 	class Function : public Callable
@@ -136,18 +136,18 @@ namespace scripting
 		virtual void visit(const Function&) = 0;
 	};
 
-	bool operator !=(const SExpression& a, const SExpression& b);
-	std::ostream& operator <<(std::ostream&, const SExpression&);
+	bool operator !=(const Object& a, const Object& b);
+	std::ostream& operator <<(std::ostream&, const Object&);
 
 	template<typename T>
-	bool has_sexpression_type(const SExpression& sexpr)
+	bool has_sexpression_type(const Object& sexpr)
 	{
-		return dynamic_cast<const SExpression*>(&sexpr) != nullptr;
+		return dynamic_cast<const Object*>(&sexpr) != nullptr;
 	}
 
 	template<typename T>
-	bool has_sexpression_type(std::shared_ptr<const SExpression> sexpr)
+	bool has_sexpression_type(std::shared_ptr<const Object> sexpr)
 	{
-		return std::dynamic_ptr_cast<const SExpression>(sexpr) != nullptr;
+		return std::dynamic_ptr_cast<const Object>(sexpr) != nullptr;
 	}
 }
