@@ -1,0 +1,24 @@
+#include "scripting/values/object.h"
+#include "scripting/interpreter.h"
+#include "scripting/environment.h"
+#include <algorithm>
+
+using namespace scripting;
+
+
+void scripting::Function::accept(ObjectVisitor& visitor) const
+{
+	visitor.visit(*this);
+}
+
+std::shared_ptr<const Object> scripting::Function::call(std::shared_ptr<Environment> environment, const std::vector<std::shared_ptr<const Object>>& argument_expressions) const
+{
+	std::vector<std::shared_ptr<const Object>> argument_values;
+	argument_values.resize(argument_expressions.size());
+
+	std::transform(argument_expressions.begin(), argument_expressions.end(), argument_values.begin(), [&environment](std::shared_ptr<const Object> expr) {
+		return evaluate(expr, environment);
+	});
+
+	return this->perform(argument_values);
+}

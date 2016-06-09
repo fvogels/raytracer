@@ -10,6 +10,7 @@
 namespace scripting
 {
 	class ObjectVisitor;
+	class Environment;
 
 	class Object
 	{
@@ -105,13 +106,18 @@ namespace scripting
 		void write(std::ostream& out) const override { out << "<Callable>"; }
 		bool operator ==(const Object&) const override { return false; }
 
-		virtual std::shared_ptr<Object> call(const std::vector<Object>&) const = 0;
+		virtual std::shared_ptr<const Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<const Object>>&) const = 0;
 	};
 
 	class Function : public Callable
 	{
 	public:
 		void accept(ObjectVisitor&) const override;
+
+		std::shared_ptr<const Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<const Object>>&) const override;
+
+	protected:
+		virtual std::shared_ptr<const Object> perform(const std::vector<std::shared_ptr<const Object>>&) const = 0;
 	};
 
 	class ObjectVisitor

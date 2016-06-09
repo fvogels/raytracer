@@ -14,11 +14,6 @@ scripting::Object::Object()
 	// NOP
 }
 
-void scripting::Function::accept(ObjectVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 bool scripting::operator !=(const Object& a, const Object& b)
 {
 	return !(a == b);

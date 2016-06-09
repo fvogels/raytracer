@@ -247,6 +247,7 @@
     <ClCompile Include="rendering\single-sampler.cpp" />
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
+    <ClCompile Include="scripting\values\function.cpp" />
     <ClCompile Include="scripting\values\list.cpp" />
     <ClCompile Include="scripting\values\number.cpp" />
     <ClCompile Include="scripting\values\object.cpp" />
