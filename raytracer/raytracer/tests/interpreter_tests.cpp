@@ -42,6 +42,7 @@ static std::shared_ptr<Environment> create_environment()
 	auto result = std::make_shared<Environment>();
 
 	result->bind(Symbol("+"), std::make_shared<scripting::library::Addition>());
+	result->bind(Symbol("*"), std::make_shared<scripting::library::Multiplication>());
 
 	return result;
 }
@@ -116,6 +117,39 @@ TEST_CASE("[evaluate] Evaluating (+ 7)", "[interpreter]")
 
 	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
 		REQUIRE(number->value() == Approx(7));
+	});
+}
+
+TEST_CASE("[evaluate] Evaluating (*)", "[interpreter]")
+{
+	auto result = interpret("(*)");
+
+	REQUIRE(has_value_type<Number>(result));
+
+	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+		REQUIRE(number->value() == Approx(1));
+	});
+}
+
+TEST_CASE("[evaluate] Evaluating (* 3)", "[interpreter]")
+{
+	auto result = interpret("(* 3)");
+
+	REQUIRE(has_value_type<Number>(result));
+
+	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+		REQUIRE(number->value() == Approx(3));
+	});
+}
+
+TEST_CASE("[evaluate] Evaluating (* 2 7)", "[interpreter]")
+{
+	auto result = interpret("(* 2 7)");
+
+	REQUIRE(has_value_type<Number>(result));
+
+	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+		REQUIRE(number->value() == Approx(14));
 	});
 }
 
