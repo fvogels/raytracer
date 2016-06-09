@@ -249,6 +249,7 @@
     <ClCompile Include="scripting\interpreter.cpp" />
     <ClCompile Include="scripting\values\function.cpp" />
     <ClCompile Include="scripting\values\list.cpp" />
+    <ClCompile Include="scripting\values\native-functions.cpp" />
     <ClCompile Include="scripting\values\number.cpp" />
     <ClCompile Include="scripting\values\object.cpp" />
     <ClCompile Include="scripting\parser.cpp" />
@@ -305,6 +306,7 @@
     <ClInclude Include="scripting\interpreter.h" />
     <ClInclude Include="scripting\location.h" />
     <ClInclude Include="scripting\parser.h" />
+    <ClInclude Include="scripting\values\native-functions.h" />
     <ClInclude Include="scripting\values\object.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
