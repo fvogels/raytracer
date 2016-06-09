@@ -3,12 +3,6 @@
 using namespace scripting;
 
 
-scripting::List::List(const Location& location, const std::vector<std::shared_ptr<const Object>>& elements)
-	: Object(location), m_elements(elements) 
-{
-	// NOP
-}
-
 scripting::List::List(const std::vector<std::shared_ptr<const Object>>& elements)
 	: m_elements(elements) 
 { 

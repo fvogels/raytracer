@@ -1,7 +1,6 @@
 #pragma once
 
 #include "scripting/location.h"
-#include "util/maybe.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -21,26 +20,12 @@ namespace scripting
 		virtual bool operator ==(const Object&) const = 0;
 
 	protected:
-		Object(const Location&);
 		Object();
-
-	private:
-		Maybe<Location> m_location;
-	};
-
-	class Atom : public Object
-	{
-	protected:
-		Atom(const Location& location)
-			: Object(location) { }
-
-		Atom() { }
 	};
 
 	class List : public Object
 	{
 	public:
-		List(const Location&, const std::vector<std::shared_ptr<const Object>>&);
 		List(const std::vector<std::shared_ptr<const Object>>&);
 
 		void accept(ObjectVisitor&) const override;
@@ -54,12 +39,9 @@ namespace scripting
 		std::vector<std::shared_ptr<const Object>> m_elements;
 	};
 
-	class Symbol : public Atom
+	class Symbol : public Object
 	{
 	public:
-		Symbol(const Location& location, const std::string& name)
-			: Atom(location), m_name(name) { }
-
 		Symbol(const std::string& name)
 			: m_name(name) { }
 
@@ -73,10 +55,9 @@ namespace scripting
 		std::string m_name;
 	};
 
-	class Number : public Atom
+	class Number : public Object
 	{
 	public:
-		Number(const Location& location, double value);
 		Number(double value);
 
 		void accept(ObjectVisitor&) const override;
@@ -89,10 +70,9 @@ namespace scripting
 		double m_value;
 	};
 
-	class String : public Atom
+	class String : public Object
 	{
 	public:
-		String(const Location&, const std::string&);
 		String(const std::string&);
 
 		void accept(ObjectVisitor&) const override;
@@ -103,7 +83,7 @@ namespace scripting
 		std::string string;
 	};
 
-	class Callable : public Atom
+	class Callable : public Object
 	{
 	public:
 		void write(std::ostream& out) const override { out << "<Callable>"; }

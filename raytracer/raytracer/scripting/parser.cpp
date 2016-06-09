@@ -38,7 +38,7 @@ void scripting::ParsingVisitor::visit(const LeftParenthesisToken& token)
 void scripting::ParsingVisitor::visit(const RightParenthesisToken&)
 {
 	auto elements = std::vector<std::shared_ptr<const Object>>(m_stack.top().begin(), m_stack.top().end());
-	auto list = std::make_shared<List>(m_locations.top(), elements);
+	auto list = std::make_shared<List>(elements);
 	m_stack.pop();
 	m_locations.pop();
 	m_stack.top().push_back(list);
@@ -46,19 +46,19 @@ void scripting::ParsingVisitor::visit(const RightParenthesisToken&)
 
 void scripting::ParsingVisitor::visit(const SymbolToken& symbol_token)
 {
-	auto symbol = std::make_shared<Symbol>(symbol_token.location, symbol_token.name);
+	auto symbol = std::make_shared<Symbol>(symbol_token.name);
 	m_stack.top().push_back(symbol);
 }
 
 void scripting::ParsingVisitor::visit(const StringToken& string_token)
 {
-	auto string = std::make_shared<String>(string_token.location, string_token.string);
+	auto string = std::make_shared<String>(string_token.string);
 	m_stack.top().push_back(string);
 }
 
 void scripting::ParsingVisitor::visit(const NumberToken& number_token)
 {
-	auto number = std::make_shared<Number>(number_token.location, number_token.value);
+	auto number = std::make_shared<Number>(number_token.value);
 	m_stack.top().push_back(number);
 }
 

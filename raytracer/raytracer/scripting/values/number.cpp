@@ -3,9 +3,6 @@
 using namespace scripting;
 
 
-scripting::Number::Number(const Location& location, double value)
-	: Atom(location), m_value(value) { }
-
 scripting::Number::Number(double value)
 	: m_value(value) { }
 

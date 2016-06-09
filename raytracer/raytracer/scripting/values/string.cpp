@@ -3,9 +3,6 @@
 using namespace scripting;
 
 
-scripting::String::String(const Location& location, const std::string& string)
-	: Atom(location), string(string) { }
-
 scripting::String::String(const std::string& string)
 	: string(string) { }
 
