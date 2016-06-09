@@ -14,11 +14,6 @@ scripting::Object::Object()
 	// NOP
 }
 
-void scripting::String::accept(SExpressionVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 void scripting::Number::accept(SExpressionVisitor& visitor) const
 {
 	visitor.visit(*this);
@@ -53,13 +48,6 @@ bool scripting::Symbol::operator==(const Object& other) const
 	return that != nullptr && this->m_name == that->m_name;
 }
 
-bool scripting::String::operator==(const Object& other) const
-{
-	auto that = dynamic_cast<const String*>(&other);
-
-	return that != nullptr && this->string == that->string;
-}
-
 
 void scripting::Symbol::write(std::ostream& out) const
 {
@@ -69,11 +57,6 @@ void scripting::Symbol::write(std::ostream& out) const
 void scripting::Number::write(std::ostream& out) const
 {
 	out << this->value;
-}
-
-void scripting::String::write(std::ostream& out) const
-{
-	out << '"' << this->string << '"';
 }
 
 std::ostream& scripting::operator <<(std::ostream& out, const Object& sexpr)

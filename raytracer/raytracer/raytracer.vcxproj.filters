@@ -144,6 +144,9 @@
     <ClCompile Include="scripting\values\list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scripting\values\string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">

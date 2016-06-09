@@ -254,6 +254,7 @@
     <ClCompile Include="scripting\stream_line_reader.cpp" />
     <ClCompile Include="scripting\tokenizer.cpp" />
     <ClCompile Include="scripting\tokens.cpp" />
+    <ClCompile Include="scripting\values\string.cpp" />
     <ClCompile Include="tests\combined_reader_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\parser_tests.cpp" />
