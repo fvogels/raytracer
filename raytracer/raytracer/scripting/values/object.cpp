@@ -2,6 +2,18 @@
 
 using namespace scripting;
 
+scripting::Object::Object(const Location& location)
+	: m_location(location)
+{
+	// NOP
+}
+
+scripting::Object::Object()
+	: m_location()
+{
+	// NOP
+}
+
 void scripting::List::accept(SExpressionVisitor& visitor) const
 {
 	visitor.visit(*this);

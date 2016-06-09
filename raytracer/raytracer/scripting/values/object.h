@@ -19,11 +19,8 @@ namespace scripting
 		virtual bool operator ==(const Object&) const = 0;
 
 	protected:
-		Object(const Location& location)
-			: m_location(location) { }
-
-		Object()
-			: m_location() { }
+		Object(const Location&);
+		Object();
 
 	private:
 		Maybe<Location> m_location;
