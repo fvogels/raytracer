@@ -22,3 +22,8 @@ void scripting::String::write(std::ostream& out) const
 {
 	out << '"' << this->string << '"';
 }
+
+std::string scripting::String::value() const
+{
+	return this->string;
+}

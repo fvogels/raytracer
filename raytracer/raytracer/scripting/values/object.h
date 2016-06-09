@@ -78,6 +78,8 @@ namespace scripting
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
+		std::string value() const;
+
 	private:
 		std::string string;
 	};
