@@ -138,7 +138,7 @@
     <ClCompile Include="scripting\environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\values\s-expression.cpp">
+    <ClCompile Include="scripting\values\object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -287,7 +287,7 @@
     <ClInclude Include="scripting\environment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scripting\values\s-expression.h">
+    <ClInclude Include="scripting\values\object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/values/s-expression.h"
+#include "scripting/values/object.h"
 #include "scripting/environment.h"
 
 namespace scripting
