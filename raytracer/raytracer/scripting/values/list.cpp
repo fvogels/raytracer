@@ -1,5 +1,7 @@
 #include "scripting/values/object.h"
 
+using namespace scripting;
+
 void scripting::List::accept(SExpressionVisitor& visitor) const
 {
 	visitor.visit(*this);
