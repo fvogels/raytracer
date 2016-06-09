@@ -2,7 +2,7 @@
 
 using namespace scripting;
 
-void scripting::List::accept(SExpressionVisitor& visitor) const
+void scripting::List::accept(ObjectVisitor& visitor) const
 {
 	visitor.visit(*this);
 }

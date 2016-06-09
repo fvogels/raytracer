@@ -3,7 +3,7 @@
 using namespace scripting;
 
 
-void scripting::Symbol::accept(SExpressionVisitor& visitor) const
+void scripting::Symbol::accept(ObjectVisitor& visitor) const
 {
 	visitor.visit(*this);
 }

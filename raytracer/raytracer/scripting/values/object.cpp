@@ -14,7 +14,7 @@ scripting::Object::Object()
 	// NOP
 }
 
-void scripting::Function::accept(SExpressionVisitor& visitor) const
+void scripting::Function::accept(ObjectVisitor& visitor) const
 {
 	visitor.visit(*this);
 }

@@ -9,12 +9,12 @@
 
 namespace scripting
 {
-	class SExpressionVisitor;
+	class ObjectVisitor;
 
 	class Object
 	{
 	public:
-		virtual void accept(SExpressionVisitor&) const = 0;
+		virtual void accept(ObjectVisitor&) const = 0;
 		virtual void write(std::ostream&) const = 0;
 		virtual bool operator ==(const Object&) const = 0;
 
@@ -44,7 +44,7 @@ namespace scripting
 		List(const std::vector<std::shared_ptr<const Object>>& elements)
 			: m_elements(elements) { }
 
-		void accept(SExpressionVisitor&) const override;
+		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -64,7 +64,7 @@ namespace scripting
 		Symbol(const std::string& name)
 			: m_name(name) { }
 
-		void accept(SExpressionVisitor&) const override;
+		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -83,7 +83,7 @@ namespace scripting
 		Number(double value)
 			: value(value) { }
 
-		void accept(SExpressionVisitor&) const override;
+		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -100,7 +100,7 @@ namespace scripting
 		String(const std::string& string)
 			: string(string) { }
 
-		void accept(SExpressionVisitor&) const override;
+		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -120,10 +120,10 @@ namespace scripting
 	class Function : public Callable
 	{
 	public:
-		void accept(SExpressionVisitor&) const override;
+		void accept(ObjectVisitor&) const override;
 	};
 
-	class SExpressionVisitor
+	class ObjectVisitor
 	{
 	public:
 		virtual void visit(const String&) = 0;

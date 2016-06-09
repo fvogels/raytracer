@@ -3,7 +3,7 @@
 
 using namespace scripting;
 
-class EvaluationVisitor : public SExpressionVisitor
+class EvaluationVisitor : public ObjectVisitor
 {
 public:
 	EvaluationVisitor(std::shared_ptr<const Object> visited, std::shared_ptr<const Environment> environment)
