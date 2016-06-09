@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <ostream>
+#include <functional>
 
 namespace scripting
 {
@@ -82,8 +83,10 @@ namespace scripting
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
+		double value() const;
+
 	private:
-		double value;
+		double m_value;
 	};
 
 	class String : public Atom
@@ -143,5 +146,20 @@ namespace scripting
 	bool has_value_type(std::shared_ptr<const Object> object)
 	{
 		return std::dynamic_ptr_cast<const Object>(object) != nullptr;
+	}
+
+	template<typename T, typename R>
+	R with_value_type(std::shared_ptr<const Object> object, std::function<R(std::shared_ptr<const T>)> function)
+	{
+		auto converted = std::dynamic_pointer_cast<const T>(object);
+
+		if (converted != nullptr)
+		{
+			return function(converted);
+		}
+		else
+		{
+			throw std::runtime_error("type error");
+		}
 	}
 }

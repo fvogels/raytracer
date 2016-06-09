@@ -4,10 +4,10 @@ using namespace scripting;
 
 
 scripting::Number::Number(const Location& location, double value)
-	: Atom(location), value(value) { }
+	: Atom(location), m_value(value) { }
 
 scripting::Number::Number(double value)
-	: value(value) { }
+	: m_value(value) { }
 
 void scripting::Number::accept(ObjectVisitor& visitor) const
 {
@@ -18,10 +18,15 @@ bool scripting::Number::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const Number*>(&other);
 
-	return that != nullptr && this->value == that->value;
+	return that != nullptr && this->m_value == that->m_value;
 }
 
 void scripting::Number::write(std::ostream& out) const
 {
-	out << this->value;
+	out << this->m_value;
+}
+
+double scripting::Number::value() const
+{
+	return m_value;
 }
