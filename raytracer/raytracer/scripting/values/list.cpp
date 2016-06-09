@@ -2,6 +2,19 @@
 
 using namespace scripting;
 
+
+scripting::List::List(const Location& location, const std::vector<std::shared_ptr<const Object>>& elements)
+	: Object(location), m_elements(elements) 
+{
+	// NOP
+}
+
+scripting::List::List(const std::vector<std::shared_ptr<const Object>>& elements)
+	: m_elements(elements) 
+{ 
+	// NOP
+}
+
 void scripting::List::accept(ObjectVisitor& visitor) const
 {
 	visitor.visit(*this);
@@ -60,4 +73,14 @@ void scripting::List::write(std::ostream& out) const
 	}
 
 	out << ')';
+}
+
+size_t scripting::List::size() const 
+{
+	return m_elements.size(); 
+}
+
+std::shared_ptr<const Object> scripting::List::nth_element(size_t index) const 
+{
+	return m_elements[index]; 
 }

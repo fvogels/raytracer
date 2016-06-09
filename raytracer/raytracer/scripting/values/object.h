@@ -38,18 +38,15 @@ namespace scripting
 	class List : public Object
 	{
 	public:
-		List(const Location& location, const std::vector<std::shared_ptr<const Object>>& elements)
-			: Object(location), m_elements(elements) { }
-
-		List(const std::vector<std::shared_ptr<const Object>>& elements)
-			: m_elements(elements) { }
+		List(const Location&, const std::vector<std::shared_ptr<const Object>>&);
+		List(const std::vector<std::shared_ptr<const Object>>&);
 
 		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
-		size_t size() const { return m_elements.size(); }
-		std::shared_ptr<const Object> nth_element(size_t index) const { return m_elements[index]; }
+		size_t size() const;
+		std::shared_ptr<const Object> nth_element(size_t index) const;
 
 	private:
 		std::vector<std::shared_ptr<const Object>> m_elements;
