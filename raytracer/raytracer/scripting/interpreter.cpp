@@ -6,7 +6,7 @@ using namespace scripting;
 class EvaluationVisitor : public ObjectVisitor
 {
 public:
-	EvaluationVisitor(std::shared_ptr<const Object> visited, std::shared_ptr<const Environment> environment)
+	EvaluationVisitor(std::shared_ptr<const Object> visited, std::shared_ptr<Environment> environment)
 		: m_visited(visited), m_environment(environment) { }
 
 	void visit(const String&) override;
@@ -18,7 +18,7 @@ public:
 	std::shared_ptr<const Object> result() const { return m_result; }
 
 private:
-	std::shared_ptr<const Environment> m_environment;
+	std::shared_ptr<Environment> m_environment;
 	std::shared_ptr<const Object> m_visited;
 	std::shared_ptr<const Object> m_result;
 };
@@ -46,9 +46,18 @@ void EvaluationVisitor::visit(const List& list)
 	}
 	else
 	{
-		// auto evaluated_head = evaluate(list.nth_element(0), m_environment);
-		// TODO
-		abort();
+		auto evaluated_head = evaluate(list.nth_element(0), m_environment);
+
+		std::vector<std::shared_ptr<const Object>> argument_expressions;
+		for (size_t i = 1; i < list.size(); ++i)
+		{
+			argument_expressions.push_back(list.nth_element(i));
+		}
+
+		m_result = with_value_type<Callable, std::shared_ptr<const Object>>(evaluated_head, [this, &argument_expressions](std::shared_ptr<const Callable> callable)
+		{
+			return callable->call(m_environment, argument_expressions);
+		});
 	}
 }
 
