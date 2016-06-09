@@ -3,6 +3,12 @@
 using namespace scripting;
 
 
+scripting::Number::Number(const Location& location, double value)
+	: Atom(location), value(value) { }
+
+scripting::Number::Number(double value)
+	: value(value) { }
+
 void scripting::Number::accept(ObjectVisitor& visitor) const
 {
 	visitor.visit(*this);

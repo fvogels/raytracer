@@ -74,11 +74,8 @@ namespace scripting
 	class Number : public Atom
 	{
 	public:
-		Number(const Location& location, double value)
-			: Atom(location), value(value) { }
-
-		Number(double value)
-			: value(value) { }
+		Number(const Location& location, double value);
+		Number(double value);
 
 		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
