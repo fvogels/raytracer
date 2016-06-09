@@ -24,9 +24,9 @@ bool scripting::operator !=(const Object& a, const Object& b)
 	return !(a == b);
 }
 
-std::ostream& scripting::operator <<(std::ostream& out, const Object& sexpr)
+std::ostream& scripting::operator <<(std::ostream& out, const Object& object)
 {
-	sexpr.write(out);
+	object.write(out);
 
 	return out;
 }

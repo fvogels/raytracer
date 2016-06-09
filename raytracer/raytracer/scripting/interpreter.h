@@ -5,5 +5,5 @@
 
 namespace scripting
 {
-	std::shared_ptr<const Object> evaluate(std::shared_ptr<const Object> sexpr, std::shared_ptr<Environment> environment);
+	std::shared_ptr<const Object> evaluate(std::shared_ptr<const Object> object, std::shared_ptr<Environment> environment);
 }

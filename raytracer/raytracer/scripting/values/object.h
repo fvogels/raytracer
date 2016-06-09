@@ -128,14 +128,14 @@ namespace scripting
 	std::ostream& operator <<(std::ostream&, const Object&);
 
 	template<typename T>
-	bool has_value_type(const Object& sexpr)
+	bool has_value_type(const Object& object)
 	{
-		return dynamic_cast<const Object*>(&sexpr) != nullptr;
+		return dynamic_cast<const Object*>(&object) != nullptr;
 	}
 
 	template<typename T>
-	bool has_value_type(std::shared_ptr<const Object> sexpr)
+	bool has_value_type(std::shared_ptr<const Object> object)
 	{
-		return std::dynamic_ptr_cast<const Object>(sexpr) != nullptr;
+		return std::dynamic_ptr_cast<const Object>(object) != nullptr;
 	}
 }

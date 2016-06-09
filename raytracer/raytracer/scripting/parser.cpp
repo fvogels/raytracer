@@ -80,7 +80,7 @@ void scripting::ParsingVisitor::next()
 scripting::Parser::Parser(std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> reader)
 	: m_reader(reader), m_visitor(std::make_unique<ParsingVisitor>())
 {
-	extract_next_sexpression();
+	extract_next_object();
 }
 
 scripting::Parser::~Parser()
@@ -90,14 +90,14 @@ scripting::Parser::~Parser()
 
 bool scripting::Parser::end_reached() const
 {
-	return m_sexpr == nullptr;
+	return m_object == nullptr;
 }
 
 std::shared_ptr<const Object> scripting::Parser::current() const
 {
 	assert(!end_reached());
 
-	return m_sexpr;
+	return m_object;
 }
 
 void scripting::Parser::next()
@@ -106,11 +106,11 @@ void scripting::Parser::next()
 
 	if (m_reader->end_reached())
 	{
-		m_sexpr = nullptr;
+		m_object = nullptr;
 	}
 	else
 	{
-		extract_next_sexpression();
+		extract_next_object();
 	}
 }
 
@@ -121,7 +121,7 @@ Location scripting::Parser::location() const
 	return m_reader->location();
 }
 
-void scripting::Parser::extract_next_sexpression()
+void scripting::Parser::extract_next_object()
 {
 	assert(!m_reader->end_reached());
 	
@@ -139,6 +139,6 @@ void scripting::Parser::extract_next_sexpression()
 		}
 	}
 
-	m_sexpr = m_visitor->current();
+	m_object = m_visitor->current();
 	m_visitor->next();
 }

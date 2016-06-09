@@ -24,9 +24,9 @@ namespace scripting
 
 	private:
 		std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> m_reader;
-		std::shared_ptr<const Object> m_sexpr;
+		std::shared_ptr<const Object> m_object;
 		std::unique_ptr<ParsingVisitor> m_visitor;
 
-		void extract_next_sexpression();
+		void extract_next_object();
 	};
 }
