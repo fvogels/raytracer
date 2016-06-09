@@ -9,7 +9,7 @@
 
 using namespace scripting;
 
-std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> create_tokenizer(std::istream& in)
+static std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> create_tokenizer(std::istream& in)
 {
 	std::vector<std::shared_ptr<const TokenRecognizer>> recognizers{
 		std::make_shared<LeftParenthesisRecognizer>(),
@@ -22,29 +22,29 @@ std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> create_tokenizer
 	return std::make_shared<Tokenizer>(in, recognizers);
 }
 
-std::shared_ptr<Parser> create_parser(std::istream& ss)
+static std::shared_ptr<Parser> create_parser(std::istream& ss)
 {
 	auto tokenizer = create_tokenizer(ss);
 
 	return std::make_shared<Parser>(tokenizer);
 }
 
-std::shared_ptr<const Object> number(double x)
+static std::shared_ptr<const Object> number(double x)
 {
 	return std::make_shared<Number>(x);
 }
 
-std::shared_ptr<const Object> string(const std::string& str)
+static std::shared_ptr<const Object> string(const std::string& str)
 {
 	return std::make_shared<String>(str);
 }
 
-std::shared_ptr<const Object> symbol(const std::string& str)
+static std::shared_ptr<const Object> symbol(const std::string& str)
 {
 	return std::make_shared<Symbol>(str);
 }
 
-std::shared_ptr<const Object> list(const std::vector<std::shared_ptr<const Object>>& elts)
+static std::shared_ptr<const Object> list(const std::vector<std::shared_ptr<const Object>>& elts)
 {
 	return std::make_shared<List>(elts);
 }

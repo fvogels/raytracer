@@ -124,7 +124,7 @@ namespace scripting
 	template<typename T>
 	bool has_value_type(std::shared_ptr<const Object> object)
 	{
-		return std::dynamic_ptr_cast<const Object>(object) != nullptr;
+		return std::dynamic_pointer_cast<const Object>(object) != nullptr;
 	}
 
 	template<typename T, typename R>

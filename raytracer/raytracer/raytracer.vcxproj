@@ -260,6 +260,7 @@
     <ClCompile Include="scripting\values\string.cpp" />
     <ClCompile Include="scripting\values\symbol.cpp" />
     <ClCompile Include="tests\combined_reader_tests.cpp" />
+    <ClCompile Include="tests\interpreter_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\parser_tests.cpp" />
     <ClCompile Include="tests\rasteriser_tests.cpp" />
