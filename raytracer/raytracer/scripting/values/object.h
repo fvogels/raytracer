@@ -42,8 +42,7 @@ namespace scripting
 	class Symbol : public Object
 	{
 	public:
-		Symbol(const std::string& name)
-			: m_name(name) { }
+		Symbol(const std::string&);
 
 		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
