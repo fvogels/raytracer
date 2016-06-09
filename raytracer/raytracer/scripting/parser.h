@@ -2,7 +2,7 @@
 
 #include "scripting/tokens.h"
 #include "scripting/reader.h"
-#include "scripting/s-expression.h"
+#include "scripting/values/s-expression.h"
 #include <memory>
 #include <stack>
 #include <list>

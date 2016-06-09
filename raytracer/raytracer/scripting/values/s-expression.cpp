@@ -1,4 +1,4 @@
-#include "scripting/s-expression.h"
+#include "scripting/values/s-expression.h"
 
 using namespace scripting;
 
@@ -18,6 +18,11 @@ void scripting::Number::accept(SExpressionVisitor& visitor) const
 }
 
 void scripting::Symbol::accept(SExpressionVisitor& visitor) const
+{
+	visitor.visit(*this);
+}
+
+void scripting::Function::accept(SExpressionVisitor& visitor) const
 {
 	visitor.visit(*this);
 }

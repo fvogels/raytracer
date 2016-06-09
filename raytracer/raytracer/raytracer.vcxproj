@@ -247,7 +247,7 @@
     <ClCompile Include="rendering\single-sampler.cpp" />
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
-    <ClCompile Include="scripting\s-expression.cpp" />
+    <ClCompile Include="scripting\values\s-expression.cpp" />
     <ClCompile Include="scripting\parser.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
     <ClCompile Include="scripting\stream_line_reader.cpp" />
@@ -300,7 +300,7 @@
     <ClInclude Include="scripting\interpreter.h" />
     <ClInclude Include="scripting\location.h" />
     <ClInclude Include="scripting\parser.h" />
-    <ClInclude Include="scripting\s-expression.h" />
+    <ClInclude Include="scripting\values\s-expression.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
     <ClInclude Include="scripting\reader.h" />

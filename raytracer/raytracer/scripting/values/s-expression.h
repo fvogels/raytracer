@@ -111,13 +111,20 @@ namespace scripting
 		std::string string;
 	};
 
-	//class Callable : public Atom
-	//{
-	//public:
-	//	void write(std::ostream& out) const override { out << "<Callable>"; }
-	//	bool operator ==(const SExpression&) const override { return false; }
+	class Callable : public Atom
+	{
+	public:
+		void write(std::ostream& out) const override { out << "<Callable>"; }
+		bool operator ==(const SExpression&) const override { return false; }
 
-	//};
+		virtual std::shared_ptr<SExpression> call(const std::vector<SExpression>&) const = 0;
+	};
+
+	class Function : public Callable
+	{
+	public:
+		void accept(SExpressionVisitor&) const override;
+	};
 
 	class SExpressionVisitor
 	{
@@ -126,6 +133,7 @@ namespace scripting
 		virtual void visit(const Number&) = 0;
 		virtual void visit(const Symbol&) = 0;
 		virtual void visit(const List&) = 0;
+		virtual void visit(const Function&) = 0;
 	};
 
 	bool operator !=(const SExpression& a, const SExpression& b);

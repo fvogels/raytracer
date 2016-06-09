@@ -13,6 +13,7 @@ public:
 	void visit(const Number&) override;
 	void visit(const Symbol&) override;
 	void visit(const List&) override;
+	void visit(const Function&) override;
 
 	std::shared_ptr<const SExpression> result() const { return m_result; }
 
@@ -46,8 +47,15 @@ void EvaluationVisitor::visit(const List& list)
 	else
 	{
 		// auto evaluated_head = evaluate(list.nth_element(0), m_environment);
+		// TODO
 		abort();
 	}
+}
+
+void EvaluationVisitor::visit(const Function&)
+{
+	// TODO
+	abort();
 }
 
 std::shared_ptr<const SExpression> scripting::evaluate(std::shared_ptr<const SExpression> value, std::shared_ptr<Environment> environment)
