@@ -88,11 +88,8 @@ namespace scripting
 	class String : public Atom
 	{
 	public:
-		String(const Location& location, const std::string& string)
-			: Atom(location), string(string) { }
-
-		String(const std::string& string)
-			: string(string) { }
+		String(const Location&, const std::string&);
+		String(const std::string&);
 
 		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
