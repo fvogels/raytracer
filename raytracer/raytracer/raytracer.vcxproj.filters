@@ -150,6 +150,9 @@
     <ClCompile Include="scripting\values\symbol.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scripting\values\number.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
