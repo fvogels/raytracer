@@ -27,6 +27,40 @@ std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<
 	return std::make_shared<Number>(total);
 }
 
+std::shared_ptr<Object> scripting::library::Subtraction::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	double result;
+
+	if (arguments.size() == 0)
+	{
+		result = 0;
+	}
+	else if (arguments.size() == 1)
+	{
+		result = with_value_type<Number, double>(arguments[0], [&result](std::shared_ptr<Number> number)
+		{
+			return -number->value();
+		});
+	}
+	else
+	{
+		result = with_value_type<Number, double>(arguments[0], [&result](std::shared_ptr<Number> number)
+		{
+			return number->value();
+		});
+
+		for (size_t i = 1; i < arguments.size(); ++i)
+		{
+			result -= with_value_type<Number, double>(arguments[i], [&result](std::shared_ptr<Number> number)
+			{
+				return number->value();
+			});
+		}
+	}
+
+	return std::make_shared<Number>(result);
+}
+
 std::shared_ptr<Object> scripting::library::Multiplication::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	double total = 1;
