@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scripting/values/object.h"
+#include "scripting/values/symbol.h"
 #include <memory>
 
 namespace scripting

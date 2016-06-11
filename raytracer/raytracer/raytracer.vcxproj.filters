@@ -329,5 +329,8 @@
     <ClInclude Include="scripting\values\string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scripting\values\symbol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

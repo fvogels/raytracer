@@ -1,4 +1,5 @@
 #include "scripting/Environment.h"
+#include "scripting/values/symbol.h"
 #include <assert.h>
 #include <map>
 
