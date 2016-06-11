@@ -54,114 +54,94 @@ static std::shared_ptr<Object> interpret(const std::string& input)
 	return evaluate(parsed_input, create_environment());
 }
 
+static std::shared_ptr<Object> number(double x)
+{
+	return std::make_shared<Number>(x);
+}
+
+static std::shared_ptr<Object> string(const std::string& str)
+{
+	return std::make_shared<String>(str);
+}
+
+static std::shared_ptr<Object> symbol(const std::string& str)
+{
+	return std::make_shared<Symbol>(str);
+}
+
+static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& elts)
+{
+	return std::make_shared<List>(elts);
+}
+
 TEST_CASE("[evaluate] Evaluating 5", "[interpreter]")
 {
 	auto result = interpret("5");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(5));
-	});
+	REQUIRE(*result == *number(5));
 }
 
 TEST_CASE("[evaluate] Evaluating \"abc\"", "[interpreter]")
 {
 	auto result = interpret("\"abc\"");
 
-	REQUIRE(has_value_type<String>(result));
-
-	with_value_type<String, void>(result, [](std::shared_ptr<String> string) {
-		REQUIRE(string->value() == "abc");
-	});
+	REQUIRE(*result == *string("abc"));
 }
 
 TEST_CASE("[evaluate] Evaluating (+ 5 3)", "[interpreter]")
 {
 	auto result = interpret("(+ 5 3)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(8));
-	});
+	REQUIRE(*result == *number(8));
 }
 
 TEST_CASE("[evaluate] Evaluating (+ 5 3 1)", "[interpreter]")
 {
 	auto result = interpret("(+ 5 3 1)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(9));
-	});
+	REQUIRE(*result == *number(9));
 }
 
 TEST_CASE("[evaluate] Evaluating (+)", "[interpreter]")
 {
 	auto result = interpret("(+)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(0));
-	});
+	REQUIRE(*result == *number(0));
 }
 
 TEST_CASE("[evaluate] Evaluating (+ 7)", "[interpreter]")
 {
 	auto result = interpret("(+ 7)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(7));
-	});
+	REQUIRE(*result == *number(7));
 }
 
 TEST_CASE("[evaluate] Evaluating (*)", "[interpreter]")
 {
 	auto result = interpret("(*)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(1));
-	});
+	REQUIRE(*result == *number(1));
 }
 
 TEST_CASE("[evaluate] Evaluating (* 3)", "[interpreter]")
 {
 	auto result = interpret("(* 3)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(3));
-	});
+	REQUIRE(*result == *number(3));
 }
 
 TEST_CASE("[evaluate] Evaluating (* 2 7)", "[interpreter]")
 {
 	auto result = interpret("(* 2 7)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(14));
-	});
+	REQUIRE(*result == *number(14));
 }
 
 TEST_CASE("[evaluate] Evaluating (* (+ 5 2) 7)", "[interpreter]")
 {
 	auto result = interpret("(* (+ 5 2) 7)");
 
-	REQUIRE(has_value_type<Number>(result));
-
-	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
-		REQUIRE(number->value() == Approx(49));
-	});
+	REQUIRE(*result == *number(49));
 }
 
 #endif
