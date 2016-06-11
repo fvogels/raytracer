@@ -246,6 +246,7 @@
     <ClCompile Include="rendering\grid-sampler.cpp" />
     <ClCompile Include="rendering\single-sampler.cpp" />
     <ClCompile Include="scripting\environment.cpp" />
+    <ClCompile Include="scripting\heap.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
     <ClCompile Include="scripting\standard-library.cpp" />
     <ClCompile Include="scripting\objects\callable.cpp" />
@@ -304,6 +305,7 @@
     <ClInclude Include="rendering\grid-sampler.h" />
     <ClInclude Include="rendering\sampler.h" />
     <ClInclude Include="rendering\single-sampler.h" />
+    <ClInclude Include="scripting\heap.h" />
     <ClInclude Include="scripting\reading\combined_reader.h" />
     <ClInclude Include="scripting\environment.h" />
     <ClInclude Include="scripting\interpreter.h" />

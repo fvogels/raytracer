@@ -168,6 +168,9 @@
     <ClCompile Include="scripting\reading\string_reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scripting\heap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -345,6 +348,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\reading\stream_line_reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\heap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
