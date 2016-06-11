@@ -23,5 +23,11 @@ namespace scripting
 		protected:
 			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
+
+		class Equality : public Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+		};
 	}
 }

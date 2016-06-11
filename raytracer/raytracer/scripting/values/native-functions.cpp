@@ -73,3 +73,23 @@ std::shared_ptr<Object> scripting::library::Multiplication::perform(const std::v
 
 	return std::make_shared<Number>(total);
 }
+
+std::shared_ptr<Object> scripting::library::Equality::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() == 0)
+	{
+		return std::make_shared<Boolean>(true);
+	}
+	else
+	{
+		for (size_t i = 1; i < arguments.size(); ++i)
+		{
+			if (*arguments[0] != *arguments[i])
+			{
+				return std::make_shared<Boolean>(false);
+			}
+		}
+
+		return std::make_shared<Boolean>(true);
+	}
+}

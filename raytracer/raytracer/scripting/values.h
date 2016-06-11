@@ -7,3 +7,4 @@
 #include "scripting/values/list.h"
 #include "scripting/values/function.h"
 #include "scripting/values/macro.h"
+#include "scripting/values/boolean.h"

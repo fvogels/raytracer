@@ -186,5 +186,4 @@ TEST_CASE("[interpret] Evaluating (let ((x 5) (y 3)) (+ x y))", "[interpreter]")
 	REQUIRE(*result == *number(8));
 }
 
-
 #endif
