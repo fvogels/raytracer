@@ -1,5 +1,5 @@
 #include "scripting/interpreter.h"
-#include "scripting/Environment.h"
+#include "scripting/environment.h"
 
 using namespace scripting;
 
