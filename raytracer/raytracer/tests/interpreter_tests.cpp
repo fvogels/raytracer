@@ -79,6 +79,8 @@ static std::shared_ptr<Object> boolean(bool b)
 	return std::make_shared<Boolean>(b);
 }
 
+#define TEST(sexpr, expected) TEST_CASE("[interpret] Evaluating " #sexpr, "[interpreter]") { auto result = interpret(sexpr); REQUIRE(*result == *expected); }
+
 
 TEST_CASE("[interpret] Evaluating 5", "[interpreter]")
 {
@@ -226,5 +228,7 @@ TEST_CASE("[interpret] Evaluating (= (+ 3 2) 5)", "[interpreter]")
 
 	REQUIRE(*result == *boolean(true));
 }
+
+TEST("(<)", boolean(true));
 
 #endif
