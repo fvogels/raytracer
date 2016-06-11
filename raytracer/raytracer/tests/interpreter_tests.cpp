@@ -74,6 +74,12 @@ static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& 
 	return std::make_shared<List>(elts);
 }
 
+static std::shared_ptr<Object> boolean(bool b)
+{
+	return std::make_shared<Boolean>(b);
+}
+
+
 TEST_CASE("[interpret] Evaluating 5", "[interpreter]")
 {
 	auto result = interpret("5");
@@ -184,6 +190,41 @@ TEST_CASE("[interpret] Evaluating (let ((x 5) (y 3)) (+ x y))", "[interpreter]")
 	auto result = interpret("(let ((x 5) (y 3)) (+ x y))");
 
 	REQUIRE(*result == *number(8));
+}
+
+TEST_CASE("[interpret] Evaluating true", "[interpreter]")
+{
+	auto result = interpret("true");
+
+	REQUIRE(*result == *boolean(true));
+}
+
+TEST_CASE("[interpret] Evaluating false", "[interpreter]")
+{
+	auto result = interpret("false");
+
+	REQUIRE(*result == *boolean(false));
+}
+
+TEST_CASE("[interpret] Evaluating (= 5 3)", "[interpreter]")
+{
+	auto result = interpret("(= 5 3)");
+
+	REQUIRE(*result == *boolean(false));
+}
+
+TEST_CASE("[interpret] Evaluating (= 5 5)", "[interpreter]")
+{
+	auto result = interpret("(= 5 5)");
+
+	REQUIRE(*result == *boolean(true));
+}
+
+TEST_CASE("[interpret] Evaluating (= (+ 3 2) 5)", "[interpreter]")
+{
+	auto result = interpret("(= (+ 3 2) 5)");
+
+	REQUIRE(*result == *boolean(true));
 }
 
 #endif
