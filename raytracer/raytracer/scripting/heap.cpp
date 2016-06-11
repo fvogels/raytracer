@@ -3,6 +3,12 @@
 using namespace scripting;
 
 
+scripting::Heap::Heap()
+	: m_nextId(0)
+{
+	// NOP
+}
+
 std::shared_ptr<scripting::Object> scripting::Heap::read(unsigned refid)
 {
 	auto it = m_heap.find(refid);
@@ -20,4 +26,9 @@ std::shared_ptr<scripting::Object> scripting::Heap::read(unsigned refid)
 void scripting::Heap::write(unsigned refid, std::shared_ptr<scripting::Object> object)
 {
 	m_heap[refid] = object;
+}
+
+unsigned scripting::Heap::allocate()
+{
+	return m_nextId++;
 }

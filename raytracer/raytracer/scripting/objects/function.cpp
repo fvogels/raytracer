@@ -15,5 +15,5 @@ std::shared_ptr<Object> scripting::Function::call(std::shared_ptr<Environment> e
 		return ::evaluate(expr, environment, heap);
 	});
 
-	return this->perform(argument_values);
+	return this->perform(heap, argument_values);
 }

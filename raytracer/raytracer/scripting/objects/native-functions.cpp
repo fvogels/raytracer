@@ -1,5 +1,7 @@
 #include "scripting/objects/native-functions.h"
 #include "scripting/objects/native-value-adapter.h"
+#include "scripting/values.h"
+#include "scripting/heap.h"
 
 using namespace scripting;
 
@@ -16,7 +18,7 @@ void for_each(const std::vector<std::shared_ptr<Object>>& arguments, std::functi
 	}
 }
 
-std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Addition::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {	
 	if (arguments.size() == 0)
 	{
@@ -69,7 +71,7 @@ std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<
 	}
 }
 
-std::shared_ptr<Object> scripting::library::Subtraction::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Subtraction::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	double result;
 
@@ -103,7 +105,7 @@ std::shared_ptr<Object> scripting::library::Subtraction::perform(const std::vect
 	return std::make_shared<Number>(result);
 }
 
-std::shared_ptr<Object> scripting::library::Multiplication::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Multiplication::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	double total = 1;
 
@@ -115,7 +117,7 @@ std::shared_ptr<Object> scripting::library::Multiplication::perform(const std::v
 	return std::make_shared<Number>(total);
 }
 
-std::shared_ptr<Object> scripting::library::Equality::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Equality::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() == 0)
 	{
@@ -135,7 +137,7 @@ std::shared_ptr<Object> scripting::library::Equality::perform(const std::vector<
 	}
 }
 
-std::shared_ptr<Object> scripting::library::Comparison::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Comparison::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() == 0)
 	{
@@ -181,7 +183,7 @@ bool scripting::library::NotGreaterThan::compare(double x, double y) const
 	return x <= y;
 }
 
-std::shared_ptr<Object> scripting::library::Negation::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Negation::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 1)
 	{
@@ -195,7 +197,7 @@ std::shared_ptr<Object> scripting::library::Negation::perform(const std::vector<
 	}
 }
 
-std::shared_ptr<Object> scripting::library::CreatePoint::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::CreatePoint::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 3)
 	{
@@ -213,7 +215,7 @@ std::shared_ptr<Object> scripting::library::CreatePoint::perform(const std::vect
 	}
 }
 
-std::shared_ptr<Object> scripting::library::CreateVector::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::CreateVector::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 3)
 	{
@@ -231,7 +233,7 @@ std::shared_ptr<Object> scripting::library::CreateVector::perform(const std::vec
 	}
 }
 
-std::shared_ptr<Object> scripting::library::GetXYZ::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::GetXYZ::perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 1)
 	{
@@ -290,4 +292,47 @@ double scripting::library::GetZ::get(const math::Point3D& p) const
 double scripting::library::GetZ::get(const math::Vector3D& v) const
 {
 	return v.z;
+}
+
+std::shared_ptr<Object> scripting::library::Allocate::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() != 0)
+	{
+		throw std::runtime_error("Allocation requires zero arguments");
+	}
+	else
+	{
+		return std::make_shared<Reference>(heap->allocate());
+	}
+}
+
+std::shared_ptr<Object> scripting::library::Read::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() != 1)
+	{
+		throw std::runtime_error("Reading requires one argument");
+	}
+	else
+	{
+		auto ref = value_cast<Reference>(arguments[0]);
+
+		return heap->read(ref->id());
+	}
+}
+
+std::shared_ptr<Object> scripting::library::Write::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() != 2)
+	{
+		throw std::runtime_error("Writing requires one argument");
+	}
+	else
+	{
+		auto ref = value_cast<Reference>(arguments[0]);
+		auto value = arguments[1];
+
+		heap->write(ref->id(), value);
+
+		return value;
+	}
 }

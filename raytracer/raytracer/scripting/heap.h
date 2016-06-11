@@ -10,12 +10,14 @@ namespace scripting
 	class Heap
 	{
 	public:
-		Heap() = default;
+		Heap();
 
+		unsigned allocate();
 		std::shared_ptr<scripting::Object> read(unsigned);
 		void write(unsigned, std::shared_ptr<scripting::Object>);
 
 	private:
+		unsigned m_nextId;
 		std::map<unsigned, std::shared_ptr<scripting::Object>> m_heap;
 	};
 }

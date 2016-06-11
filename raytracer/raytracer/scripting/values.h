@@ -6,3 +6,4 @@
 #include "scripting/objects/list.h"
 #include "scripting/objects/function.h"
 #include "scripting/objects/macro.h"
+#include "scripting/objects/reference.h"
