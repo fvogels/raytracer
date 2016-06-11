@@ -42,5 +42,8 @@ namespace math
 	Vector3D operator *(double factor, const Vector3D&);
 	Vector3D operator /(const Vector3D&, double factor);
 
+	bool operator ==(const Vector3D&, const Vector3D&);
+	bool operator !=(const Vector3D&, const Vector3D&);
+
 	std::ostream& operator <<(std::ostream& out, const Vector3D&);
 }

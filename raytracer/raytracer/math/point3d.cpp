@@ -38,3 +38,18 @@ double math::distance(const Point3D& p, const Point3D& q)
 {
 	return (q - p).norm();
 }
+
+bool math::operator ==(const Point3D& p, const Point3D& q)
+{
+	return p.x == q.x && p.y == q.y && p.z == q.z;
+}
+
+bool math::operator !=(const Point3D& p, const Point3D& q)
+{
+	return !(p == q);
+}
+
+std::ostream& math::operator <<(std::ostream& out, const Point3D& p)
+{
+	return out << "(" << p.x << "," << p.y << "," << p.z << ")";
+}

@@ -24,5 +24,10 @@ namespace math
 	Vector3D operator -(const Point3D&, const Point3D&);
 	Point3D operator -(const Point3D&, const Vector3D&);
 
+	bool operator ==(const Point3D&, const Point3D&);
+	bool operator !=(const Point3D&, const Point3D&);
+
 	double distance(const Point3D&, const Point3D&);
+
+	std::ostream& operator <<(std::ostream& out, const Point3D&);
 }

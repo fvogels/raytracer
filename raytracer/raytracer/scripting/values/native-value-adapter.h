@@ -1,6 +1,8 @@
 #pragma once
 
 #include "scripting/environment.h"
+#include "math/point3d.h"
+#include "math/vector3d.h"
 
 namespace scripting
 {
@@ -37,6 +39,8 @@ namespace scripting
 	DEFINE_NATIVE_VALUE_CLASS(double, Number)
 	DEFINE_NATIVE_VALUE_CLASS(bool, Boolean)
 	DEFINE_NATIVE_VALUE_CLASS(std::string, String)
+	DEFINE_NATIVE_VALUE_CLASS(math::Point3D, Point)
+	DEFINE_NATIVE_VALUE_CLASS(math::Vector3D, Vector)
 
 #undef DEFINE_NATIVE_VALUE_CLASS
 #endif

@@ -126,3 +126,13 @@ bool math::Vector3D::is_perpendicular_on(const Vector3D& v) const
 {
 	return dot(v) == approx(0);
 }
+
+bool math::operator ==(const Vector3D& u, const Vector3D& v)
+{
+	return u.x == v.x && u.y == v.y && u.z == v.z;
+}
+
+bool math::operator !=(const Vector3D& u, const Vector3D& v)
+{
+	return !(u == v);
+}
