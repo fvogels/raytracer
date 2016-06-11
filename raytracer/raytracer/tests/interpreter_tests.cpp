@@ -151,4 +151,25 @@ TEST_CASE("[interpret] Evaluating (-)", "[interpreter]")
 	REQUIRE(*result == *number(0));
 }
 
+TEST_CASE("[interpret] Evaluating (- 5)", "[interpreter]")
+{
+	auto result = interpret("(- 5)");
+
+	REQUIRE(*result == *number(-5));
+}
+
+TEST_CASE("[interpret] Evaluating (- 5 3)", "[interpreter]")
+{
+	auto result = interpret("(- 5 3)");
+
+	REQUIRE(*result == *number(2));
+}
+
+TEST_CASE("[interpret] Evaluating (- 5 3 1)", "[interpreter]")
+{
+	auto result = interpret("(- 5 3 1)");
+
+	REQUIRE(*result == *number(1));
+}
+
 #endif
