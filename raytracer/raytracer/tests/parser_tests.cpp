@@ -29,27 +29,27 @@ static std::shared_ptr<Parser> create_parser(std::istream& ss)
 	return std::make_shared<Parser>(tokenizer);
 }
 
-static std::shared_ptr<const Object> number(double x)
+static std::shared_ptr<Object> number(double x)
 {
 	return std::make_shared<Number>(x);
 }
 
-static std::shared_ptr<const Object> string(const std::string& str)
+static std::shared_ptr<Object> string(const std::string& str)
 {
 	return std::make_shared<String>(str);
 }
 
-static std::shared_ptr<const Object> symbol(const std::string& str)
+static std::shared_ptr<Object> symbol(const std::string& str)
 {
 	return std::make_shared<Symbol>(str);
 }
 
-static std::shared_ptr<const Object> list(const std::vector<std::shared_ptr<const Object>>& elts)
+static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& elts)
 {
 	return std::make_shared<List>(elts);
 }
 
-#define LIST(...) list(std::vector<std::shared_ptr<const Object>> { __VA_ARGS__ } )
+#define LIST(...) list(std::vector<std::shared_ptr<Object>> { __VA_ARGS__ } )
 
 TEST_CASE("[Parser] Parsing 4", "[Parser]")
 {

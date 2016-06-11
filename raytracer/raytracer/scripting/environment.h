@@ -13,8 +13,8 @@ namespace scripting
 		~Environment();
 
 		bool is_bound(const Symbol&) const;
-		std::shared_ptr<const Object> lookup(const Symbol&) const;
-		void bind(const Symbol&, std::shared_ptr<const Object> value);
+		std::shared_ptr<Object> lookup(const Symbol&) const;
+		void bind(const Symbol&, std::shared_ptr<Object> value);
 
 	private:
 		struct Impl;

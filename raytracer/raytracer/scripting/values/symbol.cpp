@@ -1,4 +1,5 @@
 #include "scripting/values/object.h"
+#include "scripting/environment.h"
 
 using namespace scripting;
 
@@ -21,4 +22,9 @@ bool scripting::Symbol::operator==(const Object& other) const
 void scripting::Symbol::write(std::ostream& out) const
 {
 	out << this->m_name;
+}
+
+std::shared_ptr<Object> scripting::Symbol::evaluate(std::shared_ptr<scripting::Environment> environment)
+{
+	return environment->lookup(*this);
 }

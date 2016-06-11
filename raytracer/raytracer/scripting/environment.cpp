@@ -10,11 +10,11 @@ namespace scripting
 		Frame() = default;
 
 		bool is_bound(const Symbol&) const;
-		std::shared_ptr<const Object> lookup(const Symbol&) const;
-		void bind(const Symbol&, std::shared_ptr<const Object>);
+		std::shared_ptr<Object> lookup(const Symbol&) const;
+		void bind(const Symbol&, std::shared_ptr<Object>);
 
 	private:
-		std::map<std::string, std::shared_ptr<const Object>> bindings;
+		std::map<std::string, std::shared_ptr<Object>> bindings;
 	};
 }
 
@@ -23,8 +23,8 @@ struct scripting::Environment::Impl
 	Impl(std::shared_ptr<scripting::Frame>, std::shared_ptr<scripting::Environment>);
 
 	bool is_bound(const Symbol&) const;
-	std::shared_ptr<const Object> lookup(const Symbol&) const;
-	void bind(const Symbol&, std::shared_ptr<const Object>);
+	std::shared_ptr<Object> lookup(const Symbol&) const;
+	void bind(const Symbol&, std::shared_ptr<Object>);
 
 	std::shared_ptr<scripting::Frame> frame;
 	std::shared_ptr<scripting::Environment> parent;
@@ -38,7 +38,7 @@ bool scripting::Environment::Impl::is_bound(const Symbol& symbol) const
 	return frame->is_bound(symbol) || (parent != nullptr && parent->is_bound(symbol));
 }
 
-std::shared_ptr<const Object> scripting::Environment::Impl::lookup(const Symbol& symbol) const
+std::shared_ptr<Object> scripting::Environment::Impl::lookup(const Symbol& symbol) const
 {
 	if ( frame->is_bound(symbol) )
 	{
@@ -54,7 +54,7 @@ std::shared_ptr<const Object> scripting::Environment::Impl::lookup(const Symbol&
 	}
 }
 
-void scripting::Environment::Impl::bind(const Symbol& symbol, std::shared_ptr<const Object> object)
+void scripting::Environment::Impl::bind(const Symbol& symbol, std::shared_ptr<Object> object)
 {
 	frame->bind(symbol, object);
 }
@@ -64,14 +64,14 @@ bool scripting::Frame::is_bound(const Symbol& symbol) const
 	return bindings.find(symbol.name()) != bindings.end();
 }
 
-std::shared_ptr<const Object> scripting::Frame::lookup(const Symbol& symbol) const
+std::shared_ptr<Object> scripting::Frame::lookup(const Symbol& symbol) const
 {
 	assert(is_bound(symbol));
 
 	return bindings.at(symbol.name());
 }
 
-void scripting::Frame::bind(const Symbol& symbol, std::shared_ptr<const Object> object)
+void scripting::Frame::bind(const Symbol& symbol, std::shared_ptr<Object> object)
 {
 	bindings[symbol.name()] = object;
 }
@@ -105,12 +105,12 @@ bool scripting::Environment::is_bound(const Symbol& symbol) const
 	return m_pimpl->is_bound(symbol);
 }
 
-std::shared_ptr<const Object> scripting::Environment::lookup(const Symbol& symbol) const
+std::shared_ptr<Object> scripting::Environment::lookup(const Symbol& symbol) const
 {
 	return m_pimpl->lookup(symbol);
 }
 
-void scripting::Environment::bind(const Symbol& symbol, std::shared_ptr<const Object> value)
+void scripting::Environment::bind(const Symbol& symbol, std::shared_ptr<Object> value)
 {
 	return m_pimpl->bind(symbol, value);
 }

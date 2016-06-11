@@ -19,6 +19,8 @@ namespace scripting
 		virtual void write(std::ostream&) const = 0;
 		virtual bool operator ==(const Object&) const = 0;
 
+		virtual std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) = 0;
+
 	protected:
 		Object();
 	};
@@ -26,17 +28,19 @@ namespace scripting
 	class List : public Object
 	{
 	public:
-		List(const std::vector<std::shared_ptr<const Object>>&);
+		List(const std::vector<std::shared_ptr<Object>>&);
 
 		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
+
 		size_t size() const;
 		std::shared_ptr<const Object> nth_element(size_t index) const;
 
 	private:
-		std::vector<std::shared_ptr<const Object>> m_elements;
+		std::vector<std::shared_ptr<Object>> m_elements;
 	};
 
 	class Symbol : public Object
@@ -47,6 +51,8 @@ namespace scripting
 		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
+
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
 
 		std::string name() const { return m_name; }
 
@@ -63,6 +69,8 @@ namespace scripting
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
+
 		double value() const;
 
 	private:
@@ -78,6 +86,8 @@ namespace scripting
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
+
 		std::string value() const;
 
 	private:
@@ -90,7 +100,9 @@ namespace scripting
 		void write(std::ostream& out) const override { out << "<Callable>"; }
 		bool operator ==(const Object&) const override { return false; }
 
-		virtual std::shared_ptr<const Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<const Object>>&) const = 0;
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
+
+		virtual std::shared_ptr<Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<Object>>&) const = 0;
 	};
 
 	class Function : public Callable
@@ -98,10 +110,10 @@ namespace scripting
 	public:
 		void accept(ObjectVisitor&) const override;
 
-		std::shared_ptr<const Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<const Object>>&) const override;
+		std::shared_ptr<Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<Object>>&) const override;
 
 	protected:
-		virtual std::shared_ptr<const Object> perform(const std::vector<std::shared_ptr<const Object>>&) const = 0;
+		virtual std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const = 0;
 	};
 
 	class ObjectVisitor
@@ -130,9 +142,9 @@ namespace scripting
 	}
 
 	template<typename T, typename R>
-	R with_value_type(std::shared_ptr<const Object> object, std::function<R(std::shared_ptr<const T>)> function)
+	R with_value_type(std::shared_ptr<Object> object, std::function<R(std::shared_ptr<T>)> function)
 	{
-		auto converted = std::dynamic_pointer_cast<const T>(object);
+		auto converted = std::dynamic_pointer_cast<T>(object);
 
 		if (converted != nullptr)
 		{

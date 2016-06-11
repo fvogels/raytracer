@@ -27,3 +27,8 @@ std::string scripting::String::value() const
 {
 	return this->string;
 }
+
+std::shared_ptr<Object> scripting::String::evaluate(std::shared_ptr<scripting::Environment>)
+{
+	return std::make_shared<String>(this->string);
+}

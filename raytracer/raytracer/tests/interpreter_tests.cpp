@@ -29,7 +29,7 @@ static std::shared_ptr<Parser> create_parser(std::istream& ss)
 	return std::make_shared<Parser>(tokenizer);
 }
 
-static std::shared_ptr<const Object> parse(const std::string& input)
+static std::shared_ptr<Object> parse(const std::string& input)
 {
 	std::istringstream ss(input);
 	auto parser = create_parser(ss);
@@ -47,7 +47,7 @@ static std::shared_ptr<Environment> create_environment()
 	return result;
 }
 
-static std::shared_ptr<const Object> interpret(const std::string& input)
+static std::shared_ptr<Object> interpret(const std::string& input)
 {
 	auto parsed_input = parse(input);
 	
@@ -60,7 +60,7 @@ TEST_CASE("[evaluate] Evaluating 5", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(5));
 	});
 }
@@ -71,7 +71,7 @@ TEST_CASE("[evaluate] Evaluating \"abc\"", "[interpreter]")
 
 	REQUIRE(has_value_type<String>(result));
 
-	with_value_type<String, void>(result, [](std::shared_ptr<const String> string) {
+	with_value_type<String, void>(result, [](std::shared_ptr<String> string) {
 		REQUIRE(string->value() == "abc");
 	});
 }
@@ -82,7 +82,7 @@ TEST_CASE("[evaluate] Evaluating (+ 5 3)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(8));
 	});
 }
@@ -93,7 +93,7 @@ TEST_CASE("[evaluate] Evaluating (+ 5 3 1)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(9));
 	});
 }
@@ -104,7 +104,7 @@ TEST_CASE("[evaluate] Evaluating (+)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(0));
 	});
 }
@@ -115,7 +115,7 @@ TEST_CASE("[evaluate] Evaluating (+ 7)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(7));
 	});
 }
@@ -126,7 +126,7 @@ TEST_CASE("[evaluate] Evaluating (*)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(1));
 	});
 }
@@ -137,7 +137,7 @@ TEST_CASE("[evaluate] Evaluating (* 3)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(3));
 	});
 }
@@ -148,7 +148,7 @@ TEST_CASE("[evaluate] Evaluating (* 2 7)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(14));
 	});
 }
@@ -159,7 +159,7 @@ TEST_CASE("[evaluate] Evaluating (* (+ 5 2) 7)", "[interpreter]")
 
 	REQUIRE(has_value_type<Number>(result));
 
-	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+	with_value_type<Number, void>(result, [](std::shared_ptr<Number> number) {
 		REQUIRE(number->value() == Approx(49));
 	});
 }

@@ -16,28 +16,28 @@ public:
 	void visit(const NumberToken& number_token) override;
 
 	bool has_next() const;
-	std::shared_ptr<const Object> current() const;
+	std::shared_ptr<Object> current() const;
 	void next();
 
 private:
-	std::stack<std::list<std::shared_ptr<const Object>>> m_stack;
+	std::stack<std::list<std::shared_ptr<Object>>> m_stack;
 	std::stack<Location> m_locations;
 };
 
 scripting::ParsingVisitor::ParsingVisitor()
 {
-	m_stack.push(std::list<std::shared_ptr<const Object>>());
+	m_stack.push(std::list<std::shared_ptr<Object>>());
 }
 
 void scripting::ParsingVisitor::visit(const LeftParenthesisToken& token)
 {
-	m_stack.push(std::list<std::shared_ptr<const Object>>());
+	m_stack.push(std::list<std::shared_ptr<Object>>());
 	m_locations.push(token.location);
 }
 
 void scripting::ParsingVisitor::visit(const RightParenthesisToken&)
 {
-	auto elements = std::vector<std::shared_ptr<const Object>>(m_stack.top().begin(), m_stack.top().end());
+	auto elements = std::vector<std::shared_ptr<Object>>(m_stack.top().begin(), m_stack.top().end());
 	auto list = std::make_shared<List>(elements);
 	m_stack.pop();
 	m_locations.pop();
@@ -67,7 +67,7 @@ bool scripting::ParsingVisitor::has_next() const
 	return m_stack.top().size() == 1 && m_stack.size() == 1;
 }
 
-std::shared_ptr<const Object> scripting::ParsingVisitor::current() const
+std::shared_ptr<Object> scripting::ParsingVisitor::current() const
 {
 	return m_stack.top().front();
 }
@@ -93,7 +93,7 @@ bool scripting::Parser::end_reached() const
 	return m_object == nullptr;
 }
 
-std::shared_ptr<const Object> scripting::Parser::current() const
+std::shared_ptr<Object> scripting::Parser::current() const
 {
 	assert(!end_reached());
 

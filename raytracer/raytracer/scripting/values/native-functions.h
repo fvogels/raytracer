@@ -9,13 +9,13 @@ namespace scripting
 		class Addition : public Function
 		{
 		protected:
-			std::shared_ptr<const Object> perform(const std::vector<std::shared_ptr<const Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class Multiplication : public Function
 		{
 		protected:
-			std::shared_ptr<const Object> perform(const std::vector<std::shared_ptr<const Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 	}
 }
