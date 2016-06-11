@@ -4,3 +4,4 @@
 #include "scripting/values/number.h"
 #include "scripting/values/string.h"
 #include "scripting/values/symbol.h"
+#include "scripting/values/list.h"
