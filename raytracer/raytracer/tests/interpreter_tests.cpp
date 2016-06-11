@@ -172,4 +172,19 @@ TEST_CASE("[interpret] Evaluating (- 5 3 1)", "[interpreter]")
 	REQUIRE(*result == *number(1));
 }
 
+TEST_CASE("[interpret] Evaluating (let ((x 5)) x)", "[interpreter]")
+{
+	auto result = interpret("(let ((x 5)) x)");
+
+	REQUIRE(*result == *number(5));
+}
+
+TEST_CASE("[interpret] Evaluating (let ((x 5) (y 3)) (+ x y))", "[interpreter]")
+{
+	auto result = interpret("(let ((x 5) (y 3)) (+ x y))");
+
+	REQUIRE(*result == *number(8));
+}
+
+
 #endif
