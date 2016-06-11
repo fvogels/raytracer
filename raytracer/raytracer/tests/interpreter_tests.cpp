@@ -4,7 +4,7 @@
 #include "scripting/interpreter.h"
 #include "scripting/tokenizer.h"
 #include "scripting/parser.h"
-#include "scripting/values/native-functions.h"
+#include "scripting/standard-library.h"
 #include <sstream>
 
 using namespace scripting;
@@ -41,8 +41,7 @@ static std::shared_ptr<Environment> create_environment()
 {
 	auto result = std::make_shared<Environment>();
 
-	result->bind(Symbol("+"), std::make_shared<scripting::library::Addition>());
-	result->bind(Symbol("*"), std::make_shared<scripting::library::Multiplication>());
+	scripting::add_standard_library_bindings(result.get());
 
 	return result;
 }
@@ -74,74 +73,81 @@ static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& 
 	return std::make_shared<List>(elts);
 }
 
-TEST_CASE("[evaluate] Evaluating 5", "[interpreter]")
+TEST_CASE("[interpret] Evaluating 5", "[interpreter]")
 {
 	auto result = interpret("5");
 
 	REQUIRE(*result == *number(5));
 }
 
-TEST_CASE("[evaluate] Evaluating \"abc\"", "[interpreter]")
+TEST_CASE("[interpret] Evaluating \"abc\"", "[interpreter]")
 {
 	auto result = interpret("\"abc\"");
 
 	REQUIRE(*result == *string("abc"));
 }
 
-TEST_CASE("[evaluate] Evaluating (+ 5 3)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (+ 5 3)", "[interpreter]")
 {
 	auto result = interpret("(+ 5 3)");
 
 	REQUIRE(*result == *number(8));
 }
 
-TEST_CASE("[evaluate] Evaluating (+ 5 3 1)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (+ 5 3 1)", "[interpreter]")
 {
 	auto result = interpret("(+ 5 3 1)");
 
 	REQUIRE(*result == *number(9));
 }
 
-TEST_CASE("[evaluate] Evaluating (+)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (+)", "[interpreter]")
 {
 	auto result = interpret("(+)");
 
 	REQUIRE(*result == *number(0));
 }
 
-TEST_CASE("[evaluate] Evaluating (+ 7)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (+ 7)", "[interpreter]")
 {
 	auto result = interpret("(+ 7)");
 
 	REQUIRE(*result == *number(7));
 }
 
-TEST_CASE("[evaluate] Evaluating (*)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (*)", "[interpreter]")
 {
 	auto result = interpret("(*)");
 
 	REQUIRE(*result == *number(1));
 }
 
-TEST_CASE("[evaluate] Evaluating (* 3)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (* 3)", "[interpreter]")
 {
 	auto result = interpret("(* 3)");
 
 	REQUIRE(*result == *number(3));
 }
 
-TEST_CASE("[evaluate] Evaluating (* 2 7)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (* 2 7)", "[interpreter]")
 {
 	auto result = interpret("(* 2 7)");
 
 	REQUIRE(*result == *number(14));
 }
 
-TEST_CASE("[evaluate] Evaluating (* (+ 5 2) 7)", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (* (+ 5 2) 7)", "[interpreter]")
 {
 	auto result = interpret("(* (+ 5 2) 7)");
 
 	REQUIRE(*result == *number(49));
+}
+
+TEST_CASE("[interpret] Evaluating (-)", "[interpreter]")
+{
+	auto result = interpret("(-)");
+
+	REQUIRE(*result == *number(0));
 }
 
 #endif

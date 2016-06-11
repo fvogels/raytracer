@@ -62,6 +62,17 @@ TEST_CASE("[Parser] Parsing 4", "[Parser]")
 	REQUIRE(parser->end_reached());
 }
 
+TEST_CASE("[Parser] Parsing ~4", "[Parser]")
+{
+	std::istringstream ss("~4");
+	auto parser = create_parser(ss);
+
+	REQUIRE(!parser->end_reached());
+	REQUIRE(*parser->current() == Number(-4));
+	parser->next();
+	REQUIRE(parser->end_reached());
+}
+
 TEST_CASE("[Parser] Parsing 45 12", "[Parser]")
 {
 	std::istringstream ss("45 12");

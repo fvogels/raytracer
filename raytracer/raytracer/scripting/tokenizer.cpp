@@ -189,7 +189,7 @@ tokenize_string_success:
 
 bool scripting::NumberRecognizer::is_valid_start(char c) const
 {
-	return c == '-' || c == '.' || std::isdigit(c);
+	return c == '~' || c == '.' || std::isdigit(c);
 }
 
 std::shared_ptr<Token> scripting::NumberRecognizer::tokenize(Reader<char, Location>& reader) const
@@ -202,7 +202,15 @@ std::shared_ptr<Token> scripting::NumberRecognizer::tokenize(Reader<char, Locati
 	bool encountered_dot = false;
 	auto accumulate = [&buffer](char c) { buffer += c; };
 
-	accumulate(reader.current());
+	if (reader.current() == '~')
+	{
+		accumulate('-');
+	}
+	else
+	{
+		accumulate(reader.current());
+	}
+
 	reader.next();
 
 	while (!reader.end_reached())
