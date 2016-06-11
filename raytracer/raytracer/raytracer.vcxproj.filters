@@ -362,5 +362,8 @@
     <ClInclude Include="scripting\values\boolean.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scripting\values\native-value-adapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

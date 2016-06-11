@@ -320,6 +320,7 @@
     <ClInclude Include="scripting\values\list.h" />
     <ClInclude Include="scripting\values\macro.h" />
     <ClInclude Include="scripting\values\native-functions.h" />
+    <ClInclude Include="scripting\values\native-value-adapter.h" />
     <ClInclude Include="scripting\values\number.h" />
     <ClInclude Include="scripting\values\object.h" />
     <ClInclude Include="scripting\string_reader.h" />
