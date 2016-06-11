@@ -323,5 +323,8 @@
     <ClInclude Include="scripting\values\number.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scripting\values.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

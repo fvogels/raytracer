@@ -309,6 +309,7 @@
     <ClInclude Include="scripting\location.h" />
     <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\standard-library.h" />
+    <ClInclude Include="scripting\values.h" />
     <ClInclude Include="scripting\values\native-functions.h" />
     <ClInclude Include="scripting\values\number.h" />
     <ClInclude Include="scripting\values\object.h" />

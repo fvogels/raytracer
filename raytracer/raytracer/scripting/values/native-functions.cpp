@@ -1,5 +1,5 @@
 #include "scripting/values/native-functions.h"
-#include "scripting/values/number.h"
+#include "scripting/values.h"
 
 using namespace scripting;
 
