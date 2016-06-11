@@ -6,11 +6,6 @@ using namespace scripting;
 scripting::String::String(const std::string& string)
 	: string(string) { }
 
-void scripting::String::accept(ObjectVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 bool scripting::String::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const String*>(&other);

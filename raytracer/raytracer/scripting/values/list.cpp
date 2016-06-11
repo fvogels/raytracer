@@ -9,11 +9,6 @@ scripting::List::List(const std::vector<std::shared_ptr<Object>>& elements)
 	// NOP
 }
 
-void scripting::List::accept(ObjectVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 bool scripting::List::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const List*>(&other);

@@ -7,11 +7,6 @@ using namespace scripting;
 scripting::Symbol::Symbol(const std::string& name)
 	: m_name(name) { }
 
-void scripting::Symbol::accept(ObjectVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 bool scripting::Symbol::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const Symbol*>(&other);

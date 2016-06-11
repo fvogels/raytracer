@@ -6,11 +6,6 @@ using namespace scripting;
 scripting::Number::Number(double value)
 	: m_value(value) { }
 
-void scripting::Number::accept(ObjectVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 bool scripting::Number::operator==(const Object& other) const
 {
 	auto that = dynamic_cast<const Number*>(&other);

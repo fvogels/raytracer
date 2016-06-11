@@ -9,14 +9,11 @@
 
 namespace scripting
 {
-	class ObjectVisitor;
 	class Environment;
-	class Number;
 
 	class Object
 	{
 	public:
-		virtual void accept(ObjectVisitor&) const = 0;
 		virtual void write(std::ostream&) const = 0;
 		virtual bool operator ==(const Object&) const = 0;
 
@@ -31,7 +28,6 @@ namespace scripting
 	public:
 		List(const std::vector<std::shared_ptr<Object>>&);
 
-		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -49,7 +45,6 @@ namespace scripting
 	public:
 		Symbol(const std::string&);
 
-		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -68,7 +63,6 @@ namespace scripting
 	public:
 		String(const std::string&);
 
-		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
@@ -94,22 +88,10 @@ namespace scripting
 	class Function : public Callable
 	{
 	public:
-		void accept(ObjectVisitor&) const override;
-
 		std::shared_ptr<Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<Object>>&) const override;
 
 	protected:
 		virtual std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const = 0;
-	};
-
-	class ObjectVisitor
-	{
-	public:
-		virtual void visit(const String&) = 0;
-		virtual void visit(const Number&) = 0;
-		virtual void visit(const Symbol&) = 0;
-		virtual void visit(const List&) = 0;
-		virtual void visit(const Function&) = 0;
 	};
 
 	bool operator !=(const Object& a, const Object& b);

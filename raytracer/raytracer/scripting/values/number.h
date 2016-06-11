@@ -9,7 +9,6 @@ namespace scripting
 	public:
 		Number(double value);
 
-		void accept(ObjectVisitor&) const override;
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 

@@ -6,11 +6,6 @@
 using namespace scripting;
 
 
-void scripting::Function::accept(ObjectVisitor& visitor) const
-{
-	visitor.visit(*this);
-}
-
 std::shared_ptr<Object> scripting::Function::call(std::shared_ptr<Environment> environment, const std::vector<std::shared_ptr<Object>>& argument_expressions) const
 {
 	std::vector<std::shared_ptr<Object>> argument_values;
