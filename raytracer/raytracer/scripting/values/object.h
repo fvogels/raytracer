@@ -11,6 +11,7 @@ namespace scripting
 {
 	class ObjectVisitor;
 	class Environment;
+	class Number;
 
 	class Object
 	{
@@ -60,22 +61,7 @@ namespace scripting
 		std::string m_name;
 	};
 
-	class Number : public Object
-	{
-	public:
-		Number(double value);
-
-		void accept(ObjectVisitor&) const override;
-		void write(std::ostream&) const override;
-		bool operator ==(const Object&) const override;
-
-		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
-
-		double value() const;
-
-	private:
-		double m_value;
-	};
+	
 
 	class String : public Object
 	{

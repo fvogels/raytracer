@@ -310,6 +310,7 @@
     <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\standard-library.h" />
     <ClInclude Include="scripting\values\native-functions.h" />
+    <ClInclude Include="scripting\values\number.h" />
     <ClInclude Include="scripting\values\object.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />

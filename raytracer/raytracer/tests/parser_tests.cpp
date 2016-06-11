@@ -2,6 +2,7 @@
 
 #include "Catch.h"
 #include "scripting/values/object.h"
+#include "scripting/values/number.h"
 #include "scripting/tokenizer.h"
 #include "scripting/parser.h"
 #include "math/util.h"

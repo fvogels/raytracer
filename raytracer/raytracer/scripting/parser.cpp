@@ -1,4 +1,5 @@
 #include "scripting/parser.h"
+#include "scripting/values/number.h"
 #include <assert.h>
 
 

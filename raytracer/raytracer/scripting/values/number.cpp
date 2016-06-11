@@ -1,4 +1,4 @@
-#include "scripting/values/object.h"
+#include "scripting/values/number.h"
 
 using namespace scripting;
 
