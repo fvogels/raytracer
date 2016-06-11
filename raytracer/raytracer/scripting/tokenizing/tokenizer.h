@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/tokens.h"
+#include "scripting/tokenizing/tokens.h"
 #include "scripting/stream_line_reader.h"
 #include "scripting/string_reader.h"
 #include "scripting/combined_reader.h"

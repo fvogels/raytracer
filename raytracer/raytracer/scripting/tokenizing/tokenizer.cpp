@@ -1,4 +1,4 @@
-#include "scripting/tokenizer.h"
+#include "scripting/tokenizing/tokenizer.h"
 #include "scripting/combined_reader.h"
 #include "scripting/stream_line_reader.h"
 #include "scripting/string_reader.h"

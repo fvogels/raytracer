@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/tokens.h"
+#include "scripting/tokenizing/tokens.h"
 #include "scripting/reader.h"
 #include "scripting/values/object.h"
 #include <memory>

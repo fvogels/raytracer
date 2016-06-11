@@ -1,7 +1,7 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "scripting/tokenizer.h"
+#include "scripting/tokenizing/tokenizer.h"
 #include "math/util.h"
 #include <sstream>
 

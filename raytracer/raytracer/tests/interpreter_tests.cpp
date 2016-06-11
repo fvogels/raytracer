@@ -2,7 +2,7 @@
 
 #include "Catch.h"
 #include "scripting/interpreter.h"
-#include "scripting/tokenizer.h"
+#include "scripting/tokenizing/tokenizer.h"
 #include "scripting/parser.h"
 #include "scripting/values.h"
 #include "scripting/standard-library.h"
