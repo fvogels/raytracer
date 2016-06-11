@@ -144,13 +144,7 @@
     <ClCompile Include="scripting\values\list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\values\string.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scripting\values\symbol.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scripting\values\number.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\values\function.cpp">
@@ -172,9 +166,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\values\special-form.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scripting\values\boolean.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -332,13 +323,7 @@
     <ClInclude Include="scripting\standard-library.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scripting\values\number.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scripting\values.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\values\string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\values\symbol.h">
@@ -357,9 +342,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\values\special-form.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\values\boolean.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\values\native-value-adapter.h">

@@ -248,13 +248,11 @@
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
     <ClCompile Include="scripting\standard-library.cpp" />
-    <ClCompile Include="scripting\values\boolean.cpp" />
     <ClCompile Include="scripting\values\callable.cpp" />
     <ClCompile Include="scripting\values\function.cpp" />
     <ClCompile Include="scripting\values\list.cpp" />
     <ClCompile Include="scripting\values\macro.cpp" />
     <ClCompile Include="scripting\values\native-functions.cpp" />
-    <ClCompile Include="scripting\values\number.cpp" />
     <ClCompile Include="scripting\values\object.cpp" />
     <ClCompile Include="scripting\parser.cpp" />
     <ClCompile Include="scripting\string_reader.cpp" />
@@ -262,7 +260,6 @@
     <ClCompile Include="scripting\tokenizer.cpp" />
     <ClCompile Include="scripting\tokens.cpp" />
     <ClCompile Include="scripting\values\special-form.cpp" />
-    <ClCompile Include="scripting\values\string.cpp" />
     <ClCompile Include="scripting\values\symbol.cpp" />
     <ClCompile Include="tests\combined_reader_tests.cpp" />
     <ClCompile Include="tests\interpreter_tests.cpp" />
@@ -314,14 +311,12 @@
     <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\standard-library.h" />
     <ClInclude Include="scripting\values.h" />
-    <ClInclude Include="scripting\values\boolean.h" />
     <ClInclude Include="scripting\values\callable.h" />
     <ClInclude Include="scripting\values\function.h" />
     <ClInclude Include="scripting\values\list.h" />
     <ClInclude Include="scripting\values\macro.h" />
     <ClInclude Include="scripting\values\native-functions.h" />
     <ClInclude Include="scripting\values\native-value-adapter.h" />
-    <ClInclude Include="scripting\values\number.h" />
     <ClInclude Include="scripting\values\object.h" />
     <ClInclude Include="scripting\string_reader.h" />
     <ClInclude Include="scripting\stream_line_reader.h" />
@@ -329,7 +324,6 @@
     <ClInclude Include="scripting\tokenizer.h" />
     <ClInclude Include="scripting\tokens.h" />
     <ClInclude Include="scripting\values\special-form.h" />
-    <ClInclude Include="scripting\values\string.h" />
     <ClInclude Include="scripting\values\symbol.h" />
     <ClInclude Include="util\array.h" />
     <ClInclude Include="util\maybe.h" />

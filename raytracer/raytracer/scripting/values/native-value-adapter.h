@@ -1,10 +1,10 @@
 #pragma once
 
-#include "scripting/values/native-value-adapter.h"
+#include "scripting/environment.h"
 
 namespace scripting
 {
-	template<typename T>
+	template<typename T, typename U>
 	class NativeValueAdapter : public scripting::Object
 	{
 	public:
@@ -15,7 +15,12 @@ namespace scripting
 
 		bool operator ==(const Object& object) const override
 		{
-			return m_value == value_cast<NativeValueAdapter<T>>(object).m_value;
+			return m_value == value_cast<NativeValueAdapter<T, U>>(object).m_value;
+		}
+
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override
+		{
+			return std::make_shared<U>(this->m_value);
 		}
 
 		T value() const { return m_value; }
@@ -23,4 +28,16 @@ namespace scripting
 	protected:
 		T m_value;
 	};
+
+#ifdef DEFINE_NATIVE_VALUE_CLASS
+#error DEFINE_NATIVE_VALUE_CLASS already defined
+#else
+#define DEFINE_NATIVE_VALUE_CLASS(T, U)  class U : public scripting::NativeValueAdapter<T, U> { using NativeValueAdapter<T, U>::NativeValueAdapter; };
+
+	DEFINE_NATIVE_VALUE_CLASS(double, Number)
+	DEFINE_NATIVE_VALUE_CLASS(bool, Boolean)
+	DEFINE_NATIVE_VALUE_CLASS(std::string, String)
+
+#undef DEFINE_NATIVE_VALUE_CLASS
+#endif
 }
