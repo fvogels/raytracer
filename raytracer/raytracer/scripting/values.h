@@ -2,3 +2,4 @@
 
 #include "scripting/values/object.h"
 #include "scripting/values/number.h"
+#include "scripting/values/string.h"
