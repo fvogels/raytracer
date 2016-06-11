@@ -248,6 +248,7 @@
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
     <ClCompile Include="scripting\standard-library.cpp" />
+    <ClCompile Include="scripting\values\boolean.cpp" />
     <ClCompile Include="scripting\values\callable.cpp" />
     <ClCompile Include="scripting\values\function.cpp" />
     <ClCompile Include="scripting\values\list.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\standard-library.h" />
     <ClInclude Include="scripting\values.h" />
+    <ClInclude Include="scripting\values\boolean.h" />
     <ClInclude Include="scripting\values\callable.h" />
     <ClInclude Include="scripting\values\function.h" />
     <ClInclude Include="scripting\values\list.h" />
