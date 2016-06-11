@@ -94,10 +94,12 @@ static std::shared_ptr<Object> vector(double x, double y, double z)
 
 TEST("5", number(5));
 TEST("\"abc\"", string("abc"));
-TEST("(+)", number(0));
 TEST("(+ 7)", number(7));
 TEST("(+ 5 3)", number(8));
 TEST("(+ 5 3 1)", number(9));
+TEST("(+ (@ 1 2 3) (-> 4 5 6))", point(5, 7, 9));
+TEST("(+ (-> 1 2 3) (-> 4 5 6))", vector(5, 7, 9));
+TEST("(+ (-> 1 2 3) (@ 4 5 6))", point(5, 7, 9));
 TEST("(*)", number(1));
 TEST("(* 3)", number(3));
 TEST("(* 2 7)", number(14));

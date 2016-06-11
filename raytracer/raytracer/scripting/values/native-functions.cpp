@@ -17,15 +17,56 @@ void for_each(const std::vector<std::shared_ptr<Object>>& arguments, std::functi
 }
 
 std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
-{
-	double total = 0;
-
-	for_each<Number>(arguments, [&total](std::shared_ptr<Number> number)
+{	
+	if (arguments.size() == 0)
 	{
-		total += number->value();
-	});
+		throw std::runtime_error("Addition expects at least one operand");
+	}
+	else
+	{
+		std::shared_ptr<Object> total = arguments[0];
 
-	return std::make_shared<Number>(total);
+		for (size_t i = 1; i < arguments.size(); ++i)
+		{
+			auto left = total;
+			auto right = arguments[i];
+
+			if (has_value_type<Number>(left) && has_value_type<Number>(right))
+			{
+				auto n1 = value_cast<Number>(left);
+				auto n2 = value_cast<Number>(right);
+
+				total = std::make_shared<Number>(n1->value() + n2->value());
+			}
+			else if (has_value_type<Vector>(left) && has_value_type<Vector>(right))
+			{
+				auto u = value_cast<Vector>(left);
+				auto v = value_cast<Vector>(right);
+
+				total = std::make_shared<Vector>(u->value() + v->value());
+			}
+			else if (has_value_type<Vector>(left) && has_value_type<Point>(right))
+			{
+				auto v = value_cast<Vector>(left);
+				auto p = value_cast<Point>(right);
+
+				total = std::make_shared<Point>(v->value() + p->value());
+			}
+			else if (has_value_type<Point>(left) && has_value_type<Vector>(right))
+			{
+				auto p = value_cast<Point>(left);
+				auto v = value_cast<Vector>(right);
+
+				total = std::make_shared<Point>(p->value() + v->value());
+			}
+			else
+			{
+				throw std::runtime_error("Incompatible types for addition");
+			}
+		}
+
+		return total;
+	}
 }
 
 std::shared_ptr<Object> scripting::library::Subtraction::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
