@@ -271,3 +271,16 @@ std::shared_ptr<Token> scripting::SymbolRecognizer::tokenize(Reader<char, Locati
 
 	return std::make_shared<SymbolToken>(start_location, buffer);
 }
+
+std::shared_ptr<Tokenizer> scripting::create_tokenizer(std::istream& in)
+{
+	std::vector<std::shared_ptr<const TokenRecognizer>> recognizers{
+		std::make_shared<LeftParenthesisRecognizer>(),
+		std::make_shared<RightParenthesisRecognizer>(),
+		std::make_shared<StringRecognizer>(),
+		std::make_shared<NumberRecognizer>(),
+		std::make_shared<SymbolRecognizer>()
+	};
+
+	return std::make_shared<Tokenizer>(in, recognizers);
+}

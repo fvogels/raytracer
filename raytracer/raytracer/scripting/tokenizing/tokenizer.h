@@ -76,4 +76,6 @@ namespace scripting
 		void skip_comments();
 		void skip_whitespace_and_comments();
 	};
+
+	std::shared_ptr<Tokenizer> create_tokenizer(std::istream&);
 }

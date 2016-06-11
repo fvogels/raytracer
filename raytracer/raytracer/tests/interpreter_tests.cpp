@@ -10,19 +10,6 @@
 
 using namespace scripting;
 
-static std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> create_tokenizer(std::istream& in)
-{
-	std::vector<std::shared_ptr<const TokenRecognizer>> recognizers{
-		std::make_shared<LeftParenthesisRecognizer>(),
-		std::make_shared<RightParenthesisRecognizer>(),
-		std::make_shared<StringRecognizer>(),
-		std::make_shared<NumberRecognizer>(),
-		std::make_shared<SymbolRecognizer>()
-	};
-
-	return std::make_shared<Tokenizer>(in, recognizers);
-}
-
 static std::shared_ptr<Parser> create_parser(std::istream& ss)
 {
 	auto tokenizer = create_tokenizer(ss);
