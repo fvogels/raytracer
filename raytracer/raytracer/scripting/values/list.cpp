@@ -65,6 +65,11 @@ void scripting::List::write(std::ostream& out) const
 	out << ')';
 }
 
+std::vector<std::shared_ptr<Object>> scripting::List::elements() const
+{
+	return m_elements;
+}
+
 size_t scripting::List::size() const 
 {
 	return m_elements.size(); 

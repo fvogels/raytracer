@@ -21,4 +21,7 @@ namespace scripting
 		struct Impl;
 		std::unique_ptr<Impl> m_pimpl;
 	};
+
+	// Extends given environment with fresh frame, yielding new environment
+	std::shared_ptr<Environment> extend(std::shared_ptr<Environment>);
 }

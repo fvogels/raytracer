@@ -8,4 +8,10 @@ namespace scripting
 	{
 
 	};
+
+	class Let : public SpecialForm
+	{
+	public:
+		std::shared_ptr<Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<Object>>&) const override;
+	};
 }

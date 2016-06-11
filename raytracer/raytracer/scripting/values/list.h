@@ -14,6 +14,7 @@ namespace scripting
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
 
+		std::vector<std::shared_ptr<Object>> elements() const;
 		size_t size() const;
 		std::shared_ptr<const Object> nth_element(size_t index) const;
 

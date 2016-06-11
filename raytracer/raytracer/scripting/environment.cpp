@@ -77,7 +77,6 @@ void scripting::Frame::bind(const Symbol& symbol, std::shared_ptr<Object> object
 	bindings[symbol.name()] = object;
 }
 
-
 scripting::Environment::Impl::Impl(std::shared_ptr<Frame> frame, std::shared_ptr<Environment> parent)
 	: frame(frame), parent(parent)
 {
@@ -114,4 +113,9 @@ std::shared_ptr<Object> scripting::Environment::lookup(const Symbol& symbol) con
 void scripting::Environment::bind(const Symbol& symbol, std::shared_ptr<Object> value)
 {
 	return m_pimpl->bind(symbol, value);
+}
+
+std::shared_ptr<Environment> scripting::extend(std::shared_ptr<Environment> environment)
+{
+	return std::make_shared<Environment>(environment);
 }
