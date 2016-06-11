@@ -247,6 +247,7 @@
     <ClCompile Include="rendering\single-sampler.cpp" />
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
+    <ClCompile Include="scripting\standard-library.cpp" />
     <ClCompile Include="scripting\values\function.cpp" />
     <ClCompile Include="scripting\values\list.cpp" />
     <ClCompile Include="scripting\values\native-functions.cpp" />
@@ -307,6 +308,7 @@
     <ClInclude Include="scripting\interpreter.h" />
     <ClInclude Include="scripting\location.h" />
     <ClInclude Include="scripting\parser.h" />
+    <ClInclude Include="scripting\standard-library.h" />
     <ClInclude Include="scripting\values\native-functions.h" />
     <ClInclude Include="scripting\values\object.h" />
     <ClInclude Include="scripting\string_reader.h" />
