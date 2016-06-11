@@ -82,153 +82,26 @@ static std::shared_ptr<Object> boolean(bool b)
 #define TEST(sexpr, expected) TEST_CASE("[interpret] Evaluating " #sexpr, "[interpreter]") { auto result = interpret(sexpr); REQUIRE(*result == *expected); }
 
 
-TEST_CASE("[interpret] Evaluating 5", "[interpreter]")
-{
-	auto result = interpret("5");
-
-	REQUIRE(*result == *number(5));
-}
-
-TEST_CASE("[interpret] Evaluating \"abc\"", "[interpreter]")
-{
-	auto result = interpret("\"abc\"");
-
-	REQUIRE(*result == *string("abc"));
-}
-
-TEST_CASE("[interpret] Evaluating (+ 5 3)", "[interpreter]")
-{
-	auto result = interpret("(+ 5 3)");
-
-	REQUIRE(*result == *number(8));
-}
-
-TEST_CASE("[interpret] Evaluating (+ 5 3 1)", "[interpreter]")
-{
-	auto result = interpret("(+ 5 3 1)");
-
-	REQUIRE(*result == *number(9));
-}
-
-TEST_CASE("[interpret] Evaluating (+)", "[interpreter]")
-{
-	auto result = interpret("(+)");
-
-	REQUIRE(*result == *number(0));
-}
-
-TEST_CASE("[interpret] Evaluating (+ 7)", "[interpreter]")
-{
-	auto result = interpret("(+ 7)");
-
-	REQUIRE(*result == *number(7));
-}
-
-TEST_CASE("[interpret] Evaluating (*)", "[interpreter]")
-{
-	auto result = interpret("(*)");
-
-	REQUIRE(*result == *number(1));
-}
-
-TEST_CASE("[interpret] Evaluating (* 3)", "[interpreter]")
-{
-	auto result = interpret("(* 3)");
-
-	REQUIRE(*result == *number(3));
-}
-
-TEST_CASE("[interpret] Evaluating (* 2 7)", "[interpreter]")
-{
-	auto result = interpret("(* 2 7)");
-
-	REQUIRE(*result == *number(14));
-}
-
-TEST_CASE("[interpret] Evaluating (* (+ 5 2) 7)", "[interpreter]")
-{
-	auto result = interpret("(* (+ 5 2) 7)");
-
-	REQUIRE(*result == *number(49));
-}
-
-TEST_CASE("[interpret] Evaluating (-)", "[interpreter]")
-{
-	auto result = interpret("(-)");
-
-	REQUIRE(*result == *number(0));
-}
-
-TEST_CASE("[interpret] Evaluating (- 5)", "[interpreter]")
-{
-	auto result = interpret("(- 5)");
-
-	REQUIRE(*result == *number(-5));
-}
-
-TEST_CASE("[interpret] Evaluating (- 5 3)", "[interpreter]")
-{
-	auto result = interpret("(- 5 3)");
-
-	REQUIRE(*result == *number(2));
-}
-
-TEST_CASE("[interpret] Evaluating (- 5 3 1)", "[interpreter]")
-{
-	auto result = interpret("(- 5 3 1)");
-
-	REQUIRE(*result == *number(1));
-}
-
-TEST_CASE("[interpret] Evaluating (let ((x 5)) x)", "[interpreter]")
-{
-	auto result = interpret("(let ((x 5)) x)");
-
-	REQUIRE(*result == *number(5));
-}
-
-TEST_CASE("[interpret] Evaluating (let ((x 5) (y 3)) (+ x y))", "[interpreter]")
-{
-	auto result = interpret("(let ((x 5) (y 3)) (+ x y))");
-
-	REQUIRE(*result == *number(8));
-}
-
-TEST_CASE("[interpret] Evaluating true", "[interpreter]")
-{
-	auto result = interpret("true");
-
-	REQUIRE(*result == *boolean(true));
-}
-
-TEST_CASE("[interpret] Evaluating false", "[interpreter]")
-{
-	auto result = interpret("false");
-
-	REQUIRE(*result == *boolean(false));
-}
-
-TEST_CASE("[interpret] Evaluating (= 5 3)", "[interpreter]")
-{
-	auto result = interpret("(= 5 3)");
-
-	REQUIRE(*result == *boolean(false));
-}
-
-TEST_CASE("[interpret] Evaluating (= 5 5)", "[interpreter]")
-{
-	auto result = interpret("(= 5 5)");
-
-	REQUIRE(*result == *boolean(true));
-}
-
-TEST_CASE("[interpret] Evaluating (= (+ 3 2) 5)", "[interpreter]")
-{
-	auto result = interpret("(= (+ 3 2) 5)");
-
-	REQUIRE(*result == *boolean(true));
-}
-
-TEST("(<)", boolean(true));
+TEST("5", number(5));
+TEST("\"abc\"", string("abc"));
+TEST("(+)", number(0));
+TEST("(+ 7)", number(7));
+TEST("(+ 5 3)", number(8));
+TEST("(+ 5 3 1)", number(9));
+TEST("(*)", number(1));
+TEST("(* 3)", number(3));
+TEST("(* 2 7)", number(14));
+TEST("(* (+ 5 2) 7)", number(49));
+TEST("(-)", number(0));
+TEST("(- 5)", number(-5));
+TEST("(- 5 3)", number(2));
+TEST("(- 5 3 1)", number(1));
+TEST("(let ((x 5)) x)", number(5));
+TEST("(let ((x 5) (y 3)) (+ x y))", number(8));
+TEST("true", boolean(true));
+TEST("false", boolean(false));
+TEST("(= 5 3)", boolean(false));
+TEST("(= 5 5)", boolean(true));
+TEST("(= (+ 3 2) 5)", boolean(true));
 
 #endif
