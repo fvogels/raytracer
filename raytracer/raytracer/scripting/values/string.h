@@ -8,7 +8,7 @@ namespace scripting
 	class String : public NativeValueAdapter<std::string>
 	{
 	public:
-		String(const std::string&);
+		using NativeValueAdapter<std::string>::NativeValueAdapter;
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
 	};

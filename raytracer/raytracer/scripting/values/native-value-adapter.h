@@ -8,6 +8,9 @@ namespace scripting
 	class NativeValueAdapter : public scripting::Object
 	{
 	public:
+		NativeValueAdapter(T value)
+			: m_value(value) { }
+
 		void write(std::ostream& out) const override { out << m_value; }
 
 		bool operator ==(const Object& object) const override
@@ -18,9 +21,6 @@ namespace scripting
 		T value() const { return m_value; }
 
 	protected:
-		NativeValueAdapter(T value)
-			: m_value(value) { }
-
 		T m_value;
 	};
 }

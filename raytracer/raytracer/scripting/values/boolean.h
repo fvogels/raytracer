@@ -9,7 +9,7 @@ namespace scripting
 	class Boolean : public scripting::NativeValueAdapter<bool>
 	{
 	public:
-		Boolean(bool);
+		using NativeValueAdapter<bool>::NativeValueAdapter;
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
 	};
