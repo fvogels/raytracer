@@ -29,5 +29,37 @@ namespace scripting
 		protected:
 			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
+
+		class Comparison : public Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+
+			virtual bool compare(double, double) const = 0;
+		};
+
+		class LessThan : public Comparison
+		{
+		protected:
+			bool compare(double, double) const override;
+		};
+
+		class GreaterThan : public Comparison
+		{
+		protected:
+			bool compare(double, double) const override;
+		};
+
+		class NotLessThan : public Comparison
+		{
+		protected:
+			bool compare(double, double) const override;
+		};
+
+		class NotGreaterThan : public Comparison
+		{
+		protected:
+			bool compare(double, double) const override;
+		};
 	}
 }

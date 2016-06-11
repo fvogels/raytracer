@@ -52,4 +52,12 @@ namespace scripting
 			throw std::runtime_error("type error");
 		}
 	}
+
+	template<typename T>
+	std::shared_ptr<T> value_cast(std::shared_ptr<Object> object)
+	{
+		return with_value_type<T, std::shared_ptr<T>>(object, [](std::shared_ptr<T> t) {
+			return t;
+		} );
+	}
 }

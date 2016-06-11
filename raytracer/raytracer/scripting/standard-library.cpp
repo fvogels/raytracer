@@ -21,6 +21,10 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND("-", Subtraction);
 	BIND("*", Multiplication);
 	BIND("=", Equality);
+	BIND("<", LessThan);
+	BIND(">", GreaterThan);
+	BIND("<=", NotGreaterThan);
+	BIND(">=", NotLessThan);
 
 #undef BIND
 #endif

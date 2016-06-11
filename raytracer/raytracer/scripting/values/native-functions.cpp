@@ -93,3 +93,49 @@ std::shared_ptr<Object> scripting::library::Equality::perform(const std::vector<
 		return std::make_shared<Boolean>(true);
 	}
 }
+
+std::shared_ptr<Object> scripting::library::Comparison::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() == 0)
+	{
+		return std::make_shared<Boolean>(true);
+	}
+	else
+	{
+		double last = value_cast<Number>(arguments[0])->value();
+
+		for (size_t i = 1; i < arguments.size(); ++i)
+		{
+			double current = value_cast<Number>(arguments[i])->value();
+
+			if (!compare(last, current))
+			{
+				return std::make_shared<Boolean>(false);
+			}
+
+			last = current;
+		}
+
+		return std::make_shared<Boolean>(true);
+	}
+}
+
+bool scripting::library::LessThan::compare(double x, double y) const
+{
+	return x < y;
+}
+
+bool scripting::library::GreaterThan::compare(double x, double y) const
+{
+	return x > y;
+}
+
+bool scripting::library::NotLessThan::compare(double x, double y) const
+{
+	return x >= y;
+}
+
+bool scripting::library::NotGreaterThan::compare(double x, double y) const
+{
+	return x <= y;
+}
