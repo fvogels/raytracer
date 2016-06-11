@@ -27,6 +27,8 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND("<=", NotGreaterThan);
 	BIND(">=", NotLessThan);
 	BIND("not", Negation);
+	BIND("@", CreatePoint);
+	BIND("->", CreateVector);
 
 #undef BIND
 #endif

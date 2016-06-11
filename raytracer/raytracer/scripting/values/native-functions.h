@@ -67,5 +67,17 @@ namespace scripting
 		protected:
 			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
+
+		class CreatePoint : public Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+		};
+
+		class CreateVector : public Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+		};
 	}
 }
