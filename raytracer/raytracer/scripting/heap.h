@@ -2,6 +2,7 @@
 
 #include "scripting/objects/object.h"
 #include <map>
+#include <memory>
 
 
 namespace scripting

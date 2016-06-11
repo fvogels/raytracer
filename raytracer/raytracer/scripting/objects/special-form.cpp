@@ -6,7 +6,7 @@
 using namespace scripting;
 
 
-std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting::Environment> environment, const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() == 0)
 	{
@@ -18,11 +18,11 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 		auto body = std::vector<std::shared_ptr<Object>>(arguments.begin() + 1, arguments.end());
 		auto extended_environment = extend(environment);
 
-		with_value_type<List, void>(bindings, [environment, extended_environment](std::shared_ptr<List> binding_list)
+		with_value_type<List, void>(bindings, [environment, extended_environment, heap](std::shared_ptr<List> binding_list)
 		{
 			for (auto binding_pair : binding_list->elements())
 			{
-				with_value_type<List, void>(binding_pair, [environment, extended_environment](std::shared_ptr<List> pair)
+				with_value_type<List, void>(binding_pair, [environment, extended_environment, heap](std::shared_ptr<List> pair)
 				{
 					if (pair->elements().size() != 2)
 					{
@@ -30,7 +30,7 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 					}
 					else
 					{
-						auto value = pair->elements()[1]->evaluate(environment);
+						auto value = pair->elements()[1]->evaluate(environment, heap);
 
 						with_value_type<Symbol, void>(pair->elements()[0], [extended_environment, value](std::shared_ptr<Symbol> symbol)
 						{
@@ -45,14 +45,14 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 
 		for (auto expr : body)
 		{
-			last_result = expr->evaluate(extended_environment);
+			last_result = expr->evaluate(extended_environment, heap);
 		}
 
 		return last_result;
 	}
 }
 
-std::shared_ptr<Object> scripting::library::If::call(std::shared_ptr<scripting::Environment> environment, const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::If::call(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 2 && arguments.size() != 3)
 	{
@@ -60,17 +60,17 @@ std::shared_ptr<Object> scripting::library::If::call(std::shared_ptr<scripting::
 	}
 	else
 	{
-		auto condition = value_cast<Boolean>(arguments[0]->evaluate(environment));
+		auto condition = value_cast<Boolean>(arguments[0]->evaluate(environment, heap));
 
 		if (condition->value())
 		{
-			return arguments[1]->evaluate(environment);
+			return arguments[1]->evaluate(environment, heap);
 		}
 		else
 		{
 			if (arguments.size() == 3)
 			{
-				return arguments[2]->evaluate(environment);
+				return arguments[2]->evaluate(environment, heap);
 			}
 			else
 			{

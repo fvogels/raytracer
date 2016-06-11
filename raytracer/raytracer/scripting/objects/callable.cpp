@@ -3,7 +3,7 @@
 using namespace scripting;
 
 
-std::shared_ptr<Object> scripting::Callable::evaluate(std::shared_ptr<scripting::Environment>)
+std::shared_ptr<Object> scripting::Callable::evaluate(std::shared_ptr<scripting::Environment>, std::shared_ptr<scripting::Heap>)
 {
 	throw std::runtime_error("Cannot evaluate callable object");
 }

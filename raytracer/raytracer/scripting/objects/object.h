@@ -1,6 +1,5 @@
 #pragma once
 
-#include "scripting/location.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -10,6 +9,7 @@
 namespace scripting
 {
 	class Environment;
+	class Heap;
 
 	class Object
 	{
@@ -17,7 +17,7 @@ namespace scripting
 		virtual void write(std::ostream&) const = 0;
 		virtual bool operator ==(const Object&) const = 0;
 
-		virtual std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) = 0;
+		virtual std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>, std::shared_ptr<scripting::Heap>) = 0;
 
 	protected:
 		Object();

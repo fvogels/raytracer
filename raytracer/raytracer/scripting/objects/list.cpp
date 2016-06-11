@@ -80,7 +80,7 @@ std::shared_ptr<const Object> scripting::List::nth_element(size_t index) const
 	return m_elements[index]; 
 }
 
-std::shared_ptr<Object> scripting::List::evaluate(std::shared_ptr<scripting::Environment> environment)
+std::shared_ptr<Object> scripting::List::evaluate(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap> heap)
 {
 	if (m_elements.size() == 0)
 	{
@@ -88,7 +88,7 @@ std::shared_ptr<Object> scripting::List::evaluate(std::shared_ptr<scripting::Env
 	}
 	else
 	{
-		auto evaluated_head = m_elements[0]->evaluate(environment);
+		auto evaluated_head = m_elements[0]->evaluate(environment, heap);
 
 		std::vector<std::shared_ptr<Object>> argument_expressions;
 		for (size_t i = 1; i < m_elements.size(); ++i)
@@ -96,9 +96,9 @@ std::shared_ptr<Object> scripting::List::evaluate(std::shared_ptr<scripting::Env
 			argument_expressions.push_back(m_elements[i]);
 		}
 
-		return with_value_type<Callable, std::shared_ptr<Object>>(evaluated_head, [environment, &argument_expressions](std::shared_ptr<Callable> callable)
+		return with_value_type<Callable, std::shared_ptr<Object>>(evaluated_head, [environment, heap, &argument_expressions](std::shared_ptr<Callable> callable)
 		{
-			return callable->call(environment, argument_expressions);
+			return callable->call(environment, heap, argument_expressions);
 		});
 	}
 }

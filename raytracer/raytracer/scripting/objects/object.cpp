@@ -18,4 +18,3 @@ std::ostream& scripting::operator <<(std::ostream& out, const Object& object)
 
 	return out;
 }
-

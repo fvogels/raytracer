@@ -3,7 +3,7 @@
 
 using namespace scripting;
 
-std::shared_ptr<Object> scripting::evaluate(std::shared_ptr<Object> value, std::shared_ptr<Environment> environment)
+std::shared_ptr<Object> scripting::evaluate(std::shared_ptr<Object> value, std::shared_ptr<Environment> environment, std::shared_ptr<scripting::Heap> heap)
 {
-	return value->evaluate(environment);
+	return value->evaluate(environment, heap);
 }

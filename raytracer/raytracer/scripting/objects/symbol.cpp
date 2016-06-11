@@ -19,7 +19,7 @@ void scripting::Symbol::write(std::ostream& out) const
 	out << this->m_name;
 }
 
-std::shared_ptr<Object> scripting::Symbol::evaluate(std::shared_ptr<scripting::Environment> environment)
+std::shared_ptr<Object> scripting::Symbol::evaluate(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap>)
 {
 	return environment->lookup(*this);
 }

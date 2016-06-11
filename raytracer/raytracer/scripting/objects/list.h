@@ -12,7 +12,7 @@ namespace scripting
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
 
-		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>, std::shared_ptr<scripting::Heap>) override;
 
 		std::vector<std::shared_ptr<Object>> elements() const;
 		size_t size() const;
