@@ -23,10 +23,6 @@ namespace scripting
 		Object();
 	};
 
-	
-
-	
-
 	bool operator !=(const Object& a, const Object& b);
 	std::ostream& operator <<(std::ostream&, const Object&);
 
