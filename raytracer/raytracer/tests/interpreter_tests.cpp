@@ -98,6 +98,7 @@ TEST("(- 5 3)", number(2));
 TEST("(- 5 3 1)", number(1));
 TEST("(let ((x 5)) x)", number(5));
 TEST("(let ((x 5) (y 3)) (+ x y))", number(8));
+TEST("(let ((x (+ 3 5)) (y 3)) (+ x y))", number(11));
 TEST("true", boolean(true));
 TEST("false", boolean(false));
 TEST("(= 5 3)", boolean(false));
@@ -131,5 +132,11 @@ TEST("(>= 7 9)", boolean(false));
 TEST("(>= 7 9 8)", boolean(false));
 TEST("(not true)", boolean(false));
 TEST("(not false)", boolean(true));
+TEST("(if true 1 0)", number(1));
+TEST("(if true 1)", number(1));
+TEST("(if false 1 2)", number(2));
+TEST("(if true (+ 1 2) 4)", number(3));
+TEST("(if false (+ 1 2) (* 2 2))", number(4));
+TEST("(if (> 5 8) (+ 1 2) (* 2 2))", number(4));
 
 #endif
