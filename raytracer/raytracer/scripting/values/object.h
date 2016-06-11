@@ -29,29 +29,29 @@ namespace scripting
 	template<typename T>
 	bool has_value_type(const Object& object)
 	{
-		return dynamic_cast<const Object*>(&object) != nullptr;
+		return dynamic_cast<const T*>(&object) != nullptr;
 	}
 
 	template<typename T>
 	bool has_value_type(std::shared_ptr<const Object> object)
 	{
-		return std::dynamic_pointer_cast<const Object>(object) != nullptr;
+		return std::dynamic_pointer_cast<const T>(object) != nullptr;
 	}
 
-	//template<typename T, typename R>
-	//R with_value_type(Object& object, std::function<R(T&)> function)
-	//{
-	//	auto converted = dynamic_cast<T&>(object);
+	template<typename T, typename R>
+	R with_value_type(Object& object, std::function<R(T&)> function)
+	{
+		auto converted = dynamic_cast<T&>(object);
 
-	//	if (converted != nullptr)
-	//	{
-	//		return function(converted);
-	//	}
-	//	else
-	//	{
-	//		throw std::runtime_error("type error");
-	//	}
-	//}
+		if (converted != nullptr)
+		{
+			return function(converted);
+		}
+		else
+		{
+			throw std::runtime_error("type error");
+		}
+	}
 
 	template<typename T, typename R>
 	R with_value_type(const Object& object, std::function<R(const T&)> function)
