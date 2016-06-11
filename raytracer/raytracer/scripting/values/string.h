@@ -17,6 +17,6 @@ namespace scripting
 		std::string value() const;
 
 	private:
-		std::string string;
+		std::string m_value;
 	};
 }
