@@ -189,3 +189,64 @@ std::shared_ptr<Object> scripting::library::CreateVector::perform(const std::vec
 		return std::make_shared<Vector>(vector);
 	}
 }
+
+std::shared_ptr<Object> scripting::library::GetXYZ::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() != 1)
+	{
+		throw std::runtime_error("requires 1 argument");
+	}
+	else
+	{
+		auto argument = arguments[0];
+
+		if (has_value_type<Point>(argument))
+		{
+			auto point = value_cast<Point>(argument)->value();
+			auto result = get(point);
+			
+			return std::make_shared<Number>(result);
+		}
+		else if (has_value_type<Vector>(argument))
+		{
+			auto vector = value_cast<Vector>(argument)->value();
+			auto result = get(vector);
+
+			return std::make_shared<Number>(result);
+		}
+		else
+		{
+			throw std::runtime_error("Invalid type");
+		}
+	}
+}
+
+double scripting::library::GetX::get(const math::Point3D& p) const
+{
+	return p.x;
+}
+
+double scripting::library::GetX::get(const math::Vector3D& v) const
+{
+	return v.x;
+}
+
+double scripting::library::GetY::get(const math::Point3D& p) const
+{
+	return p.y;
+}
+
+double scripting::library::GetY::get(const math::Vector3D& v) const
+{
+	return v.y;
+}
+
+double scripting::library::GetZ::get(const math::Point3D& p) const
+{
+	return p.z;
+}
+
+double scripting::library::GetZ::get(const math::Vector3D& v) const
+{
+	return v.z;
+}

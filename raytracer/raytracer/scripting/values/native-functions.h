@@ -1,6 +1,8 @@
 #pragma once
 
 #include "scripting/values/function.h"
+#include "math/vector3d.h"
+#include "math/point3d.h"
 
 namespace scripting
 {
@@ -78,6 +80,36 @@ namespace scripting
 		{
 		protected:
 			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+		};
+
+		class GetXYZ : public Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+
+			virtual double get(const math::Point3D&) const = 0;
+			virtual double get(const math::Vector3D&) const = 0;
+		};
+
+		class GetX : public GetXYZ
+		{
+		protected:
+			double get(const math::Point3D&) const override;
+			double get(const math::Vector3D&) const override;
+		};
+
+		class GetY : public GetXYZ
+		{
+		protected:
+			double get(const math::Point3D&) const override;
+			double get(const math::Vector3D&) const override;
+		};
+
+		class GetZ : public GetXYZ
+		{
+		protected:
+			double get(const math::Point3D&) const override;
+			double get(const math::Vector3D&) const override;
 		};
 	}
 }

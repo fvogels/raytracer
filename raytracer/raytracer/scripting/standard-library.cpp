@@ -29,6 +29,9 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND("not", Negation);
 	BIND("@", CreatePoint);
 	BIND("->", CreateVector);
+	BIND("x", GetX);
+	BIND("y", GetY);
+	BIND("z", GetZ);
 
 #undef BIND
 #endif
