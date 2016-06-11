@@ -153,4 +153,15 @@ TEST_CASE("[evaluate] Evaluating (* 2 7)", "[interpreter]")
 	});
 }
 
+TEST_CASE("[evaluate] Evaluating (* (+ 5 2) 7)", "[interpreter]")
+{
+	auto result = interpret("(* (+ 5 2) 7)");
+
+	REQUIRE(has_value_type<Number>(result));
+
+	with_value_type<Number, void>(result, [](std::shared_ptr<const Number> number) {
+		REQUIRE(number->value() == Approx(49));
+	});
+}
+
 #endif
