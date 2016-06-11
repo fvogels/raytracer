@@ -251,6 +251,7 @@
     <ClCompile Include="scripting\values\callable.cpp" />
     <ClCompile Include="scripting\values\function.cpp" />
     <ClCompile Include="scripting\values\list.cpp" />
+    <ClCompile Include="scripting\values\macro.cpp" />
     <ClCompile Include="scripting\values\native-functions.cpp" />
     <ClCompile Include="scripting\values\number.cpp" />
     <ClCompile Include="scripting\values\object.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="scripting\values\callable.h" />
     <ClInclude Include="scripting\values\function.h" />
     <ClInclude Include="scripting\values\list.h" />
+    <ClInclude Include="scripting\values\macro.h" />
     <ClInclude Include="scripting\values\native-functions.h" />
     <ClInclude Include="scripting\values\number.h" />
     <ClInclude Include="scripting\values\object.h" />
