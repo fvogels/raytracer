@@ -1,4 +1,4 @@
-#include "scripting/values/object.h"
+#include "scripting/values/function.h"
 #include "scripting/interpreter.h"
 #include "scripting/environment.h"
 #include <algorithm>

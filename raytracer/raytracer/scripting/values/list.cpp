@@ -1,4 +1,5 @@
 #include "scripting/values/list.h"
+#include "scripting/values/callable.h"
 
 using namespace scripting;
 

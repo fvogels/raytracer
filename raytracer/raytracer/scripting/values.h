@@ -5,3 +5,4 @@
 #include "scripting/values/string.h"
 #include "scripting/values/symbol.h"
 #include "scripting/values/list.h"
+#include "scripting/values/function.h"

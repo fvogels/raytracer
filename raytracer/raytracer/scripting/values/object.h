@@ -25,25 +25,7 @@ namespace scripting
 
 	
 
-	class Callable : public Object
-	{
-	public:
-		void write(std::ostream& out) const override { out << "<Callable>"; }
-		bool operator ==(const Object&) const override { return false; }
-
-		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
-
-		virtual std::shared_ptr<Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<Object>>&) const = 0;
-	};
-
-	class Function : public Callable
-	{
-	public:
-		std::shared_ptr<Object> call(std::shared_ptr<scripting::Environment>, const std::vector<std::shared_ptr<Object>>&) const override;
-
-	protected:
-		virtual std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const = 0;
-	};
+	
 
 	bool operator !=(const Object& a, const Object& b);
 	std::ostream& operator <<(std::ostream&, const Object&);

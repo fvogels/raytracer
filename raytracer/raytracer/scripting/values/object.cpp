@@ -19,7 +19,3 @@ std::ostream& scripting::operator <<(std::ostream& out, const Object& object)
 	return out;
 }
 
-std::shared_ptr<Object> scripting::Callable::evaluate(std::shared_ptr<scripting::Environment>)
-{
-	throw std::runtime_error("Cannot evaluate callable object");
-}
