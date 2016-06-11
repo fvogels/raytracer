@@ -129,5 +129,7 @@ TEST("(>= 7 6)", boolean(true));
 TEST("(>= 7 7)", boolean(true));
 TEST("(>= 7 9)", boolean(false));
 TEST("(>= 7 9 8)", boolean(false));
+TEST("(not true)", boolean(false));
+TEST("(not false)", boolean(true));
 
 #endif

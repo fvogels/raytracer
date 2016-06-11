@@ -61,5 +61,11 @@ namespace scripting
 		protected:
 			bool compare(double, double) const override;
 		};
+
+		class Negation : public Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
+		};
 	}
 }

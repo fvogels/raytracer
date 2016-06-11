@@ -25,6 +25,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND(">", GreaterThan);
 	BIND("<=", NotGreaterThan);
 	BIND(">=", NotLessThan);
+	BIND("not", Negation);
 
 #undef BIND
 #endif

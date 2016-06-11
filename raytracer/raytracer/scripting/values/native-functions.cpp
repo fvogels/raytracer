@@ -139,3 +139,17 @@ bool scripting::library::NotGreaterThan::compare(double x, double y) const
 {
 	return x <= y;
 }
+
+std::shared_ptr<Object> scripting::library::Negation::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
+{
+	if (arguments.size() != 1)
+	{
+		throw std::runtime_error("Negation expects exactly one argument");
+	}
+	else
+	{
+		auto argument = value_cast<Boolean>(arguments[0]);
+
+		return std::make_shared<Boolean>(!argument->value());
+	}
+}
