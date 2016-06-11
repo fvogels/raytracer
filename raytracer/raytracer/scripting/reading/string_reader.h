@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/reader.h"
+#include "scripting/reading/reader.h"
 #include <istream>
 #include <string>
 

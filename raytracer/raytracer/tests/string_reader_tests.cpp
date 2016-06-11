@@ -1,8 +1,8 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "scripting/reader.h"
-#include "scripting/string_reader.h"
+#include "scripting/reading/reader.h"
+#include "scripting/reading/string_reader.h"
 #include <sstream>
 
 using namespace scripting;

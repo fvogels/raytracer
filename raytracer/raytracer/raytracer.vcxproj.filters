@@ -96,12 +96,6 @@
     <ClCompile Include="imaging\wif_format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\stream_line_reader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scripting\string_reader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\stream_line_reader_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -166,6 +160,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\objects\symbol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scripting\reading\stream_line_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scripting\reading\string_reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -266,18 +266,6 @@
     <ClInclude Include="imaging\wif_format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scripting\reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\stream_line_reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\string_reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\combined_reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\angle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -345,6 +333,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects\symbol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\reading\reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\reading\combined_reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\reading\string_reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\reading\stream_line_reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

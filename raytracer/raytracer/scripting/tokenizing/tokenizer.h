@@ -1,9 +1,9 @@
 #pragma once
 
 #include "scripting/tokenizing/tokens.h"
-#include "scripting/stream_line_reader.h"
-#include "scripting/string_reader.h"
-#include "scripting/combined_reader.h"
+#include "scripting/reading/stream_line_reader.h"
+#include "scripting/reading/string_reader.h"
+#include "scripting/reading/combined_reader.h"
 #include <istream>
 #include <memory>
 #include <vector>

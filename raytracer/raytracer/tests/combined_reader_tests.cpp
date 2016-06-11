@@ -1,11 +1,11 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "scripting/reader.h"
+#include "scripting/reading/reader.h"
 #include "scripting/location.h"
-#include "scripting/string_reader.h"
-#include "scripting/stream_line_reader.h"
-#include "scripting/combined_reader.h"
+#include "scripting/reading/string_reader.h"
+#include "scripting/reading/stream_line_reader.h"
+#include "scripting/reading/combined_reader.h"
 #include <sstream>
 
 using namespace scripting;

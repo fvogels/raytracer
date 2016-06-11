@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scripting/tokenizing/tokens.h"
-#include "scripting/reader.h"
+#include "scripting/reading/reader.h"
 #include "scripting/objects/object.h"
 #include <memory>
 #include <stack>
