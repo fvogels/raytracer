@@ -2,7 +2,6 @@
 
 #include "scripting/values/object.h"
 #include <memory>
-//#include <map>
 
 namespace scripting
 {
@@ -20,7 +19,5 @@ namespace scripting
 	private:
 		struct Impl;
 		std::unique_ptr<Impl> m_pimpl;
-		//std::map<std::string, std::shared_ptr<const Object>> m_bindings;
-		//std::shared_ptr<Environment> m_parent;
 	};
 }
