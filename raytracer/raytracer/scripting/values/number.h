@@ -8,11 +8,8 @@ namespace scripting
 	class Number : public scripting::NativeValueAdapter<double>
 	{
 	public:
-		Number(double value);
+		Number(double);
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override;
-
-	private:
-		double m_value;
 	};
 }
