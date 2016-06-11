@@ -1,7 +1,7 @@
 #pragma once
 
-#include "scripting/values/object.h"
-#include "scripting/values/symbol.h"
+#include "scripting/objects/object.h"
+#include "scripting/objects/symbol.h"
 #include <memory>
 
 namespace scripting

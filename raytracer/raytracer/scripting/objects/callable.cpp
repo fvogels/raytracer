@@ -1,4 +1,4 @@
-#include "scripting/values/callable.h"
+#include "scripting/objects/callable.h"
 
 using namespace scripting;
 

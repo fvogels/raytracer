@@ -1,4 +1,4 @@
-#include "scripting/values/special-form.h"
+#include "scripting/objects/special-form.h"
 #include "scripting/values.h"
 #include "scripting/interpreter.h"
 #include "scripting/environment.h"

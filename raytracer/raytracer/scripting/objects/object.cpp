@@ -1,4 +1,4 @@
-#include "scripting/values/object.h"
+#include "scripting/objects/object.h"
 
 using namespace scripting;
 

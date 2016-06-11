@@ -1,5 +1,5 @@
-#include "scripting/values/native-functions.h"
-#include "scripting/values/native-value-adapter.h"
+#include "scripting/objects/native-functions.h"
+#include "scripting/objects/native-value-adapter.h"
 
 using namespace scripting;
 

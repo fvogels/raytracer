@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/values/function.h"
+#include "scripting/objects/function.h"
 #include "math/vector3d.h"
 #include "math/point3d.h"
 

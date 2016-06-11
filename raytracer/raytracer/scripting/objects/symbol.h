@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/values/object.h"
+#include "scripting/objects/object.h"
 
 namespace scripting
 {

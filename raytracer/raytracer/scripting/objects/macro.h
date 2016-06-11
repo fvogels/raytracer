@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scripting/values/callable.h"
+#include "scripting/objects/callable.h"
 
 namespace scripting
 {

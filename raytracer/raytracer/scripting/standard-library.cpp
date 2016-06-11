@@ -1,6 +1,6 @@
 #include "scripting/standard-library.h"
-#include "scripting/values/native-functions.h"
-#include "scripting/values/special-form.h"
+#include "scripting/objects/native-functions.h"
+#include "scripting/objects/special-form.h"
 #include "scripting/values.h"
 
 using namespace scripting;

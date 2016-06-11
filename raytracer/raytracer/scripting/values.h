@@ -1,8 +1,8 @@
 #pragma once
 
-#include "scripting/values/object.h"
-#include "scripting/values/native-value-adapter.h"
-#include "scripting/values/symbol.h"
-#include "scripting/values/list.h"
-#include "scripting/values/function.h"
-#include "scripting/values/macro.h"
+#include "scripting/objects/object.h"
+#include "scripting/objects/native-value-adapter.h"
+#include "scripting/objects/symbol.h"
+#include "scripting/objects/list.h"
+#include "scripting/objects/function.h"
+#include "scripting/objects/macro.h"

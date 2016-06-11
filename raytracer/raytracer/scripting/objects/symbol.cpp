@@ -1,4 +1,4 @@
-#include "scripting/values/symbol.h"
+#include "scripting/objects/symbol.h"
 #include "scripting/environment.h"
 
 using namespace scripting;
