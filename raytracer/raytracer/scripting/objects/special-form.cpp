@@ -88,7 +88,7 @@ std::shared_ptr<Object> scripting::library::If::call(std::shared_ptr<scripting::
 			}
 			else
 			{
-				return std::make_shared<Boolean>(false);
+				return std::make_shared<Nil>();
 			}
 		}
 	}

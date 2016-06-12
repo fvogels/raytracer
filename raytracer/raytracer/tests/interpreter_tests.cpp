@@ -78,6 +78,11 @@ static std::shared_ptr<Object> vector(double x, double y, double z)
 	return std::make_shared<Vector>(math::Vector3D(x, y, z));
 }
 
+static std::shared_ptr<Object> nil()
+{
+	return std::make_shared<Nil>();
+}
+
 #define TEST(sexpr, expected) TEST_CASE("[interpret] Evaluating " #sexpr, "[interpreter]") { auto result = interpret(sexpr); REQUIRE(*result == *expected); }
 
 
@@ -142,6 +147,7 @@ TEST("(if true 1)", number(1));
 TEST("(if false 1 2)", number(2));
 TEST("(if true (+ 1 2) 4)", number(3));
 TEST("(if false (+ 1 2) (* 2 2))", number(4));
+TEST("(if false 0)", nil());
 TEST("(if (> 5 8) (+ 1 2) (* 2 2))", number(4));
 TEST("(@ 5 3 6)", point(5, 3, 6));
 TEST("(-> 5 3 6)", vector(5, 3, 6));
