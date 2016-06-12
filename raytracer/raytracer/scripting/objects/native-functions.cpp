@@ -81,24 +81,17 @@ std::shared_ptr<Object> scripting::library::Subtraction::perform(std::shared_ptr
 	}
 	else if (arguments.size() == 1)
 	{
-		result = with_value_type<Number, double>(arguments[0], [&result](std::shared_ptr<Number> number)
-		{
-			return -number->value();
-		});
+		auto number = value_cast<Number>(arguments[0]);
+
+		result = -number->value();
 	}
 	else
 	{
-		result = with_value_type<Number, double>(arguments[0], [&result](std::shared_ptr<Number> number)
-		{
-			return number->value();
-		});
+		result = value_cast<Number>(arguments[0])->value();
 
 		for (size_t i = 1; i < arguments.size(); ++i)
 		{
-			result -= with_value_type<Number, double>(arguments[i], [&result](std::shared_ptr<Number> number)
-			{
-				return number->value();
-			});
+			result -= value_cast<Number>(arguments[i])->value();
 		}
 	}
 
