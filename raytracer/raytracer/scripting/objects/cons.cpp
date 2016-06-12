@@ -106,3 +106,15 @@ std::vector<std::shared_ptr<Object>> scripting::Cons::elements()
 
 	return result;
 }
+
+std::shared_ptr<Object> construct_list(std::vector<std::shared_ptr<Object>> elements)
+{
+	std::shared_ptr<Object> result = std::make_shared<Nil>();
+
+	for (auto it = elements.rbegin(); it != elements.rend(); ++it)
+	{
+		result = std::make_shared<Cons>(*it, result);
+	}
+
+	return result;
+}

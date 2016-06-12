@@ -25,4 +25,6 @@ namespace scripting
 		std::shared_ptr<scripting::Object> m_car;
 		std::shared_ptr<scripting::Object> m_cdr;
 	};
+
+	std::shared_ptr<Object> construct_list(std::vector<std::shared_ptr<Object>>);
 }
