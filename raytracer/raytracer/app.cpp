@@ -10,6 +10,7 @@
 #include "rendering/grid-sampler.h"
 #include "materials/uniform-material.h"
 #include "materials/checkered-material.h"
+#include "math/worley-noise2d.h"
 #include <assert.h>
 
 using namespace math;
@@ -97,30 +98,47 @@ int main()
 	const int FRAME_COUNT = 30;
 	WIF wif("e:/temp/output/test.wif");
 
-	for (int frame = 0; frame != FRAME_COUNT; ++frame)
+	Bitmap bitmap(500, 500);
+	auto noise = math::create_worley_noise2d(20);
+
+	for (int y = 0; y != bitmap.height(); ++y)
 	{
-		std::cout << "Rendering frame " << frame << std::endl;
-
-		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-		create_scene(double(frame) / FRAME_COUNT);
-
-		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
-
-		bitmap.clear(colors::black());
-
-		for (int j = 0; j != bitmap.height(); ++j)
+		for (int x = 0; x != bitmap.width(); ++x)
 		{
-			for (int i = 0; i != bitmap.width(); ++i)
-			{
-				color c = render_pixel(window_rasteriser, i, j);
+			position pos(x, y);
+			Point2D p(double(x) / bitmap.width(), double(y) / bitmap.height());
+			double value = (*noise)[p];
 
-				bitmap[position(i, j)] = c;
-			}
+			bitmap[pos] = colors::white() * (1 - value);
 		}
-
-		wif.write_frame(bitmap);
 	}
+
+	wif.write_frame(bitmap);
+
+	//for (int frame = 0; frame != FRAME_COUNT; ++frame)
+	//{
+	//	std::cout << "Rendering frame " << frame << std::endl;
+
+	//	Bitmap bitmap(500, 500);
+	//	camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+	//	create_scene(double(frame) / FRAME_COUNT);
+
+	//	Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+	//	Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
+
+	//	bitmap.clear(colors::black());
+
+	//	for (int j = 0; j != bitmap.height(); ++j)
+	//	{
+	//		for (int i = 0; i != bitmap.width(); ++i)
+	//		{
+	//			color c = render_pixel(window_rasteriser, i, j);
+
+	//			bitmap[position(i, j)] = c;
+	//		}
+	//	}
+
+	//	wif.write_frame(bitmap);
+	//}
 }
 #endif

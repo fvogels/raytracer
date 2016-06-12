@@ -177,6 +177,9 @@
     <ClCompile Include="scripting\objects\cons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\worley-noise2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -363,6 +366,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects\cons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\noise3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\noise2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\worley-noise2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

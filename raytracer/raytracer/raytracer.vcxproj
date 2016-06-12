@@ -237,6 +237,7 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
+    <ClCompile Include="math\worley-noise2d.cpp" />
     <ClCompile Include="primitives\decorator.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
     <ClCompile Include="primitives\sphere.cpp" />
@@ -287,6 +288,8 @@
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
     <ClInclude Include="math\matrix4d.h" />
+    <ClInclude Include="math\noise2d.h" />
+    <ClInclude Include="math\noise3d.h" />
     <ClInclude Include="math\point2d.h" />
     <ClInclude Include="math\point3d.h" />
     <ClInclude Include="math\rasterizer.h" />
@@ -297,6 +300,7 @@
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="materials\checkered-material.h" />
+    <ClInclude Include="math\worley-noise2d.h" />
     <ClInclude Include="primitives\decorator.h" />
     <ClInclude Include="primitives\hit.h" />
     <ClInclude Include="primitives\plane.h" />
