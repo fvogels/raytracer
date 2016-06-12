@@ -118,13 +118,13 @@ namespace scripting
 			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
-		class Read : public Function
+		class ReadHeap : public Function
 		{
 		protected:
 			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
-		class Write : public Function
+		class WriteHeap : public Function
 		{
 		protected:
 			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;

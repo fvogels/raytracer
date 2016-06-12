@@ -298,7 +298,7 @@ std::shared_ptr<Object> scripting::library::Allocate::perform(std::shared_ptr<sc
 	}
 }
 
-std::shared_ptr<Object> scripting::library::Read::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::ReadHeap::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 1)
 	{
@@ -312,7 +312,7 @@ std::shared_ptr<Object> scripting::library::Read::perform(std::shared_ptr<script
 	}
 }
 
-std::shared_ptr<Object> scripting::library::Write::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
+std::shared_ptr<Object> scripting::library::WriteHeap::perform(std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 2)
 	{
