@@ -14,41 +14,55 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 	}
 	else
 	{
-		auto bindings = arguments[0];
-		auto body = std::vector<std::shared_ptr<Object>>(arguments.begin() + 1, arguments.end());
+		auto bindings_argument = arguments[0];
+		auto body_arguments = std::vector<std::shared_ptr<Object>>(arguments.begin() + 1, arguments.end());
 		auto extended_environment = extend(environment);
 
-		with_value_type<List, void>(bindings, [environment, extended_environment, heap](std::shared_ptr<List> binding_list)
+		auto bindings_cons = value_cast<Cons>(bindings_argument);
+
+		if (!bindings_cons->is_list())
 		{
-			for (auto binding_pair : binding_list->elements())
+			throw std::runtime_error("Second argument of let must be well-formed list");
+		}
+		else
+		{
+			auto binding_list = bindings_cons->elements();
+
+			for (auto binding_list_element : binding_list)
 			{
-				with_value_type<List, void>(binding_pair, [environment, extended_environment, heap](std::shared_ptr<List> pair)
+				auto cons= value_cast<Cons>(binding_list_element);
+
+				if (!cons->is_list())
 				{
-					if (pair->elements().size() != 2)
+					throw std::runtime_error("Let expects list of pairs");
+				}
+				else
+				{
+					auto pair = cons->elements();
+
+					if (pair.size() != 2)
 					{
-						throw std::runtime_error("Let expects pairs");
+						throw std::runtime_error("Let expects list of pairs");
 					}
 					else
 					{
-						auto value = pair->elements()[1]->evaluate(environment, heap);
+						auto symbol = value_cast<Symbol>(pair[0]);
+						auto value = pair[1]->evaluate(environment, heap);
 
-						with_value_type<Symbol, void>(pair->elements()[0], [extended_environment, value](std::shared_ptr<Symbol> symbol)
-						{
-							extended_environment->bind(*symbol, value);
-						});
+						extended_environment->bind(*symbol, value);
 					}
-				});
+				}
 			}
-		});
 
-		std::shared_ptr<Object> last_result = std::make_shared<List>(std::vector<std::shared_ptr<Object>>());
+			std::shared_ptr<Object> last_result = std::make_shared<List>(std::vector<std::shared_ptr<Object>>());
 
-		for (auto expr : body)
-		{
-			last_result = expr->evaluate(extended_environment, heap);
+			for (auto expr : body_arguments)
+			{
+				last_result = expr->evaluate(extended_environment, heap);
+			}
+
+			return last_result;
 		}
-
-		return last_result;
 	}
 }
 

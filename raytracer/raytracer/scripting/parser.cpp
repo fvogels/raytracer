@@ -39,7 +39,7 @@ void scripting::ParsingVisitor::visit(const LeftParenthesisToken& token)
 void scripting::ParsingVisitor::visit(const RightParenthesisToken&)
 {
 	auto elements = std::vector<std::shared_ptr<Object>>(m_stack.top().begin(), m_stack.top().end());
-	auto list = std::make_shared<List>(elements);
+	auto list = construct_list(elements);
 	m_stack.pop();
 	m_locations.pop();
 	m_stack.top().push_back(list);

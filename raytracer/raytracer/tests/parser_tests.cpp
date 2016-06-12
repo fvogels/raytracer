@@ -34,7 +34,7 @@ static std::shared_ptr<Object> symbol(const std::string& str)
 
 static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& elts)
 {
-	return std::make_shared<List>(elts);
+	return construct_list(elts);
 }
 
 #define LIST(...) list(std::vector<std::shared_ptr<Object>> { __VA_ARGS__ } )
@@ -81,7 +81,7 @@ TEST_CASE("[Parser] Parsing ()", "[Parser]")
 	auto parser = create_parser(ss);
 
 	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST());
+	REQUIRE(*parser->current() == Nil());
 	parser->next();
 	REQUIRE(parser->end_reached());
 }

@@ -101,13 +101,13 @@ std::vector<std::shared_ptr<Object>> scripting::Cons::elements()
 	while (current != nullptr)
 	{
 		result.push_back(current->m_car);
-		current = dynamic_cast<Cons*>(m_cdr.get());
+		current = dynamic_cast<Cons*>(current->m_cdr.get());
 	}
 
 	return result;
 }
 
-std::shared_ptr<Object> construct_list(std::vector<std::shared_ptr<Object>> elements)
+std::shared_ptr<Object> scripting::construct_list(std::vector<std::shared_ptr<Object>> elements)
 {
 	std::shared_ptr<Object> result = std::make_shared<Nil>();
 
