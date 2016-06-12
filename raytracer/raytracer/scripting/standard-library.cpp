@@ -10,6 +10,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 {
 	environment->bind(Symbol("true"), std::make_shared<scripting::Boolean>(true));
 	environment->bind(Symbol("false"), std::make_shared<scripting::Boolean>(false));
+	environment->bind(Symbol("nil"), std::make_shared<scripting::Nil>());
 
 #ifdef BIND
 #error BIND macro already defined
