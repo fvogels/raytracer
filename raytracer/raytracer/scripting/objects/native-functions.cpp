@@ -302,7 +302,7 @@ std::shared_ptr<Object> scripting::library::ReadHeap::perform(std::shared_ptr<sc
 {
 	if (arguments.size() != 1)
 	{
-		throw std::runtime_error("Reading requires one argument");
+		throw std::runtime_error("Reading the heap requires one argument");
 	}
 	else
 	{
@@ -316,7 +316,7 @@ std::shared_ptr<Object> scripting::library::WriteHeap::perform(std::shared_ptr<s
 {
 	if (arguments.size() != 2)
 	{
-		throw std::runtime_error("Writing requires one argument");
+		throw std::runtime_error("Writing the heap requires one argument");
 	}
 	else
 	{
