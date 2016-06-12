@@ -54,7 +54,7 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 				}
 			}
 
-			std::shared_ptr<Object> last_result = std::make_shared<List>(std::vector<std::shared_ptr<Object>>());
+			std::shared_ptr<Object> last_result = std::make_shared<Nil>();
 
 			for (auto expr : body_arguments)
 			{

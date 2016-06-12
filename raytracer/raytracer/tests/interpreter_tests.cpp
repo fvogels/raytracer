@@ -63,11 +63,6 @@ static std::shared_ptr<Object> symbol(const std::string& str)
 	return std::make_shared<Symbol>(str);
 }
 
-static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& elts)
-{
-	return std::make_shared<List>(elts);
-}
-
 static std::shared_ptr<Object> boolean(bool b)
 {
 	return std::make_shared<Boolean>(b);

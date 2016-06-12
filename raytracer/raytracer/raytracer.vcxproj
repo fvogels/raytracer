@@ -254,7 +254,6 @@
     <ClCompile Include="scripting\standard-library.cpp" />
     <ClCompile Include="scripting\objects\callable.cpp" />
     <ClCompile Include="scripting\objects\function.cpp" />
-    <ClCompile Include="scripting\objects\list.cpp" />
     <ClCompile Include="scripting\objects\macro.cpp" />
     <ClCompile Include="scripting\objects\native-functions.cpp" />
     <ClCompile Include="scripting\objects\object.cpp" />
@@ -321,7 +320,6 @@
     <ClInclude Include="scripting\values.h" />
     <ClInclude Include="scripting\objects\callable.h" />
     <ClInclude Include="scripting\objects\function.h" />
-    <ClInclude Include="scripting\objects\list.h" />
     <ClInclude Include="scripting\objects\macro.h" />
     <ClInclude Include="scripting\objects\native-functions.h" />
     <ClInclude Include="scripting\objects\native-value-adapter.h" />

@@ -144,9 +144,6 @@
     <ClCompile Include="scripting\objects\function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\objects\list.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scripting\objects\macro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -324,9 +321,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects\function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\objects\list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects\macro.h">
