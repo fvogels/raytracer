@@ -12,6 +12,9 @@
 #include "materials/checkered-material.h"
 #include "math/worley-noise2d.h"
 #include <assert.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace math;
 using namespace Raytracer;
@@ -99,17 +102,25 @@ int main()
 	WIF wif("e:/temp/output/test.wif");
 
 	Bitmap bitmap(500, 500);
-	auto noise = math::create_worley_noise2d(20);
+	auto noise = math::create_worley_noise2d();
 
 	for (int y = 0; y != bitmap.height(); ++y)
 	{
 		for (int x = 0; x != bitmap.width(); ++x)
 		{
 			position pos(x, y);
-			Point2D p(double(x) / bitmap.width(), double(y) / bitmap.height());
+			Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
 			double value = (*noise)[p];
 
-			bitmap[pos] = colors::white() * (1 - value);
+			value = value * 2;
+
+			value = std::max<double>(value, 0);
+			value = std::min<double>(value, 1);
+
+			assert(0 <= value);
+			assert(value <= 1);
+
+			bitmap[pos] = colors::white() * value;
 		}
 	}
 
