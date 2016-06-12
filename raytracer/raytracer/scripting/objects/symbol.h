@@ -14,7 +14,7 @@ namespace scripting
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<Environment>, std::shared_ptr<scripting::Heap>) override;
 
-		std::string name() const { return m_name; }
+		std::string name() const;
 
 	private:
 		std::string m_name;

@@ -23,3 +23,8 @@ std::shared_ptr<Object> scripting::Symbol::evaluate(std::shared_ptr<scripting::E
 {
 	return environment->lookup(*this);
 }
+
+std::string scripting::Symbol::name() const 
+{
+	return m_name; 
+}
