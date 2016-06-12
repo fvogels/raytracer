@@ -177,6 +177,9 @@
     <ClCompile Include="scripting\objects\nil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scripting\objects\cons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -363,6 +366,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects\nil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\objects\cons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

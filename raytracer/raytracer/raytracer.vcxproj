@@ -248,6 +248,7 @@
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\heap.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
+    <ClCompile Include="scripting\objects\cons.cpp" />
     <ClCompile Include="scripting\objects\nil.cpp" />
     <ClCompile Include="scripting\objects\reference.cpp" />
     <ClCompile Include="scripting\standard-library.cpp" />
@@ -308,6 +309,7 @@
     <ClInclude Include="rendering\sampler.h" />
     <ClInclude Include="rendering\single-sampler.h" />
     <ClInclude Include="scripting\heap.h" />
+    <ClInclude Include="scripting\objects\cons.h" />
     <ClInclude Include="scripting\objects\nil.h" />
     <ClInclude Include="scripting\objects\reference.h" />
     <ClInclude Include="scripting\reading\combined_reader.h" />
