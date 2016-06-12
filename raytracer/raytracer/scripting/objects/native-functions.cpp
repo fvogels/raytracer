@@ -11,10 +11,9 @@ void for_each(const std::vector<std::shared_ptr<Object>>& arguments, std::functi
 {
 	for (auto argument : arguments)
 	{
-		with_value_type<Number, void>(argument, [&function](std::shared_ptr<T> converted)
-		{
-			function(converted);
-		});
+		auto converted = value_cast<Number>(argument);
+
+		function(converted);
 	}
 }
 
