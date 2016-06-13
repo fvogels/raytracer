@@ -188,42 +188,6 @@ std::shared_ptr<Object> scripting::library::Negation::perform(const std::vector<
 	}
 }
 
-std::shared_ptr<Object> scripting::library::CreatePoint::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
-{
-	if (arguments.size() != 3)
-	{
-		throw std::runtime_error("point creation requires 3 arguments");
-	}
-	else
-	{
-		auto x = value_cast<Number>(arguments[0])->value();
-		auto y = value_cast<Number>(arguments[1])->value();
-		auto z = value_cast<Number>(arguments[2])->value();
-
-		math::Point3D point(x, y, z);
-
-		return std::make_shared<Point>(point);
-	}
-}
-
-std::shared_ptr<Object> scripting::library::CreateVector::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
-{
-	if (arguments.size() != 3)
-	{
-		throw std::runtime_error("vector creation requires 3 arguments");
-	}
-	else
-	{
-		auto x = value_cast<Number>(arguments[0])->value();
-		auto y = value_cast<Number>(arguments[1])->value();
-		auto z = value_cast<Number>(arguments[2])->value();
-
-		math::Vector3D vector(x, y, z);
-
-		return std::make_shared<Vector>(vector);
-	}
-}
-
 std::shared_ptr<Object> scripting::library::GetXYZ::perform(const std::vector<std::shared_ptr<Object>>& arguments) const
 {
 	if (arguments.size() != 1)
