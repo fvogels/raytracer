@@ -17,7 +17,7 @@ namespace scripting
 
 		bool operator ==(const Object& object) const override
 		{
-			return m_value == value_cast<NativeObject<T>>(object).m_value;
+			return m_value == object_cast<NativeObject<T>>(object).m_value;
 		}
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override

@@ -47,7 +47,7 @@ namespace scripting
 		template<typename Pair>
 		typename Pair::type convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
 		{
-			return scripting::value_cast<scripting::NativeObject<typename Pair::type>>(objects[Pair::index])->value();
+			return scripting::object_cast<scripting::NativeObject<typename Pair::type>>(objects[Pair::index])->value();
 		}
 
 		template<typename R, typename... Ps>

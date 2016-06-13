@@ -10,7 +10,7 @@ void for_each(const std::vector<std::shared_ptr<Object>>& arguments, std::functi
 {
 	for (auto argument : arguments)
 	{
-		auto converted = value_cast<Number>(argument);
+		auto converted = object_cast<Number>(argument);
 
 		function(converted);
 	}
@@ -33,29 +33,29 @@ std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<
 
 			if (has_value_type<Number>(left) && has_value_type<Number>(right))
 			{
-				auto n1 = value_cast<Number>(left);
-				auto n2 = value_cast<Number>(right);
+				auto n1 = object_cast<Number>(left);
+				auto n2 = object_cast<Number>(right);
 
 				total = std::make_shared<Number>(n1->value() + n2->value());
 			}
 			else if (has_value_type<Vector>(left) && has_value_type<Vector>(right))
 			{
-				auto u = value_cast<Vector>(left);
-				auto v = value_cast<Vector>(right);
+				auto u = object_cast<Vector>(left);
+				auto v = object_cast<Vector>(right);
 
 				total = std::make_shared<Vector>(u->value() + v->value());
 			}
 			else if (has_value_type<Vector>(left) && has_value_type<Point>(right))
 			{
-				auto v = value_cast<Vector>(left);
-				auto p = value_cast<Point>(right);
+				auto v = object_cast<Vector>(left);
+				auto p = object_cast<Point>(right);
 
 				total = std::make_shared<Point>(v->value() + p->value());
 			}
 			else if (has_value_type<Point>(left) && has_value_type<Vector>(right))
 			{
-				auto p = value_cast<Point>(left);
-				auto v = value_cast<Vector>(right);
+				auto p = object_cast<Point>(left);
+				auto v = object_cast<Vector>(right);
 
 				total = std::make_shared<Point>(p->value() + v->value());
 			}
@@ -79,17 +79,17 @@ std::shared_ptr<Object> scripting::library::Subtraction::perform(const std::vect
 	}
 	else if (arguments.size() == 1)
 	{
-		auto number = value_cast<Number>(arguments[0]);
+		auto number = object_cast<Number>(arguments[0]);
 
 		result = -number->value();
 	}
 	else
 	{
-		result = value_cast<Number>(arguments[0])->value();
+		result = object_cast<Number>(arguments[0])->value();
 
 		for (size_t i = 1; i < arguments.size(); ++i)
 		{
-			result -= value_cast<Number>(arguments[i])->value();
+			result -= object_cast<Number>(arguments[i])->value();
 		}
 	}
 
@@ -136,11 +136,11 @@ std::shared_ptr<Object> scripting::library::Comparison::perform(const std::vecto
 	}
 	else
 	{
-		double last = value_cast<Number>(arguments[0])->value();
+		double last = object_cast<Number>(arguments[0])->value();
 
 		for (size_t i = 1; i < arguments.size(); ++i)
 		{
-			double current = value_cast<Number>(arguments[i])->value();
+			double current = object_cast<Number>(arguments[i])->value();
 
 			if (!compare(last, current))
 			{
@@ -182,7 +182,7 @@ std::shared_ptr<Object> scripting::library::Negation::perform(const std::vector<
 	}
 	else
 	{
-		auto argument = value_cast<Boolean>(arguments[0]);
+		auto argument = object_cast<Boolean>(arguments[0]);
 
 		return std::make_shared<Boolean>(!argument->value());
 	}
@@ -200,14 +200,14 @@ std::shared_ptr<Object> scripting::library::GetXYZ::perform(const std::vector<st
 
 		if (has_value_type<Point>(argument))
 		{
-			auto point = value_cast<Point>(argument)->value();
+			auto point = object_cast<Point>(argument)->value();
 			auto result = get(point);
 			
 			return std::make_shared<Number>(result);
 		}
 		else if (has_value_type<Vector>(argument))
 		{
-			auto vector = value_cast<Vector>(argument)->value();
+			auto vector = object_cast<Vector>(argument)->value();
 			auto result = get(vector);
 
 			return std::make_shared<Number>(result);
@@ -269,7 +269,7 @@ std::shared_ptr<Object> scripting::library::ReadHeap::perform(const std::vector<
 	}
 	else
 	{
-		auto readable = value_cast<Readable>(arguments[0]);
+		auto readable = object_cast<Readable>(arguments[0]);
 
 		return readable->read();
 	}
@@ -283,7 +283,7 @@ std::shared_ptr<Object> scripting::library::WriteHeap::perform(const std::vector
 	}
 	else
 	{
-		auto writeable = value_cast<Reference>(arguments[0]);
+		auto writeable = object_cast<Reference>(arguments[0]);
 		auto value = arguments[1];
 
 		writeable->write(value);

@@ -18,7 +18,7 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 		auto body_arguments = std::vector<std::shared_ptr<Object>>(arguments.begin() + 1, arguments.end());
 		auto extended_environment = extend(environment);
 
-		auto bindings_cons = value_cast<Cons>(bindings_argument);
+		auto bindings_cons = object_cast<Cons>(bindings_argument);
 
 		if (!bindings_cons->is_list())
 		{
@@ -30,7 +30,7 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 
 			for (auto binding_list_element : binding_list)
 			{
-				auto cons= value_cast<Cons>(binding_list_element);
+				auto cons= object_cast<Cons>(binding_list_element);
 
 				if (!cons->is_list())
 				{
@@ -46,7 +46,7 @@ std::shared_ptr<Object> scripting::library::Let::call(std::shared_ptr<scripting:
 					}
 					else
 					{
-						auto symbol = value_cast<Symbol>(pair[0]);
+						auto symbol = object_cast<Symbol>(pair[0]);
 						auto value = pair[1]->evaluate(environment);
 
 						extended_environment->bind(*symbol, value);
@@ -74,7 +74,7 @@ std::shared_ptr<Object> scripting::library::If::call(std::shared_ptr<scripting::
 	}
 	else
 	{
-		auto condition = value_cast<Boolean>(arguments[0]->evaluate(environment));
+		auto condition = object_cast<Boolean>(arguments[0]->evaluate(environment));
 
 		if (condition->value())
 		{

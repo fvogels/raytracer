@@ -17,7 +17,7 @@ bool scripting::Cons::operator==(const Object& other) const
 {
 	if (has_value_type<Cons>(other))
 	{
-		auto cons = value_cast<Cons>(other);
+		auto cons = object_cast<Cons>(other);
 
 		return *m_car == *cons.car() && *m_cdr == *cons.cdr();
 	}
@@ -84,7 +84,7 @@ bool scripting::Cons::is_list() const
 {
 	if (has_value_type<Cons>(m_cdr))
 	{
-		auto cdr = value_cast<Cons>(m_cdr);
+		auto cdr = object_cast<Cons>(m_cdr);
 
 		return cdr->is_list();
 	}
