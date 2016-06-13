@@ -11,10 +11,14 @@
 #include "materials/uniform-material.h"
 #include "materials/checkered-material.h"
 #include "math/worley-noise2d.h"
+#include "scripting/values.h"
+#include "scripting/objects/function.h"
 #include <assert.h>
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
+#include <type_traits>
+#include <list>
 
 using namespace math;
 using namespace Raytracer;
@@ -96,35 +100,156 @@ void create_scene(double t)
 }
 
 #ifndef TEST_BUILD
-int main()
+
+template<unsigned I, typename T>
+struct Indexed
 {
-	const int FRAME_COUNT = 30;
-	WIF wif("e:/temp/output/test.wif");
+	static constexpr unsigned index = I;
+	typedef T type;
+};
 
-	Bitmap bitmap(500, 500);
-	auto noise = math::create_worley_noise2d();
+template<typename T>
+class NativeValue { };
 
-	for (int y = 0; y != bitmap.height(); ++y)
+template<typename T>
+void print(const T& t)
+{
+	std::cout << t << std::endl;
+}
+
+template<unsigned... Ns>
+struct Indices { };
+
+template<unsigned I, unsigned... Ns>
+struct BuildIndex : public BuildIndex<I - 1, I - 1, Ns...> { };
+
+template<unsigned... Ns>
+struct BuildIndex<0, Ns...> : public Indices<Ns...> { };
+
+template<typename... Ts>
+using CreateIndex = BuildIndex<sizeof...(Ts)>;
+
+template<typename Tuple>
+using CreateIndex2 = BuildIndex<std::tuple_size<Tuple>::value>;
+
+class Foo
+{
+public:
+	Foo(double, double, double) { }
+};
+
+template<typename... Ts>
+struct Indexate
+{
+	template<unsigned... Ns>
+	struct with
 	{
-		for (int x = 0; x != bitmap.width(); ++x)
-		{
-			position pos(x, y);
-			Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
-			double value = (*noise)[p];
+		typedef std::tuple<Indexed<Ns, Ts>...> pairs;
+	};
+};
 
-			value = value * 2;
+template<typename... Ts, unsigned... Ns>
+std::tuple<Indexed<Ns, Ts>...> Indexation(Indices<Ns...>)
+{
+	return std::tuple<Indexed<Ns, Ts>...>();
+}
 
-			value = std::max<double>(value, 0);
-			value = std::min<double>(value, 1);
 
-			assert(0 <= value);
-			assert(value <= 1);
 
-			bitmap[pos] = colors::white() * value;
-		}
+
+template<typename T>
+class NativeObject : public scripting::Object
+{
+public:
+	NativeObject(T value)
+		: m_object(value) { }
+
+	void write(std::ostream& out) const override { out << m_object; }
+
+	bool operator ==(const scripting::Object& object) const override
+	{
+		return m_object == scripting::value_cast<NativeObject<T>>(object).m_object;
 	}
 
-	wif.write_frame(bitmap);
+	std::shared_ptr<scripting::Object> evaluate(std::shared_ptr<scripting::Environment>) override
+	{
+		return std::make_shared<NativeObject<T>>(this->m_object);
+	}
+
+	T extract() const { return m_object; }
+
+protected:
+	T m_object;
+};
+
+template<typename Pair>
+typename Pair::type convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
+{
+	return scripting::value_cast<NativeObject<typename Pair::type>>(objects[Pair::index])->extract();
+}
+
+template<typename R, typename... Ps>
+std::shared_ptr<R> create(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+{
+	return std::make_shared<R>(convert<Ps>(objects)...);
+}
+
+template<typename R, typename... Ts>
+std::shared_ptr<R> create2(const std::vector<std::shared_ptr<scripting::Object>>& objects)
+{
+	CreateIndex<Ts...> indices;
+	auto indexation = Indexation<Ts...>(indices);
+
+	return create<R>(objects, indexation);
+	// return nullptr;
+}
+
+
+int main()
+{
+	auto x = std::make_shared<NativeObject<double>>(5);
+	auto y = std::make_shared<NativeObject<double>>(5);
+	auto z = std::make_shared<NativeObject<double>>(5);
+
+	auto index = CreateIndex<double, double, double>();
+	typedef Indexate<int, double>::with<0, 1>::pairs pairs;
+
+	std::vector<std::shared_ptr<scripting::Object>> args { x,y,z };
+
+	std::tuple<Indexed<0, double>, Indexed<1, double>, Indexed<2, double>> tuple;
+
+	// auto foo = create<Foo, Indexed<0, double>, Indexed<1, double>, Indexed<2, double>>(args, tuple);
+	auto foo2 = create2<Foo, double, double, double>(args);
+
+	//const int FRAME_COUNT = 30;
+	//WIF wif("e:/temp/output/test.wif");
+
+	//Bitmap bitmap(500, 500);
+	//auto noise = math::create_worley_noise2d();
+
+	//for (int y = 0; y != bitmap.height(); ++y)
+	//{
+	//	for (int x = 0; x != bitmap.width(); ++x)
+	//	{
+	//		position pos(x, y);
+	//		Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
+	//		double value = (*noise)[p];
+
+	//		value = value * 2;
+
+	//		value = std::max<double>(value, 0);
+	//		value = std::min<double>(value, 1);
+
+	//		assert(0 <= value);
+	//		assert(value <= 1);
+
+	//		bitmap[pos] = colors::white() * value;
+	//	}
+	//}
+
+	//wif.write_frame(bitmap);
+
+
 
 	//for (int frame = 0; frame != FRAME_COUNT; ++frame)
 	//{
