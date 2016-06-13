@@ -10,7 +10,7 @@ scripting::Nil::Nil()
 
 bool scripting::Nil::operator==(const Object& other) const
 {
-	return has_value_type<Nil>(other);
+	return has_object_type<Nil>(other);
 }
 
 void scripting::Nil::write(std::ostream& out) const

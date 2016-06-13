@@ -31,28 +31,28 @@ std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<
 			auto left = total;
 			auto right = arguments[i];
 
-			if (has_value_type<Number>(left) && has_value_type<Number>(right))
+			if (has_object_type<Number>(left) && has_object_type<Number>(right))
 			{
 				auto n1 = object_cast<Number>(left);
 				auto n2 = object_cast<Number>(right);
 
 				total = std::make_shared<Number>(n1->value() + n2->value());
 			}
-			else if (has_value_type<Vector>(left) && has_value_type<Vector>(right))
+			else if (has_object_type<Vector>(left) && has_object_type<Vector>(right))
 			{
 				auto u = object_cast<Vector>(left);
 				auto v = object_cast<Vector>(right);
 
 				total = std::make_shared<Vector>(u->value() + v->value());
 			}
-			else if (has_value_type<Vector>(left) && has_value_type<Point>(right))
+			else if (has_object_type<Vector>(left) && has_object_type<Point>(right))
 			{
 				auto v = object_cast<Vector>(left);
 				auto p = object_cast<Point>(right);
 
 				total = std::make_shared<Point>(v->value() + p->value());
 			}
-			else if (has_value_type<Point>(left) && has_value_type<Vector>(right))
+			else if (has_object_type<Point>(left) && has_object_type<Vector>(right))
 			{
 				auto p = object_cast<Point>(left);
 				auto v = object_cast<Vector>(right);
@@ -198,14 +198,14 @@ std::shared_ptr<Object> scripting::library::GetXYZ::perform(const std::vector<st
 	{
 		auto argument = arguments[0];
 
-		if (has_value_type<Point>(argument))
+		if (has_object_type<Point>(argument))
 		{
 			auto point = object_cast<Point>(argument)->value();
 			auto result = get(point);
 			
 			return std::make_shared<Number>(result);
 		}
-		else if (has_value_type<Vector>(argument))
+		else if (has_object_type<Vector>(argument))
 		{
 			auto vector = object_cast<Vector>(argument)->value();
 			auto result = get(vector);

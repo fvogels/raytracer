@@ -27,13 +27,13 @@ namespace scripting
 	std::ostream& operator <<(std::ostream&, const Object&);
 
 	template<typename T>
-	bool has_value_type(const Object& object)
+	bool has_object_type(const Object& object)
 	{
 		return dynamic_cast<const T*>(&object) != nullptr;
 	}
 
 	template<typename T>
-	bool has_value_type(std::shared_ptr<const Object> object)
+	bool has_object_type(std::shared_ptr<const Object> object)
 	{
 		return std::dynamic_pointer_cast<const T>(object) != nullptr;
 	}

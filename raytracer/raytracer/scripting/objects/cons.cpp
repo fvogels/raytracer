@@ -15,7 +15,7 @@ scripting::Cons::Cons(std::shared_ptr<Object> car, std::shared_ptr<Object> cdr)
 
 bool scripting::Cons::operator==(const Object& other) const
 {
-	if (has_value_type<Cons>(other))
+	if (has_object_type<Cons>(other))
 	{
 		auto cons = object_cast<Cons>(other);
 
@@ -33,14 +33,14 @@ void scripting::Cons::write(std::ostream& out) const
 
 	std::shared_ptr<const Object> current = m_cdr;
 
-	while (has_value_type<Cons>(current))
+	while (has_object_type<Cons>(current))
 	{
 		auto cons = std::static_pointer_cast<const Cons>(current);
 		out << " " << cons->m_car;
 		current = cons->m_cdr;
 	}
 
-	if (has_value_type<Nil>(current))
+	if (has_object_type<Nil>(current))
 	{
 		out << ")";
 	}
@@ -82,13 +82,13 @@ std::shared_ptr<Object> scripting::Cons::cdr()
 
 bool scripting::Cons::is_list() const
 {
-	if (has_value_type<Cons>(m_cdr))
+	if (has_object_type<Cons>(m_cdr))
 	{
 		auto cdr = object_cast<Cons>(m_cdr);
 
 		return cdr->is_list();
 	}
-	else return has_value_type<Nil>(m_cdr);
+	else return has_object_type<Nil>(m_cdr);
 }
 
 std::vector<std::shared_ptr<Object>> scripting::Cons::elements()
