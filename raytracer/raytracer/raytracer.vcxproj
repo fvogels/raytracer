@@ -326,7 +326,7 @@
     <ClInclude Include="scripting\objects\function.h" />
     <ClInclude Include="scripting\objects\macro.h" />
     <ClInclude Include="scripting\objects\native-functions.h" />
-    <ClInclude Include="scripting\objects\native-value-adapter.h" />
+    <ClInclude Include="scripting\objects\native-object.h" />
     <ClInclude Include="scripting\objects\object.h" />
     <ClInclude Include="scripting\reading\string_reader.h" />
     <ClInclude Include="scripting\reading\stream_line_reader.h" />

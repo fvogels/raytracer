@@ -326,9 +326,6 @@
     <ClInclude Include="scripting\objects\native-functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scripting\objects\native-value-adapter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scripting\objects\object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -375,6 +372,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\objects\native-object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scripting/objects/object.h"
-#include "scripting/objects/native-value-adapter.h"
+#include "scripting/objects/native-object.h"
 #include "scripting/objects/symbol.h"
 #include "scripting/objects/cons.h"
 #include "scripting/objects/nil.h"

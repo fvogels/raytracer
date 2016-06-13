@@ -47,13 +47,13 @@ namespace scripting
 		template<typename Pair>
 		typename Pair::type convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
 		{
-			return scripting::value_cast<scripting::NativeValueAdapter<typename Pair::type>>(objects[Pair::index])->value();
+			return scripting::value_cast<scripting::NativeObject<typename Pair::type>>(objects[Pair::index])->value();
 		}
 
 		template<typename R, typename... Ps>
-		std::shared_ptr<scripting::NativeValueAdapter<R>> create(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+		std::shared_ptr<scripting::NativeObject<R>> create(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
 		{
-			return std::make_shared<scripting::NativeValueAdapter<R>>(R(convert<Ps>(objects)...));
+			return std::make_shared<scripting::NativeObject<R>>(R(convert<Ps>(objects)...));
 		}
 
 		template<typename R, typename... Ts>
