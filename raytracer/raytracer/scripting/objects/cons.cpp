@@ -50,7 +50,7 @@ void scripting::Cons::write(std::ostream& out) const
 	}
 }
 
-std::shared_ptr<Object> scripting::Cons::evaluate(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap> heap)
+std::shared_ptr<Object> scripting::Cons::evaluate(std::shared_ptr<scripting::Environment> environment)
 {
 	if (!is_list())
 	{
@@ -59,13 +59,13 @@ std::shared_ptr<Object> scripting::Cons::evaluate(std::shared_ptr<scripting::Env
 	else
 	{
 		auto elts = elements();
-		auto evaluated_head = elts[0]->evaluate(environment, heap);
+		auto evaluated_head = elts[0]->evaluate(environment);
 
 		std::vector<std::shared_ptr<Object>> argument_expressions(elts.begin() + 1, elts.end());
 
-		return with_value_type<Callable, std::shared_ptr<Object>>(evaluated_head, [environment, heap, &argument_expressions](std::shared_ptr<Callable> callable)
+		return with_value_type<Callable, std::shared_ptr<Object>>(evaluated_head, [environment, &argument_expressions](std::shared_ptr<Callable> callable)
 		{
-			return callable->call(environment, heap, argument_expressions);
+			return callable->call(environment, argument_expressions);
 		});
 	}
 }

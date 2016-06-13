@@ -11,31 +11,31 @@ namespace scripting
 		class Addition : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class Subtraction : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class Multiplication : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class Equality : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class Comparison : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 
 			virtual bool compare(double, double) const = 0;
 		};
@@ -67,25 +67,25 @@ namespace scripting
 		class Negation : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class CreatePoint : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class CreateVector : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class GetXYZ : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 
 			virtual double get(const math::Point3D&) const = 0;
 			virtual double get(const math::Vector3D&) const = 0;
@@ -115,19 +115,19 @@ namespace scripting
 		class Allocate : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class ReadHeap : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 
 		class WriteHeap : public Function
 		{
 		protected:
-			std::shared_ptr<Object> perform(std::shared_ptr<scripting::Heap>, const std::vector<std::shared_ptr<Object>>&) const override;
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>&) const override;
 		};
 	}
 }

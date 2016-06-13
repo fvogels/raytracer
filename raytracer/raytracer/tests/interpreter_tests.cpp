@@ -7,7 +7,6 @@
 #include "scripting/values.h"
 #include "scripting/standard-library.h"
 #include "scripting/environment.h"
-#include "scripting/heap.h"
 #include <sstream>
 
 using namespace scripting;
@@ -36,16 +35,11 @@ static std::shared_ptr<Environment> create_environment()
 	return result;
 }
 
-static std::shared_ptr<Heap> create_heap()
-{
-	return std::make_shared<Heap>();
-}
-
 static std::shared_ptr<Object> interpret(const std::string& input)
 {
 	auto parsed_input = parse(input);
 	
-	return evaluate(parsed_input, create_environment(), create_heap());
+	return evaluate(parsed_input, create_environment());
 }
 
 static std::shared_ptr<Object> number(double x)

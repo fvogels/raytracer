@@ -6,7 +6,7 @@
 using namespace scripting;
 
 
-std::shared_ptr<Object> scripting::Macro::call(std::shared_ptr<Environment> environment, std::shared_ptr<scripting::Heap> heap, const std::vector<std::shared_ptr<Object>>& argument_expressions) const
+std::shared_ptr<Object> scripting::Macro::call(std::shared_ptr<Environment> environment, const std::vector<std::shared_ptr<Object>>& argument_expressions) const
 {
-	return this->perform(argument_expressions)->evaluate(environment, heap);
+	return this->perform(argument_expressions)->evaluate(environment);
 }

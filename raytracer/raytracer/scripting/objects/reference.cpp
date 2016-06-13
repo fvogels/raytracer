@@ -22,7 +22,7 @@ void scripting::HeapReference::write(std::ostream& out) const
 	out << "<HEAP-REF>";
 }
 
-std::shared_ptr<Object> scripting::HeapReference::evaluate(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap>)
+std::shared_ptr<Object> scripting::HeapReference::evaluate(std::shared_ptr<scripting::Environment> environment)
 {
 	throw std::runtime_error("Cannot evaluate references");
 }

@@ -18,7 +18,7 @@ void scripting::Nil::write(std::ostream& out) const
 	out << "nil";
 }
 
-std::shared_ptr<Object> scripting::Nil::evaluate(std::shared_ptr<scripting::Environment>, std::shared_ptr<scripting::Heap>)
+std::shared_ptr<Object> scripting::Nil::evaluate(std::shared_ptr<scripting::Environment>)
 {
 	throw std::runtime_error("Cannot evaluate nil");
 }

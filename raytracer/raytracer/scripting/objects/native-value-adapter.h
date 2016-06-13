@@ -20,7 +20,7 @@ namespace scripting
 			return m_value == value_cast<NativeValueAdapter<T, U>>(object).m_value;
 		}
 
-		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>, std::shared_ptr<scripting::Heap>) override
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override
 		{
 			return std::make_shared<U>(this->m_value);
 		}
