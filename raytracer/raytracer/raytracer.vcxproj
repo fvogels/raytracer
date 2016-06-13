@@ -315,6 +315,7 @@
     <ClInclude Include="scripting\objects\cons.h" />
     <ClInclude Include="scripting\objects\nil.h" />
     <ClInclude Include="scripting\objects\reference.h" />
+    <ClInclude Include="scripting\objects\writable.h" />
     <ClInclude Include="scripting\reading\combined_reader.h" />
     <ClInclude Include="scripting\environment.h" />
     <ClInclude Include="scripting\interpreter.h" />
