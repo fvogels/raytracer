@@ -56,6 +56,12 @@ namespace scripting
 			return std::make_shared<scripting::NativeObject<R>>(R(convert<Ps>(objects)...));
 		}
 
+		template<typename R, typename... Ps>
+		std::shared_ptr<scripting::NativeObject<R>> create_large(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+		{
+			return std::make_shared<scripting::LargeNativeObject<R>>(std::make_shared<R>(convert<Ps>(objects)...));
+		}
+
 		template<typename R, typename... Ts>
 		class CreateNativeObject : public scripting::Function
 		{
@@ -66,6 +72,19 @@ namespace scripting
 				auto indexation = Indexation<Ts...>(indices);
 
 				return create<R>(objects, indexation);
+			}
+		};
+
+		template<typename R, typename... Ts>
+		class CreateLargeNativeObject : public scripting::Function
+		{
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>& objects) const override
+			{
+				CreateIndex<Ts...> indices;
+				auto indexation = Indexation<Ts...>(indices);
+
+				return create_large<R>(objects, indexation);
 			}
 		};
 	}
@@ -84,6 +103,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 #error BIND_NATIVE_OBJECT_FACTORY already defined (how improbable it may be)
 #else
 #define BIND_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeObject<TYPE, __VA_ARGS__>>())
+#define BIND_LARGE_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeObject<TYPE, __VA_ARGS__>>())
 
 	BIND_NATIVE_OBJECT_FACTORY("@", math::Point3D, double, double, double);
 	BIND_NATIVE_OBJECT_FACTORY("->", math::Vector3D, double, double, double);
