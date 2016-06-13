@@ -10,8 +10,8 @@ namespace scripting
 	class NativeObject : public scripting::Object
 	{
 	public:
-		NativeObject(T value)
-			: m_object(value) { }
+		NativeObject(const T& object)
+			: m_object(object) { }
 
 		void write(std::ostream& out) const override { out << m_object; }
 
@@ -29,6 +29,31 @@ namespace scripting
 
 	protected:
 		T m_object;
+	};
+
+	template<typename T>
+	class LargeNativeObject : public scripting::Object
+	{
+	public:
+		LargeNativeObject(std::shared_ptr<T> object)
+			: m_object(object) { }
+
+		void write(std::ostream& out) const override { out << *m_object; }
+
+		bool operator ==(const Object& object) const override
+		{
+			return *m_object == *object_cast<NativeObject<T>>(object).m_object;
+		}
+
+		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override
+		{
+			return std::make_shared<NativeObject<T>>(this->m_object);
+		}
+
+		std::shared_ptr<T> extract() const { return m_object; }
+
+	protected:
+		std::shared_ptr<T> m_object;
 	};
 
 	typedef NativeObject<std::string> String;
