@@ -10,10 +10,10 @@ namespace scripting
 	public:
 	};
 
-	class HeapReference : public Reference
+	class ExternalReference : public Reference
 	{
 	public:
-		HeapReference();
+		ExternalReference(std::shared_ptr<Object>);
 
 		void write(std::ostream&) const override;
 		bool operator ==(const Object&) const override;
@@ -26,4 +26,10 @@ namespace scripting
 	private:
 		std::shared_ptr<Object> m_value;
 	};
+
+	class HeapReference : public ExternalReference
+	{
+	public:
+		HeapReference();
+	};	
 }

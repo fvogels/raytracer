@@ -4,35 +4,41 @@
 using namespace scripting;
 
 
-scripting::HeapReference::HeapReference()
-	: m_value( std::make_shared<Nil>() )
+scripting::ExternalReference::ExternalReference(std::shared_ptr<Object> location)
+	: m_value( location )
 {
 	// NOP
 }
 
-bool scripting::HeapReference::operator==(const Object& other) const
+bool scripting::ExternalReference::operator==(const Object& other) const
 {
-	auto that = dynamic_cast<const HeapReference*>(&other);
+	auto that = dynamic_cast<const ExternalReference*>(&other);
 
-	return this == &other;
+	return m_value == that->m_value;
 }
 
-void scripting::HeapReference::write(std::ostream& out) const
+void scripting::ExternalReference::write(std::ostream& out) const
 {
-	out << "<HEAP-REF>";
+	out << "<REF>";
 }
 
-std::shared_ptr<Object> scripting::HeapReference::evaluate(std::shared_ptr<scripting::Environment> environment)
+std::shared_ptr<Object> scripting::ExternalReference::evaluate(std::shared_ptr<scripting::Environment> environment)
 {
 	throw std::runtime_error("Cannot evaluate references");
 }
 
-std::shared_ptr<Object> scripting::HeapReference::read() const
+std::shared_ptr<Object> scripting::ExternalReference::read() const
 {
 	return m_value;
 }
 
-void scripting::HeapReference::write(std::shared_ptr<Object> value)
+void scripting::ExternalReference::write(std::shared_ptr<Object> value)
 {
 	m_value = value;
+}
+
+scripting::HeapReference::HeapReference()
+	: ExternalReference(std::make_shared<Nil>())
+{
+	// NOP
 }
