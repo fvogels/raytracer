@@ -36,28 +36,28 @@ std::shared_ptr<Object> scripting::library::Addition::perform(const std::vector<
 				auto n1 = object_cast<Number>(left);
 				auto n2 = object_cast<Number>(right);
 
-				total = std::make_shared<Number>(n1->value() + n2->value());
+				total = std::make_shared<Number>(n1->extract() + n2->extract());
 			}
 			else if (has_object_type<Vector>(left) && has_object_type<Vector>(right))
 			{
 				auto u = object_cast<Vector>(left);
 				auto v = object_cast<Vector>(right);
 
-				total = std::make_shared<Vector>(u->value() + v->value());
+				total = std::make_shared<Vector>(u->extract() + v->extract());
 			}
 			else if (has_object_type<Vector>(left) && has_object_type<Point>(right))
 			{
 				auto v = object_cast<Vector>(left);
 				auto p = object_cast<Point>(right);
 
-				total = std::make_shared<Point>(v->value() + p->value());
+				total = std::make_shared<Point>(v->extract() + p->extract());
 			}
 			else if (has_object_type<Point>(left) && has_object_type<Vector>(right))
 			{
 				auto p = object_cast<Point>(left);
 				auto v = object_cast<Vector>(right);
 
-				total = std::make_shared<Point>(p->value() + v->value());
+				total = std::make_shared<Point>(p->extract() + v->extract());
 			}
 			else
 			{
@@ -81,15 +81,15 @@ std::shared_ptr<Object> scripting::library::Subtraction::perform(const std::vect
 	{
 		auto number = object_cast<Number>(arguments[0]);
 
-		result = -number->value();
+		result = -number->extract();
 	}
 	else
 	{
-		result = object_cast<Number>(arguments[0])->value();
+		result = object_cast<Number>(arguments[0])->extract();
 
 		for (size_t i = 1; i < arguments.size(); ++i)
 		{
-			result -= object_cast<Number>(arguments[i])->value();
+			result -= object_cast<Number>(arguments[i])->extract();
 		}
 	}
 
@@ -102,7 +102,7 @@ std::shared_ptr<Object> scripting::library::Multiplication::perform(const std::v
 
 	for_each<Number>(arguments, [&total](std::shared_ptr<Number> number)
 	{
-		total *= number->value();
+		total *= number->extract();
 	});
 
 	return std::make_shared<Number>(total);
@@ -136,11 +136,11 @@ std::shared_ptr<Object> scripting::library::Comparison::perform(const std::vecto
 	}
 	else
 	{
-		double last = object_cast<Number>(arguments[0])->value();
+		double last = object_cast<Number>(arguments[0])->extract();
 
 		for (size_t i = 1; i < arguments.size(); ++i)
 		{
-			double current = object_cast<Number>(arguments[i])->value();
+			double current = object_cast<Number>(arguments[i])->extract();
 
 			if (!compare(last, current))
 			{
@@ -184,7 +184,7 @@ std::shared_ptr<Object> scripting::library::Negation::perform(const std::vector<
 	{
 		auto argument = object_cast<Boolean>(arguments[0]);
 
-		return std::make_shared<Boolean>(!argument->value());
+		return std::make_shared<Boolean>(!argument->extract());
 	}
 }
 
@@ -200,14 +200,14 @@ std::shared_ptr<Object> scripting::library::GetXYZ::perform(const std::vector<st
 
 		if (has_object_type<Point>(argument))
 		{
-			auto point = object_cast<Point>(argument)->value();
+			auto point = object_cast<Point>(argument)->extract();
 			auto result = get(point);
 			
 			return std::make_shared<Number>(result);
 		}
 		else if (has_object_type<Vector>(argument))
 		{
-			auto vector = object_cast<Vector>(argument)->value();
+			auto vector = object_cast<Vector>(argument)->extract();
 			auto result = get(vector);
 
 			return std::make_shared<Number>(result);

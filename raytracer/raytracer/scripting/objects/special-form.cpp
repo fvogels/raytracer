@@ -76,7 +76,7 @@ std::shared_ptr<Object> scripting::library::If::call(std::shared_ptr<scripting::
 	{
 		auto condition = object_cast<Boolean>(arguments[0]->evaluate(environment));
 
-		if (condition->value())
+		if (condition->extract())
 		{
 			return arguments[1]->evaluate(environment);
 		}

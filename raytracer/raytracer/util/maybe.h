@@ -9,7 +9,7 @@ public:
 	Maybe() : m_has_value(false) { }
 	Maybe(const T& value) : m_has_value(true), m_value(value) { }
 	
-	T value() const 
+	T extract() const 
 	{
 		assert(m_has_value);
 

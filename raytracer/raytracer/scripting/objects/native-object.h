@@ -11,24 +11,24 @@ namespace scripting
 	{
 	public:
 		NativeObject(T value)
-			: m_value(value) { }
+			: m_object(value) { }
 
-		void write(std::ostream& out) const override { out << m_value; }
+		void write(std::ostream& out) const override { out << m_object; }
 
 		bool operator ==(const Object& object) const override
 		{
-			return m_value == object_cast<NativeObject<T>>(object).m_value;
+			return m_object == object_cast<NativeObject<T>>(object).m_object;
 		}
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override
 		{
-			return std::make_shared<NativeObject<T>>(this->m_value);
+			return std::make_shared<NativeObject<T>>(this->m_object);
 		}
 
-		T value() const { return m_value; }
+		T extract() const { return m_object; }
 
 	protected:
-		T m_value;
+		T m_object;
 	};
 
 	typedef NativeObject<std::string> String;
