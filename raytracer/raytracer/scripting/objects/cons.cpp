@@ -63,7 +63,7 @@ std::shared_ptr<Object> scripting::Cons::evaluate(std::shared_ptr<scripting::Env
 
 		std::vector<std::shared_ptr<Object>> argument_expressions(elts.begin() + 1, elts.end());
 
-		return with_value_type<Callable, std::shared_ptr<Object>>(evaluated_head, [environment, &argument_expressions](std::shared_ptr<Callable> callable)
+		return with_object_type<Callable, std::shared_ptr<Object>>(evaluated_head, [environment, &argument_expressions](std::shared_ptr<Callable> callable)
 		{
 			return callable->call(environment, argument_expressions);
 		});

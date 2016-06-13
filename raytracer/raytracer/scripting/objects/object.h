@@ -39,7 +39,7 @@ namespace scripting
 	}
 
 	template<typename T, typename R>
-	R with_value_type(Object& object, std::function<R(T&)> function)
+	R with_object_type(Object& object, std::function<R(T&)> function)
 	{
 		auto converted = dynamic_cast<T&>(object);
 
@@ -54,7 +54,7 @@ namespace scripting
 	}
 
 	template<typename T, typename R>
-	R with_value_type(const Object& object, std::function<R(const T&)> function)
+	R with_object_type(const Object& object, std::function<R(const T&)> function)
 	{
 		const T* converted = dynamic_cast<const T*>(&object);
 
@@ -69,7 +69,7 @@ namespace scripting
 	}
 
 	template<typename T, typename R>
-	R with_value_type(std::shared_ptr<Object> object, std::function<R(std::shared_ptr<T>)> function)
+	R with_object_type(std::shared_ptr<Object> object, std::function<R(std::shared_ptr<T>)> function)
 	{
 		auto converted = std::dynamic_pointer_cast<T>(object);
 
@@ -86,7 +86,7 @@ namespace scripting
 	template<typename T>
 	T& object_cast(Object& object)
 	{
-		return with_value_type<T, T&>(object, [](T& t) -> T& {
+		return with_object_type<T, T&>(object, [](T& t) -> T& {
 			return t;
 		});
 	}
@@ -94,7 +94,7 @@ namespace scripting
 	template<typename T>
 	const T& object_cast(const Object& object)
 	{
-		return with_value_type<T, const T&>(object, [] (const T& t) -> const T& {
+		return with_object_type<T, const T&>(object, [] (const T& t) -> const T& {
 			return t;
 		});
 	}
@@ -102,7 +102,7 @@ namespace scripting
 	template<typename T>
 	std::shared_ptr<T> object_cast(std::shared_ptr<Object> object)
 	{
-		return with_value_type<T, std::shared_ptr<T>>(object, [](std::shared_ptr<T> t) -> std::shared_ptr<T> {
+		return with_object_type<T, std::shared_ptr<T>>(object, [](std::shared_ptr<T> t) -> std::shared_ptr<T> {
 			return t;
 		} );
 	}
