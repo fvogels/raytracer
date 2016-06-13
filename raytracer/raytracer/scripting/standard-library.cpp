@@ -4,6 +4,7 @@
 #include "scripting/objects.h"
 #include "math/point3d.h"
 #include "math/vector3d.h"
+#include "primitives/plane.h"
 
 namespace scripting
 {
@@ -57,7 +58,7 @@ namespace scripting
 		}
 
 		template<typename R, typename... Ps>
-		std::shared_ptr<scripting::NativeObject<R>> create_large(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+		std::shared_ptr<scripting::LargeNativeObject<R>> create_large(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
 		{
 			return std::make_shared<scripting::LargeNativeObject<R>>(std::make_shared<R>(convert<Ps>(objects)...));
 		}
@@ -103,10 +104,11 @@ void scripting::add_standard_library_bindings(Environment* environment)
 #error BIND_NATIVE_OBJECT_FACTORY already defined (how improbable it may be)
 #else
 #define BIND_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeObject<TYPE, __VA_ARGS__>>())
-#define BIND_LARGE_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeObject<TYPE, __VA_ARGS__>>())
+#define BIND_LARGE_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateLargeNativeObject<TYPE, __VA_ARGS__>>())
 
 	BIND_NATIVE_OBJECT_FACTORY("@", math::Point3D, double, double, double);
 	BIND_NATIVE_OBJECT_FACTORY("->", math::Vector3D, double, double, double);
+	BIND_LARGE_NATIVE_OBJECT_FACTORY("plane", Raytracer::Plane, math::Point3D, math::Vector3D);
 
 #undef BIND_NATIVE_OBJECT_FACTORY
 #endif

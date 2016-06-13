@@ -38,16 +38,21 @@ namespace scripting
 		LargeNativeObject(std::shared_ptr<T> object)
 			: m_object(object) { }
 
-		void write(std::ostream& out) const override { out << *m_object; }
+		void write(std::ostream& out) const override 
+		{
+			//out << *m_object; 
+			out << "<LARGE-NATIVE-OBJECT>";
+		}
 
 		bool operator ==(const Object& object) const override
 		{
-			return *m_object == *object_cast<NativeObject<T>>(object).m_object;
+			// return *m_object == *object_cast<NativeObject<T>>(object).m_object;
+			return false;
 		}
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override
 		{
-			return std::make_shared<NativeObject<T>>(this->m_object);
+			return std::make_shared<LargeNativeObject<T>>(this->m_object);
 		}
 
 		std::shared_ptr<T> extract() const { return m_object; }
