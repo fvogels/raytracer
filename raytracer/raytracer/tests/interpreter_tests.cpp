@@ -157,5 +157,6 @@ TEST("(z (@ 1 2 3))", number(3));
 TEST("(x (-> 1 2 3))", number(1));
 TEST("(y (-> 1 2 3))", number(2));
 TEST("(z (-> 1 2 3))", number(3));
+TEST("(let ((x (alloc))) (set x 5) (get x))", number(5));
 
 #endif

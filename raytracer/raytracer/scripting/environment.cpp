@@ -1,6 +1,9 @@
 #include "scripting/environment.h"
 #include "scripting/objects/symbol.h"
 #include <assert.h>
+#include <iostream>
+#include <string>
+#include <sstream>
 #include <map>
 
 namespace scripting
@@ -51,7 +54,10 @@ std::shared_ptr<Object> scripting::Environment::Impl::lookup(const Symbol& symbo
 	}
 	else
 	{
-		throw std::runtime_error("Unbound symbol");
+		std::ostringstream ss;
+		ss << "Unbound symbol " << symbol.name();
+
+		throw std::runtime_error(ss.str());
 	}
 }
 

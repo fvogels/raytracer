@@ -33,7 +33,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND("x", GetX);
 	BIND("y", GetY);
 	BIND("z", GetZ);
-	BIND("ref", Allocate);
+	BIND("alloc", Allocate);
 	BIND("get", ReadHeap);
 	BIND("set", WriteHeap);
 
