@@ -380,5 +380,8 @@
     <ClInclude Include="scripting\objects\writable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scripting\objects\readable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
