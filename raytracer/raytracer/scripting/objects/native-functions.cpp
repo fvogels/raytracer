@@ -294,7 +294,7 @@ std::shared_ptr<Object> scripting::library::Allocate::perform(std::shared_ptr<sc
 	}
 	else
 	{
-		return std::make_shared<Reference>(heap->allocate());
+		return std::make_shared<HeapReference>();
 	}
 }
 
@@ -302,13 +302,13 @@ std::shared_ptr<Object> scripting::library::ReadHeap::perform(std::shared_ptr<sc
 {
 	if (arguments.size() != 1)
 	{
-		throw std::runtime_error("Reading the heap requires one argument");
+		throw std::runtime_error("Reading requires one argument");
 	}
 	else
 	{
-		auto ref = value_cast<Reference>(arguments[0]);
+		auto readable = value_cast<Readable>(arguments[0]);
 
-		return heap->read(ref->id());
+		return readable->read();
 	}
 }
 
@@ -316,14 +316,14 @@ std::shared_ptr<Object> scripting::library::WriteHeap::perform(std::shared_ptr<s
 {
 	if (arguments.size() != 2)
 	{
-		throw std::runtime_error("Writing the heap requires one argument");
+		throw std::runtime_error("Writing requires two argument");
 	}
 	else
 	{
-		auto ref = value_cast<Reference>(arguments[0]);
+		auto writeable = value_cast<Reference>(arguments[0]);
 		auto value = arguments[1];
 
-		heap->write(ref->id(), value);
+		writeable->write(value);
 
 		return value;
 	}

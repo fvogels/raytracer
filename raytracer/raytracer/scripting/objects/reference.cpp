@@ -1,24 +1,38 @@
 #include "scripting/objects/reference.h"
+#include "scripting/objects/nil.h"
 
 using namespace scripting;
 
 
-scripting::Reference::Reference(unsigned id)
-	: m_id(id) { }
-
-bool scripting::Reference::operator==(const Object& other) const
+scripting::HeapReference::HeapReference()
+	: m_value( std::make_shared<Nil>() )
 {
-	auto that = dynamic_cast<const Reference*>(&other);
-
-	return that != nullptr && this->m_id == that->m_id;
+	// NOP
 }
 
-void scripting::Reference::write(std::ostream& out) const
+bool scripting::HeapReference::operator==(const Object& other) const
 {
-	out << "REF[" << m_id << "]";
+	auto that = dynamic_cast<const HeapReference*>(&other);
+
+	return this == &other;
 }
 
-std::shared_ptr<Object> scripting::Reference::evaluate(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap>)
+void scripting::HeapReference::write(std::ostream& out) const
+{
+	out << "<HEAP-REF>";
+}
+
+std::shared_ptr<Object> scripting::HeapReference::evaluate(std::shared_ptr<scripting::Environment> environment, std::shared_ptr<scripting::Heap>)
 {
 	throw std::runtime_error("Cannot evaluate references");
+}
+
+std::shared_ptr<Object> scripting::HeapReference::read() const
+{
+	return m_value;
+}
+
+void scripting::HeapReference::write(std::shared_ptr<Object> value)
+{
+	m_value = value;
 }
