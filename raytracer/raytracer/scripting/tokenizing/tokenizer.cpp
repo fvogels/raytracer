@@ -37,7 +37,7 @@ void scripting::Tokenizer::tokenize()
 				return;
 			}
 		}
-		
+
 		throw std::runtime_error("Unrecognized character " + c);
 	}
 	else
@@ -252,7 +252,7 @@ bool scripting::SymbolRecognizer::is_valid_start(char c) const
 
 bool scripting::SymbolRecognizer::is_symbol_char(char c) const
 {
-	return isalnum(c) || std::string("+-*/!?@#$%^&|[]{}.,<>=").find(c) != std::string::npos;
+	return isalnum(c) || std::string("+-*/!?@#$%^&|[]{}.,<>=:").find(c) != std::string::npos;
 }
 
 std::shared_ptr<Token> scripting::SymbolRecognizer::tokenize(Reader<char, Location>& reader) const
