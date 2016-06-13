@@ -308,9 +308,6 @@
     <ClInclude Include="scripting\standard-library.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scripting\values.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scripting\tokenizing\tokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -375,6 +372,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\objects\writeable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scripting\objects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

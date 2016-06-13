@@ -1,5 +1,5 @@
 #include "scripting/objects/special-form.h"
-#include "scripting/values.h"
+#include "scripting/objects.h"
 #include "scripting/interpreter.h"
 #include "scripting/environment.h"
 

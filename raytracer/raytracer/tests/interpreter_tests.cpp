@@ -4,7 +4,7 @@
 #include "scripting/interpreter.h"
 #include "scripting/tokenizing/tokenizer.h"
 #include "scripting/parser.h"
-#include "scripting/values.h"
+#include "scripting/objects.h"
 #include "scripting/standard-library.h"
 #include "scripting/environment.h"
 #include <sstream>

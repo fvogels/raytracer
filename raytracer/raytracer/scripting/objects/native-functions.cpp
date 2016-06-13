@@ -1,6 +1,6 @@
 #include "scripting/objects/native-functions.h"
 #include "scripting/objects/native-value-adapter.h"
-#include "scripting/values.h"
+#include "scripting/objects.h"
 
 using namespace scripting;
 

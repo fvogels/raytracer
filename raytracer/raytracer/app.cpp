@@ -11,7 +11,7 @@
 #include "materials/uniform-material.h"
 #include "materials/checkered-material.h"
 #include "math/worley-noise2d.h"
-#include "scripting/values.h"
+#include "scripting/objects.h"
 #include "scripting/objects/function.h"
 #include <assert.h>
 #include <algorithm>

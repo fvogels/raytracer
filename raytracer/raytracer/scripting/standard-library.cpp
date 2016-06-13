@@ -1,7 +1,7 @@
 #include "scripting/standard-library.h"
 #include "scripting/objects/native-functions.h"
 #include "scripting/objects/special-form.h"
-#include "scripting/values.h"
+#include "scripting/objects.h"
 #include "math/point3d.h"
 #include "math/vector3d.h"
 

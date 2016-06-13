@@ -321,7 +321,7 @@
     <ClInclude Include="scripting\location.h" />
     <ClInclude Include="scripting\parser.h" />
     <ClInclude Include="scripting\standard-library.h" />
-    <ClInclude Include="scripting\values.h" />
+    <ClInclude Include="scripting\objects.h" />
     <ClInclude Include="scripting\objects\callable.h" />
     <ClInclude Include="scripting\objects\function.h" />
     <ClInclude Include="scripting\objects\macro.h" />

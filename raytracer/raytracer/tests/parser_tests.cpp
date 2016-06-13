@@ -1,7 +1,7 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "scripting/values.h"
+#include "scripting/objects.h"
 #include "scripting/tokenizing/tokenizer.h"
 #include "scripting/parser.h"
 #include "math/util.h"
