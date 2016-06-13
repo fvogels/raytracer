@@ -138,6 +138,11 @@ public:
 	Foo(double, double, double) { }
 };
 
+std::shared_ptr<Foo> create_foo(double x, double y, double z)
+{
+	return std::make_shared<Foo>(x, y, z);
+}
+
 template<typename... Ts>
 struct Indexate
 {
@@ -201,9 +206,24 @@ std::shared_ptr<R> create2(const std::vector<std::shared_ptr<scripting::Object>>
 	auto indexation = Indexation<Ts...>(indices);
 
 	return create<R>(objects, indexation);
-	// return nullptr;
 }
 
+
+
+template<typename R, typename... Ts, typename... Ps>
+std::shared_ptr<R> from_factory_aux(std::function<std::shared_ptr<R>(Ts...)> f, const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+{
+	return f(convert<Ps>(objects)...);
+}
+
+template<typename R, typename... Ts>
+std::shared_ptr<R> from_factory(std::function<std::shared_ptr<R>(Ts...)> f, const std::vector<std::shared_ptr<scripting::Object>>& objects)
+{
+	CreateIndex<Ts...> indices;
+	auto indexation = Indexation<Ts...>(indices);
+
+	return from_factory_aux<R, Ts...>(f, objects, indexation);
+}
 
 int main()
 {
@@ -216,10 +236,11 @@ int main()
 
 	std::vector<std::shared_ptr<scripting::Object>> args { x,y,z };
 
-	std::tuple<Indexed<0, double>, Indexed<1, double>, Indexed<2, double>> tuple;
+	// std::tuple<Indexed<0, double>, Indexed<1, double>, Indexed<2, double>> tuple;
 
 	// auto foo = create<Foo, Indexed<0, double>, Indexed<1, double>, Indexed<2, double>>(args, tuple);
 	auto foo2 = create2<Foo, double, double, double>(args);
+	// auto foo3 = from_factory<Foo, double, double, double>(create_foo, args);
 
 	//const int FRAME_COUNT = 30;
 	//WIF wif("e:/temp/output/test.wif");
