@@ -82,10 +82,17 @@ namespace scripting
 		protected:
 			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>& objects) const override
 			{
-				CreateIndex<Ts...> indices;
-				auto indexation = Indexation<Ts...>(indices);
+				if (objects.size() != sizeof...(Ts))
+				{
+					throw std::runtime_error("Wrong number of arguments");
+				}
+				else
+				{
+					CreateIndex<Ts...> indices;
+					auto indexation = Indexation<Ts...>(indices);
 
-				return create_shared_pointer<R>(objects, indexation);
+					return create_shared_pointer<R>(objects, indexation);
+				}
 			}
 		};
 	}
@@ -107,7 +114,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 
 	BIND_NATIVE_OBJECT_FACTORY("@", math::Point3D, double, double, double);
 	BIND_NATIVE_OBJECT_FACTORY("->", math::Vector3D, double, double, double);
-	BIND_NATIVE_OBJECT_FACTORY("plane", std::shared_ptr<Raytracer::Plane>, math::Point3D, math::Vector3D);
+	BIND_NATIVE_OBJECT_FACTORY("plane", std::shared_ptr<Raytracer::Plane>, math::Point3D, math::Vector3D);	
 
 #undef BIND_NATIVE_OBJECT_FACTORY
 #endif
