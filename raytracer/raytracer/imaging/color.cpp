@@ -68,5 +68,7 @@ bool operator !=(const color& c1, const color& c2)
 	return !(c1 == c2);
 }
 
-
-
+std::ostream& operator <<(std::ostream& out, const color& c)
+{
+	return out << "RGB[" << c.r << "," << c.g << "," << c.b << "]";
+}
