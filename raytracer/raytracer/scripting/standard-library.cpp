@@ -4,7 +4,8 @@
 #include "scripting/objects.h"
 #include "math/point3d.h"
 #include "math/vector3d.h"
-#include "primitives/plane.h"
+#include "primitives/primitives.h"
+#include "materials/materials.h"
 
 namespace scripting
 {
@@ -114,7 +115,10 @@ void scripting::add_standard_library_bindings(Environment* environment)
 
 	BIND_NATIVE_OBJECT_FACTORY("@", math::Point3D, double, double, double);
 	BIND_NATIVE_OBJECT_FACTORY("->", math::Vector3D, double, double, double);
-	BIND_NATIVE_OBJECT_FACTORY("plane", std::shared_ptr<Raytracer::Plane>, math::Point3D, math::Vector3D);	
+	BIND_NATIVE_OBJECT_FACTORY("rgb", color, double, double, double);
+	BIND_NATIVE_OBJECT_FACTORY("plane", std::shared_ptr<Raytracer::Plane>, math::Point3D, math::Vector3D);
+	BIND_NATIVE_OBJECT_FACTORY("uniform-material", std::shared_ptr<Raytracer::UniformMaterial>, color);
+	BIND_NATIVE_OBJECT_FACTORY("decorate", std::shared_ptr<Raytracer::Decorator>, std::shared_ptr<Raytracer::UniformMaterial>, std::shared_ptr<Raytracer::Primitive>);
 
 #undef BIND_NATIVE_OBJECT_FACTORY
 #endif
