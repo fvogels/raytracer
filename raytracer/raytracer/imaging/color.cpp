@@ -1,4 +1,5 @@
 #include "imaging/color.h"
+#include "math/util.h"
 
 
 double clamp(double x)
@@ -57,5 +58,15 @@ color& operator /=(color& c, double f)
     return c = c / f;
 }
 
-color& operator /=(color&, double);
+bool operator ==(const color& c1, const color& c2)
+{
+	return c1.r == approx(c2.r) && c1.g == approx(c2.g) && c1.b == approx(c2.b);
+}
+
+bool operator !=(const color& c1, const color& c2)
+{
+	return !(c1 == c2);
+}
+
+
 

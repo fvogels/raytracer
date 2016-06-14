@@ -22,6 +22,9 @@ color& operator +=(color&, const color&);
 color& operator *=(color&, double);
 color& operator /=(color&, double);
 
+bool operator ==(const color&, const color&);
+bool operator !=(const color&, const color&);
+
 
 // Example usage: color c = colors::black();
 namespace colors
