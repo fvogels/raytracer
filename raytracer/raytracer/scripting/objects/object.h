@@ -5,6 +5,8 @@
 #include <string>
 #include <ostream>
 #include <functional>
+#include <sstream>
+#include <typeinfo>
 
 namespace scripting
 {
@@ -86,24 +88,54 @@ namespace scripting
 	template<typename T>
 	T& object_cast(Object& object)
 	{
-		return with_object_type<T, T&>(object, [](T& t) -> T& {
-			return t;
-		});
+		T* converted = dynamic_cast<T*>(&object);
+
+		if (converted == nullptr)
+		{
+			std::ostringstream ss;
+			ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(*object).name();
+
+			throw std::runtime_error(ss.str());
+		}
+		else
+		{
+			return *converted;
+		}
 	}
 
 	template<typename T>
 	const T& object_cast(const Object& object)
 	{
-		return with_object_type<T, const T&>(object, [] (const T& t) -> const T& {
-			return t;
-		});
+		const T* converted = dynamic_cast<const T*>(&object);
+
+		if (converted == nullptr)
+		{
+			std::ostringstream ss;
+			ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(object).name();
+
+			throw std::runtime_error(ss.str());
+		}
+		else
+		{
+			return *converted;
+		}
 	}
 
 	template<typename T>
 	std::shared_ptr<T> object_cast(std::shared_ptr<Object> object)
 	{
-		return with_object_type<T, std::shared_ptr<T>>(object, [](std::shared_ptr<T> t) -> std::shared_ptr<T> {
-			return t;
-		} );
+		auto converted = std::dynamic_pointer_cast<T>(object);
+
+		if (converted == nullptr)
+		{
+			std::ostringstream ss;
+			ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(object).name();
+
+			throw std::runtime_error(ss.str());
+		}
+		else
+		{
+			return converted;
+		}
 	}
 }
