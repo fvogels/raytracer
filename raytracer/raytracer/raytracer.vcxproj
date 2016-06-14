@@ -282,6 +282,7 @@
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="materials\material3d.h" />
+    <ClInclude Include="materials\materials.h" />
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\interval.h" />
@@ -300,6 +301,7 @@
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="materials\checkered-material.h" />
     <ClInclude Include="math\worley-noise2d.h" />
+    <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator.h" />
     <ClInclude Include="primitives\hit.h" />
     <ClInclude Include="primitives\plane.h" />

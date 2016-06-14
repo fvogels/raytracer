@@ -377,5 +377,11 @@
     <ClInclude Include="scripting\objects\native-object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="primitives\primitives.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\materials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
