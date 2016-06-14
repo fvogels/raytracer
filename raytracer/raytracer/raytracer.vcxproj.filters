@@ -177,6 +177,9 @@
     <ClCompile Include="math\worley-noise2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="easylogging++.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -381,6 +384,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\materials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="easylogging++.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
