@@ -58,9 +58,9 @@ namespace scripting
 		}
 
 		template<typename R, typename... Ps>
-		std::shared_ptr<scripting::LargeNativeObject<R>> create_large(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+		std::shared_ptr<scripting::NativeObject<std::shared_ptr<R>>> create_shared_pointer(const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
 		{
-			return std::make_shared<scripting::LargeNativeObject<R>>(std::make_shared<R>(convert<Ps>(objects)...));
+			return std::make_shared<scripting::NativeObject<std::shared_ptr<R>>>(std::make_shared<R>(convert<Ps>(objects)...));
 		}
 
 		template<typename R, typename... Ts>
@@ -77,7 +77,7 @@ namespace scripting
 		};
 
 		template<typename R, typename... Ts>
-		class CreateLargeNativeObject : public scripting::Function
+		class CreateNativeObject<std::shared_ptr<R>, Ts...> : public scripting::Function
 		{
 		protected:
 			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>& objects) const override
@@ -85,7 +85,7 @@ namespace scripting
 				CreateIndex<Ts...> indices;
 				auto indexation = Indexation<Ts...>(indices);
 
-				return create_large<R>(objects, indexation);
+				return create_shared_pointer<R>(objects, indexation);
 			}
 		};
 	}
@@ -101,14 +101,13 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	environment->bind(Symbol("nil"), std::make_shared<scripting::Nil>());
 
 #ifdef BIND_NATIVE_OBJECT_FACTORY
-#error BIND_NATIVE_OBJECT_FACTORY already defined (how improbable it may be)
+#error BIND_NATIVE_OBJECT_FACTORY already defined (how improbable that may be)
 #else
 #define BIND_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeObject<TYPE, __VA_ARGS__>>())
-#define BIND_LARGE_NATIVE_OBJECT_FACTORY(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateLargeNativeObject<TYPE, __VA_ARGS__>>())
 
 	BIND_NATIVE_OBJECT_FACTORY("@", math::Point3D, double, double, double);
 	BIND_NATIVE_OBJECT_FACTORY("->", math::Vector3D, double, double, double);
-	BIND_LARGE_NATIVE_OBJECT_FACTORY("plane", Raytracer::Plane, math::Point3D, math::Vector3D);
+	BIND_NATIVE_OBJECT_FACTORY("plane", std::shared_ptr<Raytracer::Plane>, math::Point3D, math::Vector3D);
 
 #undef BIND_NATIVE_OBJECT_FACTORY
 #endif

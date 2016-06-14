@@ -32,27 +32,29 @@ namespace scripting
 	};
 
 	template<typename T>
-	class LargeNativeObject : public scripting::Object
+	class NativeObject<std::shared_ptr<T>> : public scripting::Object
 	{
 	public:
-		LargeNativeObject(std::shared_ptr<T> object)
+		NativeObject(std::shared_ptr<T> object)
 			: m_object(object) { }
 
 		void write(std::ostream& out) const override 
 		{
-			//out << *m_object; 
-			out << "<LARGE-NATIVE-OBJECT>";
+			// TODO
+			// out << *m_object;
+			throw std::runtime_error("Cannot write");
 		}
 
 		bool operator ==(const Object& object) const override
 		{
+			// TODO
 			// return *m_object == *object_cast<NativeObject<T>>(object).m_object;
-			return false;
+			throw std::runtime_error("Cannot compare");
 		}
 
 		std::shared_ptr<Object> evaluate(std::shared_ptr<scripting::Environment>) override
 		{
-			return std::make_shared<LargeNativeObject<T>>(this->m_object);
+			return std::make_shared<NativeObject<std::shared_ptr<T>>>(this->m_object);
 		}
 
 		std::shared_ptr<T> extract() const { return m_object; }
