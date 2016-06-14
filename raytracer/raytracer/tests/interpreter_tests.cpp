@@ -7,9 +7,13 @@
 #include "scripting/objects.h"
 #include "scripting/standard-library.h"
 #include "scripting/environment.h"
+#include "primitives/plane.h"
 #include <sstream>
 
 using namespace scripting;
+
+template<typename T>
+using LNO = NativeObject<std::shared_ptr<T>>;
 
 static std::shared_ptr<Parser> create_parser(std::istream& ss)
 {
@@ -152,5 +156,17 @@ TEST("(x (-> 1 2 3))", number(1));
 TEST("(y (-> 1 2 3))", number(2));
 TEST("(z (-> 1 2 3))", number(3));
 TEST("(let ((x (alloc))) (set x 5) (get x))", number(5));
+
+TEST_CASE("[interpret] Create plane object", "[interpreter]")
+{
+	auto result = interpret("(plane (@ 0 0 0) (-> 0 0 1))");
+
+	REQUIRE(has_object_type<LNO<Raytracer::Plane>>(result));
+
+	auto plane = object_cast<LNO<Raytracer::Plane>>(result)->extract();
+
+	REQUIRE(plane->point == math::Point3D(0, 0, 0));
+	REQUIRE(plane->normal == math::Vector3D(0, 0, 1));
+}
 
 #endif
