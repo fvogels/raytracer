@@ -57,7 +57,7 @@ namespace scripting
 			return std::make_shared<NativeObject<std::shared_ptr<T>>>(this->m_object);
 		}
 
-		std::shared_ptr<T> extract() const { return m_object; }
+		std::shared_ptr<T> extract() const { return m_object; }		
 
 	protected:
 		std::shared_ptr<T> m_object;
