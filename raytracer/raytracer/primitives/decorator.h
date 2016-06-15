@@ -9,12 +9,12 @@ namespace raytracer
 	class Decorator : public Primitive
 	{
 	public:
-		Decorator(std::shared_ptr<const Material3D>, std::shared_ptr<const Primitive>);
+		Decorator(std::shared_ptr<Material3D>, std::shared_ptr<Primitive>);
 
 		virtual bool find_hit(const math::Ray&, Hit*) const override;
 
 	private:
-		std::shared_ptr<const Material3D> material;
-		std::shared_ptr<const Primitive> child;
+		std::shared_ptr<Material3D> material;
+		std::shared_ptr<Primitive> child;
 	};
 }

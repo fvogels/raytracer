@@ -4,7 +4,7 @@
 using namespace raytracer;
 using namespace math;
 
-Decorator::Decorator(std::shared_ptr<const Material3D> material, std::shared_ptr<const Primitive> child)
+Decorator::Decorator(std::shared_ptr<Material3D> material, std::shared_ptr<Primitive> child)
 	: material(material), child(child)
 {
 	assert(material != nullptr);
@@ -13,14 +13,12 @@ Decorator::Decorator(std::shared_ptr<const Material3D> material, std::shared_ptr
 
 bool Decorator::find_hit(const Ray& ray, Hit* hit) const
 {
-	if (child->find_hit(ray, hit))
-	{
-		hit->c = material->at(hit->position);
+	auto old_material = hit->material;
+	hit->material = this->material;
+	
+	bool result = child->find_hit(ray, hit);
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	hit->material = old_material;
+
+	return result;
 }
