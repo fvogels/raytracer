@@ -15,20 +15,30 @@ namespace math
 	private:
 		Angle(double x) : m_radians(x) { }
 		
-		friend Angle operator "" _rad(long double);
-		friend Angle operator "" _deg(long double);
+		friend Angle radians(long double);
+		friend Angle degrees(long double);
 
 		double m_radians;
 	};
 
-	inline Angle operator""_rad(long double x)
+	inline Angle radians(long double x)
 	{
 		return Angle(x);
 	}
 
-	inline Angle operator""_deg(long double x)
+	inline Angle degrees(long double x)
 	{
 		return Angle(x / 180 * M_PI);
+	}
+
+	inline Angle operator""_rad(long double x)
+	{
+		return radians(x);
+	}
+
+	inline Angle operator""_deg(long double x)
+	{
+		return degrees(x);
 	}
 
 	inline double sin(Angle a) { return ::sin(a.radians()); }
