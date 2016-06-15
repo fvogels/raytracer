@@ -13,6 +13,7 @@
 #include "math/worley-noise2d.h"
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
+#include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
 #include <stdlib.h>
@@ -100,6 +101,7 @@ void create_scene(double t)
 }
 
 #ifndef TEST_BUILD
+
 
 
 int main()
