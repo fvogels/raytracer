@@ -2,6 +2,7 @@
 
 #include "math/vector3d.h"
 #include "math/point3d.h"
+#include "math/angle.h"
 
 namespace math
 {
@@ -21,4 +22,7 @@ namespace math
 	Matrix4D identity_matrix();
 	Matrix4D translation_matrix(const Vector3D&);
 	Matrix4D scale_matrix(double sx, double sy, double sz);
+	Matrix4D rotate_x_matrix(const Angle&);
+	Matrix4D rotate_y_matrix(const Angle&);
+	Matrix4D rotate_z_matrix(const Angle&);
 }
