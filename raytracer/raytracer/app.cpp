@@ -1,3 +1,5 @@
+#ifndef TEST_BUILD
+
 #include "imaging/bitmap.h"
 #include "imaging/wif_format.h"
 #include "primitives/sphere.h"
@@ -100,66 +102,67 @@ void create_scene(double t)
 	create_lights(t);
 }
 
-#ifndef TEST_BUILD
 
+void worley()
+{
+	WIF wif("e:/temp/output/test.wif");
+
+	Bitmap bitmap(500, 500);
+	auto noise = math::create_worley_noise2d();
+
+	for (int y = 0; y != bitmap.height(); ++y)
+	{
+		for (int x = 0; x != bitmap.width(); ++x)
+		{
+			position pos(x, y);
+			Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
+			double value = (*noise)[p];
+
+			value = value * 2;
+
+			value = std::max<double>(value, 0);
+			value = std::min<double>(value, 1);
+
+			assert(0 <= value);
+			assert(value <= 1);
+
+			bitmap[pos] = colors::white() * value;
+		}
+	}
+
+	wif.write_frame(bitmap);
+}
 
 
 int main()
 {
-	//const int FRAME_COUNT = 30;
-	//WIF wif("e:/temp/output/test.wif");
+	const int FRAME_COUNT = 30;
+	WIF wif("e:/temp/output/test.wif");
 
-	//Bitmap bitmap(500, 500);
-	//auto noise = math::create_worley_noise2d();
+	for (int frame = 0; frame != FRAME_COUNT; ++frame)
+	{
+		std::cout << "Rendering frame " << frame << std::endl;
 
-	//for (int y = 0; y != bitmap.height(); ++y)
-	//{
-	//	for (int x = 0; x != bitmap.width(); ++x)
-	//	{
-	//		position pos(x, y);
-	//		Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
-	//		double value = (*noise)[p];
+		Bitmap bitmap(500, 500);
+		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+		create_scene(double(frame) / FRAME_COUNT);
 
-	//		value = value * 2;
+		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
-	//		value = std::max<double>(value, 0);
-	//		value = std::min<double>(value, 1);
+		bitmap.clear(colors::black());
 
-	//		assert(0 <= value);
-	//		assert(value <= 1);
+		for (int j = 0; j != bitmap.height(); ++j)
+		{
+			for (int i = 0; i != bitmap.width(); ++i)
+			{
+				color c = render_pixel(window_rasteriser, i, j);
 
-	//		bitmap[pos] = colors::white() * value;
-	//	}
-	//}
+				bitmap[position(i, j)] = c;
+			}
+		}
 
-	//wif.write_frame(bitmap);
-
-
-
-	//for (int frame = 0; frame != FRAME_COUNT; ++frame)
-	//{
-	//	std::cout << "Rendering frame " << frame << std::endl;
-
-	//	Bitmap bitmap(500, 500);
-	//	camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-	//	create_scene(double(frame) / FRAME_COUNT);
-
-	//	Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-	//	Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
-
-	//	bitmap.clear(colors::black());
-
-	//	for (int j = 0; j != bitmap.height(); ++j)
-	//	{
-	//		for (int i = 0; i != bitmap.width(); ++i)
-	//		{
-	//			color c = render_pixel(window_rasteriser, i, j);
-
-	//			bitmap[position(i, j)] = c;
-	//		}
-	//	}
-
-	//	wif.write_frame(bitmap);
-	//}
+		wif.write_frame(bitmap);
+	}
 }
 #endif
