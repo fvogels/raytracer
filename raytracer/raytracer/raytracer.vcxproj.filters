@@ -389,5 +389,8 @@
     <ClInclude Include="easylogging++.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="materials\material2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
