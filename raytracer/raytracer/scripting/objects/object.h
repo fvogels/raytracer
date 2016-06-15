@@ -124,14 +124,15 @@ namespace scripting
 	template<typename T>
 	std::shared_ptr<T> object_cast(std::shared_ptr<Object> object)
 	{
-		auto converted = std::dynamic_pointer_cast<T>(object);
+		std::shared_ptr<T> converted = std::dynamic_pointer_cast<T>(object);
 
 		if (converted == nullptr)
 		{
 			std::ostringstream ss;
-			ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(object).name();
+			ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(*object).name();
+			auto message = ss.str();
 
-			throw std::runtime_error(ss.str());
+			throw std::runtime_error(message);
 		}
 		else
 		{
