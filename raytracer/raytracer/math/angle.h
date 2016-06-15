@@ -10,6 +10,8 @@ namespace math
 		double radians() const { return m_radians; }
 		double degrees() const { return m_radians * 180 / M_PI; }
 
+		Angle operator-() const { return Angle(-m_radians); }
+
 	private:
 		Angle(double x) : m_radians(x) { }
 		
