@@ -283,6 +283,7 @@
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
+    <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\material3d.h" />
     <ClInclude Include="materials\materials.h" />
     <ClInclude Include="materials\material2d.h" />
