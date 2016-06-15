@@ -4,7 +4,7 @@
 using namespace raytracer;
 using namespace math;
 
-Decorator::Decorator(std::shared_ptr<Material3D> material, std::shared_ptr<Primitive> child)
+Decorator::Decorator(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child)
 	: material(material), child(child)
 {
 	assert(material != nullptr);

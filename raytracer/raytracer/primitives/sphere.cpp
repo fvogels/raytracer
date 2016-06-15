@@ -52,6 +52,12 @@ bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 		{
 			double u = 0.5 + atan2(hit->position.z, hit->position.x) / (2 * M_PI);
 			double v = 0.5 - asin(hit->position.y) / M_PI;
+
+			assert(0 <= u);
+			assert(u <= 1);
+			assert(0 <= v);
+			assert(v <= 1);
+
 			Point2D uv(u, v);
 
 			hit->c = material2d->at(uv);

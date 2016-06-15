@@ -26,6 +26,15 @@
 using namespace math;
 using namespace raytracer;
 
+void initialize_logger()
+{
+	el::Configurations defaultConf;
+	defaultConf.setToDefault();
+	defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
+	defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
+	el::Loggers::reconfigureLogger("stdlib", defaultConf);
+}
+
 struct Light
 {
 	Point3D position;
@@ -85,7 +94,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 void create_root(double t)
 {
 	auto sphere = std::make_shared<Sphere>();
-	auto material = std::make_shared<CheckeredMaterial>(colors::white(), colors::black());
+	auto material = std::make_shared<CheckeredMaterial2D>(colors::white(), colors::black());
 	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
 	scene.root = std::make_shared<Transformer>(scale(t + 1, t + 1, t + 1), decorated_sphere);
 }
@@ -136,6 +145,8 @@ void worley()
 
 int main()
 {
+	initialize_logger();
+
 	const int FRAME_COUNT = 30;
 	WIF wif("e:/temp/output/test.wif");
 
