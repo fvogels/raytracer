@@ -2,7 +2,7 @@
 #include "math/rectangle3d.h"
 #include <assert.h>
 
-using namespace Raytracer;
+using namespace raytracer;
 using namespace math;
 
 class PerspectiveCamera : public Camera
@@ -33,7 +33,7 @@ Ray PerspectiveCamera::create_Ray(const Point2D& point) const
 	return Ray(eye, p);
 }
 
-std::shared_ptr<Camera> Raytracer::create_perspective_camera(
+std::shared_ptr<Camera> raytracer::create_perspective_camera(
 	const math::Point3D& eye,
 	const math::Point3D& look_at,
 	const math::Vector3D& up,

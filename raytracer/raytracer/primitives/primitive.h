@@ -3,7 +3,7 @@
 #include "primitives/hit.h"
 #include "math/ray.h"
 
-namespace Raytracer
+namespace raytracer
 {
 	class Primitive
 	{

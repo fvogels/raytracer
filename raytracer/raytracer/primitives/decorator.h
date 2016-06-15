@@ -4,7 +4,7 @@
 #include "materials/material3d.h"
 #include <memory>
 
-namespace Raytracer
+namespace raytracer
 {
 	class Decorator : public Primitive
 	{

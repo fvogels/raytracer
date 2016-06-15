@@ -166,9 +166,9 @@ TEST_CASE("[interpret] Evaluating (plane (@ 0 0 0) (-> 0 0 1))", "[interpreter]"
 {
 	auto result = interpret("(plane (@ 0 0 0) (-> 0 0 1))");
 
-	REQUIRE(has_object_type<LNO<Raytracer::Primitive>>(result));
+	REQUIRE(has_object_type<LNO<raytracer::Primitive>>(result));
 
-	//auto plane = object_cast<LNO<Raytracer::Plane>>(result)->extract();
+	//auto plane = object_cast<LNO<raytracer::Plane>>(result)->extract();
 
 	//REQUIRE(plane->point == math::Point3D(0, 0, 0));
 	//REQUIRE(plane->normal == math::Vector3D(0, 0, 1));
@@ -178,16 +178,16 @@ TEST_CASE("[interpret] Evaluating (uniform-material (rgb 1 0 1))", "[interpreter
 {
 	auto result = interpret("(uniform-material (rgb 1 0 1))");
 
-	REQUIRE(has_object_type<LNO<Raytracer::Material3D>>(result));
+	REQUIRE(has_object_type<LNO<raytracer::Material3D>>(result));
 }
 
 TEST_CASE("[interpret] Evaluating (decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1)))", "[interpreter]")
 {
 	auto result = interpret("(decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1)))");
 
-	/*REQUIRE(has_object_type<LNO<Raytracer::UniformMaterial>>(result));
+	/*REQUIRE(has_object_type<LNO<raytracer::UniformMaterial>>(result));
 
-	auto material = object_cast<LNO<Raytracer::UniformMaterial>>(result)->extract();*/
+	auto material = object_cast<LNO<raytracer::UniformMaterial>>(result)->extract();*/
 }
 
 #endif

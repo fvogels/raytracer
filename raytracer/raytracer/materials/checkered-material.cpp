@@ -2,7 +2,7 @@
 
 using namespace math;
 
-color Raytracer::CheckeredMaterial::at(const Point3D& p) const
+color raytracer::CheckeredMaterial::at(const Point3D& p) const
 {
 	double sum = floor(p.x) + floor(p.y) + floor(p.z);
 

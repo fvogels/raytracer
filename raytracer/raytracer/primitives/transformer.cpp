@@ -2,7 +2,7 @@
 
 using namespace math;
 
-bool Raytracer::Transformer::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::Transformer::find_hit(const Ray& ray, Hit* hit) const
 {
 	Ray transformed_Ray = ray.transform(this->transformer.inverse_Transformation_matrix);
 

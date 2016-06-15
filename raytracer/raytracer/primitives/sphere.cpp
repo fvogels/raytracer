@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <math.h>
 
-using namespace Raytracer;
+using namespace raytracer;
 using namespace math;
 
 bool Sphere::find_hit(const Ray& Ray, Hit* hit) const

@@ -5,7 +5,7 @@
 #include "imaging/color.h"
 #include <limits>
 
-namespace Raytracer
+namespace raytracer
 {
 	struct Hit
 	{

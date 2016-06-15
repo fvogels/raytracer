@@ -5,7 +5,7 @@
 #include "math/ray.h"
 #include <functional>
 
-namespace Raytracer
+namespace raytracer
 {
 	class Camera
 	{

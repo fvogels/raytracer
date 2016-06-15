@@ -2,16 +2,16 @@
 #include "math/util.h"
 #include <assert.h>
 
-using namespace Raytracer;
+using namespace raytracer;
 using namespace math;
 
-Raytracer::Plane::Plane(const Point3D& point, const Vector3D& normal)
+raytracer::Plane::Plane(const Point3D& point, const Vector3D& normal)
 	: point(point), normal(normal)
 {
 	assert(normal.is_unit());
 }
 
-bool Raytracer::Plane::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::Plane::find_hit(const Ray& ray, Hit* hit) const
 {
 	double denominator = ray.direction.dot(this->normal);
 

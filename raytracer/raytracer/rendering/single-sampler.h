@@ -2,7 +2,7 @@
 
 #include "Sampler.h"
 
-namespace Raytracer
+namespace raytracer
 {
 	class SingleSampler : public Sampler
 	{

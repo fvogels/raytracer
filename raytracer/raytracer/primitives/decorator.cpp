@@ -1,7 +1,7 @@
 #include "Decorator.h"
 #include <assert.h>
 
-using namespace Raytracer;
+using namespace raytracer;
 using namespace math;
 
 Decorator::Decorator(std::shared_ptr<const Material3D> material, std::shared_ptr<const Primitive> child)

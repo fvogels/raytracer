@@ -3,7 +3,7 @@
 #include "math/rectangle2d.h"
 #include <functional>
 
-namespace Raytracer
+namespace raytracer
 {
 	class Sampler
 	{

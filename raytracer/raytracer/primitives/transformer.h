@@ -4,7 +4,7 @@
 #include "math/transformation.h"
 #include <memory>
 
-namespace Raytracer
+namespace raytracer
 {
 	class Transformer : public Primitive
 	{

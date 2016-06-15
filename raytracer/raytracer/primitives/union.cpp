@@ -1,6 +1,6 @@
 #include "Union.h"
 
-using namespace Raytracer;
+using namespace raytracer;
 using namespace math;
 
 bool Union::find_hit(const Ray& ray, Hit* hit) const

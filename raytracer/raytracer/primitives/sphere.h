@@ -2,7 +2,7 @@
 
 #include "primitives/primitive.h"
 
-namespace Raytracer
+namespace raytracer
 {
 	class Sphere : public Primitive
 	{

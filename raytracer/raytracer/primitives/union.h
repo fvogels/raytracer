@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-namespace Raytracer
+namespace raytracer
 {
 	class Union : public Primitive
 	{

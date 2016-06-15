@@ -3,7 +3,7 @@
 #include "primitives/primitive.h"
 #include "math/point3d.h"
 
-namespace Raytracer
+namespace raytracer
 {
 	class Plane : public Primitive
 	{

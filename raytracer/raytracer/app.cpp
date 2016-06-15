@@ -22,7 +22,7 @@
 #include <list>
 
 using namespace math;
-using namespace Raytracer;
+using namespace raytracer;
 
 struct Light
 {

@@ -3,7 +3,7 @@
 #include "imaging/color.h"
 #include "math/point3d.h"
 
-namespace Raytracer 
+namespace raytracer 
 {
 	class Material3D
 	{
