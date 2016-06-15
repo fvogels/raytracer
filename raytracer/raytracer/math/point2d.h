@@ -28,4 +28,6 @@ namespace math
 	bool operator !=(const Point2D&, const Point2D&);
 
 	double distance(const Point2D&, const Point2D&);
+
+	std::ostream& operator <<(std::ostream& out, const Point2D&);
 }

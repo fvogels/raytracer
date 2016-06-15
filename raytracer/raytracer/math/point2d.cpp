@@ -46,3 +46,8 @@ bool math::operator !=(const Point2D& p, const Point2D& q)
 {
 	return !(p == q);
 }
+
+std::ostream& math::operator <<(std::ostream& out, const Point2D& p)
+{
+	return out << "(" << p.x << "," << p.y << ")";
+}
