@@ -15,7 +15,6 @@ namespace math
 		
 		friend Angle operator "" _rad(long double);
 		friend Angle operator "" _deg(long double);
-		friend Angle operator "" _°(long double);
 
 		double m_radians;
 	};
@@ -26,11 +25,6 @@ namespace math
 	}
 
 	inline Angle operator""_deg(long double x)
-	{
-		return Angle(x / 180 * M_PI);
-	}
-
-	inline Angle operator""_°(long double x)
 	{
 		return Angle(x / 180 * M_PI);
 	}
