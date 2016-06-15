@@ -17,3 +17,27 @@ Transformation math::scale(double sx, double sy, double sz)
 
 	return Transformation(tm, itm);
 }
+
+Transformation math::rotate_x(const Angle& angle)
+{
+	Matrix4D tm = rotate_x_matrix(angle);
+	Matrix4D itm = rotate_x_matrix(-angle);
+
+	return Transformation(tm, itm);
+}
+
+Transformation math::rotate_y(const Angle& angle)
+{
+	Matrix4D tm = rotate_y_matrix(angle);
+	Matrix4D itm = rotate_y_matrix(-angle);
+
+	return Transformation(tm, itm);
+}
+
+Transformation math::rotate_z(const Angle& angle)
+{
+	Matrix4D tm = rotate_z_matrix(angle);
+	Matrix4D itm = rotate_z_matrix(-angle);
+
+	return Transformation(tm, itm);
+}
