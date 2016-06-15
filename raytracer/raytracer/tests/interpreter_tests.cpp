@@ -8,9 +8,13 @@
 #include "scripting/standard-library.h"
 #include "scripting/environment.h"
 #include "primitives/plane.h"
+#include "materials/materials.h"
 #include <sstream>
 
 using namespace scripting;
+
+template<typename T>
+using NO = NativeObject<T>;
 
 template<typename T>
 using LNO = NativeObject<std::shared_ptr<T>>;
@@ -156,17 +160,34 @@ TEST("(x (-> 1 2 3))", number(1));
 TEST("(y (-> 1 2 3))", number(2));
 TEST("(z (-> 1 2 3))", number(3));
 TEST("(let ((x (alloc))) (set x 5) (get x))", number(5));
+TEST("(rgb 1 1 1)", std::make_shared<NO<color>>(color(1,1,1)));
 
-TEST_CASE("[interpret] Create plane object", "[interpreter]")
+TEST_CASE("[interpret] Evaluating (plane (@ 0 0 0) (-> 0 0 1))", "[interpreter]")
 {
 	auto result = interpret("(plane (@ 0 0 0) (-> 0 0 1))");
 
-	REQUIRE(has_object_type<LNO<Raytracer::Plane>>(result));
+	REQUIRE(has_object_type<LNO<Raytracer::Primitive>>(result));
 
-	auto plane = object_cast<LNO<Raytracer::Plane>>(result)->extract();
+	//auto plane = object_cast<LNO<Raytracer::Plane>>(result)->extract();
 
-	REQUIRE(plane->point == math::Point3D(0, 0, 0));
-	REQUIRE(plane->normal == math::Vector3D(0, 0, 1));
+	//REQUIRE(plane->point == math::Point3D(0, 0, 0));
+	//REQUIRE(plane->normal == math::Vector3D(0, 0, 1));
+}
+
+TEST_CASE("[interpret] Evaluating (uniform-material (rgb 1 0 1))", "[interpreter]")
+{
+	auto result = interpret("(uniform-material (rgb 1 0 1))");
+
+	REQUIRE(has_object_type<LNO<Raytracer::Material3D>>(result));
+}
+
+TEST_CASE("[interpret] Evaluating (decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1)))", "[interpreter]")
+{
+	auto result = interpret("(decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1)))");
+
+	/*REQUIRE(has_object_type<LNO<Raytracer::UniformMaterial>>(result));
+
+	auto material = object_cast<LNO<Raytracer::UniformMaterial>>(result)->extract();*/
 }
 
 #endif

@@ -8,6 +8,7 @@ int main(int argc, char* const argv[])
 	el::Configurations defaultConf;
 	defaultConf.setToDefault();
 	defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
+	defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
 	el::Loggers::reconfigureLogger("stdlib", defaultConf);
 
 	return Catch::Session().run(argc, argv);
