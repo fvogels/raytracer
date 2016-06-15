@@ -1,4 +1,8 @@
+#define _USE_MATH_DEFINES
 #include "Sphere.h"
+#include "materials/material.h"
+#include "materials/material2d.h"
+#include "materials/material3d.h"
 #include "util/misc.h"
 #include <assert.h>
 #include <math.h>
@@ -42,7 +46,24 @@ bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 
 		hit->position = Ray.at(hit->t);
 		hit->normal = hit->position - Point3D();
-		hit->c = hit->material->at(hit->position);
+
+		auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
+		if (material2d != nullptr)
+		{
+			double u = 0.5 + atan2(hit->position.z, hit->position.x) / (2 * M_PI);
+			double v = 0.5 - asin(hit->position.y) / M_PI;
+			Point2D uv(u, v);
+
+			hit->c = material2d->at(uv);
+		}
+		else
+		{
+			auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
+
+			assert(material3d != nullptr);
+
+			hit->c = material3d->at(hit->position);
+		}
 
 		return true;
 	}
