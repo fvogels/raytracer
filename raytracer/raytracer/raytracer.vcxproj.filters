@@ -180,7 +180,7 @@
     <ClCompile Include="easylogging++.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\materials.cpp">
+    <ClCompile Include="materials\materials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
