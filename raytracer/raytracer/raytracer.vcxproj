@@ -227,6 +227,7 @@
     <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\checkered-material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
+    <ClCompile Include="math\functions\materials.cpp" />
     <ClCompile Include="math\interval.cpp" />
     <ClCompile Include="math\interval-mapper.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />

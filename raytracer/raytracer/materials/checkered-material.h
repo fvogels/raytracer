@@ -5,17 +5,6 @@
 
 namespace raytracer
 {
-	class CheckeredMaterial2D : public Material2D
-	{
-	public:
-		CheckeredMaterial2D(const color& c1, const color& c2) : c1(c1), c2(c2) { }
-
-		color at(const math::Point2D&) const override;
-
-	private:
-		color c1, c2;
-	};
-
 	class CheckeredMaterial3D : public Material3D
 	{
 	public:
