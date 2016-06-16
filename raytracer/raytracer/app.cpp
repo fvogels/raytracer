@@ -16,6 +16,7 @@
 #include "math/functions/bool_mapper.h"
 #include "math/functions/horizontal-lines.h"
 #include "math/functions/vertical-lines.h"
+#include "math/functions/checkerboard.h"
 #include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
@@ -97,7 +98,7 @@ void create_root(double t)
 	auto sphere = std::make_shared<Sphere>();
 	// auto material = std::make_shared<CheckeredMaterial2D>(colors::white(), colors::black());
 	math::functions::BoolMapper<color> color_mapper = math::functions::BoolMapper<color>(colors::black(), colors::white());
-	std::shared_ptr<math::Function<color, const Point2D&>> texture = std::make_shared<math::functions::VerticalLines<math::functions::BoolMapper<color>>>(0.2, color_mapper);
+	std::shared_ptr<math::Function<color, const Point2D&>> texture = std::make_shared<math::functions::Checkerboard<math::functions::BoolMapper<color>>>(color_mapper);
 	auto material = std::make_shared<SimpleMaterial2D>(texture);
 	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
 	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(180 * t)), decorated_sphere);

@@ -407,5 +407,8 @@
     <ClInclude Include="math\functions\vertical-lines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\functions\checkerboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
