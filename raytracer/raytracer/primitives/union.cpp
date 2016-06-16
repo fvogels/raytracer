@@ -3,7 +3,14 @@
 using namespace raytracer;
 using namespace math;
 
-bool Union::find_hit(const Ray& ray, Hit* hit) const
+
+raytracer::Union::Union(std::vector<std::shared_ptr<Primitive>>& children)
+	: children(children)
+{
+	// NOP
+}
+
+bool raytracer::Union::find_hit(const Ray& ray, Hit* hit) const
 {
 	bool found_hit = false;
 
