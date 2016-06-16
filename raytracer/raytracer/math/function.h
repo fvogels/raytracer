@@ -6,5 +6,8 @@ namespace math
 	struct Function
 	{
 		virtual R operator ()(Ts... ts) const = 0;
+
+		typedef R result;
+		typedef std::tuple<Ts...> parameters;
 	};
 }

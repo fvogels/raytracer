@@ -12,6 +12,10 @@
 #include "math/worley-noise2d.h"
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
+#include "math/function.h"
+#include "math/functions/bool_mapper.h"
+#include "math/functions/horizontal-lines.h"
+#include "math/functions/vertical-lines.h"
 #include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
@@ -74,7 +78,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(3, 3);
+	GridSampler sampler(2, 2);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -91,15 +95,18 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 void create_root(double t)
 {
 	auto sphere = std::make_shared<Sphere>();
-	auto material = std::make_shared<CheckeredMaterial2D>(colors::white(), colors::black());
+	// auto material = std::make_shared<CheckeredMaterial2D>(colors::white(), colors::black());
+	math::functions::BoolMapper<color> color_mapper = math::functions::BoolMapper<color>(colors::black(), colors::white());
+	std::shared_ptr<math::Function<color, const Point2D&>> texture = std::make_shared<math::functions::VerticalLines<math::functions::BoolMapper<color>>>(0.2, color_mapper);
+	auto material = std::make_shared<SimpleMaterial2D>(texture);
 	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
-	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(360 * t)), decorated_sphere);
+	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(180 * t)), decorated_sphere);
 
-	auto sphere2 = std::make_shared<Sphere>();
-	auto decorated_sphere2 = std::make_shared<Decorator>(material, sphere2);
-	auto s2 = std::make_shared<Transformer>(translation(Vector3D(-2, 0, 0)), decorated_sphere2);
+	//auto sphere2 = std::make_shared<Sphere>();
+	//auto decorated_sphere2 = std::make_shared<Decorator>(material, sphere2);
+	//auto s2 = std::make_shared<Transformer>(translation(Vector3D(-2, 0, 0)), decorated_sphere2);
 
-	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1, s2 } );
+	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1 } );
 
 	scene.root = all;
 }
@@ -107,7 +114,7 @@ void create_root(double t)
 void create_lights(double t)
 {
 	scene.lights.clear();
-	scene.lights.push_back(std::make_shared<Light>(Point3D(0, 5, 5)));
+	scene.lights.push_back(std::make_shared<Light>(Point3D(0, 2, 5)));
 }
 
 void create_scene(double t)
@@ -155,7 +162,7 @@ int main()
 
 	initialize_logger();
 
-	const int FRAME_COUNT = 20;
+	const int FRAME_COUNT = 30;
 	WIF wif("e:/temp/output/test.wif");
 
 	for (int frame = 0; frame != FRAME_COUNT; ++frame)
