@@ -1,13 +1,10 @@
 #pragma once
 
 #include "math/point3d.h"
+#include "math/function.h"
 
 
 namespace math
 {
-	class Noise3D
-	{
-	public:
-		virtual double operator [](const math::Point3D&) const = 0;
-	};
+	class Noise3D : public math::Function<double, const Point3D&> { };
 }

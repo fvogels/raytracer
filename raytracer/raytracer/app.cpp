@@ -130,7 +130,7 @@ void worley()
 		{
 			position pos(x, y);
 			Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
-			double value = (*noise)[p];
+			double value = (*noise)(p);
 
 			value = value * 2;
 

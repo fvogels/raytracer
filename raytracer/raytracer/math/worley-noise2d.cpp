@@ -14,7 +14,7 @@ namespace math
 	class WorleyNoise2D : public Noise2D
 	{
 	public:
-		double operator [](const math::Point2D&) const override;
+		double operator ()(const math::Point2D&) const;
 
 	private:
 		void enumerate_points_in_cell(int, int, std::function<void(const Point2D&)>) const;
@@ -51,7 +51,7 @@ void math::WorleyNoise2D::enumerate_points_around(const Point2D& p, std::functio
 	}
 }
 
-double math::WorleyNoise2D::operator [](const math::Point2D& p) const
+double math::WorleyNoise2D::operator ()(const math::Point2D& p) const
 {
 	assert(0 <= p.x);
 	assert(p.x <= 1);
