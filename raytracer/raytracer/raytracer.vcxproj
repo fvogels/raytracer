@@ -289,6 +289,7 @@
     <ClInclude Include="materials\material2d.h" />
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="math\angle.h" />
+    <ClInclude Include="math\function.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
     <ClInclude Include="math\matrix4d.h" />

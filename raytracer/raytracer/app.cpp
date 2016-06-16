@@ -2,10 +2,7 @@
 
 #include "imaging/bitmap.h"
 #include "imaging/wif_format.h"
-#include "primitives/sphere.h"
-#include "primitives/plane.h"
-#include "primitives/transformer.h"
-#include "primitives/decorator.h"
+#include "primitives/primitives.h"
 #include "cameras/perspective-camera.h"
 #include "math/rectangle2d.h"
 #include "math/rasterizer.h"
@@ -77,7 +74,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(1, 1);
+	GridSampler sampler(3, 3);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -96,7 +93,15 @@ void create_root(double t)
 	auto sphere = std::make_shared<Sphere>();
 	auto material = std::make_shared<CheckeredMaterial2D>(colors::white(), colors::black());
 	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
-	scene.root = std::make_shared<Transformer>(scale(t + 1, t + 1, t + 1), decorated_sphere);
+	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(360 * t)), decorated_sphere);
+
+	auto sphere2 = std::make_shared<Sphere>();
+	auto decorated_sphere2 = std::make_shared<Decorator>(material, sphere2);
+	auto s2 = std::make_shared<Transformer>(translation(Vector3D(-2, 0, 0)), decorated_sphere2);
+
+	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1, s2 } );
+
+	scene.root = all;
 }
 
 void create_lights(double t)
@@ -145,9 +150,12 @@ void worley()
 
 int main()
 {
+	auto x = atan2(-1, 0.001);
+	x = atan2(-1, -0.001);
+
 	initialize_logger();
 
-	const int FRAME_COUNT = 30;
+	const int FRAME_COUNT = 20;
 	WIF wif("e:/temp/output/test.wif");
 
 	for (int frame = 0; frame != FRAME_COUNT; ++frame)
