@@ -10,13 +10,13 @@
 using namespace raytracer;
 using namespace math;
 
-bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
+bool raytracer::Sphere::find_hit(const Ray& ray, Hit* hit) const
 {
 	assert(hit != nullptr);
 
-	double a = Ray.direction.dot(Ray.direction);
-	double b = 2 * Ray.direction.dot(Ray.origin - Point3D());
-	double c = (Ray.origin - Point3D()).norm_sqr() - 1;
+	double a = ray.direction.dot(ray.direction);
+	double b = 2 * ray.direction.dot(ray.origin - Point3D());
+	double c = (ray.origin - Point3D()).norm_sqr() - 1;
 	double d = b * b - 4 * a * c;
 
 	if (d >= 0)
@@ -44,7 +44,7 @@ bool Sphere::find_hit(const Ray& Ray, Hit* hit) const
 			return false;
 		}
 
-		hit->position = Ray.at(hit->t);
+		hit->position = ray.at(hit->t);
 		hit->normal = hit->position - Point3D();
 
 		auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
