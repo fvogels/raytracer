@@ -11,5 +11,6 @@ namespace raytracer
 	namespace materials
 	{
 		std::shared_ptr<Material2D> checkered(const color&, const color&);
+		std::shared_ptr<Material3D> uniform(const color&);
 	}
 }

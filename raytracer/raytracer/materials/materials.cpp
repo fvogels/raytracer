@@ -13,3 +13,8 @@ std::shared_ptr<Material2D> raytracer::materials::checkered(const color& c1, con
 
 	return std::make_shared<SimpleMaterial2D>(texture);
 }
+
+std::shared_ptr<Material3D> raytracer::materials::uniform(const color& c)
+{
+	return std::make_shared<UniformMaterial>(c);
+}
