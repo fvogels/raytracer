@@ -74,7 +74,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(2, 2);
+	GridSampler sampler(3, 3);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -90,15 +90,14 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 
 void create_root(double t)
 {
-	auto sphere = std::make_shared<Sphere>();
-	
-	auto material = raytracer::materials::checkered(colors::white(), colors::black());
-	auto decorated_sphere = std::make_shared<Decorator>(material, sphere);
-	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(180 * t)), decorated_sphere);
+	auto shape = raytracer::transform::translate(Vector3D(0, -t-0.5, 0), std::make_shared<Plane>(Point3D(0, 0, 0), Vector3D(0, 1, 0), Vector3D(1, 0, 0)));
+	// auto shape = raytracer::transform::translate(Vector3D(0, -t, 0), std::make_shared<Sphere>());
 
-	//auto sphere2 = std::make_shared<Sphere>();
-	//auto decorated_sphere2 = std::make_shared<Decorator>(material, sphere2);
-	//auto s2 = std::make_shared<Transformer>(translation(Vector3D(-2, 0, 0)), decorated_sphere2);
+
+	auto material = raytracer::materials::checkered(colors::white(), colors::black());
+	// auto material = std::make_shared<UniformMaterial>(colors::white());
+	auto decorated_shape = std::make_shared<Decorator>(material, shape);
+	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(180 * t)), decorated_shape);
 
 	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1 } );
 
@@ -151,9 +150,6 @@ void worley()
 
 int main()
 {
-	auto x = atan2(-1, 0.001);
-	x = atan2(-1, -0.001);
-
 	initialize_logger();
 
 	const int FRAME_COUNT = 30;

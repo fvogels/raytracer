@@ -114,7 +114,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND_CREATE_BY_VALUE("->", math::Vector3D, double, double, double);
 	BIND_CREATE_BY_VALUE("rgb", color, double, double, double);
 
-	BIND_CREATE_BY_POINTER("plane", raytracer::Plane, raytracer::Primitive, math::Point3D, math::Vector3D);
+	BIND_CREATE_BY_POINTER("plane", raytracer::Plane, raytracer::Primitive, math::Point3D, math::Vector3D, math::Vector3D);
 	BIND_CREATE_BY_POINTER("decorate", raytracer::Decorator, raytracer::Primitive, std::shared_ptr<raytracer::Material3D>, std::shared_ptr<raytracer::Primitive>);
 	BIND_CREATE_BY_POINTER("uniform-material", raytracer::UniformMaterial, raytracer::Material3D, color);
 
