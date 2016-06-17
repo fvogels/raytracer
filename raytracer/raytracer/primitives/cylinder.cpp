@@ -48,7 +48,7 @@ bool raytracer::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 		}
 
 		hit->position = ray.at(hit->t);
-		hit->normal = hit->position - Point3D();
+		hit->normal = Vector3D(hit->position.x, hit->position.y, 0);
 
 		auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
 		if (material2d != nullptr)
