@@ -19,6 +19,10 @@
 #include <time.h>
 #include <type_traits>
 #include <list>
+#include <thread>
+#include <atomic>
+
+const int N_THREADS = 4;
 
 using namespace math;
 using namespace raytracer;
@@ -147,7 +151,6 @@ void worley()
 	wif.write_frame(bitmap);
 }
 
-
 int main()
 {
 	initialize_logger();
@@ -168,15 +171,40 @@ int main()
 
 		bitmap.clear(colors::black());
 
-		for (int j = 0; j != bitmap.height(); ++j)
-		{
-			for (int i = 0; i != bitmap.width(); ++i)
-			{
-				color c = render_pixel(window_rasteriser, i, j);
+		std::atomic<unsigned> j = 0;
+		std::vector<std::thread> threads;
 
-				bitmap[position(i, j)] = c;
-			}
+		for (int k = 0; k != N_THREADS; ++k)
+		{
+			threads.push_back(std::thread([&] () {
+				unsigned current;
+
+				while ((current = j++) < bitmap.height())
+				{
+					for (int i = 0; i != bitmap.width(); ++i)
+					{
+						color c = render_pixel(window_rasteriser, i, current);
+
+						bitmap[position(i, current)] = c;
+					}
+				}
+			}));
 		}
+
+		for (auto& thread : threads)
+		{
+			thread.join();
+		}
+
+		//for (int j = 0; j != bitmap.height(); ++j)
+		//{
+		//	for (int i = 0; i != bitmap.width(); ++i)
+		//	{
+		//		color c = render_pixel(window_rasteriser, i, j);
+
+		//		bitmap[position(i, j)] = c;
+		//	}
+		//}
 
 		wif.write_frame(bitmap);
 	}
