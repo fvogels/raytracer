@@ -17,62 +17,69 @@ bool raytracer::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 	Point2D O(ray.origin.x, ray.origin.y);
 	Vector2D D(ray.direction.x, ray.direction.y);
 
-	double a = D.dot(D);
-	double b = 2 * D.dot(O - Point2D());
-	double c = (O - Point2D()).norm_sqr() - 1;
-	double d = b * b - 4 * a * c;
-
-	if (d >= 0)
+	if ((O - Point2D()).norm_sqr() > 1)
 	{
-		double sqrt_d = std::sqrt(d);
+		double a = D.dot(D);
+		double b = 2 * D.dot(O - Point2D());
+		double c = (O - Point2D()).norm_sqr() - 1;
+		double d = b * b - 4 * a * c;
 
-		double t1 = (-b - sqrt_d) / (2 * a);
-		double t2 = (-b + sqrt_d) / (2 * a);
+		if (d >= 0)
+		{
+			double sqrt_d = std::sqrt(d);
 
-		if (t1 > t2)
-		{
-			swap(t1, t2);
-		}
+			double t1 = (-b - sqrt_d) / (2 * a);
+			double t2 = (-b + sqrt_d) / (2 * a);
 
-		if (t1 > 0)
-		{
-			hit->t = t1;
-		}
-		else if (t2 > 0)
-		{
-			hit->t = t2;
+			if (t1 > t2)
+			{
+				swap(t1, t2);
+			}
+
+			if (t1 > 0)
+			{
+				hit->t = t1;
+			}
+			else if (t2 > 0)
+			{
+				hit->t = t2;
+			}
+			else
+			{
+				return false;
+			}
+
+			hit->position = ray.at(hit->t);
+			hit->normal = Vector3D(hit->position.x, hit->position.y, 0);
+
+			auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
+			if (material2d != nullptr)
+			{
+				double u = 0.5 + atan2(hit->position.y, hit->position.x) / (2 * M_PI);
+				double v = hit->position.z;
+
+				assert(0 <= u);
+				assert(u <= 1);
+
+				Point2D uv(u, v);
+
+				hit->c = material2d->at(uv);
+			}
+			else
+			{
+				auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
+
+				assert(material3d != nullptr);
+
+				hit->c = material3d->at(hit->position);
+			}
+
+			return true;
 		}
 		else
 		{
 			return false;
 		}
-
-		hit->position = ray.at(hit->t);
-		hit->normal = Vector3D(hit->position.x, hit->position.y, 0);
-
-		auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
-		if (material2d != nullptr)
-		{
-			double u = 0.5 + atan2(hit->position.y, hit->position.x) / (2 * M_PI);
-			double v = hit->position.z;
-
-			assert(0 <= u);
-			assert(u <= 1);
-
-			Point2D uv(u, v);
-
-			hit->c = material2d->at(uv);
-		}
-		else
-		{
-			auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
-
-			assert(material3d != nullptr);
-
-			hit->c = material3d->at(hit->position);
-		}
-
-		return true;
 	}
 	else
 	{
