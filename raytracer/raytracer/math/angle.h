@@ -41,6 +41,16 @@ namespace math
 		return degrees(x);
 	}
 
+	inline Angle operator""_rad(long long unsigned x)
+	{
+		return radians(long double(x));
+	}
+
+	inline Angle operator""_degrees(long long unsigned x)
+	{
+		return degrees(long double(x));
+	}
+
 	inline double sin(Angle a) { return ::sin(a.radians()); }
 	inline double cos(Angle a) { return ::cos(a.radians()); }
 }
