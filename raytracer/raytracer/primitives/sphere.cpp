@@ -10,7 +10,7 @@
 using namespace raytracer;
 using namespace math;
 
-bool raytracer::Sphere::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 {
 	assert(hit != nullptr);
 

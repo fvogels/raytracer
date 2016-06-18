@@ -4,9 +4,12 @@
 
 namespace raytracer
 {
-	class Sphere : public Primitive
+	namespace primitives
 	{
-	public:
-		virtual bool find_hit(const math::Ray&, Hit*) const override;
-	};
+		class Sphere : public Primitive
+		{
+		public:
+			virtual bool find_hit(const math::Ray&, Hit*) const override;
+		};
+	}
 }

@@ -13,12 +13,12 @@ using namespace raytracer;
 
 std::shared_ptr<Primitive> raytracer::primitives::sphere()
 {
-	return std::make_shared<Sphere>();
+	return std::make_shared<raytracer::primitives::Sphere>();
 }
 
 std::shared_ptr<Primitive> raytracer::primitives::cylinder()
 {
-	return std::make_shared<Cylinder>();
+	return std::make_shared<raytracer::primitives::Cylinder>();
 }
 
 std::shared_ptr<Primitive> raytracer::primitives::plane(const math::Point3D& point, const math::Vector3D& normal, const math::Vector3D& u)
