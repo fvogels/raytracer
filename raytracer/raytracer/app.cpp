@@ -95,12 +95,12 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 
 void create_root(double t)
 {
-	auto shape = raytracer::transform::translate(Vector3D(0, -t, 0), std::make_shared<Cylinder>());
+	auto shape = raytracer::primitives::translate(Vector3D(0, -t, 0), raytracer::primitives::cylinder());
 	auto material = raytracer::materials::checkered(colors::white(), colors::black());
-	auto decorated_shape = std::make_shared<Decorator>(material, shape);
-	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(180 * t)), decorated_shape);
+	auto decorated_shape = raytracer::primitives::decorate(material, shape);
+	auto s1 = raytracer::primitives::rotate_around_y(180_degrees, decorated_shape);
 
-	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1 });
+	auto all = raytracer::primitives::group(std::vector<std::shared_ptr<Primitive>> { s1 });
 
 	scene.root = all;
 }

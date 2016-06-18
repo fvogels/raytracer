@@ -240,6 +240,7 @@
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
     <ClCompile Include="math\worley-noise2d.cpp" />
+    <ClCompile Include="primitives\primitives.cpp" />
     <ClCompile Include="primitives\cylinder.cpp" />
     <ClCompile Include="primitives\decorator.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
