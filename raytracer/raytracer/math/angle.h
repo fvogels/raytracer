@@ -36,7 +36,7 @@ namespace math
 		return radians(x);
 	}
 
-	inline Angle operator""_deg(long double x)
+	inline Angle operator""_degrees(long double x)
 	{
 		return degrees(x);
 	}
