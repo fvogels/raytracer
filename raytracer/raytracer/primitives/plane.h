@@ -5,15 +5,18 @@
 
 namespace raytracer
 {
-	class Plane : public Primitive
+	namespace primitives
 	{
-	public:
-		Plane(const math::Point3D& point, const math::Vector3D& normal, const math::Vector3D& u);
+		class Plane : public Primitive
+		{
+		public:
+			Plane(const math::Point3D& point, const math::Vector3D& normal, const math::Vector3D& u);
 
-		virtual bool find_hit(const math::Ray&, Hit*) const override;
+			virtual bool find_hit(const math::Ray&, Hit*) const override;
 
-		math::Point3D point;
-		math::Vector3D normal;
-		math::Vector3D u, v;
-	};
+			math::Point3D point;
+			math::Vector3D normal;
+			math::Vector3D u, v;
+		};
+	}
 }

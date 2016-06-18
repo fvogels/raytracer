@@ -8,7 +8,7 @@
 using namespace raytracer;
 using namespace math;
 
-raytracer::Plane::Plane(const Point3D& point, const Vector3D& normal, const Vector3D& u)
+raytracer::primitives::Plane::Plane(const Point3D& point, const Vector3D& normal, const Vector3D& u)
 	: point(point), normal(normal), u(u), v(normal.cross(u))
 {
 	assert(normal.is_unit());
@@ -19,7 +19,7 @@ raytracer::Plane::Plane(const Point3D& point, const Vector3D& normal, const Vect
 	assert(v.is_perpendicular_on(normal));
 }
 
-bool raytracer::Plane::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::Plane::find_hit(const Ray& ray, Hit* hit) const
 {
 	double denominator = ray.direction.dot(this->normal);
 

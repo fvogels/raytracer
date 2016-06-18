@@ -7,6 +7,7 @@
 #include "math/point3d.h"
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 using namespace math;
 
 

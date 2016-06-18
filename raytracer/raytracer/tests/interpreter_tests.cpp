@@ -169,7 +169,7 @@ TEST_CASE("[interpret] Evaluating (plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0))", "[in
 	REQUIRE(has_object_type<LNO<raytracer::Primitive>>(result));
 
 	auto primitive = object_cast<LNO<raytracer::Primitive>>(result)->extract();
-	auto plane = std::dynamic_pointer_cast<raytracer::Plane>(primitive);
+	auto plane = std::dynamic_pointer_cast<raytracer::primitives::Plane>(primitive);
 	
 	REQUIRE(plane != nullptr);
 	REQUIRE(plane->point == math::Point3D(0, 0, 0));
