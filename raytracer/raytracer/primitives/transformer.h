@@ -18,10 +18,4 @@ namespace raytracer
 		math::Transformation transformer;
 		std::shared_ptr<const Primitive> transformee;
 	};
-
-	namespace transform
-	{
-		std::shared_ptr<Transformer> transform(const math::Transformation&, std::shared_ptr<const Primitive>);
-		std::shared_ptr<Transformer> translate(const math::Vector3D&, std::shared_ptr<const Primitive>);
-	}
 }
