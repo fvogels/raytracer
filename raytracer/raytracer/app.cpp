@@ -12,6 +12,7 @@
 #include "math/worley-noise2d.h"
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
+#include "meta/function-traits.h"
 #include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
@@ -78,7 +79,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(3, 3);
+	GridSampler sampler(1, 1);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -94,16 +95,12 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 
 void create_root(double t)
 {
-	auto shape = raytracer::transform::translate(Vector3D(0, -t-0.5, 0), std::make_shared<Plane>(Point3D(0, 0, 0), Vector3D(0, 1, 0), Vector3D(1, 0, 0)));
-	// auto shape = raytracer::transform::translate(Vector3D(0, -t, 0), std::make_shared<Sphere>());
-
-
+	auto shape = raytracer::transform::translate(Vector3D(0, -t, 0), std::make_shared<Cylinder>());
 	auto material = raytracer::materials::checkered(colors::white(), colors::black());
-	// auto material = std::make_shared<UniformMaterial>(colors::white());
 	auto decorated_shape = std::make_shared<Decorator>(material, shape);
 	auto s1 = std::make_shared<Transformer>(rotate_y(degrees(180 * t)), decorated_shape);
 
-	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1 } );
+	auto all = std::make_shared<Union>(std::vector<std::shared_ptr<Primitive>> { s1 });
 
 	scene.root = all;
 }
@@ -125,7 +122,7 @@ void worley()
 {
 	WIF wif("e:/temp/output/test.wif");
 
-	Bitmap bitmap(500, 500);
+	Bitmap bitmap(200, 200);
 	auto noise = math::create_worley_noise2d();
 
 	for (int y = 0; y != bitmap.height(); ++y)
@@ -151,67 +148,82 @@ void worley()
 	wif.write_frame(bitmap);
 }
 
+
+Point3D foo(double x, double y, double z)
+{
+	return Point3D(x, y, z);
+}
+
+
+template<typename T>
+std::string bar(T x)
+{
+	return typeid(function_traits<T>::return_type).name();
+}
+
 int main()
 {
-	initialize_logger();
+	std::cout << bar<decltype(foo)>(foo) << std::endl;
 
-	const int FRAME_COUNT = 30;
-	WIF wif("e:/temp/output/test.wif");
+	//initialize_logger();
 
-	for (int frame = 0; frame != FRAME_COUNT; ++frame)
-	{
-		std::cout << "Rendering frame " << frame << std::endl;
+	//const int FRAME_COUNT = 30;
+	//WIF wif("e:/temp/output/test.wif");
 
-		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-		create_scene(double(frame) / FRAME_COUNT);
+	//for (int frame = 0; frame != FRAME_COUNT; ++frame)
+	//{
+	//	std::cout << "Rendering frame " << frame << std::endl;
 
-		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
+	//	Bitmap bitmap(500, 500);
+	//	camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+	//	create_scene(double(frame) / FRAME_COUNT);
 
-		bitmap.clear(colors::black());
+	//	Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+	//	Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
-		if (N_THREADS > 1)
-		{
-			std::atomic<unsigned> j = 0;
-			std::vector<std::thread> threads;
+	//	bitmap.clear(colors::black());
 
-			for (int k = 0; k != N_THREADS; ++k)
-			{
-				threads.push_back(std::thread([&]() {
-					unsigned current;
+	//	if (N_THREADS > 1)
+	//	{
+	//		std::atomic<unsigned> j = 0;
+	//		std::vector<std::thread> threads;
 
-					while ((current = j++) < bitmap.height())
-					{
-						for (int i = 0; i != bitmap.width(); ++i)
-						{
-							color c = render_pixel(window_rasteriser, i, current);
+	//		for (int k = 0; k != N_THREADS; ++k)
+	//		{
+	//			threads.push_back(std::thread([&]() {
+	//				unsigned current;
 
-							bitmap[position(i, current)] = c;
-						}
-					}
-				}));
-			}
+	//				while ((current = j++) < bitmap.height())
+	//				{
+	//					for (int i = 0; i != bitmap.width(); ++i)
+	//					{
+	//						color c = render_pixel(window_rasteriser, i, current);
 
-			for (auto& thread : threads)
-			{
-				thread.join();
-			}
-		}
-		else
-		{
-			for (int j = 0; j != bitmap.height(); ++j)
-			{
-				for (int i = 0; i != bitmap.width(); ++i)
-				{
-					color c = render_pixel(window_rasteriser, i, j);
+	//						bitmap[position(i, current)] = c;
+	//					}
+	//				}
+	//			}));
+	//		}
 
-					bitmap[position(i, j)] = c;
-				}
-			}
-		}
+	//		for (auto& thread : threads)
+	//		{
+	//			thread.join();
+	//		}
+	//	}
+	//	else
+	//	{
+	//		for (int j = 0; j != bitmap.height(); ++j)
+	//		{
+	//			for (int i = 0; i != bitmap.width(); ++i)
+	//			{
+	//				color c = render_pixel(window_rasteriser, i, j);
 
-		wif.write_frame(bitmap);
-	}
+	//				bitmap[position(i, j)] = c;
+	//			}
+	//		}
+	//	}
+
+	//	wif.write_frame(bitmap);
+	//}
 }
 #endif

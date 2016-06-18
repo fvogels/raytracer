@@ -6,6 +6,7 @@
 #include "math/vector3d.h"
 #include "primitives/primitives.h"
 #include "materials/materials.h"
+#include "meta/function-traits.h"
 #include "easylogging++.h"
 #include <sstream>
 #include <typeinfo>
@@ -48,6 +49,19 @@ namespace scripting
 		{
 			return std::tuple<Indexed<Ns, Ts>...>();
 		}
+
+		template<typename T>
+		struct IndexateTuple;
+
+		template<typename... Ts>
+		struct IndexateTuple<std::tuple<Ts...>>
+		{
+			template<unsigned... Ns>
+			static std::tuple<Indexed<Ns..., Ts>...> with(Indices<Ns...>)
+			{
+				return std::tuple<Indexed<Ns, Ts>...>();
+			}
+		};
 
 		template<typename Pair>
 		typename Pair::type convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
@@ -94,25 +108,73 @@ namespace scripting
 				return create_by_pointer<R, T>(objects, indexation);
 			}
 		};
+
+
+
+
+		template<typename R, typename... Ts, typename... Ps>
+		std::shared_ptr<scripting::NativeObject<R>> create_by_factory(std::function<R(Ts...)> factory, const std::vector<std::shared_ptr<scripting::Object>>& objects, std::tuple<Ps...> pairs)
+		{
+			return std::make_shared<scripting::NativeObject<R>>(factory(convert<Ps>(objects)...));
+		}
+
+		template<typename T>
+		class CreateNativeFromFactory;
+
+		template<typename R, typename... Ts>
+		class CreateNativeFromFactory<R(Ts...)> : public scripting::Function
+		{
+		public:
+			CreateNativeFromFactory(std::function<R(Ts...)> factory)
+				: m_factory(factory)
+			{
+				// NOP
+			}
+
+		protected:
+			std::shared_ptr<Object> perform(const std::vector<std::shared_ptr<Object>>& objects) const override
+			{
+				BuildIndex<sizeof...(Ts)> indices;
+				auto indexation = Indexation<Ts...>(indices);
+
+				return create_by_factory(m_factory, objects, indexation);
+			}
+
+		private:
+			std::function<R(Ts...)> m_factory;
+		};
+
+		template<typename T>
+		std::shared_ptr<scripting::Function> by_factory(T factory)
+		{
+			return std::make_shared<CreateNativeFromFactory<T>>(factory);
+		}
 	}
 }
 
 using namespace scripting;
 
 
+
+static math::Vector3D create_vector(double x, double y, double z) { return math::Vector3D(x, y, z); }
+static math::Point3D create_point(double x, double y, double z) { return math::Point3D(x, y, z); }
+static color create_color(double r, double g, double b) { return color(r, g, b); }
+
+
 void scripting::add_standard_library_bindings(Environment* environment)
 {
 #define BIND_CREATE_BY_VALUE(SYMBOL, TYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeByValue<TYPE, __VA_ARGS__>>())
 #define BIND_CREATE_BY_POINTER(SYMBOL, TYPE, SUPERTYPE, ...) environment->bind(Symbol(SYMBOL), std::make_shared<scripting::library::CreateNativeByPointer<TYPE, SUPERTYPE, __VA_ARGS__>>())
+#define BIND_FACTORY(SYMBOL, FACTORY) environment->bind(Symbol(SYMBOL), scripting::library::by_factory<decltype(FACTORY)>(FACTORY))
 #define BIND_LIBRARY_FUNCTION(SYMBOL_NAME, CLASS) environment->bind(Symbol(SYMBOL_NAME), std::make_shared<scripting::library::CLASS>())
 
 	environment->bind(Symbol("true"), std::make_shared<scripting::Boolean>(true));
 	environment->bind(Symbol("false"), std::make_shared<scripting::Boolean>(false));
 	environment->bind(Symbol("nil"), std::make_shared<scripting::Nil>());
 
-	BIND_CREATE_BY_VALUE("@", math::Point3D, double, double, double);
-	BIND_CREATE_BY_VALUE("->", math::Vector3D, double, double, double);
-	BIND_CREATE_BY_VALUE("rgb", color, double, double, double);
+	BIND_FACTORY("@", create_point);
+	BIND_FACTORY("->", create_vector);
+	BIND_FACTORY("rgb", create_color);
 
 	BIND_CREATE_BY_POINTER("plane", raytracer::Plane, raytracer::Primitive, math::Point3D, math::Vector3D, math::Vector3D);
 	BIND_CREATE_BY_POINTER("decorate", raytracer::Decorator, raytracer::Primitive, std::shared_ptr<raytracer::Material3D>, std::shared_ptr<raytracer::Primitive>);
