@@ -177,9 +177,6 @@
     <ClCompile Include="math\worley-noise2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="easylogging++.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="materials\materials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -190,6 +187,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\primitives.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -426,6 +426,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="meta\function-traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

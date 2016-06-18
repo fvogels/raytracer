@@ -220,7 +220,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
-    <ClCompile Include="easylogging++.cpp" />
+    <ClCompile Include="logging.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\bmp_format.cpp" />
@@ -315,6 +315,7 @@
     <ClInclude Include="materials\checkered-material.h" />
     <ClInclude Include="math\worley-noise2d.h" />
     <ClInclude Include="meta\function-traits.h" />
+    <ClInclude Include="logging.h" />
     <ClInclude Include="primitives\cylinder.h" />
     <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator.h" />
