@@ -6,7 +6,7 @@
 using namespace math;
 using namespace raytracer;
 
-std::shared_ptr<Material2D> raytracer::materials::checkered(const color& c1, const color& c2)
+std::shared_ptr<Material> raytracer::materials::checkered(const color& c1, const color& c2)
 {
 	auto bool_mapper = math::functions::BoolMapper<color>(c1, c2);
 	auto texture = std::make_shared<math::functions::Checkerboard<math::functions::BoolMapper<color>>>(bool_mapper);
@@ -14,7 +14,7 @@ std::shared_ptr<Material2D> raytracer::materials::checkered(const color& c1, con
 	return std::make_shared<SimpleMaterial2D>(texture);
 }
 
-std::shared_ptr<Material3D> raytracer::materials::uniform(const color& c)
+std::shared_ptr<Material> raytracer::materials::uniform(const color& c)
 {
 	return std::make_shared<UniformMaterial>(c);
 }
