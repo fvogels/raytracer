@@ -422,5 +422,8 @@
     <ClInclude Include="primitives\cylinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="meta\function-traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
