@@ -6,16 +6,19 @@
 
 namespace raytracer
 {
-	class Transformer : public Primitive
+	namespace primitives
 	{
-	public:
-		Transformer(const math::Transformation& transformer, std::shared_ptr<const Primitive> transformee)
-			: transformer(transformer), transformee(transformee) { }
+		class Transformer : public Primitive
+		{
+		public:
+			Transformer(const math::Transformation& transformer, std::shared_ptr<const Primitive> transformee)
+				: transformer(transformer), transformee(transformee) { }
 
-		virtual bool find_hit(const math::Ray&, Hit*) const override;
+			virtual bool find_hit(const math::Ray&, Hit*) const override;
 
-	private:
-		math::Transformation transformer;
-		std::shared_ptr<const Primitive> transformee;
-	};
+		private:
+			math::Transformation transformer;
+			std::shared_ptr<const Primitive> transformee;
+		};
+	}
 }

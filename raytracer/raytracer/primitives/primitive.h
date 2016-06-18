@@ -5,9 +5,12 @@
 
 namespace raytracer
 {
-	class Primitive
+	namespace primitives
 	{
-	public:
-		virtual bool find_hit(const math::Ray&, Hit*) const = 0;
-	};
+		class Primitive
+		{
+		public:
+			virtual bool find_hit(const math::Ray&, Hit*) const = 0;
+		};
+	}
 }

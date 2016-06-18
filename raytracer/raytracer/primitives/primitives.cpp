@@ -9,7 +9,7 @@
 #include "math/transformation.h"
 
 using namespace raytracer;
-
+using namespace raytracer::primitives;
 
 std::shared_ptr<Primitive> raytracer::primitives::sphere()
 {
@@ -58,5 +58,5 @@ std::shared_ptr<Primitive> raytracer::primitives::decorate(std::shared_ptr<Mater
 
 std::shared_ptr<Primitive> raytracer::primitives::group(std::vector<std::shared_ptr<Primitive>>& children)
 {
-	return std::make_shared<raytracer::Union>(children);
+	return std::make_shared<raytracer::primitives::Union>(children);
 }

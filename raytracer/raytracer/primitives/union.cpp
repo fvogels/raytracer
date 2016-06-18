@@ -4,13 +4,13 @@ using namespace raytracer;
 using namespace math;
 
 
-raytracer::Union::Union(std::vector<std::shared_ptr<Primitive>>& children)
+raytracer::primitives::Union::Union(std::vector<std::shared_ptr<Primitive>>& children)
 	: children(children)
 {
 	// NOP
 }
 
-bool raytracer::Union::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::Union::find_hit(const Ray& ray, Hit* hit) const
 {
 	bool found_hit = false;
 

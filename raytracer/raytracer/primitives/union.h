@@ -6,14 +6,17 @@
 
 namespace raytracer
 {
-	class Union : public Primitive
+	namespace primitives
 	{
-	public:
-		Union(std::vector<std::shared_ptr<Primitive>>&);
+		class Union : public Primitive
+		{
+		public:
+			Union(std::vector<std::shared_ptr<Primitive>>&);
 
-		virtual bool find_hit(const math::Ray&, Hit*) const override;
+			virtual bool find_hit(const math::Ray&, Hit*) const override;
 
-	private:
-		std::vector<std::shared_ptr<Primitive>> children;
-	};
+		private:
+			std::vector<std::shared_ptr<Primitive>> children;
+		};
+	}
 }

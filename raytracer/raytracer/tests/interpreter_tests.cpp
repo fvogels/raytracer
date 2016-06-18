@@ -8,6 +8,7 @@
 #include "scripting/standard-library.h"
 #include "scripting/environment.h"
 #include "primitives/plane.h"
+#include "primitives/decorator.h"
 #include "materials/materials.h"
 #include <sstream>
 
@@ -166,9 +167,9 @@ TEST_CASE("[interpret] Evaluating (plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0))", "[in
 {
 	auto result = interpret("(plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0))");
 
-	REQUIRE(has_object_type<LNO<raytracer::Primitive>>(result));
+	REQUIRE(has_object_type<LNO<raytracer::primitives::Primitive>>(result));
 
-	auto primitive = object_cast<LNO<raytracer::Primitive>>(result)->extract();
+	auto primitive = object_cast<LNO<raytracer::primitives::Primitive>>(result)->extract();
 	auto plane = std::dynamic_pointer_cast<raytracer::primitives::Plane>(primitive);
 	
 	REQUIRE(plane != nullptr);
@@ -187,9 +188,7 @@ TEST_CASE("[interpret] Evaluating (decorate (uniform-material (rgb 1 0 1)) (plan
 {
 	auto result = interpret("(decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0)))");
 
-	/*REQUIRE(has_object_type<LNO<raytracer::UniformMaterial>>(result));
-
-	auto material = object_cast<LNO<raytracer::UniformMaterial>>(result)->extract();*/
+	REQUIRE(has_object_type<LNO<raytracer::primitives::Primitive>>(result));
 }
 
 #endif
