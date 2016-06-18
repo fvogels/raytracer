@@ -4,14 +4,14 @@
 using namespace raytracer;
 using namespace math;
 
-Decorator::Decorator(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child)
+raytracer::primitives::Decorator::Decorator(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child)
 	: material(material), child(child)
 {
 	assert(material != nullptr);
 	assert(child != nullptr);
 }
 
-bool Decorator::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const
 {
 	auto old_material = hit->material;
 	hit->material = this->material;
