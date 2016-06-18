@@ -14,6 +14,7 @@
 #include "scripting/objects/function.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
+#include "logging.h"
 #include <assert.h>
 #include <algorithm>
 #include <stdlib.h>
@@ -28,14 +29,7 @@ const int N_THREADS = 1;
 using namespace math;
 using namespace raytracer;
 
-void initialize_logger()
-{
-	el::Configurations defaultConf;
-	defaultConf.setToDefault();
-	defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
-	defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
-	el::Loggers::reconfigureLogger("stdlib", defaultConf);
-}
+
 
 struct Light
 {
@@ -165,7 +159,7 @@ int main()
 {
 	std::cout << bar<decltype(foo)>(foo) << std::endl;
 
-	//initialize_logger();
+	logging::configure();
 
 	//const int FRAME_COUNT = 30;
 	//WIF wif("e:/temp/output/test.wif");
