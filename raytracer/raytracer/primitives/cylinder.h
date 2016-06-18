@@ -4,9 +4,12 @@
 
 namespace raytracer
 {
-	class Cylinder : public Primitive
+	namespace primitives
 	{
-	public:
-		virtual bool find_hit(const math::Ray&, Hit*) const override;
-	};
+		class Cylinder : public Primitive
+		{
+		public:
+			virtual bool find_hit(const math::Ray&, Hit*) const override;
+		};
+	}
 }
