@@ -51,24 +51,25 @@ namespace scripting
 		}
 
 		template<typename T>
-		struct IndexateTuple;
-
-		template<typename... Ts>
-		struct IndexateTuple<std::tuple<Ts...>>
+		struct StripType
 		{
-			template<unsigned... Ns>
-			static std::tuple<Indexed<Ns..., Ts>...> with(Indices<Ns...>)
-			{
-				return std::tuple<Indexed<Ns, Ts>...>();
-			}
+			using result = T;
+		};
+
+		template<typename T>
+		struct StripType<const T&>
+		{
+			using result = T;
 		};
 
 		template<typename Pair>
-		typename Pair::type convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
+		typename StripType<typename Pair::type>::result convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
 		{
-			CLOG(DEBUG, "stdlib") << "Converting argument #" << Pair::index << " of type " << typeid(*objects[Pair::index]).name() << " to " << typeid(scripting::NativeObject<typename Pair::type>).name();
+			using target_type = StripType<Pair::type>::result;
 
-			return scripting::object_cast<scripting::NativeObject<typename Pair::type>>(objects[Pair::index])->extract();
+			CLOG(DEBUG, "stdlib") << "Converting argument #" << Pair::index << " of type " << typeid(*objects[Pair::index]).name() << " to " << typeid(scripting::NativeObject<target_type>).name();
+
+			return scripting::object_cast<scripting::NativeObject<target_type>>(objects[Pair::index])->extract();
 		}
 
 		template<typename R, typename... Ps>
@@ -178,7 +179,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
 
 	BIND_FACTORY("plane", raytracer::primitives::plane);
 	BIND_FACTORY("decorate", raytracer::primitives::decorate);
-	BIND_CREATE_BY_POINTER("uniform-material", raytracer::UniformMaterial, raytracer::Material3D, color);
+	BIND_FACTORY("uniform-material", raytracer::materials::uniform);
 
 	BIND_LIBRARY_FUNCTION("let", Let);
 	BIND_LIBRARY_FUNCTION("if", If);
