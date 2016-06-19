@@ -220,6 +220,8 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
+    <ClCompile Include="imaging\color-mapper.cpp" />
+    <ClCompile Include="imaging\color-mapper.h" />
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
