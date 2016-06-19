@@ -296,7 +296,7 @@
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\function.h" />
-    <ClInclude Include="math\functions\bool_mapper.h" />
+    <ClInclude Include="math\functions\bool-mapper.h" />
     <ClInclude Include="math\functions\checkerboard.h" />
     <ClInclude Include="math\functions\horizontal-lines.h" />
     <ClInclude Include="math\functions\vertical-lines.h" />

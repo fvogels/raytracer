@@ -419,9 +419,6 @@
     <ClInclude Include="math\functions\horizontal-lines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\bool_mapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\functions\vertical-lines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -435,6 +432,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="logging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\bool-mapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
