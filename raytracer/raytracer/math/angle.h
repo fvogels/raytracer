@@ -17,7 +17,7 @@ namespace math
 		
 		friend Angle radians(long double);
 		friend Angle degrees(long double);
-
+		
 		double m_radians;
 	};
 
@@ -49,6 +49,16 @@ namespace math
 	inline Angle operator""_degrees(long long unsigned x)
 	{
 		return degrees(long double(x));
+	}
+
+	inline Angle operator *(const Angle& angle, double factor)
+	{
+		return radians(angle.radians() * factor);
+	}
+
+	inline Angle operator *(double factor, const Angle& angle)
+	{
+		return angle * factor;
 	}
 
 	inline double sin(Angle a) { return ::sin(a.radians()); }
