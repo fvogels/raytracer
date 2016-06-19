@@ -10,7 +10,8 @@ namespace raytracer
 {
 	namespace materials
 	{
-		std::shared_ptr<Material> checkered(const color&, const color&);
 		std::shared_ptr<Material> uniform(const color&);
+		std::shared_ptr<Material> checkered(const color&, const color&);
+		std::shared_ptr<Material> worley(const color&, const color&);
 	}
 }

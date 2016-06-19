@@ -192,9 +192,6 @@
     <ClCompile Include="logging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imaging\color-mapper.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imaging\color-mapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -435,6 +432,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\bool-mapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\color-mapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

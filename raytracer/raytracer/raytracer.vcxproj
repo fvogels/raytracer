@@ -221,7 +221,6 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
-    <ClCompile Include="imaging\color-mapper.h" />
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
@@ -287,6 +286,7 @@
     <ClInclude Include="Catch.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
+    <ClInclude Include="imaging\color-mapper.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="materials\material.h" />

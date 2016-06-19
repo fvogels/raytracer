@@ -40,7 +40,7 @@ struct Light
 
 struct Scene
 {
-	std::shared_ptr<Primitive> root;
+	std::shared_ptr<raytracer::primitives::Primitive> root;
 	std::vector<std::shared_ptr<Light>> lights;
 } scene;
 
@@ -89,12 +89,12 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 
 void create_root(double t)
 {
-	auto shape = raytracer::primitives::translate(Vector3D(0, -t, 0), raytracer::primitives::cylinder());
-	auto material = raytracer::materials::checkered(colors::white(), colors::black());
+	auto shape = raytracer::primitives::sphere();
+	auto material = raytracer::materials::worley(colors::white(), colors::black());
 	auto decorated_shape = raytracer::primitives::decorate(material, shape);
-	auto s1 = raytracer::primitives::rotate_around_y(180_degrees, decorated_shape);
+	auto s1 = raytracer::primitives::rotate_around_y(180_degrees * t, decorated_shape);
 
-	auto all = raytracer::primitives::group(std::vector<std::shared_ptr<Primitive>> { s1 });
+	auto all = raytracer::primitives::group(std::vector<std::shared_ptr<raytracer::primitives::Primitive>> { s1 });
 
 	scene.root = all;
 }
@@ -143,81 +143,71 @@ void worley()
 }
 
 
-Point3D foo(double x, double y, double z)
-{
-	return Point3D(x, y, z);
-}
-
-
-template<typename T>
-std::string bar(T x)
-{
-	return typeid(function_traits<T>::return_type).name();
-}
-
 int main()
 {
-	std::cout << bar<decltype(foo)>(foo) << std::endl;
+	TIMED_FUNC(timerObj);
 
 	logging::configure();
 
-	//const int FRAME_COUNT = 30;
-	//WIF wif("e:/temp/output/test.wif");
+	const int FRAME_COUNT = 30;
+	WIF wif("e:/temp/output/test.wif");
 
-	//for (int frame = 0; frame != FRAME_COUNT; ++frame)
-	//{
-	//	std::cout << "Rendering frame " << frame << std::endl;
+	for (int frame = 0; frame != FRAME_COUNT; ++frame)
+	{
+		TIMED_SCOPE(timerObj, "single frame");
 
-	//	Bitmap bitmap(500, 500);
-	//	camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-	//	create_scene(double(frame) / FRAME_COUNT);
+		std::cout << "Rendering frame " << frame << std::endl;
 
-	//	Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-	//	Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
+		Bitmap bitmap(500, 500);
+		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+		create_scene(double(frame) / FRAME_COUNT);
 
-	//	bitmap.clear(colors::black());
+		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
-	//	if (N_THREADS > 1)
-	//	{
-	//		std::atomic<unsigned> j = 0;
-	//		std::vector<std::thread> threads;
+		bitmap.clear(colors::black());
 
-	//		for (int k = 0; k != N_THREADS; ++k)
-	//		{
-	//			threads.push_back(std::thread([&]() {
-	//				unsigned current;
+		if (N_THREADS > 1)
+		{
+			std::atomic<unsigned> j = 0;
+			std::vector<std::thread> threads;
 
-	//				while ((current = j++) < bitmap.height())
-	//				{
-	//					for (int i = 0; i != bitmap.width(); ++i)
-	//					{
-	//						color c = render_pixel(window_rasteriser, i, current);
+			for (int k = 0; k != N_THREADS; ++k)
+			{
+				threads.push_back(std::thread([&]() {
+					unsigned current;
 
-	//						bitmap[position(i, current)] = c;
-	//					}
-	//				}
-	//			}));
-	//		}
+					while ((current = j++) < bitmap.height())
+					{
+						for (int i = 0; i != bitmap.width(); ++i)
+						{
+							color c = render_pixel(window_rasteriser, i, current);
 
-	//		for (auto& thread : threads)
-	//		{
-	//			thread.join();
-	//		}
-	//	}
-	//	else
-	//	{
-	//		for (int j = 0; j != bitmap.height(); ++j)
-	//		{
-	//			for (int i = 0; i != bitmap.width(); ++i)
-	//			{
-	//				color c = render_pixel(window_rasteriser, i, j);
+							bitmap[position(i, current)] = c;
+						}
+					}
+				}));
+			}
 
-	//				bitmap[position(i, j)] = c;
-	//			}
-	//		}
-	//	}
+			for (auto& thread : threads)
+			{
+				thread.join();
+			}
+		}
+		else
+		{
+			for (int j = 0; j != bitmap.height(); ++j)
+			{
+				for (int i = 0; i != bitmap.width(); ++i)
+				{
+					color c = render_pixel(window_rasteriser, i, j);
 
-	//	wif.write_frame(bitmap);
-	//}
+					bitmap[position(i, j)] = c;
+				}
+			}
+		}
+
+		wif.write_frame(bitmap);
+	}
 }
 #endif
