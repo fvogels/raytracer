@@ -1,4 +1,4 @@
-#include "math/worley-noise2d.h"
+#include "math/functions/worley-noise2d.h"
 #include <algorithm>
 #include <functional>
 #include <vector>
