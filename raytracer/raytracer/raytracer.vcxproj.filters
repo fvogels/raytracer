@@ -431,7 +431,7 @@
     <ClInclude Include="imaging\color-mapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\noise.h">
+    <ClInclude Include="math\functions\noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
