@@ -33,7 +33,7 @@ public:
 
 	color operator ()(const math::Point2D& p) const
 	{
-		return m_grayscale((*m_worley)(Point2D(p.x * 5, p.y * 5)) * 2);
+		return m_grayscale((*m_worley)(Point2D(p.x * 5, p.y * 5)) * 5);
 	}
 
 private:

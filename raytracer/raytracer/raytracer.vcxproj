@@ -303,8 +303,7 @@
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
     <ClInclude Include="math\matrix4d.h" />
-    <ClInclude Include="math\noise2d.h" />
-    <ClInclude Include="math\noise3d.h" />
+    <ClInclude Include="math\noise.h" />
     <ClInclude Include="math\point2d.h" />
     <ClInclude Include="math\point3d.h" />
     <ClInclude Include="math\rasterizer.h" />

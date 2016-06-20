@@ -374,12 +374,6 @@
     <ClInclude Include="scripting\objects\cons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\noise3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\noise2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\worley-noise2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -435,6 +429,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\color-mapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

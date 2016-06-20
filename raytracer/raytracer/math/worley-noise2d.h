@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/noise2d.h"
+#include "math/noise.h"
 #include <memory>
 
 namespace math
