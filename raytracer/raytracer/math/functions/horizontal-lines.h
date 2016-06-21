@@ -9,25 +9,24 @@ namespace math
 {
 	namespace functions
 	{
-		template<typename T>
-		class HorizontalLines : public Function<typename T::result, const Point2D&>
+		class HorizontalLines : public Function<bool, const Point2D&>
 		{
 		public:
-			HorizontalLines(double thickness, T converter = T())
-				: m_thickness(thickness), m_converter(converter) 
+			HorizontalLines(double thickness)
+				: m_thickness(thickness)
 			{
 				// NOP
 			}
 
-			typename T::result operator ()(const Point2D& p) const override
+			typename bool operator ()(const Point2D& p) const override
 			{
 				auto y = p.y * 10;
-				return m_converter(std::abs(y - std::round(y)) < m_thickness / 2);
+
+				return std::abs(y - std::round(y)) < m_thickness / 2;
 			}
 
 		private:
 			double m_thickness;
-			T m_converter;
 		};
 	}
 }
