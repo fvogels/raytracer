@@ -4,120 +4,63 @@
 
 using namespace math;
 
-Vector2D math::operator +(const Vector2D& u, const Vector2D& v)
-{
-	double x = u.x + v.x;
-	double y = u.y + v.y;
-
-	return Vector2D(x, y);
-}
-
-Vector2D math::operator -(const Vector2D& v)
-{
-	double x = -v.x;
-	double y = -v.y;
-
-	return Vector2D(x, y);
-}
-
-
-Vector2D math::operator -(const Vector2D& u, const Vector2D& v)
-{
-	double x = u.x - v.x;
-	double y = u.y - v.y;
-
-	return Vector2D(x, y);
-}
-
-Vector2D math::operator *(const Vector2D& v, double factor)
-{
-	double x = v.x * factor;
-	double y = v.y * factor;
-
-	return Vector2D(x, y);
-}
-
-Vector2D math::operator *(double factor, const Vector2D& v)
-{
-	return v * factor;
-}
-
-Vector2D math::operator /(const Vector2D& v, double factor)
-{
-	return v * (1.0 / factor);
-}
 
 std::ostream& math::operator <<(std::ostream& out, const Vector2D& v)
 {
 	return out << "(" << v.x << "," << v.y << ")";
 }
 
-double math::Vector2D::dot(const Vector2D& v) const
+constexpr double math::Vector2D::dot(const Vector2D& v) const noexcept
 {
-	double result = 0;
-
-	result += x * v.x;
-	result += y * v.y;
-
-	return result;
+	return x * v.x + y * v.y;
 }
 
-double math::Vector2D::norm_sqr() const
+constexpr double math::Vector2D::norm_sqr() const noexcept
 {
 	return dot(*this);
 }
 
-double math::Vector2D::norm() const
+double math::Vector2D::norm() const noexcept
 {
 	return std::sqrt(norm_sqr());
 }
 
-void math::Vector2D::normalize()
+void math::Vector2D::normalize() noexcept
 {
 	*this = normalized();
 }
 
-Vector2D math::Vector2D::normalized() const
+Vector2D math::Vector2D::normalized() const noexcept
 {
 	return *this / norm();
 }
 
-Vector2D& math::Vector2D::operator+=(const Vector2D& v)
+Vector2D& math::Vector2D::operator+=(const Vector2D& v) noexcept
 {
 	return *this = *this + v;
 }
 
-Vector2D& math::Vector2D::operator-=(const Vector2D& v)
+Vector2D& math::Vector2D::operator-=(const Vector2D& v) noexcept
 {
 	return *this = *this - v;
 }
 
-Vector2D& math::Vector2D::operator*=(double factor)
+Vector2D& math::Vector2D::operator*=(double factor) noexcept
 {
 	return *this = *this * factor;
 }
 
-Vector2D& math::Vector2D::operator/=(double factor)
+Vector2D& math::Vector2D::operator/=(double factor) noexcept
 {
 	return *this = *this / factor;
 }
 
-bool math::Vector2D::is_unit() const
+bool math::Vector2D::is_unit() const noexcept
 {
 	return norm() == approx(1);
 }
 
-bool math::Vector2D::is_perpendicular_on(const Vector2D& v) const
+constexpr bool math::Vector2D::is_perpendicular_on(const Vector2D& v) const noexcept
 {
 	return dot(v) == approx(0);
-}
-
-bool math::operator ==(const Vector2D& u, const Vector2D& v)
-{
-	return u.x == approx(v.x) && u.y == approx(v.y);
-}
-
-bool math::operator !=(const Vector2D& u, const Vector2D& v)
-{
-	return !(u == v);
 }
