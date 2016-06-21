@@ -7,56 +7,57 @@ namespace math
 	class Angle final
 	{
 	public:
-		double radians() const { return m_radians; }
-		double degrees() const { return m_radians * 180 / M_PI; }
+		constexpr double radians() const noexcept { return m_radians; }
+		constexpr double degrees() const noexcept { return m_radians * 180 / M_PI; }
 
 		Angle operator-() const { return Angle(-m_radians); }
 
 	private:
-		Angle(double x) : m_radians(x) { }
+		constexpr Angle(double x) noexcept
+			: m_radians(x) { }
 		
-		friend Angle radians(long double);
-		friend Angle degrees(long double);
+		friend constexpr Angle radians(long double) noexcept;
+		friend constexpr Angle degrees(long double) noexcept;
 		
 		double m_radians;
 	};
 
-	inline Angle radians(long double x)
+	inline constexpr Angle radians(long double x) noexcept
 	{
 		return Angle(x);
 	}
 
-	inline Angle degrees(long double x)
+	inline constexpr Angle degrees(long double x) noexcept
 	{
 		return Angle(x / 180 * M_PI);
 	}
 
-	inline Angle operator""_rad(long double x)
+	inline constexpr Angle operator""_rad(long double x) noexcept
 	{
 		return radians(x);
 	}
 
-	inline Angle operator""_degrees(long double x)
+	inline constexpr Angle operator""_degrees(long double x) noexcept
 	{
 		return degrees(x);
 	}
 
-	inline Angle operator""_rad(long long unsigned x)
+	inline constexpr Angle operator""_rad(long long unsigned x) noexcept
 	{
 		return radians(long double(x));
 	}
 
-	inline Angle operator""_degrees(long long unsigned x)
+	inline constexpr Angle operator""_degrees(long long unsigned x) noexcept
 	{
 		return degrees(long double(x));
 	}
 
-	inline Angle operator *(const Angle& angle, double factor)
+	inline constexpr Angle operator *(const Angle& angle, double factor) noexcept
 	{
 		return radians(angle.radians() * factor);
 	}
 
-	inline Angle operator *(double factor, const Angle& angle)
+	inline constexpr Angle operator *(double factor, const Angle& angle) noexcept
 	{
 		return angle * factor;
 	}
