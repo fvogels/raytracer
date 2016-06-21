@@ -9,7 +9,7 @@
 #include "rendering/grid-sampler.h"
 #include "materials/uniform-material.h"
 #include "materials/materials.h"
-#include "math/functions/worley-noise2d.h"
+#include "math/functions/worley-noise.h"
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
 #include "meta/function-traits.h"

@@ -1,7 +1,7 @@
 #include "materials/materials.h"
 #include "math/function.h"
 #include "math/functions/checkerboard.h"
-#include "math/functions/worley-noise2d.h"
+#include "math/functions/worley-noise.h"
 #include "math/functions/bool-mapper.h"
 #include "imaging/color-mapper.h"
 

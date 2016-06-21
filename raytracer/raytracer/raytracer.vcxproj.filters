@@ -192,7 +192,7 @@
     <ClCompile Include="imaging\color-mapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\worley-noise2d.cpp">
+    <ClCompile Include="math\functions\worley-noise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -431,7 +431,7 @@
     <ClInclude Include="math\functions\noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\worley-noise2d.h">
+    <ClInclude Include="math\functions\worley-noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
