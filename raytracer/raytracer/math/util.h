@@ -7,26 +7,32 @@ struct approx
 	double value;
 	double delta;
 
-	approx(double value, double delta = 0.00001) 
+	constexpr approx(double value, double delta = 0.00001) noexcept
 		: value(value), delta(delta) { }	
 };
 
-inline bool operator ==(const approx& x, double y)
+template<typename T>
+constexpr T abs(T x) noexcept
 {
-	return fabs(y - x.value) < x.delta;
+	return x < 0 ? -x : x;
 }
 
-inline bool operator ==(double x, const approx& y)
+constexpr bool operator ==(const approx& x, double y)
+{
+	return abs<double>(y - x.value) < x.delta;
+}
+
+constexpr bool operator ==(double x, const approx& y)
 {
 	return y == x;
 }
 
-inline bool operator !=(const approx& x, double y)
+constexpr bool operator !=(const approx& x, double y)
 {
 	return !(x == y);
 }
 
-inline bool operator !=(double x, const approx& y)
+constexpr bool operator !=(double x, const approx& y)
 {
 	return !(x == y);
 }
