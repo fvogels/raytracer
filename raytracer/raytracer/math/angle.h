@@ -22,42 +22,42 @@ namespace math
 		double m_radians;
 	};
 
-	inline constexpr Angle radians(long double x) noexcept
+	constexpr Angle radians(long double x) noexcept
 	{
 		return Angle(x);
 	}
 
-	inline constexpr Angle degrees(long double x) noexcept
+	constexpr Angle degrees(long double x) noexcept
 	{
 		return Angle(x / 180 * M_PI);
 	}
 
-	inline constexpr Angle operator""_rad(long double x) noexcept
+	constexpr Angle operator""_rad(long double x) noexcept
 	{
 		return radians(x);
 	}
 
-	inline constexpr Angle operator""_degrees(long double x) noexcept
+	constexpr Angle operator""_degrees(long double x) noexcept
 	{
 		return degrees(x);
 	}
 
-	inline constexpr Angle operator""_rad(long long unsigned x) noexcept
+	constexpr Angle operator""_rad(long long unsigned x) noexcept
 	{
 		return radians(long double(x));
 	}
 
-	inline constexpr Angle operator""_degrees(long long unsigned x) noexcept
+	constexpr Angle operator""_degrees(long long unsigned x) noexcept
 	{
 		return degrees(long double(x));
 	}
 
-	inline constexpr Angle operator *(const Angle& angle, double factor) noexcept
+	constexpr Angle operator *(const Angle& angle, double factor) noexcept
 	{
 		return radians(angle.radians() * factor);
 	}
 
-	inline constexpr Angle operator *(double factor, const Angle& angle) noexcept
+	constexpr Angle operator *(double factor, const Angle& angle) noexcept
 	{
 		return angle * factor;
 	}
