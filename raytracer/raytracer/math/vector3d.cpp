@@ -1,72 +1,21 @@
 #include "math/vector3d.h"
-#include "math/util.h"
 #include <math.h>
 
 using namespace math;
 
-Vector3D math::operator +(const Vector3D& u, const Vector3D& v)
-{
-	double x = u.x + v.x;
-	double y = u.y + v.y;
-	double z = u.z + v.z;
 
-	return Vector3D(x, y, z);
-}
-
-Vector3D math::operator -(const Vector3D& v)
-{
-	double x = - v.x;
-	double y = - v.y;
-	double z = - v.z;
-
-	return Vector3D(x, y, z);
-}
-
-Vector3D math::operator -(const Vector3D& u, const Vector3D& v)
-{
-	double x = u.x - v.x;
-	double y = u.y - v.y;
-	double z = u.z - v.z;
-
-	return Vector3D(x, y, z);
-}
-
-Vector3D math::operator *(const Vector3D& v, double factor)
-{
-	double x = v.x * factor;
-	double y = v.y * factor;
-	double z = v.z * factor;
-
-	return Vector3D(x, y, z);
-}
-
-Vector3D math::operator *(double factor, const Vector3D& v)
-{
-	return v * factor;
-}
-
-Vector3D math::operator /(const Vector3D& v, double factor)
-{
-	return v * (1.0 / factor);
-}
 
 std::ostream& math::operator <<(std::ostream& out, const Vector3D& v)
 {
 	return out << "(" << v.x << "," << v.y << "," << v.z << ")";
 }
 
-double math::Vector3D::dot(const Vector3D& v) const
+constexpr double math::Vector3D::dot(const Vector3D& v) const noexcept
 {
-	double result = 0;
-
-	result += x * v.x;
-	result += y * v.y;
-	result += z * v.z;
-
-	return result;
+	return x * v.x + y * v.y + z * v.z;
 }
 
-Vector3D math::Vector3D::cross(const Vector3D& v) const
+Vector3D math::Vector3D::cross(const Vector3D& v) const noexcept
 {
 	const Vector3D& u = *this;
 
@@ -77,62 +26,47 @@ Vector3D math::Vector3D::cross(const Vector3D& v) const
 	return Vector3D(x, y, z);
 }
 
-double math::Vector3D::norm_sqr() const
+constexpr double math::Vector3D::norm_sqr() const noexcept
 {
 	return dot(*this);
 }
 
-double math::Vector3D::norm() const
+double math::Vector3D::norm() const noexcept
 {
 	return std::sqrt(norm_sqr());
 }
 
-void math::Vector3D::normalize()
+void math::Vector3D::normalize() noexcept
 {
 	*this = normalized();
 }
 
-Vector3D math::Vector3D::normalized() const
+Vector3D math::Vector3D::normalized() const noexcept
 {
 	return *this / norm();
 }
 
-Vector3D& math::Vector3D::operator+=(const Vector3D& v)
+Vector3D& math::Vector3D::operator+=(const Vector3D& v) noexcept
 {
 	return *this = *this + v;
 }
 
-Vector3D& math::Vector3D::operator-=(const Vector3D& v)
+Vector3D& math::Vector3D::operator-=(const Vector3D& v) noexcept
 {
 	return *this = *this - v;
 }
 
-Vector3D& math::Vector3D::operator*=(double factor)
+Vector3D& math::Vector3D::operator*=(double factor) noexcept
 {
 	return *this = *this * factor;
 }
 
-Vector3D& math::Vector3D::operator/=(double factor)
+Vector3D& math::Vector3D::operator/=(double factor) noexcept
 {
 	return *this = *this / factor;
 }
 
-bool math::Vector3D::is_unit() const
+bool math::Vector3D::is_unit() const noexcept
 {
 	return norm() == approx(1);
-}
-
-bool math::Vector3D::is_perpendicular_on(const Vector3D& v) const
-{
-	return dot(v) == approx(0);
-}
-
-bool math::operator ==(const Vector3D& u, const Vector3D& v)
-{
-	return u.x == v.x && u.y == v.y && u.z == v.z;
-}
-
-bool math::operator !=(const Vector3D& u, const Vector3D& v)
-{
-	return !(u == v);
 }
