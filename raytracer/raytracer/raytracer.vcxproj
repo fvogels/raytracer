@@ -232,6 +232,8 @@
     <ClCompile Include="materials\checkered-material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\materials.cpp" />
+    <ClCompile Include="math\functions\noise.cpp" />
+    <ClCompile Include="math\functions\patterns.cpp" />
     <ClCompile Include="math\interval.cpp" />
     <ClCompile Include="math\interval-mapper.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
@@ -243,7 +245,6 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
-    <ClCompile Include="math\functions\worley-noise.cpp" />
     <ClCompile Include="primitives\primitives.cpp" />
     <ClCompile Include="primitives\cylinder.cpp" />
     <ClCompile Include="primitives\decorator.cpp" />
@@ -300,9 +301,7 @@
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\function.h" />
     <ClInclude Include="math\functions\bool-mapper.h" />
-    <ClInclude Include="math\functions\checkerboard.h" />
-    <ClInclude Include="math\functions\horizontal-lines.h" />
-    <ClInclude Include="math\functions\vertical-lines.h" />
+    <ClInclude Include="math\functions\patterns.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
     <ClInclude Include="math\matrix4d.h" />
@@ -317,7 +316,6 @@
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="materials\checkered-material.h" />
-    <ClInclude Include="math\functions\worley-noise.h" />
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
     <ClInclude Include="primitives\cylinder.h" />

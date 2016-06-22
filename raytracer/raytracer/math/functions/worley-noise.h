@@ -1,9 +1,0 @@
-#pragma once
-
-#include "math/functions/noise.h"
-#include <memory>
-
-namespace math
-{
-	std::shared_ptr<Noise2D> create_worley_noise2d();
-}

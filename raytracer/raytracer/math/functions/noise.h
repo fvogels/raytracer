@@ -7,7 +7,11 @@
 
 namespace math
 {
-	class Noise2D : public math::Function<double, const Point2D&> { };
+	namespace functions
+	{
+		typedef math::Function<double, const Point2D&> Noise2D;
+		typedef math::Function<double, const Point3D&> Noise3D;
 
-	class Noise3D : public math::Function<double, const Point3D&> { };
+		Noise2D worley_noise2d();
+	}
 }

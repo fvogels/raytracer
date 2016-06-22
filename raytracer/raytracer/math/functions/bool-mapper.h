@@ -6,22 +6,16 @@
 namespace math
 {
 	namespace functions
-	{
-		template<typename R> class BoolMapper : public Function<R, bool>
+	{		
+		template<typename R>
+		Function<R, bool> bool_mapper(R t, R f)
 		{
-		public:
-			BoolMapper(R t, R f)
-				: m_true(t), m_false(f) { }
-
-
-			R operator ()(bool b) const override
+			std::function<R(bool)> lambda = [t, f](bool b)
 			{
-				return b ? m_true : m_false;
-			}
+				return b ? t : f;
+			};
 
-		private:
-			R m_true;
-			R m_false;
-		};
+			return from_lambda(lambda);
+		}
 	}
 }

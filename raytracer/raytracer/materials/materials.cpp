@@ -1,7 +1,7 @@
 #include "materials/materials.h"
 #include "math/function.h"
-#include "math/functions/checkerboard.h"
-#include "math/functions/worley-noise.h"
+#include "math/functions/patterns.h"
+#include "math/functions/noise.h"
 #include "math/functions/bool-mapper.h"
 #include "imaging/color-mapper.h"
 
@@ -16,34 +16,16 @@ std::shared_ptr<Material> raytracer::materials::uniform(const color& c)
 
 std::shared_ptr<Material> raytracer::materials::checkered(const color& c1, const color& c2)
 {
-	auto bool_mapper = math::functions::BoolMapper<color>(c1, c2);
-	auto texture = std::make_shared<math::functions::Checkerboard<math::functions::BoolMapper<color>>>(bool_mapper);
+	auto bool_mapper = math::functions::bool_mapper(c1, c2);
+	auto texture = math::functions::checkerboard();
 
-	return std::make_shared<SimpleMaterial2D>(texture);
+	return std::make_shared<SimpleMaterial2D>(texture >> bool_mapper);
 }
-
-class WorleyMaterial : public math::Function<color, const math::Point2D&>
-{
-public:
-	WorleyMaterial()
-		: m_worley(math::create_worley_noise2d())
-	{
-		//  NOP
-	}
-
-	color operator ()(const math::Point2D& p) const
-	{
-		return m_grayscale((*m_worley)(Point2D(p.x * 5, p.y * 5)) * 5);
-	}
-
-private:
-	Grayscale m_grayscale;
-	std::shared_ptr<math::Noise2D> m_worley;
-};
 
 std::shared_ptr<Material> raytracer::materials::worley(const color& c1, const color& c2)
 {
-	auto worley = std::make_shared<WorleyMaterial>();
+	auto color_mapper = imaging::color_mapping::grayscale();
+	math::Function<double, const Point2D&> texture = math::functions::worley_noise2d();
 
-	return std::make_shared<SimpleMaterial2D>(worley);
+	return std::make_shared<SimpleMaterial2D>(texture >> color_mapper);
 }

@@ -17,15 +17,15 @@ namespace raytracer
 	class SimpleMaterial2D : public Material2D
 	{
 	public:
-		SimpleMaterial2D(std::shared_ptr<math::Function<color, const math::Point2D&>> color_function)
+		SimpleMaterial2D(math::Function<color, const math::Point2D&> color_function)
 			: m_color_function(color_function) { }
 
 		color at(const math::Point2D& p) const override
 		{
-			return (*m_color_function)(p);
+			return m_color_function(p);
 		}
 
 	private:
-		std::shared_ptr<math::Function<color, const math::Point2D&>> m_color_function;
+		math::Function<color, const math::Point2D&> m_color_function;
 	};
 }

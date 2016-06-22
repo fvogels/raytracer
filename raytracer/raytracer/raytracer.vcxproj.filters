@@ -192,7 +192,10 @@
     <ClCompile Include="imaging\color-mapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\worley-noise.cpp">
+    <ClCompile Include="math\functions\patterns.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\noise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -401,18 +404,6 @@
     <ClInclude Include="materials\material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\functions\horizontal-lines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\functions\vertical-lines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\functions\checkerboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\cylinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -431,7 +422,10 @@
     <ClInclude Include="math\functions\noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\worley-noise.h">
+    <ClInclude Include="math\functions\patterns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

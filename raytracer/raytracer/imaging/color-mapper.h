@@ -4,10 +4,10 @@
 #include "math/function.h"
 
 
-class ColorMapper : public math::Function<color, double> { };
-
-class Grayscale : public ColorMapper
+namespace imaging
 {
-public:
-	color operator ()(double) const override;
-};
+	namespace color_mapping
+	{
+		math::Function<color, double> grayscale();
+	}
+}

@@ -1,13 +1,86 @@
 #pragma once
 
+#include <functional>
+#include <memory>
+
+
 namespace math
 {
 	template<typename R, typename... Ts>
-	struct Function
+	struct FunctionBody
 	{
-		virtual R operator ()(Ts... ts) const = 0;
+		virtual R evaluate(Ts... args) const = 0;
 
 		typedef R result;
 		typedef std::tuple<Ts...> parameters;
 	};
+
+	template<typename R, typename... Ts>
+	class LambdaFunctionBody : public FunctionBody<R, Ts...>
+	{
+	public:
+		LambdaFunctionBody(std::function<R(Ts...)> lambda)
+			: m_lambda(lambda) { }
+
+		R evaluate(Ts... args) const override { return m_lambda(args...); }
+
+	private:
+		std::function<R(Ts...)> m_lambda;
+	};
+
+	template<typename R, typename... Ts>
+	class Function
+	{
+	public:
+		Function(std::shared_ptr<FunctionBody<R, Ts...>> body)
+			: m_body(std::move(body)) { }
+
+		Function(const Function<R, Ts...>&) = default;
+
+		R operator ()(Ts... ts) const
+		{
+			return m_body->evaluate(ts...);
+		}
+
+		typedef R result;
+		typedef std::tuple<Ts...> parameters;
+
+	private:
+		std::shared_ptr<FunctionBody<R, Ts...>> m_body;
+	};
+
+	template<typename R, typename... Ts>
+	Function<R, Ts...> from_lambda(std::function<R(Ts...)> lambda)
+	{
+		return Function<R, Ts...>(std::make_shared<LambdaFunctionBody<R, Ts...>>(lambda));
+	}
+
+	template<typename R2, typename R1, typename... Ts>
+	class Composition : public FunctionBody<R2, Ts...>
+	{
+	public:
+		Composition(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
+			: m_f(f), m_g(g) { }
+
+		R2 evaluate(Ts... args) const override
+		{
+			return m_g(m_f(args...));
+		}
+
+	private:
+		Function<R1, Ts...> m_f;
+		Function<R2, R1> m_g;
+	};
+
+	template<typename R2, typename R1, typename... Ts>
+	Function<R2, Ts...> compose(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
+	{
+		return Function<T2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
+	}
+
+	template<typename R2, typename R1, typename... Ts>
+	Function<R2, Ts...> operator >>(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
+	{
+		return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
+	}
 }
