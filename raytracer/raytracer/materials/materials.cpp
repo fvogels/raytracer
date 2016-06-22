@@ -17,7 +17,7 @@ std::shared_ptr<Material> raytracer::materials::uniform(const color& c)
 std::shared_ptr<Material> raytracer::materials::checkered(const color& c1, const color& c2)
 {
 	auto bool_mapper = math::functions::bool_mapper(c1, c2);
-	auto texture = math::functions::checkerboard();
+	auto texture = math::functions::checkered();
 
 	return std::make_shared<SimpleMaterial2D>(texture >> bool_mapper);
 }

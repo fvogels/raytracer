@@ -3,7 +3,7 @@
 using namespace math;
 
 
-Function<bool, const Point2D&> math::functions::checkerboard()
+Function<bool, const Point2D&> math::functions::checkered()
 {
 	std::function<bool(const Point2D&)> function = [](const Point2D& p)
 	{
