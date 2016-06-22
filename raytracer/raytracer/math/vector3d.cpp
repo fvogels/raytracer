@@ -4,13 +4,12 @@
 using namespace math;
 
 
-
 std::ostream& math::operator <<(std::ostream& out, const Vector3D& v)
 {
 	return out << "(" << v.x << "," << v.y << "," << v.z << ")";
 }
 
-constexpr double math::Vector3D::dot(const Vector3D& v) const noexcept
+double math::Vector3D::dot(const Vector3D& v) const noexcept
 {
 	return x * v.x + y * v.y + z * v.z;
 }
@@ -26,7 +25,7 @@ Vector3D math::Vector3D::cross(const Vector3D& v) const noexcept
 	return Vector3D(x, y, z);
 }
 
-constexpr double math::Vector3D::norm_sqr() const noexcept
+double math::Vector3D::norm_sqr() const noexcept
 {
 	return dot(*this);
 }
@@ -69,4 +68,44 @@ Vector3D& math::Vector3D::operator/=(double factor) noexcept
 bool math::Vector3D::is_unit() const noexcept
 {
 	return norm() == approx(1);
+}
+
+Vector3D math::operator +(const Vector3D& u, const Vector3D& v) noexcept
+{
+	return Vector3D(u.x + v.x, u.y + v.y, u.z + v.z);
+}
+
+Vector3D math::operator -(const Vector3D& v) noexcept
+{
+	return Vector3D(-v.x, -v.y, -v.z);
+}
+
+Vector3D math::operator -(const Vector3D& u, const Vector3D& v) noexcept
+{
+	return Vector3D(u.x - v.x, u.y - v.y, u.z - v.z);
+}
+
+Vector3D math::operator *(const Vector3D& v, double factor) noexcept
+{
+	return Vector3D(v.x * factor, v.y * factor, v.z * factor);
+}
+
+Vector3D math::operator *(double factor, const Vector3D& v) noexcept
+{
+	return v * factor;
+}
+
+Vector3D math::operator /(const Vector3D& v, double factor) noexcept
+{
+	return v * (1.0 / factor);
+}
+
+bool math::operator ==(const Vector3D& u, const Vector3D& v) noexcept
+{
+	return u.x == v.x && u.y == v.y && u.z == v.z;
+}
+
+bool math::operator !=(const Vector3D& u, const Vector3D& v) noexcept
+{
+	return !(u == v);
 }

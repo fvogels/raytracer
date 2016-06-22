@@ -21,35 +21,13 @@ namespace math
 		Point2D& operator =(const Point2D&) noexcept = default;
 	};
 
-	constexpr Point2D operator +(const Point2D& p, const Vector2D& v) noexcept
-	{
-		return Point2D(p.x + v.x, p.y + v.y);
-	}
+	Point2D operator +(const Point2D&, const Vector2D&) noexcept;
+	Point2D operator +(const Vector2D&, const Point2D&) noexcept;
+	Vector2D operator -(const Point2D&, const Point2D&) noexcept;
+	Point2D operator -(const Point2D&, const Vector2D&) noexcept;
 
-	constexpr Point2D operator +(const Vector2D& v, const Point2D& p) noexcept
-	{
-		return p + v;
-	}
-
-	constexpr Vector2D operator -(const Point2D& p, const Point2D& q) noexcept
-	{
-		return Vector2D(p.x - q.x, p.y - q.y);
-	}
-
-	constexpr Point2D operator -(const Point2D& p, const Vector2D& v) noexcept
-	{
-		return Point2D(p.x - v.x, p.y - v.y);
-	}
-
-	constexpr bool operator ==(const Point2D& p, const Point2D& q) noexcept
-	{
-		return p.x == approx(q.x) && p.y == approx(q.y);
-	}
-
-	constexpr bool operator !=(const Point2D& p, const Point2D& q) noexcept
-	{
-		return !(p == q);
-	}
+	bool operator ==(const Point2D&, const Point2D&) noexcept;
+	bool operator !=(const Point2D&, const Point2D&) noexcept;
 
 	double distance(const Point2D&, const Point2D&) noexcept;
 

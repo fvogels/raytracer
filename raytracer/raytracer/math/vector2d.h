@@ -36,45 +36,15 @@ namespace math
 		constexpr bool is_perpendicular_on(const Vector2D&) const noexcept;
 	};
 
-	constexpr Vector2D operator +(const Vector2D& u, const Vector2D& v) noexcept
-	{
-		return Vector2D(u.x + v.x, u.y + v.y);
-	}
+	Vector2D operator +(const Vector2D&, const Vector2D&) noexcept;
+	Vector2D operator -(const Vector2D&) noexcept;
+	Vector2D operator -(const Vector2D&, const Vector2D&) noexcept;
+	Vector2D operator *(const Vector2D&, double) noexcept;
+	Vector2D operator *(double, const Vector2D&) noexcept;
+	Vector2D operator /(const Vector2D&, double) noexcept;
 
-	constexpr Vector2D operator -(const Vector2D& v) noexcept
-	{
-		return Vector2D(-v.x, -v.y);
-	}
-
-	constexpr Vector2D operator -(const Vector2D& u, const Vector2D& v) noexcept
-	{
-		return Vector2D(u.x - v.x, u.y - v.y);
-	}
-
-	constexpr Vector2D operator *(const Vector2D& v, double factor) noexcept
-	{
-		return Vector2D(v.x * factor, v.y * factor);
-	}
-
-	constexpr Vector2D operator *(double factor, const Vector2D& v) noexcept
-	{
-		return v * factor;
-	}
-
-	constexpr Vector2D operator /(const Vector2D& v, double factor) noexcept
-	{
-		return v * (1.0 / factor);
-	}
-
-	constexpr bool operator ==(const Vector2D& u, const Vector2D& v) noexcept
-	{
-		return u.x == approx(v.x) && u.y == approx(v.y);
-	}
-
-	constexpr bool operator !=(const Vector2D& u, const Vector2D& v) noexcept
-	{
-		return !(u == v);
-	}
+	bool operator ==(const Vector2D&, const Vector2D&) noexcept;
+	bool operator !=(const Vector2D&, const Vector2D&) noexcept;
 
 	std::ostream& operator <<(std::ostream& out, const Vector2D&);
 }
