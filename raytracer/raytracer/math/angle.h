@@ -13,7 +13,7 @@ namespace math
 		Angle operator-() const { return Angle(-m_radians); }
 
 	private:
-		constexpr Angle(double x) noexcept
+		constexpr explicit Angle(double x) noexcept
 			: m_radians(x) { }
 		
 		friend constexpr Angle radians(long double) noexcept;
