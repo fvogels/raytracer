@@ -36,6 +36,11 @@ std::shared_ptr<Primitive> raytracer::primitives::translate(const math::Vector3D
 	return transform(math::translation(v), transformee);
 }
 
+std::shared_ptr<Primitive> raytracer::primitives::scale(double x, double y, double z, std::shared_ptr<const Primitive> transformee)
+{
+	return transform(math::scale(x, y, z), transformee);
+}
+
 std::shared_ptr<Primitive> raytracer::primitives::rotate_around_x(math::Angle angle, std::shared_ptr<const Primitive> transformee)
 {
 	return transform(math::rotate_x(angle), transformee);
