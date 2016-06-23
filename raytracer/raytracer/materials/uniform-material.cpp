@@ -1,8 +1,14 @@
 #include "materials/uniform-material.h"
 
 using namespace math;
+using namespace raytracer;
 
-color raytracer::UniformMaterial::at(const Point3D&) const
+
+MaterialProperties raytracer::UniformMaterial::at(const Point3D&) const
 {
-	return this->c;
+	MaterialProperties properties;
+
+	properties.c = this->c;
+
+	return properties;
 }

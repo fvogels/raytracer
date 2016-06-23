@@ -5,17 +5,12 @@
 #include "math/point3d.h"
 #include "imaging/color.h"
 #include "materials/material.h"
+#include "primitives/hit-position.h"
 #include <limits>
 #include <memory>
 
 namespace raytracer
 {
-	struct HitPosition
-	{
-		math::Point2D uv;
-		math::Point3D xyz;
-	};
-
 	struct Hit
 	{
 		double t;

@@ -192,6 +192,9 @@
     <ClCompile Include="math\functions\noise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="materials\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -270,9 +273,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\material3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\uniform-material.h">
@@ -389,9 +389,6 @@
     <ClInclude Include="easylogging++.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials\material2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="materials\material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -420,6 +417,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\hit-position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,8 +7,6 @@
 #include "math/rectangle2d.h"
 #include "math/rasterizer.h"
 #include "rendering/grid-sampler.h"
-#include "materials/material2d.h"
-#include "materials/material3d.h"
 #include "materials/materials.h"
 #include "math/functions/noise.h"
 #include "scripting/objects.h"
@@ -64,21 +62,7 @@ color determine_color(const Ray& r)
 
 			if (cos_angle > 0 && hit.material)
 			{
-				auto material2d = std::dynamic_pointer_cast<Material2D>(hit.material);
-				color hit_color;
-
-				if (material2d)
-				{
-					hit_color = material2d->at(hit.local_position.uv);
-				}
-				else
-				{
-					auto material3d = std::dynamic_pointer_cast<Material3D>(hit.material);
-
-					assert(material3d);
-
-					hit_color = material3d->at(hit.local_position.xyz);
-				}
+				color hit_color = hit.material->at(hit.local_position).c;
 
 				c += hit_color * cos_angle;
 			}
@@ -90,7 +74,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(2, 2);
+	GridSampler sampler(1, 1);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -107,7 +91,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 void create_root(double t)
 {
 	auto shape = raytracer::primitives::sphere();
-	auto material = raytracer::materials::uniform(colors::red());
+	auto material = raytracer::materials::checkered(colors::red(), colors::blue());
 	auto decorated_shape = raytracer::primitives::decorate(material, shape);
 	auto s1 = raytracer::primitives::rotate_around_y(180_degrees * t, decorated_shape);
 

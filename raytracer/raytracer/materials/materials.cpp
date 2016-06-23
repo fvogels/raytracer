@@ -1,5 +1,5 @@
+#include "materials/material.h"
 #include "materials/materials.h"
-#include "materials/material2d.h"
 #include "materials/uniform-material.h"
 #include "math/function.h"
 #include "math/functions/functions.h"
@@ -12,6 +12,29 @@ using namespace math;
 using namespace raytracer;
 using namespace raytracer::materials;
 
+
+namespace
+{
+	class SimpleMaterial2D : public Material2D
+	{
+	public:
+		SimpleMaterial2D(math::Function<color, const Point2D&> function)
+			: m_function(function) { }
+
+	protected:
+		MaterialProperties at(const math::Point2D& p) const override
+		{
+			MaterialProperties properties;
+
+			properties.c = m_function(p);
+
+			return properties;
+		}
+
+	private:
+		math::Function<color, const Point2D&> m_function;
+	};
+}
 
 std::shared_ptr<Material> raytracer::materials::worley(const color& c1, const color& c2)
 {

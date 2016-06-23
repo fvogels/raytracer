@@ -230,6 +230,7 @@
     <ClCompile Include="imaging\bmp_format.cpp" />
     <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\checkered-material.cpp" />
+    <ClCompile Include="materials\material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="math\functions\noise.cpp" />
@@ -292,9 +293,7 @@
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="materials\material.h" />
-    <ClInclude Include="materials\material3d.h" />
     <ClInclude Include="materials\materials.h" />
-    <ClInclude Include="materials\material2d.h" />
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\function.h" />
@@ -318,6 +317,7 @@
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
     <ClInclude Include="primitives\cylinder.h" />
+    <ClInclude Include="primitives\hit-position.h" />
     <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator.h" />
     <ClInclude Include="primitives\hit.h" />

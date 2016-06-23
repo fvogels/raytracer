@@ -1,8 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "Cylinder.h"
 #include "materials/material.h"
-#include "materials/material2d.h"
-#include "materials/material3d.h"
 #include "util/misc.h"
 #include <assert.h>
 #include <math.h>

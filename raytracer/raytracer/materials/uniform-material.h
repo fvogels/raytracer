@@ -1,6 +1,6 @@
 #pragma once
 
-#include "materials/material3d.h"
+#include "materials/material.h"
 
 namespace raytracer
 {
@@ -9,7 +9,8 @@ namespace raytracer
 	public:
 		UniformMaterial(const color& c) : c(c) { }
 
-		color at(const math::Point3D&) const override;
+	protected:
+		MaterialProperties at(const math::Point3D&) const override;
 
 	private:
 		color c;

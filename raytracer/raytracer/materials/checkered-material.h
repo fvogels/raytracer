@@ -1,7 +1,6 @@
 #pragma once
 
-#include "materials/material2d.h"
-#include "materials/material3d.h"
+#include "materials/material.h"
 
 namespace raytracer
 {
@@ -10,7 +9,8 @@ namespace raytracer
 	public:
 		CheckeredMaterial3D(const color& c1, const color& c2) : c1(c1), c2(c2) { }
 
-		color at(const math::Point3D&) const override;
+	protected:
+		MaterialProperties at(const math::Point3D&) const override;
 
 	private:
 		color c1, c2;
