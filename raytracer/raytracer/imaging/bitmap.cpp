@@ -1,8 +1,10 @@
 #include "imaging/bitmap.h"
 #include <assert.h>
 
+using namespace imaging;
 
-Bitmap::Bitmap(unsigned width, unsigned height)
+
+imaging::Bitmap::Bitmap(unsigned width, unsigned height)
     : m_width(width)
     , m_height(height)
     , m_pixels(std::move(std::make_unique<color[]>(width * height)))
@@ -10,7 +12,7 @@ Bitmap::Bitmap(unsigned width, unsigned height)
     // NOP
 }
 
-Bitmap::Bitmap(Bitmap&& other)
+imaging::Bitmap::Bitmap(Bitmap&& other)
     : m_width(other.m_width)
     , m_height(other.m_height)
     , m_pixels(std::move(other.m_pixels))
@@ -18,19 +20,19 @@ Bitmap::Bitmap(Bitmap&& other)
     // NOP
 }
 
-bool Bitmap::is_inside(const position& p) const
+bool imaging::Bitmap::is_inside(const position& p) const
 {
     return p.x < m_width && p.y < m_height;
 }
 
-color& Bitmap::operator[](const position& p)
+color& imaging::Bitmap::operator[](const position& p)
 {
     unsigned index = p.x + p.y * m_width;
 
     return m_pixels[index];
 }
 
-const color& Bitmap::operator[](const position& p) const
+const color& imaging::Bitmap::operator[](const position& p) const
 {
     assert(is_inside(p));
 
@@ -38,7 +40,7 @@ const color& Bitmap::operator[](const position& p) const
     return m_pixels[index];
 }
 
-void Bitmap::clear(const color& color)
+void imaging::Bitmap::clear(const color& color)
 {
     for (unsigned y = 0; y != m_height; ++y)
     {

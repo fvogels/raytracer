@@ -8,7 +8,7 @@ namespace raytracer
 {
 	struct MaterialProperties
 	{
-		color c;
+		imaging::color color;
 	};
 
 	class Material

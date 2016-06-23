@@ -12,6 +12,8 @@
 #include <sstream>
 
 using namespace scripting;
+using namespace imaging;
+
 
 template<typename T>
 using NO = NativeObject<T>;

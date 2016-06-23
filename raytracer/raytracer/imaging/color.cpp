@@ -1,6 +1,8 @@
 #include "imaging/color.h"
 #include "math/util.h"
 
+using namespace imaging;
+
 
 double clamp(double x)
 {
@@ -9,66 +11,66 @@ double clamp(double x)
     else return x;
 }
 
-void color::clamp()
+void imaging::color::clamp()
 {
     r = ::clamp(r);
     g = ::clamp(g);
     b = ::clamp(b);
 }
 
-color color::clamped() const
+color imaging::color::clamped() const
 {
     color copy = *this;
     copy.clamp();
     return copy;
 }
 
-color operator +(const color& c1, const color& c2)
+color imaging::operator +(const color& c1, const color& c2)
 {
     return color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
 }
 
-color operator *(const color& c, double f)
+color imaging::operator *(const color& c, double f)
 {
     return color(c.r * f, c.g * f, c.b * f);
 }
 
-color operator *(double f, const color& c)
+color imaging::operator *(double f, const color& c)
 {
     return c * f;
 }
 
-color operator /(const color& c, double f)
+color imaging::operator /(const color& c, double f)
 {
     return c * (1 / f);
 }
 
-color& operator +=(color& c1, const color& c2)
+color& imaging::operator +=(color& c1, const color& c2)
 {
     return c1 = c1 + c2;
 }
 
-color& operator *=(color& c, double f)
+color& imaging::operator *=(color& c, double f)
 {
     return c = c * f;
 }
 
-color& operator /=(color& c, double f)
+color& imaging::operator /=(color& c, double f)
 {
     return c = c / f;
 }
 
-bool operator ==(const color& c1, const color& c2)
+bool imaging::operator ==(const color& c1, const color& c2)
 {
 	return c1.r == approx(c2.r) && c1.g == approx(c2.g) && c1.b == approx(c2.b);
 }
 
-bool operator !=(const color& c1, const color& c2)
+bool imaging::operator !=(const color& c1, const color& c2)
 {
 	return !(c1 == c2);
 }
 
-std::ostream& operator <<(std::ostream& out, const color& c)
+std::ostream& imaging::operator <<(std::ostream& out, const color& c)
 {
 	return out << "RGB[" << c.r << "," << c.g << "," << c.b << "]";
 }

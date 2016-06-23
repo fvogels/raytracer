@@ -7,12 +7,12 @@ namespace raytracer
 	class UniformMaterial : public Material3D
 	{
 	public:
-		UniformMaterial(const color& c) : c(c) { }
+		UniformMaterial(const imaging::color& c) : c(c) { }
 
 	protected:
 		MaterialProperties at(const math::Point3D&) const override;
 
 	private:
-		color c;
+		imaging::color c;
 	};
 }

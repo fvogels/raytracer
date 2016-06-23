@@ -11,6 +11,7 @@
 using namespace math;
 using namespace raytracer;
 using namespace raytracer::materials;
+using namespace imaging;
 
 
 namespace
@@ -26,7 +27,7 @@ namespace
 		{
 			MaterialProperties properties;
 
-			properties.c = m_function(p);
+			properties.color = m_function(p);
 
 			return properties;
 		}
@@ -38,7 +39,7 @@ namespace
 
 std::shared_ptr<Material> raytracer::materials::worley(const color& c1, const color& c2)
 {
-	auto color_mapper = imaging::color_mapping::grayscale();
+	auto color_mapper = color_mapping::grayscale();
 	math::Function<double, const Point2D&> texture = math::functions::worley_noise2d();
 
 	return std::make_shared<SimpleMaterial2D>(texture >> color_mapper);

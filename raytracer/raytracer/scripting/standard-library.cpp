@@ -11,6 +11,10 @@
 #include <sstream>
 #include <typeinfo>
 
+using namespace scripting;
+using namespace imaging;
+
+
 namespace scripting
 {
 	namespace library
@@ -152,9 +156,6 @@ namespace scripting
 		}
 	}
 }
-
-using namespace scripting;
-
 
 
 static math::Vector3D create_vector(double x, double y, double z) { return math::Vector3D(x, y, z); }

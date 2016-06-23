@@ -1,5 +1,8 @@
 #include "wif_format.h"
 
+using namespace imaging;
+
+
 struct RGB
 {
 	uint8_t r, g, b;
@@ -15,19 +18,19 @@ struct RGB
 };
 
 
-WIF::WIF(const std::string& path) : out(path, std::ios::binary)
+imaging::WIF::WIF(const std::string& path) : out(path, std::ios::binary)
 {
 	// NOP
 }
 
-WIF::~WIF()
+imaging::WIF::~WIF()
 {
 	uint32_t datum = 0;
 
 	out.write(reinterpret_cast<char*>(&datum), sizeof(uint32_t));
 }
 
-void WIF::write_frame(const Bitmap& bitmap)
+void imaging::WIF::write_frame(const Bitmap& bitmap)
 {
 	uint32_t width = bitmap.width();
 	uint32_t height = bitmap.height();

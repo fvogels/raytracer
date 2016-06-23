@@ -27,7 +27,7 @@ const int N_THREADS = 4;
 
 using namespace math;
 using namespace raytracer;
-
+using namespace imaging;
 
 
 struct Light
@@ -62,7 +62,7 @@ color determine_color(const Ray& r)
 
 			if (cos_angle > 0 && hit.material)
 			{
-				color hit_color = hit.material->at(hit.local_position).c;
+				color hit_color = hit.material->at(hit.local_position).color;
 
 				c += hit_color * cos_angle;
 			}

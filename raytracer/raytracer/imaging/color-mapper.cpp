@@ -1,5 +1,7 @@
 #include "imaging/color-mapper.h"
 
+using namespace imaging;
+
 
 math::Function<color, double> imaging::color_mapping::grayscale()
 {

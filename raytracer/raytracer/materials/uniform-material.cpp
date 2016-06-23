@@ -8,7 +8,7 @@ MaterialProperties raytracer::UniformMaterial::at(const Point3D&) const
 {
 	MaterialProperties properties;
 
-	properties.c = this->c;
+	properties.color = this->c;
 
 	return properties;
 }
