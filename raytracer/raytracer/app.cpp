@@ -75,7 +75,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(2, 2);
+	GridSampler sampler(1, 1);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -91,12 +91,18 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 
 void create_root(double t)
 {
-	auto shape = raytracer::primitives::xy_plane();
-	auto material = raytracer::materials::grid(0.1, colors::white(), colors::black());
-	auto decorated_shape = raytracer::primitives::decorate(material, shape);
-	auto s1 = raytracer::primitives::rotate_around_y(360_degrees * t, decorated_shape);
+	using namespace raytracer::primitives;
 
-	auto all = raytracer::primitives::group(std::vector<std::shared_ptr<raytracer::primitives::Primitive>> { s1 });
+	auto shape = xy_plane();
+	auto material = raytracer::materials::grid(0.1, colors::white(), colors::black());
+	auto decorated_shape = decorate(material, shape);
+	auto s1 = rotate_around_y(360_degrees * t, decorated_shape);
+
+	auto small_sphere = scale(0.5, 0.5, 0.5, sphere());
+	auto s2 = decorate(raytracer::materials::uniform(colors::red()), small_sphere);
+	auto s3 = decorate(raytracer::materials::uniform(colors::red()), translate(Vector3D(0, 0, 1), small_sphere));
+
+	auto all = group(std::vector<std::shared_ptr<Primitive>> { s1, s2, s3 });
 
 	scene.root = all;
 }
@@ -160,7 +166,7 @@ int main()
 		std::cout << "Rendering frame " << frame << std::endl;
 
 		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+		camera = create_perspective_camera(Point3D(5, 5, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
 		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));

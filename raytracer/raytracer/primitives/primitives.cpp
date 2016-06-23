@@ -16,6 +16,16 @@ std::shared_ptr<Primitive> raytracer::primitives::xy_plane()
 	return std::make_shared<raytracer::primitives::PlaneXY>();
 }
 
+std::shared_ptr<Primitive> raytracer::primitives::xz_plane()
+{
+	return std::make_shared<raytracer::primitives::PlaneXZ>();
+}
+
+std::shared_ptr<Primitive> raytracer::primitives::yz_plane()
+{
+	return std::make_shared<raytracer::primitives::PlaneYZ>();
+}
+
 std::shared_ptr<Primitive> raytracer::primitives::sphere()
 {
 	return std::make_shared<raytracer::primitives::Sphere>();

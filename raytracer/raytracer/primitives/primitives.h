@@ -14,6 +14,8 @@ namespace raytracer
 	namespace primitives
 	{
 		std::shared_ptr<Primitive> xy_plane();
+		std::shared_ptr<Primitive> xz_plane();
+		std::shared_ptr<Primitive> yz_plane();
 		std::shared_ptr<Primitive> sphere();
 		std::shared_ptr<Primitive> cylinder();
 
