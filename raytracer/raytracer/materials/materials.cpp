@@ -2,6 +2,7 @@
 #include "materials/material2d.h"
 #include "materials/uniform-material.h"
 #include "math/function.h"
+#include "math/functions/functions.h"
 #include "math/functions/patterns.h"
 #include "math/functions/noise.h"
 #include "math/functions/bool-mapper.h"
@@ -11,11 +12,6 @@ using namespace math;
 using namespace raytracer;
 using namespace raytracer::materials;
 
-
-std::shared_ptr<Material> raytracer::materials::uniform(const color& c)
-{
-	return std::make_shared<UniformMaterial>(c);
-}
 
 std::shared_ptr<Material> raytracer::materials::worley(const color& c1, const color& c2)
 {
@@ -30,6 +26,11 @@ std::shared_ptr<Material> raytracer::materials::pattern2d(math::Function<bool, c
 	auto bool_mapper = math::functions::bool_mapper(c1, c2);
 
 	return std::make_shared<SimpleMaterial2D>(pattern >> bool_mapper);
+}
+
+std::shared_ptr<Material> raytracer::materials::uniform(const color& c)
+{
+	return std::make_shared<SimpleMaterial2D>(math::functions::constant<color, const Point2D&>(c));
 }
 
 std::shared_ptr<Material> raytracer::materials::checkered(const color& c1, const color& c2)

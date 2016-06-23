@@ -90,7 +90,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 void create_root(double t)
 {
 	auto shape = raytracer::primitives::sphere();
-	auto material = raytracer::materials::grid(0.1, colors::black(), colors::white());
+	auto material = raytracer::materials::uniform(colors::red());
 	auto decorated_shape = raytracer::primitives::decorate(material, shape);
 	auto s1 = raytracer::primitives::rotate_around_y(180_degrees * t, decorated_shape);
 
