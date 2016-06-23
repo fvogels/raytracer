@@ -14,36 +14,24 @@ using namespace math;
 
 namespace
 {
-	std::shared_ptr<Hit> create_hit(const Ray& ray, const Context& context, double t)
+	Point2D compute_uv_from_xyz(const Point3D& p)
 	{
-		auto hit = std::make_shared<Hit>();
+		double u = 0.5 + atan2(p.y, p.x) / (2 * M_PI);
+		double v = p.z;
 
+		assert(0 <= u);
+		assert(u <= 1);
+
+		Point2D uv(u, v);
+	}
+
+	void initialize_hit(Hit* hit, const Ray& ray, double t)
+	{
+		hit->t = t;
 		hit->position = ray.at(hit->t);
+		hit->local_position.xyz = hit->position;
+		hit->local_position.uv = compute_uv_from_xyz(hit->position);
 		hit->normal = Vector3D(hit->position.x, hit->position.y, 0);
-
-		auto material2d = std::dynamic_pointer_cast<Material2D>(context.material);
-		if (material2d != nullptr)
-		{
-			double u = 0.5 + atan2(hit->position.y, hit->position.x) / (2 * M_PI);
-			double v = hit->position.z;
-
-			assert(0 <= u);
-			assert(u <= 1);
-
-			Point2D uv(u, v);
-
-			hit->c = material2d->at(uv);
-		}
-		else
-		{
-			auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
-
-			assert(material3d != nullptr);
-
-			hit->c = material3d->at(hit->position);
-		}
-
-		return hit;
 	}
 }
 
@@ -65,8 +53,12 @@ bool raytracer::primitives::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 		{
 			double sqrt_d = std::sqrt(d);
 
+			// Compute both t's at which ray intersects cylinder
 			double t1 = (-b - sqrt_d) / (2 * a);
 			double t2 = (-b + sqrt_d) / (2 * a);
+
+			// Find smallest t > 0
+			double t;
 
 			if (t1 > t2)
 			{
@@ -75,43 +67,29 @@ bool raytracer::primitives::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 
 			if (t1 > 0)
 			{
-				hit->t = t1;
+				t = t1;
 			}
 			else if (t2 > 0)
 			{
-				hit->t = t2;
+				t = t2;
+			}
+			else
+			{
+				// Both hits are behind the eye
+				return false;
+			}
+
+			// Check if there's no better preexisting hit
+			if (t < hit->t)
+			{
+				initialize_hit(hit, ray, t);
+
+				return true;
 			}
 			else
 			{
 				return false;
 			}
-
-			hit->position = ray.at(hit->t);
-			hit->normal = Vector3D(hit->position.x, hit->position.y, 0);
-
-			auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
-			if (material2d != nullptr)
-			{
-				double u = 0.5 + atan2(hit->position.y, hit->position.x) / (2 * M_PI);
-				double v = hit->position.z;
-
-				assert(0 <= u);
-				assert(u <= 1);
-
-				Point2D uv(u, v);
-
-				hit->c = material2d->at(uv);
-			}
-			else
-			{
-				auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
-
-				assert(material3d != nullptr);
-
-				hit->c = material3d->at(hit->position);
-			}
-
-			return true;
 		}
 		else
 		{
@@ -124,7 +102,7 @@ bool raytracer::primitives::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 	}
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Cylinder::hits(const math::Ray& ray, const Context& context) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::Cylinder::hits(const math::Ray& ray) const
 {
 	Point2D O(ray.origin.x, ray.origin.y);
 	Vector2D D(ray.direction.x, ray.direction.y);
@@ -150,8 +128,14 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Cylinder::hits(const ma
 
 			auto hits = std::vector<std::shared_ptr<Hit>>();
 
-			hits.push_back(create_hit(ray, context, t1));
-			hits.push_back(create_hit(ray, context, t2));
+			auto hit1 = std::make_shared<Hit>();
+			auto hit2 = std::make_shared<Hit>();
+
+			initialize_hit(hit1.get(), ray, t1);
+			initialize_hit(hit2.get(), ray, t2);
+
+			hits.push_back(hit1);
+			hits.push_back(hit2);
 
 			return hits;
 		}

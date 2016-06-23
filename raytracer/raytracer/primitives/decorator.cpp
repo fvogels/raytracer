@@ -4,6 +4,17 @@
 using namespace raytracer;
 using namespace math;
 
+namespace
+{
+	void update_hit(Hit* hit, std::shared_ptr<Material> material)
+	{
+		if (hit->material == nullptr)
+		{
+			hit->material = material;
+		}
+	}
+}
+
 raytracer::primitives::Decorator::Decorator(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child)
 	: material(material), child(child)
 {
@@ -13,20 +24,24 @@ raytracer::primitives::Decorator::Decorator(std::shared_ptr<Material> material, 
 
 bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const
 {
-	auto old_material = hit->material;
-	hit->material = this->material;
-	
 	bool result = child->find_hit(ray, hit);
 
-	hit->material = old_material;
+	if (result)
+	{
+		update_hit(hit, this->material);
+	}
 
 	return result;
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Decorator::hits(const math::Ray& ray, const Context& context) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::Decorator::hits(const math::Ray& ray) const
 {
-	Context updated_context = context;
-	updated_context.material = this->material;
+	auto hits = this->child->hits(ray);
 
-	return this->child->hits(ray, updated_context);
+	for (auto hit : hits)
+	{
+		update_hit(hit.get(), material);
+	}
+
+	return hits;
 }

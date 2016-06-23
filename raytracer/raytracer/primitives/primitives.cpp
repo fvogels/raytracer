@@ -1,7 +1,6 @@
 #include "primitives/primitives.h"
 #include "primitives/primitive.h"
 #include "primitives/sphere.h"
-#include "primitives/plane.h"
 #include "primitives/cylinder.h"
 #include "primitives/union.h"
 #include "primitives/transformer.h"
@@ -19,11 +18,6 @@ std::shared_ptr<Primitive> raytracer::primitives::sphere()
 std::shared_ptr<Primitive> raytracer::primitives::cylinder()
 {
 	return std::make_shared<raytracer::primitives::Cylinder>();
-}
-
-std::shared_ptr<Primitive> raytracer::primitives::plane(const math::Point3D& point, const math::Vector3D& normal, const math::Vector3D& u)
-{
-	return std::make_shared<Plane>(point, normal, u);
 }
 
 std::shared_ptr<Primitive> raytracer::primitives::transform(const math::Transformation& transformation, std::shared_ptr<const Primitive> transformee)

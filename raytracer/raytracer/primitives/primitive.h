@@ -18,7 +18,7 @@ namespace raytracer
 		{
 		public:
 			virtual bool find_hit(const math::Ray&, Hit*) const = 0;
-			virtual std::vector<std::shared_ptr<Hit>> hits(const math::Ray&, const Context&) const = 0;
+			virtual std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const = 0;
 		};
 	}
 }

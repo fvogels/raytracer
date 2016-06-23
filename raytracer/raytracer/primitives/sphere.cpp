@@ -13,38 +13,26 @@ using namespace math;
 
 namespace
 {
-	std::shared_ptr<Hit> create_hit(const Ray& ray, const Context& context, double t)
+	Point2D compute_uv_from_xyz(const Point3D& p)
 	{
-		auto hit = std::make_shared<Hit>();
+		double u = 0.5 + atan2(p.z, p.x) / (2 * M_PI);
+		double v = 0.5 - asin(p.y) / M_PI;
 
+		assert(0 <= u);
+		assert(u <= 1);
+		assert(0 <= v);
+		assert(v <= 1);
+
+		return Point2D(u, v);
+	}
+
+	void initialize_hit(Hit* hit, const Ray& ray, double t)
+	{
+		hit->t = t;
 		hit->position = ray.at(t);
+		hit->local_position.xyz = hit->position;
+		hit->local_position.uv = compute_uv_from_xyz(hit->position);
 		hit->normal = hit->position - Point3D();
-
-		auto material2d = std::dynamic_pointer_cast<Material2D>(context.material);
-		if (material2d != nullptr)
-		{
-			double u = 0.5 + atan2(hit->position.z, hit->position.x) / (2 * M_PI);
-			double v = 0.5 - asin(hit->position.y) / M_PI;
-
-			assert(0 <= u);
-			assert(u <= 1);
-			assert(0 <= v);
-			assert(v <= 1);
-
-			Point2D uv(u, v);
-
-			hit->c = material2d->at(uv);
-		}
-		else
-		{
-			auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
-
-			assert(material3d != nullptr);
-
-			hit->c = material3d->at(hit->position);
-		}
-
-		return hit;
 	}
 }
 
@@ -61,8 +49,12 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 	{
 		double sqrt_d = std::sqrt(d);
 
+		// Compute t's at which ray intersects sphere
 		double t1 = (-b - sqrt_d) / (2 * a);
 		double t2 = (-b + sqrt_d) / (2 * a);
+
+		// Find closest t > 0
+		double t;
 
 		if (t1 > t2)
 		{
@@ -71,42 +63,27 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 
 		if (t1 > 0)
 		{
-			hit->t = t1;
+			t = t1;
 		}
 		else if (t2 > 0)
 		{
-			hit->t = t2;
+			t = t2;
+		}
+		else
+		{
+			// Both hits occur behind the eye
+			return false;
+		}
+
+		if (t < hit->t)
+		{
+			initialize_hit(hit, ray, t);
+
+			return true;
 		}
 		else
 		{
 			return false;
-		}
-
-		hit->position = ray.at(hit->t);
-		hit->normal = hit->position - Point3D();
-
-		auto material2d = std::dynamic_pointer_cast<Material2D>(hit->material);
-		if (material2d != nullptr)
-		{
-			double u = 0.5 + atan2(hit->position.z, hit->position.x) / (2 * M_PI);
-			double v = 0.5 - asin(hit->position.y) / M_PI;
-
-			assert(0 <= u);
-			assert(u <= 1);
-			assert(0 <= v);
-			assert(v <= 1);
-
-			Point2D uv(u, v);
-
-			hit->c = material2d->at(uv);
-		}
-		else
-		{
-			auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
-
-			assert(material3d != nullptr);
-
-			hit->c = material3d->at(hit->position);
 		}
 
 		return true;
@@ -117,7 +94,7 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 	}
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray& ray, const Context& context) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray& ray) const
 {
 	assert(hit != nullptr);
 
@@ -140,8 +117,14 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray&
 
 		std::vector<std::shared_ptr<Hit>> hits;
 
-		hits.push_back(create_hit(ray, context, t1));
-		hits.push_back(create_hit(ray, context, t2));
+		auto hit1 = std::make_shared<Hit>();
+		auto hit2 = std::make_shared<Hit>();
+
+		initialize_hit(hit1.get(), ray, t1);
+		initialize_hit(hit2.get(), ray, t2);
+
+		hits.push_back(hit1);
+		hits.push_back(hit2);
 
 		return hits;
 	}

@@ -78,9 +78,6 @@
     <ClCompile Include="tests\rasteriser_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\plane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="materials\uniform-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -276,9 +273,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\material3d.h">

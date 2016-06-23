@@ -7,7 +7,8 @@
 #include "math/rectangle2d.h"
 #include "math/rasterizer.h"
 #include "rendering/grid-sampler.h"
-#include "materials/uniform-material.h"
+#include "materials/material2d.h"
+#include "materials/material3d.h"
 #include "materials/materials.h"
 #include "math/functions/noise.h"
 #include "scripting/objects.h"
@@ -61,9 +62,25 @@ color determine_color(const Ray& r)
 			assert(hit.normal.is_unit());
 			assert(-1 <= cos_angle && cos_angle <= 1);
 
-			if (cos_angle > 0)
+			if (cos_angle > 0 && hit.material)
 			{
-				c += hit.c * cos_angle;
+				auto material2d = std::dynamic_pointer_cast<Material2D>(hit.material);
+				color hit_color;
+
+				if (material2d)
+				{
+					hit_color = material2d->at(hit.local_position.uv);
+				}
+				else
+				{
+					auto material3d = std::dynamic_pointer_cast<Material3D>(hit.material);
+
+					assert(material3d);
+
+					hit_color = material3d->at(hit.local_position.xyz);
+				}
+
+				c += hit_color * cos_angle;
 			}
 		}
 	}

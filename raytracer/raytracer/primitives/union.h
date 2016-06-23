@@ -14,7 +14,7 @@ namespace raytracer
 			Union(std::vector<std::shared_ptr<Primitive>>&);
 
 			bool find_hit(const math::Ray&, Hit*) const override;
-			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&, const Context&) const override;
+			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
 
 		private:
 			std::vector<std::shared_ptr<Primitive>> children;

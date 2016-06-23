@@ -15,7 +15,7 @@ namespace raytracer
 				: transformer(transformer), transformee(transformee) { }
 
 			bool find_hit(const math::Ray&, Hit*) const override;
-			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&, const Context&) const override;
+			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
 
 		private:
 			math::Transformation transformer;

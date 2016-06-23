@@ -15,7 +15,6 @@ namespace raytracer
 	{
 		std::shared_ptr<Primitive> sphere();
 		std::shared_ptr<Primitive> cylinder();
-		std::shared_ptr<Primitive> plane(const math::Point3D&, const math::Vector3D&, const math::Vector3D&);
 
 		std::shared_ptr<Primitive> transform(const math::Transformation&, std::shared_ptr<const Primitive>);
 		std::shared_ptr<Primitive> translate(const math::Vector3D&, std::shared_ptr<const Primitive>);

@@ -177,7 +177,6 @@ void scripting::add_standard_library_bindings(Environment* environment)
 	BIND_FACTORY("->", create_vector);
 	BIND_FACTORY("rgb", create_color);
 
-	BIND_FACTORY("plane", raytracer::primitives::plane);
 	BIND_FACTORY("decorate", raytracer::primitives::decorate);
 	BIND_FACTORY("uniform-material", raytracer::materials::uniform);
 

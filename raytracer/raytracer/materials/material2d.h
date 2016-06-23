@@ -14,6 +14,8 @@ namespace raytracer
 		virtual color at(const math::Point2D&) const = 0;
 	};
 
+	std::shared_ptr<Material> material2d(math::Function<color, const math::Point2D&>);
+
 	class SimpleMaterial2D : public Material2D
 	{
 	public:
