@@ -9,9 +9,9 @@ namespace math
 	{
 	public:
 		Transformation(const Matrix4D& Transformation_matrix, const Matrix4D& inverse_Transformation_matrix)
-			: Transformation_matrix(Transformation_matrix), inverse_Transformation_matrix(inverse_Transformation_matrix)  { }
+			: transformation_matrix(Transformation_matrix), inverse_Transformation_matrix(inverse_Transformation_matrix)  { }
 	
-		Matrix4D Transformation_matrix;
+		Matrix4D transformation_matrix;
 		Matrix4D inverse_Transformation_matrix;
 	};
 
