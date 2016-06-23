@@ -20,7 +20,7 @@ Function<bool, const Point2D&> math::functions::horizontal_lines(double thicknes
 {
 	std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
 	{
-		auto y = p.y * 10;
+		auto y = p.y;
 
 		return std::abs(y - std::round(y)) < thickness / 2;
 	};
@@ -32,7 +32,7 @@ Function<bool, const Point2D&> math::functions::vertical_lines(double thickness)
 {
 	std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
 	{
-		auto x = p.x * 10;
+		auto x = p.x;
 
 		return std::abs(x - std::round(x)) < thickness / 2;
 	};
@@ -44,8 +44,8 @@ Function<bool, const Point2D&> math::functions::grid(double thickness)
 {
 	std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
 	{
-		auto x = p.x * 10;
-		auto y = p.y * 10;
+		auto x = p.x;
+		auto y = p.y;
 
 		return std::abs(x - std::round(x)) < thickness / 2 || std::abs(y - std::round(y)) < thickness / 2;
 	};

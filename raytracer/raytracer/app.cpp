@@ -23,6 +23,7 @@
 #include <thread>
 #include <atomic>
 
+const int FRAME_COUNT = 30;
 const int N_THREADS = 4;
 
 using namespace math;
@@ -74,7 +75,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(1, 1);
+	GridSampler sampler(2, 2);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -90,10 +91,10 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 
 void create_root(double t)
 {
-	auto shape = raytracer::primitives::sphere();
-	auto material = raytracer::materials::checkered(colors::red(), colors::blue());
+	auto shape = raytracer::primitives::xy_plane();
+	auto material = raytracer::materials::grid(0.1, colors::white(), colors::black());
 	auto decorated_shape = raytracer::primitives::decorate(material, shape);
-	auto s1 = raytracer::primitives::rotate_around_y(180_degrees * t, decorated_shape);
+	auto s1 = raytracer::primitives::rotate_around_y(360_degrees * t, decorated_shape);
 
 	auto all = raytracer::primitives::group(std::vector<std::shared_ptr<raytracer::primitives::Primitive>> { s1 });
 
@@ -150,7 +151,6 @@ int main()
 
 	logging::configure();
 
-	const int FRAME_COUNT = 30;
 	WIF wif("e:/temp/output/test.wif");
 
 	for (int frame = 0; frame != FRAME_COUNT; ++frame)

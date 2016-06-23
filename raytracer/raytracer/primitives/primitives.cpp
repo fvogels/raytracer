@@ -1,5 +1,6 @@
 #include "primitives/primitives.h"
 #include "primitives/primitive.h"
+#include "primitives/plane.h"
 #include "primitives/sphere.h"
 #include "primitives/cylinder.h"
 #include "primitives/union.h"
@@ -9,6 +10,11 @@
 
 using namespace raytracer;
 using namespace raytracer::primitives;
+
+std::shared_ptr<Primitive> raytracer::primitives::xy_plane()
+{
+	return std::make_shared<raytracer::primitives::PlaneXY>();
+}
 
 std::shared_ptr<Primitive> raytracer::primitives::sphere()
 {

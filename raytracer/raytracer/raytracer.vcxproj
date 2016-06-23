@@ -246,6 +246,7 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
+    <ClCompile Include="primitives\plane.cpp" />
     <ClCompile Include="primitives\primitives.cpp" />
     <ClCompile Include="primitives\cylinder.cpp" />
     <ClCompile Include="primitives\decorator.cpp" />
@@ -318,6 +319,7 @@
     <ClInclude Include="logging.h" />
     <ClInclude Include="primitives\cylinder.h" />
     <ClInclude Include="primitives\hit-position.h" />
+    <ClInclude Include="primitives\plane.h" />
     <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator.h" />
     <ClInclude Include="primitives\hit.h" />
