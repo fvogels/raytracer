@@ -83,8 +83,6 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 		{
 			return false;
 		}
-
-		return true;
 	}
 	else
 	{
