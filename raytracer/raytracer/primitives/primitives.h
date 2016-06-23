@@ -28,5 +28,6 @@ namespace raytracer
 
 		std::shared_ptr<Primitive> decorate(Material material, std::shared_ptr<Primitive> child);
 		std::shared_ptr<Primitive> group(std::vector<std::shared_ptr<Primitive>>&);
+		std::shared_ptr<Primitive> intersection(std::shared_ptr<Primitive>, std::shared_ptr<Primitive>);
 	}
 }

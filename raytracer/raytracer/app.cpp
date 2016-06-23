@@ -93,18 +93,12 @@ void create_root(double t)
 {
 	using namespace raytracer::primitives;
 
-	auto shape = xy_plane();
-	auto material = raytracer::materials::grid(0.1, colors::white(), colors::black());
-	auto decorated_shape = decorate(material, shape);
-	auto s1 = rotate_around_y(360_degrees * t, decorated_shape);
+	auto s1 = translate(Vector3D(0.25, 0, 0), sphere());
+	auto s2 = translate(Vector3D(-0.25, 0, 0), sphere());
 
-	auto small_sphere = scale(0.5, 0.5, 0.5, sphere());
-	auto s2 = decorate(raytracer::materials::uniform(colors::red()), small_sphere);
-	auto s3 = decorate(raytracer::materials::uniform(colors::red()), translate(Vector3D(0, 0, 1), small_sphere));
+	auto material = raytracer::materials::uniform(colors::red());
 
-	auto all = group(std::vector<std::shared_ptr<Primitive>> { s1, s2, s3 });
-
-	scene.root = all;
+	scene.root = decorate(material, rotate_around_y(360_degrees * t, intersection(s1, s2)));
 }
 
 void create_lights(double t)

@@ -4,6 +4,7 @@
 #include "primitives/sphere.h"
 #include "primitives/cylinder.h"
 #include "primitives/union.h"
+#include "primitives/intersection.h"
 #include "primitives/transformer.h"
 #include "primitives/decorator.h"
 #include "math/transformation.h"
@@ -74,4 +75,9 @@ std::shared_ptr<Primitive> raytracer::primitives::decorate(Material material, st
 std::shared_ptr<Primitive> raytracer::primitives::group(std::vector<std::shared_ptr<Primitive>>& children)
 {
 	return std::make_shared<raytracer::primitives::Union>(children);
+}
+
+std::shared_ptr<Primitive> raytracer::primitives::intersection(std::shared_ptr<Primitive> first, std::shared_ptr<Primitive> second)
+{
+	return std::make_shared<raytracer::primitives::Intersection>(first, second);
 }
