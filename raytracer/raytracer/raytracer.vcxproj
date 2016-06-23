@@ -301,6 +301,7 @@
     <ClInclude Include="math\angle.h" />
     <ClInclude Include="math\function.h" />
     <ClInclude Include="math\functions\bool-mapper.h" />
+    <ClInclude Include="math\functions\functions.h" />
     <ClInclude Include="math\functions\patterns.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />

@@ -428,5 +428,8 @@
     <ClInclude Include="math\function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\functions\functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
