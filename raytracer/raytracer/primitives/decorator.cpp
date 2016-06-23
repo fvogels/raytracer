@@ -6,19 +6,19 @@ using namespace math;
 
 namespace
 {
-	void update_hit(Hit* hit, std::shared_ptr<Material> material)
+	void update_hit(Hit* hit, Material material)
 	{
-		if (hit->material == nullptr)
+		if (!hit->material)
 		{
 			hit->material = material;
 		}
 	}
 }
 
-raytracer::primitives::Decorator::Decorator(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child)
+raytracer::primitives::Decorator::Decorator(Material material, std::shared_ptr<Primitive> child)
 	: material(material), child(child)
 {
-	assert(material != nullptr);
+	assert(material);
 	assert(child != nullptr);
 }
 

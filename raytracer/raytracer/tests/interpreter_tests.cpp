@@ -13,6 +13,7 @@
 
 using namespace scripting;
 using namespace imaging;
+using namespace raytracer;
 
 
 template<typename T>
@@ -168,7 +169,7 @@ TEST_CASE("[interpret] Evaluating (uniform-material (rgb 1 0 1))", "[interpreter
 {
 	auto result = interpret("(uniform-material (rgb 1 0 1))");
 
-	REQUIRE(has_object_type<LNO<raytracer::Material>>(result));
+	REQUIRE(has_object_type<NO<Material>>(result));
 }
 
 #endif

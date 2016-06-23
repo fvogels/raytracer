@@ -37,42 +37,42 @@ namespace
 	};
 }
 
-std::shared_ptr<Material> raytracer::materials::worley(const color& c1, const color& c2)
+Material raytracer::materials::worley(const color& c1, const color& c2)
 {
 	auto color_mapper = color_mapping::grayscale();
 	math::Function<double, const Point2D&> texture = math::functions::worley_noise2d();
 
-	return std::make_shared<SimpleMaterial2D>(texture >> color_mapper);
+	return Material(std::make_shared<SimpleMaterial2D>(texture >> color_mapper));
 }
 
-std::shared_ptr<Material> raytracer::materials::pattern2d(math::Function<bool, const Point2D&> pattern, const color& c1, const color& c2)
+Material raytracer::materials::pattern2d(math::Function<bool, const Point2D&> pattern, const color& c1, const color& c2)
 {
 	auto bool_mapper = math::functions::bool_mapper(c1, c2);
 
-	return std::make_shared<SimpleMaterial2D>(pattern >> bool_mapper);
+	return Material(std::make_shared<SimpleMaterial2D>(pattern >> bool_mapper));
 }
 
-std::shared_ptr<Material> raytracer::materials::uniform(const color& c)
+Material raytracer::materials::uniform(const color& c)
 {
-	return std::make_shared<SimpleMaterial2D>(math::functions::constant<color, const Point2D&>(c));
+	return Material(std::make_shared<SimpleMaterial2D>(math::functions::constant<color, const Point2D&>(c)));
 }
 
-std::shared_ptr<Material> raytracer::materials::checkered(const color& c1, const color& c2)
+Material raytracer::materials::checkered(const color& c1, const color& c2)
 {
 	return pattern2d(math::functions::checkered(), c1, c2);
 }
 
-std::shared_ptr<Material> raytracer::materials::horizontal_lines(double thickness, const color& c1, const color& c2)
+Material raytracer::materials::horizontal_lines(double thickness, const color& c1, const color& c2)
 {
 	return pattern2d(math::functions::horizontal_lines(thickness), c1, c2);
 }
 
-std::shared_ptr<Material> raytracer::materials::vertical_lines(double thickness, const color& c1, const color& c2)
+Material raytracer::materials::vertical_lines(double thickness, const color& c1, const color& c2)
 {
 	return pattern2d(math::functions::vertical_lines(thickness), c1, c2);
 }
 
-std::shared_ptr<Material> raytracer::materials::grid(double thickness, const color& c1, const color& c2)
+Material raytracer::materials::grid(double thickness, const color& c1, const color& c2)
 {
 	return pattern2d(math::functions::grid(thickness), c1, c2);
 }

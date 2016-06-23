@@ -22,7 +22,7 @@ namespace raytracer
 		std::shared_ptr<Primitive> rotate_around_y(math::Angle, std::shared_ptr<const Primitive>);
 		std::shared_ptr<Primitive> rotate_around_z(math::Angle, std::shared_ptr<const Primitive>);
 
-		std::shared_ptr<Primitive> decorate(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child);
+		std::shared_ptr<Primitive> decorate(Material material, std::shared_ptr<Primitive> child);
 		std::shared_ptr<Primitive> group(std::vector<std::shared_ptr<Primitive>>&);
 	}
 }

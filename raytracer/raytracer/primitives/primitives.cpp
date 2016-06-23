@@ -45,7 +45,7 @@ std::shared_ptr<Primitive> raytracer::primitives::rotate_around_z(math::Angle an
 	return transform(math::rotate_z(angle), transformee);
 }
 
-std::shared_ptr<Primitive> raytracer::primitives::decorate(std::shared_ptr<Material> material, std::shared_ptr<Primitive> child)
+std::shared_ptr<Primitive> raytracer::primitives::decorate(Material material, std::shared_ptr<Primitive> child)
 {
 	return std::make_shared<raytracer::primitives::Decorator>(material, child);
 }

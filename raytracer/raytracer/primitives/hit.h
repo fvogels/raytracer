@@ -17,7 +17,7 @@ namespace raytracer
 		HitPosition local_position;
 		math::Point3D position;
 		math::Vector3D normal;
-		std::shared_ptr<Material> material;
+		Material material;
 
 		Hit() : t( std::numeric_limits<double>::infinity()) { }
 	};
