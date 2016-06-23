@@ -7,12 +7,33 @@ using namespace math;
 namespace
 {
 	template<unsigned X, unsigned Y, unsigned Z>
+	Point2D xyz_to_uv(const Point3D&);
+
+	template<>
+	Point2D xyz_to_uv<0, 0, 1>(const Point3D& p)
+	{
+		return Point2D(p.x, p.y);
+	}
+
+	template<>
+	Point2D xyz_to_uv<0, 1, 0>(const Point3D& p)
+	{
+		return Point2D(p.x, p.z);
+	}
+
+	template<>
+	Point2D xyz_to_uv<1, 0, 0>(const Point3D& p)
+	{
+		return Point2D(p.y, p.z);
+	}
+
+	template<unsigned X, unsigned Y, unsigned Z>
 	void initialize_hit(Hit* hit, const Ray& ray, double t)
 	{
 		hit->t = t;
 		hit->position = ray.at(hit->t);
 		hit->local_position.xyz = hit->position;
-		hit->local_position.uv = Point2D(hit->position.x, hit->position.y);
+		hit->local_position.uv = xyz_to_uv<X, Y, Z>(hit->local_position.xyz);
 		hit->normal = Vector3D(X, Y, Z);
 
 		assert(X != 1 || hit->position.x == approx(0));
