@@ -7,7 +7,6 @@
 #include "scripting/objects.h"
 #include "scripting/standard-library.h"
 #include "scripting/environment.h"
-#include "primitives/plane.h"
 #include "primitives/decorator.h"
 #include "materials/materials.h"
 #include <sstream>
@@ -163,32 +162,11 @@ TEST("(z (-> 1 2 3))", number(3));
 TEST("(let ((x (alloc))) (set x 5) (get x))", number(5));
 TEST("(rgb 1 1 1)", std::make_shared<NO<color>>(color(1,1,1)));
 
-TEST_CASE("[interpret] Evaluating (plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0))", "[interpreter]")
-{
-	auto result = interpret("(plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0))");
-
-	REQUIRE(has_object_type<LNO<raytracer::primitives::Primitive>>(result));
-
-	auto primitive = object_cast<LNO<raytracer::primitives::Primitive>>(result)->extract();
-	auto plane = std::dynamic_pointer_cast<raytracer::primitives::Plane>(primitive);
-	
-	REQUIRE(plane != nullptr);
-	REQUIRE(plane->point == math::Point3D(0, 0, 0));
-	REQUIRE(plane->normal == math::Vector3D(0, 0, 1));
-}
-
 TEST_CASE("[interpret] Evaluating (uniform-material (rgb 1 0 1))", "[interpreter]")
 {
 	auto result = interpret("(uniform-material (rgb 1 0 1))");
 
 	REQUIRE(has_object_type<LNO<raytracer::Material>>(result));
-}
-
-TEST_CASE("[interpret] Evaluating (decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0)))", "[interpreter]")
-{
-	auto result = interpret("(decorate (uniform-material (rgb 1 0 1)) (plane (@ 0 0 0) (-> 0 0 1) (-> 1 0 0)))");
-
-	REQUIRE(has_object_type<LNO<raytracer::primitives::Primitive>>(result));
 }
 
 #endif
