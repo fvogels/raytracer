@@ -22,7 +22,7 @@ namespace
 		assert(0 <= u);
 		assert(u <= 1);
 
-		Point2D uv(u, v);
+		return Point2D(u, v);
 	}
 
 	void initialize_hit(Hit* hit, const Ray& ray, double t)
