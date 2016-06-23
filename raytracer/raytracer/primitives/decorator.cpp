@@ -22,3 +22,11 @@ bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const
 
 	return result;
 }
+
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::Decorator::hits(const math::Ray& ray, const Context& context) const
+{
+	Context updated_context = context;
+	updated_context.material = this->material;
+
+	return this->child->hits(ray, updated_context);
+}

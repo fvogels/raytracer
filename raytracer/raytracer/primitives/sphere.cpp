@@ -8,7 +8,45 @@
 #include <math.h>
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 using namespace math;
+
+namespace
+{
+	std::shared_ptr<Hit> create_hit(const Ray& ray, const Context& context, double t)
+	{
+		auto hit = std::make_shared<Hit>();
+
+		hit->position = ray.at(t);
+		hit->normal = hit->position - Point3D();
+
+		auto material2d = std::dynamic_pointer_cast<Material2D>(context.material);
+		if (material2d != nullptr)
+		{
+			double u = 0.5 + atan2(hit->position.z, hit->position.x) / (2 * M_PI);
+			double v = 0.5 - asin(hit->position.y) / M_PI;
+
+			assert(0 <= u);
+			assert(u <= 1);
+			assert(0 <= v);
+			assert(v <= 1);
+
+			Point2D uv(u, v);
+
+			hit->c = material2d->at(uv);
+		}
+		else
+		{
+			auto material3d = std::dynamic_pointer_cast<Material3D>(hit->material);
+
+			assert(material3d != nullptr);
+
+			hit->c = material3d->at(hit->position);
+		}
+
+		return hit;
+	}
+}
 
 bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 {
@@ -76,5 +114,39 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 	else
 	{
 		return false;
+	}
+}
+
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray& ray, const Context& context) const
+{
+	assert(hit != nullptr);
+
+	double a = ray.direction.dot(ray.direction);
+	double b = 2 * ray.direction.dot(ray.origin - Point3D());
+	double c = (ray.origin - Point3D()).norm_sqr() - 1;
+	double d = b * b - 4 * a * c;
+
+	if (d >= 0)
+	{
+		double sqrt_d = std::sqrt(d);
+
+		double t1 = (-b - sqrt_d) / (2 * a);
+		double t2 = (-b + sqrt_d) / (2 * a);
+
+		if (t1 > t2)
+		{
+			swap(t1, t2);
+		}
+
+		std::vector<std::shared_ptr<Hit>> hits;
+
+		hits.push_back(create_hit(ray, context, t1));
+		hits.push_back(create_hit(ray, context, t2));
+
+		return hits;
+	}
+	else
+	{
+		return std::vector<std::shared_ptr<Hit>>();
 	}
 }

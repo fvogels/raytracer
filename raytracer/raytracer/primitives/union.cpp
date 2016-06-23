@@ -1,6 +1,8 @@
 #include "Union.h"
+#include <algorithm>
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 using namespace math;
 
 
@@ -20,4 +22,24 @@ bool raytracer::primitives::Union::find_hit(const Ray& ray, Hit* hit) const
 	}
 
 	return found_hit;
+}
+
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::Union::hits(const math::Ray& ray, const Context& context) const
+{
+	std::vector<std::shared_ptr<Hit>> hits;
+
+	for (const auto& child : this->children)
+	{
+		for (auto hit : child->hits(ray, context))
+		{
+			hits.push_back(hit);
+		}
+	}
+
+	std::sort(hits.begin(), hits.end(), [](const std::shared_ptr<Hit>& h1, const std::shared_ptr<Hit>& h2)
+	{
+		return h1->t < h2->t;
+	});
+
+	return hits;
 }

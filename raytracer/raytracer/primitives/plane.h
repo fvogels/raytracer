@@ -12,7 +12,8 @@ namespace raytracer
 		public:
 			Plane(const math::Point3D& point, const math::Vector3D& normal, const math::Vector3D& u);
 
-			virtual bool find_hit(const math::Ray&, Hit*) const override;
+			bool find_hit(const math::Ray&, Hit*) const override;
+			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&, const Context&) const override;
 
 			math::Point3D point;
 			math::Vector3D normal;
