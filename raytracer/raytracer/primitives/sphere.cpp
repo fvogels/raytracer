@@ -96,8 +96,6 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
 
 std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray& ray) const
 {
-	assert(hit != nullptr);
-
 	double a = ray.direction.dot(ray.direction);
 	double b = 2 * ray.direction.dot(ray.origin - Point3D());
 	double c = (ray.origin - Point3D()).norm_sqr() - 1;
