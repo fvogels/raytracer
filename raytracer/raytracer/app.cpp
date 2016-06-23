@@ -166,7 +166,7 @@ int main()
 		std::cout << "Rendering frame " << frame << std::endl;
 
 		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(Point3D(5, 5, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+		camera = create_perspective_camera(Point3D(0, 5, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 		create_scene(double(frame) / FRAME_COUNT);
 
 		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
