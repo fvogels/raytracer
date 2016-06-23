@@ -24,7 +24,7 @@
 #include <thread>
 #include <atomic>
 
-const int N_THREADS = 1;
+const int N_THREADS = 4;
 
 using namespace math;
 using namespace raytracer;
@@ -73,7 +73,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(1, 1);
+	GridSampler sampler(2, 2);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -90,7 +90,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 void create_root(double t)
 {
 	auto shape = raytracer::primitives::sphere();
-	auto material = raytracer::materials::worley(colors::white(), colors::black());
+	auto material = raytracer::materials::grid(0.1, colors::black(), colors::white());
 	auto decorated_shape = raytracer::primitives::decorate(material, shape);
 	auto s1 = raytracer::primitives::rotate_around_y(180_degrees * t, decorated_shape);
 
