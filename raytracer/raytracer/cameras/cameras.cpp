@@ -9,7 +9,7 @@ using namespace raytracer;
 using namespace math;
 
 
-std::shared_ptr<Camera> raytracer::cameras::create_perspective_camera(
+std::shared_ptr<Camera> raytracer::cameras::perspective(
 	const math::Point3D& eye,
 	const math::Point3D& look_at,
 	const math::Vector3D& up,
@@ -37,7 +37,7 @@ std::shared_ptr<Camera> raytracer::cameras::create_perspective_camera(
 	return std::make_shared<PerspectiveCamera>(eye, view_window);
 }
 
-std::shared_ptr<Camera> raytracer::cameras::create_orthographic_camera(
+std::shared_ptr<Camera> raytracer::cameras::orthographic(
 	const math::Point3D& eye,
 	const math::Point3D& look_at,
 	const math::Vector3D& up,
@@ -71,7 +71,7 @@ std::shared_ptr<Camera> raytracer::cameras::create_orthographic_camera(
 	return std::make_shared<OrthographicCamera>(eye_window, view_window);
 }
 
-std::shared_ptr<Camera> raytracer::cameras::create_fisheye_camera()
+std::shared_ptr<Camera> raytracer::cameras::fisheye()
 {
 	return std::make_shared<FisheyeCamera>();
 }

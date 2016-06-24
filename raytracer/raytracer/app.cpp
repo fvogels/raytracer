@@ -73,10 +73,10 @@ color determine_color(const Ray& r)
 	return c;
 }
 
-color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
+color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
 {
 	GridSampler sampler(2, 2);
-	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
+	Rectangle2D pixel_rectangle = window_rasteriser[position(x, y)];
 	color c = colors::black();
 	int sample_count = 0;
 
@@ -167,9 +167,9 @@ int main()
 
 		Bitmap bitmap(500, 500);
 
-		// camera = raytracer::cameras::create_perspective_camera(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 1, 1);
-		// camera = raytracer::cameras::create_orthographic_camera(Point3D(0, 0, 0), Point3D(0, 0, -1), Vector3D(0, 1, 0), 10, 1);
-		camera = raytracer::cameras::create_fisheye_camera();
+		// camera = raytracer::cameras::perspective(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 1, 1);
+		camera = raytracer::cameras::orthographic(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 10, 1);
+		// camera = raytracer::cameras::fisheye();
 
 		create_scene(t);
 
@@ -190,9 +190,13 @@ int main()
 
 					while ((current = j++) < bitmap.height())
 					{
+						int y = bitmap.height() - current;
+
 						for (int i = 0; i != bitmap.width(); ++i)
 						{
-							color c = render_pixel(window_rasteriser, i, current);
+							int x = i;
+
+							color c = render_pixel(window_rasteriser, x, y);
 
 							bitmap[position(i, current)] = c;
 						}
@@ -209,9 +213,13 @@ int main()
 		{
 			for (int j = 0; j != bitmap.height(); ++j)
 			{
+				int y = bitmap.height() - j - 1;
+
 				for (int i = 0; i != bitmap.width(); ++i)
 				{
-					color c = render_pixel(window_rasteriser, i, j);
+					int x = i;
+
+					color c = render_pixel(window_rasteriser, x, y);
 
 					bitmap[position(i, j)] = c;
 				}
