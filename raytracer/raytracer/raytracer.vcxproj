@@ -222,6 +222,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="logging.cpp" />
@@ -287,6 +288,7 @@
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="cameras\camera.h" />
+    <ClInclude Include="cameras\orthographic-camera.h" />
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="easylogging++.h" />

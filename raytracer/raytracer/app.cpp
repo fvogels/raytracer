@@ -4,6 +4,7 @@
 #include "imaging/wif_format.h"
 #include "primitives/primitives.h"
 #include "cameras/perspective-camera.h"
+#include "cameras/orthographic-camera.h"
 #include "math/rectangle2d.h"
 #include "math/rasterizer.h"
 #include "rendering/grid-sampler.h"
@@ -75,7 +76,7 @@ color determine_color(const Ray& r)
 
 color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 {
-	GridSampler sampler(1, 1);
+	GridSampler sampler(2, 2);
 	Rectangle2D pixel_rectangle = window_rasteriser[position(i, j)];
 	color c = colors::black();
 	int sample_count = 0;
@@ -93,18 +94,19 @@ void create_root(double t)
 {
 	using namespace raytracer::primitives;
 
-	auto s1 = translate(Vector3D(0.25, 0, 0), sphere());
-	auto s2 = translate(Vector3D(-0.25, 0, 0), sphere());
+	auto material = raytracer::materials::grid(0.1, colors::white(), colors::black());
+	auto left = translate(Vector3D(-1, 0, 0), yz_plane());
+	auto right = translate(Vector3D(1, 0, 0), yz_plane());
+	auto plane = raytracer::primitives::xz_plane();
 
-	auto material = raytracer::materials::uniform(colors::red());
 
-	scene.root = decorate(material, rotate_around_y(360_degrees * t, intersection(s1, s2)));
+	scene.root = decorate(material, group(std::vector<Primitive> { left, right, plane }));
 }
 
 void create_lights(double t)
 {
 	scene.lights.clear();
-	scene.lights.push_back(std::make_shared<Light>(Point3D(0, 2, 5)));
+	scene.lights.push_back(std::make_shared<Light>(Point3D(0, 2, 0)));
 }
 
 void create_scene(double t)
@@ -157,11 +159,16 @@ int main()
 	{
 		TIMED_SCOPE(timerObj, "single frame");
 
+		double t = double(frame) / FRAME_COUNT;
+
 		std::cout << "Rendering frame " << frame << std::endl;
 
 		Bitmap bitmap(500, 500);
-		camera = create_perspective_camera(Point3D(0, 5, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-		create_scene(double(frame) / FRAME_COUNT);
+
+		// camera = create_perspective_camera(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1); create_perspective_camera create_orthographic_camera
+		camera = create_orthographic_camera(Point3D(0, 1 - t, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+
+		create_scene(t);
 
 		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
 		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
