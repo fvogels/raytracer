@@ -1,6 +1,7 @@
 #include "cameras/cameras.h"
 #include "cameras/perspective-camera.h"
 #include "cameras/orthographic-camera.h"
+#include "cameras/fisheye-camera.h"
 #include "math/rectangle3d.h"
 #include <assert.h>
 
@@ -68,4 +69,9 @@ std::shared_ptr<Camera> raytracer::cameras::create_orthographic_camera(
 	Rectangle3D view_window(view_window_origin, view_window_right, view_window_down);
 
 	return std::make_shared<OrthographicCamera>(eye_window, view_window);
+}
+
+std::shared_ptr<Camera> raytracer::cameras::create_fisheye_camera()
+{
+	return std::make_shared<FisheyeCamera>();
 }

@@ -23,5 +23,7 @@ namespace raytracer
 			const math::Vector3D& up,
 			double distance,
 			double aspect_ratio);
+
+		std::shared_ptr<Camera> create_fisheye_camera();
 	}
 }

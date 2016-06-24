@@ -223,6 +223,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\cameras.cpp" />
+    <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
@@ -278,6 +279,7 @@
     <ClCompile Include="scripting\objects\special-form.cpp" />
     <ClCompile Include="scripting\objects\symbol.cpp" />
     <ClCompile Include="tests\combined_reader_tests.cpp" />
+    <ClCompile Include="tests\fisheye_tests.cpp" />
     <ClCompile Include="tests\interpreter_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\parser_tests.cpp" />
@@ -290,6 +292,7 @@
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="cameras\camera.h" />
     <ClInclude Include="cameras\cameras.h" />
+    <ClInclude Include="cameras\fisheye-camera.h" />
     <ClInclude Include="cameras\orthographic-camera.h" />
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />

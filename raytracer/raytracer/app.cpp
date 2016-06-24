@@ -92,15 +92,17 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 void create_root(double t)
 {
 	using namespace raytracer::primitives;
+	using namespace raytracer::materials;
 
 	auto material = raytracer::materials::uniform(colors::red());
-	auto left = translate(Vector3D(-2, 0, 0), sphere());
-	auto right = translate(Vector3D(2, 0, 0), sphere());
-	auto spheres = decorate(material, rotate_around_y(360_degrees * t, group(std::vector<Primitive> { left, right })));
-	
-	auto plane = decorate(raytracer::materials::grid(0.1, colors::white(), colors::black()), xz_plane());
+	auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red()), sphere()));
+	auto middle = decorate(uniform(colors::green()), sphere());
+	auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue()), sphere()));
+	auto spheres = decorate(material, translate(Vector3D(0, 0, 5), rotate_around_y(360_degrees * t, group(std::vector<Primitive> { left, middle, right }))));
 
-	scene.root = group(std::vector<Primitive> { spheres, plane } );
+	auto plane = decorate(raytracer::materials::grid(0.1, colors::white(), colors::black()), translate(Vector3D(0, -2, 0), xz_plane()));
+
+	scene.root = group(std::vector<Primitive> { spheres, plane });
 }
 
 void create_lights(double t)
@@ -165,7 +167,9 @@ int main()
 
 		Bitmap bitmap(500, 500);
 
-		camera = raytracer::cameras::create_perspective_camera(Point3D(0, 5, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+		// camera = raytracer::cameras::create_perspective_camera(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 1, 1);
+		// camera = raytracer::cameras::create_orthographic_camera(Point3D(0, 0, 0), Point3D(0, 0, -1), Vector3D(0, 1, 0), 10, 1);
+		camera = raytracer::cameras::create_fisheye_camera();
 
 		create_scene(t);
 
