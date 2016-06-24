@@ -31,6 +31,7 @@ namespace raytracer
 
 		virtual math::Ray create_untransformed_ray(const math::Point2D&) const = 0;
 
+	private:
 		math::Matrix4D m_transformation;
 	};
 }
