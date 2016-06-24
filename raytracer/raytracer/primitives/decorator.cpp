@@ -19,14 +19,19 @@ bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const
 
 	bool result = child->find_hit(ray, hit);
 
-	if (result && !hit->material)
+	if (result)
 	{
-		hit->material = this->material;
+		if (!hit->material)
+		{
+			hit->material = this->material;
+		}
 	}
 	else
 	{
 		hit->material = old_material;
 	}
+	
+	assert(!result || hit->material);
 
 	return result;
 }
