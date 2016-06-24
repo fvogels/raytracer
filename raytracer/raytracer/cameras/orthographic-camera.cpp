@@ -11,7 +11,7 @@ raytracer::cameras::OrthographicCamera::OrthographicCamera(const Rectangle3D& ey
 	// NOP
 }
 
-Ray raytracer::cameras::OrthographicCamera::create_Ray(const Point2D& point) const
+Ray raytracer::cameras::OrthographicCamera::create_ray(const Point2D& point) const
 {
 	assert(0 <= point.x && point.x <= 1);
 	assert(0 <= point.y && point.y <= 1);

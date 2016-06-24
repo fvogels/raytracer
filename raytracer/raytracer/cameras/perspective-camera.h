@@ -17,7 +17,7 @@ namespace raytracer
 		public:
 			PerspectiveCamera(const math::Point3D&, const math::Rectangle3D&);
 
-			math::Ray create_Ray(const math::Point2D&) const;
+			math::Ray create_ray(const math::Point2D&) const;
 
 		private:
 			math::Point3D m_eye;

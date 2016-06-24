@@ -17,7 +17,7 @@ namespace raytracer
 		public:
 			OrthographicCamera(const math::Rectangle3D&, const math::Rectangle3D&);
 
-			math::Ray create_Ray(const math::Point2D& point) const override;
+			math::Ray create_ray(const math::Point2D& point) const override;
 
 		private:
 			math::Rectangle3D eye_window;

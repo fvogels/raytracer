@@ -81,7 +81,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int i, int j)
 	int sample_count = 0;
 
 	sampler.sample(pixel_rectangle, [&c, &sample_count](const Point2D& p) {
-		auto ray = camera->create_Ray(p);
+		auto ray = camera->create_ray(p);
 		c += determine_color(ray);
 		++sample_count;
 	});

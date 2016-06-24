@@ -12,7 +12,7 @@ raytracer::cameras::PerspectiveCamera::PerspectiveCamera(const Point3D& eye, con
 	// NOP
 }
 
-Ray raytracer::cameras::PerspectiveCamera::create_Ray(const Point2D& point) const
+Ray raytracer::cameras::PerspectiveCamera::create_ray(const Point2D& point) const
 {
 	assert(0 <= point.x && point.x <= 1);
 	assert(0 <= point.y && point.y <= 1);

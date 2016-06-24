@@ -10,6 +10,6 @@ namespace raytracer
 	class Camera
 	{
 	public:
-		virtual math::Ray create_Ray(const math::Point2D&) const = 0;
+		virtual math::Ray create_ray(const math::Point2D&) const = 0;
 	};
 }
