@@ -4,11 +4,11 @@ using namespace raytracer;
 using namespace math;
 
 
-raytracer::primitives::Intersection::Intersection(std::shared_ptr<Primitive> first, std::shared_ptr<Primitive> second)
+raytracer::primitives::Intersection::Intersection(Primitive first, Primitive second)
 	: m_first(first), m_second(second)
 {
-	assert(first != nullptr);
-	assert(second != nullptr);
+	assert(first);
+	assert(second);
 }
 
 bool raytracer::primitives::Intersection::find_hit(const Ray& ray, Hit* hit) const

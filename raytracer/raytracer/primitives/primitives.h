@@ -13,21 +13,21 @@ namespace raytracer
 {
 	namespace primitives
 	{
-		std::shared_ptr<Primitive> xy_plane();
-		std::shared_ptr<Primitive> xz_plane();
-		std::shared_ptr<Primitive> yz_plane();
-		std::shared_ptr<Primitive> sphere();
-		std::shared_ptr<Primitive> cylinder();
+		Primitive xy_plane();
+		Primitive xz_plane();
+		Primitive yz_plane();
+		Primitive sphere();
+		Primitive cylinder();
 
-		std::shared_ptr<Primitive> transform(const math::Transformation&, std::shared_ptr<const Primitive>);
-		std::shared_ptr<Primitive> translate(const math::Vector3D&, std::shared_ptr<const Primitive>);
-		std::shared_ptr<Primitive> scale(double x, double y, double z, std::shared_ptr<const Primitive>);
-		std::shared_ptr<Primitive> rotate_around_x(math::Angle, std::shared_ptr<const Primitive>);
-		std::shared_ptr<Primitive> rotate_around_y(math::Angle, std::shared_ptr<const Primitive>);
-		std::shared_ptr<Primitive> rotate_around_z(math::Angle, std::shared_ptr<const Primitive>);
+		Primitive transform(const math::Transformation&, Primitive);
+		Primitive translate(const math::Vector3D&, Primitive);
+		Primitive scale(double x, double y, double z, Primitive);
+		Primitive rotate_around_x(math::Angle, Primitive);
+		Primitive rotate_around_y(math::Angle, Primitive);
+		Primitive rotate_around_z(math::Angle, Primitive);
 
-		std::shared_ptr<Primitive> decorate(Material material, std::shared_ptr<Primitive> child);
-		std::shared_ptr<Primitive> group(std::vector<std::shared_ptr<Primitive>>&);
-		std::shared_ptr<Primitive> intersection(std::shared_ptr<Primitive>, std::shared_ptr<Primitive>);
+		Primitive decorate(Material material, Primitive child);
+		Primitive group(std::vector<Primitive>&);
+		Primitive intersection(Primitive, Primitive);
 	}
 }

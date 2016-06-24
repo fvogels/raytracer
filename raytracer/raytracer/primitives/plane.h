@@ -6,7 +6,7 @@ namespace raytracer
 {
 	namespace primitives
 	{
-		class CoordinatePlane : public Primitive
+		class CoordinatePlane : public PrimitiveImplementation
 		{
 		public:
 			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;

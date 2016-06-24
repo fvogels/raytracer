@@ -6,7 +6,7 @@ namespace raytracer
 {
 	namespace primitives
 	{
-		class Cylinder : public Primitive
+		class Cylinder : public PrimitiveImplementation
 		{
 		public:
 			bool find_hit(const math::Ray&, Hit*) const override;

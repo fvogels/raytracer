@@ -6,7 +6,7 @@ namespace raytracer
 {
 	namespace primitives
 	{
-		class Sphere : public Primitive
+		class Sphere : public PrimitiveImplementation
 		{
 		public:
 			bool find_hit(const math::Ray&, Hit*) const override;

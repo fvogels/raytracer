@@ -8,17 +8,17 @@ namespace raytracer
 {
 	namespace primitives
 	{
-		class Intersection : public Primitive
+		class Intersection : public PrimitiveImplementation
 		{
 		public:
-			Intersection(std::shared_ptr<Primitive>, std::shared_ptr<Primitive>);
+			Intersection(Primitive, Primitive);
 
 			bool find_hit(const math::Ray&, Hit*) const override;
 			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
 
 		private:
-			std::shared_ptr<Primitive> m_first;
-			std::shared_ptr<Primitive> m_second;
+			Primitive m_first;
+			Primitive m_second;
 		};
 	}
 }

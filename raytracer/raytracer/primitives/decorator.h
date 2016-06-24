@@ -8,17 +8,17 @@ namespace raytracer
 {
 	namespace primitives
 	{
-		class Decorator : public Primitive
+		class Decorator : public PrimitiveImplementation
 		{
 		public:
-			Decorator(Material, std::shared_ptr<Primitive>);
+			Decorator(Material, Primitive);
 
 			virtual bool find_hit(const math::Ray&, Hit*) const override;
 			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
 
 		private:
 			Material material;
-			std::shared_ptr<Primitive> child;
+			Primitive child;
 		};
 	}
 }

@@ -5,11 +5,11 @@ using namespace raytracer;
 using namespace math;
 
 
-raytracer::primitives::Decorator::Decorator(Material material, std::shared_ptr<Primitive> child)
+raytracer::primitives::Decorator::Decorator(Material material, Primitive child)
 	: material(material), child(child)
 {
 	assert(material);
-	assert(child != nullptr);
+	assert(child);
 }
 
 bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const

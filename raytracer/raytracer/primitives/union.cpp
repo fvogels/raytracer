@@ -6,7 +6,7 @@ using namespace raytracer::primitives;
 using namespace math;
 
 
-raytracer::primitives::Union::Union(std::vector<std::shared_ptr<Primitive>>& children)
+raytracer::primitives::Union::Union(std::vector<Primitive>& children)
 	: children(children)
 {
 	// NOP

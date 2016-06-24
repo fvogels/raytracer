@@ -40,7 +40,7 @@ struct Light
 
 struct Scene
 {
-	std::shared_ptr<raytracer::primitives::Primitive> root;
+	raytracer::primitives::Primitive root;
 	std::vector<std::shared_ptr<Light>> lights;
 } scene;
 
