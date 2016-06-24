@@ -10,7 +10,9 @@ namespace math
 		constexpr double radians() const noexcept { return m_radians; }
 		constexpr double degrees() const noexcept { return m_radians * 180 / M_PI; }
 
-		Angle operator-() const { return Angle(-m_radians); }
+		Angle operator+(const Angle& x) const noexcept { return math::radians(this->radians() + x.radians()); }
+		Angle operator-() const noexcept { return Angle(-m_radians); }
+		Angle operator-(const Angle& x) const noexcept { return math::radians(this->radians() - x.radians()); }
 
 	private:
 		constexpr explicit Angle(double x) noexcept
