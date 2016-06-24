@@ -98,7 +98,7 @@ void create_root(double t)
 	auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red()), sphere()));
 	auto middle = decorate(uniform(colors::green()), sphere());
 	auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue()), sphere()));
-	auto spheres = decorate(material, translate(Vector3D(0, 0, 5), rotate_around_y(360_degrees * t, group(std::vector<Primitive> { left, middle, right }))));
+	auto spheres = decorate(material, translate(Vector3D(0, 0, 5), rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }))));
 
 	auto plane = decorate(raytracer::materials::grid(0.1, colors::white(), colors::black()), translate(Vector3D(0, -2, 0), xz_plane()));
 
@@ -167,8 +167,8 @@ int main()
 
 		Bitmap bitmap(500, 500);
 
-		// camera = raytracer::cameras::perspective(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 1, 1);
-		camera = raytracer::cameras::orthographic(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 10, 1);
+		camera = raytracer::cameras::perspective(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 1+t, 1);
+		// camera = raytracer::cameras::orthographic(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 10, 1);
 		// camera = raytracer::cameras::fisheye();
 
 		create_scene(t);
