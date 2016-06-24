@@ -5,32 +5,35 @@
 using namespace raytracer;
 using namespace math;
 
-class PerspectiveCamera : public Camera
+namespace
 {
-public:
-	PerspectiveCamera(const Point3D& eye, const Rectangle3D& view_window);
+	class PerspectiveCamera : public Camera
+	{
+	public:
+		PerspectiveCamera(const Point3D& eye, const Rectangle3D& view_window);
 
-	virtual Ray create_Ray(const Point2D&) const override;
+		virtual Ray create_Ray(const Point2D&) const override;
 
-private:
-	Point3D eye;
-	Rectangle3D view_window;
-};
+	private:
+		Point3D eye;
+		Rectangle3D view_window;
+	};
 
-PerspectiveCamera::PerspectiveCamera(const Point3D& eye, const Rectangle3D& view_window)
-	: eye(eye), view_window(view_window)
-{
-	// NOP
-}
+	PerspectiveCamera::PerspectiveCamera(const Point3D& eye, const Rectangle3D& view_window)
+		: eye(eye), view_window(view_window)
+	{
+		// NOP
+	}
 
-Ray PerspectiveCamera::create_Ray(const Point2D& point) const
-{
-	assert(0 <= point.x && point.x <= 1);
-	assert(0 <= point.y && point.y <= 1);
+	Ray PerspectiveCamera::create_Ray(const Point2D& point) const
+	{
+		assert(0 <= point.x && point.x <= 1);
+		assert(0 <= point.y && point.y <= 1);
 
-	Point3D p = view_window.project(point);
+		Point3D p = view_window.project(point);
 
-	return Ray(eye, p);
+		return Ray(eye, p);
+	}
 }
 
 std::shared_ptr<Camera> raytracer::create_perspective_camera(
