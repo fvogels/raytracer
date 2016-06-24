@@ -3,8 +3,7 @@
 #include "imaging/bitmap.h"
 #include "imaging/wif_format.h"
 #include "primitives/primitives.h"
-#include "cameras/perspective-camera.h"
-#include "cameras/orthographic-camera.h"
+#include "cameras/cameras.h"
 #include "math/rectangle2d.h"
 #include "math/rasterizer.h"
 #include "rendering/grid-sampler.h"
@@ -94,13 +93,14 @@ void create_root(double t)
 {
 	using namespace raytracer::primitives;
 
-	auto material = raytracer::materials::grid(0.1, colors::white(), colors::black());
-	auto left = translate(Vector3D(-1, 0, 0), yz_plane());
-	auto right = translate(Vector3D(1, 0, 0), yz_plane());
-	auto plane = raytracer::primitives::xz_plane();
+	auto material = raytracer::materials::uniform(colors::red());
+	auto left = translate(Vector3D(-2, 0, 0), sphere());
+	auto right = translate(Vector3D(2, 0, 0), sphere());
+	auto spheres = decorate(material, rotate_around_y(360_degrees * t, group(std::vector<Primitive> { left, right })));
+	
+	auto plane = decorate(raytracer::materials::grid(0.1, colors::white(), colors::black()), xz_plane());
 
-
-	scene.root = decorate(material, group(std::vector<Primitive> { left, right, plane }));
+	scene.root = group(std::vector<Primitive> { spheres, plane } );
 }
 
 void create_lights(double t)
@@ -165,8 +165,7 @@ int main()
 
 		Bitmap bitmap(500, 500);
 
-		// camera = create_perspective_camera(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1); create_perspective_camera create_orthographic_camera
-		camera = create_orthographic_camera(Point3D(0, 1 - t, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+		camera = raytracer::cameras::create_perspective_camera(Point3D(0, 5, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 
 		create_scene(t);
 

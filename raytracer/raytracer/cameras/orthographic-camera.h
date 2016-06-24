@@ -2,15 +2,26 @@
 
 #include "cameras/camera.h"
 #include "math/vector3d.h"
+#include "math/point2d.h"
 #include "math/point3d.h"
+#include "math/rectangle3d.h"
+
 #include <memory>
 
 namespace raytracer
 {
-	std::shared_ptr<Camera> create_orthographic_camera(
-		const math::Point3D& eye,
-		const math::Point3D& look_at,
-		const math::Vector3D& up,
-		double distance,
-		double aspect_ratio);
+	namespace cameras
+	{
+		class OrthographicCamera : public Camera
+		{
+		public:
+			OrthographicCamera(const math::Rectangle3D&, const math::Rectangle3D&);
+
+			math::Ray create_Ray(const math::Point2D& point) const override;
+
+		private:
+			math::Rectangle3D eye_window;
+			math::Rectangle3D view_window;
+		};
+	}
 }

@@ -204,6 +204,9 @@
     <ClCompile Include="cameras\orthographic-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cameras\cameras.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -438,6 +441,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cameras\orthographic-camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cameras\cameras.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
