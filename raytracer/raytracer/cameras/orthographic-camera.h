@@ -20,8 +20,8 @@ namespace raytracer
 			math::Ray create_ray(const math::Point2D& point) const override;
 
 		private:
-			math::Rectangle3D eye_window;
-			math::Rectangle3D view_window;
+			math::Rectangle3D m_eye_window;
+			math::Rectangle3D m_view_window;
 		};
 	}
 }
