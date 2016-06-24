@@ -37,10 +37,12 @@ std::shared_ptr<Camera> raytracer::create_orthographic_camera(
 	const math::Point3D& eye,
 	const math::Point3D& look_at,
 	const math::Vector3D& up,
-	double distance,
+	double window_width,
 	double aspect_ratio)
 {
 	assert(up.is_unit());
+
+	double window_height = window_width / aspect_ratio;
 
 	Vector3D look_direction = (look_at - eye).normalized();
 	Vector3D right = look_direction.cross(up).normalized();
@@ -51,12 +53,12 @@ std::shared_ptr<Camera> raytracer::create_orthographic_camera(
 	assert(up2.is_perpendicular_on(right));
 	assert(look_direction.is_perpendicular_on(right));
 
-	Point3D eye_window_origin = eye + up2 / 2 - right / 2 * aspect_ratio;
-	Vector3D eye_window_right = right * aspect_ratio;
-	Vector3D eye_window_down = -up2;
+	Point3D eye_window_origin = eye + up2 * window_height / 2 - right * window_width / 2;
+	Vector3D eye_window_right = right * window_width;
+	Vector3D eye_window_down = -up2 * window_height;
 	Rectangle3D eye_window(eye_window_origin, eye_window_right, eye_window_down);
 	
-	Vector3D eye_view_offset = look_direction * distance;
+	Vector3D eye_view_offset = look_direction;
 	Point3D view_window_origin = eye_window_origin + eye_view_offset;
 	Vector3D view_window_right = eye_window_right;
 	Vector3D view_window_down = eye_window_down;
