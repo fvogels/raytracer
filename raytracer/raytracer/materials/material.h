@@ -49,11 +49,14 @@ namespace raytracer
 			return m_impl != nullptr;
 		}
 
-		MaterialProperties at(const HitPosition& hp) const
+		MaterialImplementation* operator ->()
 		{
-			assert(m_impl != nullptr);
+			return m_impl.get();
+		}
 
-			return m_impl->at(hp);
+		MaterialImplementation* operator ->() const
+		{
+			return m_impl.get();
 		}
 
 	private:
