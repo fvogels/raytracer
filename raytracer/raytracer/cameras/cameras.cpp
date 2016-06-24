@@ -28,11 +28,11 @@ std::shared_ptr<Camera> raytracer::cameras::create_perspective_camera(
 	assert(look_direction.is_perpendicular_on(right));
 
 	Point3D view_window_center = eye + look_direction * distance;
-	Point3D view_window_origin = view_window_center + up2 / 2 - right / 2 * aspect_ratio;
-	Vector3D view_window_down = -up2;
+	Point3D view_window_origin = view_window_center - up2 / 2 - right / 2 * aspect_ratio;
+	Vector3D view_window_up = up2;
 	Vector3D view_window_right = right * aspect_ratio;
 
-	Rectangle3D view_window(view_window_origin, view_window_right, view_window_down);
+	Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
 
 	return std::make_shared<PerspectiveCamera>(eye, view_window);
 }
@@ -57,16 +57,16 @@ std::shared_ptr<Camera> raytracer::cameras::create_orthographic_camera(
 	assert(up2.is_perpendicular_on(right));
 	assert(look_direction.is_perpendicular_on(right));
 
-	Point3D eye_window_origin = eye + up2 * window_height / 2 - right * window_width / 2;
+	Point3D eye_window_origin = eye - up2 * window_height / 2 - right * window_width / 2;
 	Vector3D eye_window_right = right * window_width;
-	Vector3D eye_window_down = -up2 * window_height;
-	Rectangle3D eye_window(eye_window_origin, eye_window_right, eye_window_down);
+	Vector3D eye_window_up = up2 * window_height;
+	Rectangle3D eye_window(eye_window_origin, eye_window_right, eye_window_up);
 
 	Vector3D eye_view_offset = look_direction;
 	Point3D view_window_origin = eye_window_origin + eye_view_offset;
 	Vector3D view_window_right = eye_window_right;
-	Vector3D view_window_down = eye_window_down;
-	Rectangle3D view_window(view_window_origin, view_window_right, view_window_down);
+	Vector3D view_window_up = eye_window_up;
+	Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
 
 	return std::make_shared<OrthographicCamera>(eye_window, view_window);
 }
