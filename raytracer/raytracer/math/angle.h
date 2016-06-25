@@ -64,6 +64,11 @@ namespace math
 		return angle * factor;
 	}
 
+	constexpr Angle operator /(const Angle& angle, double factor) noexcept
+	{
+		return radians(angle.radians() / factor);
+	}
+
 	inline double sin(Angle a) { return ::sin(a.radians()); }
 	inline double cos(Angle a) { return ::cos(a.radians()); }
 }
