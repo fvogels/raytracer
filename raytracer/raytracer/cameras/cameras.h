@@ -24,6 +24,9 @@ namespace raytracer
 			double distance,
 			double aspect_ratio);
 
-		std::shared_ptr<Camera> fisheye();
+		std::shared_ptr<Camera> fisheye(
+			const math::Point3D& eye,
+			const math::Point3D& look_at,
+			const math::Vector3D& up);
 	}
 }
