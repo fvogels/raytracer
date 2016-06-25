@@ -8,7 +8,7 @@ namespace raytracer
 {
 	namespace materials
 	{
-		Material uniform(const imaging::color&);
+		Material uniform(const imaging::color&, const imaging::color&, double);
 		Material pattern2d(math::Function<bool, const math::Point2D&>, Material, Material);
 		Material horizontal_lines(double thickness, Material, Material);
 		Material vertical_lines(double thickness, Material, Material);

@@ -46,32 +46,41 @@ struct Scene
 
 std::shared_ptr<Camera> camera = nullptr;
 
-color trace(const Ray& r)
+color trace(const Ray& ray)
 {
 	Hit hit;
-	color c = colors::black();
+	color result = colors::black();
 
-	if (scene.root->find_hit(r, &hit))
+	if (scene.root->find_hit(ray, &hit))
 	{
+		assert(hit.material);
+
+		auto material_properties = hit.material->at(hit.local_position);
+
 		for (auto light : scene.lights)
 		{
 			Vector3D hit_to_light = (light->position - hit.position).normalized();
-			double cos_angle = hit_to_light.dot(hit.normal);
+			double diffuse_cos_angle = hit_to_light.dot(hit.normal);
 
 			assert(hit.normal.is_unit());
-			assert(-1 <= cos_angle && cos_angle <= 1);
+			assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
 
-			if (cos_angle > 0 && hit.material)
+			if (diffuse_cos_angle > 0)
 			{
-				auto material_properties = hit.material->at(hit.local_position);
-				color hit_color = material_properties.diffuse;
-				
-				c += hit_color * cos_angle;
+				result += material_properties.diffuse * diffuse_cos_angle;
+			}
+
+			Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+			double specular_cos_angle = reflected_ray_direction.dot(hit_to_light);
+
+			if (specular_cos_angle > 0)
+			{
+				result += material_properties.specular * std::pow(specular_cos_angle, 20);
 			}
 		}
 	}
 
-	return c;
+	return result;
 }
 
 color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
@@ -95,13 +104,12 @@ void create_root(double t)
 	using namespace raytracer::primitives;
 	using namespace raytracer::materials;
 
-	auto material = raytracer::materials::uniform(colors::red());
-	auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red()), sphere()));
-	auto middle = decorate(uniform(colors::green()), sphere());
-	auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue()), sphere()));
-	auto spheres = decorate(material, translate(Vector3D(0, 0, 5), rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }))));
+	auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red() * 0.8, colors::white() * 0.8, 10), sphere()));
+	auto middle = decorate(uniform(colors::green() * 0.8, colors::white() * 0.8, 10), sphere());
+	auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue() * 0.8, colors::white() * 0.8, 10), sphere()));
+	auto spheres = rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }));
 
-	auto plane = decorate(raytracer::materials::grid(0.1, uniform(colors::white()), uniform(colors::black())), translate(Vector3D(0, -1, 0), xz_plane()));
+	auto plane = decorate(raytracer::materials::grid(0.1, uniform(colors::white(), colors::white(), 10), uniform(colors::black(), colors::white(), 10)), translate(Vector3D(0, -1, 0), xz_plane()));
 
 	scene.root = group(std::vector<Primitive> { spheres, plane });
 }
@@ -168,7 +176,7 @@ int main()
 
 		Bitmap bitmap(500, 500);
 
-		camera = raytracer::cameras::perspective(Point3D(0, t, -5), Point3D(0, 0, 5), Vector3D(0, 1, 0), 1, 1);
+		camera = raytracer::cameras::perspective(Point3D(0, 2*t, -15), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 		// camera = raytracer::cameras::orthographic(Point3D(0, t, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 10, 1);
 		// camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 

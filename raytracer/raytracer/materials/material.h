@@ -12,6 +12,8 @@ namespace raytracer
 	struct MaterialProperties
 	{
 		imaging::color diffuse;
+		imaging::color specular;
+		double specular_exponent;
 	};
 
 	class MaterialImplementation
