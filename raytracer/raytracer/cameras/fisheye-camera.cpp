@@ -7,12 +7,11 @@ using namespace raytracer;
 using namespace math;
 
 
-raytracer::cameras::FisheyeCamera::FisheyeCamera(const math::Matrix4D& transformation)
-	: DisplacableCamera(transformation)
+raytracer::cameras::FisheyeCamera::FisheyeCamera(const math::Matrix4D& transformation, math::Angle horizontal_angle, math::Angle vertical_angle)
+	: DisplacableCamera(transformation), m_horizontal_angle(horizontal_angle), m_vertical_angle(vertical_angle)
 {
 	// NOP
 }
-
 
 Ray raytracer::cameras::FisheyeCamera::create_untransformed_ray(const Point2D& point) const
 {
@@ -21,8 +20,15 @@ Ray raytracer::cameras::FisheyeCamera::create_untransformed_ray(const Point2D& p
 
 	Point3D eye(0, 0, 0);
 
-	Angle azimuth = (0.5 - point.x) * 180_degrees - 90_degrees;
-	Angle inclination = (1 - point.y) * 180_degrees;
+	double dx = point.x - 0.5;
+	Angle azimuth_zero = -90_degrees;
+	Angle delta_azimuth = -dx * m_horizontal_angle;
+	Angle azimuth = azimuth_zero + delta_azimuth;
+
+	double dy = point.y - 0.5;
+	Angle inclination_zero = 90_degrees;
+	Angle delta_inclination = -dy * m_vertical_angle;
+	Angle inclination = inclination_zero + delta_inclination;
 
 	double x = sin(inclination) * cos(azimuth);
 	double y = cos(inclination);

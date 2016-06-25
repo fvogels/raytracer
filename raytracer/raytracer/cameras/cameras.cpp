@@ -69,7 +69,9 @@ std::shared_ptr<Camera> raytracer::cameras::orthographic(
 std::shared_ptr<Camera> raytracer::cameras::fisheye(
 	const math::Point3D& eye,
 	const math::Point3D& look_at,
-	const math::Vector3D& up)
+	const math::Vector3D& up,
+	const math::Angle& horizontal_angle,
+	const math::Angle& vertical_angle)
 {
 	assert(up.is_unit());
 
@@ -85,5 +87,5 @@ std::shared_ptr<Camera> raytracer::cameras::fisheye(
 
 	Matrix4D transformation = math::coordinate_system(eye, right, fixed_up, back_direction);
 
-	return std::make_shared<FisheyeCamera>(transformation);
+	return std::make_shared<FisheyeCamera>(transformation, horizontal_angle, vertical_angle);
 }
