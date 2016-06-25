@@ -8,7 +8,7 @@ MaterialProperties raytracer::UniformMaterial::at(const Point3D&) const
 {
 	MaterialProperties properties;
 
-	properties.color = this->c;
+	properties.diffuse = this->m_diffuse;
 
 	return properties;
 }

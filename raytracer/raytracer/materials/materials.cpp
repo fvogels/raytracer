@@ -27,7 +27,7 @@ namespace
 		{
 			MaterialProperties properties;
 
-			properties.color = m_function(p);
+			properties.diffuse = m_function(p);
 
 			return properties;
 		}

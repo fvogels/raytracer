@@ -46,7 +46,7 @@ struct Scene
 
 std::shared_ptr<Camera> camera = nullptr;
 
-color determine_color(const Ray& r)
+color trace(const Ray& r)
 {
 	Hit hit;
 	color c = colors::black();
@@ -63,8 +63,9 @@ color determine_color(const Ray& r)
 
 			if (cos_angle > 0 && hit.material)
 			{
-				color hit_color = hit.material->at(hit.local_position).color;
-
+				auto material_properties = hit.material->at(hit.local_position);
+				color hit_color = material_properties.diffuse;
+				
 				c += hit_color * cos_angle;
 			}
 		}
@@ -82,7 +83,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
 
 	sampler.sample(pixel_rectangle, [&c, &sample_count](const Point2D& p) {
 		auto ray = camera->create_ray(p);
-		c += determine_color(ray);
+		c += trace(ray);
 		++sample_count;
 	});
 

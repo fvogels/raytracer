@@ -11,7 +11,7 @@ namespace raytracer
 {
 	struct MaterialProperties
 	{
-		imaging::color color;
+		imaging::color diffuse;
 	};
 
 	class MaterialImplementation
