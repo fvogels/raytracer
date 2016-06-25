@@ -12,15 +12,15 @@ namespace raytracer
 {
 	namespace cameras
 	{
-		class PerspectiveCamera : public Camera
+		class PerspectiveCamera : public DisplacableCamera
 		{
 		public:
-			PerspectiveCamera(const math::Point3D&, const math::Rectangle3D&);
+			PerspectiveCamera(const math::Matrix4D transformation, const math::Rectangle3D&);
 
-			math::Ray create_ray(const math::Point2D&) const;
+		protected:
+			math::Ray create_untransformed_ray(const math::Point2D&) const;
 
 		private:
-			math::Point3D m_eye;
 			math::Rectangle3D m_view_window;
 		};
 	}

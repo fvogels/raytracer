@@ -18,23 +18,26 @@ std::shared_ptr<Camera> raytracer::cameras::perspective(
 {
 	assert(up.is_unit());
 
+	double view_window_width = aspect_ratio;
+	double view_window_height = 1;
+	Point3D view_window_origin(- view_window_width / 2, -view_window_height / 2, -distance);
+	Vector3D view_window_right(view_window_width, 0, 0);
+	Vector3D view_window_up(0, view_window_height, 0);
+	Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
+
 	Vector3D look_direction = (look_at - eye).normalized();
+	Vector3D back_direction = -look_direction;
 	Vector3D right = look_direction.cross(up).normalized();
-	Vector3D up2 = right.cross(look_direction);
+	Vector3D fixed_up = right.cross(look_direction);
 
 	assert(look_direction.is_unit());
 	assert(right.is_unit());
-	assert(up2.is_perpendicular_on(right));
+	assert(fixed_up.is_perpendicular_on(right));
 	assert(look_direction.is_perpendicular_on(right));
 
-	Point3D view_window_center = eye + look_direction * distance;
-	Point3D view_window_origin = view_window_center - up2 / 2 - right / 2 * aspect_ratio;
-	Vector3D view_window_up = up2;
-	Vector3D view_window_right = right * aspect_ratio;
-
-	Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
-
-	return std::make_shared<PerspectiveCamera>(eye, view_window);
+	Matrix4D transformation = math::coordinate_system(eye, right, fixed_up, back_direction);
+	
+	return std::make_shared<PerspectiveCamera>(transformation, view_window);
 }
 
 std::shared_ptr<Camera> raytracer::cameras::orthographic(
