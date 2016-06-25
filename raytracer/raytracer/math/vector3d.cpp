@@ -110,7 +110,7 @@ bool math::operator !=(const Vector3D& u, const Vector3D& v) noexcept
 	return !(u == v);
 }
 
-Vector3D& math::Vector3D::reflect_by(const Vector3D& n) const
+Vector3D math::Vector3D::reflect_by(const Vector3D& n) const
 {
 	const Vector3D& v = *this;
 
