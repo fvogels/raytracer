@@ -101,7 +101,7 @@ void create_root(double t)
 	auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue()), sphere()));
 	auto spheres = decorate(material, translate(Vector3D(0, 0, 5), rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }))));
 
-	auto plane = decorate(raytracer::materials::grid(0.1, colors::white(), colors::black()), translate(Vector3D(0, -1, 0), xz_plane()));
+	auto plane = decorate(raytracer::materials::grid(0.1, uniform(colors::white()), uniform(colors::black())), translate(Vector3D(0, -1, 0), xz_plane()));
 
 	scene.root = group(std::vector<Primitive> { spheres, plane });
 }

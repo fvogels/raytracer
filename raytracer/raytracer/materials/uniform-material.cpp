@@ -4,7 +4,7 @@ using namespace math;
 using namespace raytracer;
 
 
-MaterialProperties raytracer::UniformMaterial::at(const Point3D&) const
+MaterialProperties raytracer::materials::UniformMaterial::at(const HitPosition&) const
 {
 	MaterialProperties properties;
 
