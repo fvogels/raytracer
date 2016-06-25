@@ -38,6 +38,8 @@ namespace math
 		{
 			return dot(v) == approx(0);
 		}
+
+		Vector3D& reflect_by(const Vector3D&) const;
 	};
 
 	Vector3D operator +(const Vector3D&, const Vector3D&) noexcept;

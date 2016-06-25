@@ -167,9 +167,9 @@ int main()
 
 		Bitmap bitmap(500, 500);
 
-		// camera = raytracer::cameras::perspective(Point3D(0, t, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 1, 1);
+		camera = raytracer::cameras::perspective(Point3D(0, t, -5), Point3D(0, 0, 5), Vector3D(0, 1, 0), 1, 1);
 		// camera = raytracer::cameras::orthographic(Point3D(0, t, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 10, 1);
-		camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
+		// camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
 		create_scene(t);
 
