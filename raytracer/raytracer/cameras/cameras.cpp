@@ -52,26 +52,18 @@ std::shared_ptr<Camera> raytracer::cameras::orthographic(
 	double window_height = window_width / aspect_ratio;
 
 	Vector3D look_direction = (look_at - eye).normalized();
+	Vector3D back_direction = -look_direction;
 	Vector3D right = look_direction.cross(up).normalized();
-	Vector3D up2 = right.cross(look_direction);
+	Vector3D fixed_up = right.cross(look_direction);
 
 	assert(look_direction.is_unit());
 	assert(right.is_unit());
-	assert(up2.is_perpendicular_on(right));
+	assert(fixed_up.is_perpendicular_on(right));
 	assert(look_direction.is_perpendicular_on(right));
 
-	Point3D eye_window_origin = eye - up2 * window_height / 2 - right * window_width / 2;
-	Vector3D eye_window_right = right * window_width;
-	Vector3D eye_window_up = up2 * window_height;
-	Rectangle3D eye_window(eye_window_origin, eye_window_right, eye_window_up);
+	Matrix4D transformation = math::coordinate_system(eye, right, fixed_up, back_direction);
 
-	Vector3D eye_view_offset = look_direction;
-	Point3D view_window_origin = eye_window_origin + eye_view_offset;
-	Vector3D view_window_right = eye_window_right;
-	Vector3D view_window_up = eye_window_up;
-	Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
-
-	return std::make_shared<OrthographicCamera>(eye_window, view_window);
+	return std::make_shared<OrthographicCamera>(transformation, window_width, window_height);
 }
 
 std::shared_ptr<Camera> raytracer::cameras::fisheye()

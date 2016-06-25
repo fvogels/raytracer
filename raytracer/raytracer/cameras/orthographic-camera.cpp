@@ -5,19 +5,18 @@
 using namespace raytracer;
 using namespace math;
 
-raytracer::cameras::OrthographicCamera::OrthographicCamera(const Rectangle3D& eye_window, const Rectangle3D& view_window)
-	: m_eye_window(eye_window), m_view_window(view_window)
+raytracer::cameras::OrthographicCamera::OrthographicCamera(const math::Matrix4D& transformation, double window_width, double window_height)
+	: DisplacableCamera(transformation), m_eye_window(Point3D(-window_width / 2, -window_height / 2, 0), Vector3D(window_width, 0, 0), Vector3D(0, window_height, 0))
 {
 	// NOP
 }
 
-Ray raytracer::cameras::OrthographicCamera::create_ray(const Point2D& point) const
+Ray raytracer::cameras::OrthographicCamera::create_untransformed_ray(const Point2D& point) const
 {
 	assert(0 <= point.x && point.x <= 1);
 	assert(0 <= point.y && point.y <= 1);
 
 	Point3D from = m_eye_window.project(point);
-	Point3D through = m_view_window.project(point);
 
-	return Ray(from, through);
+	return Ray(from, Vector3D(0, 0, -1));
 }

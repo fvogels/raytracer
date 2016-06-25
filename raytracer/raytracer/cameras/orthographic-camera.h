@@ -12,16 +12,16 @@ namespace raytracer
 {
 	namespace cameras
 	{
-		class OrthographicCamera : public Camera
+		class OrthographicCamera : public DisplacableCamera
 		{
 		public:
-			OrthographicCamera(const math::Rectangle3D&, const math::Rectangle3D&);
+			OrthographicCamera(const math::Matrix4D&, double window_width, double window_height);
 
-			math::Ray create_ray(const math::Point2D& point) const override;
+		protected:
+			math::Ray create_untransformed_ray(const math::Point2D& point) const override;
 
 		private:
 			math::Rectangle3D m_eye_window;
-			math::Rectangle3D m_view_window;
 		};
 	}
 }
