@@ -29,56 +29,6 @@ Matrix4D math::operator *(const Matrix4D& a, const Matrix4D& b)
 #undef AUX
 }
 
-void math::Matrix4D::set_row(int row, const Vector3D& v)
-{
-	assert(0 <= row);
-	assert(row <= 3);
-
-#define AUX(row) x ## row ## 1 = v.x; x ## row ## 2 = v.y; x ## row ## 3 = v.z; x ## row ## 4 = 0
-	if (row == 0)
-	{
-		AUX(1);
-	}
-	else if (row == 1)
-	{
-		AUX(2);
-	}
-	else if (row == 2)
-	{
-		AUX(3);
-	}
-	else
-	{
-		AUX(4);
-	}
-#undef AUX
-}
-
-void math::Matrix4D::set_column(int column, const Point3D& v)
-{
-	assert(0 <= column);
-	assert(column <= 3);
-
-#define AUX(col) x1 ## col = v.x; x2 ## col = v.y; x3 ## col = v.z; x4 ## col = 1
-	if (column == 0)
-	{
-		AUX(1);
-	}
-	else if (column == 1)
-	{
-		AUX(2);
-	}
-	else if (column == 2)
-	{
-		AUX(3);
-	}
-	else
-	{
-		AUX(4);
-	}
-#undef AUX
-}
-
 Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
 {
 #define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 3 * v.z
