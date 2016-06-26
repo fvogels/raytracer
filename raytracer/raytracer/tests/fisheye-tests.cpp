@@ -7,18 +7,18 @@ using namespace math;
 
 namespace
 {
-    void assert_equals(const Point3D& p, const Point3D& q)
+    void assert_equals(const Point3D& expected, const Point3D& actual)
     {
-        REQUIRE(p.x == Approx(q.x));
-        REQUIRE(p.y == Approx(q.y));
-        REQUIRE(p.z == Approx(q.z));
+        INFO("Expected: " << expected << "\nActual: " << actual);
+
+        REQUIRE(approx<Point3D>(expected) == actual);
     }
 
-    void assert_equals(const Vector3D& u, const Vector3D& v)
+    void assert_equals(const Vector3D& expected, const Vector3D& actual)
     {
-        REQUIRE(u.x == Approx(v.x));
-        REQUIRE(u.y == Approx(v.y));
-        REQUIRE(u.z == Approx(v.z));
+        INFO("Expected: " << expected << "\nActual: " << actual);
+
+        REQUIRE(approx<Vector3D>(expected) == actual);
     }
 
     std::string show(const Ray& ray)
@@ -49,7 +49,7 @@ namespace
         auto camera = raytracer::cameras::fisheye(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), degrees(HANGLE), degrees(VANGLE)); \
         auto ray = camera->create_ray(Point2D(P)); \
         \
-        INFO( "Actual ray: " + show(ray) ); \
+        INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(Point3D(EXPECTED_ORIGIN), Vector3D(EXPECTED_DIRECTION)))); \
         assert_equals(ray.origin, Point3D(EXPECTED_ORIGIN)); \
         assert_equals(ray.direction, Vector3D(EXPECTED_DIRECTION)); \
     }

@@ -11,7 +11,7 @@ bool raytracer::primitives::PlaneXY::find_hit(const Ray& ray, Hit* hit) const
 	const Vector3D normal(0, 0, 1);
 	double denom = ray.direction.dot(normal);
 
-	if (denom == approx(0))
+	if (denom == approx<double>(0))
 	{
 		return false;
 	}
@@ -44,7 +44,7 @@ bool raytracer::primitives::PlaneXZ::find_hit(const Ray& ray, Hit* hit) const
 	const Vector3D normal(0, 1, 0);
 	double denom = ray.direction.dot(normal);
 
-	if (denom == approx(0))
+	if (denom == approx<double>(0))
 	{
 		return false;
 	}
@@ -77,7 +77,7 @@ bool raytracer::primitives::PlaneYZ::find_hit(const Ray& ray, Hit* hit) const
 	const Vector3D normal(1, 0, 0);
 	double denom = ray.direction.dot(normal);
 
-	if (denom == approx(0))
+	if (denom == approx<double>(0))
 	{
 		return false;
 	}

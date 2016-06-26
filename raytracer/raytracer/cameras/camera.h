@@ -19,7 +19,10 @@ namespace raytracer
 	public:
 		math::Ray create_ray(const math::Point2D& p) const
 		{
-			return create_untransformed_ray(p).transform(m_transformation);
+            auto untransformed_ray = create_untransformed_ray(p);
+            auto transformed_ray = untransformed_ray.transform(m_transformation);
+
+			return transformed_ray;
 		}
 
 	protected:

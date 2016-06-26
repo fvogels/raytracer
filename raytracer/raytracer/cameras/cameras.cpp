@@ -12,16 +12,30 @@ using namespace math;
 Matrix4D raytracer::cameras::create_transformation(const Point3D& eye, const Point3D& look_at, const Vector3D& up)
 {
 	Vector3D look_direction = (look_at - eye).normalized();
-	Vector3D back_direction = -look_direction;
 	Vector3D right = look_direction.cross(up).normalized();
 	Vector3D fixed_up = right.cross(look_direction);
 
-	assert(look_direction.is_unit());
+    assert(look_direction.is_unit());
 	assert(right.is_unit());
 	assert(fixed_up.is_perpendicular_on(right));
 	assert(look_direction.is_perpendicular_on(right));
 
-	Matrix4D transformation = math::coordinate_system(eye, right, fixed_up, look_direction);
+    Point3D origin = eye;    
+    Vector3D y_axis = fixed_up;
+    Vector3D z_axis = look_direction;
+    Vector3D x_axis = y_axis.cross(z_axis);
+
+    assert(x_axis.is_unit());
+    assert(y_axis.is_unit());
+    assert(z_axis.is_unit());
+    assert(x_axis.is_perpendicular_on(y_axis));
+    assert(x_axis.is_perpendicular_on(z_axis));
+    assert(y_axis.is_perpendicular_on(z_axis));
+
+	Matrix4D transformation = math::coordinate_system(origin, x_axis, y_axis, z_axis);
+
+    assert(transformation * Vector3D(0, 1, 0) == approx<Vector3D>(up));
+    assert(transformation * Vector3D(0, 0, 1) == approx<Vector3D>(look_direction));
 
 	return transformation;
 }
