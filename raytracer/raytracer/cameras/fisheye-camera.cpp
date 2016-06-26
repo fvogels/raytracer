@@ -9,13 +9,13 @@ using namespace raytracer;
 using namespace math;
 
 
-raytracer::cameras::FisheyeCamera::FisheyeCamera(const math::Matrix4D& transformation, math::Angle horizontal_view_angle, math::Angle vertical_view_angle)
+raytracer::cameras::_private_::FisheyeCamera::FisheyeCamera(const math::Matrix4D& transformation, math::Angle horizontal_view_angle, math::Angle vertical_view_angle)
     : DisplacableCamera(transformation), m_horizontal_view_angle(horizontal_view_angle), m_vertical_view_angle(vertical_view_angle)
 {
     // NOP
 }
 
-Ray raytracer::cameras::FisheyeCamera::create_untransformed_ray(const Point2D& point) const
+Ray raytracer::cameras::_private_::FisheyeCamera::create_untransformed_ray(const Point2D& point) const
 {
     assert(0 <= point.x && point.x <= 1);
     assert(0 <= point.y && point.y <= 1);

@@ -86,5 +86,5 @@ std::shared_ptr<cameras::Camera> raytracer::cameras::fisheye(
 
     Matrix4D transformation = create_transformation(eye, look_at, up);
 
-    return std::make_shared<FisheyeCamera>(transformation, horizontal_angle, vertical_angle);
+    return std::make_shared<_private_::FisheyeCamera>(transformation, horizontal_angle, vertical_angle);
 }
