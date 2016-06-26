@@ -56,6 +56,37 @@ private:
     color c;
 };
 
+class ConeLight : public LightSource
+{
+public:
+    ConeLight(const Point3D& position, const Vector3D& direction, Angle angle, const color& c)
+        : position(position), direction(direction), min_cos(cos(angle)), c(c) 
+    {
+        assert(direction.is_unit());
+    }
+
+    std::vector<LightRay> lightrays_to(const Point3D& p) const
+    {
+        Ray ray(position, p);
+        double intensity = ray.direction.normalized().dot(direction);
+
+        if (intensity > min_cos)
+        {
+            return std::vector<LightRay> { LightRay(ray, c * intensity) };
+        }
+        else
+        {
+            return std::vector<LightRay>();
+        }
+    }
+
+private:
+    Point3D position;
+    Vector3D direction;
+    double min_cos;
+    color c;
+};
+
 struct Scene
 {
     raytracer::primitives::Primitive root;
@@ -137,16 +168,16 @@ void create_root(double t)
     scene.root = group(std::vector<Primitive> { plane });
 }
 
-void create_LightSources(double t)
+void create_light_sources(double t)
 {
     scene.LightSources.clear();
-    scene.LightSources.push_back(std::make_shared<PointLight>(Point3D(0, 2, 0), colors::white()));
+    scene.LightSources.push_back(std::make_shared<ConeLight>(Point3D(0, 2, 0), Vector3D(t,-1,0), 45_degrees, colors::white()));
 }
 
 void create_scene(double t)
 {
     create_root(t);
-    create_LightSources(t);
+    create_light_sources(t);
 }
 
 
