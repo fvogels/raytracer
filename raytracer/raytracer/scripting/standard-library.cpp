@@ -120,11 +120,12 @@ namespace scripting
     }
 }
 
-
-static math::Vector3D create_vector(double x, double y, double z) { return math::Vector3D(x, y, z); }
-static math::Point3D create_point(double x, double y, double z) { return math::Point3D(x, y, z); }
-static color create_color(double r, double g, double b) { return color(r, g, b); }
-
+namespace
+{
+    math::Vector3D create_vector(double x, double y, double z) { return math::Vector3D(x, y, z); }
+    math::Point3D create_point(double x, double y, double z) { return math::Point3D(x, y, z); }
+    color create_color(double r, double g, double b) { return color(r, g, b); }
+}
 
 void scripting::add_standard_library_bindings(Environment* environment)
 {
