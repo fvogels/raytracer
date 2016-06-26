@@ -33,9 +33,6 @@
     <ClCompile Include="math\point2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\interval.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cameras\perspective-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -88,9 +85,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\wif_format.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="math\interval-mapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\rasterizer.cpp">
@@ -189,9 +183,6 @@
     <ClCompile Include="cameras\fisheye-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\perspective-camera-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\rasteriser-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -207,19 +198,22 @@
     <ClCompile Include="tests\parser-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\orthographic-camera-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\interpreter-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\fisheye-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\combined-reader-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\camera-transformation-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\perspective-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\orthographic-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\fisheye-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

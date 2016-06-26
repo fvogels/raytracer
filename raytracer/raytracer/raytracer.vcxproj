@@ -238,8 +238,6 @@
     <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="math\functions\noise.cpp" />
     <ClCompile Include="math\functions\patterns.cpp" />
-    <ClCompile Include="math\interval.cpp" />
-    <ClCompile Include="math\interval-mapper.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
     <ClCompile Include="math\point2d.cpp" />
     <ClCompile Include="math\point3d.cpp" />

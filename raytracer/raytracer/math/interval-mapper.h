@@ -4,15 +4,20 @@
 
 namespace math
 {
+    template<typename T1, typename T2>
 	struct IntervalMapper
 	{
-		Interval from, to;
+        Interval<T1> from;
+        Interval<T2> to;
 
-		IntervalMapper(const Interval& from, const Interval& to)
+		IntervalMapper(const Interval<T1>& from, const Interval<T2>& to)
 			: from(from), to(to) { }
 
-		IntervalMapper(const IntervalMapper&) = default;
+		IntervalMapper(const IntervalMapper<T1, T2>&) = default;
 
-		double operator [](double) const;
+        T2 operator [](T1 x) const
+        {
+            return to.from_relative(from.to_relative(x));
+        }
 	};
 }

@@ -2,19 +2,34 @@
 
 namespace math
 {
+    template<typename T>
 	struct Interval
 	{
-		double lower, upper;
+		T lower, upper;
 
-		Interval(double lower, double upper)
+		Interval(T lower, T upper)
 			: lower(lower), upper(upper) { }
 
 		Interval(const Interval&) = default;
 
-		double size() const;
-		bool contains(double x) const;
+        T size() const
+        {
+            return upper - lower;
+        }
 
-		double to_relative(double x) const;
-		double from_relative(double t) const;
+        bool contains(T x) const
+        {
+            return lower <= x && x <= upper;
+        }
+
+        double to_relative(T x) const
+        {
+            return (x - lower) / size();
+        }
+
+        T from_relative(double t) const
+        {
+            return t * size() + lower;
+        }
 	};
 }
