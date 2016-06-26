@@ -326,6 +326,7 @@
     <ClInclude Include="materials\checkered-material.h" />
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
+    <ClInclude Include="meta\indexing.h" />
     <ClInclude Include="primitives\cylinder.h" />
     <ClInclude Include="primitives\hit-position.h" />
     <ClInclude Include="primitives\intersection.h" />

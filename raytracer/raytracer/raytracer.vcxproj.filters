@@ -458,5 +458,8 @@
     <ClInclude Include="math\approx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="meta\indexing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
