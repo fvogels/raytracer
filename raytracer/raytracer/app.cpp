@@ -11,6 +11,7 @@
 #include "math/functions/noise.h"
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
+#include "lights/light-source.h"
 #include "rendering/light-ray.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
@@ -31,12 +32,6 @@ using namespace math;
 using namespace raytracer;
 using namespace imaging;
 
-
-class LightSource
-{
-public:
-    virtual std::vector<LightRay> lightrays_to(const Point3D&) const = 0;
-};
 
 class PointLight : public LightSource
 {

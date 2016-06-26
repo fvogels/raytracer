@@ -467,5 +467,8 @@
     <ClInclude Include="rendering\light-ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lights\light-source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
