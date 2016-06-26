@@ -23,10 +23,29 @@ namespace math
 	Point3D operator +(const Vector3D&, const Point3D&) noexcept;
 	Vector3D operator -(const Point3D&, const Point3D&) noexcept;
 	Point3D operator -(const Point3D&, const Vector3D&) noexcept;
-	bool operator ==(const Point3D&, const Point3D&) noexcept;
+	
+    bool operator ==(const Point3D&, const Point3D&) noexcept;
 	bool operator !=(const Point3D&, const Point3D&) noexcept;
 
 	double distance(const Point3D&, const Point3D&) noexcept;
 
 	std::ostream& operator <<(std::ostream& out, const Point3D&);
+
+    template<>
+    struct approx<Point3D>
+    {
+        Point3D value;
+        double delta;
+
+        explicit approx(const Point3D& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const Point3D& other) const
+        {
+            return (value - other).norm() < delta;
+        }
+    };
 }
