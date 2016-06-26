@@ -12,7 +12,7 @@
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
 #include "lights/light-source.h"
-#include "lights/cone-light.h"
+#include "lights/conical-light.h"
 #include "rendering/light-ray.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
@@ -122,7 +122,7 @@ void create_root(double t)
 void create_light_sources(double t)
 {
     scene.LightSources.clear();
-    scene.LightSources.push_back(std::make_shared<ConeLight>(Point3D(0, 2, 0), Vector3D(t,-1,0), 45_degrees, colors::white()));
+    scene.LightSources.push_back(std::make_shared<ConicalLight>(Point3D(0, 2, 0), Vector3D(t,-1,0), 45_degrees, colors::white()));
 }
 
 void create_scene(double t)
@@ -181,7 +181,7 @@ int main()
 
         Bitmap bitmap(500, 500);
 
-        camera = raytracer::cameras::perspective(Point3D(0, 10 * t, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        camera = raytracer::cameras::perspective(Point3D(0, 10, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 

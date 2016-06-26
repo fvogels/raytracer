@@ -3,6 +3,7 @@
 #include "lights/light-source.h"
 #include "imaging/color.h"
 #include "math/point3d.h"
+#include "util/maybe.h"
 
 
 namespace raytracer
@@ -10,12 +11,13 @@ namespace raytracer
     class PointLight : public LightSource
     {
     public:
-        PointLight(const math::Point3D&, const imaging::color&);
+        PointLight(const math::Point3D&);
 
         std::vector<LightRay> lightrays_to(const math::Point3D&) const override;
 
-    private:
-        math::Point3D position;
-        imaging::color m_color;
+    protected:
+        virtual LightRay cast_lightray_to(const math::Point3D&) const = 0;
+
+        math::Point3D m_position;
     };
 }

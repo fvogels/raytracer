@@ -2,14 +2,22 @@
 
 using namespace math;
 using namespace raytracer;
+using namespace imaging;
 
 
-raytracer::PointLight::PointLight(const math::Point3D& position, const imaging::color& c)
-        : position(position), m_color(c) { }
+raytracer::PointLight::PointLight(const math::Point3D& position)
+    : m_position(position) { }
 
 std::vector<LightRay> raytracer::PointLight::lightrays_to(const math::Point3D& p) const
 {
-    math::Ray ray(position, p);
+    auto result = this->cast_lightray_to(p);
 
-    return std::vector<LightRay> { LightRay(ray, m_color) };
+    if (result.color != colors::black())
+    {
+        return std::vector<LightRay> { result };
+    }
+    else
+    {
+        return std::vector<LightRay>();
+    }
 }

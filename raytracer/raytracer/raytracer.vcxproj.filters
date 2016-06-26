@@ -222,7 +222,10 @@
     <ClCompile Include="lights\point-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lights\cone-light.cpp">
+    <ClCompile Include="lights\omnidirectional-point-light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lights\conical-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -479,7 +482,10 @@
     <ClInclude Include="lights\point-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lights\cone-light.h">
+    <ClInclude Include="lights\omnidirectional-point-light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lights\conical-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
