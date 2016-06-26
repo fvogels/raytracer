@@ -278,11 +278,14 @@
     <ClCompile Include="scripting\tokenizing\tokens.cpp" />
     <ClCompile Include="scripting\objects\special-form.cpp" />
     <ClCompile Include="scripting\objects\symbol.cpp" />
+    <ClCompile Include="tests\camera_transformation_tests.cpp" />
     <ClCompile Include="tests\combined_reader_tests.cpp" />
     <ClCompile Include="tests\fisheye_tests.cpp" />
     <ClCompile Include="tests\interpreter_tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="tests\orthographic_camera_tests.cpp" />
     <ClCompile Include="tests\parser_tests.cpp" />
+    <ClCompile Include="tests\perspective_camera_tests.cpp" />
     <ClCompile Include="tests\rasteriser_tests.cpp" />
     <ClCompile Include="tests\stream_line_reader_tests.cpp" />
     <ClCompile Include="tests\string_reader_tests.cpp" />

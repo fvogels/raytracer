@@ -15,7 +15,7 @@ namespace raytracer
 		class OrthographicCamera : public DisplacableCamera
 		{
 		public:
-			OrthographicCamera(const math::Matrix4D&, double window_width, double window_height);
+			OrthographicCamera(const math::Matrix4D&, double, double);
 
 		protected:
 			math::Ray create_untransformed_ray(const math::Point2D& point) const override;

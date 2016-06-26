@@ -21,7 +21,7 @@ Ray raytracer::cameras::FisheyeCamera::create_untransformed_ray(const Point2D& p
 	Point3D eye(0, 0, 0);
 
 	double dx = point.x - 0.5;
-	Angle azimuth_zero = -90_degrees;
+	Angle azimuth_zero = 90_degrees;
 	Angle delta_azimuth = -dx * m_horizontal_angle;
 	Angle azimuth = azimuth_zero + delta_azimuth;
 

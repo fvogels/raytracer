@@ -165,11 +165,4 @@ TEST("(z (-> 1 2 3))", number(3));
 TEST("(let ((x (alloc))) (set x 5) (get x))", number(5));
 TEST("(rgb 1 1 1)", std::make_shared<NO<color>>(color(1,1,1)));
 
-TEST_CASE("[interpret] Evaluating (uniform-material (rgb 1 0 1))", "[interpreter]")
-{
-	auto result = interpret("(uniform-material (rgb 1 0 1))");
-
-	REQUIRE(has_object_type<NO<Material>>(result));
-}
-
 #endif

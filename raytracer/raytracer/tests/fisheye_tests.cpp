@@ -7,164 +7,66 @@ using namespace math;
 
 namespace
 {
-	void assert_equals(const Point3D& p, const Point3D& q)
-	{
-		REQUIRE(p.x == Approx(q.x));
-		REQUIRE(p.y == Approx(q.y));
-		REQUIRE(p.z == Approx(q.z));
-	}
+    void assert_equals(const Point3D& p, const Point3D& q)
+    {
+        REQUIRE(p.x == Approx(q.x));
+        REQUIRE(p.y == Approx(q.y));
+        REQUIRE(p.z == Approx(q.z));
+    }
 
-	void assert_equals(const Vector3D& u, const Vector3D& v)
-	{
-		REQUIRE(u.x == Approx(v.x));
-		REQUIRE(u.y == Approx(v.y));
-		REQUIRE(u.z == Approx(v.z));
-	}
+    void assert_equals(const Vector3D& u, const Vector3D& v)
+    {
+        REQUIRE(u.x == Approx(v.x));
+        REQUIRE(u.y == Approx(v.y));
+        REQUIRE(u.z == Approx(v.z));
+    }
 
-	std::shared_ptr<raytracer::Camera> create_default_camera()
-	{
-		return raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), 180_degrees, 180_degrees);
-	}
+    std::string show(const Ray& ray)
+    {
+        std::ostringstream ss;
 
-	std::shared_ptr<raytracer::Camera> create_camera_with_hangle(Angle angle)
-	{
-		return raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 1), Vector3D(0, 1, 0), angle, 180_degrees);
-	}
+        ss << ray;
+
+        return ss.str();
+    }
 }
 
-TEST_CASE("[FisheyeCamera] At (0.5, 0.5)", "[FisheyeCamera]")
-{
-	auto camera = create_default_camera();
-	auto ray = camera->create_ray(Point2D(0.5, 0.5));
+#define XY(...)  __VA_ARGS__
+#define XYZ(...) __VA_ARGS__
 
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 0, 1));
-}
+#define TEST_SIMPLE(P, EXPECTED_DIRECTION) \
+    TEST(P, XYZ(0,0,0), XYZ(0,0,1), XYZ(0,1,0), 180, 180, XYZ(0,0,0), EXPECTED_DIRECTION)
 
-TEST_CASE("[FisheyeCamera] At (1, 0.5)", "[FisheyeCamera]")
-{
-	auto camera = create_default_camera();
-	auto ray = camera->create_ray(Point2D(1, 0.5));
+#define TEST_EYE_LOOKAT(P, EYE, LOOK_AT, EXPECTED_DIRECTION) \
+    TEST(P, EYE, LOOK_AT, XYZ(0,1,0), 180, 180, EYE, EXPECTED_DIRECTION)
 
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(1, 0, 0));
-}
+#define TEST_ANGLES(P, HANGLE, VANGLE, EXPECTED_DIRECTION) \
+    TEST(P, XYZ(0,0,0), XYZ(0,0,1), XYZ(0,1,0), HANGLE, VANGLE, XYZ(0,0,0), EXPECTED_DIRECTION)
 
-TEST_CASE("[FisheyeCamera] At (0, 0.5)", "[FisheyeCamera]")
-{
-	auto camera = create_default_camera();
-	auto ray = camera->create_ray(Point2D(0, 0.5));
+#define TEST(P, EYE, LOOK_AT, UP, HANGLE, VANGLE, EXPECTED_ORIGIN, EXPECTED_DIRECTION) \
+    TEST_CASE("[FisheyeCamera] Eye = " #EYE ", Lookat = " #LOOK_AT ", Up = " #UP ", HAngle = " #HANGLE ", VAngle = " #VANGLE ", At " #P, "[FisheyeCamera]") \
+    { \
+        auto camera = raytracer::cameras::fisheye(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), degrees(HANGLE), degrees(VANGLE)); \
+        auto ray = camera->create_ray(Point2D(P)); \
+        \
+        INFO( "Actual ray: " + show(ray) ); \
+        assert_equals(ray.origin, Point3D(EXPECTED_ORIGIN)); \
+        assert_equals(ray.direction, Vector3D(EXPECTED_DIRECTION)); \
+    }
 
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(-1, 0, 0));
-}
+TEST_SIMPLE(XY(0.5, 0.5), XYZ(0, 0, 1))
+TEST_SIMPLE(XY(0, 0.5), XYZ(1, 0, 0))
+TEST_SIMPLE(XY(1, 0.5), XYZ(-1, 0, 0))
+TEST_SIMPLE(XY(0.5, 1), XYZ(0, 1, 0))
+TEST_SIMPLE(XY(0.5, 0), XYZ(0, -1, 0))
 
-TEST_CASE("[FisheyeCamera] At (0.5, 1)", "[FisheyeCamera]")
-{
-	auto camera = create_default_camera();
-	auto ray = camera->create_ray(Point2D(0.5, 1));
+TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(1, 0, 0), XYZ(1, 0, 1), XYZ(0, 0, 1))
+TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(-1, 0, 0), XYZ(-1, 0, 1), XYZ(0, 0, 1))
+TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(-2, 0, 0), XYZ(-2, 0, 1), XYZ(0, 0, 1))
+TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(0, 0, 0), XYZ(1, 0, 0), XYZ(1, 0, 0))
 
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 1, 0));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 0)", "[FisheyeCamera]")
-{
-	auto camera = create_default_camera();
-	auto ray = camera->create_ray(Point2D(0.5, 0));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, -1, 0));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 0.5) with horizontal angle = 90", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(90_degrees);
-	auto ray = camera->create_ray(Point2D(0.5, 0.5));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 0, 1));
-}
-
-TEST_CASE("[FisheyeCamera] At (1, 0.5) with horizontal angle = 90", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(90_degrees);
-	auto ray = camera->create_ray(Point2D(1, 0.5));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(sin(45_degrees), 0, sin(45_degrees)));
-}
-
-TEST_CASE("[FisheyeCamera] At (0, 0.5) with horizontal angle = 90", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(90_degrees);
-	auto ray = camera->create_ray(Point2D(0, 0.5));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(-sin(45_degrees), 0, sin(45_degrees)));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 1) with horizontal angle = 90", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(90_degrees);
-	auto ray = camera->create_ray(Point2D(0.5, 1));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 1, 0));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 0) with horizontal angle = 90", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(90_degrees);
-	auto ray = camera->create_ray(Point2D(0.5, 0));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, -1, 0));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 0.5) with horizontal angle = 360", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(360_degrees);
-	auto ray = camera->create_ray(Point2D(0.5, 0.5));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 0, 1));
-}
-
-TEST_CASE("[FisheyeCamera] At (1, 0.5) with horizontal angle = 360", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(360_degrees);
-	auto ray = camera->create_ray(Point2D(1, 0.5));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 0, -1));
-}
-
-TEST_CASE("[FisheyeCamera] At (0, 0.5) with horizontal angle = 360", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(360_degrees);
-	auto ray = camera->create_ray(Point2D(0, 0.5));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 0, -1));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 1) with horizontal angle = 360", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(360_degrees);
-	auto ray = camera->create_ray(Point2D(0.5, 1));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, 1, 0));
-}
-
-TEST_CASE("[FisheyeCamera] At (0.5, 0) with horizontal angle = 360", "[FisheyeCamera]")
-{
-	auto camera = create_camera_with_hangle(360_degrees);
-	auto ray = camera->create_ray(Point2D(0.5, 0));
-
-	assert_equals(ray.origin, Point3D(0, 0, 0));
-	assert_equals(ray.direction, Vector3D(0, -1, 0));
-}
+TEST_ANGLES(XY(0.5, 0.5), 360, 180, XYZ(0, 0, 1))
+TEST_ANGLES(XY(1, 0.5), 360, 180, XYZ(0, 0, -1))
+TEST_ANGLES(XY(0, 0.5), 360, 180, XYZ(0, 0, -1))
 
 #endif

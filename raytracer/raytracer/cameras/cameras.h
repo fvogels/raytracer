@@ -10,11 +10,13 @@ namespace raytracer
 {
 	namespace cameras
 	{
+		math::Matrix4D create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
+
 		std::shared_ptr<Camera> orthographic(
 			const math::Point3D& eye,
 			const math::Point3D& look_at,
 			const math::Vector3D& up,
-			double distance,
+			double window_width,
 			double aspect_ratio);
 
 		std::shared_ptr<Camera> perspective(
