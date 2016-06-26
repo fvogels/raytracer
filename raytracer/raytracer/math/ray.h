@@ -3,6 +3,7 @@
 #include "math/vector3d.h"
 #include "math/point3d.h"
 #include "math/matrix4d.h"
+#include <iostream>
 
 namespace math
 {
@@ -23,4 +24,6 @@ namespace math
 
 		Ray transform(const Matrix4D&) const;
 	};
+
+    std::ostream& operator <<(std::ostream& out, const Ray&);
 }

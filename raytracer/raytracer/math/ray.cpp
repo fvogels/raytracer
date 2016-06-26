@@ -9,3 +9,8 @@ Ray math::Ray::transform(const Matrix4D& m) const
 
 	return Ray(transformed_origin, transformed_direction);
 }
+
+std::ostream& math::operator <<(std::ostream& out, const Ray& ray)
+{
+    return out << "RAY[" << ray.origin << " : " << ray.direction << "]";
+}
