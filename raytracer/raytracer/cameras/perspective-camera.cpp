@@ -6,13 +6,13 @@ using namespace raytracer;
 using namespace math;
 
 
-raytracer::cameras::PerspectiveCamera::PerspectiveCamera(const math::Matrix4D transformation, const Rectangle3D& view_window)
+raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::Matrix4D transformation, const Rectangle3D& view_window)
     : DisplacableCamera(transformation), m_view_window(view_window)
 {
     // NOP
 }
 
-Ray raytracer::cameras::PerspectiveCamera::create_untransformed_ray(const Point2D& point) const
+Ray raytracer::cameras::_private_::PerspectiveCamera::create_untransformed_ray(const Point2D& point) const
 {
     assert(0 <= point.x && point.x <= 1);
     assert(0 <= point.y && point.y <= 1);

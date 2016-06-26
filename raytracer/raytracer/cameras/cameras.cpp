@@ -57,7 +57,7 @@ std::shared_ptr<cameras::Camera> raytracer::cameras::perspective(
     Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
     Matrix4D transformation = create_transformation(eye, look_at, up);
     
-    return std::make_shared<PerspectiveCamera>(transformation, view_window);
+    return std::make_shared<_private_::PerspectiveCamera>(transformation, view_window);
 }
 
 std::shared_ptr<cameras::Camera> raytracer::cameras::orthographic(
