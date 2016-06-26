@@ -36,7 +36,7 @@ Point2D math::operator -(const Point2D& p, const Vector2D& v) noexcept
 
 bool math::operator ==(const Point2D& p, const Point2D& q) noexcept
 {
-	return p.x == approx(q.x) && p.y == approx(q.y);
+	return p.x == approx<double>(q.x) && p.y == approx<double>(q.y);
 }
 
 bool math::operator !=(const Point2D& p, const Point2D& q) noexcept
