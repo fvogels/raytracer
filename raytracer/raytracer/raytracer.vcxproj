@@ -311,6 +311,7 @@
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="lights\conical-light.h" />
     <ClInclude Include="lights\light-source.h" />
+    <ClInclude Include="lights\lights.h" />
     <ClInclude Include="lights\omnidirectional-point-light.h" />
     <ClInclude Include="lights\point-light.h" />
     <ClInclude Include="materials\material.h" />

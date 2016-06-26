@@ -488,5 +488,8 @@
     <ClInclude Include="lights\conical-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lights\lights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
