@@ -67,7 +67,7 @@ Vector3D& math::Vector3D::operator/=(double factor) noexcept
 
 bool math::Vector3D::is_unit() const noexcept
 {
-	return norm() == approx(1);
+	return norm() == approx<double>(1);
 }
 
 Vector3D math::operator +(const Vector3D& u, const Vector3D& v) noexcept
