@@ -35,14 +35,14 @@ namespace imaging
     // Example usage: color c = colors::black();
     namespace colors
     {
-        constexpr color black() { return color{ 0, 0, 0 }; }
-        constexpr color white() { return color{ 1, 1, 1 }; }
-        constexpr color red() { return color{ 1, 0, 0 }; }
-        constexpr color green() { return color{ 0, 1, 0 }; }
-        constexpr color blue() { return color{ 0, 0, 1 }; }
-        constexpr color yellow() { return color{ 1, 1, 0 }; }
+        constexpr color black()   { return color{ 0, 0, 0 }; }
+        constexpr color white()   { return color{ 1, 1, 1 }; }
+        constexpr color red()     { return color{ 1, 0, 0 }; }
+        constexpr color green()   { return color{ 0, 1, 0 }; }
+        constexpr color blue()    { return color{ 0, 0, 1 }; }
+        constexpr color yellow()  { return color{ 1, 1, 0 }; }
         constexpr color magenta() { return color{ 1, 0, 1 }; }
-        constexpr color cyan() { return color{ 0, 1, 1 }; }
+        constexpr color cyan()    { return color{ 0, 1, 1 }; }
     }
 }
 
