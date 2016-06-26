@@ -33,210 +33,210 @@ using namespace imaging;
 
 struct Light
 {
-	Point3D position;
+    Point3D position;
 
-	Light(const Point3D& position) : position(position) { }
+    Light(const Point3D& position) : position(position) { }
 };
 
 struct Scene
 {
-	raytracer::primitives::Primitive root;
-	std::vector<std::shared_ptr<Light>> lights;
+    raytracer::primitives::Primitive root;
+    std::vector<std::shared_ptr<Light>> lights;
 } scene;
 
 std::shared_ptr<Camera> camera = nullptr;
 
 color trace(const Ray& ray)
 {
-	Hit hit;
-	color result = colors::black();
+    Hit hit;
+    color result = colors::black();
 
-	if (scene.root->find_hit(ray, &hit))
-	{
-		assert(hit.material);
+    if (scene.root->find_hit(ray, &hit))
+    {
+        assert(hit.material);
 
-		auto material_properties = hit.material->at(hit.local_position);
+        auto material_properties = hit.material->at(hit.local_position);
 
-		for (auto light : scene.lights)
-		{
-			Vector3D hit_to_light = (light->position - hit.position).normalized();
-			double diffuse_cos_angle = hit_to_light.dot(hit.normal);
+        for (auto light : scene.lights)
+        {
+            Vector3D hit_to_light = (light->position - hit.position).normalized();
+            double diffuse_cos_angle = hit_to_light.dot(hit.normal);
 
-			assert(hit.normal.is_unit());
-			assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
+            assert(hit.normal.is_unit());
+            assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
 
-			if (diffuse_cos_angle > 0)
-			{
-				result += material_properties.diffuse * diffuse_cos_angle;
-			}
+            if (diffuse_cos_angle > 0)
+            {
+                result += material_properties.diffuse * diffuse_cos_angle;
+            }
 
-			Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-			double specular_cos_angle = reflected_ray_direction.dot(hit_to_light);
+            Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+            double specular_cos_angle = reflected_ray_direction.dot(hit_to_light);
 
-			if (specular_cos_angle > 0)
-			{
-				result += material_properties.specular * std::pow(specular_cos_angle, 20);
-			}
-		}
-	}
+            if (specular_cos_angle > 0)
+            {
+                result += material_properties.specular * std::pow(specular_cos_angle, 20);
+            }
+        }
+    }
 
-	return result;
+    return result;
 }
 
 color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
 {
-	GridSampler sampler(1, 1);
-	Rectangle2D pixel_rectangle = window_rasteriser[position(x, y)];
-	color c = colors::black();
-	int sample_count = 0;
+    GridSampler sampler(1, 1);
+    Rectangle2D pixel_rectangle = window_rasteriser[position(x, y)];
+    color c = colors::black();
+    int sample_count = 0;
 
-	sampler.sample(pixel_rectangle, [&c, &sample_count](const Point2D& p) {
-		auto ray = camera->create_ray(p);
-		c += trace(ray);
-		++sample_count;
-	});
+    sampler.sample(pixel_rectangle, [&c, &sample_count](const Point2D& p) {
+        auto ray = camera->create_ray(p);
+        c += trace(ray);
+        ++sample_count;
+    });
 
-	return c / sample_count;
+    return c / sample_count;
 }
 
 void create_root(double t)
 {
-	using namespace raytracer::primitives;
-	using namespace raytracer::materials;
+    using namespace raytracer::primitives;
+    using namespace raytracer::materials;
 
-	auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red() * 0.8, colors::white() * 0.8, 10), sphere()));
-	auto middle = decorate(uniform(colors::green() * 0.8, colors::white() * 0.8, 10), sphere());
-	auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue() * 0.8, colors::white() * 0.8, 10), sphere()));
-	auto spheres = rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }));
+    auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red() * 0.8, colors::white() * 0.8, 10), sphere()));
+    auto middle = decorate(uniform(colors::green() * 0.8, colors::white() * 0.8, 10), sphere());
+    auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue() * 0.8, colors::white() * 0.8, 10), sphere()));
+    auto spheres = rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }));
 
-	auto plane = decorate(raytracer::materials::grid(0.1, uniform(colors::white(), colors::white(), 10), uniform(colors::black(), colors::white(), 10)), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto plane = decorate(raytracer::materials::grid(0.1, uniform(colors::white(), colors::white(), 10), uniform(colors::black(), colors::white(), 10)), translate(Vector3D(0, -1, 0), xz_plane()));
 
-	scene.root = group(std::vector<Primitive> { spheres, plane });
+    scene.root = group(std::vector<Primitive> { spheres, plane });
 }
 
 void create_lights(double t)
 {
-	scene.lights.clear();
-	scene.lights.push_back(std::make_shared<Light>(Point3D(0, 2, 5)));
+    scene.lights.clear();
+    scene.lights.push_back(std::make_shared<Light>(Point3D(0, 2, 5)));
 }
 
 void create_scene(double t)
 {
-	create_root(t);
-	create_lights(t);
+    create_root(t);
+    create_lights(t);
 }
 
 
 void worley()
 {
-	WIF wif("e:/temp/output/test.wif");
+    WIF wif("e:/temp/output/test.wif");
 
-	Bitmap bitmap(200, 200);
-	auto noise = math::functions::worley_noise2d();
+    Bitmap bitmap(200, 200);
+    auto noise = math::functions::worley_noise2d();
 
-	for (int y = 0; y != bitmap.height(); ++y)
-	{
-		for (int x = 0; x != bitmap.width(); ++x)
-		{
-			position pos(x, y);
-			Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
-			double value = noise(p);
+    for (int y = 0; y != bitmap.height(); ++y)
+    {
+        for (int x = 0; x != bitmap.width(); ++x)
+        {
+            position pos(x, y);
+            Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
+            double value = noise(p);
 
-			value = value * 2;
+            value = value * 2;
 
-			value = std::max<double>(value, 0);
-			value = std::min<double>(value, 1);
+            value = std::max<double>(value, 0);
+            value = std::min<double>(value, 1);
 
-			assert(0 <= value);
-			assert(value <= 1);
+            assert(0 <= value);
+            assert(value <= 1);
 
-			bitmap[pos] = colors::white() * value;
-		}
-	}
+            bitmap[pos] = colors::white() * value;
+        }
+    }
 
-	wif.write_frame(bitmap);
+    wif.write_frame(bitmap);
 }
 
 
 int main()
 {
-	TIMED_FUNC(timerObj);
+    TIMED_FUNC(timerObj);
 
-	logging::configure();
+    logging::configure();
 
-	WIF wif("e:/temp/output/test.wif");
+    WIF wif("e:/temp/output/test.wif");
 
-	for (int frame = 0; frame != FRAME_COUNT; ++frame)
-	{
-		TIMED_SCOPE(timerObj, "single frame");
+    for (int frame = 0; frame != FRAME_COUNT; ++frame)
+    {
+        TIMED_SCOPE(timerObj, "single frame");
 
-		double t = double(frame) / FRAME_COUNT;
+        double t = double(frame) / FRAME_COUNT;
 
-		std::cout << "Rendering frame " << frame << std::endl;
+        std::cout << "Rendering frame " << frame << std::endl;
 
-		Bitmap bitmap(500, 500);
+        Bitmap bitmap(500, 500);
 
-		camera = raytracer::cameras::perspective(Point3D(1, t, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-		// camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
-		// camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
+        camera = raytracer::cameras::perspective(Point3D(-1+2*t, 0, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
+        // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
-		create_scene(t);
+        create_scene(t);
 
-		Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-		Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
+        Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+        Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
 
-		bitmap.clear(colors::black());
+        bitmap.clear(colors::black());
 
-		if (N_THREADS > 1)
-		{
-			std::atomic<unsigned> j = 0;
-			std::vector<std::thread> threads;
+        if (N_THREADS > 1)
+        {
+            std::atomic<unsigned> j = 0;
+            std::vector<std::thread> threads;
 
-			for (int k = 0; k != N_THREADS; ++k)
-			{
-				threads.push_back(std::thread([&]() {
-					unsigned current;
+            for (int k = 0; k != N_THREADS; ++k)
+            {
+                threads.push_back(std::thread([&]() {
+                    unsigned current;
 
-					while ((current = j++) < bitmap.height())
-					{
-						int y = bitmap.height() - current - 1;
+                    while ((current = j++) < bitmap.height())
+                    {
+                        int y = bitmap.height() - current - 1;
 
-						for (int i = 0; i != bitmap.width(); ++i)
-						{
-							int x = i;
+                        for (int i = 0; i != bitmap.width(); ++i)
+                        {
+                            int x = i;
 
-							color c = render_pixel(window_rasteriser, x, y);
+                            color c = render_pixel(window_rasteriser, x, y);
 
-							bitmap[position(i, current)] = c;
-						}
-					}
-				}));
-			}
+                            bitmap[position(i, current)] = c;
+                        }
+                    }
+                }));
+            }
 
-			for (auto& thread : threads)
-			{
-				thread.join();
-			}
-		}
-		else
-		{
-			for (int j = 0; j != bitmap.height(); ++j)
-			{
-				int y = bitmap.height() - j - 1;
+            for (auto& thread : threads)
+            {
+                thread.join();
+            }
+        }
+        else
+        {
+            for (int j = 0; j != bitmap.height(); ++j)
+            {
+                int y = bitmap.height() - j - 1;
 
-				for (int i = 0; i != bitmap.width(); ++i)
-				{
-					int x = i;
+                for (int i = 0; i != bitmap.width(); ++i)
+                {
+                    int x = i;
 
-					color c = render_pixel(window_rasteriser, x, y);
+                    color c = render_pixel(window_rasteriser, x, y);
 
-					bitmap[position(i, j)] = c;
-				}
-			}
-		}
+                    bitmap[position(i, j)] = c;
+                }
+            }
+        }
 
-		wif.write_frame(bitmap);
-	}
+        wif.write_frame(bitmap);
+    }
 }
 
 #endif

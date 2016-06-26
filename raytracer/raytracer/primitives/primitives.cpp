@@ -14,70 +14,70 @@ using namespace raytracer::primitives;
 
 Primitive raytracer::primitives::xy_plane()
 {
-	return Primitive(std::make_shared<raytracer::primitives::PlaneXY>());
+    return Primitive(std::make_shared<raytracer::primitives::PlaneXY>());
 }
 
 Primitive raytracer::primitives::xz_plane()
 {
-	return Primitive(std::make_shared<raytracer::primitives::PlaneXZ>());
+    return Primitive(std::make_shared<raytracer::primitives::PlaneXZ>());
 }
 
 Primitive raytracer::primitives::yz_plane()
 {
-	return Primitive(std::make_shared<raytracer::primitives::PlaneYZ>());
+    return Primitive(std::make_shared<raytracer::primitives::PlaneYZ>());
 }
 
 Primitive raytracer::primitives::sphere()
 {
-	return Primitive(std::make_shared<raytracer::primitives::Sphere>());
+    return Primitive(std::make_shared<raytracer::primitives::Sphere>());
 }
 
 Primitive raytracer::primitives::cylinder()
 {
-	return Primitive(std::make_shared<raytracer::primitives::Cylinder>());
+    return Primitive(std::make_shared<raytracer::primitives::Cylinder>());
 }
 
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
 {
-	return Primitive(std::make_shared<Transformer>(transformation, transformee));
+    return Primitive(std::make_shared<Transformer>(transformation, transformee));
 }
 
 Primitive raytracer::primitives::translate(const math::Vector3D& v, Primitive transformee)
 {
-	return transform(math::translation(v), transformee);
+    return transform(math::translation(v), transformee);
 }
 
 Primitive raytracer::primitives::scale(double x, double y, double z, Primitive transformee)
 {
-	return transform(math::scale(x, y, z), transformee);
+    return transform(math::scale(x, y, z), transformee);
 }
 
 Primitive raytracer::primitives::rotate_around_x(math::Angle angle, Primitive transformee)
 {
-	return transform(math::rotate_x(angle), transformee);
+    return transform(math::rotate_x(angle), transformee);
 }
 
 Primitive raytracer::primitives::rotate_around_y(math::Angle angle, Primitive transformee)
 {
-	return transform(math::rotate_y(angle), transformee);
+    return transform(math::rotate_y(angle), transformee);
 }
 
 Primitive raytracer::primitives::rotate_around_z(math::Angle angle, Primitive transformee)
 {
-	return transform(math::rotate_z(angle), transformee);
+    return transform(math::rotate_z(angle), transformee);
 }
 
 Primitive raytracer::primitives::decorate(Material material, Primitive child)
 {
-	return Primitive(std::make_shared<raytracer::primitives::Decorator>(material, child));
+    return Primitive(std::make_shared<raytracer::primitives::Decorator>(material, child));
 }
 
 Primitive raytracer::primitives::group(std::vector<Primitive>& children)
 {
-	return Primitive(std::make_shared<raytracer::primitives::Union>(children));
+    return Primitive(std::make_shared<raytracer::primitives::Union>(children));
 }
 
 Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
 {
-	return Primitive(std::make_shared<raytracer::primitives::Intersection>(first, second));
+    return Primitive(std::make_shared<raytracer::primitives::Intersection>(first, second));
 }

@@ -9,59 +9,59 @@
 
 namespace raytracer
 {
-	struct MaterialProperties
-	{
-		imaging::color diffuse;
-		imaging::color specular;
-		double specular_exponent;
-	};
+    struct MaterialProperties
+    {
+        imaging::color diffuse;
+        imaging::color specular;
+        double specular_exponent;
+    };
 
-	class MaterialImplementation
-	{
-	public:
-		virtual MaterialProperties at(const HitPosition&) const = 0;
-	};
+    class MaterialImplementation
+    {
+    public:
+        virtual MaterialProperties at(const HitPosition&) const = 0;
+    };
 
-	class Material2D : public MaterialImplementation
-	{
-	public:
-		MaterialProperties at(const HitPosition&) const override;
+    class Material2D : public MaterialImplementation
+    {
+    public:
+        MaterialProperties at(const HitPosition&) const override;
 
-	protected:
-		virtual MaterialProperties at(const math::Point2D&) const = 0;
-	};
+    protected:
+        virtual MaterialProperties at(const math::Point2D&) const = 0;
+    };
 
-	class Material3D : public MaterialImplementation
-	{
-	public:
-		MaterialProperties at(const HitPosition&) const override;
+    class Material3D : public MaterialImplementation
+    {
+    public:
+        MaterialProperties at(const HitPosition&) const override;
 
-	protected:
-		virtual MaterialProperties at(const math::Point3D&) const = 0;
-	};	
+    protected:
+        virtual MaterialProperties at(const math::Point3D&) const = 0;
+    };    
 
-	class Material
-	{
-	public:
-		Material(std::shared_ptr<MaterialImplementation> impl = nullptr)
-			: m_impl(impl) { }
+    class Material
+    {
+    public:
+        Material(std::shared_ptr<MaterialImplementation> impl = nullptr)
+            : m_impl(impl) { }
 
-		operator bool() const
-		{
-			return m_impl != nullptr;
-		}
+        operator bool() const
+        {
+            return m_impl != nullptr;
+        }
 
-		MaterialImplementation* operator ->()
-		{
-			return m_impl.get();
-		}
+        MaterialImplementation* operator ->()
+        {
+            return m_impl.get();
+        }
 
-		MaterialImplementation* operator ->() const
-		{
-			return m_impl.get();
-		}
+        MaterialImplementation* operator ->() const
+        {
+            return m_impl.get();
+        }
 
-	private:
-		std::shared_ptr<MaterialImplementation> m_impl;
-	};
+    private:
+        std::shared_ptr<MaterialImplementation> m_impl;
+    };
 }

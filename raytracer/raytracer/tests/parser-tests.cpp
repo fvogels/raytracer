@@ -12,139 +12,139 @@ using namespace scripting;
 
 static std::shared_ptr<Parser> create_parser(std::istream& ss)
 {
-	auto tokenizer = create_tokenizer(ss);
+    auto tokenizer = create_tokenizer(ss);
 
-	return std::make_shared<Parser>(tokenizer);
+    return std::make_shared<Parser>(tokenizer);
 }
 
 static std::shared_ptr<Object> number(double x)
 {
-	return std::make_shared<Number>(x);
+    return std::make_shared<Number>(x);
 }
 
 static std::shared_ptr<Object> string(const std::string& str)
 {
-	return std::make_shared<String>(str);
+    return std::make_shared<String>(str);
 }
 
 static std::shared_ptr<Object> symbol(const std::string& str)
 {
-	return std::make_shared<Symbol>(str);
+    return std::make_shared<Symbol>(str);
 }
 
 static std::shared_ptr<Object> list(const std::vector<std::shared_ptr<Object>>& elts)
 {
-	return construct_list(elts);
+    return construct_list(elts);
 }
 
 #define LIST(...) list(std::vector<std::shared_ptr<Object>> { __VA_ARGS__ } )
 
 TEST_CASE("[Parser] Parsing 4", "[Parser]")
 {
-	std::istringstream ss("4");
-	auto parser = create_parser(ss);
+    std::istringstream ss("4");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == Number(4));
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == Number(4));
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing ~4", "[Parser]")
 {
-	std::istringstream ss("~4");
-	auto parser = create_parser(ss);
+    std::istringstream ss("~4");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == Number(-4));
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == Number(-4));
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing 45 12", "[Parser]")
 {
-	std::istringstream ss("45 12");
-	auto parser = create_parser(ss);
+    std::istringstream ss("45 12");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == Number(45));
-	parser->next();
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == Number(12));
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == Number(45));
+    parser->next();
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == Number(12));
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing ()", "[Parser]")
 {
-	std::istringstream ss("()");
-	auto parser = create_parser(ss);
+    std::istringstream ss("()");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == Nil());
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == Nil());
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing (5)", "[Parser]")
 {
-	std::istringstream ss("(5)");
-	auto parser = create_parser(ss);
+    std::istringstream ss("(5)");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST(number(5)));
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST(number(5)));
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing (+ 2 3)", "[Parser]")
 {
-	std::istringstream ss("(+ 2 3)");
-	auto parser = create_parser(ss);
+    std::istringstream ss("(+ 2 3)");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST(symbol("+"), number(2), number(3)));
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST(symbol("+"), number(2), number(3)));
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing (+ (* 1 2) 3)", "[Parser]")
 {
-	std::istringstream ss("(+ (* 1 2) 3)");
-	auto parser = create_parser(ss);
+    std::istringstream ss("(+ (* 1 2) 3)");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST(symbol("+"), LIST(symbol("*"), number(1), number(2)), number(3)));
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST(symbol("+"), LIST(symbol("*"), number(1), number(2)), number(3)));
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing () ()", "[Parser]")
 {
-	std::istringstream ss("() ()");
-	auto parser = create_parser(ss);
+    std::istringstream ss("() ()");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST());
-	parser->next();
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST());
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST());
+    parser->next();
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST());
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 TEST_CASE("[Parser] Parsing ()()", "[Parser]")
 {
-	std::istringstream ss("()()");
-	auto parser = create_parser(ss);
+    std::istringstream ss("()()");
+    auto parser = create_parser(ss);
 
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST());
-	parser->next();
-	REQUIRE(!parser->end_reached());
-	REQUIRE(*parser->current() == *LIST());
-	parser->next();
-	REQUIRE(parser->end_reached());
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST());
+    parser->next();
+    REQUIRE(!parser->end_reached());
+    REQUIRE(*parser->current() == *LIST());
+    parser->next();
+    REQUIRE(parser->end_reached());
 }
 
 #endif

@@ -6,9 +6,9 @@
 
 namespace raytracer
 {
-	struct HitPosition
-	{
-		math::Point2D uv;
-		math::Point3D xyz;
-	};
+    struct HitPosition
+    {
+        math::Point2D uv;
+        math::Point3D xyz;
+    };
 }

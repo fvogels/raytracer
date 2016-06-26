@@ -4,19 +4,19 @@
 
 namespace raytracer
 {
-	namespace materials
-	{
-		class UniformMaterial : public MaterialImplementation
-		{
-		public:
-			UniformMaterial(const imaging::color&, const imaging::color&, double);
+    namespace materials
+    {
+        class UniformMaterial : public MaterialImplementation
+        {
+        public:
+            UniformMaterial(const imaging::color&, const imaging::color&, double);
 
-			MaterialProperties at(const HitPosition&) const override;
+            MaterialProperties at(const HitPosition&) const override;
 
-		private:
-			imaging::color m_diffuse;
-			imaging::color m_specular;
-			double m_specular_exponent;
-		};
-	}
+        private:
+            imaging::color m_diffuse;
+            imaging::color m_specular;
+            double m_specular_exponent;
+        };
+    }
 }

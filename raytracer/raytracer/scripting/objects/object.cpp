@@ -4,17 +4,17 @@ using namespace scripting;
 
 scripting::Object::Object()
 {
-	// NOP
+    // NOP
 }
 
 bool scripting::operator !=(const Object& a, const Object& b)
 {
-	return !(a == b);
+    return !(a == b);
 }
 
 std::ostream& scripting::operator <<(std::ostream& out, const Object& object)
 {
-	object.write(out);
+    object.write(out);
 
-	return out;
+    return out;
 }

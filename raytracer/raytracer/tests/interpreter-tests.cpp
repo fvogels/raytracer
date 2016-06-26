@@ -24,68 +24,68 @@ using LNO = NativeObject<std::shared_ptr<T>>;
 
 static std::shared_ptr<Parser> create_parser(std::istream& ss)
 {
-	auto tokenizer = create_tokenizer(ss);
+    auto tokenizer = create_tokenizer(ss);
 
-	return std::make_shared<Parser>(tokenizer);
+    return std::make_shared<Parser>(tokenizer);
 }
 
 static std::shared_ptr<Object> parse(const std::string& input)
 {
-	std::istringstream ss(input);
-	auto parser = create_parser(ss);
+    std::istringstream ss(input);
+    auto parser = create_parser(ss);
 
-	return parser->current();
+    return parser->current();
 }
 
 static std::shared_ptr<Environment> create_environment()
 {
-	auto result = std::make_shared<Environment>();
+    auto result = std::make_shared<Environment>();
 
-	scripting::add_standard_library_bindings(result.get());
+    scripting::add_standard_library_bindings(result.get());
 
-	return result;
+    return result;
 }
 
 static std::shared_ptr<Object> interpret(const std::string& input)
 {
-	auto parsed_input = parse(input);
-	
-	return evaluate(parsed_input, create_environment());
+    auto parsed_input = parse(input);
+    
+    return evaluate(parsed_input, create_environment());
 }
 
 static std::shared_ptr<Object> number(double x)
 {
-	return std::make_shared<Number>(x);
+    return std::make_shared<Number>(x);
 }
 
 static std::shared_ptr<Object> string(const std::string& str)
 {
-	return std::make_shared<String>(str);
+    return std::make_shared<String>(str);
 }
 
 static std::shared_ptr<Object> symbol(const std::string& str)
 {
-	return std::make_shared<Symbol>(str);
+    return std::make_shared<Symbol>(str);
 }
 
 static std::shared_ptr<Object> boolean(bool b)
 {
-	return std::make_shared<Boolean>(b);
+    return std::make_shared<Boolean>(b);
 }
 
 static std::shared_ptr<Object> point(double x, double y, double z)
 {
-	return std::make_shared<Point>(math::Point3D(x,y,z));
+    return std::make_shared<Point>(math::Point3D(x,y,z));
 }
 
 static std::shared_ptr<Object> vector(double x, double y, double z)
 {
-	return std::make_shared<Vector>(math::Vector3D(x, y, z));
+    return std::make_shared<Vector>(math::Vector3D(x, y, z));
 }
 
 static std::shared_ptr<Object> nil()
 {
-	return std::make_shared<Nil>();
+    return std::make_shared<Nil>();
 }
 
 #define TEST(sexpr, expected) TEST_CASE("[interpret] Evaluating " #sexpr, "[interpreter]") { auto result = interpret(sexpr); REQUIRE(*result == *expected); }

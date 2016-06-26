@@ -5,26 +5,26 @@ using namespace scripting;
 
 
 scripting::Symbol::Symbol(const std::string& name)
-	: m_name(name) { }
+    : m_name(name) { }
 
 bool scripting::Symbol::operator==(const Object& other) const
 {
-	auto that = dynamic_cast<const Symbol*>(&other);
+    auto that = dynamic_cast<const Symbol*>(&other);
 
-	return that != nullptr && this->m_name == that->m_name;
+    return that != nullptr && this->m_name == that->m_name;
 }
 
 void scripting::Symbol::write(std::ostream& out) const
 {
-	out << this->m_name;
+    out << this->m_name;
 }
 
 std::shared_ptr<Object> scripting::Symbol::evaluate(std::shared_ptr<scripting::Environment> environment)
 {
-	return environment->lookup(*this);
+    return environment->lookup(*this);
 }
 
 std::string scripting::Symbol::name() const 
 {
-	return m_name; 
+    return m_name; 
 }

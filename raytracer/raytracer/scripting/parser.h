@@ -9,24 +9,24 @@
 
 namespace scripting
 {
-	class ParsingVisitor;
+    class ParsingVisitor;
 
-	class Parser : public Reader<std::shared_ptr<Object>, Location>
-	{
-	public:
-		Parser(std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>>);
-		~Parser();
+    class Parser : public Reader<std::shared_ptr<Object>, Location>
+    {
+    public:
+        Parser(std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>>);
+        ~Parser();
 
-		bool end_reached() const override;
-		std::shared_ptr<Object> current() const override;
-		void next() override;
-		Location location() const override;
+        bool end_reached() const override;
+        std::shared_ptr<Object> current() const override;
+        void next() override;
+        Location location() const override;
 
-	private:
-		std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> m_reader;
-		std::shared_ptr<Object> m_object;
-		std::unique_ptr<ParsingVisitor> m_visitor;
+    private:
+        std::shared_ptr<Reader<std::shared_ptr<const Token>, Location>> m_reader;
+        std::shared_ptr<Object> m_object;
+        std::unique_ptr<ParsingVisitor> m_visitor;
 
-		void extract_next_object();
-	};
+        void extract_next_object();
+    };
 }

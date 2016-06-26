@@ -6,9 +6,9 @@
 
 int main(int argc, char* const argv[])
 {
-	logging::configure();
+    logging::configure();
 
-	return Catch::Session().run(argc, argv);
+    return Catch::Session().run(argc, argv);
 }
 
 #endif

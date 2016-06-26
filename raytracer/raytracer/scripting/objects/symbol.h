@@ -4,19 +4,19 @@
 
 namespace scripting
 {
-	class Symbol : public Object
-	{
-	public:
-		Symbol(const std::string&);
+    class Symbol : public Object
+    {
+    public:
+        Symbol(const std::string&);
 
-		void write(std::ostream&) const override;
-		bool operator ==(const Object&) const override;
+        void write(std::ostream&) const override;
+        bool operator ==(const Object&) const override;
 
-		std::shared_ptr<Object> evaluate(std::shared_ptr<Environment>) override;
+        std::shared_ptr<Object> evaluate(std::shared_ptr<Environment>) override;
 
-		std::string name() const;
+        std::string name() const;
 
-	private:
-		std::string m_name;
-	};
+    private:
+        std::string m_name;
+    };
 }

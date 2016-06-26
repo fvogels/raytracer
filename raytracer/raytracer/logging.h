@@ -2,5 +2,5 @@
 
 namespace logging
 {
-	void configure();
+    void configure();
 }

@@ -7,15 +7,15 @@
 
 namespace imaging
 {
-	class WIF
-	{
-	public:
-		WIF(const std::string&);
-		~WIF();
+    class WIF
+    {
+    public:
+        WIF(const std::string&);
+        ~WIF();
 
-		void write_frame(const Bitmap& bitmap);
+        void write_frame(const Bitmap& bitmap);
 
-	private:
-		std::ofstream out;
-	};
+    private:
+        std::ofstream out;
+    };
 }

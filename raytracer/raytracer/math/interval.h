@@ -3,14 +3,14 @@
 namespace math
 {
     template<typename T>
-	struct Interval
-	{
-		T lower, upper;
+    struct Interval
+    {
+        T lower, upper;
 
-		Interval(T lower, T upper)
-			: lower(lower), upper(upper) { }
+        Interval(T lower, T upper)
+            : lower(lower), upper(upper) { }
 
-		Interval(const Interval&) = default;
+        Interval(const Interval&) = default;
 
         T size() const
         {
@@ -31,5 +31,5 @@ namespace math
         {
             return t * size() + lower;
         }
-	};
+    };
 }

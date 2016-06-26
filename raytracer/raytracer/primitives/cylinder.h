@@ -4,13 +4,13 @@
 
 namespace raytracer
 {
-	namespace primitives
-	{
-		class Cylinder : public PrimitiveImplementation
-		{
-		public:
-			bool find_hit(const math::Ray&, Hit*) const override;
-			std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
-		};
-	}
+    namespace primitives
+    {
+        class Cylinder : public PrimitiveImplementation
+        {
+        public:
+            bool find_hit(const math::Ray&, Hit*) const override;
+            std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
+        };
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace animation
 {
-	class Animation
-	{
-	public:
-		virtual void update(double time) = 0;
-	};
+    class Animation
+    {
+    public:
+        virtual void update(double time) = 0;
+    };
 }

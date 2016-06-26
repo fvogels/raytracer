@@ -4,15 +4,15 @@
 
 namespace raytracer
 {
-	class CheckeredMaterial3D : public Material3D
-	{
-	public:
-		CheckeredMaterial3D(const imaging::color& c1, const imaging::color& c2) : c1(c1), c2(c2) { }
+    class CheckeredMaterial3D : public Material3D
+    {
+    public:
+        CheckeredMaterial3D(const imaging::color& c1, const imaging::color& c2) : c1(c1), c2(c2) { }
 
-	protected:
-		MaterialProperties at(const math::Point3D&) const override;
+    protected:
+        MaterialProperties at(const math::Point3D&) const override;
 
-	private:
-		imaging::color c1, c2;
-	};		
+    private:
+        imaging::color c1, c2;
+    };        
 }

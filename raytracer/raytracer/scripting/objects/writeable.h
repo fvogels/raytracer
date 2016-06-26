@@ -4,9 +4,9 @@
 
 namespace scripting
 {
-	class Writeable : public virtual Object
-	{
-	public:
-		virtual void write(std::shared_ptr<Object>) = 0;
-	};
+    class Writeable : public virtual Object
+    {
+    public:
+        virtual void write(std::shared_ptr<Object>) = 0;
+    };
 }

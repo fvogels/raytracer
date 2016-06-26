@@ -14,280 +14,280 @@ namespace
 {
 #pragma pack(push, r1, 1)
 
-	struct FILE_HEADER
-	{
-		uint16_t FileType;     /* File type, always 4D42h ("BM") */
-		uint32_t FileSize;     /* Size of the file in bytes */
-		uint16_t Reserved1;    /* Always 0 */
-		uint16_t Reserved2;    /* Always 0 */
-		uint32_t BitmapOffset; /* Starting position of image data in bytes */
-	};
+    struct FILE_HEADER
+    {
+        uint16_t FileType;     /* File type, always 4D42h ("BM") */
+        uint32_t FileSize;     /* Size of the file in bytes */
+        uint16_t Reserved1;    /* Always 0 */
+        uint16_t Reserved2;    /* Always 0 */
+        uint32_t BitmapOffset; /* Starting position of image data in bytes */
+    };
 
-	struct BITMAP_HEADER_V2
-	{
-		uint32_t Size;            /* Size of this header in bytes */
-		int32_t  Width;           /* Image width in pixels */
-		int32_t  Height;          /* Image height in pixels */
-		uint16_t Planes;          /* Number of color planes */
-		uint16_t BitsPerPixel;    /* Number of bits per pixel */
-	};
+    struct BITMAP_HEADER_V2
+    {
+        uint32_t Size;            /* Size of this header in bytes */
+        int32_t  Width;           /* Image width in pixels */
+        int32_t  Height;          /* Image height in pixels */
+        uint16_t Planes;          /* Number of color planes */
+        uint16_t BitsPerPixel;    /* Number of bits per pixel */
+    };
 
-	struct BITMAP_HEADER_V3
-	{
-		uint32_t Size;            /* Size of this header in bytes */
-		int32_t  Width;           /* Image width in pixels */
-		int32_t  Height;          /* Image height in pixels */
-		uint16_t Planes;          /* Number of color planes */
-		uint16_t BitsPerPixel;    /* Number of bits per pixel */
-		uint32_t Compression;     /* Compression methods used */
-		uint32_t SizeOfBitmap;    /* Size of bitmap in bytes */
-		int32_t  HorzResolution;  /* Horizontal resolution in pixels per meter */
-		int32_t  VertResolution;  /* Vertical resolution in pixels per meter */
-		uint32_t ColorsUsed;      /* Number of colors in the image */
-		uint32_t ColorsImportant; /* Minimum number of important colors */
-	};
+    struct BITMAP_HEADER_V3
+    {
+        uint32_t Size;            /* Size of this header in bytes */
+        int32_t  Width;           /* Image width in pixels */
+        int32_t  Height;          /* Image height in pixels */
+        uint16_t Planes;          /* Number of color planes */
+        uint16_t BitsPerPixel;    /* Number of bits per pixel */
+        uint32_t Compression;     /* Compression methods used */
+        uint32_t SizeOfBitmap;    /* Size of bitmap in bytes */
+        int32_t  HorzResolution;  /* Horizontal resolution in pixels per meter */
+        int32_t  VertResolution;  /* Vertical resolution in pixels per meter */
+        uint32_t ColorsUsed;      /* Number of colors in the image */
+        uint32_t ColorsImportant; /* Minimum number of important colors */
+    };
 
-	struct BITMAP_HEADER_V4
-	{
-		uint32_t Size;            /* Size of this header in bytes */
-		int32_t  Width;           /* Image width in pixels */
-		int32_t  Height;          /* Image height in pixels */
-		uint16_t Planes;          /* Number of color planes */
-		uint16_t BitsPerPixel;    /* Number of bits per pixel */
-		uint32_t Compression;     /* Compression methods used */
-		uint32_t SizeOfBitmap;    /* Size of bitmap in bytes */
-		int32_t  HorzResolution;  /* Horizontal resolution in pixels per meter */
-		int32_t  VertResolution;  /* Vertical resolution in pixels per meter */
-		uint32_t ColorsUsed;      /* Number of colors in the image */
-		uint32_t ColorsImportant; /* Minimum number of important colors */
-		uint32_t RedMask;         /* Mask identifying bits of red component */
-		uint32_t GreenMask;       /* Mask identifying bits of green component */
-		uint32_t BlueMask;        /* Mask identifying bits of blue component */
-		uint32_t AlphaMask;       /* Mask identifying bits of alpha component */
-		uint32_t CSType;          /* Color space type */
-		int32_t  RedX;            /* X coordinate of red endpoint */
-		int32_t  RedY;            /* Y coordinate of red endpoint */
-		int32_t  RedZ;            /* Z coordinate of red endpoint */
-		int32_t  GreenX;          /* X coordinate of green endpoint */
-		int32_t  GreenY;          /* Y coordinate of green endpoint */
-		int32_t  GreenZ;          /* Z coordinate of green endpoint */
-		int32_t  BlueX;           /* X coordinate of blue endpoint */
-		int32_t  BlueY;           /* Y coordinate of blue endpoint */
-		int32_t  BlueZ;           /* Z coordinate of blue endpoint */
-		uint32_t GammaRed;        /* Gamma red coordinate scale value */
-		uint32_t GammaGreen;      /* Gamma green coordinate scale value */
-		uint32_t GammaBlue;       /* Gamma blue coordinate scale value */
-	};
+    struct BITMAP_HEADER_V4
+    {
+        uint32_t Size;            /* Size of this header in bytes */
+        int32_t  Width;           /* Image width in pixels */
+        int32_t  Height;          /* Image height in pixels */
+        uint16_t Planes;          /* Number of color planes */
+        uint16_t BitsPerPixel;    /* Number of bits per pixel */
+        uint32_t Compression;     /* Compression methods used */
+        uint32_t SizeOfBitmap;    /* Size of bitmap in bytes */
+        int32_t  HorzResolution;  /* Horizontal resolution in pixels per meter */
+        int32_t  VertResolution;  /* Vertical resolution in pixels per meter */
+        uint32_t ColorsUsed;      /* Number of colors in the image */
+        uint32_t ColorsImportant; /* Minimum number of important colors */
+        uint32_t RedMask;         /* Mask identifying bits of red component */
+        uint32_t GreenMask;       /* Mask identifying bits of green component */
+        uint32_t BlueMask;        /* Mask identifying bits of blue component */
+        uint32_t AlphaMask;       /* Mask identifying bits of alpha component */
+        uint32_t CSType;          /* Color space type */
+        int32_t  RedX;            /* X coordinate of red endpoint */
+        int32_t  RedY;            /* Y coordinate of red endpoint */
+        int32_t  RedZ;            /* Z coordinate of red endpoint */
+        int32_t  GreenX;          /* X coordinate of green endpoint */
+        int32_t  GreenY;          /* Y coordinate of green endpoint */
+        int32_t  GreenZ;          /* Z coordinate of green endpoint */
+        int32_t  BlueX;           /* X coordinate of blue endpoint */
+        int32_t  BlueY;           /* Y coordinate of blue endpoint */
+        int32_t  BlueZ;           /* Z coordinate of blue endpoint */
+        uint32_t GammaRed;        /* Gamma red coordinate scale value */
+        uint32_t GammaGreen;      /* Gamma green coordinate scale value */
+        uint32_t GammaBlue;       /* Gamma blue coordinate scale value */
+    };
 
 
-	struct BITMAP_HEADER_V5
-	{
-		uint32_t Size;            /* Size of this header in bytes */
-		int32_t  Width;           /* Image width in pixels */
-		int32_t  Height;          /* Image height in pixels */
-		uint16_t Planes;          /* Number of color planes */
-		uint16_t BitsPerPixel;    /* Number of bits per pixel */
-		uint32_t Compression;     /* Compression methods used */
-		uint32_t SizeOfBitmap;    /* Size of bitmap in bytes */
-		int32_t  HorzResolution;  /* Horizontal resolution in pixels per meter */
-		int32_t  VertResolution;  /* Vertical resolution in pixels per meter */
-		uint32_t ColorsUsed;      /* Number of colors in the image */
-		uint32_t ColorsImportant; /* Minimum number of important colors */
-		uint32_t RedMask;         /* Mask identifying bits of red component */
-		uint32_t GreenMask;       /* Mask identifying bits of green component */
-		uint32_t BlueMask;        /* Mask identifying bits of blue component */
-		uint32_t AlphaMask;       /* Mask identifying bits of alpha component */
-		uint32_t CSType;          /* Color space type */
-		int32_t  RedX;            /* X coordinate of red endpoint */
-		int32_t  RedY;            /* Y coordinate of red endpoint */
-		int32_t  RedZ;            /* Z coordinate of red endpoint */
-		int32_t  GreenX;          /* X coordinate of green endpoint */
-		int32_t  GreenY;          /* Y coordinate of green endpoint */
-		int32_t  GreenZ;          /* Z coordinate of green endpoint */
-		int32_t  BlueX;           /* X coordinate of blue endpoint */
-		int32_t  BlueY;           /* Y coordinate of blue endpoint */
-		int32_t  BlueZ;           /* Z coordinate of blue endpoint */
-		uint32_t GammaRed;        /* Gamma red coordinate scale value */
-		uint32_t GammaGreen;      /* Gamma green coordinate scale value */
-		uint32_t GammaBlue;       /* Gamma blue coordinate scale value */
-		uint32_t Intent;
-		uint32_t ProfileData;
-		uint32_t ProfileSize;
-		uint32_t Reserved;
-	};
+    struct BITMAP_HEADER_V5
+    {
+        uint32_t Size;            /* Size of this header in bytes */
+        int32_t  Width;           /* Image width in pixels */
+        int32_t  Height;          /* Image height in pixels */
+        uint16_t Planes;          /* Number of color planes */
+        uint16_t BitsPerPixel;    /* Number of bits per pixel */
+        uint32_t Compression;     /* Compression methods used */
+        uint32_t SizeOfBitmap;    /* Size of bitmap in bytes */
+        int32_t  HorzResolution;  /* Horizontal resolution in pixels per meter */
+        int32_t  VertResolution;  /* Vertical resolution in pixels per meter */
+        uint32_t ColorsUsed;      /* Number of colors in the image */
+        uint32_t ColorsImportant; /* Minimum number of important colors */
+        uint32_t RedMask;         /* Mask identifying bits of red component */
+        uint32_t GreenMask;       /* Mask identifying bits of green component */
+        uint32_t BlueMask;        /* Mask identifying bits of blue component */
+        uint32_t AlphaMask;       /* Mask identifying bits of alpha component */
+        uint32_t CSType;          /* Color space type */
+        int32_t  RedX;            /* X coordinate of red endpoint */
+        int32_t  RedY;            /* Y coordinate of red endpoint */
+        int32_t  RedZ;            /* Z coordinate of red endpoint */
+        int32_t  GreenX;          /* X coordinate of green endpoint */
+        int32_t  GreenY;          /* Y coordinate of green endpoint */
+        int32_t  GreenZ;          /* Z coordinate of green endpoint */
+        int32_t  BlueX;           /* X coordinate of blue endpoint */
+        int32_t  BlueY;           /* Y coordinate of blue endpoint */
+        int32_t  BlueZ;           /* Z coordinate of blue endpoint */
+        uint32_t GammaRed;        /* Gamma red coordinate scale value */
+        uint32_t GammaGreen;      /* Gamma green coordinate scale value */
+        uint32_t GammaBlue;       /* Gamma blue coordinate scale value */
+        uint32_t Intent;
+        uint32_t ProfileData;
+        uint32_t ProfileSize;
+        uint32_t Reserved;
+    };
 
-	struct BITMAP_FILE_V3
-	{
-		FILE_HEADER      file_header;
-		BITMAP_HEADER_V3 bitmap_header;
-	};
+    struct BITMAP_FILE_V3
+    {
+        FILE_HEADER      file_header;
+        BITMAP_HEADER_V3 bitmap_header;
+    };
 
-	struct BITMAP_FILE_V4
-	{
-		FILE_HEADER      file_header;
-		BITMAP_HEADER_V4 bitmap_header;
-	};
+    struct BITMAP_FILE_V4
+    {
+        FILE_HEADER      file_header;
+        BITMAP_HEADER_V4 bitmap_header;
+    };
 
-	struct BITMAP_FILE_V5
-	{
-		FILE_HEADER      file_header;
-		BITMAP_HEADER_V5 bitmap_header;
-	};
+    struct BITMAP_FILE_V5
+    {
+        FILE_HEADER      file_header;
+        BITMAP_HEADER_V5 bitmap_header;
+    };
 
-	struct ARGB
-	{
-		uint8_t b;
-		uint8_t g;
-		uint8_t r;
-		uint8_t a;
-	};
+    struct ARGB
+    {
+        uint8_t b;
+        uint8_t g;
+        uint8_t r;
+        uint8_t a;
+    };
 
-	struct RGB
-	{
-		uint8_t b;
-		uint8_t g;
-		uint8_t r;
-	};
+    struct RGB
+    {
+        uint8_t b;
+        uint8_t g;
+        uint8_t r;
+    };
 
 #pragma pack(pop, r1)
 
 
-	ARGB to_argb(const color& c)
-	{
-		color clamped = c.clamped();
+    ARGB to_argb(const color& c)
+    {
+        color clamped = c.clamped();
 
-		uint8_t a = 255;
-		uint8_t r = uint8_t(clamped.r * 255);
-		uint8_t g = uint8_t(clamped.g * 255);
-		uint8_t b = uint8_t(clamped.b * 255);
+        uint8_t a = 255;
+        uint8_t r = uint8_t(clamped.r * 255);
+        uint8_t g = uint8_t(clamped.g * 255);
+        uint8_t b = uint8_t(clamped.b * 255);
 
-		return ARGB{ b, g, r, a };
-	}
+        return ARGB{ b, g, r, a };
+    }
 
-	color from_argb(const ARGB& argb)
-	{
-		double r = argb.r / 255.0;
-		double g = argb.g / 255.0;
-		double b = argb.b / 255.0;
+    color from_argb(const ARGB& argb)
+    {
+        double r = argb.r / 255.0;
+        double g = argb.g / 255.0;
+        double b = argb.b / 255.0;
 
-		return color{ r, g, b };
-	}
+        return color{ r, g, b };
+    }
 
-	color from_rgb(const RGB& rgb)
-	{
-		double r = rgb.r / 255.0;
-		double g = rgb.g / 255.0;
-		double b = rgb.b / 255.0;
+    color from_rgb(const RGB& rgb)
+    {
+        double r = rgb.r / 255.0;
+        double g = rgb.g / 255.0;
+        double b = rgb.b / 255.0;
 
-		return color{ r, g, b };
-	}
+        return color{ r, g, b };
+    }
 
-	unsigned file_size(std::ifstream& in)
-	{
-		auto position = in.tellg();
-		in.seekg(0, std::ios::end);
-		auto length = in.tellg();
-		in.seekg(position, std::ios::beg);
+    unsigned file_size(std::ifstream& in)
+    {
+        auto position = in.tellg();
+        in.seekg(0, std::ios::end);
+        auto length = in.tellg();
+        in.seekg(position, std::ios::beg);
 
-		return unsigned(length);
-	}
+        return unsigned(length);
+    }
 
-	array<uint8_t> read_data(const std::string& path)
-	{
-		std::ifstream in(path, std::ios::binary);
+    array<uint8_t> read_data(const std::string& path)
+    {
+        std::ifstream in(path, std::ios::binary);
 
-		if (!in)
-		{
-			std::cerr << "Could not open file " << path << std::endl;
-			abort();
-		}
-		else
-		{
-			unsigned size = file_size(in);
-			array<uint8_t> buffer(size);
-			in.read(reinterpret_cast<char*>(buffer.ptr()), buffer.size());
+        if (!in)
+        {
+            std::cerr << "Could not open file " << path << std::endl;
+            abort();
+        }
+        else
+        {
+            unsigned size = file_size(in);
+            array<uint8_t> buffer(size);
+            in.read(reinterpret_cast<char*>(buffer.ptr()), buffer.size());
 
-			return buffer;
-		}
-	}
+            return buffer;
+        }
+    }
 
-	void verify_file_header(const FILE_HEADER* p)
-	{
-		if (p->FileType != 0x4D42)
-		{
-			std::cerr << "Invalid file type" << std::endl;
-			abort();
-		}
-	}
+    void verify_file_header(const FILE_HEADER* p)
+    {
+        if (p->FileType != 0x4D42)
+        {
+            std::cerr << "Invalid file type" << std::endl;
+            abort();
+        }
+    }
 
-	void verify_bitmap_header(const BITMAP_HEADER_V5* p)
-	{
-		if (p->Size != sizeof(BITMAP_HEADER_V5))
-		{
-			std::cerr << "Invalid size " << p->Size << ", only support " << sizeof(BITMAP_HEADER_V5) << std::endl;
-			abort();
-		}
+    void verify_bitmap_header(const BITMAP_HEADER_V5* p)
+    {
+        if (p->Size != sizeof(BITMAP_HEADER_V5))
+        {
+            std::cerr << "Invalid size " << p->Size << ", only support " << sizeof(BITMAP_HEADER_V5) << std::endl;
+            abort();
+        }
 
-		if (p->Compression != 0)
-		{
-			std::cerr << "Unsupported compression " << p->Compression << std::endl;
-			abort();
-		}
+        if (p->Compression != 0)
+        {
+            std::cerr << "Unsupported compression " << p->Compression << std::endl;
+            abort();
+        }
 
-		if (p->Planes != 1)
-		{
-			std::cerr << "Unsupported plane count " << p->Planes << std::endl;
-			abort();
-		}
+        if (p->Planes != 1)
+        {
+            std::cerr << "Unsupported plane count " << p->Planes << std::endl;
+            abort();
+        }
 
-		if (p->BitsPerPixel != 24 && p->BitsPerPixel != 32)
-		{
-			std::cerr << "Unsupported bits per pixel " << p->BitsPerPixel << std::endl;
-			abort();
-		}
+        if (p->BitsPerPixel != 24 && p->BitsPerPixel != 32)
+        {
+            std::cerr << "Unsupported bits per pixel " << p->BitsPerPixel << std::endl;
+            abort();
+        }
 
-		if (p->Height < 0)
-		{
-			std::cerr << "Unsupported height " << p->Height << std::endl;
-			abort();
-		}
-	}
+        if (p->Height < 0)
+        {
+            std::cerr << "Unsupported height " << p->Height << std::endl;
+            abort();
+        }
+    }
 
-	void read_24bit_pixels(Bitmap& bmp, array<uint8_t> pixels)
-	{
-		unsigned scanline_size = (bmp.width() * sizeof(RGB) + 3) & 0xFFFFFFFC;
+    void read_24bit_pixels(Bitmap& bmp, array<uint8_t> pixels)
+    {
+        unsigned scanline_size = (bmp.width() * sizeof(RGB) + 3) & 0xFFFFFFFC;
 
-		for (unsigned y = 0; y < bmp.height(); ++y)
-		{
-			array<uint8_t> scanline = pixels.slice(y * scanline_size);
+        for (unsigned y = 0; y < bmp.height(); ++y)
+        {
+            array<uint8_t> scanline = pixels.slice(y * scanline_size);
 
-			for (unsigned x = 0; x != bmp.width(); ++x)
-			{
-				position p{ x, bmp.height() - y - 1 };
-				array<uint8_t> pixelBytes = scanline.slice(x * sizeof(RGB));
-				RGB* pixel = reinterpret<RGB>(pixelBytes);
+            for (unsigned x = 0; x != bmp.width(); ++x)
+            {
+                position p{ x, bmp.height() - y - 1 };
+                array<uint8_t> pixelBytes = scanline.slice(x * sizeof(RGB));
+                RGB* pixel = reinterpret<RGB>(pixelBytes);
 
-				bmp[p] = from_rgb(*pixel);
-			}
-		}
-	}
+                bmp[p] = from_rgb(*pixel);
+            }
+        }
+    }
 
-	void read_32bit_pixels(Bitmap& bmp, array<uint8_t> pixels)
-	{
-		for (unsigned y = 0; y < bmp.height(); ++y)
-		{
-			array<uint8_t> scanline = pixels.slice(y * bmp.width() * sizeof(ARGB));
+    void read_32bit_pixels(Bitmap& bmp, array<uint8_t> pixels)
+    {
+        for (unsigned y = 0; y < bmp.height(); ++y)
+        {
+            array<uint8_t> scanline = pixels.slice(y * bmp.width() * sizeof(ARGB));
 
-			for (unsigned x = 0; x != bmp.width(); ++x)
-			{
-				position p{ x, bmp.height() - y - 1 };
-				array<uint8_t> pixelBytes = scanline.slice(x * sizeof(ARGB));
-				ARGB* pixel = reinterpret<ARGB>(pixelBytes);
+            for (unsigned x = 0; x != bmp.width(); ++x)
+            {
+                position p{ x, bmp.height() - y - 1 };
+                array<uint8_t> pixelBytes = scanline.slice(x * sizeof(ARGB));
+                ARGB* pixel = reinterpret<ARGB>(pixelBytes);
 
-				bmp[p] = from_argb(*pixel);
-			}
-		}
-	}
+                bmp[p] = from_argb(*pixel);
+            }
+        }
+    }
 }
 
 Bitmap imaging::load_bitmap(const std::string& path)

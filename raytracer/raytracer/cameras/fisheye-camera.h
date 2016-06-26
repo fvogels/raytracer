@@ -10,19 +10,19 @@
 
 namespace raytracer
 {
-	namespace cameras
-	{
-		class FisheyeCamera : public DisplacableCamera
-		{
-		public:
-			FisheyeCamera(const math::Matrix4D&, math::Angle, math::Angle);
+    namespace cameras
+    {
+        class FisheyeCamera : public DisplacableCamera
+        {
+        public:
+            FisheyeCamera(const math::Matrix4D&, math::Angle, math::Angle);
 
-		protected:
-			math::Ray create_untransformed_ray(const math::Point2D& point) const override;
+        protected:
+            math::Ray create_untransformed_ray(const math::Point2D& point) const override;
 
-		private:
-			math::Angle m_horizontal_view_angle;
-			math::Angle m_vertical_view_angle;
-		};
-	}
+        private:
+            math::Angle m_horizontal_view_angle;
+            math::Angle m_vertical_view_angle;
+        };
+    }
 }

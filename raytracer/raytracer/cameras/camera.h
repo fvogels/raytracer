@@ -8,33 +8,33 @@
 
 namespace raytracer
 {
-	class Camera
-	{
-	public:
-		virtual math::Ray create_ray(const math::Point2D&) const = 0;
-	};
+    class Camera
+    {
+    public:
+        virtual math::Ray create_ray(const math::Point2D&) const = 0;
+    };
 
-	class DisplacableCamera : public Camera
-	{
-	public:
-		math::Ray create_ray(const math::Point2D& p) const
-		{
+    class DisplacableCamera : public Camera
+    {
+    public:
+        math::Ray create_ray(const math::Point2D& p) const
+        {
             auto untransformed_ray = create_untransformed_ray(p);
             auto transformed_ray = untransformed_ray.transform(m_transformation);
 
-			return transformed_ray;
-		}
+            return transformed_ray;
+        }
 
-	protected:
-		DisplacableCamera(math::Matrix4D transformation)
-			: m_transformation(transformation)
-		{
-			// NOP
-		}
+    protected:
+        DisplacableCamera(math::Matrix4D transformation)
+            : m_transformation(transformation)
+        {
+            // NOP
+        }
 
-		virtual math::Ray create_untransformed_ray(const math::Point2D&) const = 0;
+        virtual math::Ray create_untransformed_ray(const math::Point2D&) const = 0;
 
-	private:
-		math::Matrix4D m_transformation;
-	};
+    private:
+        math::Matrix4D m_transformation;
+    };
 }

@@ -6,8 +6,8 @@
 
 namespace imaging
 {
-	namespace color_mapping
-	{
-		math::Function<color, double> grayscale();
-	}
+    namespace color_mapping
+    {
+        math::Function<color, double> grayscale();
+    }
 }
