@@ -57,11 +57,11 @@ color trace(const Ray& ray)
         {
             for (auto& light_ray : light_source->lightrays_to(hit.position))
             {
-                Vector3D hit_to_LightSource = (light_ray.ray.origin - hit.position).normalized();
+                Vector3D hit_to_light_source = (light_ray.ray.origin - hit.position).normalized();
 
                 if (material_properties.diffuse != colors::black())
                 {
-                    double diffuse_cos_angle = hit_to_LightSource.dot(hit.normal);
+                    double diffuse_cos_angle = hit_to_light_source.dot(hit.normal);
 
                     assert(hit.normal.is_unit());
                     assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
@@ -75,7 +75,7 @@ color trace(const Ray& ray)
                 if (material_properties.specular != colors::black())
                 {
                     Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-                    double specular_cos_angle = reflected_ray_direction.dot(hit_to_LightSource);
+                    double specular_cos_angle = reflected_ray_direction.dot(hit_to_light_source);
 
                     if (specular_cos_angle > 0)
                     {
