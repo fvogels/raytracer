@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include <iostream>
 
 namespace math
 {
@@ -50,5 +51,11 @@ namespace math
     bool operator !=(double x, const approx<T>& y) noexcept
     {
         return !(x == y);
+    }
+
+    template<typename T>
+    std::ostream& operator <<(std::ostream& out, const approx<T>& x)
+    {
+        return out << "approx(" << x.value << ")";
     }
 }
