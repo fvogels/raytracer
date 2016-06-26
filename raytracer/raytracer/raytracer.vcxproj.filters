@@ -75,9 +75,6 @@
     <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\rasteriser_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="materials\uniform-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,18 +90,6 @@
     <ClCompile Include="imaging\wif_format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\stream_line_reader_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\combined_reader_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\string_reader_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\tokenizer_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\interval-mapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -114,16 +99,10 @@
     <ClCompile Include="scripting\parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\parser_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scripting\interpreter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\environment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\interpreter_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\standard-library.cpp">
@@ -210,16 +189,37 @@
     <ClCompile Include="cameras\fisheye-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\camera_transformation_tests.cpp">
+    <ClCompile Include="tests\perspective-camera-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\orthographic_camera_tests.cpp">
+    <ClCompile Include="tests\rasteriser-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\perspective_camera_tests.cpp">
+    <ClCompile Include="tests\stream-line-reader-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\fisheye_tests.cpp">
+    <ClCompile Include="tests\string-reader-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\tokenizer-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\parser-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\orthographic-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\interpreter-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\fisheye-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\combined-reader-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\camera-transformation-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
