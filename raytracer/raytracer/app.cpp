@@ -41,7 +41,7 @@ using namespace imaging;
 struct Scene
 {
     raytracer::primitives::Primitive root;
-    std::vector<std::shared_ptr<LightSource>> LightSources;
+    std::vector<std::shared_ptr<LightSource>> light_sources;
 } scene;
 
 std::shared_ptr<Camera> camera = nullptr;
@@ -57,7 +57,7 @@ color trace(const Ray& ray)
 
         auto material_properties = hit.material->at(hit.local_position);
 
-        for (auto light_source : scene.LightSources)
+        for (auto light_source : scene.light_sources)
         {
             for (auto& light_ray : light_source->lightrays_to(hit.position))
             {
@@ -121,8 +121,10 @@ void create_root(double t)
 
 void create_light_sources(double t)
 {
-    scene.LightSources.clear();
-    scene.LightSources.push_back(std::make_shared<ConicalLight>(Point3D(0, 2, 0), Vector3D(t,-1,0), 45_degrees, colors::white()));
+    using namespace raytracer::lights;
+
+    scene.light_sources.clear();
+    scene.light_sources.push_back(conical(Point3D(0, 2, 0), Vector3D(t,-1,0), 45_degrees, colors::white()));
 }
 
 void create_scene(double t)
