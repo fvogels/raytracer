@@ -122,10 +122,10 @@ Matrix4D math::rotate_z_matrix(const Angle& angle)
 
 Matrix4D math::coordinate_system(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis, const Vector3D& z_axis)
 {
-	return Matrix4D{
-		x_axis.x, x_axis.y , x_axis.z, origin.x,
-		y_axis.x, y_axis.y , y_axis.z, origin.y,
-		z_axis.x, z_axis.y , z_axis.z, origin.z,
-		0, 0, 0, 1
-	};
+    return Matrix4D{
+        x_axis.x, y_axis.x, z_axis.x, origin.x,
+        x_axis.y, y_axis.y, z_axis.y, origin.y,
+        x_axis.z, y_axis.z, z_axis.z, origin.z,
+        0, 0, 0, 1
+    };
 }
