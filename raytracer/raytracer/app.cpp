@@ -12,6 +12,7 @@
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
 #include "lights/light-source.h"
+#include "lights/cone-light.h"
 #include "rendering/light-ray.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
@@ -35,36 +36,7 @@ using namespace imaging;
 
 
 
-class ConeLight : public LightSource
-{
-public:
-    ConeLight(const Point3D& position, const Vector3D& direction, Angle angle, const color& c)
-        : position(position), direction(direction), min_cos(cos(angle)), c(c) 
-    {
-        assert(direction.is_unit());
-    }
 
-    std::vector<LightRay> lightrays_to(const Point3D& p) const
-    {
-        Ray ray(position, p);
-        double intensity = ray.direction.normalized().dot(direction);
-
-        if (intensity > min_cos)
-        {
-            return std::vector<LightRay> { LightRay(ray, c * intensity) };
-        }
-        else
-        {
-            return std::vector<LightRay>();
-        }
-    }
-
-private:
-    Point3D position;
-    Vector3D direction;
-    double min_cos;
-    color c;
-};
 
 struct Scene
 {

@@ -222,6 +222,9 @@
     <ClCompile Include="lights\point-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lights\cone-light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -474,6 +477,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lights\point-light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lights\cone-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
