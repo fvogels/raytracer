@@ -2,37 +2,53 @@
 
 #include <math.h>
 
-struct approx
+namespace math
 {
-	double value;
-	double delta;
+    template<typename T>
+    constexpr T abs(T x) noexcept
+    {
+        return x < 0 ? -x : x;
+    }
 
-	constexpr approx(double value, double delta = 0.00001) noexcept
-		: value(value), delta(delta) { }	
-};
+    template<typename>
+    struct approx;
 
-template<typename T>
-constexpr T abs(T x) noexcept
-{
-	return x < 0 ? -x : x;
-}
+    template<>
+    struct approx<double>
+    {
+        double value;
+        double delta;
 
-constexpr bool operator ==(const approx& x, double y) noexcept
-{
-	return abs<double>(y - x.value) < x.delta;
-}
+        explicit approx(double value, double delta = 0.00001) noexcept
+            : value(value), delta(delta) { }
 
-constexpr bool operator ==(double x, const approx& y) noexcept
-{
-	return y == x;
-}
+        bool close_enough(double other) const
+        {
+            return abs(other - value) < delta;
+        }
+    };
 
-constexpr bool operator !=(const approx& x, double y) noexcept
-{
-	return !(x == y);
-}
+    template<typename T>
+    bool operator ==(const approx<T>& x, T y) noexcept
+    {
+        return x.close_enough(y);
+    }
 
-constexpr bool operator !=(double x, const approx& y) noexcept
-{
-	return !(x == y);
+    template<typename T>
+    bool operator ==(T x, const approx<T>& y) noexcept
+    {
+        return y == x;
+    }
+
+    template<typename T>
+    bool operator !=(const approx<T>& x, T y) noexcept
+    {
+        return !(x == y);
+    }
+
+    template<typename T>
+    bool operator !=(double x, const approx<T>& y) noexcept
+    {
+        return !(x == y);
+    }
 }
