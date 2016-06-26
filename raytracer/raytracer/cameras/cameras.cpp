@@ -72,7 +72,7 @@ std::shared_ptr<cameras::Camera> raytracer::cameras::orthographic(
     double window_height = window_width / aspect_ratio;
     Matrix4D transformation = create_transformation(eye, look_at, up);
 
-    return std::make_shared<OrthographicCamera>(transformation, window_width, window_height);
+    return std::make_shared<_private::OrthographicCamera>(transformation, window_width, window_height);
 }
 
 std::shared_ptr<cameras::Camera> raytracer::cameras::fisheye(
