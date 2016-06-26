@@ -248,9 +248,6 @@
     <ClInclude Include="math\interval.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cameras\perspective-camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -456,6 +453,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cameras\fisheye-camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\approx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

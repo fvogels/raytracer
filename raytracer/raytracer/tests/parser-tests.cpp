@@ -4,7 +4,7 @@
 #include "scripting/objects.h"
 #include "scripting/tokenizing/tokenizer.h"
 #include "scripting/parser.h"
-#include "math/util.h"
+#include "math/approx.h"
 #include <sstream>
 
 using namespace scripting;

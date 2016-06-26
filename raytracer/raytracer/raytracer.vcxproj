@@ -306,6 +306,7 @@
     <ClInclude Include="materials\materials.h" />
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="math\angle.h" />
+    <ClInclude Include="math\approx.h" />
     <ClInclude Include="math\function.h" />
     <ClInclude Include="math\functions\bool-mapper.h" />
     <ClInclude Include="math\functions\functions.h" />
@@ -320,7 +321,6 @@
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
     <ClInclude Include="math\transformation.h" />
-    <ClInclude Include="math\util.h" />
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="materials\checkered-material.h" />

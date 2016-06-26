@@ -1,5 +1,5 @@
 #include "imaging/color.h"
-#include "math/util.h"
+#include "math/approx.h"
 
 using namespace imaging;
 

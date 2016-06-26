@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "math/util.h"
+#include "math/approx.h"
 
 
 namespace math

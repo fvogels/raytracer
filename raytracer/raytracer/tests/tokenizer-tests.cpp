@@ -2,7 +2,7 @@
 
 #include "Catch.h"
 #include "scripting/tokenizing/tokenizer.h"
-#include "math/util.h"
+#include "math/approx.h"
 #include <sstream>
 
 using namespace scripting;

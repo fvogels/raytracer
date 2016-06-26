@@ -1,5 +1,5 @@
 #include "math/vector2d.h"
-#include "math/util.h"
+#include "math/approx.h"
 #include <math.h>
 
 using namespace math;

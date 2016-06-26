@@ -5,12 +5,6 @@
 
 namespace math
 {
-    template<typename T>
-    constexpr T abs(T x) noexcept
-    {
-        return x < 0 ? -x : x;
-    }
-
     template<typename>
     struct approx;
 
@@ -25,7 +19,7 @@ namespace math
 
         bool close_enough(double other) const
         {
-            return abs(other - value) < delta;
+            return std::abs(other - value) < delta;
         }
     };
 

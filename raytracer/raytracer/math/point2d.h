@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/vector2d.h"
-#include "math/util.h"
+#include "math/approx.h"
 
 
 namespace math
