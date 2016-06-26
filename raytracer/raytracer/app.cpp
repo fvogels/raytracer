@@ -11,6 +11,7 @@
 #include "math/functions/noise.h"
 #include "scripting/objects.h"
 #include "scripting/objects/function.h"
+#include "rendering/light-ray.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
 #include "logging.h"
@@ -31,17 +32,34 @@ using namespace raytracer;
 using namespace imaging;
 
 
-struct Light
+class LightSource
 {
-    Point3D position;
+public:
+    virtual std::vector<LightRay> lightrays_to(const Point3D&) const = 0;
+};
 
-    Light(const Point3D& position) : position(position) { }
+class PointLight : public LightSource
+{
+public:
+    PointLight(const Point3D& position, const color& c)
+        : position(position), c(c) { }
+
+    std::vector<LightRay> lightrays_to(const Point3D& p) const
+    {
+        Ray ray(position, p);
+
+        return std::vector<LightRay> { LightRay(ray, c) };
+    }
+
+private:
+    Point3D position;
+    color c;
 };
 
 struct Scene
 {
     raytracer::primitives::Primitive root;
-    std::vector<std::shared_ptr<Light>> lights;
+    std::vector<std::shared_ptr<LightSource>> LightSources;
 } scene;
 
 std::shared_ptr<Camera> camera = nullptr;
@@ -57,25 +75,35 @@ color trace(const Ray& ray)
 
         auto material_properties = hit.material->at(hit.local_position);
 
-        for (auto light : scene.lights)
+        for (auto light_source : scene.LightSources)
         {
-            Vector3D hit_to_light = (light->position - hit.position).normalized();
-            double diffuse_cos_angle = hit_to_light.dot(hit.normal);
-
-            assert(hit.normal.is_unit());
-            assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
-
-            if (diffuse_cos_angle > 0)
+            for (auto& light_ray : light_source->lightrays_to(hit.position))
             {
-                result += material_properties.diffuse * diffuse_cos_angle;
-            }
+                Vector3D hit_to_LightSource = (light_ray.ray.origin - hit.position).normalized();
 
-            Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-            double specular_cos_angle = reflected_ray_direction.dot(hit_to_light);
+                if (material_properties.diffuse != colors::black())
+                {
+                    double diffuse_cos_angle = hit_to_LightSource.dot(hit.normal);
 
-            if (specular_cos_angle > 0)
-            {
-                result += material_properties.specular * std::pow(specular_cos_angle, 20);
+                    assert(hit.normal.is_unit());
+                    assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
+
+                    if (diffuse_cos_angle > 0)
+                    {
+                        result += material_properties.diffuse * diffuse_cos_angle;
+                    }
+                }
+
+                if (material_properties.specular != colors::black())
+                {
+                    Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+                    double specular_cos_angle = reflected_ray_direction.dot(hit_to_LightSource);
+
+                    if (specular_cos_angle > 0)
+                    {
+                        result += material_properties.specular * std::pow(specular_cos_angle, 20);
+                    }
+                }
             }
         }
     }
@@ -103,22 +131,22 @@ void create_root(double t)
 {
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
-    
+
     auto plane = decorate(uniform(colors::red(), colors::black(), 0), translate(Vector3D(0, -1, 0), xz_plane()));
 
     scene.root = group(std::vector<Primitive> { plane });
 }
 
-void create_lights(double t)
+void create_LightSources(double t)
 {
-    scene.lights.clear();
-    scene.lights.push_back(std::make_shared<Light>(Point3D(0, 2, 5)));
+    scene.LightSources.clear();
+    scene.LightSources.push_back(std::make_shared<PointLight>(Point3D(0, 2, 0), colors::white()));
 }
 
 void create_scene(double t)
 {
     create_root(t);
-    create_lights(t);
+    create_LightSources(t);
 }
 
 
@@ -171,7 +199,7 @@ int main()
 
         Bitmap bitmap(500, 500);
 
-        camera = raytracer::cameras::perspective(Point3D(-1+2*t, 0, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        camera = raytracer::cameras::perspective(Point3D(0, 10 * t, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
