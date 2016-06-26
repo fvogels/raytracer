@@ -6,9 +6,9 @@ template<typename T>
 class Maybe
 {
 public:
-    Maybe() : m_has_value(false) { }
-    Maybe(const T& value) : m_has_value(true), m_value(value) { }
-    
+    static Maybe<T> just(T value) { return Maybe<T>(value); }
+    static Maybe<T> nothing()     { return Maybe<T>(); }
+
     T value() const 
     {
         assert(m_has_value);
@@ -22,6 +22,9 @@ public:
     }
 
 private:
+    Maybe() : m_has_value(false) { }
+    Maybe(const T& value) : m_has_value(true), m_value(value) { }
+
     bool m_has_value;
     T m_value;
 };
