@@ -62,7 +62,7 @@ color& imaging::operator /=(color& c, double f)
 
 bool imaging::operator ==(const color& c1, const color& c2)
 {
-    return c1.r == math::approx<double>(c2.r) && c1.g == math::approx<double>(c2.g) && c1.b == math::approx<double>(c2.b);
+    return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
 }
 
 bool imaging::operator !=(const color& c1, const color& c2)

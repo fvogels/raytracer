@@ -103,15 +103,10 @@ void create_root(double t)
 {
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
+    
+    auto plane = decorate(uniform(colors::red(), colors::black(), 0), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    auto left = translate(Vector3D(-2, 0, 0), decorate(uniform(colors::red() * 0.8, colors::white() * 0.8, 10), sphere()));
-    auto middle = decorate(uniform(colors::green() * 0.8, colors::white() * 0.8, 10), sphere());
-    auto right = translate(Vector3D(2, 0, 0), decorate(uniform(colors::blue() * 0.8, colors::white() * 0.8, 10), sphere()));
-    auto spheres = rotate_around_y(360_degrees, group(std::vector<Primitive> { left, middle, right }));
-
-    auto plane = decorate(raytracer::materials::grid(0.1, uniform(colors::white(), colors::white(), 10), uniform(colors::black(), colors::white(), 10)), translate(Vector3D(0, -1, 0), xz_plane()));
-
-    scene.root = group(std::vector<Primitive> { spheres, plane });
+    scene.root = group(std::vector<Primitive> { plane });
 }
 
 void create_lights(double t)
