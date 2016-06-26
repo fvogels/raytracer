@@ -7,9 +7,12 @@
 
 namespace raytracer
 {
-    class LightSource
+    namespace lights
     {
-    public:
-        virtual std::vector<LightRay> lightrays_to(const math::Point3D&) const = 0;
-    };
+        class LightSource
+        {
+        public:
+            virtual std::vector<LightRay> lightrays_to(const math::Point3D&) const = 0;
+        };
+    }
 }

@@ -14,7 +14,7 @@ LightRay raytracer::lights::_private_::OmnidirectionalPointLight::cast_lightray_
     return LightRay(ray, m_color);
 }
 
-std::shared_ptr<LightSource> raytracer::lights::omnidirectional(const math::Point3D& position, const imaging::color& color)
+std::shared_ptr<lights::LightSource> raytracer::lights::omnidirectional(const math::Point3D& position, const imaging::color& color)
 {
     return std::make_shared<raytracer::lights::_private_::OmnidirectionalPointLight>(position, color);
 }

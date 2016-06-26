@@ -27,7 +27,7 @@ LightRay raytracer::lights::_private_::ConicalLight::cast_lightray_to(const math
     }
 }
 
-std::shared_ptr<LightSource> raytracer::lights::conical(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::color& color)
+std::shared_ptr<lights::LightSource> raytracer::lights::conical(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::color& color)
 {
     return std::make_shared<raytracer::lights::_private_::ConicalLight>(position, direction, angle, color);
 }
