@@ -10,12 +10,12 @@ std::ostream& math::operator <<(std::ostream& out, const Vector2D& v)
 	return out << "(" << v.x << "," << v.y << ")";
 }
 
-constexpr double math::Vector2D::dot(const Vector2D& v) const noexcept
+double math::Vector2D::dot(const Vector2D& v) const noexcept
 {
 	return x * v.x + y * v.y;
 }
 
-constexpr double math::Vector2D::norm_sqr() const noexcept
+double math::Vector2D::norm_sqr() const noexcept
 {
 	return dot(*this);
 }
@@ -57,12 +57,12 @@ Vector2D& math::Vector2D::operator/=(double factor) noexcept
 
 bool math::Vector2D::is_unit() const noexcept
 {
-	return norm() == approx(1);
+	return norm() == approx<double>(1);
 }
 
-constexpr bool math::Vector2D::is_perpendicular_on(const Vector2D& v) const noexcept
+bool math::Vector2D::is_perpendicular_on(const Vector2D& v) const noexcept
 {
-	return dot(v) == approx(0);
+	return dot(v) == approx<double>(0);
 }
 
 Vector2D math::operator +(const Vector2D& u, const Vector2D& v) noexcept
@@ -97,7 +97,7 @@ Vector2D math::operator /(const Vector2D& v, double factor) noexcept
 
 bool math::operator ==(const Vector2D& u, const Vector2D& v) noexcept
 {
-	return u.x == approx(v.x) && u.y == approx(v.y);
+	return u.x == approx<double>(v.x) && u.y == approx<double>(v.y);
 }
 
 bool math::operator !=(const Vector2D& u, const Vector2D& v) noexcept
