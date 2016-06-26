@@ -39,3 +39,17 @@ Ray raytracer::cameras::_private_::FisheyeCamera::create_untransformed_ray(const
 
     return Ray(eye, through);
 }
+
+std::shared_ptr<cameras::Camera> raytracer::cameras::fisheye(
+    const math::Point3D& eye,
+    const math::Point3D& look_at,
+    const math::Vector3D& up,
+    const math::Angle& horizontal_angle,
+    const math::Angle& vertical_angle)
+{
+    assert(up.is_unit());
+
+    Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
+
+    return std::make_shared<_private_::FisheyeCamera>(transformation, horizontal_angle, vertical_angle);
+}

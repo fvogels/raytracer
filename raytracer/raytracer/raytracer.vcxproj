@@ -225,7 +225,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="cameras\cameras.cpp" />
+    <ClCompile Include="cameras\camera.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />

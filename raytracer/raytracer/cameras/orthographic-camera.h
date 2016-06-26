@@ -12,7 +12,7 @@ namespace raytracer
 {
     namespace cameras
     {
-        namespace _private
+        namespace _private_
         {
             class OrthographicCamera : public DisplacableCamera
             {
@@ -26,5 +26,12 @@ namespace raytracer
                 math::Rectangle3D m_eye_window;
             };
         }
+
+        std::shared_ptr<Camera> orthographic(
+            const math::Point3D& eye,
+            const math::Point3D& look_at,
+            const math::Vector3D& up,
+            double window_width,
+            double aspect_ratio);
     }
 }

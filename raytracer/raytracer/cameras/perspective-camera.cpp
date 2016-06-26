@@ -21,3 +21,23 @@ Ray raytracer::cameras::_private_::PerspectiveCamera::create_untransformed_ray(c
 
     return Ray(Point3D(0, 0, 0), p);
 }
+
+std::shared_ptr<cameras::Camera> raytracer::cameras::perspective(
+    const math::Point3D& eye,
+    const math::Point3D& look_at,
+    const math::Vector3D& up,
+    double distance,
+    double aspect_ratio)
+{
+    assert(up.is_unit());
+
+    double view_window_width = aspect_ratio;
+    double view_window_height = 1;
+    Point3D view_window_origin(view_window_width / 2, -view_window_height / 2, distance);
+    Vector3D view_window_right(-view_window_width, 0, 0);
+    Vector3D view_window_up(0, view_window_height, 0);
+    Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
+    Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
+
+    return std::make_shared<_private_::PerspectiveCamera>(transformation, view_window);
+}

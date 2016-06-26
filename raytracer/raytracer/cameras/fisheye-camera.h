@@ -27,5 +27,12 @@ namespace raytracer
                 math::Angle m_vertical_view_angle;
             };
         }
+
+        std::shared_ptr<Camera> fisheye(
+            const math::Point3D& eye,
+            const math::Point3D& look_at,
+            const math::Vector3D& up,
+            const math::Angle& horizontal_angle,
+            const math::Angle& vertical_angle);
     }
 }

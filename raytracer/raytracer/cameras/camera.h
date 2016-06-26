@@ -10,6 +10,11 @@ namespace raytracer
 {
     namespace cameras
     {
+        namespace _private_
+        {
+            math::Matrix4D create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
+        }
+
         class Camera
         {
         public:

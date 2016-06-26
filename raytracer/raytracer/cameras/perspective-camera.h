@@ -26,5 +26,12 @@ namespace raytracer
                 math::Rectangle3D m_view_window;
             };
         }
+
+        std::shared_ptr<Camera> perspective(
+            const math::Point3D& eye,
+            const math::Point3D& look_at,
+            const math::Vector3D& up,
+            double distance,
+            double aspect_ratio);
     }
 }

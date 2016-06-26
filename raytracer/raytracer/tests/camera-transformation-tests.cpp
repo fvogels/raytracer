@@ -4,7 +4,7 @@
 #include "cameras/cameras.h"
 
 using namespace math;
-using namespace raytracer::cameras;
+using namespace raytracer::cameras::_private_;
 
 namespace
 {
