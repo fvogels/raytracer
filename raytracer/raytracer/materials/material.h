@@ -14,6 +14,7 @@ namespace raytracer
         imaging::color diffuse;
         imaging::color specular;
         double specular_exponent;
+        double reflectivity;
     };
 
     class MaterialImplementation
