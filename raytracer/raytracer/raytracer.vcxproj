@@ -230,6 +230,7 @@
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
+    <ClCompile Include="lights\point-light.cpp" />
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
@@ -307,6 +308,7 @@
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="lights\light-source.h" />
+    <ClInclude Include="lights\point-light.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\materials.h" />
     <ClInclude Include="materials\uniform-material.h" />

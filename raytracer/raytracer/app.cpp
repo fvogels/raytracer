@@ -33,23 +33,7 @@ using namespace raytracer;
 using namespace imaging;
 
 
-class PointLight : public LightSource
-{
-public:
-    PointLight(const Point3D& position, const color& c)
-        : position(position), c(c) { }
 
-    std::vector<LightRay> lightrays_to(const Point3D& p) const
-    {
-        Ray ray(position, p);
-
-        return std::vector<LightRay> { LightRay(ray, c) };
-    }
-
-private:
-    Point3D position;
-    color c;
-};
 
 class ConeLight : public LightSource
 {
