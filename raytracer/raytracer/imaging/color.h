@@ -1,5 +1,6 @@
 #pragma once
 
+#include "math/approx.h"
 #include <iostream>
 
 namespace imaging
@@ -31,7 +32,6 @@ namespace imaging
 
     std::ostream& operator <<(std::ostream&, const color&);
 
-
     // Example usage: color c = colors::black();
     namespace colors
     {
@@ -44,4 +44,28 @@ namespace imaging
         constexpr color magenta() { return color{ 1, 0, 1 }; }
         constexpr color cyan() { return color{ 0, 1, 1 }; }
     }
+}
+
+namespace math
+{
+    template<>
+    struct approx<imaging::color>
+    {
+        imaging::color value;
+        double delta;
+
+        explicit approx(const imaging::color& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const imaging::color& other) const
+        {
+            return
+                value.r == approx<double>(other.r) &&
+                value.g == approx<double>(other.g) &&
+                value.b == approx<double>(other.b);
+        }
+    };
 }
