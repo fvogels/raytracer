@@ -34,17 +34,13 @@ using namespace raytracer;
 using namespace imaging;
 
 
-
-
-
-
 struct Scene
 {
     raytracer::primitives::Primitive root;
     std::vector<std::shared_ptr<lights::LightSource>> light_sources;
 } scene;
 
-std::shared_ptr<Camera> camera = nullptr;
+std::shared_ptr<cameras::Camera> camera = nullptr;
 
 color trace(const Ray& ray)
 {

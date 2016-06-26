@@ -40,7 +40,7 @@ Matrix4D raytracer::cameras::create_transformation(const Point3D& eye, const Poi
     return transformation;
 }
 
-std::shared_ptr<Camera> raytracer::cameras::perspective(
+std::shared_ptr<cameras::Camera> raytracer::cameras::perspective(
     const math::Point3D& eye,
     const math::Point3D& look_at,
     const math::Vector3D& up,
@@ -60,7 +60,7 @@ std::shared_ptr<Camera> raytracer::cameras::perspective(
     return std::make_shared<PerspectiveCamera>(transformation, view_window);
 }
 
-std::shared_ptr<Camera> raytracer::cameras::orthographic(
+std::shared_ptr<cameras::Camera> raytracer::cameras::orthographic(
     const math::Point3D& eye,
     const math::Point3D& look_at,
     const math::Vector3D& up,
@@ -75,7 +75,7 @@ std::shared_ptr<Camera> raytracer::cameras::orthographic(
     return std::make_shared<OrthographicCamera>(transformation, window_width, window_height);
 }
 
-std::shared_ptr<Camera> raytracer::cameras::fisheye(
+std::shared_ptr<cameras::Camera> raytracer::cameras::fisheye(
     const math::Point3D& eye,
     const math::Point3D& look_at,
     const math::Vector3D& up,
