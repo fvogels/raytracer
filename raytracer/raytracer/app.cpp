@@ -130,37 +130,6 @@ void create_scene(double t)
 }
 
 
-void worley()
-{
-    WIF wif("e:/temp/output/test.wif");
-
-    Bitmap bitmap(200, 200);
-    auto noise = math::functions::worley_noise2d();
-
-    for (int y = 0; y != bitmap.height(); ++y)
-    {
-        for (int x = 0; x != bitmap.width(); ++x)
-        {
-            position pos(x, y);
-            Point2D p(double(x) / bitmap.width() * 5, double(y) / bitmap.height() * 5);
-            double value = noise(p);
-
-            value = value * 2;
-
-            value = std::max<double>(value, 0);
-            value = std::min<double>(value, 1);
-
-            assert(0 <= value);
-            assert(value <= 1);
-
-            bitmap[pos] = colors::white() * value;
-        }
-    }
-
-    wif.write_frame(bitmap);
-}
-
-
 int main()
 {
     TIMED_FUNC(timerObj);
