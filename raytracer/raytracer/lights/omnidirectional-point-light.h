@@ -20,7 +20,6 @@ namespace raytracer
                 LightRay cast_lightray_to(const math::Point3D&) const override;
 
             private:
-                math::Point3D position;
                 imaging::color m_color;
             };
         }

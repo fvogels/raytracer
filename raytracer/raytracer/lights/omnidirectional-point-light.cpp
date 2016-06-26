@@ -9,7 +9,7 @@ raytracer::lights::_private_::OmnidirectionalPointLight::OmnidirectionalPointLig
 
 LightRay raytracer::lights::_private_::OmnidirectionalPointLight::cast_lightray_to(const math::Point3D& p) const
 {
-    math::Ray ray(position, p);
+    math::Ray ray(m_position, p);
 
     return LightRay(ray, m_color);
 }
