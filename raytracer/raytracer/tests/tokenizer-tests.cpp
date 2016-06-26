@@ -37,7 +37,7 @@ bool is_number(std::shared_ptr<const Token> token, double value)
 	{
 		auto number_token = std::dynamic_pointer_cast<const NumberToken>(token);
 
-		return number_token->value == approx(value);
+		return number_token->value == math::approx<double>(value);
 	}
 	else
 	{
