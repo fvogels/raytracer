@@ -8,16 +8,22 @@
 
 namespace raytracer
 {
-    class PointLight : public LightSource
+    namespace lights
     {
-    public:
-        PointLight(const math::Point3D&);
+        namespace _private_
+        {
+            class PointLight : public LightSource
+            {
+            public:
+                PointLight(const math::Point3D&);
 
-        std::vector<LightRay> lightrays_to(const math::Point3D&) const override;
+                std::vector<LightRay> lightrays_to(const math::Point3D&) const override;
 
-    protected:
-        virtual LightRay cast_lightray_to(const math::Point3D&) const = 0;
+            protected:
+                virtual LightRay cast_lightray_to(const math::Point3D&) const = 0;
 
-        math::Point3D m_position;
-    };
+                math::Point3D m_position;
+            };
+        }
+    }
 }
