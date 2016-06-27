@@ -82,8 +82,14 @@ namespace math
     }
 
     template<typename R2, typename R1, typename... Ts>
-    Function<R2, Ts...> operator >>(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
+    Function<R2, Ts...> operator >> (const Function<R1, Ts...>& f, const Function<R2, R1>& g)
     {
         return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
+    }
+
+    template<typename R, typename... Ts>
+    Function<R, Ts...> operator +(const Function<R, Ts...>& f, const Function<R, Ts...>& g)
+    {
+        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) + g(ts...);});
     }
 }
