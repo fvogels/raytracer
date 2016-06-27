@@ -231,6 +231,9 @@
     <ClCompile Include="materials\brdfs\diffuse-component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="materials\brdfs\specular-component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -498,6 +501,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\brdfs\diffuse-component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\brdfs\specular-component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
