@@ -21,6 +21,7 @@ namespace imaging
     color operator +(const color&, const color&);
     color operator *(const color&, double);
     color operator *(double, const color&);
+    color operator *(const color&, const color&);
     color operator /(const color&, double);
 
     color& operator +=(color&, const color&);

@@ -40,6 +40,11 @@ color imaging::operator *(double f, const color& c)
     return c * f;
 }
 
+color imaging::operator *(const color& c1, const color& c2)
+{
+    return color(c1.r * c2.r, c1.g * c2.g, c1.b * c2.b);
+}
+
 color imaging::operator /(const color& c, double f)
 {
     return c * (1 / f);
