@@ -22,7 +22,7 @@ color raytracer::brdfs::_private_::DiffuseComponent::evaluate(
 {
     assert(incoming_direction.is_unit());
     assert(normal.is_unit());
-    assert(out.is_unit());
+    assert(outgoing_direction.is_unit());
 
     double cosine = -incoming_direction.dot(normal);
     double reflectivity = std::max(0.0, cosine);

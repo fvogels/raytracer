@@ -22,7 +22,7 @@ color raytracer::brdfs::_private_::SpecularComponent::evaluate(
 {
     assert(incoming_direction.is_unit());
     assert(normal.is_unit());
-    assert(out.is_unit());
+    assert(outgoing_direction.is_unit());
 
     auto reflected_incoming_direction = incoming_direction.reflect_by(normal);
     double cos_between_reflected_and_outgoing = reflected_incoming_direction.dot(outgoing_direction);
