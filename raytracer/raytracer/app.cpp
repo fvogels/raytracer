@@ -129,7 +129,7 @@ void create_root(double t)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(uniform(colors::white() * 0.8, colors::white(), 10, 0), sphere());
+    auto s1 = decorate(uniform(colors::white() * 0.8, colors::white(), 10, 0.5), sphere());
     auto plane = decorate(uniform(colors::red() * 0.5, colors::black(), 0, 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
     scene.root = group(std::vector<Primitive> { plane, s1 });
