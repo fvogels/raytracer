@@ -1,6 +1,7 @@
 #pragma once
 
 #include "math/approx.h"
+#include "math/angle.h"
 #include <iostream>
 
 
@@ -10,11 +11,14 @@ namespace math
     {
         double x, y, z;
 
-        Vector3D() noexcept
-            : x(0), y(0), z(0) { }
-
         Vector3D(double x, double y, double z) noexcept
             : x(x), y(y), z(z) { }
+
+        Vector3D(double r, math::Angle azimuth, math::Angle altitude)
+            : x(r * cos(azimuth) * cos(altitude)), y(r * sin(altitude)), z(r * sin(azimuth) * cos(altitude)) { }
+
+        Vector3D() noexcept
+            : x(0), y(0), z(0) { }
 
         Vector3D(const Vector3D& v) noexcept = default;
 
