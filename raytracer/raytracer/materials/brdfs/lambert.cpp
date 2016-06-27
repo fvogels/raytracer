@@ -7,12 +7,13 @@ using namespace raytracer;
 using namespace raytracer::brdfs;
 
 
-double raytracer::brdfs::_private_::Lambert::evaluate(const math::Vector3D& in, const math::Vector3D& out) const
+double raytracer::brdfs::_private_::Lambert::evaluate(const math::Vector3D& in, const math::Vector3D& normal, const math::Vector3D& out) const
 {
     assert(in.is_unit());
+    assert(normal.is_unit());
     assert(out.is_unit());
 
-    double cosine = -in.dot(out);
+    double cosine = -in.dot(normal);
 
     return std::max(0.0, cosine);
 }

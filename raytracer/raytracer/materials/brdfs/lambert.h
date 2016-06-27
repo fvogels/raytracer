@@ -12,7 +12,7 @@ namespace raytracer
             class Lambert : public BRDFBody
             {
             public:
-                double evaluate(const math::Vector3D&, const math::Vector3D&) const override;
+                double evaluate(const math::Vector3D&, const math::Vector3D&, const math::Vector3D&) const override;
             };
         }
 
