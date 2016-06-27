@@ -240,6 +240,7 @@
     <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\brdfs\diffuse-component.cpp" />
     <ClCompile Include="materials\brdfs\lambert.cpp" />
+    <ClCompile Include="materials\brdfs\phong.cpp" />
     <ClCompile Include="materials\brdfs\specular-component.cpp" />
     <ClCompile Include="materials\material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
@@ -319,6 +320,7 @@
     <ClInclude Include="materials\brdf.h" />
     <ClInclude Include="materials\brdfs\diffuse-component.h" />
     <ClInclude Include="materials\brdfs\lambert.h" />
+    <ClInclude Include="materials\brdfs\phong.h" />
     <ClInclude Include="materials\brdfs\specular-component.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\materials.h" />
