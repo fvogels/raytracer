@@ -143,7 +143,7 @@ void scripting::add_standard_library_bindings(Environment* environment)
     BIND_FACTORY("rgb", create_color);
 
     BIND_FACTORY("decorate", raytracer::primitives::decorate);
-    BIND_FACTORY("uniform-material", raytracer::materials::uniform);
+    // BIND_FACTORY("uniform-material", raytracer::materials::uniform);
 
     BIND_LIBRARY_FUNCTION("let", Let);
     BIND_LIBRARY_FUNCTION("if", If);
