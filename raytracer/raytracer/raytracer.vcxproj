@@ -239,7 +239,6 @@
     <ClCompile Include="imaging\bmp_format.cpp" />
     <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\brdfs\lambert.cpp" />
-    <ClCompile Include="materials\checkered-material.cpp" />
     <ClCompile Include="materials\material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\materials.cpp" />
@@ -338,7 +337,6 @@
     <ClInclude Include="math\transformation.h" />
     <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
-    <ClInclude Include="materials\checkered-material.h" />
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
     <ClInclude Include="meta\indexing.h" />

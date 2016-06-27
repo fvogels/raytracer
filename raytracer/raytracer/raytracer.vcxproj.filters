@@ -78,9 +78,6 @@
     <ClCompile Include="primitives\decorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\checkered-material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imaging\bmp_format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -312,9 +309,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\decorator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\checkered-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\wif_format.h">
