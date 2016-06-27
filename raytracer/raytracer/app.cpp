@@ -15,6 +15,7 @@
 #include "lights/lights.h"
 #include "rendering/light-ray.h"
 #include "materials/brdfs/lambert.h"
+#include "materials/brdfs/phong.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
 #include "logging.h"
@@ -131,10 +132,18 @@ color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
     return c / sample_count;
 }
 
-Material create_diffuse(const color& c)
+Material create_lambert_material(const color& c)
 {
     MaterialProperties properties;
     properties.brdf = raytracer::brdfs::lambert(c);
+
+    return raytracer::materials::uniform(properties);
+}
+
+Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent)
+{
+    MaterialProperties properties;
+    properties.brdf = raytracer::brdfs::phong(diffuse, specular, specular_exponent);
 
     return raytracer::materials::uniform(properties);
 }
@@ -144,8 +153,8 @@ void create_root(double t)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(create_diffuse(colors::white()), sphere());
-    auto plane = decorate(create_diffuse(colors::red()), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto s1 = decorate(create_phong_material(colors::blue(), colors::white(), 10), sphere());
+    auto plane = decorate(create_lambert_material(colors::red()), translate(Vector3D(0, -1, 0), xz_plane()));
 
     scene.root = group(std::vector<Primitive> { plane, s1 });
 }

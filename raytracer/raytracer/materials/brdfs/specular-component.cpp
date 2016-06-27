@@ -8,8 +8,8 @@ using namespace raytracer::brdfs;
 using namespace imaging;
 
 
-raytracer::brdfs::_private_::SpecularComponent::SpecularComponent(const color& c)
-    : m_color(c)
+raytracer::brdfs::_private_::SpecularComponent::SpecularComponent(const color& c, double exponent)
+    : m_color(c), m_exponent(exponent)
 {
     // NOP
 }
@@ -26,12 +26,18 @@ color raytracer::brdfs::_private_::SpecularComponent::evaluate(
 
     auto reflected_incoming_direction = incoming_direction.reflect_by(normal);
     double cos_between_reflected_and_outgoing = reflected_incoming_direction.dot(outgoing_direction);
-    double reflectivity = std::max(cos_between_reflected_and_outgoing, 0.0);
-
-    return reflectivity * m_color;
+    
+    if (cos_between_reflected_and_outgoing > 0)
+    {
+        return m_color * std::pow(cos_between_reflected_and_outgoing, m_exponent);
+    }
+    else
+    {
+        return colors::black();
+    }
 }
 
-BRDF raytracer::brdfs::specular_component(const color& c)
+BRDF raytracer::brdfs::specular_component(const color& c, double exponent)
 {
-    return BRDF(std::make_shared<_private_::SpecularComponent>(c));
+    return BRDF(std::make_shared<_private_::SpecularComponent>(c, exponent));
 }

@@ -9,7 +9,7 @@ using namespace raytracer::brdfs;
 using namespace imaging;
 
 
-BRDF raytracer::brdfs::phong(const color& diffuse, const color& specular)
+BRDF raytracer::brdfs::phong(const color& diffuse_color, const color& specular_color, double specular_exponent)
 {
-    return diffuse_component(diffuse) + specular_component(specular);
+    return diffuse_component(diffuse_color) + specular_component(specular_color, specular_exponent);
 }
