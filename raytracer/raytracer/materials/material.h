@@ -3,6 +3,7 @@
 #include "imaging/color.h"
 #include "math/point2d.h"
 #include "primitives/hit-position.h"
+#include "materials/brdf.h"
 #include <assert.h>
 #include <memory>
 
@@ -11,10 +12,8 @@ namespace raytracer
 {
     struct MaterialProperties
     {
-        imaging::color diffuse;
-        imaging::color specular;
-        double specular_exponent;
-        double reflectivity;
+        imaging::color reflected_color;
+        BRDF brdf;
     };
 
     class MaterialImplementation

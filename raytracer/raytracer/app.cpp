@@ -14,6 +14,7 @@
 #include "lights/light-source.h"
 #include "lights/lights.h"
 #include "rendering/light-ray.h"
+#include "materials/brdfs/lambert.h"
 #include "meta/function-traits.h"
 #include "easylogging++.h"
 #include "logging.h"
@@ -63,43 +64,49 @@ color trace(const Ray& ray, double weight = 1.0)
             {
                 for (auto& light_ray : light_source->lightrays_to(hit.position))
                 {
-                    Vector3D hit_to_light_source = (light_ray.ray.origin - hit.position).normalized();
+                    // Vector3D hit_to_light_source = (light_ray.ray.origin - hit.position).normalized();
                     Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
 
-                    Hit lighthit;
-                    if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
-                    {
-                        if (material_properties.diffuse != colors::black())
-                        {
-                            double diffuse_cos_angle = hit_to_light_source.dot(hit.normal);
+                    auto incoming = light_ray.ray.direction.normalized();
+                    auto outgoing = -ray.direction.normalized();
+                    double reflectivity = material_properties.brdf(incoming, hit.normal, outgoing);
 
-                            assert(hit.normal.is_unit());
-                            assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
+                    result += light_ray.color * material_properties.reflected_color * reflectivity;
 
-                            if (diffuse_cos_angle > 0)
-                            {
-                                result += material_properties.diffuse * diffuse_cos_angle;
-                            }
-                        }
+                    //Hit lighthit;
+                    //if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
+                    //{
+                    //    if (material_properties.diffuse != colors::black())
+                    //    {
+                    //        double diffuse_cos_angle = hit_to_light_source.dot(hit.normal);
 
-                        if (material_properties.specular != colors::black())
-                        {
-                            Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-                            double specular_cos_angle = reflected_ray_direction.dot(hit_to_light_source);
+                    //        assert(hit.normal.is_unit());
+                    //        assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
 
-                            if (specular_cos_angle > 0)
-                            {
-                                result += material_properties.specular * std::pow(specular_cos_angle, 20);
-                            }
-                        }                        
-                    }
+                    //        if (diffuse_cos_angle > 0)
+                    //        {
+                    //            result += material_properties.diffuse * diffuse_cos_angle;
+                    //        }
+                    //    }
 
-                    if (material_properties.reflectivity > 0)
-                    {
-                        Ray reflected_ray(hit.position + reflected_ray_direction * 0.00001, reflected_ray_direction);
+                    //    if (material_properties.specular != colors::black())
+                    //    {
+                    //        Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+                    //        double specular_cos_angle = reflected_ray_direction.dot(hit_to_light_source);
 
-                        result += trace(reflected_ray, weight * material_properties.reflectivity) * material_properties.reflectivity;
-                    }
+                    //        if (specular_cos_angle > 0)
+                    //        {
+                    //            result += material_properties.specular * std::pow(specular_cos_angle, 20);
+                    //        }
+                    //    }                        
+                    //}
+
+                    //if (material_properties.reflectivity > 0)
+                    //{
+                    //    Ray reflected_ray(hit.position + reflected_ray_direction * 0.00001, reflected_ray_direction);
+
+                    //    result += trace(reflected_ray, weight * material_properties.reflectivity) * material_properties.reflectivity;
+                    //}
                 }
             }
         }
@@ -124,13 +131,22 @@ color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
     return c / sample_count;
 }
 
+Material create_diffuse(const color& c)
+{
+    MaterialProperties properties;
+    properties.reflected_color = c;
+    properties.brdf = raytracer::brdfs::lambert();
+
+    return raytracer::materials::uniform(properties);
+}
+
 void create_root(double t)
 {
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(uniform(colors::white() * 0.8, colors::white(), 10, 0.5), sphere());
-    auto plane = decorate(uniform(colors::red() * 0.5, colors::black(), 0, 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto s1 = decorate(create_diffuse(colors::white()), sphere());
+    auto plane = decorate(create_diffuse(colors::red()), translate(Vector3D(0, -1, 0), xz_plane()));
 
     scene.root = group(std::vector<Primitive> { plane, s1 });
 }

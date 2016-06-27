@@ -47,9 +47,9 @@ Material raytracer::materials::pattern2d(math::Function<bool, const Point2D&> pa
     return Material(std::make_shared<MultiMaterial>(pattern >> bool_mapper));
 }
 
-Material raytracer::materials::uniform(const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
+Material raytracer::materials::uniform(const MaterialProperties& properties)
 {
-    return Material(std::make_shared<UniformMaterial>(diffuse, specular, specular_exponent, reflectivity));
+    return Material(std::make_shared<UniformMaterial>(properties));
 }
 
 Material raytracer::materials::checkered(Material m1, Material m2)
