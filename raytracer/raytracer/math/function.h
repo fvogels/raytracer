@@ -32,6 +32,9 @@ namespace math
     class Function
     {
     public:
+        Function()
+            : m_body(nullptr) { }
+
         Function(std::shared_ptr<FunctionBody<R, Ts...>> body)
             : m_body(std::move(body)) { }
 
