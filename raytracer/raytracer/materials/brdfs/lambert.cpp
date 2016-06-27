@@ -3,6 +3,7 @@
 #include <assert.h>
 
 using namespace math;
+using namespace raytracer;
 using namespace raytracer::brdfs;
 
 
@@ -11,7 +12,12 @@ double raytracer::brdfs::_private_::Lambert::evaluate(const math::Vector3D& in, 
     assert(in.is_unit());
     assert(out.is_unit());
 
-    double cosine = in.dot(out);
+    double cosine = -in.dot(out);
 
     return std::max(0.0, cosine);
+}
+
+BRDF raytracer::brdfs::lambert()
+{
+    return BRDF(std::make_shared<_private_::Lambert>());
 }

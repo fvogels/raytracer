@@ -15,5 +15,7 @@ namespace raytracer
                 double evaluate(const math::Vector3D&, const math::Vector3D&) const override;
             };
         }
+
+        BRDF lambert();
     }
 }
