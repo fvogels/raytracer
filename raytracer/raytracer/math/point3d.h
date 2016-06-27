@@ -14,6 +14,9 @@ namespace math
         Point3D(double x, double y, double z) noexcept
             : x(x), y(y), z(z) { }
 
+        Point3D(double r, math::Angle azimuth, math::Angle altitude)
+            : x(r * cos(azimuth) * cos(altitude)), y(r * sin(altitude)), z(r * sin(azimuth) * cos(altitude)) { }
+
         Point3D(const Point3D& v) noexcept = default;
 
         Point3D& operator =(const Point3D&) noexcept = default;
