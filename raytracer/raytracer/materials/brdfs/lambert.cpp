@@ -5,20 +5,32 @@
 using namespace math;
 using namespace raytracer;
 using namespace raytracer::brdfs;
+using namespace imaging;
 
 
-double raytracer::brdfs::_private_::Lambert::evaluate(const math::Vector3D& in, const math::Vector3D& normal, const math::Vector3D& out) const
+raytracer::brdfs::_private_::Lambert::Lambert(const color& c)
+    : m_color(c)
 {
-    assert(in.is_unit());
+    // NOP
+}
+
+color raytracer::brdfs::_private_::Lambert::evaluate(
+    const math::Vector3D& incoming_direction, 
+    const imaging::color& incoming_color, 
+    const math::Vector3D& normal,
+    const math::Vector3D& outgoing_direction) const
+{
+    assert(incoming_direction.is_unit());
     assert(normal.is_unit());
     assert(out.is_unit());
 
-    double cosine = -in.dot(normal);
+    double cosine = -incoming_direction.dot(normal);
+    double reflectivity = std::max(0.0, cosine);
 
-    return std::max(0.0, cosine);
+    return m_color * reflectivity;
 }
 
-BRDF raytracer::brdfs::lambert()
+BRDF raytracer::brdfs::lambert(const color& c)
 {
-    return BRDF(std::make_shared<_private_::Lambert>());
+    return BRDF(std::make_shared<_private_::Lambert>(c));
 }

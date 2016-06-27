@@ -12,7 +12,6 @@ namespace raytracer
 {
     struct MaterialProperties
     {
-        imaging::color reflected_color;
         BRDF brdf;
     };
 

@@ -12,10 +12,15 @@ namespace raytracer
             class Lambert : public BRDFBody
             {
             public:
-                double evaluate(const math::Vector3D&, const math::Vector3D&, const math::Vector3D&) const override;
+                Lambert(const imaging::color&);
+
+                imaging::color evaluate(const math::Vector3D&, const imaging::color&, const math::Vector3D&, const math::Vector3D&) const override;
+
+            private:
+                imaging::color m_color;
             };
         }
 
-        BRDF lambert();
+        BRDF lambert(const imaging::color&);
     }
 }

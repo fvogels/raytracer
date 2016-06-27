@@ -69,9 +69,9 @@ color trace(const Ray& ray, double weight = 1.0)
 
                     auto incoming = light_ray.ray.direction.normalized();
                     auto outgoing = -ray.direction.normalized();
-                    double reflectivity = material_properties.brdf(incoming, hit.normal, outgoing);
+                    color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, outgoing);
 
-                    result += light_ray.color * material_properties.reflected_color * reflectivity;
+                    result += reflected_color;
 
                     //Hit lighthit;
                     //if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
@@ -134,8 +134,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
 Material create_diffuse(const color& c)
 {
     MaterialProperties properties;
-    properties.reflected_color = c;
-    properties.brdf = raytracer::brdfs::lambert();
+    properties.brdf = raytracer::brdfs::lambert(c);
 
     return raytracer::materials::uniform(properties);
 }
