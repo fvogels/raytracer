@@ -93,7 +93,7 @@ namespace scripting
         if (converted == nullptr)
         {
             std::ostringstream ss;
-            ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(*object).name();
+            ss << "Type error: expected type " << typeid(T).name() << ", actual type " << typeid(object).name();
 
             throw std::runtime_error(ss.str());
         }
