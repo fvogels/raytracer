@@ -43,8 +43,8 @@ void math::functions::WorleyNoise2D::enumerate_points_in_cell(int x, int y, std:
 
 void math::functions::WorleyNoise2D::enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
 {
-    int x = int(std::floor(p.x));
-    int y = int(std::floor(p.y));
+    int x = int(floor(p.x));
+    int y = int(floor(p.y));
 
     for (int dx = -1; dx <= 1; ++dx)
     {
@@ -67,7 +67,7 @@ double math::functions::WorleyNoise2D::evaluate(const math::Point2D& p) const
 
 double math::functions::WorleyNoise2D::find_smallest_distance(const Point2D& p) const
 {
-    double closest = std::sqrt(2);
+    double closest = sqrt(2);
 
     enumerate_points_around(p, [&closest, &p](const Point2D& q)
     {
