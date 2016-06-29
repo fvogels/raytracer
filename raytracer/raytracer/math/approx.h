@@ -19,7 +19,7 @@ namespace math
 
         bool close_enough(double other) const
         {
-            return std::abs(other - value) < delta;
+            return fabs(other - value) < delta;
         }
     };
 
