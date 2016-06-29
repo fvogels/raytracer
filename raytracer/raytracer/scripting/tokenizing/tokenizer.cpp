@@ -38,7 +38,9 @@ void scripting::Tokenizer::tokenize()
             }
         }
 
-        throw std::runtime_error("Unrecognized character " + c);
+	std::string error_message = "Unrecognized character ";
+	error_message.push_back(c);
+        throw std::runtime_error(error_message);
     }
     else
     {
