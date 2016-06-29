@@ -156,7 +156,8 @@ void create_root(double t)
     auto s1 = decorate(create_phong_material(colors::blue(), colors::white(), 10), sphere());
     auto plane = decorate(create_lambert_material(colors::red()), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    scene.root = group(std::vector<Primitive> { plane, s1 });
+    std::vector<Primitive> root_elts { plane, s1 };
+    scene.root = group(root_elts);
 }
 
 void create_light_sources(double t)
@@ -206,7 +207,7 @@ int main()
 
         if (N_THREADS > 1)
         {
-            std::atomic<unsigned> j = 0;
+            std::atomic<unsigned> j(0);
             std::vector<std::thread> threads;
 
             for (int k = 0; k != N_THREADS; ++k)
