@@ -63,7 +63,7 @@ namespace scripting
         void next() override;
         bool end_reached() const override;
         std::shared_ptr<const Token> current() const override;
-        Location location() const;
+        Location location() const override;
 
     private:
         CombinedReader<StreamLineReader, StringReader, LocationFactory> m_reader;
