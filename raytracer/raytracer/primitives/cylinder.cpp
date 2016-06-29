@@ -49,7 +49,7 @@ bool raytracer::primitives::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 
         if (d >= 0)
         {
-            double sqrt_d = std::sqrt(d);
+            double sqrt_d = sqrt(d);
 
             // Compute both t's at which ray intersects cylinder
             double t1 = (-b - sqrt_d) / (2 * a);
@@ -114,7 +114,7 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Cylinder::hits(const ma
 
         if (d >= 0)
         {
-            double sqrt_d = std::sqrt(d);
+            double sqrt_d = sqrt(d);
 
             double t1 = (-b - sqrt_d) / (2 * a);
             double t2 = (-b + sqrt_d) / (2 * a);
