@@ -1,4 +1,4 @@
-#include "Union.h"
+#include "primitives/nion.h"
 #include <algorithm>
 
 using namespace raytracer;
