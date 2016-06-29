@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#include "Cylinder.h"
+#include "primitives/cylinder.h"
 #include "materials/material.h"
 #include "util/misc.h"
 #include <assert.h>
