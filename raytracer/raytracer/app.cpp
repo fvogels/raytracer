@@ -28,7 +28,7 @@
 #include <thread>
 #include <atomic>
 
-const int FRAME_COUNT = 30;
+const int FRAME_COUNT = 1;
 const int N_THREADS = 4;
 
 using namespace math;
@@ -40,92 +40,233 @@ struct Scene
 {
     raytracer::primitives::Primitive root;
     std::vector<std::shared_ptr<lights::LightSource>> light_sources;
-} scene;
+};
 
 std::shared_ptr<cameras::Camera> camera = nullptr;
 
-color trace(const Ray& ray, double weight = 1.0)
+class RayTracer
 {
-    if (weight < 0.01)
+public:
+    virtual color trace(const Scene&, const Ray&) const = 0;
+    };
+
+class FastRayTracer : public RayTracer
+{
+public:
+    FastRayTracer(unsigned recursion_limit = 2)
+        : m_recursion_limit(recursion_limit) { }
+
+    color trace(const Scene& scene, const Ray& ray) const override
     {
-        return colors::black();
+        return trace(scene, ray, m_recursion_limit);
     }
-    else
+
+private:
+    color trace(const Scene& scene, const Ray& ray, unsigned recursions_left) const
     {
-        Hit hit;
-        color result = colors::black();
-
-        if (scene.root->find_hit(ray, &hit))
+        if (!recursions_left)
         {
-            assert(hit.material);
+            return colors::black();
+        }
+        else
+        {
+            Hit hit;
+            color result = colors::black();
 
-            auto material_properties = hit.material->at(hit.local_position);
-
-            for (auto light_source : scene.light_sources)
+            if (scene.root->find_hit(ray, &hit))
             {
-                for (auto& light_ray : light_source->lightrays_to(hit.position))
+                assert(hit.material);
+
+                auto material_properties = hit.material->at(hit.local_position);
+
+                for (auto light_source : scene.light_sources)
                 {
-                    // Vector3D hit_to_light_source = (light_ray.ray.origin - hit.position).normalized();
-                    Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+                    for (auto& light_ray : light_source->lightrays_to(hit.position))
+                    {
+                        Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+                        auto direction_back_to_eye = -ray.direction.normalized();
 
-                    auto incoming = light_ray.ray.direction.normalized();
-                    auto outgoing = -ray.direction.normalized();
-                    color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, outgoing);
+                        Hit lighthit;
 
-                    result += reflected_color;
+                        if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
+                        {
+                            auto incoming = light_ray.ray.direction.normalized();
+                            color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, direction_back_to_eye);
 
-                    //Hit lighthit;
-                    //if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
-                    //{
-                    //    if (material_properties.diffuse != colors::black())
-                    //    {
-                    //        double diffuse_cos_angle = hit_to_light_source.dot(hit.normal);
+                            result += reflected_color;
+                        }
 
-                    //        assert(hit.normal.is_unit());
-                    //        assert(-1 <= diffuse_cos_angle && diffuse_cos_angle <= 1);
-
-                    //        if (diffuse_cos_angle > 0)
-                    //        {
-                    //            result += material_properties.diffuse * diffuse_cos_angle;
-                    //        }
-                    //    }
-
-                    //    if (material_properties.specular != colors::black())
-                    //    {
-                    //        Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-                    //        double specular_cos_angle = reflected_ray_direction.dot(hit_to_light_source);
-
-                    //        if (specular_cos_angle > 0)
-                    //        {
-                    //            result += material_properties.specular * std::pow(specular_cos_angle, 20);
-                    //        }
-                    //    }                        
-                    //}
-
-                    //if (material_properties.reflectivity > 0)
-                    //{
-                    //    Ray reflected_ray(hit.position + reflected_ray_direction * 0.00001, reflected_ray_direction);
-
-                    //    result += trace(reflected_ray, weight * material_properties.reflectivity) * material_properties.reflectivity;
-                    //}
+                        Ray reflected_ray(hit.position + 0.00001 * reflected_ray_direction, reflected_ray_direction);
+                        color reflection_color = trace(scene, reflected_ray, recursions_left - 1);
+                        result += material_properties.brdf(-reflected_ray_direction, reflection_color, hit.normal, direction_back_to_eye);
+                    }
                 }
             }
+
+            return result;
         }
-
-        return result;
     }
-}
 
-color render_pixel(const Rasterizer& window_rasteriser, int x, int y)
+    unsigned m_recursion_limit;
+};
+
+class MonteCarloRayTracer : public RayTracer
+{
+public:
+    MonteCarloRayTracer(unsigned recursion_limit = 2)
+        : m_recursion_limit(recursion_limit) { }
+
+    color trace(const Scene& scene, const Ray& ray) const override
+    {
+        return trace(scene, ray, m_recursion_limit);
+    }
+
+private:
+    color trace(const Scene& scene, const Ray& ray, unsigned recursions_left) const
+    {
+        if (!recursions_left)
+        {
+            return colors::black();
+        }
+        else
+        {
+            Hit hit;
+            color result = colors::black();
+
+            if (scene.root->find_hit(ray, &hit))
+            {
+                assert(hit.material);
+
+                auto material_properties = hit.material->at(hit.local_position);
+
+                for (auto light_source : scene.light_sources)
+                {
+                    for (auto& light_ray : light_source->lightrays_to(hit.position))
+                    {
+                        Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+                        auto direction_back_to_eye = -ray.direction.normalized();
+
+                        Hit lighthit;
+
+                        if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
+                        {
+                            auto incoming = light_ray.ray.direction.normalized();
+
+                            color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, direction_back_to_eye);
+
+                            result += reflected_color;
+                        }
+
+                        int count = 0;
+                        color total = colors::black();
+
+                        for (double azimuth = 0; azimuth < 360; azimuth += 10)
+                        {
+                            for (double altitude = -90; altitude <= 90; altitude += 10)
+                            {
+                                Vector3D direction(1, degrees(azimuth), degrees(altitude));
+
+                                if (direction.dot(hit.normal) > 0)
+                                {
+                                    Ray r(hit.position + 0.00001 * direction, direction);
+                                    color c = trace(scene, r, recursions_left - 1);
+
+                                    total += material_properties.brdf(-direction, c, hit.normal, direction_back_to_eye);
+                                    ++count;
+                                }
+                            }
+                        }
+
+                        result += (total / count);
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+
+    unsigned m_recursion_limit;
+};
+
+//color trace(const Ray& ray, unsigned recursions_left = 2)
+//{
+//    if (!recursions_left)
+//    {
+//        return colors::black();
+//    }
+//    else
+//    {
+//        Hit hit;
+//        color result = colors::black();
+//
+//        if (scene.root->find_hit(ray, &hit))
+//        {
+//            assert(hit.material);
+//
+//            auto material_properties = hit.material->at(hit.local_position);
+//
+//            for (auto light_source : scene.light_sources)
+//            {
+//                for (auto& light_ray : light_source->lightrays_to(hit.position))
+//                {
+//                    Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
+//                    auto direction_back_to_eye = -ray.direction.normalized();
+//
+//                    Hit lighthit;
+//
+//                    if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
+//                    {
+//                        auto incoming = light_ray.ray.direction.normalized();
+//                        
+//                        color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, direction_back_to_eye);
+//
+//                        result += reflected_color;
+//                    }
+//
+//                    //Ray reflected_ray(hit.position + 0.00001 * reflected_ray_direction, reflected_ray_direction);
+//                    //color reflection_color = trace(reflected_ray, recursions_left - 1);
+//                    //result += material_properties.brdf(-reflected_ray_direction, reflection_color, hit.normal, direction_back_to_eye);
+//
+//                    int count = 0;
+//                    color total = colors::black();
+//
+//                    for (double azimuth = 0; azimuth < 360; azimuth += 10)
+//                    {
+//                        for (double altitude = -90; altitude <= 90; altitude += 10)
+//                        {
+//                            Vector3D direction(1, degrees(azimuth), degrees(altitude));
+//
+//                            if (direction.dot(hit.normal) > 0)
+//                            {
+//                                Ray r(hit.position + 0.00001 * direction, direction);
+//                                color c = trace(r, recursions_left - 1);
+//
+//                                total += material_properties.brdf(-direction, c, hit.normal, direction_back_to_eye);
+//                                ++count;
+//                            }
+//                        }
+//                    }
+//
+//                    result += (total / count);
+//                }
+//            }
+//        }
+//
+//        return result;
+//    }
+//}
+
+color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scene& scene, const RayTracer& ray_tracer)
 {
     GridSampler sampler(1, 1);
     Rectangle2D pixel_rectangle = window_rasteriser[position(x, y)];
     color c = colors::black();
     int sample_count = 0;
 
-    sampler.sample(pixel_rectangle, [&c, &sample_count](const Point2D& p) {
+    sampler.sample(pixel_rectangle, [&c, &sample_count, &scene, &ray_tracer](const Point2D& p) {
         auto ray = camera->create_ray(p);
-        c += trace(ray);
+        c += ray_tracer.trace(scene, ray);
         ++sample_count;
     });
 
@@ -148,30 +289,37 @@ Material create_phong_material(const color& diffuse, const color& specular, doub
     return raytracer::materials::uniform(properties);
 }
 
-void create_root(double t)
+raytracer::primitives::Primitive create_root(double t)
 {
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(create_phong_material(colors::blue(), colors::white(), 10), sphere());
-    auto plane = decorate(create_lambert_material(colors::red()), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto s1 = decorate(create_phong_material(colors::blue() * 0.5, colors::white() * 0.5, 10), sphere());
+    auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    scene.root = group(std::vector<Primitive> { plane, s1 });
+    return group(std::vector<Primitive> { s1, plane });
 }
 
-void create_light_sources(double t)
+std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_sources(double t)
 {
     using namespace raytracer::lights;
 
-    scene.light_sources.clear();
-    scene.light_sources.push_back(omnidirectional(Point3D(0, 5, 5), colors::white()));
+    std::vector<std::shared_ptr<LightSource>> light_sources;
+
+    light_sources.push_back(omnidirectional(Point3D(5 * t, 5, 5), colors::white()));
     // scene.light_sources.push_back(conical(Point3D(5 * t, 5, 5), Vector3D(0,-1,0), 60_degrees, colors::white()));
+
+    return light_sources;
 }
 
-void create_scene(double t)
+std::shared_ptr<Scene> create_scene(double t)
 {
-    create_root(t);
-    create_light_sources(t);
+    auto scene = std::make_shared<Scene>();
+
+    scene->root = create_root(t);
+    scene->light_sources = create_light_sources(t);
+
+    return scene;
 }
 
 
@@ -182,6 +330,9 @@ int main()
     logging::configure();
 
     WIF wif("e:/temp/output/test.wif");
+
+    FastRayTracer ray_tracer;
+
 
     for (int frame = 0; frame != FRAME_COUNT; ++frame)
     {
@@ -197,7 +348,7 @@ int main()
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
-        create_scene(t);
+        auto scene = create_scene(t);
 
         Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
         Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
@@ -222,7 +373,7 @@ int main()
                         {
                             int x = i;
 
-                            color c = render_pixel(window_rasteriser, x, y);
+                            color c = render_pixel(window_rasteriser, x, y, *scene, ray_tracer);
 
                             bitmap[position(i, current)] = c;
                         }
@@ -245,7 +396,7 @@ int main()
                 {
                     int x = i;
 
-                    color c = render_pixel(window_rasteriser, x, y);
+                    color c = render_pixel(window_rasteriser, x, y, *scene, ray_tracer);
 
                     bitmap[position(i, j)] = c;
                 }
