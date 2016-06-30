@@ -17,6 +17,8 @@
 #include "materials/brdfs/lambert.h"
 #include "materials/brdfs/phong.h"
 #include "meta/function-traits.h"
+#include "raytracing/ray-tracer.h"
+#include "raytracing/fast-ray-tracer.h"
 #include "easylogging++.h"
 #include "logging.h"
 #include <assert.h>
@@ -35,159 +37,7 @@ using namespace math;
 using namespace raytracer;
 using namespace imaging;
 
-
-struct Scene
-{
-    raytracer::primitives::Primitive root;
-    std::vector<std::shared_ptr<lights::LightSource>> light_sources;
-};
-
 std::shared_ptr<cameras::Camera> camera = nullptr;
-
-class RayTracer
-{
-public:
-    virtual color trace(const Scene&, const Ray&) const = 0;
-    };
-
-class FastRayTracer : public RayTracer
-{
-public:
-    FastRayTracer(unsigned recursion_limit = 2)
-        : m_recursion_limit(recursion_limit) { }
-
-    color trace(const Scene& scene, const Ray& ray) const override
-    {
-        return trace(scene, ray, m_recursion_limit);
-    }
-
-private:
-    color trace(const Scene& scene, const Ray& ray, unsigned recursions_left) const
-    {
-        if (!recursions_left)
-        {
-            return colors::black();
-        }
-        else
-        {
-            Hit hit;
-            color result = colors::black();
-
-            if (scene.root->find_hit(ray, &hit))
-            {
-                assert(hit.material);
-
-                auto material_properties = hit.material->at(hit.local_position);
-
-                for (auto light_source : scene.light_sources)
-                {
-                    for (auto& light_ray : light_source->lightrays_to(hit.position))
-                    {
-                        Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-                        auto direction_back_to_eye = -ray.direction.normalized();
-
-                        Hit lighthit;
-
-                        if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
-                        {
-                            auto incoming = light_ray.ray.direction.normalized();
-                            color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, direction_back_to_eye);
-
-                            result += reflected_color;
-                        }
-
-                        Ray reflected_ray(hit.position + 0.00001 * reflected_ray_direction, reflected_ray_direction);
-                        color reflection_color = trace(scene, reflected_ray, recursions_left - 1);
-                        result += material_properties.brdf(-reflected_ray_direction, reflection_color, hit.normal, direction_back_to_eye);
-                    }
-                }
-            }
-
-            return result;
-        }
-    }
-
-    unsigned m_recursion_limit;
-};
-
-class MonteCarloRayTracer : public RayTracer
-{
-public:
-    MonteCarloRayTracer(unsigned recursion_limit = 2)
-        : m_recursion_limit(recursion_limit) { }
-
-    color trace(const Scene& scene, const Ray& ray) const override
-    {
-        return trace(scene, ray, m_recursion_limit);
-    }
-
-private:
-    color trace(const Scene& scene, const Ray& ray, unsigned recursions_left) const
-    {
-        if (!recursions_left)
-        {
-            return colors::black();
-        }
-        else
-        {
-            Hit hit;
-            color result = colors::black();
-
-            if (scene.root->find_hit(ray, &hit))
-            {
-                assert(hit.material);
-
-                auto material_properties = hit.material->at(hit.local_position);
-
-                for (auto light_source : scene.light_sources)
-                {
-                    for (auto& light_ray : light_source->lightrays_to(hit.position))
-                    {
-                        Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
-                        auto direction_back_to_eye = -ray.direction.normalized();
-
-                        Hit lighthit;
-
-                        if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
-                        {
-                            auto incoming = light_ray.ray.direction.normalized();
-
-                            color reflected_color = material_properties.brdf(incoming, light_ray.color, hit.normal, direction_back_to_eye);
-
-                            result += reflected_color;
-                        }
-
-                        int count = 0;
-                        color total = colors::black();
-
-                        for (double azimuth = 0; azimuth < 360; azimuth += 10)
-                        {
-                            for (double altitude = -90; altitude <= 90; altitude += 10)
-                            {
-                                Vector3D direction(1, degrees(azimuth), degrees(altitude));
-
-                                if (direction.dot(hit.normal) > 0)
-                                {
-                                    Ray r(hit.position + 0.00001 * direction, direction);
-                                    color c = trace(scene, r, recursions_left - 1);
-
-                                    total += material_properties.brdf(-direction, c, hit.normal, direction_back_to_eye);
-                                    ++count;
-                                }
-                            }
-                        }
-
-                        result += (total / count);
-                    }
-                }
-            }
-
-            return result;
-        }
-    }
-
-    unsigned m_recursion_limit;
-};
 
 color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scene& scene, const RayTracer& ray_tracer)
 {
@@ -205,18 +55,20 @@ color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scen
     return c / sample_count;
 }
 
-Material create_lambert_material(const color& c)
+Material create_lambert_material(const color& c, bool reflective = false)
 {
     MaterialProperties properties;
     properties.brdf = raytracer::brdfs::lambert(c);
+    properties.reflective = reflective;
 
     return raytracer::materials::uniform(properties);
 }
 
-Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent)
+Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent, bool reflective = true)
 {
     MaterialProperties properties;
     properties.brdf = raytracer::brdfs::phong(diffuse, specular, specular_exponent);
+    properties.reflective = reflective;
 
     return raytracer::materials::uniform(properties);
 }
@@ -264,7 +116,7 @@ int main()
 
     WIF wif("e:/temp/output/test.wif");
 
-    FastRayTracer ray_tracer;
+    auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
 
 
     for (int frame = 0; frame != FRAME_COUNT; ++frame)
@@ -306,7 +158,7 @@ int main()
                         {
                             int x = i;
 
-                            color c = render_pixel(window_rasteriser, x, y, *scene, ray_tracer);
+                            color c = render_pixel(window_rasteriser, x, y, *scene, *ray_tracer);
 
                             bitmap[position(i, current)] = c;
                         }
@@ -329,7 +181,7 @@ int main()
                 {
                     int x = i;
 
-                    color c = render_pixel(window_rasteriser, x, y, *scene, ray_tracer);
+                    color c = render_pixel(window_rasteriser, x, y, *scene, *ray_tracer);
 
                     bitmap[position(i, j)] = c;
                 }

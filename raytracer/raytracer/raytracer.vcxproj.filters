@@ -237,6 +237,12 @@
     <ClCompile Include="materials\brdfs\phong.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="raytracing\fast-ray-tracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -510,6 +516,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\brdfs\phong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\fast-ray-tracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\monte-carlo-ray-tracer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

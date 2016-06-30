@@ -265,6 +265,8 @@
     <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="primitives\transformer.cpp" />
     <ClCompile Include="primitives\union.cpp" />
+    <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
+    <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp" />
     <ClCompile Include="rendering\grid-sampler.cpp" />
     <ClCompile Include="rendering\light-ray.cpp" />
     <ClCompile Include="rendering\single-sampler.cpp" />
@@ -357,6 +359,10 @@
     <ClInclude Include="primitives\sphere.h" />
     <ClInclude Include="primitives\transformer.h" />
     <ClInclude Include="primitives\union.h" />
+    <ClInclude Include="raytracing\fast-ray-tracer.h" />
+    <ClInclude Include="raytracing\monte-carlo-ray-tracer.h" />
+    <ClInclude Include="raytracing\ray-tracer.h" />
+    <ClInclude Include="raytracing\scene.h" />
     <ClInclude Include="rendering\grid-sampler.h" />
     <ClInclude Include="rendering\light-ray.h" />
     <ClInclude Include="rendering\sampler.h" />
