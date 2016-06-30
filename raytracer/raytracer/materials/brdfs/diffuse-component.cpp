@@ -27,7 +27,7 @@ color raytracer::brdfs::_private_::DiffuseComponent::evaluate(
     double cosine = -incoming_direction.dot(normal);
     double reflectivity = std::max(0.0, cosine);
 
-    return m_color * reflectivity;
+    return incoming_color * m_color * reflectivity;
 }
 
 BRDF raytracer::brdfs::diffuse_component(const color& c)
