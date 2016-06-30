@@ -256,6 +256,7 @@
     <ClCompile Include="math\vector2d.cpp" />
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
+    <ClCompile Include="primitives\cropper.cpp" />
     <ClCompile Include="primitives\intersection.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
     <ClCompile Include="primitives\primitives.cpp" />
@@ -348,6 +349,7 @@
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
     <ClInclude Include="meta\indexing.h" />
+    <ClInclude Include="primitives\cropper.h" />
     <ClInclude Include="primitives\cylinder.h" />
     <ClInclude Include="primitives\hit-position.h" />
     <ClInclude Include="primitives\intersection.h" />
