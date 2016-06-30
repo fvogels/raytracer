@@ -35,7 +35,7 @@ namespace scripting
         template<typename Pair>
         typename StripType<typename Pair::type>::result convert(const std::vector<std::shared_ptr<scripting::Object>>& objects)
         {
-            using target_type = StripType<Pair::type>::result;
+            using target_type = typename StripType<typename Pair::type>::result;
 
             CLOG(DEBUG, "stdlib") << "Converting argument #" << Pair::index << " of type " << typeid(*objects[Pair::index]).name() << " to " << typeid(scripting::NativeObject<target_type>).name();
 

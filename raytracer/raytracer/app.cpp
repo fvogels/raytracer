@@ -28,7 +28,7 @@
 #include <thread>
 #include <atomic>
 
-const int FRAME_COUNT = 1;
+const int FRAME_COUNT = 30;
 const int N_THREADS = 4;
 
 using namespace math;
@@ -297,7 +297,8 @@ raytracer::primitives::Primitive create_root(double t)
     auto s1 = decorate(create_phong_material(colors::blue() * 0.5, colors::white() * 0.5, 10), sphere());
     auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    return group(std::vector<Primitive> { s1, plane });
+    std::vector<Primitive> root_elts{ plane, s1 };
+    return group(root_elts);
 }
 
 std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_sources(double t)
@@ -357,7 +358,7 @@ int main()
 
         if (N_THREADS > 1)
         {
-            std::atomic<unsigned> j = 0;
+            std::atomic<unsigned> j(0);
             std::vector<std::thread> threads;
 
             for (int k = 0; k != N_THREADS; ++k)

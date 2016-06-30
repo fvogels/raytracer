@@ -32,7 +32,7 @@ double math::Vector3D::norm_sqr() const noexcept
 
 double math::Vector3D::norm() const noexcept
 {
-    return std::sqrt(norm_sqr());
+    return sqrt(norm_sqr());
 }
 
 void math::Vector3D::normalize() noexcept

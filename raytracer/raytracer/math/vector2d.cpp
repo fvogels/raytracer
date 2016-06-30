@@ -22,7 +22,7 @@ double math::Vector2D::norm_sqr() const noexcept
 
 double math::Vector2D::norm() const noexcept
 {
-    return std::sqrt(norm_sqr());
+    return sqrt(norm_sqr());
 }
 
 void math::Vector2D::normalize() noexcept

@@ -7,8 +7,8 @@ Function<bool, const Point2D&> math::functions::checkered()
 {
     std::function<bool(const Point2D&)> function = [](const Point2D& p)
     {
-        double x = p.x - std::floor(p.x);
-        double y = p.y - std::floor(p.y);
+        double x = p.x - floor(p.x);
+        double y = p.y - floor(p.y);
 
         return (x < 0.5) != (y < 0.5);
     };
@@ -22,7 +22,7 @@ Function<bool, const Point2D&> math::functions::horizontal_lines(double thicknes
     {
         auto y = p.y;
 
-        return std::abs(y - std::round(y)) < thickness / 2;
+        return fabs(y - round(y)) < thickness / 2;
     };
 
     return from_lambda<bool, const Point2D&>(function);
@@ -34,7 +34,7 @@ Function<bool, const Point2D&> math::functions::vertical_lines(double thickness)
     {
         auto x = p.x;
 
-        return std::abs(x - std::round(x)) < thickness / 2;
+        return fabs(x - round(x)) < thickness / 2;
     };
 
     return from_lambda<bool, const Point2D&>(function);
@@ -47,7 +47,7 @@ Function<bool, const Point2D&> math::functions::grid(double thickness)
         auto x = p.x;
         auto y = p.y;
 
-        return std::abs(x - std::round(x)) < thickness / 2 || std::abs(y - std::round(y)) < thickness / 2;
+        return fabs(x - round(x)) < thickness / 2 || fabs(y - round(y)) < thickness / 2;
     };
 
     return from_lambda<bool, const Point2D&>(function);

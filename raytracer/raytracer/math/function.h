@@ -78,7 +78,7 @@ namespace math
     template<typename R2, typename R1, typename... Ts>
     Function<R2, Ts...> compose(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
     {
-        return Function<T2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
+        return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
     }
 
     template<typename R2, typename R1, typename... Ts>

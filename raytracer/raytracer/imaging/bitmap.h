@@ -1,6 +1,6 @@
 #pragma once
 
-#include "color.h"
+#include "imaging/color.h"
 #include "util/position.h"
 #include <memory>
 #include <string>
