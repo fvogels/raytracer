@@ -78,7 +78,8 @@ raytracer::primitives::Primitive create_root(double t)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(create_phong_material(colors::blue() * 0.5, colors::white() * 0.5, 10), sphere());
+    auto s = rotate_around_x(90_degrees, cylinder());
+    auto s1 = decorate(create_phong_material(colors::blue() * 0.5, colors::white() * 0.5, 10), s);
     auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
     std::vector<Primitive> root_elts{ plane, s1 };

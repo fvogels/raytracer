@@ -7,6 +7,7 @@
 #include "primitives/intersection.h"
 #include "primitives/transformer.h"
 #include "primitives/decorator.h"
+#include "primitives/cropper.h"
 #include "math/transformation.h"
 
 using namespace raytracer;

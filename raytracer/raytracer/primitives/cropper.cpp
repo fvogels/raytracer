@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 
 
 raytracer::primitives::_private_::Cropper::Cropper(Primitive cropped, const math::Function<bool, const math::Point3D&> predicate)
@@ -38,4 +39,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cropper::hit
     });
 
     return hits;
+}
+
+Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool, const math::Point3D&> predicate)
+{
+    return Primitive(std::make_shared<_private_::Cropper>(cropped, predicate));
 }

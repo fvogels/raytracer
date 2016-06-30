@@ -23,5 +23,7 @@ namespace raytracer
                 math::Function<bool, const math::Point3D&> m_predicate;
             };
         }
+
+        Primitive crop(Primitive, math::Function<bool, const math::Point3D&>);
     }
 }
