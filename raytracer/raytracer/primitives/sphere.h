@@ -2,6 +2,7 @@
 
 #include "primitives/primitive.h"
 
+
 namespace raytracer
 {
     namespace primitives
