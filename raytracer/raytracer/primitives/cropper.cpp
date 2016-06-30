@@ -20,9 +20,12 @@ bool raytracer::primitives::_private_::Cropper::find_hit(const math::Ray& ray, H
 
     for (auto h : hs)
     {
+        assert(h);
+
         if (h->t > 0)
         {
             *hit = *h;
+
             return true;
         }
     }
@@ -34,10 +37,12 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cropper::hit
 {
     auto hits = m_cropped->hits(ray);
 
-    std::remove_if(hits.begin(), hits.end(), [this](std::shared_ptr<Hit> hit)
+    auto new_end = std::remove_if(hits.begin(), hits.end(), [this](std::shared_ptr<Hit> hit)
     {
         return !this->m_predicate(hit->position);
     });
+
+    hits.erase(new_end, hits.end());
 
     return hits;
 }
@@ -45,6 +50,26 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cropper::hit
 Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool, const Point3D&> predicate)
 {
     return Primitive(std::make_shared<_private_::Cropper>(cropped, predicate));
+}
+
+Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<double>& x_interval)
+{
+    std::function<bool(const Point3D&)> predicate = [x_interval](const Point3D& p)
+    {
+        return x_interval.contains(p.x);
+    };
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
+}
+
+Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<double>& y_interval)
+{
+    std::function<bool(const Point3D&)> predicate = [y_interval](const Point3D& p)
+    {
+        return y_interval.contains(p.y);
+    };
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
 }
 
 Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<double>& z_interval)

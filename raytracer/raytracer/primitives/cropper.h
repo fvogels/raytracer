@@ -26,6 +26,8 @@ namespace raytracer
         }
 
         Primitive crop(Primitive, math::Function<bool, const math::Point3D&>);
+        Primitive crop_along_x(Primitive, const math::Interval<double>&);
+        Primitive crop_along_y(Primitive, const math::Interval<double>&);
         Primitive crop_along_z(Primitive, const math::Interval<double>&);
     }
 }
