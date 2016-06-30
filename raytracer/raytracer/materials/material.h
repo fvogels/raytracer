@@ -13,6 +13,7 @@ namespace raytracer
     struct MaterialProperties
     {
         BRDF brdf;
+        bool reflective;
     };
 
     class MaterialImplementation
