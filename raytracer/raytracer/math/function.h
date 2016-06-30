@@ -110,4 +110,16 @@ namespace math
     {
         return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) / g(ts...);});
     }
+
+    template<typename R, typename... Ts>
+    Function<R, Ts...> operator &&(const Function<R, Ts...>& f, const Function<R, Ts...>& g)
+    {
+        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) && g(ts...);});
+    }
+
+    template<typename R, typename... Ts>
+    Function<R, Ts...> operator ||(const Function<R, Ts...>& f, const Function<R, Ts...>& g)
+    {
+        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) || g(ts...);});
+    }
 }
