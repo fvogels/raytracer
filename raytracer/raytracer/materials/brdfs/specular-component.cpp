@@ -29,7 +29,7 @@ color raytracer::brdfs::_private_::SpecularComponent::evaluate(
     
     if (cos_between_reflected_and_outgoing > 0)
     {
-        return m_color * std::pow(cos_between_reflected_and_outgoing, m_exponent);
+        return incoming_color * m_color * std::pow(cos_between_reflected_and_outgoing, m_exponent);
     }
     else
     {
