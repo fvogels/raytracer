@@ -45,6 +45,11 @@ namespace math
             return m_body->evaluate(ts...);
         }
 
+        operator bool() const
+        {
+            return m_body != nullptr;
+        }
+
         typedef R result;
         typedef std::tuple<Ts...> parameters;
 
