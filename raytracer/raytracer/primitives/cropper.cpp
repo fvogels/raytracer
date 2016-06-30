@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <algorithm>
 
+using namespace math;
 using namespace raytracer;
 using namespace raytracer::primitives;
 
@@ -41,7 +42,17 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cropper::hit
     return hits;
 }
 
-Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool, const math::Point3D&> predicate)
+Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool, const Point3D&> predicate)
 {
     return Primitive(std::make_shared<_private_::Cropper>(cropped, predicate));
+}
+
+Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<double>& z_interval)
+{
+    std::function<bool(const Point3D&)> predicate = [z_interval](const Point3D& p)
+    {
+        return z_interval.contains(p.z);
+    };
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
 }

@@ -2,6 +2,7 @@
 
 #include "primitives/primitive.h"
 #include "math/function.h"
+#include "math/interval.h"
 
 
 namespace raytracer
@@ -25,5 +26,6 @@ namespace raytracer
         }
 
         Primitive crop(Primitive, math::Function<bool, const math::Point3D&>);
+        Primitive crop_along_z(Primitive, const math::Interval<double>&);
     }
 }
