@@ -84,10 +84,12 @@ raytracer::primitives::Primitive create_root(double t)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder());
+    auto s1 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_x());
+    auto s2 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_y());
+    auto s3 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_z());
     auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    std::vector<Primitive> root_elts{ plane, s1 };
+    std::vector<Primitive> root_elts{ plane, s1, s2, s3 };
     return group(root_elts);
 }
 
@@ -97,7 +99,7 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     std::vector<std::shared_ptr<LightSource>> light_sources;
 
-    light_sources.push_back(omnidirectional(Point3D(5 * t, 5, 5), colors::white()));
+    light_sources.push_back(omnidirectional(Point3D(5, 5, 5), colors::white()));
     // scene.light_sources.push_back(conical(Point3D(5 * t, 5, 5), Vector3D(0,-1,0), 60_degrees, colors::white()));
 
     return light_sources;

@@ -8,7 +8,21 @@ namespace raytracer
     {
         namespace _private_
         {
-            class Cylinder : public PrimitiveImplementation
+            class CylinderX : public PrimitiveImplementation
+            {
+            public:
+                bool find_hit(const math::Ray&, Hit*) const override;
+                std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
+            };
+
+            class CylinderY : public PrimitiveImplementation
+            {
+            public:
+                bool find_hit(const math::Ray&, Hit*) const override;
+                std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
+            };
+
+            class CylinderZ : public PrimitiveImplementation
             {
             public:
                 bool find_hit(const math::Ray&, Hit*) const override;
@@ -16,6 +30,8 @@ namespace raytracer
             };
         }
 
-        Primitive cylinder();
+        Primitive cylinder_along_x();
+        Primitive cylinder_along_y();
+        Primitive cylinder_along_z();
     }
 }
