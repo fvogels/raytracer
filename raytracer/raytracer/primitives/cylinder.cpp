@@ -33,7 +33,7 @@ namespace
     }
 }
 
-bool raytracer::primitives::Cylinder::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::Cylinder::find_hit(const Ray& ray, Hit* hit) const
 {
     assert(hit != nullptr);
 
@@ -100,7 +100,7 @@ bool raytracer::primitives::Cylinder::find_hit(const Ray& ray, Hit* hit) const
     }
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Cylinder::hits(const math::Ray& ray) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cylinder::hits(const math::Ray& ray) const
 {
     Point2D O(ray.origin.x, ray.origin.y);
     Vector2D D(ray.direction.x, ray.direction.y);
@@ -146,4 +146,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Cylinder::hits(const ma
     {
         return std::vector<std::shared_ptr<Hit>>();
     }
+}
+
+Primitive raytracer::primitives::cylinder()
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::Cylinder>());
 }

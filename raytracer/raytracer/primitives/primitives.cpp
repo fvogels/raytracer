@@ -33,11 +33,6 @@ Primitive raytracer::primitives::sphere()
     return Primitive(std::make_shared<raytracer::primitives::Sphere>());
 }
 
-Primitive raytracer::primitives::cylinder()
-{
-    return Primitive(std::make_shared<raytracer::primitives::Cylinder>());
-}
-
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
 {
     return Primitive(std::make_shared<Transformer>(transformation, transformee));

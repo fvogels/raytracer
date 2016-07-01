@@ -20,7 +20,6 @@ namespace raytracer
         Primitive xz_plane();
         Primitive yz_plane();
         Primitive sphere();
-        Primitive cylinder();
 
         Primitive transform(const math::Transformation&, Primitive);
         Primitive translate(const math::Vector3D&, Primitive);
