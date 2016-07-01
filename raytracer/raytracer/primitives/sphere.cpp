@@ -34,7 +34,7 @@ namespace
     }
 }
 
-bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::Sphere::find_hit(const Ray& ray, Hit* hit) const
 {
     assert(hit != nullptr);
 
@@ -90,7 +90,7 @@ bool raytracer::primitives::Sphere::find_hit(const Ray& ray, Hit* hit) const
     }
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray& ray) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Sphere::hits(const Ray& ray) const
 {
     double a = ray.direction.dot(ray.direction);
     double b = 2 * ray.direction.dot(ray.origin - Point3D());
@@ -126,4 +126,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Sphere::hits(const Ray&
     {
         return std::vector<std::shared_ptr<Hit>>();
     }
+}
+
+Primitive raytracer::primitives::sphere()
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::Sphere>());
 }

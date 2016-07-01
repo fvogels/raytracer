@@ -8,6 +8,9 @@
 #include "primitives/cropper.h"
 #include "primitives/disk.h"
 #include "primitives/union.h"
+#include "primitives/decorator.h"
+#include "primitives/cylinder.h"
+#include "primitives/sphere.h"
 #include <memory>
 #include <vector>
 
@@ -19,7 +22,6 @@ namespace raytracer
         Primitive xy_plane();
         Primitive xz_plane();
         Primitive yz_plane();
-        Primitive sphere();
 
         Primitive transform(const math::Transformation&, Primitive);
         Primitive translate(const math::Vector3D&, Primitive);
@@ -27,8 +29,6 @@ namespace raytracer
         Primitive rotate_around_x(math::Angle, Primitive);
         Primitive rotate_around_y(math::Angle, Primitive);
         Primitive rotate_around_z(math::Angle, Primitive);
-
-        Primitive decorate(Material material, Primitive child);
         
         Primitive intersection(Primitive, Primitive);
     }

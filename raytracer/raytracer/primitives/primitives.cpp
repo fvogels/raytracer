@@ -28,11 +28,6 @@ Primitive raytracer::primitives::yz_plane()
     return Primitive(std::make_shared<raytracer::primitives::PlaneYZ>());
 }
 
-Primitive raytracer::primitives::sphere()
-{
-    return Primitive(std::make_shared<raytracer::primitives::Sphere>());
-}
-
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
 {
     return Primitive(std::make_shared<Transformer>(transformation, transformee));
@@ -61,11 +56,6 @@ Primitive raytracer::primitives::rotate_around_y(math::Angle angle, Primitive tr
 Primitive raytracer::primitives::rotate_around_z(math::Angle angle, Primitive transformee)
 {
     return transform(math::rotate_z(angle), transformee);
-}
-
-Primitive raytracer::primitives::decorate(Material material, Primitive child)
-{
-    return Primitive(std::make_shared<raytracer::primitives::Decorator>(material, child));
 }
 
 Primitive raytracer::primitives::intersection(Primitive first, Primitive second)

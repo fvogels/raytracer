@@ -2,17 +2,18 @@
 #include <assert.h>
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 using namespace math;
 
 
-raytracer::primitives::Decorator::Decorator(Material material, Primitive child)
+raytracer::primitives::_private_::Decorator::Decorator(Material material, Primitive child)
     : material(material), child(child)
 {
     assert(material);
     assert(child);
 }
 
-bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::Decorator::find_hit(const Ray& ray, Hit* hit) const
 {
     Material old_material = hit->material;
     hit->material = Material();
@@ -36,7 +37,7 @@ bool raytracer::primitives::Decorator::find_hit(const Ray& ray, Hit* hit) const
     return result;
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Decorator::hits(const math::Ray& ray) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Decorator::hits(const math::Ray& ray) const
 {
     auto hits = this->child->hits(ray);
 
@@ -49,4 +50,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Decorator::hits(const m
     }
 
     return hits;
+}
+
+Primitive raytracer::primitives::decorate(Material material, Primitive child)
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::Decorator>(material, child));
 }
