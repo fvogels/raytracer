@@ -1,5 +1,8 @@
 #pragma once
 
+#include <limits>
+
+
 namespace math
 {
     template<typename T>
@@ -11,6 +14,11 @@ namespace math
             : lower(lower), upper(upper) { }
 
         Interval(const Interval&) = default;
+
+        static Interval empty()
+        {
+            return Interval(std::numeric_limits<T>::infinity(), -std::numeric_limits<T>::infinity());
+        }
 
         T size() const
         {
