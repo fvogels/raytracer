@@ -73,11 +73,6 @@ Primitive raytracer::primitives::decorate(Material material, Primitive child)
     return Primitive(std::make_shared<raytracer::primitives::Decorator>(material, child));
 }
 
-Primitive raytracer::primitives::group(std::vector<Primitive>& children)
-{
-    return Primitive(std::make_shared<raytracer::primitives::Union>(children));
-}
-
 Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
 {
     return Primitive(std::make_shared<raytracer::primitives::Intersection>(first, second));

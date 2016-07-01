@@ -6,13 +6,13 @@ using namespace raytracer::primitives;
 using namespace math;
 
 
-raytracer::primitives::Union::Union(std::vector<Primitive>& children)
+raytracer::primitives::_private_::Union::Union(std::vector<Primitive>& children)
     : children(children)
 {
     // NOP
 }
 
-bool raytracer::primitives::Union::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::Union::find_hit(const Ray& ray, Hit* hit) const
 {
     bool found_hit = false;
 
@@ -24,7 +24,7 @@ bool raytracer::primitives::Union::find_hit(const Ray& ray, Hit* hit) const
     return found_hit;
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Union::hits(const math::Ray& ray) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Union::hits(const math::Ray& ray) const
 {
     std::vector<std::shared_ptr<Hit>> hits;
 
@@ -42,4 +42,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::Union::hits(const math:
     });
 
     return hits;
+}
+
+Primitive raytracer::primitives::group(std::vector<Primitive>& children)
+{
+    return Primitive(std::make_shared<_private_::Union>(children));
 }

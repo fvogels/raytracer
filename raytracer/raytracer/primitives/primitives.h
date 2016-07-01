@@ -7,6 +7,7 @@
 #include "math/point3d.h"
 #include "primitives/cropper.h"
 #include "primitives/disk.h"
+#include "primitives/union.h"
 #include <memory>
 #include <vector>
 
@@ -29,7 +30,7 @@ namespace raytracer
         Primitive rotate_around_z(math::Angle, Primitive);
 
         Primitive decorate(Material material, Primitive child);
-        Primitive group(std::vector<Primitive>&);
+        
         Primitive intersection(Primitive, Primitive);
     }
 }
