@@ -52,6 +52,11 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Decorator::h
     return hits;
 }
 
+math::Box raytracer::primitives::_private_::Decorator::bounding_box() const
+{
+    return child->bounding_box();
+}
+
 Primitive raytracer::primitives::decorate(Material material, Primitive child)
 {
     return Primitive(std::make_shared<raytracer::primitives::_private_::Decorator>(material, child));
