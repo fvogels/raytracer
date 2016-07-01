@@ -12,6 +12,7 @@ namespace math
         Box(const Interval<double>&, const Interval<double>&, const Interval<double>&);
 
         bool hits(const math::Ray&) const;
+        Box merge(const Box&) const;
 
         static Box empty();
 
