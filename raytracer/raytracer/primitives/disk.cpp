@@ -53,6 +53,11 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Disk::hits(c
     }
 }
 
+math::Box raytracer::primitives::_private_::Disk::bounding_box() const
+{
+    return Box(Interval<double>(-1, 1), Interval<double>(-0.01, 0.01), Interval<double>(-1, 1));
+}
+
 Primitive raytracer::primitives::disk()
 {
     return Primitive(std::make_shared<_private_::Disk>());
