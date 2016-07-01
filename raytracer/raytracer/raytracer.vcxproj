@@ -294,6 +294,7 @@
     <ClCompile Include="tests\combined-reader-tests.cpp" />
     <ClCompile Include="tests\fisheye-tests.cpp" />
     <ClCompile Include="tests\interpreter-tests.cpp" />
+    <ClCompile Include="tests\intersection-tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\parser-tests.cpp" />

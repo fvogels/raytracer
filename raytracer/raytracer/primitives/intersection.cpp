@@ -59,9 +59,52 @@ bool raytracer::primitives::_private_::Intersection::find_hit(const Ray& ray, Hi
     return false;
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Intersection::hits(const math::Ray&) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Intersection::hits(const math::Ray& ray) const
 {
-    abort();
+    std::vector<std::shared_ptr<Hit>> result;
+
+    auto first_hits = m_first->hits(ray);
+    auto second_hits = m_second->hits(ray);
+
+    auto i1 = first_hits.begin();
+    auto i2 = second_hits.begin();
+
+    bool inside_first = false;
+    bool inside_second = false;
+    bool inside = false;
+
+    while (i1 != first_hits.end() && i2 != second_hits.end())
+    {
+        std::shared_ptr<Hit> current_hit;
+
+        double t1 = (*i1)->t;
+        double t2 = (*i2)->t;
+
+        if (t1 < t2)
+        {
+            inside_first = !inside_first;
+            current_hit = *i1;
+
+            ++i1;
+        }
+        else
+        {
+            inside_second = !inside_second;
+            current_hit = *i2;
+
+            ++i2;
+        }
+
+        bool new_inside = inside_first && inside_second;
+
+        if (inside != new_inside)
+        {
+            result.push_back(current_hit);
+            inside = new_inside;
+        }
+    }
+
+    return result;
 }
 
 Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
