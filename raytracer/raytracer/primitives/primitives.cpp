@@ -13,20 +13,6 @@
 using namespace raytracer;
 using namespace raytracer::primitives;
 
-Primitive raytracer::primitives::xy_plane()
-{
-    return Primitive(std::make_shared<raytracer::primitives::PlaneXY>());
-}
-
-Primitive raytracer::primitives::xz_plane()
-{
-    return Primitive(std::make_shared<raytracer::primitives::PlaneXZ>());
-}
-
-Primitive raytracer::primitives::yz_plane()
-{
-    return Primitive(std::make_shared<raytracer::primitives::PlaneYZ>());
-}
 
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
 {

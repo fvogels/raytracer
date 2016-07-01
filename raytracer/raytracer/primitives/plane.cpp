@@ -1,10 +1,11 @@
 #include "primitives/plane.h"
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 using namespace math;
 
 
-bool raytracer::primitives::PlaneXY::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::PlaneXY::find_hit(const Ray& ray, Hit* hit) const
 {
     assert(hit != nullptr);
 
@@ -37,7 +38,7 @@ bool raytracer::primitives::PlaneXY::find_hit(const Ray& ray, Hit* hit) const
     }
 }
 
-bool raytracer::primitives::PlaneXZ::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::PlaneXZ::find_hit(const Ray& ray, Hit* hit) const
 {
     assert(hit != nullptr);
 
@@ -70,7 +71,7 @@ bool raytracer::primitives::PlaneXZ::find_hit(const Ray& ray, Hit* hit) const
     }
 }
 
-bool raytracer::primitives::PlaneYZ::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::PlaneYZ::find_hit(const Ray& ray, Hit* hit) const
 {
     assert(hit != nullptr);
 
@@ -103,7 +104,7 @@ bool raytracer::primitives::PlaneYZ::find_hit(const Ray& ray, Hit* hit) const
     }
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::CoordinatePlane::hits(const math::Ray& ray) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CoordinatePlane::hits(const math::Ray& ray) const
 {
     auto hit = std::make_shared<Hit>();
 
@@ -115,4 +116,19 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::CoordinatePlane::hits(c
     {
         return std::vector<std::shared_ptr<Hit>>();
     }
+}
+
+Primitive raytracer::primitives::xy_plane()
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::PlaneXY>());
+}
+
+Primitive raytracer::primitives::xz_plane()
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::PlaneXZ>());
+}
+
+Primitive raytracer::primitives::yz_plane()
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::PlaneYZ>());
 }

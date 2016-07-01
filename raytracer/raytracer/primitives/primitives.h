@@ -12,6 +12,7 @@
 #include "primitives/cylinder.h"
 #include "primitives/sphere.h"
 #include "primitives/intersection.h"
+#include "primitives/plane.h"
 #include <memory>
 #include <vector>
 
@@ -20,10 +21,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive xy_plane();
-        Primitive xz_plane();
-        Primitive yz_plane();
-
         Primitive transform(const math::Transformation&, Primitive);
         Primitive translate(const math::Vector3D&, Primitive);
         Primitive scale(double, double, double, Primitive);
