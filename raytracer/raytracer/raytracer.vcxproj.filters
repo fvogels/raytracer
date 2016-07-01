@@ -249,6 +249,9 @@
     <ClCompile Include="tests\intersection-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\quadratic_equation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -543,6 +546,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\quadratic_equation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
