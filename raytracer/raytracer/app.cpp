@@ -84,7 +84,7 @@ raytracer::primitives::Primitive create_root(double t)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), rotate_around_z(360_degrees * t, disk()));
+    auto s1 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder());
     auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
     std::vector<Primitive> root_elts{ plane, s1 };
@@ -135,7 +135,7 @@ int main()
 
         Bitmap bitmap(500, 500);
 
-        camera = raytracer::cameras::perspective(Point3D(5, 5, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        camera = raytracer::cameras::perspective(Point3D(5*t, 5, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 

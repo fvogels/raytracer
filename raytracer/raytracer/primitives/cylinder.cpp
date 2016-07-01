@@ -2,6 +2,7 @@
 #include "primitives/cylinder.h"
 #include "materials/material.h"
 #include "util/misc.h"
+#include "math/quadratic_equation.h"
 #include <assert.h>
 #include <math.h>
 
@@ -12,10 +13,10 @@ using namespace math;
 
 namespace
 {
-    Point2D compute_uv_from_xyz(const Point3D& p)
+    Point2D compute_uv_from_xyz(const Point2D& p, double height)
     {
         double u = 0.5 + atan2(p.y, p.x) / (2 * M_PI);
-        double v = p.z;
+        double v = height;
 
         assert(0 <= u);
         assert(u <= 1);
@@ -25,11 +26,47 @@ namespace
 
     void initialize_hit(Hit* hit, const Ray& ray, double t)
     {
+        assert(hit);
+
+        Point3D position = ray.at(t);
+        Point2D position_on_circle(position.x, position.y);
+        double height = position.x;
+
         hit->t = t;
-        hit->position = ray.at(hit->t);
-        hit->local_position.xyz = hit->position;
-        hit->local_position.uv = compute_uv_from_xyz(hit->position);
-        hit->normal = Vector3D(hit->position.x, hit->position.y, 0);
+        hit->position = position;
+        hit->local_position.xyz = position;
+        hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
+        hit->normal = Vector3D(position_on_circle.x, position_on_circle.y, 0);
+
+        assert(hit->normal.is_unit());
+    }
+
+    bool find_intersections(const Point2D& O, const Vector2D& D, double* t1, double* t2)
+    {
+        if ((O - Point2D()).norm_sqr() > 1)
+        {
+            double a = D.dot(D);
+            double b = 2 * D.dot(O - Point2D());
+            double c = (O - Point2D()).norm_sqr() - 1;
+
+            QuadraticEquation eq(a, b, c);
+
+            if (eq.has_solutions())
+            {
+                *t1 = eq.x1();
+                *t2 = eq.x2();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 
@@ -40,54 +77,21 @@ bool raytracer::primitives::_private_::Cylinder::find_hit(const Ray& ray, Hit* h
     Point2D O(ray.origin.x, ray.origin.y);
     Vector2D D(ray.direction.x, ray.direction.y);
 
-    if ((O - Point2D()).norm_sqr() > 1)
+    double t1, t2;
+    if (find_intersections(O, D, &t1, &t2))
     {
-        double a = D.dot(D);
-        double b = 2 * D.dot(O - Point2D());
-        double c = (O - Point2D()).norm_sqr() - 1;
-        double d = b * b - 4 * a * c;
-
-        if (d >= 0)
+        double t;
+        if (!smallest_greater_than_zero(t1, t2, &t))
         {
-            double sqrt_d = sqrt(d);
+            // Both hits are behind the eye
+            return false;
+        }
 
-            // Compute both t's at which ray intersects cylinder
-            double t1 = (-b - sqrt_d) / (2 * a);
-            double t2 = (-b + sqrt_d) / (2 * a);
+        if (t < hit->t)
+        {
+            initialize_hit(hit, ray, t);
 
-            // Find smallest t > 0
-            double t;
-
-            if (t1 > t2)
-            {
-                swap(t1, t2);
-            }
-
-            if (t1 > 0)
-            {
-                t = t1;
-            }
-            else if (t2 > 0)
-            {
-                t = t2;
-            }
-            else
-            {
-                // Both hits are behind the eye
-                return false;
-            }
-
-            // Check if there's no better preexisting hit
-            if (t < hit->t)
-            {
-                initialize_hit(hit, ray, t);
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
         else
         {
@@ -105,42 +109,23 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cylinder::hi
     Point2D O(ray.origin.x, ray.origin.y);
     Vector2D D(ray.direction.x, ray.direction.y);
 
-    if ((O - Point2D()).norm_sqr() > 1)
+    double t1, t2;
+    if (find_intersections(O, D, &t1, &t2))
     {
-        double a = D.dot(D);
-        double b = 2 * D.dot(O - Point2D());
-        double c = (O - Point2D()).norm_sqr() - 1;
-        double d = b * b - 4 * a * c;
+        sort(t1, t2);
 
-        if (d >= 0)
-        {
-            double sqrt_d = sqrt(d);
+        auto hits = std::vector<std::shared_ptr<Hit>>();
 
-            double t1 = (-b - sqrt_d) / (2 * a);
-            double t2 = (-b + sqrt_d) / (2 * a);
+        auto hit1 = std::make_shared<Hit>();
+        auto hit2 = std::make_shared<Hit>();
 
-            if (t1 > t2)
-            {
-                swap(t1, t2);
-            }
+        initialize_hit(hit1.get(), ray, t1);
+        initialize_hit(hit2.get(), ray, t2);
 
-            auto hits = std::vector<std::shared_ptr<Hit>>();
+        hits.push_back(hit1);
+        hits.push_back(hit2);
 
-            auto hit1 = std::make_shared<Hit>();
-            auto hit2 = std::make_shared<Hit>();
-
-            initialize_hit(hit1.get(), ray, t1);
-            initialize_hit(hit2.get(), ray, t2);
-
-            hits.push_back(hit1);
-            hits.push_back(hit2);
-
-            return hits;
-        }
-        else
-        {
-            return std::vector<std::shared_ptr<Hit>>();
-        }
+        return hits;
     }
     else
     {

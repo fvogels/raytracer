@@ -292,6 +292,7 @@
     <ClCompile Include="scripting\objects\symbol.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\combined-reader-tests.cpp" />
+    <ClCompile Include="tests\cylinder-tests.cpp" />
     <ClCompile Include="tests\fisheye-tests.cpp" />
     <ClCompile Include="tests\interpreter-tests.cpp" />
     <ClCompile Include="tests\intersection-tests.cpp" />
