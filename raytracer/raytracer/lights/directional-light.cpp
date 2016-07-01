@@ -14,7 +14,7 @@ raytracer::lights::_private_::DirectionalLight::DirectionalLight(const math::Vec
 
 std::vector<LightRay> raytracer::lights::_private_::DirectionalLight::lightrays_to(const math::Point3D& p) const
 {
-    Ray ray(p, m_direction);
+    Ray ray(p - m_direction * 1000, m_direction * 1000);
     LightRay light_ray(ray, m_color);
 
     return std::vector<LightRay> { light_ray };

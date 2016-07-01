@@ -89,7 +89,7 @@ raytracer::primitives::Primitive create_root(double t)
     auto s3 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_z());
     auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    std::vector<Primitive> root_elts{ plane, s1, s2, s3 };
+    std::vector<Primitive> root_elts{ plane, s2 };
     return group(root_elts);
 }
 
@@ -99,8 +99,9 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     std::vector<std::shared_ptr<LightSource>> light_sources;
 
-    light_sources.push_back(omnidirectional(Point3D(5, 5, 5), colors::white()));
+    // light_sources.push_back(omnidirectional(Point3D(15, 15, 15), colors::white()));
     // scene.light_sources.push_back(conical(Point3D(5 * t, 5, 5), Vector3D(0,-1,0), 60_degrees, colors::white()));
+    light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
 
     return light_sources;
 }
@@ -137,7 +138,7 @@ int main()
 
         Bitmap bitmap(500, 500);
 
-        camera = raytracer::cameras::perspective(Point3D(5*t, 5, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        camera = raytracer::cameras::perspective(Point3D(10 * cos(360_degrees * t), 10, 10 * sin(360_degrees * t)), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
