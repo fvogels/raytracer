@@ -1,5 +1,6 @@
 #include "math/box.h"
 #include "math/ray.h"
+#include <limits>
 
 using namespace math;
 
@@ -64,4 +65,11 @@ bool math::Box::hits_yz_face(const Ray& ray, double x) const
 
         return m_y_interval.contains(p.y) && m_z_interval.contains(p.z);
     }
+}
+
+Box math::Box::empty()
+{
+    Interval<double> interval = Interval<double>::empty();
+
+    return Box(interval, interval, interval);
 }

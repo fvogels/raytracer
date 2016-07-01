@@ -12,6 +12,8 @@ namespace math
 
         bool hits(const Ray&) const;
 
+        static Box empty();
+
     private:
         bool math::Box::hits_xy_face(const Ray&, double) const;
         bool math::Box::hits_xz_face(const Ray&, double) const;
