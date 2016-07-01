@@ -18,7 +18,7 @@ void sort(T& x, T& y)
 }
 
 template<typename T>
-bool smallest_greater_than_zero(T* result, T x, T y)
+bool smallest_greater_than_zero(T x, T y, T* result)
 {
     sort(x, y);
 
