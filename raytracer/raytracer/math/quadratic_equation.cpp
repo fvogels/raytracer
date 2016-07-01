@@ -9,35 +9,34 @@ math::QuadraticEquation::QuadraticEquation(double a, double b, double c)
 
     if (discriminant < 0)
     {
-        m_has_solution = false;
+        m_has_solutions = false;
     }
     else
     {
-        m_has_solution = true;
+        m_has_solutions = true;
 
         double sqrt_d = sqrt(discriminant);
 
-        x1 = (-b - sqrt_d) / (2 * a);
-        x2 = (-b + sqrt_d) / (2 * a);
+        m_x1 = (-b - sqrt_d) / (2 * a);
+        m_x2 = (-b + sqrt_d) / (2 * a);
     }
 }
 
-bool math::QuadraticEquation::has_solution() const
+bool math::QuadraticEquation::has_solutions() const
 {
-    return m_has_solution;
+    return m_has_solutions;
 }
 
 double math::QuadraticEquation::x1() const
 {
-    assert(has_solution());
+    assert(has_solutions());
 
     return m_x1;
 }
 
 double math::QuadraticEquation::x2() const
 {
-    assert(has_solution());
+    assert(has_solutions());
 
     return m_x2;
-
 }
