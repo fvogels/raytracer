@@ -10,3 +10,4 @@
 #include "primitives/intersection.h"
 #include "primitives/plane.h"
 #include "primitives/transformer.h"
+#include "primitives/triangle.h"

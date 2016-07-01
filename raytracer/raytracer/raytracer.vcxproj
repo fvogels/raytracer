@@ -267,6 +267,7 @@
     <ClCompile Include="primitives\sphere.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="primitives\transformer.cpp" />
+    <ClCompile Include="primitives\triangle.cpp" />
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
     <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp" />
@@ -305,6 +306,7 @@
     <ClCompile Include="tests\stream-line-reader-tests.cpp" />
     <ClCompile Include="tests\string-reader-tests.cpp" />
     <ClCompile Include="tests\tokenizer-tests.cpp" />
+    <ClCompile Include="tests\triangle-tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -368,6 +370,7 @@
     <ClInclude Include="primitives\primitive.h" />
     <ClInclude Include="primitives\sphere.h" />
     <ClInclude Include="primitives\transformer.h" />
+    <ClInclude Include="primitives\triangle.h" />
     <ClInclude Include="primitives\union.h" />
     <ClInclude Include="raytracing\fast-ray-tracer.h" />
     <ClInclude Include="raytracing\monte-carlo-ray-tracer.h" />

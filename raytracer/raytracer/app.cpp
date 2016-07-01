@@ -84,12 +84,10 @@ raytracer::primitives::Primitive create_root(double t)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
-    auto s1 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_x());
-    auto s2 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_y());
-    auto s3 = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), cylinder_along_z());
+    auto s = decorate(create_phong_material(colors::white() * 0.5, colors::white() * 0.5, 10), rotate_around_y(360_degrees * t, triangle(Point3D(0, 0, 0), Point3D(5, 0, 0), Point3D(0, 5, 0))));
     auto plane = decorate(create_lambert_material(colors::red() * 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    std::vector<Primitive> root_elts{ plane, s2 };
+    std::vector<Primitive> root_elts{ s };
     return group(root_elts);
 }
 
@@ -99,9 +97,9 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     std::vector<std::shared_ptr<LightSource>> light_sources;
 
-    // light_sources.push_back(omnidirectional(Point3D(15, 15, 15), colors::white()));
+    light_sources.push_back(omnidirectional(Point3D(0, 0, 15), colors::white()));
     // scene.light_sources.push_back(conical(Point3D(5 * t, 5, 5), Vector3D(0,-1,0), 60_degrees, colors::white()));
-    light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
+    // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
 
     return light_sources;
 }
@@ -115,7 +113,6 @@ std::shared_ptr<Scene> create_scene(double t)
 
     return scene;
 }
-
 
 int main()
 {
@@ -138,7 +135,7 @@ int main()
 
         Bitmap bitmap(500, 500);
 
-        camera = raytracer::cameras::perspective(Point3D(10 * cos(360_degrees * t), 10, 10 * sin(360_degrees * t)), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        camera = raytracer::cameras::perspective(Point3D(0, 0, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
