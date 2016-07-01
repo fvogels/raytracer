@@ -293,6 +293,21 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderZ::h
     }
 }
 
+Box raytracer::primitives::_private_::CylinderX::bounding_box() const
+{
+    return Box(Interval<double>::infinite(), Interval<double>(-1, 1), Interval<double>(-1, 1));
+}
+
+Box raytracer::primitives::_private_::CylinderY::bounding_box() const
+{
+    return Box(Interval<double>(-1, 1), Interval<double>::infinite(), Interval<double>(-1, 1));
+}
+
+Box raytracer::primitives::_private_::CylinderZ::bounding_box() const
+{
+    return Box(Interval<double>(-1, 1), Interval<double>(-1, 1), Interval<double>::infinite());
+}
+
 Primitive raytracer::primitives::cylinder_along_x()
 {
     return Primitive(std::make_shared<raytracer::primitives::_private_::CylinderX>());
