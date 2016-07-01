@@ -57,8 +57,3 @@ Primitive raytracer::primitives::rotate_around_z(math::Angle angle, Primitive tr
 {
     return transform(math::rotate_z(angle), transformee);
 }
-
-Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
-{
-    return Primitive(std::make_shared<raytracer::primitives::Intersection>(first, second));
-}

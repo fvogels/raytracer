@@ -11,6 +11,7 @@
 #include "primitives/decorator.h"
 #include "primitives/cylinder.h"
 #include "primitives/sphere.h"
+#include "primitives/intersection.h"
 #include <memory>
 #include <vector>
 
@@ -29,7 +30,5 @@ namespace raytracer
         Primitive rotate_around_x(math::Angle, Primitive);
         Primitive rotate_around_y(math::Angle, Primitive);
         Primitive rotate_around_z(math::Angle, Primitive);
-        
-        Primitive intersection(Primitive, Primitive);
     }
 }

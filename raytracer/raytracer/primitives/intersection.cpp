@@ -1,17 +1,18 @@
 #include "primitives/intersection.h"
 
 using namespace raytracer;
+using namespace raytracer::primitives;
 using namespace math;
 
 
-raytracer::primitives::Intersection::Intersection(Primitive first, Primitive second)
+raytracer::primitives::_private_::Intersection::Intersection(Primitive first, Primitive second)
     : m_first(first), m_second(second)
 {
     assert(first);
     assert(second);
 }
 
-bool raytracer::primitives::Intersection::find_hit(const Ray& ray, Hit* hit) const
+bool raytracer::primitives::_private_::Intersection::find_hit(const Ray& ray, Hit* hit) const
 {
     auto first_hits = m_first->hits(ray);
     auto second_hits = m_second->hits(ray);
@@ -58,7 +59,12 @@ bool raytracer::primitives::Intersection::find_hit(const Ray& ray, Hit* hit) con
     return false;
 }
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::Intersection::hits(const math::Ray&) const
+std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Intersection::hits(const math::Ray&) const
 {
     abort();
+}
+
+Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
+{
+    return Primitive(std::make_shared<_private_::Intersection>(first, second));
 }
