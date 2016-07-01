@@ -18,6 +18,7 @@ namespace raytracer
 
                 bool find_hit(const math::Ray&, Hit*) const override;
                 std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
+                math::Box bounding_box() const override;
 
             private:
                 Primitive m_cropped;

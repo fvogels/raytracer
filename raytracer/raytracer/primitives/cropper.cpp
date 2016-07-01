@@ -47,6 +47,11 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cropper::hit
     return hits;
 }
 
+Box raytracer::primitives::_private_::Cropper::bounding_box() const
+{
+    return m_cropped->bounding_box();
+}
+
 Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool, const Point3D&> predicate)
 {
     return Primitive(std::make_shared<_private_::Cropper>(cropped, predicate));
