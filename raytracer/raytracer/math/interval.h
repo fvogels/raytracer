@@ -1,6 +1,7 @@
 #pragma once
 
 #include <limits>
+#include <algorithm>
 
 
 namespace math
@@ -38,6 +39,11 @@ namespace math
         T from_relative(double t) const
         {
             return t * size() + lower;
+        }
+
+        Interval merge(const Interval& other) const
+        {
+            return Interval(std::min(lower, other.lower), std::max(upper, other.upper));
         }
     };
 }
