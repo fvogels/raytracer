@@ -231,6 +231,7 @@
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="lights\conical-light.cpp" />
+    <ClCompile Include="lights\directional-light.cpp" />
     <ClCompile Include="lights\omnidirectional-point-light.cpp" />
     <ClCompile Include="lights\point-light.cpp" />
     <ClCompile Include="logging.cpp" />
@@ -319,6 +320,7 @@
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="lights\conical-light.h" />
+    <ClInclude Include="lights\directional-light.h" />
     <ClInclude Include="lights\light-source.h" />
     <ClInclude Include="lights\lights.h" />
     <ClInclude Include="lights\omnidirectional-point-light.h" />
