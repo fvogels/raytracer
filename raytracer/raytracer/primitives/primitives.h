@@ -6,6 +6,7 @@
 #include "math/vector3d.h"
 #include "math/point3d.h"
 #include "primitives/cropper.h"
+#include "primitives/disk.h"
 #include <memory>
 #include <vector>
 

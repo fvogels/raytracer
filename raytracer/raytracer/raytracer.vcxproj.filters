@@ -246,6 +246,9 @@
     <ClCompile Include="primitives\cropper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\disk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -534,6 +537,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\cropper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\disk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
