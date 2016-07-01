@@ -260,7 +260,6 @@
     <ClCompile Include="primitives\disk.cpp" />
     <ClCompile Include="primitives\intersection.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
-    <ClCompile Include="primitives\primitives.cpp" />
     <ClCompile Include="primitives\cylinder.cpp" />
     <ClCompile Include="primitives\decorator.cpp" />
     <ClCompile Include="primitives\sphere.cpp" />
