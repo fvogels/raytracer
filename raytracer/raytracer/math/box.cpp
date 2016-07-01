@@ -33,7 +33,7 @@ bool math::Box::hits_xy_face(const Ray& ray, double z) const
         double t = -(ray.origin.z - z) / ray.direction.z;
         Point3D p = ray.at(t);
 
-        return m_x_interval.contains(p.x) && m_y_interval.contains(p.y);
+        return t > 0 && m_x_interval.contains(p.x) && m_y_interval.contains(p.y);
     }
 }
 
@@ -48,7 +48,7 @@ bool math::Box::hits_xz_face(const Ray& ray, double y) const
         double t = -(ray.origin.y - y) / ray.direction.y;
         Point3D p = ray.at(t);
 
-        return m_x_interval.contains(p.x) && m_z_interval.contains(p.z);
+        return t > 0 && m_x_interval.contains(p.x) && m_z_interval.contains(p.z);
     }
 }
 
@@ -63,7 +63,7 @@ bool math::Box::hits_yz_face(const Ray& ray, double x) const
         double t = -(ray.origin.x - x) / ray.direction.x;
         Point3D p = ray.at(t);
 
-        return m_y_interval.contains(p.y) && m_z_interval.contains(p.z);
+        return t > 0 && m_y_interval.contains(p.y) && m_z_interval.contains(p.z);
     }
 }
 
