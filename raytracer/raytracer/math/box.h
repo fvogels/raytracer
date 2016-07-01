@@ -1,6 +1,7 @@
 #pragma once
 
 #include "math/interval.h"
+#include "math/ray.h"
 
 
 namespace math
@@ -10,7 +11,7 @@ namespace math
     public:
         Box(const Interval<double>&, const Interval<double>&, const Interval<double>&);
 
-        bool hits(const Ray&) const;
+        bool hits(const math::Ray&) const;
 
         static Box empty();
 
