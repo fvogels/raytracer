@@ -50,12 +50,12 @@ namespace imaging
 namespace math
 {
     template<>
-    struct approx<imaging::color>
+    struct approximately<imaging::color>
     {
         imaging::color value;
         double delta;
 
-        explicit approx(const imaging::color& value, double delta = 0.00001)
+        explicit approximately(const imaging::color& value, double delta = 0.00001)
             :value(value), delta(delta)
         {
             // NOP
@@ -64,9 +64,9 @@ namespace math
         bool close_enough(const imaging::color& other) const
         {
             return
-                value.r == approx<double>(other.r) &&
-                value.g == approx<double>(other.g) &&
-                value.b == approx<double>(other.b);
+                value.r == approx(other.r) &&
+                value.g == approx(other.g) &&
+                value.b == approx(other.b);
         }
     };
 }

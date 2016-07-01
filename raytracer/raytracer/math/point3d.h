@@ -35,12 +35,12 @@ namespace math
     std::ostream& operator <<(std::ostream& out, const Point3D&);
 
     template<>
-    struct approx<Point3D>
+    struct approximately<Point3D>
     {
         Point3D value;
         double delta;
 
-        explicit approx(const Point3D& value, double delta = 0.00001)
+        explicit approximately(const Point3D& value, double delta = 0.00001)
             :value(value), delta(delta)
         {
             // NOP

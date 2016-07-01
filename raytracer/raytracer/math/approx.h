@@ -6,15 +6,15 @@
 namespace math
 {
     template<typename>
-    struct approx;
+    struct approximately;
 
     template<>
-    struct approx<double>
+    struct approximately<double>
     {
         double value;
         double delta;
 
-        explicit approx(double value, double delta = 0.00001) noexcept
+        explicit approximately(double value, double delta = 0.00001) noexcept
             : value(value), delta(delta) { }
 
         bool close_enough(double other) const
@@ -24,32 +24,38 @@ namespace math
     };
 
     template<typename T>
-    bool operator ==(const approx<T>& x, T y) noexcept
+    approximately<T> approx(T x)
+    {
+        return approximately<T>(x);
+    }
+
+    template<typename T>
+    bool operator ==(const approximately<T>& x, T y) noexcept
     {
         return x.close_enough(y);
     }
 
     template<typename T>
-    bool operator ==(T x, const approx<T>& y) noexcept
+    bool operator ==(T x, const approximately<T>& y) noexcept
     {
         return y == x;
     }
 
     template<typename T>
-    bool operator !=(const approx<T>& x, T y) noexcept
+    bool operator !=(const approximately<T>& x, T y) noexcept
     {
         return !(x == y);
     }
 
     template<typename T>
-    bool operator !=(double x, const approx<T>& y) noexcept
+    bool operator !=(double x, const approximately<T>& y) noexcept
     {
         return !(x == y);
     }
 
     template<typename T>
-    std::ostream& operator <<(std::ostream& out, const approx<T>& x)
+    std::ostream& operator <<(std::ostream& out, const approximately<T>& x)
     {
-        return out << "approx(" << x.value << ")";
+        return out << "approximately(" << x.value << ")";
     }
 }

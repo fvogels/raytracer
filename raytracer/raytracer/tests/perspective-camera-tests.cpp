@@ -14,14 +14,14 @@ namespace
     {
         INFO("Expected Point3D: " << expected << "\nActual: " << actual);
 
-        REQUIRE(approx<Point3D>(expected) == actual);
+        REQUIRE(approx(expected) == actual);
     }
 
     void assert_equals(const Vector3D& expected, const Vector3D& actual)
     {
         INFO("Expected: " << expected << "\nActual: " << actual);
 
-        REQUIRE(approx<Vector3D>(expected) == actual);
+        REQUIRE(approx(expected) == actual);
     }
 
     std::string show(const Ray& ray)

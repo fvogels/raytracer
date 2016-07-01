@@ -18,7 +18,7 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
 {
     double denom = m_normal.dot(ray.direction);
 
-    if (denom == approx<double>(0.0))
+    if (denom == approx(0.0))
     {
         return false;
     }
@@ -61,7 +61,7 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
 
             if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
             {
-                assert(alpha + beta + gamma == approx<double>(1.0));
+                assert(alpha + beta + gamma == approx(1.0));
                 //assert(0 <= alpha);
                 //assert(0 <= beta);
                 //assert(0 <= gamma);

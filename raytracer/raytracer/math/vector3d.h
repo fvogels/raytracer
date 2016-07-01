@@ -40,7 +40,7 @@ namespace math
 
         bool is_perpendicular_on(const Vector3D& v) const noexcept
         {
-            return dot(v) == approx<double>(0);
+            return dot(v) == approx(0.0);
         }
 
         Vector3D reflect_by(const Vector3D&) const;
@@ -59,12 +59,12 @@ namespace math
     std::ostream& operator <<(std::ostream&, const Vector3D&);
 
     template<>
-    struct approx<Vector3D>
+    struct approximately<Vector3D>
     {
         Vector3D value;
         double delta;
 
-        explicit approx(const Vector3D& value, double delta = 0.00001)
+        explicit approximately(const Vector3D& value, double delta = 0.00001)
             :value(value), delta(delta)
         {
             // NOP

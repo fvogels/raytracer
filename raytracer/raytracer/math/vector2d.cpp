@@ -57,12 +57,12 @@ Vector2D& math::Vector2D::operator/=(double factor) noexcept
 
 bool math::Vector2D::is_unit() const noexcept
 {
-    return norm() == approx<double>(1);
+    return norm() == approx(1.0);
 }
 
 bool math::Vector2D::is_perpendicular_on(const Vector2D& v) const noexcept
 {
-    return dot(v) == approx<double>(0);
+    return dot(v) == approx(0.0);
 }
 
 Vector2D math::operator +(const Vector2D& u, const Vector2D& v) noexcept
@@ -97,7 +97,7 @@ Vector2D math::operator /(const Vector2D& v, double factor) noexcept
 
 bool math::operator ==(const Vector2D& u, const Vector2D& v) noexcept
 {
-    return u.x == approx<double>(v.x) && u.y == approx<double>(v.y);
+    return u.x == approx(v.x) && u.y == approx(v.y);
 }
 
 bool math::operator !=(const Vector2D& u, const Vector2D& v) noexcept
