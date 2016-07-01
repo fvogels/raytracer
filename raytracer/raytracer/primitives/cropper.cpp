@@ -81,3 +81,13 @@ Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
 }
+
+Primitive raytracer::primitives::crop_spherical(Primitive cropped, double radius)
+{
+    std::function<bool(const Point3D&)> predicate = [radius](const Point3D& p)
+    {
+        return distance(Point3D(0, 0, 0), p) < radius;
+    };
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
+}
