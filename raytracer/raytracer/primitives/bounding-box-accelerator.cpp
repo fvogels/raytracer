@@ -82,6 +82,8 @@ bool raytracer::primitives::_private_::BoundingBoxAccelerator::find_hit(const ma
     }
     else
     {
+        assert(!m_child->find_hit(ray, hit));
+
         return false;
     }
 }
