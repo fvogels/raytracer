@@ -94,3 +94,18 @@ Box math::Box::intersect(const Box& other) const
 {
     return Box(m_x_interval.intersect(other.m_x_interval), m_y_interval.intersect(other.m_y_interval), m_z_interval.intersect(other.m_z_interval));
 }
+
+double math::Box::size_x() const
+{
+    return m_x_interval.size();
+}
+
+double math::Box::size_y() const
+{
+    return m_y_interval.size();
+}
+
+double math::Box::size_z() const
+{
+    return m_z_interval.size();
+}
