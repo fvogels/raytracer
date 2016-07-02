@@ -10,6 +10,9 @@ namespace math
     {
     public:
         Box(const Interval<double>&, const Interval<double>&, const Interval<double>&);
+        
+        static Box empty();
+        static Box infinite();
 
         Interval<double> x() const;
         Interval<double> y() const;
@@ -19,9 +22,7 @@ namespace math
         bool is_hit_by(const math::Ray&) const;
 
         Box merge(const Box&) const;
-        Box intersect(const Box&) const;
-
-        static Box empty();
+        Box intersect(const Box&) const;        
 
     private:
         bool math::Box::hits_xy_face(const Ray&, double, bool) const;

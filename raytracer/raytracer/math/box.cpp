@@ -85,6 +85,13 @@ Box math::Box::empty()
     return Box(interval, interval, interval);
 }
 
+Box math::Box::infinite()
+{
+    Interval<double> interval = Interval<double>::infinite();
+
+    return Box(interval, interval, interval);
+}
+
 Box math::Box::merge(const Box& other) const
 {
     return Box(m_x_interval.merge(other.m_x_interval), m_y_interval.merge(other.m_y_interval), m_z_interval.merge(other.m_z_interval));
