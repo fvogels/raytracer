@@ -43,7 +43,7 @@ math::Box raytracer::primitives::_private_::Transformer::bounding_box() const
 {
     auto box = transformee->bounding_box();
 
-#define AUX(I, J, K)       Point3D p ## I ## J ## K = box.corner<I, J, K>()
+#define AUX(I, J, K)       Point3D p ## I ## J ## K = this->transformer.transformation_matrix * box.corner<I, J, K>()
     AUX(0, 0, 0);
     AUX(0, 0, 1);
     AUX(0, 1, 0);
