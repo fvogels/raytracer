@@ -31,6 +31,7 @@ raytracer::primitives::_private_::Triangle::Triangle(const Point3D& a, const Poi
 
 bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, Hit* hit) const
 {
+    Vector3D normal = ray.direction.dot(m_normal) > 0 ? -m_normal : m_normal;
     double denom = m_normal.dot(ray.direction);
 
     if (denom == approx(0.0))
@@ -39,10 +40,10 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
     }
     else
     {
-        double numer = -(ray.origin - m_a).dot(m_normal);
+        double numer = -(ray.origin - m_a).dot(normal);
         double t = numer / denom;
 
-        if (t > 0)
+        if (0 < t && t < hit->t)
         {
             const Point3D& A = m_a;
             const Point3D& B = m_b;
@@ -66,9 +67,9 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
             double area_ABP = ABxAP.norm() / 2;
             double area_BCP = BCxBP.norm() / 2;
 
-            bool p_is_left_of_ab = ABxAP.dot(m_normal) > 0;
-            bool p_is_left_of_bc = BCxBP.dot(m_normal) > 0;
-            bool p_is_left_of_ca = CAxCP.dot(m_normal) > 0;
+            bool p_is_left_of_ab = ABxAP.dot(normal) > 0;
+            bool p_is_left_of_bc = BCxBP.dot(normal) > 0;
+            bool p_is_left_of_ca = CAxCP.dot(normal) > 0;
 
             double gamma = area_ABP / area_ABC;
             double beta = area_BCP / area_ABC;
@@ -85,7 +86,7 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
                 hit->position = P;
                 hit->local_position.xyz = P;
                 hit->local_position.uv = Point2D(alpha, beta);
-                hit->normal = m_normal;
+                hit->normal = normal;
 
                 return true;
             }
