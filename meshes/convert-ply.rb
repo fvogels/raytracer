@@ -23,7 +23,7 @@ def read_header(file)
     then nil
 
     else
-      puts "Ignoring header line #{line}"
+      STDERR.puts "Ignoring header line #{line}"
     end
   end
 
@@ -39,7 +39,6 @@ def read_vertices(file, header_data)
 
   abort "Missing x y z properties" unless (x_index and y_index and z_index)
 
-  puts header_data['vertex'][:count]
   header_data['vertex'][:count].times do
     line = file.readline.strip
     parts = line.split(/ /)
