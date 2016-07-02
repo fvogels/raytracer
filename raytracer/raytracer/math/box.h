@@ -11,9 +11,9 @@ namespace math
     public:
         Box(const Interval<double>&, const Interval<double>&, const Interval<double>&);
 
-        double size_x() const;
-        double size_y() const;
-        double size_z() const;
+        Interval<double> x() const;
+        Interval<double> y() const;
+        Interval<double> z() const;
 
         bool is_hit_positively_by(const math::Ray&) const;
         bool is_hit_by(const math::Ray&) const;
