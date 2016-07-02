@@ -50,7 +50,8 @@ math::Box raytracer::primitives::_private_::Union::bounding_box() const
 
     for (auto child : this->children)
     {
-        result = result.merge(child->bounding_box());
+        Box child_box = child->bounding_box();
+        result = result.merge(child_box);
     }
 
     return result;
