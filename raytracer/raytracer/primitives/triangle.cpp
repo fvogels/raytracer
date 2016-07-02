@@ -8,6 +8,21 @@ using namespace raytracer;
 using namespace raytracer::primitives;
 
 
+namespace
+{
+    template<typename T>
+    T min3(T x, T y, T z)
+    {
+        return std::min(x, std::min(y, z));
+    }
+
+    template<typename T>
+    T max3(T x, T y, T z)
+    {
+        return std::max(x, std::max(y, z));
+    }
+}
+
 raytracer::primitives::_private_::Triangle::Triangle(const Point3D& a, const Point3D& b, const Point3D& c)
     : m_a(a), m_b(b), m_c(c)
 {
@@ -62,9 +77,9 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
             if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
             {
                 assert(alpha + beta + gamma == approx(1.0));
-                //assert(0 <= alpha);
-                //assert(0 <= beta);
-                //assert(0 <= gamma);
+                assert(0 <= alpha);
+                assert(0 <= beta);
+                assert(0 <= gamma);
 
                 hit->t = t;
                 hit->position = P;
@@ -90,6 +105,15 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Triangle::hi
 {
     // TODO
     abort();
+}
+
+math::Box raytracer::primitives::_private_::Triangle::bounding_box() const
+{
+    Interval<double> x_interval(min3(m_a.x, m_b.x, m_c.x), max3(m_a.x, m_b.x, m_c.x));
+    Interval<double> y_interval(min3(m_a.y, m_b.y, m_c.y), max3(m_a.y, m_b.y, m_c.y));
+    Interval<double> z_interval(min3(m_a.z, m_b.z, m_c.z), max3(m_a.z, m_b.z, m_c.z));
+
+    return Box(x_interval, y_interval, z_interval);
 }
 
 Primitive raytracer::primitives::triangle(const math::Point3D& a, const math::Point3D& b, const math::Point3D& c)

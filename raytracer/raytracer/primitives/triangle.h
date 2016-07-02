@@ -15,6 +15,7 @@ namespace raytracer
 
                 bool find_hit(const math::Ray&, Hit*) const override;
                 std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
+                math::Box bounding_box() const override;
 
             private:
                 math::Point3D m_a, m_b, m_c;
