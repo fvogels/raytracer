@@ -11,4 +11,5 @@
 #include "primitives/plane.h"
 #include "primitives/transformer.h"
 #include "primitives/triangle.h"
-#include "bounding-box-accelerator.h"
+#include "primitives/bounding-box-accelerator.h"
+#include "primitives/mesh.h"
