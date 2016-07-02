@@ -29,7 +29,9 @@
 #include <list>
 #include <thread>
 #include <atomic>
+#include <sstream>
 
+const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
@@ -91,7 +93,7 @@ raytracer::primitives::Primitive create_root(double t)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
-    auto g = rotate_around_y(360_degrees * t, scale(30, 30, 30, mesh));
+    auto g = rotate_around_y(360_degrees * t, scale(55, 55, 55, mesh));
 
 
     // auto g = group(primitives);
@@ -132,7 +134,7 @@ int main()
 
     auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
 
-    mesh = raytracer::primitives::load_mesh(std::ifstream("e:/temp/buddha.mesh"));
+    mesh = raytracer::primitives::load_mesh(std::ifstream("e:/temp/bunny.mesh"));
 
     for (int frame = FRAME_START; frame != FRAME_END; ++frame)
     {
@@ -142,7 +144,7 @@ int main()
 
         std::cout << "Rendering frame " << frame << std::endl;
 
-        Bitmap bitmap(500, 500);
+        Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
 
         camera = raytracer::cameras::perspective(Point3D(0, 10, 10), Point3D(0, 4, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
@@ -190,6 +192,10 @@ int main()
         {
             for (int j = 0; j != bitmap.height(); ++j)
             {
+                std::ostringstream ss;
+                ss << "line " << j << " out of " << bitmap.height();
+                TIMED_SCOPE(timerObj, ss.str());
+
                 int y = bitmap.height() - j - 1;
 
                 for (int i = 0; i != bitmap.width(); ++i)
