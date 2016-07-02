@@ -13,6 +13,7 @@ namespace math
         
         static Box empty();
         static Box infinite();
+        static Box from_corners(const Point3D&, const Point3D&);
 
         Interval<double> x() const;
         Interval<double> y() const;
@@ -22,7 +23,17 @@ namespace math
         bool is_hit_by(const math::Ray&) const;
 
         Box merge(const Box&) const;
-        Box intersect(const Box&) const;        
+        Box intersect(const Box&) const;
+
+        template<unsigned I, unsigned J, unsigned K>
+        constexpr Point3D corner() const
+        {
+            static_assert(I == 0 || I == 1, "I must be either 0 or 1");
+            static_assert(J == 0 || J == 1, "J must be either 0 or 1");
+            static_assert(K == 0 || K == 1, "K must be either 0 or 1");
+
+            return Point3D(m_x_interval.bound<I>(), m_x_interval.bound<J>(), m_x_interval.bound<K>());
+        }
 
     private:
         bool math::Box::hits_xy_face(const Ray&, double, bool) const;

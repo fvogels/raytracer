@@ -92,6 +92,15 @@ Box math::Box::infinite()
     return Box(interval, interval, interval);
 }
 
+Box math::Box::from_corners(const Point3D& lower_corner, const Point3D& upper_corner)
+{
+    Interval<double> x(lower_corner.x, upper_corner.x);
+    Interval<double> y(lower_corner.y, upper_corner.y);
+    Interval<double> z(lower_corner.z, upper_corner.z);
+
+    return Box(x, y, z);
+}
+
 Box math::Box::merge(const Box& other) const
 {
     return Box(m_x_interval.merge(other.m_x_interval), m_y_interval.merge(other.m_y_interval), m_z_interval.merge(other.m_z_interval));
