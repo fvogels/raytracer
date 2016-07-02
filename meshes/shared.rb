@@ -18,3 +18,18 @@ def load(file)
 
   { :vertices => vertices, :triangles => triangles }
 end
+
+
+def write(vertices, triangles)
+  puts vertices.size
+  
+  vertices.each do |vertex|
+    puts "#{vertex.x} #{vertex.y} #{vertex.z}"
+  end
+
+  puts triangles.size
+
+  triangles.each do |triangle|
+    puts "#{triangle.a} #{triangle.b} #{triangle.c}"
+  end
+end
