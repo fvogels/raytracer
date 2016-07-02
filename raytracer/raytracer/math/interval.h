@@ -59,7 +59,7 @@ namespace math
         template<unsigned I>
         constexpr T bound() const
         {
-            static_assert(I == 0 || I == 1);
+            static_assert(I == 0 || I == 1, "I must be either 0 or 1");
 
             return I == 0 ? this->lower : this->upper;
         }
