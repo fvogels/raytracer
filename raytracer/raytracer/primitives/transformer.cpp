@@ -38,6 +38,12 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Transformer:
     return hits;
 }
 
+math::Box raytracer::primitives::_private_::Transformer::bounding_box() const
+{
+    // TODO
+    abort();
+}
+
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
 {
     return Primitive(std::make_shared<_private_::Transformer>(transformation, transformee));
@@ -67,3 +73,4 @@ Primitive raytracer::primitives::rotate_around_z(math::Angle angle, Primitive tr
 {
     return transform(math::rotate_z(angle), transformee);
 }
+
