@@ -14,23 +14,23 @@ math::Box::Box(const Interval<double>& x_interval, const Interval<double>& y_int
 bool math::Box::is_hit_positively_by(const Ray& ray) const
 {
     return
-        hits_xy_face(ray, m_x_interval.lower, true) ||
-        hits_xy_face(ray, m_x_interval.upper, true) ||
+        hits_xy_face(ray, m_z_interval.lower, true) ||
+        hits_xy_face(ray, m_z_interval.upper, true) ||
         hits_xz_face(ray, m_y_interval.lower, true) ||
         hits_xz_face(ray, m_y_interval.upper, true) ||
-        hits_yz_face(ray, m_z_interval.lower, true) ||
-        hits_yz_face(ray, m_z_interval.upper, true);
+        hits_yz_face(ray, m_x_interval.lower, true) ||
+        hits_yz_face(ray, m_x_interval.upper, true);
 }
 
 bool math::Box::is_hit_by(const Ray& ray) const
 {
     return
-        hits_xy_face(ray, m_x_interval.lower, false) ||
-        hits_xy_face(ray, m_x_interval.upper, false) ||
+        hits_xy_face(ray, m_z_interval.lower, false) ||
+        hits_xy_face(ray, m_z_interval.upper, false) ||
         hits_xz_face(ray, m_y_interval.lower, false) ||
         hits_xz_face(ray, m_y_interval.upper, false) ||
-        hits_yz_face(ray, m_z_interval.lower, false) ||
-        hits_yz_face(ray, m_z_interval.upper, false);
+        hits_yz_face(ray, m_x_interval.lower, false) ||
+        hits_yz_face(ray, m_x_interval.upper, false);
 }
 
 bool math::Box::hits_xy_face(const Ray& ray, double z, bool only_positive) const
