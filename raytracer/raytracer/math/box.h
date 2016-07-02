@@ -11,16 +11,18 @@ namespace math
     public:
         Box(const Interval<double>&, const Interval<double>&, const Interval<double>&);
 
-        bool hits(const math::Ray&) const;
+        bool is_hit_positively_by(const math::Ray&) const;
+        bool is_hit_by(const math::Ray&) const;
+
         Box merge(const Box&) const;
         Box intersect(const Box&) const;
 
         static Box empty();
 
     private:
-        bool math::Box::hits_xy_face(const Ray&, double) const;
-        bool math::Box::hits_xz_face(const Ray&, double) const;
-        bool math::Box::hits_yz_face(const Ray&, double) const;
+        bool math::Box::hits_xy_face(const Ray&, double, bool) const;
+        bool math::Box::hits_xz_face(const Ray&, double, bool) const;
+        bool math::Box::hits_yz_face(const Ray&, double, bool) const;
 
         Interval<double> m_x_interval, m_y_interval, m_z_interval;
     };

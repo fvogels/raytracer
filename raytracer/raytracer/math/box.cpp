@@ -11,18 +11,29 @@ math::Box::Box(const Interval<double>& x_interval, const Interval<double>& y_int
     // NOP
 }
 
-bool math::Box::hits(const Ray& ray) const
+bool math::Box::is_hit_positively_by(const Ray& ray) const
 {
     return
-        hits_xy_face(ray, m_x_interval.lower) ||
-        hits_xy_face(ray, m_x_interval.upper) ||
-        hits_xz_face(ray, m_y_interval.lower) ||
-        hits_xz_face(ray, m_y_interval.upper) ||
-        hits_yz_face(ray, m_z_interval.lower) ||
-        hits_yz_face(ray, m_z_interval.upper);
+        hits_xy_face(ray, m_x_interval.lower, true) ||
+        hits_xy_face(ray, m_x_interval.upper, true) ||
+        hits_xz_face(ray, m_y_interval.lower, true) ||
+        hits_xz_face(ray, m_y_interval.upper, true) ||
+        hits_yz_face(ray, m_z_interval.lower, true) ||
+        hits_yz_face(ray, m_z_interval.upper, true);
 }
 
-bool math::Box::hits_xy_face(const Ray& ray, double z) const
+bool math::Box::is_hit_by(const Ray& ray) const
+{
+    return
+        hits_xy_face(ray, m_x_interval.lower, false) ||
+        hits_xy_face(ray, m_x_interval.upper, false) ||
+        hits_xz_face(ray, m_y_interval.lower, false) ||
+        hits_xz_face(ray, m_y_interval.upper, false) ||
+        hits_yz_face(ray, m_z_interval.lower, false) ||
+        hits_yz_face(ray, m_z_interval.upper, false);
+}
+
+bool math::Box::hits_xy_face(const Ray& ray, double z, bool only_positive) const
 {
     if (ray.direction.z == approx(0.0))
     {
@@ -33,11 +44,11 @@ bool math::Box::hits_xy_face(const Ray& ray, double z) const
         double t = -(ray.origin.z - z) / ray.direction.z;
         Point3D p = ray.at(t);
 
-        return t > 0 && m_x_interval.contains(p.x) && m_y_interval.contains(p.y);
+        return (!only_positive || t > 0) && m_x_interval.contains(p.x) && m_y_interval.contains(p.y);
     }
 }
 
-bool math::Box::hits_xz_face(const Ray& ray, double y) const
+bool math::Box::hits_xz_face(const Ray& ray, double y, bool only_positive) const
 {
     if (ray.direction.y == approx(0.0))
     {
@@ -48,11 +59,11 @@ bool math::Box::hits_xz_face(const Ray& ray, double y) const
         double t = -(ray.origin.y - y) / ray.direction.y;
         Point3D p = ray.at(t);
 
-        return t > 0 && m_x_interval.contains(p.x) && m_z_interval.contains(p.z);
+        return (!only_positive || t > 0) && m_x_interval.contains(p.x) && m_z_interval.contains(p.z);
     }
 }
 
-bool math::Box::hits_yz_face(const Ray& ray, double x) const
+bool math::Box::hits_yz_face(const Ray& ray, double x, bool only_positive) const
 {
     if (ray.direction.x == approx(0.0))
     {
@@ -63,7 +74,7 @@ bool math::Box::hits_yz_face(const Ray& ray, double x) const
         double t = -(ray.origin.x - x) / ray.direction.x;
         Point3D p = ray.at(t);
 
-        return t > 0 && m_y_interval.contains(p.y) && m_z_interval.contains(p.z);
+        return (!only_positive || t > 0) && m_y_interval.contains(p.y) && m_z_interval.contains(p.z);
     }
 }
 

@@ -1,4 +1,4 @@
-#include "primitives/bounding_box_accelerator.h"
+#include "primitives/bounding-box-accelerator.h"
 
 using namespace math;
 using namespace raytracer;
@@ -13,7 +13,7 @@ raytracer::primitives::_private_::BoundingBoxAccelerator::BoundingBoxAccelerator
 
 bool raytracer::primitives::_private_::BoundingBoxAccelerator::find_hit(const math::Ray& ray, Hit* hit) const
 {
-    if (m_bounding_box.hits(ray))
+    if (m_bounding_box.is_hit_positively_by(ray))
     {
         return m_child->find_hit(ray, hit);
     }
@@ -25,7 +25,7 @@ bool raytracer::primitives::_private_::BoundingBoxAccelerator::find_hit(const ma
 
 std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::BoundingBoxAccelerator::hits(const math::Ray& ray) const
 {
-    if (m_bounding_box.hits(ray))
+    if (m_bounding_box.is_hit_by(ray))
     {
         return m_child->hits(ray);
     }
