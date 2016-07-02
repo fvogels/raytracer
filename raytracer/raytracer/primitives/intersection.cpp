@@ -111,3 +111,8 @@ Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
 {
     return Primitive(std::make_shared<_private_::Intersection>(first, second));
 }
+
+math::Box raytracer::primitives::_private_::Intersection::bounding_box() const
+{
+    return m_first->bounding_box().intersect(m_second->bounding_box());
+}
