@@ -10,4 +10,9 @@ void logging::configure()
     defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
     defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
     el::Loggers::reconfigureLogger("stdlib", defaultConf);
+
+    defaultConf.setToDefault();
+    defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
+    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "true");
+    el::Loggers::reconfigureLogger("mesh", defaultConf);
 }
