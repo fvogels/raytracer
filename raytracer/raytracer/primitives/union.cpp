@@ -44,6 +44,18 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Union::hits(
     return hits;
 }
 
+math::Box raytracer::primitives::_private_::Union::bounding_box() const
+{
+    Box result = Box::empty();
+
+    for (auto child : this->children)
+    {
+        result = result.merge(child->bounding_box());
+    }
+
+    return result;
+}
+
 Primitive raytracer::primitives::group(std::vector<Primitive>& children)
 {
     return Primitive(std::make_shared<_private_::Union>(children));
