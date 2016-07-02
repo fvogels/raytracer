@@ -128,6 +128,13 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Sphere::hits
     }
 }
 
+math::Box raytracer::primitives::_private_::Sphere::bounding_box() const
+{
+    Interval<double> interval(-1, 1);
+
+    return Box(interval, interval, interval);
+}
+
 Primitive raytracer::primitives::sphere()
 {
     return Primitive(std::make_shared<raytracer::primitives::_private_::Sphere>());
