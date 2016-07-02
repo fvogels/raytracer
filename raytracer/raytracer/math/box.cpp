@@ -78,3 +78,8 @@ Box math::Box::merge(const Box& other) const
 {
     return Box(m_x_interval.merge(other.m_x_interval), m_y_interval.merge(other.m_y_interval), m_z_interval.merge(other.m_z_interval));
 }
+
+Box math::Box::intersect(const Box& other) const
+{
+    return Box(m_x_interval.intersect(other.m_x_interval), m_y_interval.intersect(other.m_y_interval), m_z_interval.intersect(other.m_z_interval));
+}

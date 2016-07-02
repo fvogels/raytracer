@@ -13,6 +13,7 @@ namespace math
 
         bool hits(const math::Ray&) const;
         Box merge(const Box&) const;
+        Box intersect(const Box&) const;
 
         static Box empty();
 
