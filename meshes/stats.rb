@@ -1,21 +1,12 @@
-Vertex = Struct.new(:x, :y, :z)
-Triangle = Struct.new(:a, :b, :c)
+require './shared.rb'
 
-n_vertices = STDIN.readline.to_i
-puts "#{n_vertices} vertices"
+data = load(STDIN)
 
-vertices = []
-n_vertices.times do
-  vertices << Vertex.new(*STDIN.readline.strip.split(/ /).map(&:to_f))
-end
+vertices = data[:vertices]
+triangles = data[:triangles]
 
-n_triangles = STDIN.readline.to_i
-puts "#{n_triangles} triangles"
-
-triangles = []
-n_triangles.times do
-  triangles << Triangle.new(*STDIN.readline.strip.split(/ /).map(&:to_i))
-end
+puts "#{vertices.size} vertices"
+puts "#{triangles.size} triangles"
 
 min_x = vertices.map(&:x).min
 min_y = vertices.map(&:y).min
@@ -31,4 +22,3 @@ puts "Z: [#{min_z}, #{max_z}]"
 puts "DX = #{max_x - min_x}"
 puts "DY = #{max_y - min_y}"
 puts "DZ = #{max_z - min_z}"
-
