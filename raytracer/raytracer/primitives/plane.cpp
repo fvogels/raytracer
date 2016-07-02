@@ -118,6 +118,21 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CoordinatePl
     }
 }
 
+math::Box raytracer::primitives::_private_::PlaneXY::bounding_box() const
+{
+    return Box(Interval<double>::infinite(), Interval<double>::infinite(), Interval<double>(-0.01, 0.01));
+}
+
+math::Box raytracer::primitives::_private_::PlaneXZ::bounding_box() const
+{
+    return Box(Interval<double>::infinite(), Interval<double>(-0.01, 0.01), Interval<double>::infinite());
+}
+
+math::Box raytracer::primitives::_private_::PlaneYZ::bounding_box() const
+{
+    return Box(Interval<double>(-0.01, 0.01), Interval<double>::infinite(), Interval<double>::infinite());
+}
+
 Primitive raytracer::primitives::xy_plane()
 {
     return Primitive(std::make_shared<raytracer::primitives::_private_::PlaneXY>());

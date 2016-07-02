@@ -18,18 +18,21 @@ namespace raytracer
             {
             public:
                 bool find_hit(const math::Ray&, Hit*) const override;
+                math::Box bounding_box() const override;
             };
 
             class PlaneXZ : public CoordinatePlane
             {
             public:
                 bool find_hit(const math::Ray&, Hit*) const override;
+                math::Box bounding_box() const override;
             };
 
             class PlaneYZ : public CoordinatePlane
             {
             public:
                 bool find_hit(const math::Ray&, Hit*) const override;
+                math::Box bounding_box() const override;
             };
         }
 
