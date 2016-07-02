@@ -50,5 +50,10 @@ namespace math
         {
             return Interval(std::min(lower, other.lower), std::max(upper, other.upper));
         }
+
+        Interval intersect(const Interval& other) const
+        {
+            return Interval(std::max(lower, other.lower), std::min(upper, other.upper));
+        }
     };
 }
