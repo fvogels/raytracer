@@ -112,6 +112,14 @@ OptionParser.new do |opts|
 
     translate(-dx, -dy, -dz)
   end
+
+  opts.on("--corner", "Center mesh around origin") do |arg|
+    dx = x_coords.min
+    dy = y_coords.min
+    dz = z_coords.min
+
+    translate(-dx, -dy, -dz)
+  end
 end.parse!
 
 
