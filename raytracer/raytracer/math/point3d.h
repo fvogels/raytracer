@@ -19,6 +19,21 @@ namespace math
 
         Point3D(const Point3D& v) noexcept = default;
 
+        static Point3D in_xz_plane(double r, math::Angle angle, double y = 0)
+        {
+            return Point3D(r * cos(angle), y, r * sin(angle));
+        }
+
+        static Point3D in_xy_plane(double r, math::Angle angle, double z = 0)
+        {
+            return Point3D(r * cos(angle), r * sin(angle), z);
+        }
+
+        static Point3D in_zy_plane(double r, math::Angle angle, double x = 0)
+        {
+            return Point3D(x, r * sin(angle), r * cos(angle));
+        }
+
         Point3D& operator =(const Point3D&) noexcept = default;
     };
 
@@ -26,7 +41,7 @@ namespace math
     Point3D operator +(const Vector3D&, const Point3D&) noexcept;
     Vector3D operator -(const Point3D&, const Point3D&) noexcept;
     Point3D operator -(const Point3D&, const Vector3D&) noexcept;
-    
+
     bool operator ==(const Point3D&, const Point3D&) noexcept;
     bool operator !=(const Point3D&, const Point3D&) noexcept;
 
