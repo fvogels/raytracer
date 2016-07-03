@@ -26,7 +26,7 @@ namespace math
             return Interval(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
         }
 
-        T size() const
+        decltype(upper-lower) size() const
         {
             return upper - lower;
         }
