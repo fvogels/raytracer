@@ -7,6 +7,7 @@ namespace animation
     public:
         static Duration from_milliseconds(double);
         static Duration from_seconds(double);
+        static Duration zero();
 
         double milliseconds() const;
 

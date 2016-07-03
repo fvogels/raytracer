@@ -13,6 +13,11 @@ Duration animation::Duration::from_seconds(double s)
     return Duration(s * 1000.0);
 }
 
+Duration animation::Duration::zero()
+{
+    return Duration::from_milliseconds(0);
+}
+
 animation::Duration::Duration(double ms)
     : m_milliseconds(ms)
 {
