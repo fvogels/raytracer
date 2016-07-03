@@ -46,12 +46,12 @@ namespace math
             return t * size() + lower;
         }
 
-        Interval merge(const Interval& other) const
+        Interval<T> merge(const Interval& other) const
         {
             return Interval(std::min(lower, other.lower), std::max(upper, other.upper));
         }
 
-        Interval intersect(const Interval& other) const
+        Interval<T> intersect(const Interval& other) const
         {
             return Interval(std::max(lower, other.lower), std::min(upper, other.upper));
         }
