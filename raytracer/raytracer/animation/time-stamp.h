@@ -10,6 +10,8 @@ namespace animation
     public:
         TimeStamp();
 
+        double seconds() const;
+
     private:
         TimeStamp(const Duration&);
 

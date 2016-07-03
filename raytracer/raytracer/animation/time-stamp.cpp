@@ -15,6 +15,11 @@ animation::TimeStamp::TimeStamp(const Duration& since_epoch)
     // NOP
 }
 
+double animation::TimeStamp::seconds() const
+{
+    return m_since_epoch.seconds();
+}
+
 TimeStamp animation::operator +(const TimeStamp& ts, const Duration& d)
 {
     return TimeStamp(ts.m_since_epoch + d);
