@@ -1,32 +1,86 @@
 require './shared.rb'
 require 'optparse'
 
+class Cell
+  def initialize(&block)
+    @dirty = true
+    @observers = []
+    @recomputer = block
+  end
+  
+  def value
+    clean
+    @value
+  end
+
+  def value=(x)
+    @value = x
+    @observers.each { |observer| observer[] }
+  end
+
+  def make_dirty
+    @dirty = true
+  end
+
+  def clean
+    if @dirty
+    then
+      recompute
+      @dirty = false
+    end
+  end
+
+  def observe(&block)
+    @observers << block
+  end
+
+  def recompute
+    @value = @recomputer[]
+  end
+end
+
+def derived_cell(original, &block)
+  result = Cell.new do
+    block[original.value]
+  end
+  
+  original.observe do
+    result.make_dirty
+  end
+
+  result
+end
+
 
 data = load(STDIN)
 
-$vertices = data[:vertices]
-$triangles = data[:triangles]
+$vertices = Cell.new { data[:vertices] }
+$triangles = Cell.new { data[:triangles] }
+
+$x_coords = derived_cell($vertices) { |vertices| vertices.map(&:x) }
+$y_coords = derived_cell($vertices) { |vertices| vertices.map(&:y) }
+$z_coords = derived_cell($vertices) { |vertices| vertices.map(&:z) }
 
 def x_coords
-  $vertices.map(&:x)
+  $x_coords.value
 end
 
 def y_coords
-  $vertices.map(&:y)
+  $y_coords.value
 end
 
 def z_coords
-  $vertices.map(&:z)
+  $z_coords.value
 end
 
 def scale(factor)
-  $vertices.map! do |vertex|
+  $vertices.value = $vertices.value.map do |vertex|
     Vertex.new(vertex.x * factor, vertex.y * factor, vertex.z * factor)
   end
 end
 
 def translate(dx, dy, dz)
-  $vertices.map! do |vertex|
+  $vertices.value = $vertices.value.map do |vertex|
     Vertex.new(vertex.x + dx, vertex.y + dy, vertex.z + dz)
   end
 end
@@ -36,16 +90,13 @@ OptionParser.new do |opts|
     case arg.downcase
     when 'x'
     then
-      coords = x_coords
-      factor = 1 / (coords.max - coords.min)
+      factor = 1 / (x_coords.max - x_coords.min)
     when 'y'
     then
-      coords = y_coords
-      factor = 1 / (coords.max - coords.min)
+      factor = 1 / (y_coords.max - y_coords.min)
     when 'z'
     then
-      coords = z_coords
-      factor = 1 / (coords.max - coords.min)
+      factor = 1 / (z_coords.max - z_coords.min)
     when /^[0-9.]+$/
     then
       factor = arg.to_f
@@ -55,19 +106,15 @@ OptionParser.new do |opts|
   end
 
   opts.on("--center", "Center mesh around origin") do |arg|
-    xs = x_coords
-    ys = y_coords
-    zs = z_coords
-
-    dx = (xs.max + xs.min) / 2
-    dy = (ys.max + ys.min) / 2
-    dz = (zs.max + zs.min) / 2
+    dx = (x_coords.max + x_coords.min) / 2
+    dy = (y_coords.max + y_coords.min) / 2
+    dz = (z_coords.max + z_coords.min) / 2
 
     translate(-dx, -dy, -dz)
   end
 end.parse!
 
 
-write($vertices, $triangles)
+write($vertices.value, $triangles.value)
 
 
