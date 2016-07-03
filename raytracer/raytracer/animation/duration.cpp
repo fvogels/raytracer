@@ -70,6 +70,11 @@ Duration animation::operator /(const Duration& duration, double factor)
     return duration * (1.0 / factor);
 }
 
+double animation::operator /(const Duration& d1, const Duration& d2)
+{
+    return d1.milliseconds() / d2.milliseconds();
+}
+
 bool animation::operator <(const Duration& d1, const Duration& d2)
 {
     return d1.milliseconds() < d2.milliseconds();
