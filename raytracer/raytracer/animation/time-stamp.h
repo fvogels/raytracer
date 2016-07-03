@@ -20,6 +20,6 @@ namespace animation
         friend TimeStamp operator +(const TimeStamp&, const Duration&);
         friend TimeStamp operator +(const Duration&, const TimeStamp&);
         friend TimeStamp operator -(const TimeStamp&, const Duration&);
-        friend TimeStamp operator -(const TimeStamp&, const TimeStamp&);
+        friend Duration operator -(const TimeStamp&, const TimeStamp&);
     };
 }

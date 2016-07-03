@@ -35,7 +35,7 @@ TimeStamp animation::operator -(const TimeStamp& ts, const Duration& d)
     return ts + -d;
 }
 
-TimeStamp animation::operator -(const TimeStamp& ts1, const TimeStamp& ts2)
+Duration animation::operator -(const TimeStamp& ts1, const TimeStamp& ts2)
 {
-    return TimeStamp(ts1.m_since_epoch - ts2.m_since_epoch);
+    return ts1.m_since_epoch - ts2.m_since_epoch;
 }
