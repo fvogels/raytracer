@@ -1,4 +1,5 @@
 #include "animation/duration.h"
+#include <limits>
 
 using namespace animation;
 
@@ -18,6 +19,11 @@ Duration animation::Duration::zero()
     return Duration::from_milliseconds(0);
 }
 
+Duration animation::Duration::infinite()
+{
+    return Duration::from_milliseconds(std::numeric_limits<double>::infinity());
+}
+
 animation::Duration::Duration(double ms)
     : m_milliseconds(ms)
 {
@@ -27,6 +33,11 @@ animation::Duration::Duration(double ms)
 double animation::Duration::milliseconds() const
 {
     return m_milliseconds;
+}
+
+double animation::Duration::seconds() const
+{
+    return m_milliseconds / 1000.0;
 }
 
 Duration animation::operator +(const Duration& d1, const Duration& d2)

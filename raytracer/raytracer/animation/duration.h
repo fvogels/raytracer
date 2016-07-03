@@ -8,8 +8,10 @@ namespace animation
         static Duration from_milliseconds(double);
         static Duration from_seconds(double);
         static Duration zero();
+        static Duration infinite();
 
         double milliseconds() const;
+        double seconds() const;
 
     private:
         Duration(double);
