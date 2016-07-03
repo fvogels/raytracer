@@ -34,6 +34,11 @@ Duration animation::operator +(const Duration& d1, const Duration& d2)
     return Duration::from_milliseconds(d1.milliseconds() + d2.milliseconds());
 }
 
+Duration animation::operator -(const Duration& d)
+{
+    return Duration::from_milliseconds(-d.milliseconds());
+}
+
 Duration animation::operator -(const Duration& d1, const Duration& d2)
 {
     return Duration::from_milliseconds(d1.milliseconds() - d2.milliseconds());

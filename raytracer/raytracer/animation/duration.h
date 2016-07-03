@@ -38,6 +38,7 @@ namespace animation
     }
 
     Duration operator +(const Duration&, const Duration&);
+    Duration operator -(const Duration&);
     Duration operator -(const Duration&, const Duration&);
     Duration operator *(const Duration&, double);
     Duration operator *(double, const Duration&);
