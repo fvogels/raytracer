@@ -273,10 +273,13 @@
     <ClCompile Include="primitives\mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="animation.cpp">
+    <ClCompile Include="animation\duration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="animation\duration.cpp">
+    <ClCompile Include="animation\time-stamp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="animation\animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -594,6 +597,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\duration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\time-stamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
