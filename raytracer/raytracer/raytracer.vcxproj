@@ -224,8 +224,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="animation.cpp" />
+    <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />
+    <ClCompile Include="animation\time-stamp.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\camera.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
@@ -316,6 +317,7 @@
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\duration.h" />
+    <ClInclude Include="animation\time-stamp.h" />
     <ClInclude Include="cameras\camera.h" />
     <ClInclude Include="cameras\cameras.h" />
     <ClInclude Include="cameras\fisheye-camera.h" />
