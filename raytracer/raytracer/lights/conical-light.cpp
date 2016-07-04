@@ -31,3 +31,8 @@ std::shared_ptr<lights::LightSource> raytracer::lights::conical(const math::Poin
 {
     return std::make_shared<raytracer::lights::_private_::ConicalLight>(position, direction, angle, color);
 }
+
+std::shared_ptr<lights::LightSource> raytracer::lights::conical(const math::Point3D& position, const math::Point3D& pointed_at, math::Angle angle, const imaging::color& color)
+{
+    return std::make_shared<raytracer::lights::_private_::ConicalLight>(position, (pointed_at - position).normalized(), angle, color);
+}

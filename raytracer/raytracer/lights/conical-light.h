@@ -26,5 +26,6 @@ namespace raytracer
         }
 
         std::shared_ptr<LightSource> conical(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
+        std::shared_ptr<LightSource> conical(const math::Point3D&, const math::Point3D&, math::Angle, const imaging::color&);
     }
 }
