@@ -10,6 +10,8 @@ namespace animation
     public:
         TimeStamp();
 
+        static TimeStamp zero() { return TimeStamp(); }
+
         double seconds() const;
 
     private:
