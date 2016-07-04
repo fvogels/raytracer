@@ -4,22 +4,15 @@
 using namespace animation;
 using namespace math;
 
-//
-//Animation<math::Point3D> animation::circular_xz(Angle start, Angle end, Duration duration)
-//{
-//    std::function<Point3D(TimeStamp)> lambda = [start, end, duration](TimeStamp ts)
-//    {
-//        double 
-//        return Point3D(cos(start + (end - start) * ts.seconds()), 0, sin(start + (end - start) * ts.seconds()));
-//    };
-//
-//    return Animation(from_lambda(lambda), );
-//}
+Animation<math::Point3D> animation::circular_xz(double radius, const math::Interval<math::Angle>& angle_interval, const math::Interval<TimeStamp>& time_interval)
+{
+    std::function<Point3D(TimeStamp)> lambda = [radius, angle_interval, time_interval](TimeStamp ts)
+    {
+        double t = time_interval.to_relative(ts);
+        Angle angle = angle_interval.from_relative(t);
 
-//Animation<math::Point3D> animation::circular_xz(const math::Point3D& around, double radius, Angle start, Angle end, const Duration& duration)
-//{
-//    std::function<Point3D(TimeStamp)> function = [around, radius, start, end, duration](TimeStamp ts)
-//    {
-//        return around + Point3D(radius * cos(a
-//    };
-//}
+        return Point3D::in_xz_plane(radius, angle);
+    };
+
+    return Animation<Point3D>(from_lambda(lambda), time_interval.size());
+}

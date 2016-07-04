@@ -14,12 +14,12 @@ namespace animation
     class Animation
     {
     public:
-        Animation(std::shared_ptr<math::FunctionBody<T, TimeStamp>> body, Duration duration)
-            : m_body(body), m_duration(duration) { }
+        Animation(math::Function<T, TimeStamp> function, Duration duration)
+            : m_function(function), m_duration(duration) { }
 
         T operator ()(TimeStamp t)
         {
-            return m_body->evaluate(t);
+            return m_function(t);
         }
 
         Duration duration() const
@@ -28,11 +28,9 @@ namespace animation
         }
 
     private:
-        std::shared_ptr<math::FunctionBody<T, TimeStamp>> m_body;
+        math::Function<T, TimeStamp> m_function;
         Duration m_duration;
     };
 
-    // Animation<math::Point3D> circular_xz(math::Angle, math::Angle);
-
-    // Animation<math::Point3D> circular_xz(const math::Point3D&, double, math::Angle, math::Angle, const Duration&);
+    Animation<math::Point3D> circular_xz(double radius, const math::Interval<math::Angle>&, const math::Interval<TimeStamp>&);
 }
