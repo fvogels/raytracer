@@ -107,7 +107,7 @@ namespace math
                 {
                     for (int i = 0; i != 10; ++i)
                     {
-                        unsigned k = x * 71767 + y * 19178 + i * 57465;
+                        unsigned k = x * 71767 + y * 9178 + z * 73467 + i * 57465;
 
                         double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
                         double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
