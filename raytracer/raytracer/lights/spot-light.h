@@ -10,10 +10,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class ConicalLight : public PointLight
+            class SpotLight : public PointLight
             {
             public:
-                ConicalLight(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
+                SpotLight(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
 
             protected:
                 LightRay cast_lightray_to(const math::Point3D&) const;
@@ -25,7 +25,7 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<LightSource> conical(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
-        std::shared_ptr<LightSource> conical(const math::Point3D&, const math::Point3D&, math::Angle, const imaging::color&);
+        std::shared_ptr<LightSource> spot(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
+        std::shared_ptr<LightSource> spot(const math::Point3D&, const math::Point3D&, math::Angle, const imaging::color&);
     }
 }

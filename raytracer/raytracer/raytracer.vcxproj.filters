@@ -216,9 +216,6 @@
     <ClCompile Include="lights\omnidirectional-point-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lights\conical-light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cameras\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -280,6 +277,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="animation\animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lights\spot-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -536,9 +536,6 @@
     <ClInclude Include="lights\omnidirectional-point-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lights\conical-light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lights\lights.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -600,6 +597,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\time-stamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lights\spot-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
