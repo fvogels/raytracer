@@ -14,8 +14,8 @@ namespace animation
     class Animation
     {
     public:
-        Animation(math::Function<T, TimeStamp> function, Duration duration)
-            : m_function(function), m_duration(duration) { }
+        Animation(math::Function<T, TimeStamp> function, math::Interval<TimeStamp> domain)
+            : m_function(function), m_domain(domain) { }
 
         T operator ()(TimeStamp t)
         {
@@ -29,7 +29,7 @@ namespace animation
 
     private:
         math::Function<T, TimeStamp> m_function;
-        Duration m_duration;
+        math::Interval<TimeStamp> m_domain;
     };
 
     Animation<math::Point3D> circular_xz(double radius, const math::Interval<math::Angle>&, const math::Interval<TimeStamp>&);

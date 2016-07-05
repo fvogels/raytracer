@@ -14,5 +14,5 @@ Animation<math::Point3D> animation::circular_xz(double radius, const math::Inter
         return Point3D::in_xz_plane(radius, angle);
     };
 
-    return Animation<Point3D>(from_lambda(lambda), time_interval.size());
+    return Animation<Point3D>(from_lambda(lambda), time_interval);
 }
