@@ -614,5 +614,8 @@
     <ClInclude Include="math\functions\random-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="util\lazy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

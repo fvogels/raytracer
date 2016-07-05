@@ -19,6 +19,7 @@
 #include "animation/animation.h"
 #include "easylogging++.h"
 #include "logging.h"
+#include "util/lazy.h"
 #include <assert.h>
 #include <algorithm>
 #include <stdlib.h>
@@ -82,7 +83,10 @@ Material create_phong_material(const color& diffuse, const color& specular, doub
     return raytracer::materials::uniform(properties);
 }
 
-raytracer::primitives::Primitive mesh;
+Lazy<raytracer::primitives::Primitive> bunny([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/bunny.mesh")); });
+Lazy<raytracer::primitives::Primitive> buddha([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/buddha.mesh")); });
+Lazy<raytracer::primitives::Primitive> statuette([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/statuette.mesh")); });
+Lazy<raytracer::primitives::Primitive> lucy([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/lucy.mesh")); });
 
 raytracer::primitives::Primitive create_root(TimeStamp now)
 {
@@ -92,7 +96,7 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
-    auto g = decorate(create_lambert_material(colors::white() * 0.85), mesh);
+    auto g = decorate(create_lambert_material(colors::white() * 0.85), bunny.value());
     auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
     // auto p = decorate(create_lambert_material(colors::white()*0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
@@ -109,7 +113,7 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     Point3D light_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 2, 0);
     // light_sources.push_back(omnidirectional(light_position, colors::white()));
-    
+
     light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
 
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
@@ -137,7 +141,10 @@ int main()
 
     auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
 
-    mesh = raytracer::primitives::load_mesh(std::ifstream("e:/temp/bunny.mesh"));
+    bunny = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/bunny.mesh"));});
+    buddha = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/buddha.mesh"));});
+    statuette = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/statuette.mesh"));});
+    statuette = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/lucy.mesh"));});
 
     for (int frame = FRAME_START; frame != FRAME_END; ++frame)
     {
