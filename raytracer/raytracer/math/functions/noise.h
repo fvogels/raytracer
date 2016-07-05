@@ -11,7 +11,5 @@ namespace math
     {
         typedef math::Function<double, const Point2D&> Noise2D;
         typedef math::Function<double, const Point3D&> Noise3D;
-
-        Noise2D worley_noise2d();
     }
 }

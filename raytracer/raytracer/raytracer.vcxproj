@@ -250,8 +250,8 @@
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="math\box.cpp" />
-    <ClCompile Include="math\functions\noise.cpp" />
     <ClCompile Include="math\functions\patterns.cpp" />
+    <ClCompile Include="math\functions\worley.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
     <ClCompile Include="math\point2d.cpp" />
     <ClCompile Include="math\point3d.cpp" />
@@ -352,6 +352,7 @@
     <ClInclude Include="math\functions\bool-mapper.h" />
     <ClInclude Include="math\functions\functions.h" />
     <ClInclude Include="math\functions\patterns.h" />
+    <ClInclude Include="math\functions\worley.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
     <ClInclude Include="math\matrix4d.h" />
