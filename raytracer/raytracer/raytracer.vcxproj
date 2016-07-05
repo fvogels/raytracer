@@ -257,6 +257,7 @@
     <ClCompile Include="math\point3d.cpp" />
     <ClCompile Include="math\quadratic_equation.cpp" />
     <ClCompile Include="math\quaternion.cpp" />
+    <ClCompile Include="math\functions\random-function.cpp" />
     <ClCompile Include="math\rasterizer.cpp" />
     <ClCompile Include="math\rectangle3d.cpp" />
     <ClCompile Include="math\transformation.cpp" />
@@ -360,6 +361,7 @@
     <ClInclude Include="math\point3d.h" />
     <ClInclude Include="math\quadratic_equation.h" />
     <ClInclude Include="math\quaternion.h" />
+    <ClInclude Include="math\functions\random-function.h" />
     <ClInclude Include="math\rasterizer.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
