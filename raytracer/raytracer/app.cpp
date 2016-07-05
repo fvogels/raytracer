@@ -14,6 +14,7 @@
 #include "rendering/light-ray.h"
 #include "materials/brdfs/lambert.h"
 #include "materials/brdfs/phong.h"
+#include "materials/worley-material.h"
 #include "raytracing/ray-tracer.h"
 #include "raytracing/fast-ray-tracer.h"
 #include "animation/animation.h"
@@ -97,11 +98,12 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     // primitives.push_back(sphere());
 
     auto g = decorate(create_lambert_material(colors::white() * 0.85), bunny.value());
-    auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
+    // auto g = decorate(materials::worley(), bunny.value() );
+    // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
     // auto p = decorate(create_lambert_material(colors::white()*0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
     // auto g = group(primitives);
-    std::vector<Primitive> root_elts{ p, g };
+    std::vector<Primitive> root_elts{ g };
     return group(root_elts);
 }
 
@@ -111,10 +113,11 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     std::vector<std::shared_ptr<LightSource>> light_sources;
 
-    Point3D light_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 2, 0);
-    // light_sources.push_back(omnidirectional(light_position, colors::white()));
+    Point3D light_position(0, 1, 5);
+    // Point3D light_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 2, 0);
+    light_sources.push_back(omnidirectional(light_position, colors::white()));
 
-    light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
+    // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
 
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
 
@@ -158,7 +161,7 @@ int main()
         Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
 
         // auto camera_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 1, 0);
-        Point3D camera_position(0, 2, 2);
+        Point3D camera_position(0, 2+t, 2);
         camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0.5, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
