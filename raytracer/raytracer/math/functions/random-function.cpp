@@ -7,8 +7,8 @@ math::Function<unsigned, unsigned> math::functions::random_function(unsigned par
 {
     std::function<unsigned(unsigned)> lambda = [parameter](unsigned x) -> unsigned
     {
-        unsigned y = x ^ parameter;
-        unsigned z = x * 87984667 + y * 754136899;
+        unsigned y = x ^ parameter ^ 0x3F78A401;
+        unsigned z = x * 87984667 + y * 754136899 + 1324657;
 
         return x ^ z;
     };
