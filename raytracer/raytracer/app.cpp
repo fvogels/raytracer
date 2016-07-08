@@ -31,15 +31,20 @@
 #include <atomic>
 #include <sstream>
 
+
+#ifdef NDEBUG
 const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
 const int SAMPLES = 1;
-
-#ifdef NDEBUG
 const int N_THREADS = 4;
 #else
+const int BITMAP_SIZE = 500;
+const int FRAME_COUNT = 30;
+const int FRAME_START = 0;
+const int FRAME_END = 1;
+const int SAMPLES = 1;
 const int N_THREADS = 1;
 #endif
 
@@ -97,7 +102,7 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
-    auto g = decorate(create_lambert_material(colors::white() * 0.85), bunny.value());
+    auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(materials::worley(), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
     // auto p = decorate(create_lambert_material(colors::white()*0.5), translate(Vector3D(0, -1, 0), xz_plane()));
@@ -113,7 +118,7 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     std::vector<std::shared_ptr<LightSource>> light_sources;
 
-    Point3D light_position(0, 1, 5);
+    Point3D light_position(5, 10, 0);
     // Point3D light_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 2, 0);
     light_sources.push_back(omnidirectional(light_position, colors::white()));
 
@@ -155,9 +160,9 @@ int main()
 
         Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
 
-        auto camera_position_animation  = circular(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-        // Point3D camera_position(0, 2+t, 2);
-        Point3D camera_position = camera_position_animation(now);
+        auto camera_position_animation  = circular(Point3D(0, 5, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
+        Point3D camera_position(5, 0, 0);
+        // Point3D camera_position = camera_position_animation(now);
         camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);

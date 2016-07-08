@@ -266,6 +266,7 @@
     <ClCompile Include="math\vector3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
     <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
+    <ClCompile Include="primitives\cone.cpp" />
     <ClCompile Include="primitives\cropper.cpp" />
     <ClCompile Include="primitives\disk.cpp" />
     <ClCompile Include="primitives\fast-mesh.cpp" />
@@ -304,6 +305,7 @@
     <ClCompile Include="scripting\objects\symbol.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\combined-reader-tests.cpp" />
+    <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
     <ClCompile Include="tests\fisheye-tests.cpp" />
     <ClCompile Include="tests\interpreter-tests.cpp" />
@@ -376,6 +378,7 @@
     <ClInclude Include="logging.h" />
     <ClInclude Include="meta\indexing.h" />
     <ClInclude Include="primitives\bounding-box-accelerator.h" />
+    <ClInclude Include="primitives\cone.h" />
     <ClInclude Include="primitives\cropper.h" />
     <ClInclude Include="primitives\cylinder.h" />
     <ClInclude Include="primitives\disk.h" />
