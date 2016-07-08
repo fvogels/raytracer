@@ -33,4 +33,5 @@ namespace animation
     };
 
     Animation<math::Point3D> circular_xz(double radius, const math::Interval<math::Angle>&, const math::Interval<TimeStamp>&);
+    Animation<math::Point3D> circular(const math::Point3D&, const math::Point3D&, const math::Vector3D&, const math::Interval<math::Angle>&, const math::Interval<TimeStamp>&);
 }
