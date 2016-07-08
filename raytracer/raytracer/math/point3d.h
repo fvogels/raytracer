@@ -19,6 +19,11 @@ namespace math
 
         Point3D(const Point3D& v) noexcept = default;
 
+        static Point3D origin() noexcept
+        {
+            return Point3D(0, 0, 0);
+        }
+
         static Point3D in_xz_plane(double r, math::Angle angle, double y = 0)
         {
             return Point3D(r * cos(angle), y, r * sin(angle));
