@@ -26,6 +26,12 @@ namespace math
             return Interval(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
         }
 
+        // Bounds are taken as is. If x > y, then interval is empty.
+        static Interval from_raw_bounds(double x, double y)
+        {
+            return Interval(x, y);
+        }
+
         // Bounds are "sorted" so that interval is not empty
         static Interval from_bounds(double x, double y)
         {
