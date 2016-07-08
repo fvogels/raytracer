@@ -18,6 +18,11 @@ namespace math
 
         constexpr Point2D(const Point2D& v) noexcept = default;
 
+        static Point2D origin()
+        {
+            return Point2D(0, 0);
+        }
+
         Point2D& operator =(const Point2D&) noexcept = default;
     };
 
