@@ -26,6 +26,12 @@ namespace math
             return Interval(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
         }
 
+        // Bounds are "sorted" so that interval is not empty
+        static Interval from_bounds(double x, double y)
+        {
+            return Interval(std::min(x, y), std::max(x, y));
+        }
+
         decltype(upper-lower) size() const
         {
             return upper - lower;
