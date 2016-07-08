@@ -155,7 +155,7 @@ int main()
 
         Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
 
-        auto camera_position_animation  = circular(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), Interval<Angle>(0_degrees, 360_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::from_epoch(1_s)));
+        auto camera_position_animation  = circular(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), Interval<Angle>(0_degrees, 360_degrees), 1_s);
         // Point3D camera_position(0, 2+t, 2);
         Point3D camera_position = camera_position_animation(now);
         camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
