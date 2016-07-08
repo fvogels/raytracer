@@ -32,14 +32,6 @@ namespace
     };
 }
 
-//Material raytracer::materials::worley(const color& c1, const color& c2)
-//{
-//    auto color_mapper = color_mapping::grayscale();
-//    math::Function<double, const Point2D&> texture = math::functions::worley_noise2d();
-//
-//    return Material(std::make_shared<MultiMaterial>(texture >> color_mapper));
-//}
-
 Material raytracer::materials::pattern2d(math::Function<bool, const Point2D&> pattern, Material m1, Material m2)
 {
     auto bool_mapper = math::functions::bool_mapper(m1, m2);

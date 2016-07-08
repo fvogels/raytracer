@@ -14,6 +14,5 @@ namespace raytracer
         Material vertical_lines(double thickness, Material, Material);
         Material grid(double thickness, Material, Material);
         Material checkered(Material, Material);
-        // Material worley(const imaging::color&, const imaging::color&);
     }
 }
