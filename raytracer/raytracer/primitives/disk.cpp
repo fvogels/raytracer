@@ -22,7 +22,7 @@ bool raytracer::primitives::_private_::Disk::find_hit(const math::Ray& ray, Hit*
         Point3D p = ray.at(t);
         double r = distance(Point3D(0, 0, 0), p);
 
-        if (r < 1)
+        if (t < hit->t && t < 1)
         {
             hit->t = t;
             hit->normal = Vector3D(0, sign(ray.origin.y), 0);
