@@ -13,6 +13,7 @@ namespace math
         
         static Box empty();
         static Box infinite();
+        static Box from_raw_corners(const Point3D&, const Point3D&);
         static Box from_corners(const Point3D&, const Point3D&);
 
         Interval<double> x() const;

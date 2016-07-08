@@ -92,11 +92,21 @@ Box math::Box::infinite()
     return Box(interval, interval, interval);
 }
 
-Box math::Box::from_corners(const Point3D& lower_corner, const Point3D& upper_corner)
+Box math::Box::from_raw_corners(const Point3D& lower_corner, const Point3D& upper_corner)
 {
     Interval<double> x(lower_corner.x, upper_corner.x);
     Interval<double> y(lower_corner.y, upper_corner.y);
     Interval<double> z(lower_corner.z, upper_corner.z);
+
+    return Box(x, y, z);
+}
+
+Box math::Box::from_corners(const Point3D& p, const Point3D& q)
+{
+    // Sort coordinates so that box is nonempty
+    auto x = Interval<double>::from_bounds(p.x, q.x);
+    auto y = Interval<double>::from_bounds(p.y, q.y);
+    auto z = Interval<double>::from_bounds(p.z, q.z);
 
     return Box(x, y, z);
 }
