@@ -84,7 +84,7 @@ Material create_phong_material(const color& diffuse, const color& specular, doub
     return raytracer::materials::uniform(properties);
 }
 
-Lazy<raytracer::primitives::Primitive> bunny([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/bunny.mesh")); });
+Lazy<raytracer::primitives::Primitive> bunny([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/bunny.mesh")); });
 Lazy<raytracer::primitives::Primitive> buddha([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/buddha.mesh")); });
 Lazy<raytracer::primitives::Primitive> statuette([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/statuette.mesh")); });
 Lazy<raytracer::primitives::Primitive> lucy([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/lucy.mesh")); });
@@ -144,11 +144,6 @@ int main()
 
     auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
 
-    bunny = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/bunny.mesh"));});
-    buddha = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/buddha.mesh"));});
-    statuette = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/statuette.mesh"));});
-    statuette = Lazy<raytracer::primitives::Primitive>([] {return raytracer::primitives::load_mesh(std::ifstream("e:/temp/lucy.mesh"));});
-
     for (int frame = FRAME_START; frame != FRAME_END; ++frame)
     {
         TIMED_SCOPE(timerObj, "single frame");
@@ -160,9 +155,9 @@ int main()
 
         Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
 
-        // auto camera_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 1, 0);
-        Point3D camera_position(0, 2+t, 2);
-        camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0.5, 0), Vector3D(0, 1, 0), 1, 1);
+        auto camera_position = circular_xz(1, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 1, 0);
+        // Point3D camera_position(0, 2+t, 2);
+        camera = raytracer::cameras::perspective(Point3D(0, 0, 4), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
 
