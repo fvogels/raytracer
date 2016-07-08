@@ -11,6 +11,7 @@ namespace animation
         TimeStamp();
 
         static TimeStamp zero() { return TimeStamp(); }
+        static TimeStamp from_epoch(const Duration& duration) { return TimeStamp(duration); }
 
         double seconds() const;
 
