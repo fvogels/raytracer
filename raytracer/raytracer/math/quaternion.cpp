@@ -1,6 +1,7 @@
 #include "math/Quaternion.h"
 #include <assert.h>
 #include <math.h>
+#include "math/approx.h"
 
 using namespace math;
 
@@ -19,7 +20,7 @@ math::Quaternion::Quaternion(const Point3D& p)
 
 math::Quaternion::Quaternion(Angle angle, const Vector3D& v)
 {
-    assert(approx(v.length(), 1.0));
+    assert(v.norm() == approx(1.0));
 
     double c = cos(angle / 2);
     double s = sin(angle / 2);
@@ -39,7 +40,7 @@ Point3D math::Quaternion::rotate(const Point3D& p) const
 {
     Quaternion q = (*this * Quaternion(p) * this->conjugate());
 
-    assert(q.a == approx(0));
+    assert(q.a == approx(0.0));
 
     return Point3D(q.b, q.c, q.d);
 }
