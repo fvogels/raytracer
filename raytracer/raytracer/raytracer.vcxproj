@@ -268,6 +268,7 @@
     <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
     <ClCompile Include="primitives\cropper.cpp" />
     <ClCompile Include="primitives\disk.cpp" />
+    <ClCompile Include="primitives\fast-mesh.cpp" />
     <ClCompile Include="primitives\intersection.cpp" />
     <ClCompile Include="primitives\mesh.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
@@ -378,6 +379,7 @@
     <ClInclude Include="primitives\cropper.h" />
     <ClInclude Include="primitives\cylinder.h" />
     <ClInclude Include="primitives\disk.h" />
+    <ClInclude Include="primitives\fast-mesh.h" />
     <ClInclude Include="primitives\hit-position.h" />
     <ClInclude Include="primitives\intersection.h" />
     <ClInclude Include="primitives\mesh.h" />

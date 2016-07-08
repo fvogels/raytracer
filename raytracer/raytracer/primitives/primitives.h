@@ -13,3 +13,4 @@
 #include "primitives/triangle.h"
 #include "primitives/bounding-box-accelerator.h"
 #include "primitives/mesh.h"
+#include "primitives/fast-mesh.h"
