@@ -66,7 +66,7 @@ math::Box raytracer::primitives::_private_::Transformer::bounding_box() const
     Point3D lower_corner(min_x, min_y, min_z);
     Point3D upper_corner(max_x, max_y, max_z);
 
-    return Box::from_corners(lower_corner, upper_corner);
+    return Box::from_raw_corners(lower_corner, upper_corner);
 }
 
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
