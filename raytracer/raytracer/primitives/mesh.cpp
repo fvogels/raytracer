@@ -100,9 +100,8 @@ namespace
             }
             else if (tag == "g")
             {
-                unsigned n;
+                unsigned n = 2;
 
-                in >> n;
                 std::vector<Primitive> children;
 
                 for (unsigned i = 0; i != n; ++i)
