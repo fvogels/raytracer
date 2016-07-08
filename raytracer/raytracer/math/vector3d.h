@@ -22,6 +22,11 @@ namespace math
 
         Vector3D(const Vector3D& v) noexcept = default;
 
+        static Vector3D zero() noexcept { return Vector3D(0, 0, 0); }
+        static Vector3D x_axis() noexcept { return Vector3D(1, 0, 0); }
+        static Vector3D y_axis() noexcept { return Vector3D(0, 1, 0); }
+        static Vector3D z_axis() noexcept { return Vector3D(0, 0, 1); }
+
         Vector3D& operator =(const Vector3D&) noexcept = default;
 
         double dot(const Vector3D&) const noexcept;
