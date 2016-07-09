@@ -6,6 +6,7 @@
 #include <assert.h>
 
 using namespace raytracer;
+using namespace raytracer::cameras;
 using namespace math;
 
 
@@ -37,7 +38,7 @@ Ray raytracer::cameras::_private_::FisheyeCamera::create_untransformed_ray(const
     return Ray(eye, through);
 }
 
-std::shared_ptr<cameras::Camera> raytracer::cameras::fisheye(
+Camera raytracer::cameras::fisheye(
     const math::Point3D& eye,
     const math::Point3D& look_at,
     const math::Vector3D& up,
@@ -48,5 +49,5 @@ std::shared_ptr<cameras::Camera> raytracer::cameras::fisheye(
 
     Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
 
-    return std::make_shared<_private_::FisheyeCamera>(transformation, horizontal_angle, vertical_angle);
+    return Camera(std::make_shared<_private_::FisheyeCamera>(transformation, horizontal_angle, vertical_angle));
 }

@@ -5,6 +5,8 @@
 #include "math/ray.h"
 #include "math/matrix4d.h"
 #include <functional>
+#include <memory>
+
 
 namespace raytracer
 {
@@ -15,13 +17,13 @@ namespace raytracer
             math::Matrix4D create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
         }
 
-        class Camera
+        class CameraImplementation
         {
         public:
             virtual math::Ray create_ray(const math::Point2D&) const = 0;
         };
 
-        class DisplacableCamera : public Camera
+        class DisplacableCamera : public CameraImplementation
         {
         public:
             math::Ray create_ray(const math::Point2D& p) const
@@ -43,6 +45,23 @@ namespace raytracer
 
         private:
             math::Matrix4D m_transformation;
+        };
+
+        class Camera
+        {
+        public:
+            Camera() : m_implementation(nullptr) { }
+
+            Camera(std::shared_ptr<CameraImplementation> implementation)
+                : m_implementation(implementation) { }
+
+            CameraImplementation* operator ->() const
+            {
+                return m_implementation.get();
+            }
+
+        private:
+            std::shared_ptr<CameraImplementation> m_implementation;
         };
     }
 }

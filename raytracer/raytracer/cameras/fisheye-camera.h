@@ -5,8 +5,8 @@
 #include "math/point2d.h"
 #include "math/point3d.h"
 #include "math/rectangle3d.h"
-
 #include <memory>
+
 
 namespace raytracer
 {
@@ -28,7 +28,7 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<Camera> fisheye(
+        Camera fisheye(
             const math::Point3D& eye,
             const math::Point3D& look_at,
             const math::Vector3D& up,

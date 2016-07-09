@@ -3,7 +3,9 @@
 #include <assert.h>
 
 using namespace raytracer;
+using namespace raytracer::cameras;
 using namespace math;
+
 
 raytracer::cameras::_private_::OrthographicCamera::OrthographicCamera(const math::Matrix4D& transformation, double window_width, double window_height)
     : DisplacableCamera(transformation), m_eye_window(Point3D(window_width / 2, -window_height / 2, 0), Vector3D(-window_width, 0, 0), Vector3D(0, window_height, 0))
@@ -21,7 +23,7 @@ Ray raytracer::cameras::_private_::OrthographicCamera::create_untransformed_ray(
     return Ray(from, Vector3D(0, 0, 1));
 }
 
-std::shared_ptr<cameras::Camera> raytracer::cameras::orthographic(
+Camera raytracer::cameras::orthographic(
     const math::Point3D& eye,
     const math::Point3D& look_at,
     const math::Vector3D& up,
@@ -33,5 +35,5 @@ std::shared_ptr<cameras::Camera> raytracer::cameras::orthographic(
     double window_height = window_width / aspect_ratio;
     Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
 
-    return std::make_shared<_private_::OrthographicCamera>(transformation, window_width, window_height);
+    return Camera(std::make_shared<_private_::OrthographicCamera>(transformation, window_width, window_height));
 }

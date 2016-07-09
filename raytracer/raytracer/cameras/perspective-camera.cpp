@@ -3,6 +3,7 @@
 #include <assert.h>
 
 using namespace raytracer;
+using namespace raytracer::cameras;
 using namespace math;
 
 
@@ -22,7 +23,7 @@ Ray raytracer::cameras::_private_::PerspectiveCamera::create_untransformed_ray(c
     return Ray(Point3D(0, 0, 0), p);
 }
 
-std::shared_ptr<cameras::Camera> raytracer::cameras::perspective(
+Camera raytracer::cameras::perspective(
     const math::Point3D& eye,
     const math::Point3D& look_at,
     const math::Vector3D& up,
@@ -39,5 +40,5 @@ std::shared_ptr<cameras::Camera> raytracer::cameras::perspective(
     Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
     Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
 
-    return std::make_shared<_private_::PerspectiveCamera>(transformation, view_window);
+    return Camera(std::make_shared<_private_::PerspectiveCamera>(transformation, view_window));
 }

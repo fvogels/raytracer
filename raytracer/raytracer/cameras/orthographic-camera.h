@@ -27,7 +27,7 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<Camera> orthographic(
+        Camera orthographic(
             const math::Point3D& eye,
             const math::Point3D& look_at,
             const math::Vector3D& up,

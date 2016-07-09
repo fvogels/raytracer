@@ -35,7 +35,7 @@ const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 2;
+const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -51,7 +51,7 @@ using namespace raytracer;
 using namespace imaging;
 using namespace animation;
 
-std::shared_ptr<cameras::Camera> camera = nullptr;
+cameras::Camera camera;
 
 color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scene& scene, const RayTracer& ray_tracer)
 {
@@ -102,7 +102,7 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     // primitives.push_back(sphere());
 
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
-    auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), lucy.value() );
+    auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
     // auto p = decorate(create_lambert_material(colors::white()*0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
