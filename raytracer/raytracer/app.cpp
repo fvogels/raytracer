@@ -52,22 +52,6 @@ using namespace imaging;
 using namespace animation;
 
 
-color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scene& scene, const RayTracer& ray_tracer)
-{
-    auto sampler = raytracer::samplers::grid(SAMPLES, SAMPLES);
-    Rectangle2D pixel_rectangle = window_rasteriser[position(x, y)];
-    color c = colors::black();
-    int sample_count = 0;
-
-    sampler->sample(pixel_rectangle, [&c, &sample_count, &scene, &ray_tracer](const Point2D& p) {
-        auto ray = scene.camera->create_ray(p);
-        c += ray_tracer.trace(scene, ray);
-        ++sample_count;
-    });
-
-    return c / sample_count;
-}
-
 Material create_lambert_material(const color& c, bool reflective = false)
 {
     MaterialProperties properties;
@@ -149,20 +133,106 @@ std::shared_ptr<Scene> create_scene(TimeStamp now)
 class Renderer
 {
 public:
+    Renderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, std::shared_ptr<RayTracer> ray_tracer)
+        : m_horizontal_resolution(horizontal_resolution), m_vertical_resolution(vertical_resolution), m_sampler(sampler), m_ray_tracer(ray_tracer) { }
+
     virtual Bitmap render(const Scene&) const = 0;
+
+protected:
+    unsigned m_horizontal_resolution, m_vertical_resolution;
+    raytracer::samplers::Sampler m_sampler;
+    std::shared_ptr<RayTracer> m_ray_tracer;
+
+    color render_pixel(const Rasterizer& window_rasterizer, int x, int y, const Scene& scene) const
+    {
+        Rectangle2D pixel_rectangle = window_rasterizer[position(x, y)];
+        color c = colors::black();
+        int sample_count = 0;
+
+        m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const Point2D& p) {
+            auto ray = scene.camera->create_ray(p);
+            c += m_ray_tracer->trace(scene, ray);
+            ++sample_count;
+        });
+
+        return c / sample_count;
+    }
 };
 
-//class SingleThreadedRenderer : public Renderer
-//{
-//public:
-//    Bitmap render(const Scene& scene) const override
-//    {
-//
-//    }
-//
-//private:
-//    
-//};
+class SingleThreadedRenderer : public Renderer
+{
+public:
+    using Renderer::Renderer;
+
+    Bitmap render(const Scene& scene) const override
+    {
+        Bitmap bitmap(m_horizontal_resolution, m_vertical_resolution);
+        Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+        Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
+
+        for (int j = 0; j != bitmap.height(); ++j)
+        {
+            std::ostringstream ss;
+            ss << "line " << j << " out of " << bitmap.height();
+            TIMED_SCOPE(timerObj, ss.str());
+
+            int y = bitmap.height() - j - 1;
+
+            for (int i = 0; i != bitmap.width(); ++i)
+            {
+                int x = i;
+
+                color c = render_pixel(window_rasterizer, x, y, scene);
+
+                bitmap[position(i, j)] = c;
+            }
+        }
+    }
+};
+
+class MultiThreadedRenderer : public Renderer
+{
+public:
+    using Renderer::Renderer;
+
+    Bitmap render(const Scene& scene) const override
+    {
+        Bitmap bitmap(m_horizontal_resolution, m_vertical_resolution);
+        Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+        Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
+
+        std::atomic<unsigned> j(0);
+        std::vector<std::thread> threads;
+
+        for (int k = 0; k != N_THREADS; ++k)
+        {
+            threads.push_back(std::thread([&]() {
+                unsigned current;
+
+                while ((current = j++) < bitmap.height())
+                {
+                    int y = bitmap.height() - current - 1;
+
+                    for (int i = 0; i != bitmap.width(); ++i)
+                    {
+                        int x = i;
+
+                        color c = render_pixel(window_rasterizer, x, y, scene);
+
+                        bitmap[position(i, current)] = c;
+                    }
+                }
+            }));
+        }
+
+        for (auto& thread : threads)
+        {
+            thread.join();
+        }
+
+        return bitmap;
+    }
+};
 
 void render()
 {
@@ -173,6 +243,7 @@ void render()
     WIF wif("e:/temp/output/test.wif");
 
     auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
+    MultiThreadedRenderer renderer(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
 
     for (int frame = FRAME_START; frame != FRAME_END; ++frame)
     {
@@ -180,69 +251,11 @@ void render()
 
         double t = double(frame) / FRAME_COUNT;
         TimeStamp now = TimeStamp::from_epoch(1_s * t);
+        auto scene = create_scene(now);
 
         std::cout << "Rendering frame " << frame << std::endl;
 
-        Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
-        
-        auto scene = create_scene(now);
-
-        Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-        Rasterizer window_rasteriser(window, bitmap.width(), bitmap.height());
-
-        bitmap.clear(colors::black());
-
-        if (N_THREADS > 1)
-        {
-            std::atomic<unsigned> j(0);
-            std::vector<std::thread> threads;
-
-            for (int k = 0; k != N_THREADS; ++k)
-            {
-                threads.push_back(std::thread([&]() {
-                    unsigned current;
-
-                    while ((current = j++) < bitmap.height())
-                    {
-                        int y = bitmap.height() - current - 1;
-
-                        for (int i = 0; i != bitmap.width(); ++i)
-                        {
-                            int x = i;
-
-                            color c = render_pixel(window_rasteriser, x, y, *scene, *ray_tracer);
-
-                            bitmap[position(i, current)] = c;
-                        }
-                    }
-                }));
-            }
-
-            for (auto& thread : threads)
-            {
-                thread.join();
-            }
-        }
-        else
-        {
-            for (int j = 0; j != bitmap.height(); ++j)
-            {
-                std::ostringstream ss;
-                ss << "line " << j << " out of " << bitmap.height();
-                TIMED_SCOPE(timerObj, ss.str());
-
-                int y = bitmap.height() - j - 1;
-
-                for (int i = 0; i != bitmap.width(); ++i)
-                {
-                    int x = i;
-
-                    color c = render_pixel(window_rasteriser, x, y, *scene, *ray_tracer);
-
-                    bitmap[position(i, j)] = c;
-                }
-            }
-        }
+        auto bitmap = renderer.render(*scene);
 
         wif.write_frame(bitmap);
     }
