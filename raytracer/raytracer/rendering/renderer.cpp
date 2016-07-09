@@ -1,5 +1,7 @@
 #include "rendering/renderer.h"
 
+using namespace math;
+
 
 raytracer::rendering::Renderer::Renderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, std::shared_ptr<RayTracer> ray_tracer)
     : m_horizontal_resolution(horizontal_resolution), m_vertical_resolution(vertical_resolution), m_sampler(sampler), m_ray_tracer(ray_tracer) { }
@@ -10,14 +12,11 @@ imaging::color raytracer::rendering::Renderer::render_pixel(const math::Rasteriz
     imaging::color c = imaging::colors::black();
     int sample_count = 0;
 
-    m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const math::Point2D& p) {
-        auto rays = scene.camera->create_rays(p);
-
-        for (auto& ray : rays)
-        {
+    m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const Point2D& p) {
+        scene.camera->enumerate_rays(p, [this, &c, &sample_count, &scene](const Ray& ray) {
             c += m_ray_tracer->trace(scene, ray);
             ++sample_count;
-        }
+        });
     });
 
     return c / sample_count;
