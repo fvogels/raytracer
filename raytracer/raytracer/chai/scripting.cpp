@@ -28,13 +28,17 @@ namespace
 
         module->add(fun(create_point), "pt");
         module->add(fun(create_vector), "vec");
+
+        return module;
     }
 
     ModulePtr create_primitives_module()
     {
         auto module = std::make_shared<chaiscript::Module>();
 
-        module->add(fun(raytracer::primitives::sphere), "sphere");        
+        module->add(fun(raytracer::primitives::sphere), "sphere");
+
+        return module;
     }
 
     ModulePtr create_cameras_module()
@@ -42,12 +46,15 @@ namespace
         auto module = std::make_shared<chaiscript::Module>();
 
         module->add(fun(raytracer::cameras::perspective), "perspective_camera");
+
+        return module;
     }
 }
 
 void run_script(const std::string& path)
 {
     ChaiScript chai(Std_Lib::library());
+    chai.add(create_math_module());
     chai.add(create_primitives_module());
     chai.add(create_cameras_module());
     chai.eval_file(path);
