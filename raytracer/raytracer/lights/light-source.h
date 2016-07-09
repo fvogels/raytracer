@@ -1,6 +1,6 @@
 #pragma once
 
-#include "rendering/light-ray.h"
+#include "lights/light-ray.h"
 #include "math/point3d.h"
 #include <vector>
 #include <memory>

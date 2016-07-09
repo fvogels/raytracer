@@ -9,7 +9,7 @@
 #include "materials/materials.h"
 #include "math/functions/noise.h"
 #include "lights/lights.h"
-#include "rendering/light-ray.h"
+#include "lights/light-ray.h"
 #include "materials/brdfs/lambert.h"
 #include "materials/brdfs/phong.h"
 #include "materials/worley-material.h"

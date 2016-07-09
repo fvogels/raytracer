@@ -198,9 +198,6 @@
     <ClCompile Include="tests\fisheye-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\light-ray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lights\point-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -301,6 +298,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sampling\single-sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lights\light-ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -536,9 +536,6 @@
     <ClInclude Include="meta\indexing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\light-ray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lights\light-source.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -645,6 +642,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sampling\single-sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lights\light-ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

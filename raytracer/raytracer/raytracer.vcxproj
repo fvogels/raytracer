@@ -290,7 +290,7 @@
     <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
     <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp" />
     <ClCompile Include="sampling\grid-sampler.cpp" />
-    <ClCompile Include="rendering\light-ray.cpp" />
+    <ClCompile Include="lights\light-ray.cpp" />
     <ClCompile Include="sampling\single-sampler.cpp" />
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
@@ -408,7 +408,7 @@
     <ClInclude Include="raytracing\ray-tracer.h" />
     <ClInclude Include="raytracing\scene.h" />
     <ClInclude Include="sampling\grid-sampler.h" />
-    <ClInclude Include="rendering\light-ray.h" />
+    <ClInclude Include="lights\light-ray.h" />
     <ClInclude Include="sampling\sampler.h" />
     <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="scripting\objects\cons.h" />
