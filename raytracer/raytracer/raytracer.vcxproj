@@ -289,6 +289,9 @@
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
     <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp" />
+    <ClCompile Include="rendering\multithreaded-renderer.cpp" />
+    <ClCompile Include="rendering\renderer.cpp" />
+    <ClCompile Include="rendering\single-threaded-renderer.cpp" />
     <ClCompile Include="sampling\grid-sampler.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
     <ClCompile Include="sampling\single-sampler.cpp" />
@@ -407,6 +410,9 @@
     <ClInclude Include="raytracing\monte-carlo-ray-tracer.h" />
     <ClInclude Include="raytracing\ray-tracer.h" />
     <ClInclude Include="raytracing\scene.h" />
+    <ClInclude Include="rendering\multithreaded-renderer.h" />
+    <ClInclude Include="rendering\renderer.h" />
+    <ClInclude Include="rendering\single-threaded-renderer.h" />
     <ClInclude Include="sampling\grid-sampler.h" />
     <ClInclude Include="lights\light-ray.h" />
     <ClInclude Include="sampling\sampler.h" />
