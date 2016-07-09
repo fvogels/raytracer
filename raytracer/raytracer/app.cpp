@@ -8,8 +8,6 @@
 #include "rendering/grid-sampler.h"
 #include "materials/materials.h"
 #include "math/functions/noise.h"
-#include "scripting/objects.h"
-#include "scripting/objects/function.h"
 #include "lights/lights.h"
 #include "rendering/light-ray.h"
 #include "materials/brdfs/lambert.h"
@@ -37,7 +35,7 @@ const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 1;
+const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -90,9 +88,10 @@ Material create_phong_material(const color& diffuse, const color& specular, doub
 }
 
 Lazy<raytracer::primitives::Primitive> bunny([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/bunny.mesh")); });
-Lazy<raytracer::primitives::Primitive> buddha([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/buddha.mesh")); });
-Lazy<raytracer::primitives::Primitive> statuette([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/statuette.mesh")); });
-Lazy<raytracer::primitives::Primitive> lucy([]() { return raytracer::primitives::load_mesh(std::ifstream("e:/temp/lucy.mesh")); });
+Lazy<raytracer::primitives::Primitive> buddha([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.mesh")); });
+Lazy<raytracer::primitives::Primitive> dragon([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.dragon")); });
+Lazy<raytracer::primitives::Primitive> statuette([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/statuette.mesh")); });
+Lazy<raytracer::primitives::Primitive> lucy([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/lucy.mesh")); });
 
 raytracer::primitives::Primitive create_root(TimeStamp now)
 {
@@ -102,8 +101,8 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
-    auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
-    // auto g = decorate(materials::worley(), bunny.value() );
+    // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
+    auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), lucy.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
     // auto p = decorate(create_lambert_material(colors::white()*0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
@@ -118,12 +117,8 @@ std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_source
 
     std::vector<std::shared_ptr<LightSource>> light_sources;
 
-    Point3D light_position(5, 10, 0);
-    // Point3D light_position = circular_xz(5, Interval<Angle>(90_degrees, 450_degrees), Interval<TimeStamp>(TimeStamp::zero(), TimeStamp::zero() + 1_s))(now) + Vector3D(0, 2, 0);
-    light_sources.push_back(omnidirectional(light_position, colors::white()));
-
+    light_sources.push_back(omnidirectional(Point3D(5, 5, 0), colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
-
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
 
     return light_sources;
@@ -139,7 +134,7 @@ std::shared_ptr<Scene> create_scene(TimeStamp now)
     return scene;
 }
 
-int main()
+void render()
 {
     TIMED_FUNC(timerObj);
 
@@ -154,15 +149,15 @@ int main()
         TIMED_SCOPE(timerObj, "single frame");
 
         double t = double(frame) / FRAME_COUNT;
-        TimeStamp now = TimeStamp::zero() + 1_s * t;
+        TimeStamp now = TimeStamp::from_epoch(1_s * t);
 
         std::cout << "Rendering frame " << frame << std::endl;
 
         Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
 
-        auto camera_position_animation  = circular(Point3D(0, 5, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-        Point3D camera_position(5, 0, 0);
-        // Point3D camera_position = camera_position_animation(now);
+        auto camera_position_animation = circular(Point3D(0, 2, 2), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
+        // Point3D camera_position(5, 0, 0);
+        Point3D camera_position = camera_position_animation(now);
         camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
         // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
@@ -228,6 +223,12 @@ int main()
 
         wif.write_frame(bitmap);
     }
+}
+
+
+int main()
+{
+    render();
 }
 
 #endif
