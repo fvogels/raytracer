@@ -45,13 +45,7 @@
     <ClCompile Include="math\rectangle3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\single-sampler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\rectangle2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering\grid-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\union.cpp">
@@ -303,6 +297,12 @@
     <ClCompile Include="chai\scripting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sampling\grid-sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sampling\single-sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -354,15 +354,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\rectangle2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\sampler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\single-sampler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\grid-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\union.h">
@@ -645,6 +636,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chai\scripting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\grid-sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\single-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

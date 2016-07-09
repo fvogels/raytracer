@@ -1,6 +1,6 @@
 #pragma once
 
-#include "rendering/sampler.h"
+#include "sampling/sampler.h"
 
 namespace raytracer
 {
@@ -8,16 +8,19 @@ namespace raytracer
     {
         namespace _private_
         {
-            class SingleSampler : public SamplerImplementation
+            class GridSampler : public SamplerImplementation
             {
             public:
+                GridSampler(int rows, int columns)
+                    : rows(rows), columns(columns) { }
+
                 void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override;
+
+            private:
+                int rows, columns;
             };
         }
 
-        Sampler single()
-        {
-            return Sampler(std::make_shared<_private_::SingleSampler>());
-        }
+        Sampler grid(int rows, int columns);
     }
 }

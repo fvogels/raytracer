@@ -1,4 +1,4 @@
-#include "rendering/grid-sampler.h"
+#include "sampling/grid-sampler.h"
 #include "math/rasterizer.h"
 
 using namespace math;

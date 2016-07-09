@@ -289,9 +289,9 @@
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
     <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp" />
-    <ClCompile Include="rendering\grid-sampler.cpp" />
+    <ClCompile Include="sampling\grid-sampler.cpp" />
     <ClCompile Include="rendering\light-ray.cpp" />
-    <ClCompile Include="rendering\single-sampler.cpp" />
+    <ClCompile Include="sampling\single-sampler.cpp" />
     <ClCompile Include="scripting\environment.cpp" />
     <ClCompile Include="scripting\interpreter.cpp" />
     <ClCompile Include="scripting\objects\cons.cpp" />
@@ -407,10 +407,10 @@
     <ClInclude Include="raytracing\monte-carlo-ray-tracer.h" />
     <ClInclude Include="raytracing\ray-tracer.h" />
     <ClInclude Include="raytracing\scene.h" />
-    <ClInclude Include="rendering\grid-sampler.h" />
+    <ClInclude Include="sampling\grid-sampler.h" />
     <ClInclude Include="rendering\light-ray.h" />
-    <ClInclude Include="rendering\sampler.h" />
-    <ClInclude Include="rendering\single-sampler.h" />
+    <ClInclude Include="sampling\sampler.h" />
+    <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="scripting\objects\cons.h" />
     <ClInclude Include="scripting\objects\nil.h" />
     <ClInclude Include="scripting\objects\readable.h" />
