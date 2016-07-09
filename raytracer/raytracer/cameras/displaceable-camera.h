@@ -19,12 +19,12 @@ namespace raytracer
             class DisplaceableCamera : public CameraImplementation
             {
             public:
-                std::vector<math::Ray> create_rays(const math::Point2D&) const;
+                void enumerate_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const;
 
             protected:
                 DisplaceableCamera(const math::Matrix4D&);
 
-                virtual std::vector<math::Ray> create_untransformed_rays(const math::Point2D&) const = 0;
+                virtual void enumerate_untransformed_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const = 0;
 
             private:
                 math::Matrix4D m_transformation;

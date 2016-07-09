@@ -20,7 +20,7 @@ namespace raytracer
                 OrthographicCamera(const math::Matrix4D&, double, double);
 
             protected:
-                std::vector<math::Ray> create_untransformed_rays(const math::Point2D& point) const override;
+                void enumerate_untransformed_rays(const math::Point2D& point, std::function<void(const math::Ray&)>) const override;
 
             private:
                 math::Rectangle3D m_eye_window;

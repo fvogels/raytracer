@@ -10,17 +10,11 @@ raytracer::cameras::_private_::DisplaceableCamera::DisplaceableCamera(const Matr
     // NOP
 }
 
-std::vector<math::Ray> raytracer::cameras::_private_::DisplaceableCamera::create_rays(const math::Point2D& p) const
+void raytracer::cameras::_private_::DisplaceableCamera::enumerate_rays(const math::Point2D& p, std::function<void(const math::Ray&)> callback) const
 {
-    auto untransformed_rays = create_untransformed_rays(p);
-
-    std::vector<math::Ray> transformed_rays;
-    for (auto& untransformed_ray : untransformed_rays)
-    {
+    enumerate_untransformed_rays(p, [this, &callback](const Ray& untransformed_ray) {
         auto transformed_ray = untransformed_ray.transform(m_transformation);
 
-        transformed_rays.push_back(transformed_ray);
-    }
-
-    return transformed_rays;
+        callback(transformed_ray);
+    });
 }

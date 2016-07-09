@@ -16,7 +16,7 @@ raytracer::cameras::_private_::FisheyeCamera::FisheyeCamera(const math::Matrix4D
     // NOP
 }
 
-std::vector<Ray> raytracer::cameras::_private_::FisheyeCamera::create_untransformed_rays(const Point2D& point) const
+void raytracer::cameras::_private_::FisheyeCamera::enumerate_untransformed_rays(const Point2D& point, std::function<void(const math::Ray&)> callback) const
 {
     assert(0 <= point.x && point.x <= 1);
     assert(0 <= point.y && point.y <= 1);
@@ -35,7 +35,7 @@ std::vector<Ray> raytracer::cameras::_private_::FisheyeCamera::create_untransfor
 
     Point3D through(1.0, azimuth, altitude);
 
-    return std::vector<Ray> { Ray(eye, through) };
+    callback(Ray(eye, through));
 }
 
 Camera raytracer::cameras::fisheye(

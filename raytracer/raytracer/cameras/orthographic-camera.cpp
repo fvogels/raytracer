@@ -13,14 +13,14 @@ raytracer::cameras::_private_::OrthographicCamera::OrthographicCamera(const math
     // NOP
 }
 
-std::vector<Ray> raytracer::cameras::_private_::OrthographicCamera::create_untransformed_rays(const Point2D& point) const
+void raytracer::cameras::_private_::OrthographicCamera::enumerate_untransformed_rays(const Point2D& point, std::function<void(const math::Ray&)> callback) const
 {
     assert(0 <= point.x && point.x <= 1);
     assert(0 <= point.y && point.y <= 1);
 
     Point3D from = m_eye_window.project(point);
 
-    return std::vector<Ray> { Ray(from, Vector3D(0, 0, 1)) };
+    callback(Ray(from, Vector3D(0, 0, 1)));
 }
 
 Camera raytracer::cameras::orthographic(

@@ -34,3 +34,15 @@ Matrix4D raytracer::cameras::_private_::create_transformation(const Point3D& eye
 
     return transformation;
 }
+
+std::vector<Ray> raytracer::cameras::_private_::CameraImplementation::create_rays(const math::Point2D& p) const
+{
+    std::vector<Ray> rays;
+
+    this->enumerate_rays(p, [&rays](const Ray& ray)
+    {
+        rays.push_back(ray);
+    });
+
+    return rays;
+}
