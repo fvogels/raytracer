@@ -16,29 +16,29 @@ namespace raytracer
         namespace _private_
         {
             math::Matrix4D create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
-        }
 
-        class CameraImplementation
-        {
-        public:
-            virtual std::vector<math::Ray> create_rays(const math::Point2D&) const = 0;
-        };
+            class CameraImplementation
+            {
+            public:
+                virtual std::vector<math::Ray> create_rays(const math::Point2D&) const = 0;
+            };
+        }
 
         class Camera
         {
         public:
             Camera() : m_implementation(nullptr) { }
 
-            Camera(std::shared_ptr<CameraImplementation> implementation)
+            Camera(std::shared_ptr<_private_::CameraImplementation> implementation)
                 : m_implementation(implementation) { }
 
-            CameraImplementation* operator ->() const
+            _private_::CameraImplementation* operator ->() const
             {
                 return m_implementation.get();
             }
 
         private:
-            std::shared_ptr<CameraImplementation> m_implementation;
+            std::shared_ptr<_private_::CameraImplementation> m_implementation;
         };
     }
 }
