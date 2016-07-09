@@ -51,14 +51,15 @@ using namespace raytracer;
 using namespace imaging;
 using namespace animation;
 
+
 color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scene& scene, const RayTracer& ray_tracer)
 {
-    GridSampler sampler(SAMPLES, SAMPLES);
+    auto sampler = raytracer::samplers::grid(SAMPLES, SAMPLES);
     Rectangle2D pixel_rectangle = window_rasteriser[position(x, y)];
     color c = colors::black();
     int sample_count = 0;
 
-    sampler.sample(pixel_rectangle, [&c, &sample_count, &scene, &ray_tracer](const Point2D& p) {
+    sampler->sample(pixel_rectangle, [&c, &sample_count, &scene, &ray_tracer](const Point2D& p) {
         auto ray = scene.camera->create_ray(p);
         c += ray_tracer.trace(scene, ray);
         ++sample_count;
@@ -144,6 +145,24 @@ std::shared_ptr<Scene> create_scene(TimeStamp now)
 
     return scene;
 }
+
+class Renderer
+{
+public:
+    virtual Bitmap render(const Scene&) const = 0;
+};
+
+//class SingleThreadedRenderer : public Renderer
+//{
+//public:
+//    Bitmap render(const Scene& scene) const override
+//    {
+//
+//    }
+//
+//private:
+//    
+//};
 
 void render()
 {

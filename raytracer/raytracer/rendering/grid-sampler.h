@@ -4,15 +4,23 @@
 
 namespace raytracer
 {
-    class GridSampler : public Sampler
+    namespace samplers
     {
-    public:
-        GridSampler(int rows, int columns)
-            : rows(rows), columns(columns) { }
+        namespace _private_
+        {
+            class GridSampler : public SamplerImplementation
+            {
+            public:
+                GridSampler(int rows, int columns)
+                    : rows(rows), columns(columns) { }
 
-        void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override;
+                void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override;
 
-    private:
-        int rows, columns;
-    };
+            private:
+                int rows, columns;
+            };
+        }
+
+        Sampler grid(int rows, int columns);
+    }
 }
