@@ -20,7 +20,7 @@ namespace raytracer
                 PerspectiveCamera(const math::Matrix4D transformation, const math::Rectangle3D&);
 
             protected:
-                math::Ray create_untransformed_ray(const math::Point2D&) const;
+                std::vector<math::Ray> create_untransformed_rays(const math::Point2D&) const;
 
             private:
                 math::Rectangle3D m_view_window;

@@ -6,6 +6,7 @@
 #include "math/matrix4d.h"
 #include <functional>
 #include <memory>
+#include <vector>
 
 
 namespace raytracer
@@ -20,18 +21,25 @@ namespace raytracer
         class CameraImplementation
         {
         public:
-            virtual math::Ray create_ray(const math::Point2D&) const = 0;
+            virtual std::vector<math::Ray> create_rays(const math::Point2D&) const = 0;
         };
 
         class DisplacableCamera : public CameraImplementation
         {
         public:
-            math::Ray create_ray(const math::Point2D& p) const
+            std::vector<math::Ray> create_rays(const math::Point2D& p) const
             {
-                auto untransformed_ray = create_untransformed_ray(p);
-                auto transformed_ray = untransformed_ray.transform(m_transformation);
+                auto untransformed_rays = create_untransformed_rays(p);
 
-                return transformed_ray;
+                std::vector<math::Ray> transformed_rays;
+                for (auto& untransformed_ray : untransformed_rays)
+                {
+                    auto transformed_ray = untransformed_ray.transform(m_transformation);
+
+                    transformed_rays.push_back(transformed_ray);
+                }
+                
+                return transformed_rays;
             }
 
         protected:
@@ -41,7 +49,7 @@ namespace raytracer
                 // NOP
             }
 
-            virtual math::Ray create_untransformed_ray(const math::Point2D&) const = 0;
+            virtual std::vector<math::Ray> create_untransformed_rays(const math::Point2D&) const = 0;
 
         private:
             math::Matrix4D m_transformation;

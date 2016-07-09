@@ -11,9 +11,13 @@ imaging::color raytracer::rendering::Renderer::render_pixel(const math::Rasteriz
     int sample_count = 0;
 
     m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const math::Point2D& p) {
-        auto ray = scene.camera->create_ray(p);
-        c += m_ray_tracer->trace(scene, ray);
-        ++sample_count;
+        auto rays = scene.camera->create_rays(p);
+
+        for (auto& ray : rays)
+        {
+            c += m_ray_tracer->trace(scene, ray);
+            ++sample_count;
+        }
     });
 
     return c / sample_count;

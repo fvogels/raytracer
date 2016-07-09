@@ -20,7 +20,7 @@ namespace raytracer
                 FisheyeCamera(const math::Matrix4D&, math::Angle, math::Angle);
 
             protected:
-                math::Ray create_untransformed_ray(const math::Point2D& point) const override;
+                std::vector<math::Ray> create_untransformed_rays(const math::Point2D& point) const override;
 
             private:
                 math::Angle m_horizontal_view_angle;

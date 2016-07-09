@@ -16,7 +16,7 @@ raytracer::cameras::_private_::FisheyeCamera::FisheyeCamera(const math::Matrix4D
     // NOP
 }
 
-Ray raytracer::cameras::_private_::FisheyeCamera::create_untransformed_ray(const Point2D& point) const
+std::vector<Ray> raytracer::cameras::_private_::FisheyeCamera::create_untransformed_rays(const Point2D& point) const
 {
     assert(0 <= point.x && point.x <= 1);
     assert(0 <= point.y && point.y <= 1);
@@ -32,10 +32,10 @@ Ray raytracer::cameras::_private_::FisheyeCamera::create_untransformed_ray(const
     Interval<Angle> altitude_interval(-m_vertical_view_angle / 2, m_vertical_view_angle / 2);
     IntervalMapper<double, Angle> altitude_mapper(y_interval, altitude_interval);
     Angle altitude = altitude_mapper[point.y];
-    
+
     Point3D through(1.0, azimuth, altitude);
 
-    return Ray(eye, through);
+    return std::vector<Ray> { Ray(eye, through) };
 }
 
 Camera raytracer::cameras::fisheye(

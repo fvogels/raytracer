@@ -13,14 +13,14 @@ raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::
     // NOP
 }
 
-Ray raytracer::cameras::_private_::PerspectiveCamera::create_untransformed_ray(const Point2D& point) const
+std::vector<Ray> raytracer::cameras::_private_::PerspectiveCamera::create_untransformed_rays(const Point2D& point) const
 {
     assert(0 <= point.x && point.x <= 1);
     assert(0 <= point.y && point.y <= 1);
 
     Point3D p = m_view_window.project(point);
 
-    return Ray(Point3D(0, 0, 0), p);
+    return std::vector<Ray>{ Ray(Point3D(0, 0, 0), p) };
 }
 
 Camera raytracer::cameras::perspective(
