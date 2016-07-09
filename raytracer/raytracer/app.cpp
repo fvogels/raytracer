@@ -51,8 +51,6 @@ using namespace raytracer;
 using namespace imaging;
 using namespace animation;
 
-cameras::Camera camera;
-
 color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scene& scene, const RayTracer& ray_tracer)
 {
     GridSampler sampler(SAMPLES, SAMPLES);
@@ -61,7 +59,7 @@ color render_pixel(const Rasterizer& window_rasteriser, int x, int y, const Scen
     int sample_count = 0;
 
     sampler.sample(pixel_rectangle, [&c, &sample_count, &scene, &ray_tracer](const Point2D& p) {
-        auto ray = camera->create_ray(p);
+        auto ray = scene.camera->create_ray(p);
         c += ray_tracer.trace(scene, ray);
         ++sample_count;
     });
@@ -124,12 +122,25 @@ std::vector<raytracer::lights::LightSource> create_light_sources(TimeStamp now)
     return light_sources;
 }
 
+raytracer::cameras::Camera create_camera(TimeStamp now)
+{
+    auto camera_position_animation = circular(Point3D(0, 2, 2), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
+    // Point3D camera_position(5, 0, 0);
+    Point3D camera_position = camera_position_animation(now);
+    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+    // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
+    // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
+
+    return camera;
+}
+
 std::shared_ptr<Scene> create_scene(TimeStamp now)
 {
     auto scene = std::make_shared<Scene>();
 
     scene->root = create_root(now);
     scene->light_sources = create_light_sources(now);
+    scene->camera = create_camera(now);
 
     return scene;
 }
@@ -154,14 +165,7 @@ void render()
         std::cout << "Rendering frame " << frame << std::endl;
 
         Bitmap bitmap(BITMAP_SIZE, BITMAP_SIZE);
-
-        auto camera_position_animation = circular(Point3D(0, 2, 2), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-        // Point3D camera_position(5, 0, 0);
-        Point3D camera_position = camera_position_animation(now);
-        camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-        // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
-        // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
-
+        
         auto scene = create_scene(now);
 
         Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
