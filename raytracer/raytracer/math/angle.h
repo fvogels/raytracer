@@ -80,6 +80,36 @@ namespace math
         return radians(angle.radians() / factor);
     }
 
+    inline bool operator <(const Angle& a, const Angle& b) noexcept
+    {
+        return a.radians() < b.radians();
+    }
+
+    inline bool operator >(const Angle& a, const Angle& b) noexcept
+    {
+        return a.radians() > b.radians();
+    }
+
+    inline bool operator <=(const Angle& a, const Angle& b) noexcept
+    {
+        return a.radians() <= b.radians();
+    }
+
+    inline bool operator >=(const Angle& a, const Angle& b) noexcept
+    {
+        return a.radians() >= b.radians();
+    }
+
+    inline bool operator ==(const Angle& a, const Angle& b) noexcept
+    {
+        return a.radians() == b.radians();
+    }
+
+    inline bool operator !=(const Angle& a, const Angle& b) noexcept
+    {
+        return a.radians() != b.radians();
+    }
+
     inline double sin(Angle a) { return ::sin(a.radians()); }
     inline double cos(Angle a) { return ::cos(a.radians()); }
 }
