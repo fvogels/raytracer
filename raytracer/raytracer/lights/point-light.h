@@ -12,10 +12,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class PointLight : public LightSource
+            class PointLightImplementation : public LightSourceImplementation
             {
             public:
-                PointLight(const math::Point3D&);
+                PointLightImplementation(const math::Point3D&);
 
                 std::vector<LightRay> lightrays_to(const math::Point3D&) const override;
 

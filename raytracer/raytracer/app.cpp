@@ -111,11 +111,11 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     return group(root_elts);
 }
 
-std::vector<std::shared_ptr<raytracer::lights::LightSource>> create_light_sources(TimeStamp now)
+std::vector<raytracer::lights::LightSource> create_light_sources(TimeStamp now)
 {
     using namespace raytracer::lights;
 
-    std::vector<std::shared_ptr<LightSource>> light_sources;
+    std::vector<LightSource> light_sources;
 
     light_sources.push_back(omnidirectional(Point3D(5, 5, 0), colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));

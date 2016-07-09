@@ -10,7 +10,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class SpotLight : public PointLight
+            class SpotLight : public PointLightImplementation
             {
             public:
                 SpotLight(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
@@ -25,7 +25,7 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<LightSource> spot(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
-        std::shared_ptr<LightSource> spot(const math::Point3D&, const math::Point3D&, math::Angle, const imaging::color&);
+        LightSource spot(const math::Point3D&, const math::Vector3D&, math::Angle, const imaging::color&);
+        LightSource spot(const math::Point3D&, const math::Point3D&, math::Angle, const imaging::color&);
     }
 }

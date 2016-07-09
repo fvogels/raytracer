@@ -11,7 +11,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class OmnidirectionalPointLight : public PointLight
+            class OmnidirectionalPointLight : public PointLightImplementation
             {
             public:
                 OmnidirectionalPointLight(const math::Point3D&, const imaging::color&);
@@ -24,6 +24,6 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<LightSource> omnidirectional(const math::Point3D&, const imaging::color&);
+        LightSource omnidirectional(const math::Point3D&, const imaging::color&);
     }
 }

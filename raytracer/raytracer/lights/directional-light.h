@@ -10,7 +10,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class DirectionalLight : public LightSource
+            class DirectionalLight : public LightSourceImplementation
             {
             public:
                 DirectionalLight(const math::Vector3D&, const imaging::color&);
@@ -23,6 +23,6 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<LightSource> directional(const math::Vector3D&, const imaging::color&);
+        LightSource directional(const math::Vector3D&, const imaging::color&);
     }
 }

@@ -35,7 +35,7 @@ color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene,
 
             for (auto light_source : scene.light_sources)
             {
-                for (auto& light_ray : light_source->lightrays_to(hit.position))
+                for (auto light_ray : light_source->lightrays_to(hit.position))
                 {
                     Vector3D reflected_ray_direction = ray.direction.reflect_by(hit.normal).normalized();
                     auto direction_back_to_eye = -ray.direction.normalized();
