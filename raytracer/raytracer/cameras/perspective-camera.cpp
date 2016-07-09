@@ -8,7 +8,7 @@ using namespace math;
 
 
 raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::Matrix4D transformation, const Rectangle3D& view_window)
-    : DisplacableCamera(transformation), m_view_window(view_window)
+    : DisplaceableCamera(transformation), m_view_window(view_window)
 {
     // NOP
 }

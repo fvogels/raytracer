@@ -24,37 +24,6 @@ namespace raytracer
             virtual std::vector<math::Ray> create_rays(const math::Point2D&) const = 0;
         };
 
-        class DisplacableCamera : public CameraImplementation
-        {
-        public:
-            std::vector<math::Ray> create_rays(const math::Point2D& p) const
-            {
-                auto untransformed_rays = create_untransformed_rays(p);
-
-                std::vector<math::Ray> transformed_rays;
-                for (auto& untransformed_ray : untransformed_rays)
-                {
-                    auto transformed_ray = untransformed_ray.transform(m_transformation);
-
-                    transformed_rays.push_back(transformed_ray);
-                }
-                
-                return transformed_rays;
-            }
-
-        protected:
-            DisplacableCamera(math::Matrix4D transformation)
-                : m_transformation(transformation)
-            {
-                // NOP
-            }
-
-            virtual std::vector<math::Ray> create_untransformed_rays(const math::Point2D&) const = 0;
-
-        private:
-            math::Matrix4D m_transformation;
-        };
-
         class Camera
         {
         public:

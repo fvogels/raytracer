@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cameras/camera.h"
+#include "cameras/displaceable-camera.h"
 #include "math/vector3d.h"
 #include "math/point2d.h"
 #include "math/point3d.h"
@@ -14,7 +14,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class PerspectiveCamera : public DisplacableCamera
+            class PerspectiveCamera : public DisplaceableCamera
             {
             public:
                 PerspectiveCamera(const math::Matrix4D transformation, const math::Rectangle3D&);

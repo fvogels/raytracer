@@ -8,7 +8,7 @@ using namespace math;
 
 
 raytracer::cameras::_private_::OrthographicCamera::OrthographicCamera(const math::Matrix4D& transformation, double window_width, double window_height)
-    : DisplacableCamera(transformation), m_eye_window(Point3D(window_width / 2, -window_height / 2, 0), Vector3D(-window_width, 0, 0), Vector3D(0, window_height, 0))
+    : DisplaceableCamera(transformation), m_eye_window(Point3D(window_width / 2, -window_height / 2, 0), Vector3D(-window_width, 0, 0), Vector3D(0, window_height, 0))
 {
     // NOP
 }
