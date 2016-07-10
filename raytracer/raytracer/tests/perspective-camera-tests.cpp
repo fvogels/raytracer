@@ -50,8 +50,10 @@ namespace
     TEST_CASE("[PerspectiveCamera] Eye = " #EYE ", Lookat = " #LOOK_AT ", Up = " #UP ", Distance = " #DISTANCE ", Aspect Ratio = " #ASPECT_RATIO ", At " #P, "[PerspectiveCamera]") \
     { \
         auto camera = raytracer::cameras::perspective(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), DISTANCE, ASPECT_RATIO); \
-        auto ray = camera->create_ray(Point2D(P)); \
+        auto rays = camera->create_rays(Point2D(P)); \
         \
+        REQUIRE(rays.size() == 1); \
+        auto ray = rays.front(); \
         INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(Point3D(EXPECTED_ORIGIN), Vector3D(EXPECTED_DIRECTION)))); \
         assert_equals(ray.origin, Point3D(EXPECTED_ORIGIN)); \
         assert_equals(ray.direction, Vector3D(EXPECTED_DIRECTION)); \

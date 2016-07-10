@@ -44,8 +44,10 @@ namespace
     TEST_CASE("[OrthographicCamera] Eye = " #EYE ", Lookat = " #LOOK_AT ", Up = " #UP ", Window Width = " #WINDOW_WIDTH ", Aspect Ratio =" #ASPECT_RATIO ", At " #P, "[OrthographicCamera]") \
     { \
         auto camera = raytracer::cameras::orthographic(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), WINDOW_WIDTH, ASPECT_RATIO); \
-        auto ray = camera->create_ray(Point2D(P)); \
+        auto rays = camera->create_rays(Point2D(P)); \
         \
+        REQUIRE(rays.size() == 1); \
+        auto ray = rays.front(); \
         INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(Point3D(EXPECTED_ORIGIN), Vector3D(EXPECTED_DIRECTION)))); \
         assert_equals(ray.origin, Point3D(EXPECTED_ORIGIN)); \
         assert_equals(ray.direction, Vector3D(EXPECTED_DIRECTION)); \
