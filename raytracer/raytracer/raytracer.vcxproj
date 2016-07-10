@@ -235,6 +235,7 @@
     <ClCompile Include="animation\time-stamp.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\camera.cpp" />
+    <ClCompile Include="cameras\depth-of-field-perspective-camera.cpp" />
     <ClCompile Include="cameras\displaceable-camera.cpp" />
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="cameras\orthographic-camera.cpp" />
@@ -337,6 +338,7 @@
     <ClInclude Include="animation\time-stamp.h" />
     <ClInclude Include="cameras\camera.h" />
     <ClInclude Include="cameras\cameras.h" />
+    <ClInclude Include="cameras\depth-of-field-perspective-camera.h" />
     <ClInclude Include="cameras\displaceable-camera.h" />
     <ClInclude Include="cameras\fisheye-camera.h" />
     <ClInclude Include="cameras\orthographic-camera.h" />

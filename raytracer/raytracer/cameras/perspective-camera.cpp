@@ -20,7 +20,7 @@ void raytracer::cameras::_private_::PerspectiveCamera::enumerate_untransformed_r
 
     Point3D p = m_view_window.project(point);
 
-    callback(Ray(Point3D(0, 0, 0), p));
+    callback(Ray(Point3D::origin(), p));
 }
 
 Camera raytracer::cameras::perspective(

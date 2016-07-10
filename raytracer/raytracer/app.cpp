@@ -21,20 +21,14 @@
 #include "logging.h"
 #include "util/lazy.h"
 #include <assert.h>
-#include <algorithm>
-#include <stdlib.h>
-#include <time.h>
-#include <type_traits>
-#include <list>
-#include <sstream>
 
 
 #ifdef NDEBUG
 const int BITMAP_SIZE = 500;
-const int FRAME_COUNT = 30;
+const int FRAME_COUNT = 90;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 1;
+const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -83,13 +77,28 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
+    auto vans = checkered(create_lambert_material(colors::white() * 0.85), create_lambert_material(colors::white() * 0.1));
+
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
-    auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
+    // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    // auto p = decorate(create_lambert_material(colors::white()*0.5), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto g = decorate(vans, translate(Vector3D(0, -1, 0), xz_plane()));
+
+    std::vector<Primitive> spheres;
+
+    for (double z = 0; z < 20; z += 5)
+    {
+        spheres.push_back(translate(Vector3D(-2, 0, -z), sphere()));
+        spheres.push_back(translate(Vector3D(2, 0, -z), sphere()));
+    }
+
+    auto g2 = decorate(vans, accelerated_union(spheres));
 
     // auto g = group(primitives);
-    std::vector<Primitive> root_elts{ g };
+    std::vector<Primitive> root_elts{ g, g2 };
+
+
+
     return group(root_elts);
 }
 
@@ -108,12 +117,13 @@ std::vector<raytracer::lights::LightSource> create_light_sources(TimeStamp now)
 
 raytracer::cameras::Camera create_camera(TimeStamp now)
 {
-    auto camera_position_animation = circular(Point3D(0, 2, 2), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-    // Point3D camera_position(5, 0, 0);
-    Point3D camera_position = camera_position_animation(now);
-    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-    // camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
-    // camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
+    // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
+    Point3D camera_position(0, 1, 5);
+    // Point3D camera_position = camera_position_animation(now);
+    // auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+    // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
+    // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
+    auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1);
 
     return camera;
 }
@@ -140,7 +150,7 @@ void render()
     auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
     auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
 
-    for (int frame = FRAME_START; frame != FRAME_END; ++frame)
+    for (int frame = FRAME_START; frame < FRAME_END; ++frame)
     {
         TIMED_SCOPE(timerObj, "single frame");
 
