@@ -19,18 +19,13 @@ namespace raytracer
             class DepthOfFieldPerspectiveCamera : public DisplaceableCamera
             {
             public:
-                DepthOfFieldPerspectiveCamera(const math::Matrix4D, const math::Point3D&, double, double, double, raytracer::samplers::Sampler);
+                DepthOfFieldPerspectiveCamera(const math::Matrix4D, const std::vector<Camera>&);
 
             protected:
                 void enumerate_untransformed_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const;
 
             private:
-                math::Rectangle2D m_eye_window;
-                raytracer::samplers::Sampler m_eye_sampler;
-                math::Point3D m_look_at;
-                double m_focal_distance;
-                double m_distance;
-                double m_aspect_ratio;
+                std::vector<Camera> m_cameras;
             };
         }
 
