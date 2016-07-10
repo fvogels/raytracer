@@ -52,7 +52,7 @@ Bitmap raytracer::rendering::_private_::MultithreadedRenderer::render(const Scen
     return bitmap;
 }
 
-std::shared_ptr<Renderer> raytracer::rendering::multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, std::shared_ptr<RayTracer> ray_tracer, unsigned thread_count)
+std::shared_ptr<_private_::Renderer> raytracer::rendering::multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, std::shared_ptr<RayTracer> ray_tracer, unsigned thread_count)
 {
     return std::make_shared<_private_::MultithreadedRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count);
 }

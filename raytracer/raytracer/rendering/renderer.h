@@ -11,19 +11,22 @@ namespace raytracer
 {
     namespace rendering
     {
-        class Renderer
+        namespace _private_
         {
-        public:
-            Renderer(unsigned, unsigned, raytracer::samplers::Sampler, std::shared_ptr<RayTracer>);
+            class Renderer
+            {
+            public:
+                Renderer(unsigned, unsigned, raytracer::samplers::Sampler, std::shared_ptr<RayTracer>);
 
-            virtual imaging::Bitmap render(const Scene&) const = 0;
+                virtual imaging::Bitmap render(const Scene&) const = 0;
 
-        protected:
-            unsigned m_horizontal_resolution, m_vertical_resolution;
-            raytracer::samplers::Sampler m_sampler;
-            std::shared_ptr<RayTracer> m_ray_tracer;
+            protected:
+                unsigned m_horizontal_resolution, m_vertical_resolution;
+                raytracer::samplers::Sampler m_sampler;
+                std::shared_ptr<RayTracer> m_ray_tracer;
 
-            imaging::color render_pixel(const math::Rasterizer&, int, int, const Scene&) const;
-        };
+                imaging::color render_pixel(const math::Rasterizer&, int, int, const Scene&) const;
+            };
+        }
     }
 }

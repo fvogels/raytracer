@@ -18,6 +18,6 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<Renderer> single_threaded(unsigned, unsigned, raytracer::samplers::Sampler, std::shared_ptr<RayTracer>);
+        std::shared_ptr<_private_::Renderer> single_threaded(unsigned, unsigned, raytracer::samplers::Sampler, std::shared_ptr<RayTracer>);
     }
 }
