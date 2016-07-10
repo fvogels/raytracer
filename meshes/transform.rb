@@ -52,7 +52,7 @@ def derived_cell(original, &block)
 end
 
 
-data = load(STDIN)
+data = load_raw(STDIN)
 
 $vertices = Cell.new { data[:vertices] }
 $triangles = Cell.new { data[:triangles] }
@@ -124,5 +124,4 @@ end.parse!
 
 
 write($vertices.value, $triangles.value)
-
 

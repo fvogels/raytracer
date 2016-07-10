@@ -1,6 +1,6 @@
 require './shared.rb'
 
-data = load(STDIN)
+data = load_raw(STDIN)
 
 vertices = data[:vertices]
 triangles = data[:triangles]

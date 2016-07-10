@@ -5,6 +5,15 @@ def read_header(file)
   data = {}
 
   abort "Expected 'ply' as first line" unless file.readline.strip == 'ply'
+
+  data[:format] = case line = file.readline.strip
+                  when 'format binary_big_endian 1.0'
+                  then :big_endian
+                  when 'format ascii 1.0'
+                  then :ascii
+                  else
+                    raise "Unknown format: #{line}"
+                  end
   
   while (line = file.readline.strip) != 'end_header'
     case line
@@ -31,50 +40,92 @@ def read_header(file)
 end
 
 def read_vertices(file, header_data)
-  vertices = []
+  case header_data[:format]
+  when :ascii
+  then
+    vertices = []
 
-  x_index = header_data['vertex'][:properties].find_index { |parts| parts[1] == 'x' }
-  y_index = header_data['vertex'][:properties].find_index { |parts| parts[1] == 'y' }
-  z_index = header_data['vertex'][:properties].find_index { |parts| parts[1] == 'z' }
+    x_index = header_data['vertex'][:properties].find_index { |parts| parts[1] == 'x' }
+    y_index = header_data['vertex'][:properties].find_index { |parts| parts[1] == 'y' }
+    z_index = header_data['vertex'][:properties].find_index { |parts| parts[1] == 'z' }
 
-  abort "Missing x y z properties" unless (x_index and y_index and z_index)
+    abort "Missing x y z properties" unless (x_index and y_index and z_index)
 
-  header_data['vertex'][:count].times do
-    line = file.readline.strip
-    parts = line.split(/ /)
+    header_data['vertex'][:count].times do
+      line = file.readline.strip
+      parts = line.split(/ /)
 
-    x = parts[x_index].to_f
-    y = parts[y_index].to_f
-    z = parts[z_index].to_f
+      x = parts[x_index].to_f
+      y = parts[y_index].to_f
+      z = parts[z_index].to_f
 
-    vertices << Vertex.new(x, y, z)
+      vertices << Vertex.new(x, y, z)
+    end
+
+    vertices
+    
+  when :big_endian
+  then
+    if header_data['vertex'][:properties].size != 3
+    then abort "Expected 3 vertex properties"
+    end
+
+    (1..header_data['vertex'][:count]).map do
+      coords = file.read(12).unpack('ggg')
+      Vertex.new(*coords)
+    end
+
+  else
+    abort "Unknown format"
   end
-
-  vertices
 end
 
 def read_faces(file, header_data, vertices)
-  faces = []
+  case header_data[:format]
+  when :ascii
+    faces = []
 
-  header_data['face'][:count].times do
-    line = file.readline.strip
-    parts = line.split(/ /)
+    header_data['face'][:count].times do
+      line = file.readline.strip
+      parts = line.split(/ /)
 
-    abort "All faces must be triangles" unless parts[0].to_i == 3
+      abort "All faces must be triangles" unless parts[0].to_i == 3
 
-    vertex_indices = parts[1..-1].map(&:to_i)
+      vertex_indices = parts[1..-1].map(&:to_i)
 
-    faces << Triangle.new(*vertex_indices)
+      faces << Triangle.new(*vertex_indices)
+    end
+
+    faces
+
+  when :big_endian
+    (1..header_data['face'][:count]).map do
+      n = file.read(1).unpack('C')[0]
+
+      abort "All faces must be triangles -- found face with #{n} sides" unless n == 3
+
+      indices = file.read(12).unpack('NNN')
+
+      indices.each do |index|
+        if index >= vertices.size
+        then abort "Index out of bounds: #{index} >= #{vertices.size}"
+        end
+      end
+      
+      Triangle.new(*indices)
+    end
+
+  else
+    abort "Unknown format"
   end
-
-  faces
 end
 
 def main
   header_data = read_header(STDIN)
   vertices = read_vertices(STDIN, header_data)
   faces = read_faces(STDIN, header_data, vertices)
-  
+
+  puts "raw"
   puts vertices.size
   vertices.each do |vertex|
     puts "#{vertex.x} #{vertex.y} #{vertex.z}"
