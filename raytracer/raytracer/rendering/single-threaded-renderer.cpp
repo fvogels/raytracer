@@ -31,6 +31,8 @@ imaging::Bitmap raytracer::rendering::_private_::SingleThreadedRenderer::render(
             bitmap[position(i, j)] = c;
         }
     }
+
+    return bitmap;
 }
 
 std::shared_ptr<Renderer> single_threaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, std::shared_ptr<RayTracer> ray_tracer)
