@@ -45,6 +45,41 @@ namespace math
       return radians(x.radians() - y.radians()); 
     }
 
+    inline Angle operator *(const Angle& angle, double factor) noexcept
+    {
+        return radians(angle.radians() * factor);
+    }
+
+    inline Angle operator *(double factor, const Angle& angle) noexcept
+    {
+        return angle * factor;
+    }
+
+    inline Angle operator /(const Angle& angle, double factor) noexcept
+    {
+        return radians(angle.radians() / factor);
+    }
+
+    inline Angle& operator +=(Angle& x, const Angle& y) noexcept
+    {
+        return (x = x + y);
+    }
+
+    inline Angle& operator -=(Angle& x, const Angle& y) noexcept
+    {
+        return (x = x - y);
+    }
+
+    inline Angle& operator *=(Angle& x, double f) noexcept
+    {
+        return (x = x * f);
+    }
+
+    inline Angle& operator /=(Angle& x, double f) noexcept
+    {
+        return (x = x / f);
+    }
+
     inline Angle operator""_rad(long double x) noexcept
     {
         return radians(x);
@@ -63,21 +98,6 @@ namespace math
     inline Angle operator""_degrees(long long unsigned x) noexcept
     {
         return degrees((long double) x);
-    }
-
-    inline Angle operator *(const Angle& angle, double factor) noexcept
-    {
-        return radians(angle.radians() * factor);
-    }
-
-    inline Angle operator *(double factor, const Angle& angle) noexcept
-    {
-        return angle * factor;
-    }
-
-    inline Angle operator /(const Angle& angle, double factor) noexcept
-    {
-        return radians(angle.radians() / factor);
     }
 
     inline bool operator <(const Angle& a, const Angle& b) noexcept
