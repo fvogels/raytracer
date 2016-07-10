@@ -327,6 +327,7 @@
     <ClCompile Include="tests\parser-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
+    <ClCompile Include="tests\scripting-tests.cpp" />
     <ClCompile Include="tests\stream-line-reader-tests.cpp" />
     <ClCompile Include="tests\string-reader-tests.cpp" />
     <ClCompile Include="tests\tokenizer-tests.cpp" />

@@ -12,12 +12,12 @@ using namespace math;
 
 namespace
 {
-    Point3D create_point(double x, double y, double z)
+    Point3D create_point3d(double x, double y, double z)
     {
         return Point3D(x, y, z);
     }
 
-    Vector3D create_vector(double x, double y, double z)
+    Vector3D create_vector3d(double x, double y, double z)
     {
         return Vector3D(x, y, z);
     }
@@ -26,8 +26,11 @@ namespace
     {
         auto module = std::make_shared<chaiscript::Module>();
 
-        module->add(fun(create_point), "pt");
-        module->add(fun(create_vector), "vec");
+        module->add(fun(create_point3d), "pt");
+        module->add(fun(create_vector3d), "vec");
+        module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v;}), "+");
+        module->add(fun([](const Point3D& u, const Vector3D& v) { return u + v;}), "+");
+        module->add(fun([](const Vector3D& u, const Point3D& v) { return u + v;}), "+");
 
         return module;
     }
@@ -51,11 +54,31 @@ namespace
     }
 }
 
-void run_script(const std::string& path)
+namespace scripting
+{
+    ModulePtr create_modules()
+    {
+        auto module = std::make_shared<chaiscript::Module>();
+
+        module->add(create_math_module());
+        module->add(create_primitives_module());
+        module->add(create_cameras_module());
+
+        return module;
+    }
+}
+
+void scripting::run_script(const std::string& path)
 {
     ChaiScript chai(Std_Lib::library());
-    chai.add(create_math_module());
-    chai.add(create_primitives_module());
-    chai.add(create_cameras_module());
+    chai.add(create_modules());
     chai.eval_file(path);
 }
+
+void scripting::run(const std::string& source)
+{
+    ChaiScript chai(Std_Lib::library());
+    chai.add(create_modules());
+    chai.eval(source);
+}
+
