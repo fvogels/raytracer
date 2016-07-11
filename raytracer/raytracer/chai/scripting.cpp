@@ -3,6 +3,7 @@
 #include "cameras/cameras.h"
 #include "math/vector3d.h"
 #include "math/point3d.h"
+#include "imaging/color.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 
@@ -22,15 +23,48 @@ namespace
         return Vector3D(x, y, z);
     }
 
+    struct ColorLibrary
+    {
+#define COLOR(NAME) imaging::color NAME() const { return imaging::colors::NAME(); }
+        COLOR(black)
+        COLOR(white)
+        COLOR(red)
+        COLOR(green)
+        COLOR(blue)
+        COLOR(yellow)
+        COLOR(magenta)
+        COLOR(cyan)
+#undef COLOR
+    };
+
+    ModulePtr create_imaging_module()
+    {
+        auto module = std::make_shared<chaiscript::Module>();
+
+        auto color_library = std::make_shared<ColorLibrary>();
+        module->add_global_const(chaiscript::const_var(color_library), "colors");
+#define COLOR(NAME) module->add(fun(&ColorLibrary::NAME), #NAME);
+        COLOR(black)
+        COLOR(white)
+        COLOR(red)
+        COLOR(green)
+        COLOR(blue)
+        COLOR(yellow)
+        COLOR(magenta)
+        COLOR(cyan)
+#undef COLOR
+        return module;
+    }
+
     ModulePtr create_math_module()
     {
         auto module = std::make_shared<chaiscript::Module>();
 
         module->add(fun(create_point3d), "pt");
         module->add(fun(create_vector3d), "vec");
-        module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v;}), "+");
-        module->add(fun([](const Point3D& u, const Vector3D& v) { return u + v;}), "+");
-        module->add(fun([](const Vector3D& u, const Point3D& v) { return u + v;}), "+");
+        module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
+        module->add(fun([](const Point3D& u, const Vector3D& v) { return u + v; }), "+");
+        module->add(fun([](const Vector3D& u, const Point3D& v) { return u + v; }), "+");
 
         return module;
     }
@@ -60,6 +94,7 @@ namespace scripting
     {
         auto module = std::make_shared<chaiscript::Module>();
 
+        module->add(create_imaging_module());
         module->add(create_math_module());
         module->add(create_primitives_module());
         module->add(create_cameras_module());

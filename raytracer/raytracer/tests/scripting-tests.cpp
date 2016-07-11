@@ -5,6 +5,7 @@
 #include "math/vector3d.h"
 #include "math/point3d.h"
 #include "math/approx.h"
+#include "imaging/color.h"
 #include <sstream>
 
 using namespace scripting;
@@ -44,5 +45,27 @@ TEST_CASE("[Scripting] Point + Vector", "[Scripting]")
 
     REQUIRE(result == math::approx(math::Point3D(5, 7, 9)));
 }
+
+TEST_CASE("[Scripting] colors.black()", "[Scripting]")
+{
+    auto result = scripting::evaluate<imaging::color>("colors.black()");
+
+    REQUIRE(result == math::approx(imaging::colors::black()));
+}
+
+TEST_CASE("[Scripting] colors.white()", "[Scripting]")
+{
+    auto result = scripting::evaluate<imaging::color>("colors.white()");
+
+    REQUIRE(result == math::approx(imaging::colors::white()));
+}
+
+TEST_CASE("[Scripting] colors.red()", "[Scripting]")
+{
+    auto result = scripting::evaluate<imaging::color>("colors.red()");
+
+    REQUIRE(result == math::approx(imaging::colors::red()));
+}
+
 
 #endif
