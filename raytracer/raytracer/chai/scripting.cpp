@@ -43,16 +43,38 @@ namespace
 
         auto color_library = std::make_shared<ColorLibrary>();
         module->add_global_const(chaiscript::const_var(color_library), "colors");
-#define COLOR(NAME) module->add(fun(&ColorLibrary::NAME), #NAME);
-        COLOR(black)
-        COLOR(white)
-        COLOR(red)
-        COLOR(green)
-        COLOR(blue)
-        COLOR(yellow)
-        COLOR(magenta)
-        COLOR(cyan)
+
+#define COLOR(NAME) module->add(fun(&ColorLibrary::NAME), #NAME)
+        COLOR(black);
+        COLOR(white);
+        COLOR(red);
+        COLOR(green);
+        COLOR(blue);
+        COLOR(yellow);
+        COLOR(magenta);
+        COLOR(cyan);
 #undef COLOR
+
+        module->add(fun([](const imaging::color& c1, const imaging::color& c2) {
+            return c1 + c2;
+        }), "+");
+
+        module->add(fun([](const imaging::color& c1, const imaging::color& c2) {
+            return c1 * c2;
+        }), "*");
+
+        module->add(fun([](const imaging::color& c, double f) {
+            return c * f;
+        }), "*");
+
+        module->add(fun([](double f, const imaging::color& c) {
+            return c * f;
+        }), "*");
+
+        module->add(fun([](const imaging::color& c, double f) {
+            return c / f;
+        }), "/");
+
         return module;
     }
 

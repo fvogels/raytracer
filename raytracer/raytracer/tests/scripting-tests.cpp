@@ -67,5 +67,12 @@ TEST_CASE("[Scripting] colors.red()", "[Scripting]")
     REQUIRE(result == math::approx(imaging::colors::red()));
 }
 
+TEST_CASE("[Scripting] colors.blue() * 0.5", "[Scripting]")
+{
+    auto result = scripting::evaluate<imaging::color>("colors.blue() * 0.5");
+
+    REQUIRE(result == math::approx(imaging::colors::blue() * 0.5));
+}
+
 
 #endif
