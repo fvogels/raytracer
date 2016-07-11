@@ -140,6 +140,14 @@ std::shared_ptr<Scene> create_scene(TimeStamp now)
     return scene;
 }
 
+//Bitmap render_picture(Renderer const Scene& scene)
+//{
+//    auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
+//    auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
+//
+//    return renderer->render(scene);
+//}
+
 void render()
 {
     TIMED_FUNC(timerObj);

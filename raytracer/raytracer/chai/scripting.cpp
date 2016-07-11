@@ -1,5 +1,5 @@
 #include "chai/scripting.h"
-#include "primitives/sphere.h"
+#include "primitives/primitives.h"
 #include "cameras/cameras.h"
 #include "math/vector3d.h"
 #include "math/point3d.h"
@@ -96,15 +96,54 @@ namespace
         auto module = std::make_shared<chaiscript::Module>();
 
         module->add(fun(raytracer::primitives::sphere), "sphere");
+        module->add(fun(raytracer::primitives::cone_along_z), "cone_along_z");
+        module->add(fun(raytracer::primitives::cylinder_along_x), "cylinder_along_x");
+        module->add(fun(raytracer::primitives::cylinder_along_y), "cylinder_along_y");
+        module->add(fun(raytracer::primitives::cylinder_along_z), "cylinder_along_z");
+        module->add(fun(raytracer::primitives::translate), "translate");
+        module->add(fun(raytracer::primitives::scale), "scale");
+        module->add(fun(raytracer::primitives::rotate_around_x), "rotate_around_x");
+        module->add(fun(raytracer::primitives::rotate_around_y), "rotate_around_y");
+        module->add(fun(raytracer::primitives::rotate_around_z), "rotate_around_z");
+        module->add(fun(raytracer::primitives::group), "union");
 
         return module;
     }
+
+    class CameraLibrary
+    {
+    public:
+        raytracer::cameras::Camera perspective(
+            const math::Point3D& eye,
+            const math::Point3D& look_at,
+            const math::Vector3D& up,
+            double distance,
+            double aspect_ratio) const
+        {
+            return raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+        }
+
+        raytracer::cameras::Camera depth_of_field(
+            const math::Point3D& eye,
+            const math::Point3D& look_at,
+            const math::Vector3D& up,
+            double distance,
+            double aspect_ratio,
+            double eye_size,
+            raytracer::samplers::Sampler eye_sampler)
+        {
+            return raytracer::cameras::depth_of_field_perspective(eye, look_at, up, distance, aspect_ratio, eye_size, eye_sampler);
+        }
+    };
 
     ModulePtr create_cameras_module()
     {
         auto module = std::make_shared<chaiscript::Module>();
 
-        module->add(fun(raytracer::cameras::perspective), "perspective_camera");
+        CameraLibrary camera_library;
+        module->add_global_const(chaiscript::const_var(camera_library), "cameras");
+        module->add(fun(&CameraLibrary::perspective), "perspective");
+        module->add(fun(&CameraLibrary::depth_of_field), "depth_of_field");
 
         return module;
     }
