@@ -6,21 +6,23 @@
 #include <chaiscript/chaiscript_stdlib.hpp>
 #endif
 
-
-namespace scripting
+namespace raytracer
 {
-    void run_script(const std::string&);
-    void run(const std::string&);
-
-#ifdef TEST_BUILD
-    chaiscript::ModulePtr create_modules();
-
-    template<typename T>
-    T evaluate(const std::string& source)
+    namespace scripting
     {
-        chaiscript::ChaiScript chai(chaiscript::Std_Lib::library());
-        chai.add(create_modules());
-        return chai.eval<T>(source);
+        void run_script(const std::string&);
+        void run(const std::string&);
+
+#       ifdef TEST_BUILD
+        chaiscript::ModulePtr create_modules();
+
+        template<typename T>
+        T evaluate(const std::string& source)
+        {
+            chaiscript::ChaiScript chai(chaiscript::Std_Lib::library());
+            chai.add(create_modules());
+            return chai.eval<T>(source);
+        }
+#       endif
     }
-#endif
 }

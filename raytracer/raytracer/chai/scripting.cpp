@@ -3,11 +3,11 @@
 #include "cameras/cameras.h"
 #include "math/vector3d.h"
 #include "math/point3d.h"
-#include "imaging/color.h"
+#include "chai/imaging-module.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 
-using namespace scripting;
+using namespace raytracer::scripting;
 using namespace chaiscript;
 using namespace math;
 
@@ -21,61 +21,6 @@ namespace
     Vector3D create_vector3d(double x, double y, double z)
     {
         return Vector3D(x, y, z);
-    }
-
-    struct ColorLibrary
-    {
-#define COLOR(NAME) imaging::color NAME() const { return imaging::colors::NAME(); }
-        COLOR(black)
-        COLOR(white)
-        COLOR(red)
-        COLOR(green)
-        COLOR(blue)
-        COLOR(yellow)
-        COLOR(magenta)
-        COLOR(cyan)
-#undef COLOR
-    };
-
-    ModulePtr create_imaging_module()
-    {
-        auto module = std::make_shared<chaiscript::Module>();
-
-        auto color_library = std::make_shared<ColorLibrary>();
-        module->add_global_const(chaiscript::const_var(color_library), "colors");
-
-#define COLOR(NAME) module->add(fun(&ColorLibrary::NAME), #NAME)
-        COLOR(black);
-        COLOR(white);
-        COLOR(red);
-        COLOR(green);
-        COLOR(blue);
-        COLOR(yellow);
-        COLOR(magenta);
-        COLOR(cyan);
-#undef COLOR
-
-        module->add(fun([](const imaging::color& c1, const imaging::color& c2) {
-            return c1 + c2;
-        }), "+");
-
-        module->add(fun([](const imaging::color& c1, const imaging::color& c2) {
-            return c1 * c2;
-        }), "*");
-
-        module->add(fun([](const imaging::color& c, double f) {
-            return c * f;
-        }), "*");
-
-        module->add(fun([](double f, const imaging::color& c) {
-            return c * f;
-        }), "*");
-
-        module->add(fun([](const imaging::color& c, double f) {
-            return c / f;
-        }), "/");
-
-        return module;
     }
 
     ModulePtr create_math_module()
@@ -149,29 +94,34 @@ namespace
     }
 }
 
-namespace scripting
+namespace raytracer
 {
-    ModulePtr create_modules()
+    namespace scripting
     {
-        auto module = std::make_shared<chaiscript::Module>();
+        ModulePtr create_modules()
+        {
+            using namespace raytracer::scripting::_private_;
 
-        module->add(create_imaging_module());
-        module->add(create_math_module());
-        module->add(create_primitives_module());
-        module->add(create_cameras_module());
+            auto module = std::make_shared<chaiscript::Module>();
 
-        return module;
+            module->add(create_imaging_module());
+            module->add(create_math_module());
+            module->add(create_primitives_module());
+            module->add(create_cameras_module());
+
+            return module;
+        }
     }
 }
 
-void scripting::run_script(const std::string& path)
+void raytracer::scripting::run_script(const std::string& path)
 {
     ChaiScript chai(Std_Lib::library());
     chai.add(create_modules());
     chai.eval_file(path);
 }
 
-void scripting::run(const std::string& source)
+void raytracer::scripting::run(const std::string& source)
 {
     ChaiScript chai(Std_Lib::library());
     chai.add(create_modules());
