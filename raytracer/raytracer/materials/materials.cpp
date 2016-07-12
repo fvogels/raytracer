@@ -16,7 +16,7 @@ using namespace imaging;
 
 namespace
 {
-    class MultiMaterial : public MaterialImplementation
+    class MultiMaterial : public materials::_private_::MaterialImplementation
     {
     public:
         MultiMaterial(math::Function<Material, const Point2D&> function)

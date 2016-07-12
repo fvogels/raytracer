@@ -7,7 +7,7 @@ namespace raytracer
 {
     namespace materials
     {
-        class UniformMaterial : public MaterialImplementation
+        class UniformMaterial : public _private_::MaterialImplementation
         {
         public:
             UniformMaterial(const MaterialProperties&);

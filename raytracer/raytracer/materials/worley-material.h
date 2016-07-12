@@ -10,7 +10,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class WorleyMaterial3D : public MaterialImplementation
+            class WorleyMaterial3D : public _private_::MaterialImplementation
             {
             public:
                 WorleyMaterial3D();
