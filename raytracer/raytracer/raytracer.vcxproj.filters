@@ -321,6 +321,9 @@
     <ClCompile Include="chai\imaging-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lights\area-light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -681,6 +684,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\material-properties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lights\area-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -29,7 +29,7 @@ const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = 1;
-const int SAMPLES = 1;
+const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -85,8 +85,8 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     // primitives.push_back(sphere());
 
     auto vans = checkered(
-        create_lambert_material(colors::white() * 0.85),
-        create_phong_material(colors::white() * 0.1, colors::white() * 0.85, 8, 0.25));
+        create_phong_material(colors::white() * 0.85, colors::white() * 0.85, 100, 0.0),
+        create_phong_material(colors::white() * 0.1, colors::white() * 0.85, 8, 0.0));
 
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
@@ -117,9 +117,10 @@ std::vector<raytracer::lights::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    light_sources.push_back(omnidirectional(Point3D(5, 5, 0), colors::white()));
+    // light_sources.push_back(omnidirectional(Point3D(5, 5, 0), colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
+    light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
 
     return light_sources;
 }
