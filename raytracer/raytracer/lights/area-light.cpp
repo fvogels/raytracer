@@ -9,7 +9,6 @@ using namespace imaging;
 raytracer::lights::_private_::AreaLight::AreaLight(const math::Rectangle3D& area, samplers::Sampler sampler, const imaging::color& color)
     : m_area(area), m_sampler(sampler), m_color(color)
 {
-    assert(direction.is_unit());
     assert(sampler);
 }
 

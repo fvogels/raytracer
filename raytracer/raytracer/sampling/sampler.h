@@ -31,6 +31,11 @@ namespace raytracer
                 return m_implementation.get();
             }
 
+            operator bool() const
+            {
+                return m_implementation != nullptr;
+            }
+
         private:
             std::shared_ptr<_private_::SamplerImplementation> m_implementation;
         };
