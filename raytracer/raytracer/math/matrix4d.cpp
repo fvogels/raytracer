@@ -51,7 +51,7 @@ Point3D math::operator *(const Matrix4D& a, const Point3D& p)
 #undef AUX
 }
 
-Matrix4D math::identity_matrix()
+Matrix4D math::transformation_matrices::identity()
 {
     return Matrix4D{
         1, 0 , 0, 0,
@@ -61,7 +61,7 @@ Matrix4D math::identity_matrix()
     };
 }
 
-Matrix4D math::translation_matrix(const Vector3D& v)
+Matrix4D math::transformation_matrices::translation(const Vector3D& v)
 {
     return Matrix4D{
         1, 0 , 0, v.x,
@@ -71,7 +71,7 @@ Matrix4D math::translation_matrix(const Vector3D& v)
     };
 }
 
-Matrix4D math::scale_matrix(double sx, double sy, double sz)
+Matrix4D math::transformation_matrices::scaling(double sx, double sy, double sz)
 {
     return Matrix4D{
         sx, 0 , 0, 0,
@@ -81,7 +81,7 @@ Matrix4D math::scale_matrix(double sx, double sy, double sz)
     };
 }
 
-Matrix4D math::rotate_x_matrix(const Angle& angle)
+Matrix4D math::transformation_matrices::rotation_around_x(const Angle& angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -94,7 +94,7 @@ Matrix4D math::rotate_x_matrix(const Angle& angle)
     };
 }
 
-Matrix4D math::rotate_y_matrix(const Angle& angle)
+Matrix4D math::transformation_matrices::rotation_around_y(const Angle& angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -107,7 +107,7 @@ Matrix4D math::rotate_y_matrix(const Angle& angle)
     };
 }
 
-Matrix4D math::rotate_z_matrix(const Angle& angle)
+Matrix4D math::transformation_matrices::rotation_around_z(const Angle& angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -120,7 +120,7 @@ Matrix4D math::rotate_z_matrix(const Angle& angle)
     };
 }
 
-Matrix4D math::coordinate_system(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis, const Vector3D& z_axis)
+Matrix4D math::transformation_matrices::coordinate_system(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis, const Vector3D& z_axis)
 {
     return Matrix4D{
         x_axis.x, y_axis.x, z_axis.x, origin.x,

@@ -19,11 +19,14 @@ namespace math
     Vector3D operator *(const Matrix4D&, const Vector3D&);
     Point3D operator *(const Matrix4D&, const Point3D&);
 
-    Matrix4D identity_matrix();
-    Matrix4D coordinate_system(const Point3D&, const Vector3D&, const Vector3D&, const Vector3D&);
-    Matrix4D translation_matrix(const Vector3D&);
-    Matrix4D scale_matrix(double sx, double sy, double sz);
-    Matrix4D rotate_x_matrix(const Angle&);
-    Matrix4D rotate_y_matrix(const Angle&);
-    Matrix4D rotate_z_matrix(const Angle&);
+    namespace transformation_matrices
+    {
+        Matrix4D identity();
+        Matrix4D coordinate_system(const Point3D&, const Vector3D&, const Vector3D&, const Vector3D&);
+        Matrix4D translation(const Vector3D&);
+        Matrix4D scaling(double sx, double sy, double sz);
+        Matrix4D rotation_around_x(const Angle&);
+        Matrix4D rotation_around_y(const Angle&);
+        Matrix4D rotation_around_z(const Angle&);
+    }
 }
