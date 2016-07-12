@@ -76,26 +76,26 @@ Primitive raytracer::primitives::transform(const math::Transformation& transform
 
 Primitive raytracer::primitives::translate(const math::Vector3D& v, Primitive transformee)
 {
-    return transform(math::translation(v), transformee);
+    return transform(math::transformations::translation(v), transformee);
 }
 
 Primitive raytracer::primitives::scale(double x, double y, double z, Primitive transformee)
 {
-    return transform(math::scale(x, y, z), transformee);
+    return transform(math::transformations::scale(x, y, z), transformee);
 }
 
 Primitive raytracer::primitives::rotate_around_x(math::Angle angle, Primitive transformee)
 {
-    return transform(math::rotate_x(angle), transformee);
+    return transform(math::transformations::rotate_x(angle), transformee);
 }
 
 Primitive raytracer::primitives::rotate_around_y(math::Angle angle, Primitive transformee)
 {
-    return transform(math::rotate_y(angle), transformee);
+    return transform(math::transformations::rotate_y(angle), transformee);
 }
 
 Primitive raytracer::primitives::rotate_around_z(math::Angle angle, Primitive transformee)
 {
-    return transform(math::rotate_z(angle), transformee);
+    return transform(math::transformations::rotate_z(angle), transformee);
 }
 
