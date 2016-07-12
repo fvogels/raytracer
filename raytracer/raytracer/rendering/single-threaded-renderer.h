@@ -9,15 +9,15 @@ namespace raytracer
     {
         namespace _private_
         {
-            class SingleThreadedRenderer : public Renderer
+            class SingleThreadedRenderer : public RendererImplementation
             {
             public:
-                using Renderer::Renderer;
+                using RendererImplementation::RendererImplementation;
 
                 imaging::Bitmap render(const Scene&) const override;
             };
         }
 
-        std::shared_ptr<_private_::Renderer> single_threaded(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer);
+        Renderer single_threaded(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer);
     }
 }

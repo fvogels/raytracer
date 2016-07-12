@@ -8,7 +8,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class MultithreadedRenderer : public Renderer
+            class MultithreadedRenderer : public RendererImplementation
             {
             public:
                 MultithreadedRenderer(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer, unsigned);
@@ -20,6 +20,6 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<_private_::Renderer> multithreaded(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer, unsigned);
+        Renderer multithreaded(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer, unsigned);
     }
 }

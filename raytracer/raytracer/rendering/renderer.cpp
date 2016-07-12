@@ -3,10 +3,13 @@
 using namespace math;
 
 
-raytracer::rendering::_private_::Renderer::Renderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, RayTracer ray_tracer)
-    : m_horizontal_resolution(horizontal_resolution), m_vertical_resolution(vertical_resolution), m_sampler(sampler), m_ray_tracer(ray_tracer) { }
+raytracer::rendering::_private_::RendererImplementation::RendererImplementation(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, RayTracer ray_tracer)
+    : m_horizontal_resolution(horizontal_resolution), m_vertical_resolution(vertical_resolution), m_sampler(sampler), m_ray_tracer(ray_tracer)
+{
+    // NOP
+}
 
-imaging::color raytracer::rendering::_private_::Renderer::render_pixel(const math::Rasterizer& window_rasterizer, int x, int y, const Scene& scene) const
+imaging::color raytracer::rendering::_private_::RendererImplementation::render_pixel(const math::Rasterizer& window_rasterizer, int x, int y, const Scene& scene) const
 {
     math::Rectangle2D pixel_rectangle = window_rasterizer[position(x, y)];
     imaging::color c = imaging::colors::black();

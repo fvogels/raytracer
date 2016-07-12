@@ -13,10 +13,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class Renderer
+            class RendererImplementation
             {
             public:
-                Renderer(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer);
+                RendererImplementation(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer);
 
                 virtual imaging::Bitmap render(const Scene&) const = 0;
 
@@ -29,4 +29,18 @@ namespace raytracer
             };
         }
     }
+
+    class Renderer
+    {
+    public:
+        Renderer(std::shared_ptr<rendering::_private_::RendererImplementation> implementation)
+            : m_implementation(implementation) { }
+
+        const rendering::_private_::RendererImplementation* operator ->() const { return m_implementation.get(); }
+
+        operator bool() const { return m_implementation != nullptr; }
+
+    private:
+        std::shared_ptr<rendering::_private_::RendererImplementation> m_implementation;
+    };
 }
