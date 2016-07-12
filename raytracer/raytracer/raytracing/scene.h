@@ -11,6 +11,6 @@ namespace raytracer
     {
         raytracer::primitives::Primitive root;
         std::vector<LightSource> light_sources;
-        raytracer::cameras::Camera camera;
+        raytracer::Camera camera;
     };
 }

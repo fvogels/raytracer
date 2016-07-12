@@ -124,7 +124,7 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
     return light_sources;
 }
 
-raytracer::cameras::Camera create_camera(TimeStamp now)
+raytracer::Camera create_camera(TimeStamp now)
 {
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
     Point3D camera_position(0, 1 - now.seconds(), 5);

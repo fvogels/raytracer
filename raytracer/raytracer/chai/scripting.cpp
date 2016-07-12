@@ -58,7 +58,7 @@ namespace
     class CameraLibrary
     {
     public:
-        raytracer::cameras::Camera perspective(
+        raytracer::Camera perspective(
             const math::Point3D& eye,
             const math::Point3D& look_at,
             const math::Vector3D& up,
@@ -68,7 +68,7 @@ namespace
             return raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
         }
 
-        raytracer::cameras::Camera depth_of_field(
+        raytracer::Camera depth_of_field(
             const math::Point3D& eye,
             const math::Point3D& look_at,
             const math::Vector3D& up,
