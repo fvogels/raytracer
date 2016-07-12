@@ -5,20 +5,20 @@ using namespace math;
 using namespace raytracer;
 
 
-raytracer::raytracers::_private_::FastRayTracer::FastRayTracer(unsigned recursion_limit)
-    : m_recursion_limit(recursion_limit)
+raytracer::raytracers::_private_::FastRayTracer::FastRayTracer(double weight_bound)
+    : m_weight_bound(weight_bound)
 {
     // NOP
 }
 
 color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene, const Ray& ray) const
 {
-    return trace(scene, ray, m_recursion_limit);
+    return trace(scene, ray, 1.0);
 }
 
-color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene, const math::Ray& ray, unsigned recursions_left) const
+color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene, const math::Ray& ray, double weight) const
 {
-    if (!recursions_left)
+    if (weight < m_weight_bound)
     {
         return colors::black();
     }
@@ -32,7 +32,7 @@ color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene,
             assert(hit.material);
 
             auto material_properties = hit.material->at(hit.local_position);
-            const Vector3D& hit_normal = hit.normal;            
+            const Vector3D& hit_normal = hit.normal;
 
             for (auto light_source : scene.light_sources)
             {
@@ -66,7 +66,7 @@ color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene,
                         }
 
                         // Specular
-                        if ( material_properties.specular != colors::black() )
+                        if (material_properties.specular != colors::black())
                         {
                             assert(hit_normal.is_unit());
                             assert(incoming.is_unit());
@@ -79,6 +79,15 @@ color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene,
                                 result += material_properties.specular * light_ray.color * pow(cos, material_properties.specular_exponent);
                             }
                         }
+
+                        // Reflection
+                        if (material_properties.reflectivity > 0)
+                        {
+                            Vector3D reflected = ray.direction.reflect_by(hit_normal);
+                            Ray secundary_ray(hit.position + reflected * 0.00001, reflected);
+
+                            result += material_properties.reflectivity * trace(scene, secundary_ray, weight * material_properties.reflectivity);
+                        }
                     }
                 }
             }
@@ -88,7 +97,7 @@ color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene,
     }
 }
 
-std::shared_ptr<RayTracer> raytracer::raytracers::fast_ray_tracer(unsigned recursion_limit)
+std::shared_ptr<RayTracer> raytracer::raytracers::fast_ray_tracer(double weight_bound)
 {
-    return std::make_shared<raytracer::raytracers::_private_::FastRayTracer>(recursion_limit);
+    return std::make_shared<raytracer::raytracers::_private_::FastRayTracer>(weight_bound);
 }

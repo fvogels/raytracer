@@ -13,17 +13,17 @@ namespace raytracer
             class FastRayTracer : public RayTracer
             {
             public:
-                FastRayTracer(unsigned recursion_limit = 2);
+                FastRayTracer(double weight_bound);
 
-                imaging::color trace(const Scene& scene, const math::Ray& ray) const override;                
+                imaging::color trace(const Scene&, const math::Ray&) const override;
 
             private:
-                imaging::color trace(const Scene& scene, const math::Ray& ray, unsigned recursions_left) const;
+                imaging::color trace(const Scene&, const math::Ray&, double) const;
 
-                unsigned m_recursion_limit;
+                double m_weight_bound;
             };
         }
 
-        std::shared_ptr<RayTracer> fast_ray_tracer(unsigned recursion_limit = 2);
+        std::shared_ptr<RayTracer> fast_ray_tracer(double weight_bound = 0.01);
     }
 }
