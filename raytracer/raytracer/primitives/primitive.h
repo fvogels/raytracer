@@ -11,27 +11,30 @@ namespace raytracer
 {
     namespace primitives
     {
-        class PrimitiveImplementation
+        namespace _private_
         {
-        public:
-            virtual bool find_hit(const math::Ray&, Hit*) const = 0;
-            virtual std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const = 0;
-            virtual math::Box bounding_box() const = 0;
-        };
+            class PrimitiveImplementation
+            {
+            public:
+                virtual bool find_hit(const math::Ray&, Hit*) const = 0;
+                virtual std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const = 0;
+                virtual math::Box bounding_box() const = 0;
+            };
+        }
     }
 
     class Primitive
     {
     public:
-        Primitive(std::shared_ptr<primitives::PrimitiveImplementation> impl = nullptr)
+        Primitive(std::shared_ptr<primitives::_private_::PrimitiveImplementation> impl = nullptr)
             : m_impl(impl) { }
 
-        primitives::PrimitiveImplementation* operator ->()
+        primitives::_private_::PrimitiveImplementation* operator ->()
         {
             return m_impl.get();
         }
 
-        primitives::PrimitiveImplementation* operator ->() const
+        primitives::_private_::PrimitiveImplementation* operator ->() const
         {
             return m_impl.get();
         }
@@ -53,7 +56,7 @@ namespace raytracer
         }
 
     private:
-        std::shared_ptr<primitives::PrimitiveImplementation> m_impl;
+        std::shared_ptr<primitives::_private_::PrimitiveImplementation> m_impl;
     };
 
     inline std::ostream& operator <<(std::ostream& out, const Primitive&)

@@ -35,7 +35,7 @@ namespace
 
 #pragma pack(pop)
 
-    class FastMesh : public PrimitiveImplementation
+    class FastMesh : public _private_::PrimitiveImplementation
     {
     public:
         FastMesh(std::unique_ptr<XYZ[]> vertices, std::unique_ptr<TRIANGLE[]> triangles, std::unique_ptr<BOX[]> boxes, unsigned vertex_count, unsigned triangle_count, unsigned box_count)
