@@ -27,12 +27,12 @@ LightRay raytracer::lights::_private_::SpotLight::cast_lightray_to(const math::P
     }
 }
 
-lights::LightSource raytracer::lights::spot(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::color& color)
+LightSource raytracer::lights::spot(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::SpotLight>(position, direction, angle, color));
 }
 
-lights::LightSource raytracer::lights::spot(const math::Point3D& position, const math::Point3D& pointed_at, math::Angle angle, const imaging::color& color)
+LightSource raytracer::lights::spot(const math::Point3D& position, const math::Point3D& pointed_at, math::Angle angle, const imaging::color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::SpotLight>(position, (pointed_at - position).normalized(), angle, color));
 }

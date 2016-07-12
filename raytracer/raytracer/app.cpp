@@ -110,7 +110,7 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     return group(root_elts);
 }
 
-std::vector<raytracer::lights::LightSource> create_light_sources(TimeStamp now)
+std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 {
     using namespace raytracer::lights;
 

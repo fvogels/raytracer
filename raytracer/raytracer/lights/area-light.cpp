@@ -34,7 +34,7 @@ std::vector<LightRay> raytracer::lights::_private_::AreaLight::lightrays_to(cons
     return light_rays;
 }
 
-lights::LightSource raytracer::lights::area(const math::Rectangle3D& area, raytracer::samplers::Sampler sampler, const imaging::color& color)
+LightSource raytracer::lights::area(const math::Rectangle3D& area, raytracer::samplers::Sampler sampler, const imaging::color& color)
 {
-    return lights::LightSource(std::make_shared<raytracer::lights::_private_::AreaLight>(area, sampler, color));
+    return LightSource(std::make_shared<raytracer::lights::_private_::AreaLight>(area, sampler, color));
 }

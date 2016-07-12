@@ -20,7 +20,7 @@ std::vector<LightRay> raytracer::lights::_private_::DirectionalLight::lightrays_
     return std::vector<LightRay> { light_ray };
 }
 
-lights::LightSource raytracer::lights::directional(const math::Vector3D& direction, const imaging::color& color)
+LightSource raytracer::lights::directional(const math::Vector3D& direction, const imaging::color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::DirectionalLight>(direction, color));
 }

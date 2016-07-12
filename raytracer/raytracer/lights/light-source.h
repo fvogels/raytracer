@@ -16,21 +16,21 @@ namespace raytracer
             public:
                 virtual std::vector<LightRay> lightrays_to(const math::Point3D&) const = 0;
             };
+        }        
+    }
+
+    class LightSource
+    {
+    public:
+        LightSource(std::shared_ptr<lights::_private_::LightSourceImplementation> implementation)
+            : m_implementation(implementation) { }
+
+        lights::_private_::LightSourceImplementation* operator ->() const
+        {
+            return m_implementation.get();
         }
 
-        class LightSource
-        {
-        public:
-            LightSource(std::shared_ptr<_private_::LightSourceImplementation> implementation)
-                : m_implementation(implementation) { }
-
-            _private_::LightSourceImplementation* operator ->() const
-            {
-                return m_implementation.get();
-            }
-
-        private:
-            std::shared_ptr<_private_::LightSourceImplementation> m_implementation;
-        };
-    }
+    private:
+        std::shared_ptr<lights::_private_::LightSourceImplementation> m_implementation;
+    };
 }
