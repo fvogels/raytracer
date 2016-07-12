@@ -10,7 +10,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            class FastRayTracer : public RayTracer
+            class FastRayTracer : public RayTracerImplementation
             {
             public:
                 FastRayTracer(double weight_bound);
@@ -24,6 +24,6 @@ namespace raytracer
             };
         }
 
-        std::shared_ptr<RayTracer> fast_ray_tracer(double weight_bound = 0.01);
+        RayTracer fast_ray_tracer(double weight_bound = 0.01);
     }
 }

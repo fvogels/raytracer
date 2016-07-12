@@ -95,7 +95,7 @@ color raytracer::raytracers::_private_::FastRayTracer::trace(const Scene& scene,
     }
 }
 
-std::shared_ptr<RayTracer> raytracer::raytracers::fast_ray_tracer(double weight_bound)
+raytracer::RayTracer raytracer::raytracers::fast_ray_tracer(double weight_bound)
 {
-    return std::make_shared<raytracer::raytracers::_private_::FastRayTracer>(weight_bound);
+    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::FastRayTracer>(weight_bound));
 }
