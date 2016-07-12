@@ -11,11 +11,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        struct Context
-        {
-            std::shared_ptr<MaterialImplementation> material;
-        };
-
         class PrimitiveImplementation
         {
         public:
