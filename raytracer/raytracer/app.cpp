@@ -69,13 +69,13 @@ Material create_phong_material(const color& diffuse, const color& specular, doub
     return raytracer::materials::uniform(properties);
 }
 
-Lazy<raytracer::primitives::Primitive> bunny([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/bunny.mesh")); });
-Lazy<raytracer::primitives::Primitive> buddha([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.mesh")); });
-Lazy<raytracer::primitives::Primitive> dragon([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.dragon")); });
-Lazy<raytracer::primitives::Primitive> statuette([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/statuette.mesh")); });
-Lazy<raytracer::primitives::Primitive> lucy([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/lucy.mesh")); });
+Lazy<raytracer::Primitive> bunny([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/bunny.mesh")); });
+Lazy<raytracer::Primitive> buddha([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.mesh")); });
+Lazy<raytracer::Primitive> dragon([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.dragon")); });
+Lazy<raytracer::Primitive> statuette([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/statuette.mesh")); });
+Lazy<raytracer::Primitive> lucy([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/lucy.mesh")); });
 
-raytracer::primitives::Primitive create_root(TimeStamp now)
+raytracer::Primitive create_root(TimeStamp now)
 {
     using namespace raytracer::primitives;
     using namespace raytracer::materials;

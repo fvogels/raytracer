@@ -9,7 +9,7 @@ namespace raytracer
 {
     struct Scene
     {
-        raytracer::primitives::Primitive root;
+        raytracer::Primitive root;
         std::vector<LightSource> light_sources;
         raytracer::Camera camera;
     };
