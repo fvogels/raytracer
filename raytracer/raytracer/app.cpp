@@ -28,7 +28,7 @@
 const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
-const int FRAME_END = FRAME_COUNT;
+const int FRAME_END = 1;
 const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
@@ -58,14 +58,14 @@ Material create_lambert_material(const color& c, bool reflective = false)
     return raytracer::materials::uniform(properties);
 }
 
-Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent)
+Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
 {
     MaterialProperties properties;
     properties.ambient = colors::black();
     properties.diffuse = diffuse;
     properties.specular = specular;
     properties.specular_exponent = specular_exponent;
-    properties.reflectivity = 0;
+    properties.reflectivity = reflectivity;
 
     return raytracer::materials::uniform(properties);
 }
@@ -84,7 +84,9 @@ raytracer::primitives::Primitive create_root(TimeStamp now)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
-    auto vans = checkered(create_lambert_material(colors::white() * 0.85), create_lambert_material(colors::white() * 0.1));
+    auto vans = checkered(
+        create_lambert_material(colors::white() * 0.85),
+        create_phong_material(colors::white() * 0.1, colors::white() * 0.85, 8, 0.25));
 
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
