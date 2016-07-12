@@ -291,7 +291,6 @@
     <ClCompile Include="primitives\triangle.cpp" />
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
-    <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp" />
     <ClCompile Include="rendering\multithreaded-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
     <ClCompile Include="rendering\single-threaded-renderer.cpp" />
@@ -364,6 +363,7 @@
     <ClInclude Include="materials\brdfs\lambert.h" />
     <ClInclude Include="materials\brdfs\phong.h" />
     <ClInclude Include="materials\brdfs\specular-component.h" />
+    <ClInclude Include="materials\material-properties.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\materials.h" />
     <ClInclude Include="materials\uniform-material.h" />
@@ -414,7 +414,6 @@
     <ClInclude Include="primitives\triangle.h" />
     <ClInclude Include="primitives\union.h" />
     <ClInclude Include="raytracing\fast-ray-tracer.h" />
-    <ClInclude Include="raytracing\monte-carlo-ray-tracer.h" />
     <ClInclude Include="raytracing\ray-tracer.h" />
     <ClInclude Include="raytracing\scene.h" />
     <ClInclude Include="rendering\multithreaded-renderer.h" />

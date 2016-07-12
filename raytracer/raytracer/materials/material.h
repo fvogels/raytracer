@@ -4,18 +4,13 @@
 #include "math/point2d.h"
 #include "primitives/hit-position.h"
 #include "materials/brdf.h"
+#include "materials/material-properties.h"
 #include <assert.h>
 #include <memory>
 
 
 namespace raytracer
 {
-    struct MaterialProperties
-    {
-        BRDF brdf;
-        bool reflective;
-    };
-
     class MaterialImplementation
     {
     public:

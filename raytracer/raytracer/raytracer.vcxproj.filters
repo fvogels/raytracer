@@ -222,9 +222,6 @@
     <ClCompile Include="raytracing\fast-ray-tracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raytracing\monte-carlo-ray-tracer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\cropper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -593,9 +590,6 @@
     <ClInclude Include="raytracing\fast-ray-tracer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracing\monte-carlo-ray-tracer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\cropper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -684,6 +678,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chai\imaging-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\material-properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

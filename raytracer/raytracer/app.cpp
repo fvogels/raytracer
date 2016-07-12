@@ -49,17 +49,23 @@ using namespace animation;
 Material create_lambert_material(const color& c, bool reflective = false)
 {
     MaterialProperties properties;
-    properties.brdf = raytracer::brdfs::lambert(c);
-    properties.reflective = reflective;
+    properties.ambient = colors::black();
+    properties.diffuse = c;
+    properties.specular = colors::black();
+    properties.specular_exponent = 0;
+    properties.reflectivity = 0;
 
     return raytracer::materials::uniform(properties);
 }
 
-Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent, bool reflective = true)
+Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent)
 {
     MaterialProperties properties;
-    properties.brdf = raytracer::brdfs::phong(diffuse, specular, specular_exponent);
-    properties.reflective = reflective;
+    properties.ambient = colors::black();
+    properties.diffuse = diffuse;
+    properties.specular = specular;
+    properties.specular_exponent = specular_exponent;
+    properties.reflectivity = 0;
 
     return raytracer::materials::uniform(properties);
 }

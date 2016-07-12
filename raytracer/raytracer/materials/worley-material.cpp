@@ -6,6 +6,7 @@
 using namespace raytracer;
 using namespace raytracer::materials;
 using namespace math;
+using namespace imaging;
 
 
 raytracer::materials::_private_::WorleyMaterial3D::WorleyMaterial3D()
@@ -16,11 +17,14 @@ raytracer::materials::_private_::WorleyMaterial3D::WorleyMaterial3D()
 
 MaterialProperties raytracer::materials::_private_::WorleyMaterial3D::at(const HitPosition& hp) const
 {
-    MaterialProperties properties;
-
     Point3D p = hp.xyz;
-    properties.brdf = raytracer::brdfs::lambert(imaging::colors::white() * m_noise_function(Point3D(p.x * 5, p.y * 5, p.z * 5)));
-    properties.reflective = false;
+
+    MaterialProperties properties;
+    properties.ambient = colors::black();
+    properties.diffuse = this->m_noise_function(p) * colors::white();
+    properties.specular = colors::black();
+    properties.specular_exponent = 0.0;
+    properties.reflectivity = 0.0;
 
     return properties;
 }
