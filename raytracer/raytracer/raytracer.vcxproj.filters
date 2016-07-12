@@ -324,6 +324,9 @@
     <ClCompile Include="lights\area-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="raytracing\binary-ray-tracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -687,6 +690,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lights\area-light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\binary-ray-tracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

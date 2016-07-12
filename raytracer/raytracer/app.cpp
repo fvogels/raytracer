@@ -13,8 +13,7 @@
 #include "materials/brdfs/lambert.h"
 #include "materials/brdfs/phong.h"
 #include "materials/worley-material.h"
-#include "raytracing/ray-tracer.h"
-#include "raytracing/fast-ray-tracer.h"
+#include "raytracing/ray-tracers.h"
 #include "rendering/multithreaded-renderer.h"
 #include "animation/animation.h"
 #include "easylogging++.h"
@@ -28,7 +27,7 @@
 const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
-const int FRAME_END = 1;
+const int FRAME_END = FRAME_COUNT;
 const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
@@ -128,7 +127,7 @@ std::vector<raytracer::lights::LightSource> create_light_sources(TimeStamp now)
 raytracer::cameras::Camera create_camera(TimeStamp now)
 {
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-    Point3D camera_position(0, 1, 5);
+    Point3D camera_position(0, 1 - now.seconds(), 5);
     // Point3D camera_position = camera_position_animation(now);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
@@ -165,7 +164,7 @@ void render()
 
     WIF wif("e:/temp/output/test.wif");
 
-    auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
+    auto ray_tracer = raytracer::raytracers::binary();
     auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
 
     for (int frame = FRAME_START; frame < FRAME_END; ++frame)
