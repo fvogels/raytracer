@@ -33,7 +33,7 @@ Camera raytracer::cameras::depth_of_field_perspective(
     double distance,
     double aspect_ratio,
     double eye_size,
-    raytracer::samplers::Sampler eye_sampler)
+    raytracer::Sampler eye_sampler)
 {
     assert(up.is_unit());
 

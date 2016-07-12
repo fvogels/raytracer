@@ -6,7 +6,7 @@ using namespace raytracer;
 using namespace imaging;
 
 
-raytracer::lights::_private_::AreaLight::AreaLight(const math::Rectangle3D& area, samplers::Sampler sampler, const imaging::color& color)
+raytracer::lights::_private_::AreaLight::AreaLight(const math::Rectangle3D& area, Sampler sampler, const imaging::color& color)
     : m_area(area), m_sampler(sampler), m_color(color)
 {
     assert(sampler);
@@ -33,7 +33,7 @@ std::vector<LightRay> raytracer::lights::_private_::AreaLight::lightrays_to(cons
     return light_rays;
 }
 
-LightSource raytracer::lights::area(const math::Rectangle3D& area, raytracer::samplers::Sampler sampler, const imaging::color& color)
+LightSource raytracer::lights::area(const math::Rectangle3D& area, raytracer::Sampler sampler, const imaging::color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::AreaLight>(area, sampler, color));
 }

@@ -16,13 +16,13 @@ namespace raytracer
             class RendererImplementation
             {
             public:
-                RendererImplementation(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer);
+                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer);
 
                 virtual imaging::Bitmap render(const Scene&) const = 0;
 
             protected:
                 unsigned m_horizontal_resolution, m_vertical_resolution;
-                raytracer::samplers::Sampler m_sampler;
+                raytracer::Sampler m_sampler;
                 RayTracer m_ray_tracer;
 
                 imaging::color render_pixel(const math::Rasterizer&, int, int, const Scene&) const;

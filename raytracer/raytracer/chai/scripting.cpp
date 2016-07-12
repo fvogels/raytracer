@@ -75,7 +75,7 @@ namespace
             double distance,
             double aspect_ratio,
             double eye_size,
-            raytracer::samplers::Sampler eye_sampler)
+            raytracer::Sampler eye_sampler)
         {
             return raytracer::cameras::depth_of_field_perspective(eye, look_at, up, distance, aspect_ratio, eye_size, eye_sampler);
         }

@@ -3,7 +3,7 @@
 using namespace math;
 
 
-raytracer::rendering::_private_::RendererImplementation::RendererImplementation(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, RayTracer ray_tracer)
+raytracer::rendering::_private_::RendererImplementation::RendererImplementation(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer)
     : m_horizontal_resolution(horizontal_resolution), m_vertical_resolution(vertical_resolution), m_sampler(sampler), m_ray_tracer(ray_tracer)
 {
     // NOP

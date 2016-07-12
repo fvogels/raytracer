@@ -2,7 +2,7 @@
 #include "math/rasterizer.h"
 
 using namespace math;
-using namespace raytracer::samplers;
+using namespace raytracer;
 
 
 void raytracer::samplers::_private_::GridSampler::sample(const Rectangle2D& rectangle, std::function<void(const Point2D&)> function) const

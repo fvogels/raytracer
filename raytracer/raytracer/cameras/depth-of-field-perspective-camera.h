@@ -36,6 +36,6 @@ namespace raytracer
             double distance,
             double aspect_ratio,
             double eye_size,
-            raytracer::samplers::Sampler eye_sampler);
+            raytracer::Sampler eye_sampler);
     }
 }

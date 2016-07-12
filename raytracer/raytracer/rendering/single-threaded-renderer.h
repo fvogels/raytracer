@@ -18,6 +18,6 @@ namespace raytracer
             };
         }
 
-        Renderer single_threaded(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer);
+        Renderer single_threaded(unsigned, unsigned, raytracer::Sampler, RayTracer);
     }
 }

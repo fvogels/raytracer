@@ -11,7 +11,7 @@ namespace raytracer
             class MultithreadedRenderer : public RendererImplementation
             {
             public:
-                MultithreadedRenderer(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer, unsigned);
+                MultithreadedRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
 
                 imaging::Bitmap render(const Scene&) const override;
 
@@ -20,6 +20,6 @@ namespace raytracer
             };
         }
 
-        Renderer multithreaded(unsigned, unsigned, raytracer::samplers::Sampler, RayTracer, unsigned);
+        Renderer multithreaded(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
     }
 }

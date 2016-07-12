@@ -35,7 +35,7 @@ imaging::Bitmap raytracer::rendering::_private_::SingleThreadedRenderer::render(
     return bitmap;
 }
 
-Renderer single_threaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::samplers::Sampler sampler, RayTracer ray_tracer)
+Renderer single_threaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer)
 {
     return Renderer(std::make_shared<_private_::SingleThreadedRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer));
 }
