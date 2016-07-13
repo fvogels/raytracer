@@ -16,5 +16,11 @@ namespace math
 
             return from_lambda(lambda);
         }
+
+        template<typename R>
+        Function<R, R> identity()
+        {
+            return from_lambda<R, R>([](R x) { return x; });
+        }
     }
 }
