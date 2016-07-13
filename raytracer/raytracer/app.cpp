@@ -25,10 +25,10 @@
 
 #ifdef NDEBUG
 const int BITMAP_SIZE = 500;
-const int FRAME_COUNT = 30;
+const int FRAME_COUNT = 30 * 5;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 1;
+const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -94,7 +94,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> spheres;
 
-    for (double z = 0; z < 20; z += 5)
+    for (double z = 0; z < 1; z += 5)
     {
         spheres.push_back(translate(Vector3D(-2, 0, -z), sphere()));
         spheres.push_back(translate(Vector3D(2, 0, -z), sphere()));
@@ -129,7 +129,7 @@ raytracer::Camera create_camera(TimeStamp now)
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
     math::Function<double, double> t = math::functions::identity<double>();
-    Animation<double> camera_y = ease(make_animation(5.0 - 5.0 * t, 1_s), easing_function<QUADRATIC, IN>());
+    Animation<double> camera_y = ease(make_animation(5.0 - 5.0 * t, 1_s), easing_function<BOUNCE>());
     Point3D camera_position(0, camera_y(now), 5);
     // Point3D camera_position = camera_position_animation(now);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
