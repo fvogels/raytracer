@@ -312,12 +312,6 @@
     <ClCompile Include="cameras\depth-of-field-perspective-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\scripting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="chai\imaging-module.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lights\area-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -328,6 +322,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\easing-functions-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\perlin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="materials\perlin-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -683,12 +683,6 @@
     <ClInclude Include="cameras\depth-of-field-perspective-camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\scripting.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="chai\imaging-module.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="materials\material-properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -702,6 +696,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\easing-functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\perlin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\perlin-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

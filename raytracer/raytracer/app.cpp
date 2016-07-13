@@ -14,6 +14,7 @@
 #include "materials/brdfs/lambert.h"
 #include "materials/brdfs/phong.h"
 #include "materials/worley-material.h"
+#include "materials/perlin-material.h"
 #include "raytracing/ray-tracers.h"
 #include "rendering/multithreaded-renderer.h"
 #include "animation/animation.h"
@@ -25,10 +26,10 @@
 
 #ifdef NDEBUG
 const int BITMAP_SIZE = 500;
-const int FRAME_COUNT = 30 * 5;
+const int FRAME_COUNT = 30 * 1;
 const int FRAME_START = 0;
-const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 2;
+const int FRAME_END = 1;
+const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -83,6 +84,9 @@ raytracer::Primitive create_root(TimeStamp now)
     std::vector<Primitive> primitives;
     // primitives.push_back(sphere());
 
+    auto white = create_lambert_material(colors::white());
+    auto black = create_lambert_material(colors::black());
+
     auto vans = checkered(
         create_phong_material(colors::white() * 0.85, colors::white() * 0.85, 100, 0.0),
         create_phong_material(colors::white() * 0.1, colors::white() * 0.85, 8, 0.0));
@@ -90,7 +94,7 @@ raytracer::Primitive create_root(TimeStamp now)
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    auto g = decorate(vans, translate(Vector3D(0, -1, 0), xz_plane()));
+    auto g = decorate(worley(), translate(Vector3D(0, -1, 0), xz_plane()));
 
     std::vector<Primitive> spheres;
 
@@ -129,14 +133,14 @@ raytracer::Camera create_camera(TimeStamp now)
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
     math::Function<double, double> t = math::functions::identity<double>();
-    Animation<double> camera_y = ease(make_animation(5.0 - 5.0 * t, 1_s), easing_function<BOUNCE>());
+    Animation<double> camera_y = ease(make_animation(5.0 - 5.0 * t, 1_s), easing_function<LINEAR>());
     Point3D camera_position(0, camera_y(now), 5);
     // Point3D camera_position = camera_position_animation(now);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
     // auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1, 0.5, samplers::grid(4, 4));
-
+    
     return camera;
 }
 

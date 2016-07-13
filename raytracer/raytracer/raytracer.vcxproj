@@ -240,8 +240,6 @@
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
-    <ClCompile Include="chai\imaging-module.cpp" />
-    <ClCompile Include="chai\scripting.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="lights\area-light.cpp" />
     <ClCompile Include="lights\spot-light.cpp" />
@@ -258,12 +256,14 @@
     <ClCompile Include="materials\brdfs\phong.cpp" />
     <ClCompile Include="materials\brdfs\specular-component.cpp" />
     <ClCompile Include="materials\material.cpp" />
+    <ClCompile Include="materials\perlin-material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="materials\worley-material.cpp" />
     <ClCompile Include="math\box.cpp" />
     <ClCompile Include="math\functions\easing-functions.cpp" />
     <ClCompile Include="math\functions\patterns.cpp" />
+    <ClCompile Include="math\functions\perlin.cpp" />
     <ClCompile Include="math\functions\worley.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
     <ClCompile Include="math\point2d.cpp" />
@@ -348,8 +348,6 @@
     <ClInclude Include="cameras\orthographic-camera.h" />
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
-    <ClInclude Include="chai\imaging-module.h" />
-    <ClInclude Include="chai\scripting.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color-mapper.h" />
@@ -370,6 +368,7 @@
     <ClInclude Include="materials\material-properties.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\materials.h" />
+    <ClInclude Include="materials\perlin-material.h" />
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="materials\worley-material.h" />
     <ClInclude Include="math\angle.h" />
@@ -380,6 +379,7 @@
     <ClInclude Include="math\functions\easing-functions.h" />
     <ClInclude Include="math\functions\functions.h" />
     <ClInclude Include="math\functions\patterns.h" />
+    <ClInclude Include="math\functions\perlin.h" />
     <ClInclude Include="math\functions\worley.h" />
     <ClInclude Include="math\interval.h" />
     <ClInclude Include="math\interval-mapper.h" />
