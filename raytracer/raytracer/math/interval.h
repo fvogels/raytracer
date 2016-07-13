@@ -17,44 +17,44 @@ namespace math
 
         Interval(const Interval&) = default;
 
-        static Interval empty()
+        static constexpr Interval empty()
         {
             return Interval(std::numeric_limits<T>::infinity(), -std::numeric_limits<T>::infinity());
         }
 
-        static Interval infinite()
+        static constexpr Interval infinite()
         {
             return Interval(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
         }
 
         // Bounds are taken as is. If x > y, then interval is empty.
-        static Interval from_raw_bounds(double x, double y)
+        static constexpr Interval from_raw_bounds(double x, double y)
         {
             return Interval(x, y);
         }
 
         // Bounds are "sorted" so that interval is not empty
-        static Interval from_bounds(double x, double y)
+        static constexpr Interval from_bounds(double x, double y)
         {
             return Interval(std::min(x, y), std::max(x, y));
         }
 
-        decltype(upper-lower) size() const
+        constexpr decltype(upper-lower) size() const
         {
             return upper - lower;
         }
 
-        bool contains(T x) const
+        constexpr bool contains(T x) const
         {
             return lower <= x && x <= upper;
         }
 
-        double to_relative(T x) const
+        constexpr double to_relative(T x) const
         {
             return (x - lower) / size();
         }
 
-        T from_relative(double t) const
+        constexpr T from_relative(double t) const
         {
             return t * size() + lower;
         }
