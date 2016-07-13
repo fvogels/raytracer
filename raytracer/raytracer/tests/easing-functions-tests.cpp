@@ -9,12 +9,12 @@ using namespace math::functions::easing;
 
 namespace
 {
-    double lderivative(Function<double, double> f, double x, double dx = 0.000001)
+    double lderivative(Function<double, double> f, double x, double dx = 0.00000001)
     {
         return (f(x + dx) - f(x)) / dx;
     }
 
-    double rderivative(Function<double, double> f, double x, double dx = 0.000001)
+    double rderivative(Function<double, double> f, double x, double dx = 0.00000001)
     {
         return (f(x) - f(x - dx)) / dx;
     }
@@ -95,8 +95,8 @@ TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunct
 
     CHECK(f(2) == Approx(3));
     CHECK(f(3) == Approx(7));
-    CHECK(lderivative(f, 2) == Approx(0).epsilon(0.0001));
-    CHECK(rderivative(f, 3) == Approx(0).epsilon(0.0001));
+    CHECK(lderivative(f, 2) == Approx(0).epsilon(0.000001));
+    CHECK(rderivative(f, 3) == Approx(0).epsilon(0.000001));
 }
 
 #endif
