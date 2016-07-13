@@ -71,5 +71,13 @@ TEST_CASE("[EasingFunctions] Linear with x=1..3, y=1..7)", "[EasingFunctions]")
     CHECK(rderivative(f, 3) == Approx(3));
 }
 
+TEST_CASE("[EasingFunctions] QuadraticIn with x=2..3, y=3..7)", "[EasingFunctions]")
+{
+    auto f = easing_function<QUADRATIC, IN>(x_range(2, 3), y_range(3, 7));
+
+    CHECK(f(2) == Approx(3));
+    CHECK(f(3) == Approx(7));
+    CHECK(lderivative(f, 2) == Approx(0));
+}
 
 #endif
