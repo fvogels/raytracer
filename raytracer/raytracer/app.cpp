@@ -5,9 +5,10 @@
 #include "primitives/primitives.h"
 #include "cameras/cameras.h"
 #include "math/rasterizer.h"
+#include "math/functions/functions.h"
+#include "math/functions/noise.h"
 #include "sampling/grid-sampler.h"
 #include "materials/materials.h"
-#include "math/functions/noise.h"
 #include "lights/lights.h"
 #include "lights/light-ray.h"
 #include "materials/brdfs/lambert.h"
@@ -16,10 +17,9 @@
 #include "raytracing/ray-tracers.h"
 #include "rendering/multithreaded-renderer.h"
 #include "animation/animation.h"
-#include "easylogging++.h"
+// #include "easylogging++.h"
 #include "logging.h"
 #include "util/lazy.h"
-#include "chai/scripting.h"
 #include <assert.h>
 
 
@@ -28,7 +28,7 @@ const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 2;
+const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 500;
@@ -105,8 +105,6 @@ raytracer::Primitive create_root(TimeStamp now)
     // auto g = group(primitives);
     std::vector<Primitive> root_elts{ g, g2 };
 
-
-
     return group(root_elts);
 }
 
@@ -116,18 +114,23 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    // light_sources.push_back(omnidirectional(Point3D(5, 5, 0), colors::white()));
+    light_sources.push_back(omnidirectional(Point3D(0, 5, 5), colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
-    light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
+    // light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
 
     return light_sources;
 }
 
 raytracer::Camera create_camera(TimeStamp now)
 {
+    using namespace math::functions::easing;
+
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-    Point3D camera_position(0, 1 - now.seconds(), 5);
+
+    math::Function<double, double> t = math::functions::identity<double>();
+    Animation<double> camera_y = ease(make_animation(5.0 - 5.0 * t, 1_s), easing_function<QUADRATIC, IN>());
+    Point3D camera_position(0, camera_y(now), 5);
     // Point3D camera_position = camera_position_animation(now);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
@@ -158,18 +161,18 @@ std::shared_ptr<Scene> create_scene(TimeStamp now)
 
 void render()
 {
-    TIMED_FUNC(timerObj);
+    // TIMED_FUNC(timerObj);
 
     logging::configure();
 
     WIF wif("e:/temp/output/test.wif");
 
-    auto ray_tracer = raytracer::raytracers::binary();
+    auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
     auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
 
     for (int frame = FRAME_START; frame < FRAME_END; ++frame)
     {
-        TIMED_SCOPE(timerObj, "single frame");
+        // TIMED_SCOPE(timerObj, "single frame");
 
         double t = double(frame) / FRAME_COUNT;
         TimeStamp now = TimeStamp::from_epoch(1_s * t);
