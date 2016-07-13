@@ -12,7 +12,7 @@ namespace math
         T lower, upper;
 
         // TODO Make private and make use of factory methods
-        Interval(T lower, T upper)
+        constexpr Interval(T lower, T upper)
             : lower(lower), upper(upper) { }
 
         Interval(const Interval&) = default;
