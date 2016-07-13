@@ -1,6 +1,4 @@
 #include "materials/worley-material.h"
-#include "materials/brdf.h"
-#include "materials/brdfs/lambert.h"
 #include "math/functions/worley.h"
 
 using namespace raytracer;
