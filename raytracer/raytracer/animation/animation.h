@@ -32,6 +32,12 @@ namespace animation
         animation::Duration m_duration;
     };
 
+    template<typename T>
+    Animation<T> make_animation(math::Function<T, TimeStamp> function, animation::Duration duration)
+    {
+        return Animation<T>(function, duration);
+    }
+
     Animation<math::Point3D> circular_xz(double radius, const math::Interval<math::Angle>&, const Duration&);
     Animation<math::Point3D> circular(const math::Point3D&, const math::Point3D&, const math::Vector3D&, const math::Interval<math::Angle>&, const Duration&);
 }
