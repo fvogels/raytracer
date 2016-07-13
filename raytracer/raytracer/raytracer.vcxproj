@@ -262,6 +262,7 @@
     <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="materials\worley-material.cpp" />
     <ClCompile Include="math\box.cpp" />
+    <ClCompile Include="math\functions\easing-functions.cpp" />
     <ClCompile Include="math\functions\patterns.cpp" />
     <ClCompile Include="math\functions\worley.cpp" />
     <ClCompile Include="math\matrix4d.cpp" />
@@ -321,6 +322,7 @@
     <ClCompile Include="tests\combined-reader-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
+    <ClCompile Include="tests\easing-functions-tests.cpp" />
     <ClCompile Include="tests\fisheye-tests.cpp" />
     <ClCompile Include="tests\interpreter-tests.cpp" />
     <ClCompile Include="tests\intersection-tests.cpp" />
@@ -329,7 +331,6 @@
     <ClCompile Include="tests\parser-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
-    <ClCompile Include="tests\scripting-tests.cpp" />
     <ClCompile Include="tests\stream-line-reader-tests.cpp" />
     <ClCompile Include="tests\string-reader-tests.cpp" />
     <ClCompile Include="tests\tokenizer-tests.cpp" />
@@ -376,6 +377,7 @@
     <ClInclude Include="math\box.h" />
     <ClInclude Include="math\function.h" />
     <ClInclude Include="math\functions\bool-mapper.h" />
+    <ClInclude Include="math\functions\easing-functions.h" />
     <ClInclude Include="math\functions\functions.h" />
     <ClInclude Include="math\functions\patterns.h" />
     <ClInclude Include="math\functions\worley.h" />

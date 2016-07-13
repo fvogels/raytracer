@@ -80,6 +80,12 @@ namespace math
         Function<R2, R1> m_g;
     };
 
+    template<typename R>
+    Function<R, R> identity()
+    {
+        return from_lambda<R, R>([](R x) { return x; });
+    }
+
     template<typename R2, typename R1, typename... Ts>
     Function<R2, Ts...> compose(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
     {
