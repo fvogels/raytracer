@@ -34,6 +34,7 @@ namespace math
                 math::functions::EasingFunction linear();
                 math::functions::EasingFunction quadratic_in();
                 math::functions::EasingFunction quadratic_out();
+                math::functions::EasingFunction quadratic_inout();
 
                 template<typename, typename, typename = void>
                 struct EasingFunctionBuilder;
@@ -62,6 +63,15 @@ namespace math
                     static math::functions::EasingFunction function()
                     {
                         return quadratic_out();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<QUADRATIC, INOUT>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return quadratic_inout();
                     }
                 };
 

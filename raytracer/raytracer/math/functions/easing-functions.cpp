@@ -37,3 +37,14 @@ EasingFunction math::functions::easing::_private_::quadratic_out()
 
     return from_lambda(lambda);
 }
+
+EasingFunction math::functions::easing::_private_::quadratic_inout()
+{
+    std::function<double(double)> lambda = [](double t) {
+        assert(Interval<double>(0, 1).contains(t));
+
+        return (3 - 2 * t) * t * t;
+    };
+
+    return from_lambda(lambda);
+}
