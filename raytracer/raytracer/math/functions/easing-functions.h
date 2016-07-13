@@ -39,8 +39,8 @@ namespace math
                 template<typename, typename, typename = void>
                 struct EasingFunctionBuilder;
 
-                template<typename SIDE>
-                struct EasingFunctionBuilder<LINEAR, SIDE, typename is_side_parameter<SIDE>::t>
+                template<>
+                struct EasingFunctionBuilder<LINEAR, void>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -116,31 +116,31 @@ namespace math
                 return _private_::YInterval{ Interval<double>(from, to) };
             }
 
-            template<typename SHAPE, typename SIDES>
+            template<typename SHAPE, typename SIDES = void>
             EasingFunction easing_function()
             {
                 return _private_::EasingFunctionBuilder<SHAPE, SIDES>::function();
             }
 
-            template<typename SHAPE, typename SIDES>
+            template<typename SHAPE, typename SIDES = void>
             EasingFunction easing_function(_private_::DeltaY dy)
             {
                 return easing_function<SHAPE, SIDES>() * dy.delta;
             }
 
-            template<typename SHAPE, typename SIDES>
+            template<typename SHAPE, typename SIDES = void>
             EasingFunction easing_function(_private_::YInterval y)
             {
                 return easing_function<SHAPE, SIDES>(dy(y.interval.size())) + y.interval.lower;
             }
 
-            template<typename SHAPE, typename SIDES>
+            template<typename SHAPE, typename SIDES = void>
             EasingFunction easing_function(_private_::DeltaX dx, _private_::YInterval y)
             {
                 return (identity<double>() / dx.delta) >> easing_function<SHAPE, SIDES>(y);
             }
 
-            template<typename SHAPE, typename SIDES>
+            template<typename SHAPE, typename SIDES = void>
             EasingFunction easing_function(_private_::XInterval x, _private_::YInterval y)
             {
                 return (identity<double>() - x.interval.lower) >> easing_function<SHAPE, SIDES>(dx(x.interval.size()), y);

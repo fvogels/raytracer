@@ -23,7 +23,7 @@ namespace
 
 TEST_CASE("[EasingFunctions] Linear)", "[EasingFunctions]")
 {
-    auto f = easing_function<LINEAR, IN>();
+    auto f = easing_function<LINEAR>();
 
     CHECK(f(0) == Approx(0));
     CHECK(f(1) == Approx(1));
@@ -33,7 +33,7 @@ TEST_CASE("[EasingFunctions] Linear)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] Linear with dy=5)", "[EasingFunctions]")
 {
-    auto f = easing_function<LINEAR, IN>(dy(5));
+    auto f = easing_function<LINEAR>(dy(5));
 
     CHECK(f(0) == Approx(0));
     CHECK(f(1) == Approx(5));
@@ -43,7 +43,7 @@ TEST_CASE("[EasingFunctions] Linear with dy=5)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] Linear with y=1..7)", "[EasingFunctions]")
 {
-    auto f = easing_function<LINEAR, IN>(y_range(1, 7));
+    auto f = easing_function<LINEAR>(y_range(1, 7));
 
     CHECK(f(0) == Approx(1));
     CHECK(f(1) == Approx(7));
@@ -53,7 +53,7 @@ TEST_CASE("[EasingFunctions] Linear with y=1..7)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] Linear with dx=3, y=1..7)", "[EasingFunctions]")
 {
-    auto f = easing_function<LINEAR, IN>(dx(3), y_range(1, 7));
+    auto f = easing_function<LINEAR>(dx(3), y_range(1, 7));
 
     CHECK(f(0) == Approx(1));
     CHECK(f(3) == Approx(7));
@@ -63,7 +63,7 @@ TEST_CASE("[EasingFunctions] Linear with dx=3, y=1..7)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] Linear with x=1..3, y=1..7)", "[EasingFunctions]")
 {
-    auto f = easing_function<LINEAR, IN>(x_range(1, 3), y_range(1, 7));
+    auto f = easing_function<LINEAR>(x_range(1, 3), y_range(1, 7));
 
     CHECK(f(1) == Approx(1));
     CHECK(f(3) == Approx(7));
@@ -95,8 +95,8 @@ TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunct
 
     CHECK(f(2) == Approx(3));
     CHECK(f(3) == Approx(7));
-    CHECK(lderivative(f, 2) == Approx(0));
-    CHECK(rderivative(f, 3) == Approx(0));
+    CHECK(lderivative(f, 2) == Approx(0).epsilon(0.0001));
+    CHECK(rderivative(f, 3) == Approx(0).epsilon(0.0001));
 }
 
 #endif
