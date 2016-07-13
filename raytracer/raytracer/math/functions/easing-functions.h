@@ -33,6 +33,7 @@ namespace math
             {
                 math::functions::EasingFunction linear();
                 math::functions::EasingFunction quadratic_in();
+                math::functions::EasingFunction quadratic_out();
 
                 template<typename, typename, typename = void>
                 struct EasingFunctionBuilder;
@@ -46,12 +47,21 @@ namespace math
                     }
                 };
 
-                template<typename SIDE>
-                struct EasingFunctionBuilder<QUADRATIC, SIDE, typename is_side_parameter<SIDE>::t>
+                template<>
+                struct EasingFunctionBuilder<QUADRATIC, IN>
                 {
                     static math::functions::EasingFunction function()
                     {
                         return quadratic_in();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<QUADRATIC, OUT>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return quadratic_out();
                     }
                 };
 
