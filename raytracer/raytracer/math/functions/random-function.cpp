@@ -7,10 +7,11 @@ math::Function<unsigned, unsigned> math::functions::random_function(unsigned par
 {
     std::function<unsigned(unsigned)> lambda = [parameter](unsigned x) -> unsigned
     {
-        unsigned y = x ^ parameter ^ 0x3F78A401;
-        unsigned z = x * 87984667 + y * 754136899 + 1324657;
+        unsigned a = x ^ 0x71F38A01;
+        unsigned b = x ^ 0x3049F1BC;
+        unsigned c = a * b * x;
 
-        return x ^ z;
+        return a ^ b ^ c;
     };
 
     return from_lambda<unsigned, unsigned>(lambda);
