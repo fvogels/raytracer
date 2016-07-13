@@ -57,7 +57,7 @@ TEST_CASE("[CameraTransformation] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0)"
     Vector3D up(0, 1, 0);
 
     auto matrix = create_transformation(eye, lookat, up);
-    auto expected = math::identity_matrix();
+    auto expected = math::transformation_matrices::identity();
 
     assert_equals(matrix, expected);
     assert_equals(eye, matrix * Point3D(0, 0, 0));
