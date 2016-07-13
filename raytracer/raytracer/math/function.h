@@ -105,6 +105,18 @@ namespace math
     }
 
     template<typename R, typename... Ts>
+    Function<R, Ts...> operator *(const Function<R, Ts...>& f, const R& factor)
+    {
+        return from_lambda<R, Ts...>([f, factor](Ts... ts) { return f(ts...) * factor;});
+    }
+
+    template<typename R, typename... Ts>
+    Function<R, Ts...> operator *(const R& factor, const Function<R, Ts...>& f)
+    {
+        return from_lambda<R, Ts...>([f, g](Ts... ts) { return factor * f(ts...);});
+    }
+
+    template<typename R, typename... Ts>
     Function<R, Ts...> operator *(const Function<R, Ts...>& f, const Function<R, Ts...>& g)
     {
         return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) * g(ts...);});
