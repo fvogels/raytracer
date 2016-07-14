@@ -94,7 +94,7 @@ raytracer::Primitive create_root(TimeStamp now)
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    auto g = decorate(worley(), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto g = decorate(perlin2d(), translate(Vector3D(0, -1, 0), xz_plane()));
 
     std::vector<Primitive> spheres;
 
@@ -107,7 +107,7 @@ raytracer::Primitive create_root(TimeStamp now)
     auto g2 = decorate(vans, accelerated_union(spheres));
 
     // auto g = group(primitives);
-    std::vector<Primitive> root_elts{ g, g2 };
+    std::vector<Primitive> root_elts{ g };
 
     return group(root_elts);
 }
