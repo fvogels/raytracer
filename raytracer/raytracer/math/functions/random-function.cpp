@@ -9,9 +9,9 @@ math::Function<unsigned, unsigned> math::functions::random_function(unsigned par
     {
         unsigned a = x ^ 0x71F38A01;
         unsigned b = x ^ 0x3049F1BC;
-        unsigned c = a * b * x;
+        unsigned c = parameter * a * b * x;
 
-        return a ^ b ^ c;
+        return a ^ b ^ c ^ parameter;
     };
 
     return from_lambda<unsigned, unsigned>(lambda);
