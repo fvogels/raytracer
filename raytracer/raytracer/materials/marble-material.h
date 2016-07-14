@@ -8,6 +8,6 @@ namespace raytracer
 {
     namespace materials
     {
-        Material marble2d();
+        Material marble2d(unsigned, double);
     }
 }

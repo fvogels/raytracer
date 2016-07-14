@@ -6,7 +6,7 @@ using namespace imaging;
 using namespace math;
 
 
-Material raytracer::materials::marble2d()
+Material raytracer::materials::marble2d(unsigned octaves, double turbulence)
 {
     std::function<MaterialProperties(double)> converter = [](double t) -> MaterialProperties {
         MaterialProperties properties;
@@ -19,5 +19,5 @@ Material raytracer::materials::marble2d()
         return properties;
     };
 
-    return make_2d_material(math::functions::marble2d() >> from_lambda<MaterialProperties, double>(converter));
+    return make_2d_material(math::functions::marble2d(octaves, turbulence) >> from_lambda<MaterialProperties, double>(converter));
 }

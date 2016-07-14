@@ -28,7 +28,7 @@
 const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30 * 1;
 const int FRAME_START = 0;
-const int FRAME_END = 1;
+const int FRAME_END = FRAME_COUNT;
 const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
@@ -94,7 +94,7 @@ raytracer::Primitive create_root(TimeStamp now)
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    auto g = decorate(marble2d(), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto g = decorate(marble2d(4, now.seconds() * 5), translate(Vector3D(0, -1, 0), xz_plane()));
 
     std::vector<Primitive> spheres;
 
@@ -134,7 +134,7 @@ raytracer::Camera create_camera(TimeStamp now)
 
     math::Function<double, double> t = math::functions::identity<double>();
     Animation<double> camera_y = ease(make_animation(5.0 - 5.0 * t, 1_s), easing_function<LINEAR>());
-    Point3D camera_position(0, camera_y(now), 5);
+    Point3D camera_position(0, 5, 5);
     // Point3D camera_position = camera_position_animation(now);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);

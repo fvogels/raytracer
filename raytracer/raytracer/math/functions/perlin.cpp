@@ -97,20 +97,20 @@ Noise2D math::functions::perlin2d(unsigned seed)
     return Noise2D(std::make_shared<_private_::PerlinNoise2D>(random_function(seed)));
 }
 
-Noise2D math::functions::marble2d()
+Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
 {
     auto p = perlin2d(15);
 
-    auto p1 = p;
-    auto p2 = (_private_::scale(2) >> p) / 2.0;
-    auto p4 = (_private_::scale(4) >> p) / 4.0;
-    auto p8 = (_private_::scale(8) >> p) / 8.0;
+    Noise2D total = p;
 
-    auto p_sum = p1 + p2 + p4 + p8;
+    for (unsigned i = 2; i <= octaves; ++i)
+    {
+        total = total + (_private_::scale(i) >> p) / double(i);
+    }
 
-    std::function<double(const Point2D&)> lambda = [p_sum](const Point2D& p) -> double {
+    std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
         double t = p.x + p.y;
-        return abs(sin(360_degrees * t + 600_degrees * p_sum(p)));
+        return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
     return from_lambda<double, const Point2D&>(lambda);
