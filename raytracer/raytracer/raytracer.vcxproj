@@ -255,8 +255,8 @@
     <ClCompile Include="materials\brdfs\lambert.cpp" />
     <ClCompile Include="materials\brdfs\phong.cpp" />
     <ClCompile Include="materials\brdfs\specular-component.cpp" />
+    <ClCompile Include="materials\marble-material.cpp" />
     <ClCompile Include="materials\material.cpp" />
-    <ClCompile Include="materials\perlin-material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="materials\worley-material.cpp" />
@@ -365,10 +365,10 @@
     <ClInclude Include="materials\brdfs\lambert.h" />
     <ClInclude Include="materials\brdfs\phong.h" />
     <ClInclude Include="materials\brdfs\specular-component.h" />
+    <ClInclude Include="materials\marble-material.h" />
     <ClInclude Include="materials\material-properties.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\materials.h" />
-    <ClInclude Include="materials\perlin-material.h" />
     <ClInclude Include="materials\uniform-material.h" />
     <ClInclude Include="materials\worley-material.h" />
     <ClInclude Include="math\angle.h" />

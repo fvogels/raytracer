@@ -327,7 +327,7 @@
     <ClCompile Include="math\functions\perlin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\perlin-material.cpp">
+    <ClCompile Include="materials\marble-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -701,7 +701,7 @@
     <ClInclude Include="math\functions\perlin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials\perlin-material.h">
+    <ClInclude Include="materials\marble-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

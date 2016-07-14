@@ -14,7 +14,7 @@
 #include "materials/brdfs/lambert.h"
 #include "materials/brdfs/phong.h"
 #include "materials/worley-material.h"
-#include "materials/perlin-material.h"
+#include "materials/marble-material.h"
 #include "raytracing/ray-tracers.h"
 #include "rendering/multithreaded-renderer.h"
 #include "animation/animation.h"
@@ -94,7 +94,7 @@ raytracer::Primitive create_root(TimeStamp now)
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    auto g = decorate(perlin2d(), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto g = decorate(marble2d(), translate(Vector3D(0, -1, 0), xz_plane()));
 
     std::vector<Primitive> spheres;
 
