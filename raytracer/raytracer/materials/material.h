@@ -60,4 +60,7 @@ namespace raytracer
     private:
         std::shared_ptr<materials::_private_::MaterialImplementation> m_impl;
     };
+
+    Material make_2d_material(math::Function<MaterialProperties, const math::Point2D&>);
+    Material make_3d_material(math::Function<MaterialProperties, const math::Point3D&>);
 }
