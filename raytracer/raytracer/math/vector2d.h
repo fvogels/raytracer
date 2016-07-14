@@ -1,7 +1,8 @@
 #pragma once
 
-#include <iostream>
 #include "math/approx.h"
+#include "math/angle.h"
+#include <iostream>
 
 
 namespace math
@@ -15,6 +16,9 @@ namespace math
 
         Vector2D(double x, double y) noexcept
             : x(x), y(y) { }
+
+        Vector2D(double r, Angle a)
+            : x(r * cos(a)), y(r * sin(a)) { }
 
         Vector2D(const Vector2D& v) noexcept = default;
 
