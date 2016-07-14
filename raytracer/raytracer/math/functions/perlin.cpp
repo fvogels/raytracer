@@ -1,9 +1,11 @@
+#define _USE_MATH_DEFINES
 #include "math/functions/perlin.h"
 #include "math/functions/random-function.h"
 #include "math/functions/easing-functions.h"
 #include <assert.h>
 #include <algorithm>
 #include <limits>
+#include <math.h>
 
 
 namespace math
@@ -12,6 +14,15 @@ namespace math
     {
         namespace _private_
         {
+            Function<Point2D, const Point2D&> scale(double factor)
+            {
+                std::function<Point2D(const Point2D&)> lambda = [factor](const Point2D& p) -> Point2D {
+                    return Point2D(p.x * factor, p.y * factor);
+                };
+
+                return from_lambda(lambda);
+            }
+
             class PerlinNoise2D : public FunctionBody<double, const Point2D&>
             {
             public:
@@ -84,4 +95,23 @@ using namespace math::functions;
 Noise2D math::functions::perlin2d(unsigned seed)
 {
     return Noise2D(std::make_shared<_private_::PerlinNoise2D>(random_function(seed)));
+}
+
+Noise2D math::functions::marble2d()
+{
+    auto p = perlin2d(15);
+
+    auto p1 = p;
+    auto p2 = (_private_::scale(2) >> p) / 2.0;
+    auto p4 = (_private_::scale(4) >> p) / 4.0;
+    auto p8 = (_private_::scale(8) >> p) / 8.0;
+
+    auto p_sum = p1 + p2 + p4 + p8;
+
+    std::function<double(const Point2D&)> lambda = [p_sum](const Point2D& p) -> double {
+        double t = p.x + p.y;
+        return abs(sin(360_degrees * t + 600_degrees * p_sum(p)));
+    };
+
+    return from_lambda<double, const Point2D&>(lambda);
 }
