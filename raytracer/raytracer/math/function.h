@@ -45,7 +45,7 @@ namespace math
             return m_body->evaluate(ts...);
         }
 
-        operator bool() const
+        explicit operator bool() const
         {
             return m_body != nullptr;
         }
@@ -63,11 +63,11 @@ namespace math
         return Function<R, Ts...>(std::make_shared<LambdaFunctionBody<R, Ts...>>(lambda));
     }
 
-    template<typename R2, typename R1, typename... Ts>
+    template<typename R2, typename RT, typename R1, typename... Ts>
     class Composition : public FunctionBody<R2, Ts...>
     {
     public:
-        Composition(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
+        Composition(const Function<R1, Ts...>& f, const Function<R2, RT>& g)
             : m_f(f), m_g(g) { }
 
         R2 evaluate(Ts... args) const override
@@ -77,19 +77,25 @@ namespace math
 
     private:
         Function<R1, Ts...> m_f;
-        Function<R2, R1> m_g;
+        Function<R2, RT> m_g;
     };    
 
     template<typename R2, typename R1, typename... Ts>
     Function<R2, Ts...> compose(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
     {
-        return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
+        return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, R1, Ts...>>(f, g));
     }
 
     template<typename R2, typename R1, typename... Ts>
     Function<R2, Ts...> operator >>(const Function<R1, Ts...>& f, const Function<R2, R1>& g)
     {
-        return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, Ts...>>(f, g));
+        return Function<R2, Ts...>(std::make_shared<Composition<R2, R1, R1, Ts...>>(f, g));
+    }
+
+    template<typename R2, typename R1, typename... Ts>
+    Function<R2, Ts...> operator >> (const Function<R1, Ts...>& f, const Function<R2, const R1&>& g)
+    {
+        return Function<R2, Ts...>(std::make_shared<Composition<R2, const R1&, R1, Ts...>>(f, g));
     }
 
     template<typename R, typename... Ts>
