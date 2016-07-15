@@ -27,7 +27,7 @@ namespace
     {
         auto module = std::make_shared<chaiscript::Module>();
 
-        module->add(fun(create_point3d), "pt");
+        module->add(fun(create_point3d), "pos");
         module->add(fun(create_vector3d), "vec");
         module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
         module->add(fun([](const Point3D& u, const Vector3D& v) { return u + v; }), "+");
