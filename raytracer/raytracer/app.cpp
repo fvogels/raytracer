@@ -146,11 +146,10 @@ raytracer::Camera create_camera(TimeStamp now)
 
 std::shared_ptr<Scene> create_scene(TimeStamp now)
 {
-    auto scene = std::make_shared<Scene>();
-
-    scene->root = create_root(now);
-    scene->light_sources = create_light_sources(now);
-    scene->camera = create_camera(now);
+    auto root = create_root(now);
+    auto light_sources = create_light_sources(now);
+    auto camera = create_camera(now);
+    auto scene = std::make_shared<Scene>(root, light_sources, camera);
 
     return scene;
 }

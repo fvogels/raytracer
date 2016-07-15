@@ -348,6 +348,12 @@
     <ClCompile Include="chai\lights-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chai\math-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\raytracing-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -735,6 +741,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chai\lights-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\math-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\raytracing-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
