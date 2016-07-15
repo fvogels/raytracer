@@ -11,7 +11,7 @@ namespace
 {
     struct LightLibrary
     {
-        LightSource omnidirectional(const Point3D& position, const color& c)
+        LightSource omnidirectional(const Point3D& position, const color& c) const
         {
             return lights::omnidirectional(position, c);
         }
