@@ -242,6 +242,7 @@
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="chai\cameras-module.cpp" />
     <ClCompile Include="chai\imaging-module.cpp" />
+    <ClCompile Include="chai\lights-module.cpp" />
     <ClCompile Include="chai\primitives-module.cpp" />
     <ClCompile Include="chai\scripting.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
@@ -355,6 +356,7 @@
     <ClInclude Include="Catch.h" />
     <ClInclude Include="chai\cameras-module.h" />
     <ClInclude Include="chai\imaging-module.h" />
+    <ClInclude Include="chai\lights-module.h" />
     <ClInclude Include="chai\primitives-module.h" />
     <ClInclude Include="chai\scripting.h" />
     <ClInclude Include="easylogging++.h" />

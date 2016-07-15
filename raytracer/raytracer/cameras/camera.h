@@ -39,6 +39,11 @@ namespace raytracer
             return m_implementation.get();
         }
 
+        explicit operator bool()
+        {
+            return m_implementation != nullptr;
+        }
+
     private:
         std::shared_ptr<cameras::_private_::CameraImplementation> m_implementation;
     };

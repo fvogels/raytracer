@@ -345,6 +345,9 @@
     <ClCompile Include="chai\cameras-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chai\lights-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -729,6 +732,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chai\cameras-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\lights-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
