@@ -5,6 +5,7 @@
 #include "chai/cameras-module.h"
 #include "chai/lights-module.h"
 #include "chai/raytracing-module.h"
+#include "chai/materials-module.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 
@@ -28,6 +29,7 @@ namespace raytracer
             module->add(create_cameras_module());
             module->add(create_lights_module());
             module->add(create_raytracing_module());
+            module->add(create_materials_module());
 
             return module;
         }
