@@ -5,6 +5,7 @@
 #include "math/point3d.h"
 #include "chai/imaging-module.h"
 #include "chai/primitives-module.h"
+#include "chai/cameras-module.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 
@@ -33,44 +34,6 @@ namespace
         module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
         module->add(fun([](const Point3D& u, const Vector3D& v) { return u + v; }), "+");
         module->add(fun([](const Vector3D& u, const Point3D& v) { return u + v; }), "+");
-
-        return module;
-    }
-
-    class CameraLibrary
-    {
-    public:
-        raytracer::Camera perspective(
-            const math::Point3D& eye,
-            const math::Point3D& look_at,
-            const math::Vector3D& up,
-            double distance,
-            double aspect_ratio) const
-        {
-            return raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
-        }
-
-        raytracer::Camera depth_of_field(
-            const math::Point3D& eye,
-            const math::Point3D& look_at,
-            const math::Vector3D& up,
-            double distance,
-            double aspect_ratio,
-            double eye_size,
-            raytracer::Sampler eye_sampler)
-        {
-            return raytracer::cameras::depth_of_field_perspective(eye, look_at, up, distance, aspect_ratio, eye_size, eye_sampler);
-        }
-    };
-
-    ModulePtr create_cameras_module()
-    {
-        auto module = std::make_shared<chaiscript::Module>();
-
-        CameraLibrary camera_library;
-        module->add_global_const(chaiscript::const_var(camera_library), "cameras");
-        module->add(fun(&CameraLibrary::perspective), "perspective");
-        module->add(fun(&CameraLibrary::depth_of_field), "depth_of_field");
 
         return module;
     }

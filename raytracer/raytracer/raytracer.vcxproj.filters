@@ -342,6 +342,9 @@
     <ClCompile Include="tests\scripting-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chai\cameras-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -723,6 +726,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chai\primitives-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\cameras-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
