@@ -761,5 +761,8 @@
     <ClInclude Include="chai\materials-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rendering\renderers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
