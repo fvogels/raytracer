@@ -449,6 +449,7 @@
     <ClInclude Include="sampling\grid-sampler.h" />
     <ClInclude Include="lights\light-ray.h" />
     <ClInclude Include="sampling\sampler.h" />
+    <ClInclude Include="sampling\samplers.h" />
     <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="scripting\objects\cons.h" />
     <ClInclude Include="scripting\objects\nil.h" />
