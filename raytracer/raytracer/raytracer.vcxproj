@@ -248,6 +248,7 @@
     <ClCompile Include="chai\raytracing-module.cpp" />
     <ClCompile Include="chai\scripting.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
+    <ClCompile Include="imaging\ppm-format.cpp" />
     <ClCompile Include="lights\area-light.cpp" />
     <ClCompile Include="lights\spot-light.cpp" />
     <ClCompile Include="lights\directional-light.cpp" />
@@ -367,6 +368,7 @@
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color-mapper.h" />
     <ClInclude Include="imaging\color.h" />
+    <ClInclude Include="imaging\ppm-format.h" />
     <ClInclude Include="imaging\wif_format.h" />
     <ClInclude Include="lights\area-light.h" />
     <ClInclude Include="lights\spot-light.h" />
