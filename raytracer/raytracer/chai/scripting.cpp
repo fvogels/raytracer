@@ -4,6 +4,7 @@
 #include "math/vector3d.h"
 #include "math/point3d.h"
 #include "chai/imaging-module.h"
+#include "chai/primitives-module.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 
@@ -32,25 +33,6 @@ namespace
         module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
         module->add(fun([](const Point3D& u, const Vector3D& v) { return u + v; }), "+");
         module->add(fun([](const Vector3D& u, const Point3D& v) { return u + v; }), "+");
-
-        return module;
-    }
-
-    ModulePtr create_primitives_module()
-    {
-        auto module = std::make_shared<chaiscript::Module>();
-
-        module->add(fun(raytracer::primitives::sphere), "sphere");
-        module->add(fun(raytracer::primitives::cone_along_z), "cone_along_z");
-        module->add(fun(raytracer::primitives::cylinder_along_x), "cylinder_along_x");
-        module->add(fun(raytracer::primitives::cylinder_along_y), "cylinder_along_y");
-        module->add(fun(raytracer::primitives::cylinder_along_z), "cylinder_along_z");
-        module->add(fun(raytracer::primitives::translate), "translate");
-        module->add(fun(raytracer::primitives::scale), "scale");
-        module->add(fun(raytracer::primitives::rotate_around_x), "rotate_around_x");
-        module->add(fun(raytracer::primitives::rotate_around_y), "rotate_around_y");
-        module->add(fun(raytracer::primitives::rotate_around_z), "rotate_around_z");
-        module->add(fun(raytracer::primitives::group), "union");
 
         return module;
     }

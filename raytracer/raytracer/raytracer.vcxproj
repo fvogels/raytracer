@@ -241,6 +241,7 @@
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="chai\imaging-module.cpp" />
+    <ClCompile Include="chai\primitives-module.cpp" />
     <ClCompile Include="chai\scripting.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="lights\area-light.cpp" />
@@ -333,6 +334,7 @@
     <ClCompile Include="tests\parser-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
+    <ClCompile Include="tests\scripting-tests.cpp" />
     <ClCompile Include="tests\stream-line-reader-tests.cpp" />
     <ClCompile Include="tests\string-reader-tests.cpp" />
     <ClCompile Include="tests\tokenizer-tests.cpp" />
@@ -351,6 +353,7 @@
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="chai\imaging-module.h" />
+    <ClInclude Include="chai\primitives-module.h" />
     <ClInclude Include="chai\scripting.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
