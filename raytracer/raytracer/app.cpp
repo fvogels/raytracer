@@ -94,7 +94,7 @@ raytracer::Primitive create_root(TimeStamp now)
     // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
     // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
     // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    auto g = decorate(marble2d(4, now.seconds() * 5), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto g = decorate(to_animated_2d_material(marble3d(4,2))(now), xz_plane());
 
     std::vector<Primitive> spheres;
 

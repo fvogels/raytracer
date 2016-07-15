@@ -5,6 +5,7 @@
 #include "primitives/hit-position.h"
 #include "materials/brdf.h"
 #include "materials/material-properties.h"
+#include "animation/time-stamp.h"
 #include <assert.h>
 #include <memory>
 
@@ -63,4 +64,6 @@ namespace raytracer
 
     Material make_2d_material(math::Function<MaterialProperties, const math::Point2D&>);
     Material make_3d_material(math::Function<MaterialProperties, const math::Point3D&>);
+
+    math::Function<Material, animation::TimeStamp> to_animated_2d_material(Material material);
 }
