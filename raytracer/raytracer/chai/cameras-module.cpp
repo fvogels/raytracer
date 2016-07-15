@@ -15,7 +15,7 @@ namespace
             const math::Point3D& look_at,
             const math::Vector3D& up,
             double distance,
-            double aspect_ratio)
+            double aspect_ratio) const
         {
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
         }
@@ -26,8 +26,8 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
-    auto primitive_library = std::make_shared<CameraLibrary>();
-    module->add_global_const(chaiscript::const_var(primitive_library), "cameras");
+    auto camera_library = std::make_shared<CameraLibrary>();
+    module->add_global_const(chaiscript::const_var(camera_library), "cameras");
 
 #define CAMERA(NAME) module->add(fun(&CameraLibrary::NAME), #NAME)
     CAMERA(perspective);
