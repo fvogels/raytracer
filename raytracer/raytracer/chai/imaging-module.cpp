@@ -27,7 +27,7 @@ ModulePtr raytracer::scripting::_private_::create_imaging_module()
     auto module = std::make_shared<chaiscript::Module>();
 
     auto color_library = std::make_shared<ColorLibrary>();
-    module->add_global_const(chaiscript::const_var(color_library), "colors");
+    module->add_global_const(chaiscript::const_var(color_library), "Colors");
 
 #define COLOR(NAME) module->add(fun(&ColorLibrary::NAME), #NAME)
     COLOR(black);

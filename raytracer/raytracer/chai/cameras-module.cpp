@@ -27,7 +27,7 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
     auto module = std::make_shared<chaiscript::Module>();
 
     auto camera_library = std::make_shared<CameraLibrary>();
-    module->add_global_const(chaiscript::const_var(camera_library), "cameras");
+    module->add_global_const(chaiscript::const_var(camera_library), "Cameras");
 
 #define CAMERA(NAME) module->add(fun(&CameraLibrary::NAME), #NAME)
     CAMERA(perspective);

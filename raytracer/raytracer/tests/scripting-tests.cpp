@@ -49,28 +49,28 @@ using namespace raytracer::scripting;
 //
 //TEST_CASE("[Scripting] colors.black()", "[Scripting]")
 //{
-//    auto result = evaluate<imaging::color>("colors.black()");
+//    auto result = evaluate<imaging::color>("Colors.black()");
 //
 //    REQUIRE(result == math::approx(imaging::colors::black()));
 //}
 //
 //TEST_CASE("[Scripting] colors.white()", "[Scripting]")
 //{
-//    auto result = evaluate<imaging::color>("colors.white()");
+//    auto result = evaluate<imaging::color>("Colors.white()");
 //
 //    REQUIRE(result == math::approx(imaging::colors::white()));
 //}
 //
 //TEST_CASE("[Scripting] colors.red()", "[Scripting]")
 //{
-//    auto result = evaluate<imaging::color>("colors.red()");
+//    auto result = evaluate<imaging::color>("Colors.red()");
 //
 //    REQUIRE(result == math::approx(imaging::colors::red()));
 //}
 //
 //TEST_CASE("[Scripting] colors.blue() * 0.5", "[Scripting]")
 //{
-//    auto result = evaluate<imaging::color>("colors.blue() * 0.5");
+//    auto result = evaluate<imaging::color>("Colors.blue() * 0.5");
 //
 //    REQUIRE(result == math::approx(imaging::colors::blue() * 0.5));
 //}
@@ -79,7 +79,7 @@ TEST_CASE("[Scripting] Creating perspective camera", "[Scripting]")
 {
     // 
     auto result = evaluate<raytracer::Camera>(R"(
-        var camera = cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
+        var camera = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
         camera
     )");
 

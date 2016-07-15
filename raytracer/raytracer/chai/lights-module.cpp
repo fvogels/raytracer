@@ -23,7 +23,7 @@ ModulePtr raytracer::scripting::_private_::create_lights_module()
     auto module = std::make_shared<chaiscript::Module>();
 
     auto primitive_library = std::make_shared<LightLibrary>();
-    module->add_global_const(chaiscript::const_var(primitive_library), "lights");
+    module->add_global_const(chaiscript::const_var(primitive_library), "Lights");
 
 #define LIGHT(NAME) module->add(fun(&LightLibrary::NAME), #NAME)
     LIGHT(omnidirectional);
