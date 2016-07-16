@@ -18,9 +18,11 @@ namespace
         }
     };
 
-    imaging::Bitmap render(unsigned width, unsigned height, RayTracer ray_tracer)
+    imaging::Bitmap render(unsigned width, unsigned height, RayTracer ray_tracer, const Scene& scene)
     {
         auto renderer = raytracer::rendering::single_threaded(width, height, samplers::single(), ray_tracer);
+
+        return renderer->render(scene);
     }
 
     void save_as_wif(imaging::Bitmap bitmap, std::string path)
