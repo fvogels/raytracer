@@ -15,9 +15,6 @@ namespace raytracer
             };
         }
 
-        Sampler single()
-        {
-            return Sampler(std::make_shared<_private_::SingleSampler>());
-        }
+        Sampler single();
     }
 }
