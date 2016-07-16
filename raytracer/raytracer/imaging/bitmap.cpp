@@ -1,13 +1,38 @@
 #include "imaging/bitmap.h"
+#include <algorithm>
 #include <assert.h>
 
 using namespace imaging;
+
+
+namespace
+{
+    std::unique_ptr<color[]> copy_pixels(color* cs, unsigned width, unsigned height)
+    {
+        auto result = std::make_unique<color[]>(width * height);
+
+        for (size_t i = 0; i != width * height; ++i)
+        {
+            result[i] = cs[i];
+        }
+
+        return result;
+    }
+}
 
 
 imaging::Bitmap::Bitmap(unsigned width, unsigned height)
     : m_width(width)
     , m_height(height)
     , m_pixels(std::move(std::make_unique<color[]>(width * height)))
+{
+    // NOP
+}
+
+imaging::Bitmap::Bitmap(const Bitmap& bitmap)
+    : m_width(bitmap.m_width)
+    , m_height(bitmap.m_height)
+    , m_pixels(std::move(copy_pixels(bitmap.m_pixels.get(), bitmap.m_width, bitmap.m_height)))
 {
     // NOP
 }

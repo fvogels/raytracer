@@ -17,7 +17,7 @@ namespace imaging
 
     public:
         Bitmap(unsigned width, unsigned height);
-        Bitmap(const Bitmap&) = delete;
+        Bitmap(const Bitmap&);
         Bitmap(Bitmap&&);
 
         bool is_inside(const position&) const;
