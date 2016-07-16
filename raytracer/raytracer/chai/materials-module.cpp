@@ -12,7 +12,7 @@ namespace
 {
     struct MaterialLibrary
     {
-        Material uniform(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
+        Material uniform(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity) const
         {
             MaterialProperties properties;
 
