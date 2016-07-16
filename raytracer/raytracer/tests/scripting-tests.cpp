@@ -86,15 +86,19 @@ TEST_CASE("[Scripting] Creating perspective camera", "[Scripting]")
     REQUIRE(!!result);
 }
 
-//TEST_CASE("[Scripting] Adding light to scene", "[Scripting]")
-//{
-//    auto result = evaluate<raytracer::Scene>(R"(
-//        var scene = Scene()
-//        scene.lights = [ omnidirectional( pos(0,0,0), colors.white() ) ]
-//        scene
-//    )");
-//
-//    REQUIRE(result.light_sources.size() == 1);
-//}
+TEST_CASE("[Scripting] Adding light to scene", "[Scripting]")
+{
+    auto result = evaluate<raytracer::Scene>(R"(
+        var camera = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
+        var root   = Primitives.sphere()
+        var scene  = Scene(camera, root)
+
+        add_light( scene, Lights.omnidirectional(pos(0,5,0), Colors.white()) )
+
+        scene
+    )");
+
+    REQUIRE(result.light_sources.size() == 1);
+}
 
 #endif

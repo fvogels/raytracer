@@ -25,10 +25,8 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 #undef COLOR
 
     module->add(user_type<Scene>(), "Scene");
-    module->add(constructor<Scene(raytracer::Camera, raytracer::Primitive, const std::vector<LightSource>&)>(), "Scene");
-    module->add(fun(&Scene::camera), "camera");
-    module->add(fun(&Scene::light_sources), "light_sources");
-    module->add(fun(&Scene::root), "root");
+    module->add(constructor<Scene(raytracer::Camera, raytracer::Primitive)>(), "Scene");
+    module->add(fun([](Scene& scene, LightSource light) { scene.light_sources.push_back(light); }), "add_light");
 
     return module;
 }
