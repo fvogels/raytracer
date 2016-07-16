@@ -41,13 +41,31 @@ void raytracer::scripting::run_script(const std::string& path)
 {
     ChaiScript chai(Std_Lib::library());
     chai.add(create_modules());
-    chai.eval_file(path);
+
+    try
+    {
+        chai.eval_file(path);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error occurred while evaluating script" << std::endl << e.what() << std::endl;
+        abort();
+    }
 }
 
 void raytracer::scripting::run(const std::string& source)
 {
     ChaiScript chai(Std_Lib::library());
     chai.add(create_modules());
-    chai.eval(source);
+
+    try
+    {
+        chai.eval(source);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error occurred while evaluating script" << std::endl << e.what() << std::endl;
+        abort();
+    }
 }
 
