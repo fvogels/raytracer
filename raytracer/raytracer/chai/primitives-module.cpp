@@ -24,6 +24,11 @@ namespace
         {
             return primitives::group(children);
         }
+
+        Primitive decorate(Material material, Primitive decorated) const
+        {
+            return primitives::decorate(material, decorated);
+        }
     };
 }
 
@@ -39,6 +44,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     PRIMITIVE(sphere);
     PRIMITIVE(translate);
     PRIMITIVE_WITH_NAME(group, union);
+    PRIMITIVE(decorate);
 #undef COLOR
 
     return module;
