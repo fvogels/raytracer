@@ -48,9 +48,9 @@ void raytracer::scripting::run_script(const std::string& path)
     {
         chai.eval_file(path);
     }
-    catch (const std::exception& e)
+    catch (const chaiscript::exception::eval_error& e)
     {
-        std::cerr << "Error occurred while evaluating script" << std::endl << e.what() << std::endl;
+        std::cerr << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
         abort();
     }
 }
@@ -64,9 +64,9 @@ void raytracer::scripting::run(const std::string& source)
     {
         chai.eval(source);
     }
-    catch (const std::exception& e)
+    catch (const chaiscript::exception::eval_error& e)
     {
-        std::cerr << "Error occurred while evaluating script" << std::endl << e.what() << std::endl;
+        std::cerr << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
         abort();
     }
 }
