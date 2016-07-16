@@ -17,6 +17,6 @@ namespace raytracer
             };
         }
 
-        RayTracer binary(double weight_bound = 0.01);
+        RayTracer binary();
     }
 }

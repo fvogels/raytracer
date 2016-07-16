@@ -19,7 +19,7 @@ color raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene& scen
     }
 }
 
-raytracer::RayTracer raytracer::raytracers::binary(double weight_bound)
+raytracer::RayTracer raytracer::raytracers::binary()
 {
     return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::BinaryRayTracer>());
 }
