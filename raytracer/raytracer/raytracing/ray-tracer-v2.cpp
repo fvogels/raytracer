@@ -32,7 +32,7 @@ color raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& scene, c
 
 color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, const LightRay& light_ray) const
 {
-    Vector3D incoming = eye_ray.direction.normalized();
+    Vector3D incoming = light_ray.ray.direction.normalized();
 
     assert(hit.normal.is_unit());
     double cos = -hit.normal.dot(incoming);
