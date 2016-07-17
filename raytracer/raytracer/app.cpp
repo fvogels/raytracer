@@ -10,12 +10,8 @@
 #include "sampling/grid-sampler.h"
 #include "materials/materials.h"
 #include "lights/lights.h"
-#include "lights/light-ray.h"
-#include "materials/brdfs/lambert.h"
-#include "materials/brdfs/phong.h"
-#include "materials/worley-material.h"
-#include "materials/marble-material.h"
 #include "raytracing/ray-tracers.h"
+#include "rendering/single-threaded-renderer.h"
 #include "rendering/multithreaded-renderer.h"
 #include "animation/animation.h"
 #include "demo/demos.h"
@@ -60,10 +56,10 @@ Material create_lambert_material(const color& c, bool reflective = false)
     return raytracer::materials::uniform(properties);
 }
 
-Material create_phong_material(const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
+Material create_phong_material(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
 {
     MaterialProperties properties;
-    properties.ambient = colors::black();
+    properties.ambient = ambient;
     properties.diffuse = diffuse;
     properties.specular = specular;
     properties.specular_exponent = specular_exponent;
@@ -84,34 +80,11 @@ raytracer::Primitive create_root(TimeStamp now)
     using namespace raytracer::materials;
 
     std::vector<Primitive> primitives;
-    // primitives.push_back(sphere());
 
-    auto white = create_lambert_material(colors::white());
-    auto black = create_lambert_material(colors::black());
+    auto sphere = decorate(create_phong_material(colors::white() * 0.1, colors::red() * 0.8, colors::white(), 20, 0.5), primitives::sphere());
+    auto plane = decorate(create_phong_material(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    auto vans = checkered(
-        create_phong_material(colors::white() * 0.85, colors::white() * 0.85, 100, 0.0),
-        create_phong_material(colors::white() * 0.1, colors::white() * 0.85, 8, 0.0));
-
-    // auto g = decorate(create_lambert_material(colors::white() * 0.85), cone_along_z());
-    // auto g = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, true), bunny.value() );
-    // auto p = decorate(create_phong_material(colors::white()*0.5, colors::white(), 10, false), translate(Vector3D(0, g->bounding_box().z().lower, 0), xz_plane()));
-    auto g = decorate(to_animated_2d_material(marble3d(4,2))(now), xz_plane());
-
-    std::vector<Primitive> spheres;
-
-    for (double z = 0; z < 1; z += 5)
-    {
-        spheres.push_back(translate(Vector3D(-2, 0, -z), sphere()));
-        spheres.push_back(translate(Vector3D(2, 0, -z), sphere()));
-    }
-
-    auto g2 = decorate(vans, accelerated_union(spheres));
-
-    // auto g = group(primitives);
-    std::vector<Primitive> root_elts{ g };
-
-    return group(root_elts);
+    return group(std::vector<Primitive> { sphere, plane });
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -120,7 +93,9 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    light_sources.push_back(omnidirectional(Point3D(0, 5, 5), colors::white()));
+    Point3D light_position = Point3D(now.seconds() * 5 + 5, 5, 5);
+    LOG(DEBUG) << "Light position " << light_position;
+    light_sources.push_back(omnidirectional(light_position, colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
     // light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
@@ -146,30 +121,28 @@ raytracer::Camera create_camera(TimeStamp now)
     return camera;
 }
 
-std::shared_ptr<Scene> create_scene(TimeStamp now)
+Animation<std::shared_ptr<Scene>> create_scene()
 {
-    auto camera = create_camera(now);
-    auto root = create_root(now);
-    auto light_sources = create_light_sources(now);
-    auto scene = std::make_shared<Scene>(camera, root, light_sources);
+    std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [](TimeStamp now) -> std::shared_ptr<Scene> {
+        auto camera = create_camera(now);
+        auto root = create_root(now);
+        auto light_sources = create_light_sources(now);
+        auto scene = std::make_shared<Scene>(camera, root, light_sources);
 
-    return scene;
+        return scene;
+    };
+
+    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
 }
 
-//Bitmap render_picture(Renderer const Scene& scene)
-//{
-//    auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
-//    auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
-//
-//    return renderer->render(scene);
-//}
-
-void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps, std::string output_path)
+void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps)
 {
+    std::string output_path = "e:/temp/output/test.wif";
     WIF wif(output_path);
 
-    auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
-    auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
+    auto ray_tracer = raytracer::raytracers::v3();
+    auto renderer = N_THREADS > 1 ? raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS) :
+                                    raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
 
     for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)
     {
@@ -191,7 +164,7 @@ void render()
 {
     logging::configure();
 
-    demos::marble_animation("e:/temp/output/test.wif");
+    render_animation(create_scene(), 30);
 }
 
 int main()
