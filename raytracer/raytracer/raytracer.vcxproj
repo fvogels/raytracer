@@ -249,6 +249,7 @@
     <ClCompile Include="chai\raytracing-module.cpp" />
     <ClCompile Include="chai\rendering-module.cpp" />
     <ClCompile Include="chai\scripting.cpp" />
+    <ClCompile Include="demo\demos.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
     <ClCompile Include="lights\area-light.cpp" />
@@ -372,6 +373,7 @@
     <ClInclude Include="chai\raytracing-module.h" />
     <ClInclude Include="chai\rendering-module.h" />
     <ClInclude Include="chai\scripting.h" />
+    <ClInclude Include="demo\demos.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color-mapper.h" />
