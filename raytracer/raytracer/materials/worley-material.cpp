@@ -16,13 +16,7 @@ raytracer::materials::_private_::WorleyMaterial3D::WorleyMaterial3D()
 MaterialProperties raytracer::materials::_private_::WorleyMaterial3D::at(const HitPosition& hp) const
 {
     Point3D p = hp.xyz;
-
-    MaterialProperties properties;
-    properties.ambient = colors::black();
-    properties.diffuse = this->m_noise_function(p) * colors::white();
-    properties.specular = colors::black();
-    properties.specular_exponent = 0.0;
-    properties.reflectivity = 0.0;
+    MaterialProperties properties(colors::black(), this->m_noise_function(p) * colors::white(), colors::black(), 0.0, 0.0, 0.0, 0.0);
 
     return properties;
 }

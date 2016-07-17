@@ -46,24 +46,21 @@ using namespace animation;
 
 Material create_lambert_material(const color& c, bool reflective = false)
 {
-    MaterialProperties properties;
-    properties.ambient = colors::black();
-    properties.diffuse = c;
-    properties.specular = colors::black();
-    properties.specular_exponent = 0;
-    properties.reflectivity = 0;
+    MaterialProperties properties(colors::black(), c, colors::black(), 0, 0, 0, 0);
 
     return raytracer::materials::uniform(properties);
 }
 
 Material create_phong_material(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
 {
-    MaterialProperties properties;
-    properties.ambient = ambient;
-    properties.diffuse = diffuse;
-    properties.specular = specular;
-    properties.specular_exponent = specular_exponent;
-    properties.reflectivity = reflectivity;
+    MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, 0, 0);
+
+    return raytracer::materials::uniform(properties);
+}
+
+Material create_phong_material(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index)
+{
+    MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
 
     return raytracer::materials::uniform(properties);
 }
