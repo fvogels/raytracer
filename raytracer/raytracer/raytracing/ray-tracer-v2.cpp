@@ -20,12 +20,40 @@ color raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& scene, c
 
         for (auto light_source : scene.light_sources)
         {
-            for (auto light_ray : light_source->lightrays_to(hit.position))
-            {
-                result += compute_diffuse(material_properties, hit, ray, light_ray);
-            }
+            result += process_light_source(scene, material_properties, hit, ray, light_source);
         }
     }
+
+    return result;
+}
+
+imaging::color raytracer::raytracers::_private_::RayTracerV2::process_light_source(
+    const Scene& scene,
+    const MaterialProperties& material_properties, 
+    const Hit& hit,
+    const math::Ray& eye_ray,
+    LightSource light_source) const
+{
+    color result = colors::black();
+
+    for (auto light_ray : light_source->lightrays_to(hit.position))
+    {
+        result += process_light_ray(scene, material_properties, hit, eye_ray, light_ray);
+    }
+
+    return result;
+}
+
+imaging::color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(
+    const Scene& scene,
+    const MaterialProperties& material_properties,
+    const Hit& hit,
+    const math::Ray& eye_ray,
+    const LightRay& light_ray) const
+{
+    color result = colors::black();
+
+    result += compute_diffuse(material_properties, hit, eye_ray, light_ray);
 
     return result;
 }

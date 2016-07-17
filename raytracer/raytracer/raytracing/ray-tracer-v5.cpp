@@ -16,7 +16,7 @@ color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, c
     return trace(scene, ray, 1.0);
 }
 
-color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, const Ray& ray, double weight) const
+color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, const Ray& eye_ray, double weight) const
 {
     assert(weight >= 0);
 
@@ -25,7 +25,7 @@ color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, c
         Hit hit;
         color result = colors::black();
 
-        if (scene.root->find_hit(ray, &hit))
+        if (scene.root->find_hit(eye_ray, &hit))
         {
             assert(hit.material);
 
@@ -35,14 +35,10 @@ color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, c
 
             for (auto light_source : scene.light_sources)
             {
-                for (auto light_ray : light_source->lightrays_to(hit.position))
-                {
-                    result += compute_diffuse(material_properties, hit, ray, light_ray);
-                    result += compute_specular(material_properties, hit, ray, light_ray);
-                }
+                result += process_light_source(scene, material_properties, hit, eye_ray, light_source);
             }
 
-            result += compute_reflection(scene, material_properties, hit, ray, weight);
+            result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
         }
 
         return result;

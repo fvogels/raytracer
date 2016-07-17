@@ -12,8 +12,8 @@ namespace raytracer
         {
             class RayTracerV4 : public RayTracerV3
             {
-            public:
-                imaging::color trace(const Scene&, const math::Ray&) const override;
+            protected:
+                imaging::color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const override;
             };
         }
 
