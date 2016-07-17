@@ -241,6 +241,7 @@
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
+    <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />

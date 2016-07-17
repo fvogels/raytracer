@@ -354,6 +354,9 @@
     <ClCompile Include="raytracing\ray-tracer-v4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="materials\material-properties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
