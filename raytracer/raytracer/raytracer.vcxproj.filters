@@ -363,6 +363,18 @@
     <ClCompile Include="chai\rendering-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="raytracing\ray-tracer-v1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracing\ray-tracer-v2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracing\ray-tracer-v3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracing\ray-tracer-v4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -771,6 +783,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chai\rendering-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer-v1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer-v2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer-v3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer-v4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

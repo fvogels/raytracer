@@ -21,7 +21,7 @@
 // #include "easylogging++.h"
 #include "logging.h"
 #include "util/lazy.h"
-#include "chai/scripting.h"
+// #include "chai/scripting.h"
 #include <assert.h>
 
 
@@ -192,8 +192,8 @@ void render()
 
 int main()
 {
-    // render();
-    scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
+    render();
+    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
 }
 
 #endif

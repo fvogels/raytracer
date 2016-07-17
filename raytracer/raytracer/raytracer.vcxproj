@@ -304,6 +304,10 @@
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="raytracing\binary-ray-tracer.cpp" />
     <ClCompile Include="raytracing\fast-ray-tracer.cpp" />
+    <ClCompile Include="raytracing\ray-tracer-v1.cpp" />
+    <ClCompile Include="raytracing\ray-tracer-v2.cpp" />
+    <ClCompile Include="raytracing\ray-tracer-v3.cpp" />
+    <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="rendering\multithreaded-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
     <ClCompile Include="rendering\single-threaded-renderer.cpp" />
@@ -441,6 +445,10 @@
     <ClInclude Include="primitives\union.h" />
     <ClInclude Include="raytracing\binary-ray-tracer.h" />
     <ClInclude Include="raytracing\fast-ray-tracer.h" />
+    <ClInclude Include="raytracing\ray-tracer-v1.h" />
+    <ClInclude Include="raytracing\ray-tracer-v2.h" />
+    <ClInclude Include="raytracing\ray-tracer-v3.h" />
+    <ClInclude Include="raytracing\ray-tracer-v4.h" />
     <ClInclude Include="raytracing\ray-tracer.h" />
     <ClInclude Include="raytracing\ray-tracers.h" />
     <ClInclude Include="raytracing\scene.h" />
