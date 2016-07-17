@@ -35,11 +35,10 @@ color raytracer::raytracers::_private_::RayTracerV3::compute_specular(const Mate
 {
     if (material_properties.specular != colors::black())
     {
-        assert(hit_normal.is_unit());
-        assert(incoming.is_unit());
+        assert(hit.normal.is_unit());
         Vector3D reflected = eye_ray.direction.reflect_by(hit.normal).normalized();
-        double cos = -reflected.dot(eye_ray.direction.normalized());
-        assert(Interval<double>(0, 1).contains(cos));
+        double cos = -reflected.dot(light_ray.ray.direction.normalized());
+        assert(Interval<double>(-1, 1).contains(cos));
 
         if (cos > 0)
         {
@@ -49,6 +48,10 @@ color raytracer::raytracers::_private_::RayTracerV3::compute_specular(const Mate
         {
             return colors::black();
         }
+    }
+    else
+    {
+        return colors::black();
     }
 }
 
