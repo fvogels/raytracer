@@ -20,7 +20,7 @@ color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, c
 {
     assert(weight >= 0);
 
-    if (weight < m_minimum_weight)
+    if (weight >= m_minimum_weight)
     {
         Hit hit;
         color result = colors::black();
