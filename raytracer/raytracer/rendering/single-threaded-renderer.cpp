@@ -16,10 +16,6 @@ imaging::Bitmap raytracer::rendering::_private_::SingleThreadedRenderer::render(
 
     for (int j = 0; j != bitmap.height(); ++j)
     {
-        std::ostringstream ss;
-        ss << "line " << j << " out of " << bitmap.height();
-        TIMED_SCOPE(timerObj, ss.str());
-
         int y = bitmap.height() - j - 1;
 
         for (int i = 0; i != bitmap.width(); ++i)
