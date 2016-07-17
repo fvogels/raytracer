@@ -18,7 +18,8 @@
 #include "raytracing/ray-tracers.h"
 #include "rendering/multithreaded-renderer.h"
 #include "animation/animation.h"
-// #include "easylogging++.h"
+#include "demo/demos.h"
+#include "easylogging++.h"
 #include "logging.h"
 #include "util/lazy.h"
 // #include "chai/scripting.h"
@@ -163,24 +164,20 @@ std::shared_ptr<Scene> create_scene(TimeStamp now)
 //    return renderer->render(scene);
 //}
 
-void render()
+void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps, std::string output_path)
 {
-    // TIMED_FUNC(timerObj);
-
-    logging::configure();
-
-    WIF wif("e:/temp/output/test.wif");
+    WIF wif(output_path);
 
     auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
     auto renderer = raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS);
 
-    for (int frame = FRAME_START; frame < FRAME_END; ++frame)
+    for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)
     {
-        // TIMED_SCOPE(timerObj, "single frame");
+        TIMED_SCOPE(timerObj, "single frame");
 
         double t = double(frame) / FRAME_COUNT;
         TimeStamp now = TimeStamp::from_epoch(1_s * t);
-        auto scene = create_scene(now);
+        auto scene = scene_animation(now);
 
         std::cout << "Rendering frame " << frame << std::endl;
 
@@ -188,6 +185,13 @@ void render()
 
         wif.write_frame(bitmap);
     }
+}
+
+void render()
+{
+    logging::configure();
+
+    demos::marble_animation("e:/temp/output/test.wif");
 }
 
 int main()

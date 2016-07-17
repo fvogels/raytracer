@@ -8,5 +8,5 @@
 
 namespace demos
 {
-    animation::Animation<std::shared_ptr<raytracer::Scene>> marble_animation();
+    void marble_animation(const std::string&);
 }

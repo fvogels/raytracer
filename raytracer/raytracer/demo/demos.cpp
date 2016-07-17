@@ -3,6 +3,11 @@
 #include "imaging/color.h"
 #include "materials/materials.h"
 #include "cameras/cameras.h"
+#include "easylogging++.h"
+#include "imaging/wif_format.h"
+#include "raytracing/ray-tracers.h"
+#include "rendering/renderers.h"
+#include "sampling/samplers.h"
 
 using namespace raytracer;
 using namespace animation;
@@ -15,7 +20,34 @@ namespace
     class MarbleAnimation
     {
     public:
-        static Animation<std::shared_ptr<Scene>> create()
+        static void render(const std::string& output_path)
+        {
+            WIF wif(output_path);
+
+            const unsigned fps = 30;
+            auto scene_animation = create_scene_animation();
+            auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
+            auto renderer = raytracer::rendering::multithreaded(500, 500, raytracer::samplers::grid(2, 2), ray_tracer, 4);
+            const unsigned frame_count = unsigned(round(fps * scene_animation.duration().seconds()));
+
+            for (unsigned frame = 0; frame < frame_count; ++frame)
+            {
+                TIMED_SCOPE(timerObj, "single frame");
+
+                double t = double(frame) / frame_count;
+                TimeStamp now = TimeStamp::from_epoch(1_s * t);
+                auto scene = scene_animation(now);
+
+                std::cout << "Rendering frame " << frame << std::endl;
+
+                auto bitmap = renderer->render(*scene);
+
+                wif.write_frame(bitmap);
+            }
+        }
+
+    private:
+        static Animation<std::shared_ptr<Scene>> create_scene_animation()
         {
             std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [](TimeStamp now) {
                 auto camera = create_camera(now);
@@ -31,7 +63,6 @@ namespace
             return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
         }
 
-    private:
         static raytracer::Primitive create_root(TimeStamp now)
         {
             using namespace raytracer::primitives;
@@ -59,7 +90,7 @@ namespace
     };
 }
 
-Animation<std::shared_ptr<Scene>> demos::marble_animation()
+void demos::marble_animation(const std::string& output_path)
 {
-    return MarbleAnimation::create();
+    MarbleAnimation::render(output_path);
 }
