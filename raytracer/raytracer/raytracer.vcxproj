@@ -241,6 +241,7 @@
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
+    <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
     <ClCompile Include="lights\area-light.cpp" />
@@ -299,7 +300,7 @@
     <ClCompile Include="raytracing\ray-tracer-v1.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v2.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v3.cpp" />
-    <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
+    <ClCompile Include="raytracing\ray-tracer-v5.cpp" />
     <ClCompile Include="rendering\multithreaded-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
     <ClCompile Include="rendering\single-threaded-renderer.cpp" />
@@ -356,6 +357,7 @@
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="demo\demos.h" />
+    <ClInclude Include="raytracing\ray-tracer-v4.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
     <ClInclude Include="imaging\color-mapper.h" />
@@ -432,7 +434,7 @@
     <ClInclude Include="raytracing\ray-tracer-v1.h" />
     <ClInclude Include="raytracing\ray-tracer-v2.h" />
     <ClInclude Include="raytracing\ray-tracer-v3.h" />
-    <ClInclude Include="raytracing\ray-tracer-v4.h" />
+    <ClInclude Include="raytracing\ray-tracer-v5.h" />
     <ClInclude Include="raytracing\ray-tracer.h" />
     <ClInclude Include="raytracing\ray-tracers.h" />
     <ClInclude Include="raytracing\scene.h" />

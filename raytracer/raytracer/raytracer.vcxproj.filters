@@ -345,10 +345,13 @@
     <ClCompile Include="raytracing\ray-tracer-v3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v4.cpp">
+    <ClCompile Include="demo\demos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo\demos.cpp">
+    <ClCompile Include="raytracing\ray-tracer-v5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracing\ray-tracer-v4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -743,10 +746,13 @@
     <ClInclude Include="raytracing\ray-tracer-v3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v4.h">
+    <ClInclude Include="demo\demos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demo\demos.h">
+    <ClInclude Include="raytracing\ray-tracer-v5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer-v4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

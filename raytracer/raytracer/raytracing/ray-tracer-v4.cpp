@@ -5,70 +5,38 @@ using namespace math;
 using namespace raytracer;
 
 
-raytracer::raytracers::_private_::RayTracerV4::RayTracerV4(double minimum_weight)
-    : m_minimum_weight(minimum_weight)
-{
-    // NOP
-}
-
 color raytracer::raytracers::_private_::RayTracerV4::trace(const Scene& scene, const Ray& ray) const
 {
-    return trace(scene, ray, 1.0);
-}
+    Hit hit;
+    color result = colors::black();
 
-color raytracer::raytracers::_private_::RayTracerV4::trace(const Scene& scene, const Ray& ray, double weight) const
-{
-    assert(weight >= 0);
-
-    if (weight < m_minimum_weight)
+    if (scene.root->find_hit(ray, &hit))
     {
-        Hit hit;
-        color result = colors::black();
+        assert(hit.material);
 
-        if (scene.root->find_hit(ray, &hit))
+        auto material_properties = hit.material->at(hit.local_position);
+
+        result += compute_ambient(material_properties);
+
+        for (auto light_source : scene.light_sources)
         {
-            assert(hit.material);
-
-            auto material_properties = hit.material->at(hit.local_position);
-
-            result += compute_ambient(material_properties);
-
-            for (auto light_source : scene.light_sources)
+            for (auto light_ray : light_source->lightrays_to(hit.position))
             {
-                for (auto light_ray : light_source->lightrays_to(hit.position))
+                Hit lighthit;
+
+                if (!scene.root->find_hit(light_ray.ray, &lighthit) || lighthit.t > 0.99999)
                 {
                     result += compute_diffuse(material_properties, hit, ray, light_ray);
                     result += compute_specular(material_properties, hit, ray, light_ray);
                 }
             }
-
-            result += compute_reflection(scene, material_properties, hit, ray, weight);
         }
+    }
 
-        return result;
-    }
-    else
-    {
-        return colors::black();
-    }
+    return result;
 }
 
-color raytracer::raytracers::_private_::RayTracerV4::compute_reflection(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
+raytracer::RayTracer raytracer::raytracers::v4()
 {
-    if (material_properties.reflectivity > 0)
-    {
-        Vector3D reflected = eye_ray.direction.reflect_by(hit.normal);
-        Ray secundary_ray(hit.position + reflected * 0.00001, reflected);
-
-        return material_properties.reflectivity * trace(scene, secundary_ray, weight * material_properties.reflectivity);
-    }
-    else
-    {
-        return colors::black();
-    }
-}
-
-raytracer::RayTracer raytracer::raytracers::v4(double minimum_weight)
-{
-    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV4>(minimum_weight));
+    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV4>());
 }
