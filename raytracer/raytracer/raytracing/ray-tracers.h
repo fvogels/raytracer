@@ -1,4 +1,6 @@
-#pragma once
-
-#include "binary-ray-tracer.h"
-#include "fast-ray-tracer.h"
+#include "raytracing/binary-ray-tracer.h"
+#include "raytracing/ray-tracer-v1.h"
+#include "raytracing/ray-tracer-v2.h"
+#include "raytracing/ray-tracer-v3.h"
+#include "raytracing/ray-tracer-v4.h"
+#include "raytracing/fast-ray-tracer.h"
