@@ -140,7 +140,7 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
     WIF wif(output_path);
 
     auto ray_tracer = raytracer::raytracers::v6();
-    auto renderer = N_THREADS > 1 ? raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS, 5) :
+    auto renderer = N_THREADS > 1 ? raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS, 4, 5) :
         raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
 
     for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)

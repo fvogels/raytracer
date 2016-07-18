@@ -242,7 +242,6 @@
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
-    <ClCompile Include="primitives\cartoon-renderer.cpp" />
     <ClCompile Include="primitives\group.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
@@ -304,6 +303,7 @@
     <ClCompile Include="raytracing\ray-tracer-v3.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v5.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v6.cpp" />
+    <ClCompile Include="rendering\cartoon-renderer.cpp" />
     <ClCompile Include="rendering\multithreaded-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
     <ClCompile Include="rendering\single-threaded-renderer.cpp" />

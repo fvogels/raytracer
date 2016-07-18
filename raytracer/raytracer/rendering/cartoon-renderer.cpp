@@ -2,6 +2,7 @@
 #include "data-structures/grid.h"
 #include <thread>
 #include <atomic>
+#include <set>
 
 using namespace imaging;
 using namespace math;
@@ -9,15 +10,29 @@ using namespace raytracer;
 using namespace raytracer::rendering;
 
 
+namespace
+{
+    double dist(const position& p, const position& q)
+    {
+        double dx = p.x - q.x;
+        double dy = p.y - q.y;
+
+        return sqrt(dx * dx + dy * dy);
+    }
+}
+
+
 raytracer::rendering::_private_::CartoonRenderer::CartoonRenderer(
-    unsigned horizontal_resolution, 
-    unsigned vertical_resolution, 
-    raytracer::Sampler sampler, 
-    RayTracer ray_tracer, 
-    unsigned thread_count, 
+    unsigned horizontal_resolution,
+    unsigned vertical_resolution,
+    raytracer::Sampler sampler,
+    RayTracer ray_tracer,
+    unsigned thread_count,
+    unsigned shade_count,
     double stroke_thickness)
     : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer)
     , m_thread_count(thread_count)
+    , m_shade_count(shade_count)
     , m_stroke_thickness(stroke_thickness)
 {
     // NOP
@@ -26,7 +41,6 @@ raytracer::rendering::_private_::CartoonRenderer::CartoonRenderer(
 Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& scene) const
 {
     Bitmap bitmap(m_horizontal_resolution, m_vertical_resolution);
-    data::Grid<unsigned> id_grid(m_horizontal_resolution, m_vertical_resolution);
     Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
     Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
 
@@ -47,9 +61,8 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
                     int x = i;
 
                     color c = render_pixel(window_rasterizer, x, y, scene);
-                    c.quantize(16);
 
-                    bitmap[position(i, current)] = c;
+                    bitmap[position(i, current)] = c.quantized(m_shade_count);
                 }
             }
         }));
@@ -63,7 +76,7 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
     return bitmap;
 }
 
-Renderer raytracer::rendering::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count, double stroke_thickness)
+Renderer raytracer::rendering::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count, unsigned shade_count, double stroke_thickness)
 {
-    return Renderer(std::make_shared<_private_::CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count, stroke_thickness));
+    return Renderer(std::make_shared<_private_::CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count, shade_count, stroke_thickness));
 }

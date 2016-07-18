@@ -357,10 +357,10 @@
     <ClCompile Include="raytracing\ray-tracer-v6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\cartoon-renderer.cpp">
+    <ClCompile Include="primitives\group.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\group.cpp">
+    <ClCompile Include="rendering\cartoon-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
