@@ -5,4 +5,3 @@
 #include "raytracing/ray-tracer-v4.h"
 #include "raytracing/ray-tracer-v5.h"
 #include "raytracing/ray-tracer-v6.h"
-#include "raytracing/fast-ray-tracer.h"

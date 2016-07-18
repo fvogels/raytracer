@@ -26,7 +26,7 @@ namespace
 
             const unsigned fps = 30;
             auto scene_animation = create_scene_animation();
-            auto ray_tracer = raytracer::raytracers::fast_ray_tracer();
+            auto ray_tracer = raytracer::raytracers::v6();
             auto renderer = raytracer::rendering::multithreaded(500, 500, raytracer::samplers::grid(2, 2), ray_tracer, 4);
             const unsigned frame_count = unsigned(round(fps * scene_animation.duration().seconds()));
 
