@@ -57,7 +57,7 @@ math::Box raytracer::primitives::_private_::Union::bounding_box() const
     return result;
 }
 
-Primitive raytracer::primitives::group(std::vector<Primitive>& children)
+Primitive raytracer::primitives::make_union(std::vector<Primitive>& children)
 {
     return Primitive(std::make_shared<_private_::Union>(children));
 }

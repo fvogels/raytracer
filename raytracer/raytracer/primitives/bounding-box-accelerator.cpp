@@ -33,7 +33,7 @@ namespace
         std::vector<Primitive> left_primitives(primitives.begin(), middle);
         std::vector<Primitive> right_primitives(middle, primitives.end());
 
-        return bounding_box_accelerator(group(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
+        return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
     }
 
     Primitive accelerated_union_along_y(std::vector<Primitive>& primitives)
@@ -48,7 +48,7 @@ namespace
         std::vector<Primitive> left_primitives(primitives.begin(), middle);
         std::vector<Primitive> right_primitives(middle, primitives.end());
 
-        return bounding_box_accelerator(group(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
+        return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
     }
 
     Primitive accelerated_union_along_z(std::vector<Primitive>& primitives)
@@ -63,7 +63,7 @@ namespace
         std::vector<Primitive> left_primitives(primitives.begin(), middle);
         std::vector<Primitive> right_primitives(middle, primitives.end());
 
-        return bounding_box_accelerator(group(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
+        return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
     }
 }
 
@@ -114,7 +114,7 @@ Primitive raytracer::primitives::accelerated_union(std::vector<Primitive>& primi
 {
     if (primitives.size() <= 3)
     {
-        return bounding_box_accelerator(group(primitives));
+        return bounding_box_accelerator(make_union(primitives));
     }
     else
     {

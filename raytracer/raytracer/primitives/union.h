@@ -24,6 +24,6 @@ namespace raytracer
             };
         }
 
-        Primitive group(std::vector<Primitive>&);
+        Primitive make_union(std::vector<Primitive>&);
     }
 }
