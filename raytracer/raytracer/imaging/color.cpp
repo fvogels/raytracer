@@ -4,11 +4,19 @@
 using namespace imaging;
 
 
-double clamp(double x)
+namespace
 {
-    if (x < 0) return 0;
-    else if (x > 1) return 1;
-    else return x;
+    double clamp(double x)
+    {
+        if (x < 0) return 0;
+        else if (x > 1) return 1;
+        else return x;
+    }
+
+    double quantize(double x, unsigned levels)
+    {
+        return round(x * levels) / levels;
+    }
 }
 
 void imaging::color::clamp()
@@ -78,4 +86,20 @@ bool imaging::operator !=(const color& c1, const color& c2)
 std::ostream& imaging::operator <<(std::ostream& out, const color& c)
 {
     return out << "RGB[" << c.r << "," << c.g << "," << c.b << "]";
+}
+
+void imaging::color::quantize(unsigned levels)
+{
+    r = ::quantize(r, levels);
+    g = ::quantize(g, levels);
+    b = ::quantize(b, levels);
+}
+
+color imaging::color::quantized(unsigned levels) const
+{
+    color copy = *this;
+
+    copy.quantize(levels);
+
+    return copy;
 }

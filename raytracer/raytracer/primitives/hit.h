@@ -11,9 +11,11 @@
 
 namespace raytracer
 {
+    const unsigned MISSING_ID = -1;
+
     struct Hit
     {
-        Hit() : t(std::numeric_limits<double>::infinity()), group_id(0) { }
+        Hit() : t(std::numeric_limits<double>::infinity()), group_id(MISSING_ID) { }
 
         double t;
         HitPosition local_position;

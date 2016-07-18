@@ -16,6 +16,9 @@ namespace imaging
 
         void clamp();
         color clamped() const;
+
+        void quantize(unsigned);
+        color quantized(unsigned) const;
     };
 
     color operator +(const color&, const color&);

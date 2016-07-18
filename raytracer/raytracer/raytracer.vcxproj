@@ -242,6 +242,8 @@
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
+    <ClCompile Include="primitives\cartoon-renderer.cpp" />
+    <ClCompile Include="primitives\group.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
@@ -358,7 +360,10 @@
     <ClInclude Include="cameras\orthographic-camera.h" />
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
+    <ClInclude Include="data-structures\grid.h" />
     <ClInclude Include="demo\demos.h" />
+    <ClInclude Include="primitives\group.h" />
+    <ClInclude Include="rendering\cartoon-renderer.h" />
     <ClInclude Include="raytracing\ray-tracer-v4.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="imaging\bitmap.h" />
@@ -475,7 +480,7 @@
     <ClInclude Include="scripting\tokenizing\tokens.h" />
     <ClInclude Include="scripting\objects\special-form.h" />
     <ClInclude Include="scripting\objects\symbol.h" />
-    <ClInclude Include="util\array.h" />
+    <ClInclude Include="data-structures\array.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\maybe.h" />
     <ClInclude Include="util\misc.h" />

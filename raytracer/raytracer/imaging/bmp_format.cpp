@@ -1,5 +1,5 @@
 #include "imaging/bitmap.h"
-#include "util/array.h"
+#include "data-structures/array.h"
 #include <stdint.h>
 #include <fstream>
 #include <iostream>

@@ -360,6 +360,12 @@
     <ClCompile Include="raytracing\ray-tracer-v6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\cartoon-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primitives\group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -369,9 +375,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="util\position.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="util\array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\vector3d.h">
@@ -762,6 +765,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracing\ray-tracer-v6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\cartoon-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data-structures\array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data-structures\grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\group.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
