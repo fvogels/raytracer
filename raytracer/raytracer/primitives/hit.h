@@ -13,12 +13,13 @@ namespace raytracer
 {
     struct Hit
     {
+        Hit() : t(std::numeric_limits<double>::infinity()), group_id(0) { }
+
         double t;
         HitPosition local_position;
         math::Point3D position;
         math::Vector3D normal;
         Material material;
-
-        Hit() : t( std::numeric_limits<double>::infinity()) { }
+        unsigned group_id;
     };
 }
