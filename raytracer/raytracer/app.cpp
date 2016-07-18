@@ -78,7 +78,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto sphere = decorate(create_phong_material(colors::white() * 0.1, colors::red() * 0.8, colors::white(), 20, 0.5), primitives::sphere());
+    auto sphere = decorate(create_phong_material(colors::white() * 0.1, colors::red() * 0.8, colors::white(), 20, 0, 0.5, 1.5), primitives::sphere());
     auto plane = decorate(create_phong_material(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
 
     return group(std::vector<Primitive> { sphere, plane });
@@ -137,7 +137,7 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
     std::string output_path = "e:/temp/output/test.wif";
     WIF wif(output_path);
 
-    auto ray_tracer = raytracer::raytracers::v5();
+    auto ray_tracer = raytracer::raytracers::v6();
     auto renderer = N_THREADS > 1 ? raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS) :
                                     raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
 

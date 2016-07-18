@@ -357,6 +357,9 @@
     <ClCompile Include="materials\material-properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="raytracing\ray-tracer-v6.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -756,6 +759,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracing\ray-tracer-v4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracing\ray-tracer-v6.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
