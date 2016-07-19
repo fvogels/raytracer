@@ -53,14 +53,16 @@ namespace data
 
         bool is_inside(const position& p) const
         {
-            return p.x < m_width && p.y <= m_height;
+            return p.x < m_width && p.y < m_height;
         }
 
         void around(const position& p, unsigned distance, std::function<void(const position&)> callback) const
         {
-            for (int dx = -distance; dx <= distance; ++dx)
+            int dist = int(distance);
+
+            for (int dx = -dist; dx <= dist; ++dx)
             {
-                for (int dy = -distance; dy <= distance; ++dy)
+                for (int dy = -dist; dy <= dist; ++dy)
                 {
                     position q(p.x + dx, p.y + dy);
 
