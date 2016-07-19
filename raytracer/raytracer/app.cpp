@@ -31,7 +31,7 @@ const int FRAME_END = FRAME_COUNT;
 const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
-const int BITMAP_SIZE = 500;
+const int BITMAP_SIZE = 100;
 const int FRAME_COUNT = 30;
 const int FRAME_START = 0;
 const int FRAME_END = 1;
@@ -79,9 +79,9 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto sphere1 = decorate(create_phong_material(colors::white() * 0.1, colors::red() * 0.8, colors::white(), 20, 0, 0.5, 1.5), primitives::sphere());
-    auto sphere2 = decorate(create_phong_material(colors::white() * 0.1, colors::blue() * 0.8, colors::white(), 20, 0), translate(Vector3D(0, 0, -5), primitives::sphere()));
-    auto plane = decorate(create_phong_material(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto sphere1 = group(0, decorate(create_phong_material(colors::white() * 0.1, colors::red() * 0.8, colors::white(), 20, 0, 0.5, 1.5), primitives::sphere()));
+    auto sphere2 = group(1, decorate(create_phong_material(colors::white() * 0.1, colors::blue() * 0.8, colors::white(), 20, 0), translate(Vector3D(0, 0, -5), primitives::sphere())));
+    auto plane = group(2, decorate(create_phong_material(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5), translate(Vector3D(0, -1, 0), xz_plane())));
 
     return make_union(std::vector<Primitive> { sphere1, sphere2, plane });
 }
@@ -93,7 +93,6 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
     std::vector<LightSource> light_sources;
 
     Point3D light_position = Point3D(now.seconds() * 5 + 5, 5, 5);
-    LOG(DEBUG) << "Light position " << light_position;
     light_sources.push_back(omnidirectional(light_position, colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
@@ -140,8 +139,10 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
     WIF wif(output_path);
 
     auto ray_tracer = raytracer::raytracers::v6();
-    auto renderer = N_THREADS > 1 ? raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS, 4, 5) :
-        raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
+
+    //auto renderer = N_THREADS > 1 ? raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(2, 2), ray_tracer, N_THREADS, 4, 2) :
+    //    raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
+    auto renderer = raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(2, 2), ray_tracer, N_THREADS, 4, 0.005);
 
     for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)
     {
