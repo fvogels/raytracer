@@ -66,9 +66,9 @@ Material create_phong_material(const color& ambient, const color& diffuse, const
     return raytracer::materials::uniform(properties);
 }
 
-Lazy<raytracer::Primitive> bunny([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/bunny.mesh")); });
-Lazy<raytracer::Primitive> buddha([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.mesh")); });
-Lazy<raytracer::Primitive> dragon([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/buddha.dragon")); });
+Lazy<raytracer::Primitive> bunny([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/bunny.bmesh", std::ios::binary)); });
+Lazy<raytracer::Primitive> buddha([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/buddha.bmesh", std::ios::binary)); });
+Lazy<raytracer::Primitive> dragon([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/dragon.bmesh", std::ios::binary)); });
 Lazy<raytracer::Primitive> statuette([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/statuette.mesh")); });
 Lazy<raytracer::Primitive> lucy([]() { return raytracer::primitives::fast_mesh(std::ifstream("e:/temp/lucy.mesh")); });
 
@@ -79,10 +79,10 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto sphere1 = decorate(wood2d(4, 0), primitives::sphere());
-    auto plane = decorate(wood2d(4, 0.4), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto b = decorate(marble3d(4, 10), sphere());
+    // auto plane = decorate(wood2d(4, 0.4), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    return make_union(std::vector<Primitive> { plane });
+    return make_union(std::vector<Primitive> { b });
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -163,7 +163,7 @@ void render()
 {
     logging::configure();
 
-    render_animation(create_scene(), 1);
+    render_animation(create_scene(), 30);
 }
 
 int main()

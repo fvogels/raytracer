@@ -242,6 +242,7 @@
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
+    <ClCompile Include="math\vector4d.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="primitives\group.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
@@ -362,6 +363,7 @@
     <ClInclude Include="Catch.h" />
     <ClInclude Include="data-structures\grid.h" />
     <ClInclude Include="demo\demos.h" />
+    <ClInclude Include="math\vector4d.h" />
     <ClInclude Include="materials\wood-material.h" />
     <ClInclude Include="primitives\group.h" />
     <ClInclude Include="rendering\cartoon-renderer.h" />
