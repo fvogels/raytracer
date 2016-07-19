@@ -17,7 +17,7 @@ imaging::color raytracer::rendering::_private_::RendererImplementation::render_p
 
     m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const Point2D& p) {
         scene.camera->enumerate_rays(p, [this, &c, &sample_count, &scene](const Ray& ray) {
-            c += m_ray_tracer->trace(scene, ray);
+            c += m_ray_tracer->trace(scene, ray).color;
             ++sample_count;
         });
     });
