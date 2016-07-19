@@ -51,6 +51,27 @@ namespace data
             return m_height;
         }
 
+        bool is_inside(const position& p) const
+        {
+            return p.x < m_width && p.y <= m_height;
+        }
+
+        void around(const position& p, unsigned distance, std::function<void(const position&)> callback) const
+        {
+            for (int dx = -distance; dx <= distance; ++dx)
+            {
+                for (int dy = -distance; dy <= distance; ++dy)
+                {
+                    position q(p.x + dx, p.y + dy);
+
+                    if (is_inside(q))
+                    {
+                        callback(q);
+                    }
+                }
+            }
+        }
+
     private:
         std::unique_ptr<T[]> m_elts;
         unsigned m_width;
