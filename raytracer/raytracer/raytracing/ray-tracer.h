@@ -7,6 +7,20 @@
 
 namespace raytracer
 {
+    struct TraceResult
+    {
+        static TraceResult no_hit()
+        {
+            return TraceResult(imaging::colors::black(), MISSING_ID);
+        }
+
+        TraceResult(imaging::color color, unsigned group_id)
+            : color(color), group_id(group_id) { }
+
+        imaging::color color;
+        unsigned group_id;
+    };
+
     namespace raytracers
     {
         namespace _private_
@@ -14,7 +28,7 @@ namespace raytracer
             class RayTracerImplementation
             {
             public:
-                virtual imaging::color trace(const Scene&, const math::Ray&) const = 0;
+                virtual TraceResult trace(const Scene&, const math::Ray&) const = 0;
             };
         }
     }
