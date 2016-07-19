@@ -5,23 +5,26 @@ using namespace math;
 using namespace raytracer;
 
 
-color raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& scene, const Ray& eye_ray) const
+TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& scene, const Ray& eye_ray) const
 {
     Hit hit;
-    color result = colors::black();
 
     if (scene.root->find_hit(eye_ray, &hit))
     {
         assert(hit.material);
 
+        color result = colors::black();
         auto material_properties = hit.material->at(hit.local_position);
 
         result += compute_ambient(material_properties);
         result += process_lights(scene, material_properties, hit, eye_ray);
-        
-    }
 
-    return result;
+        return TraceResult(result, hit.group_id);
+    }
+    else
+    {
+        return TraceResult::no_hit();
+    }
 }
 
 imaging::color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray) const
