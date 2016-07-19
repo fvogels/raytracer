@@ -47,7 +47,7 @@ math::Box raytracer::primitives::_private_::Group::bounding_box() const
     return m_child->bounding_box();
 }
 
-Primitive group(unsigned id, Primitive child)
+Primitive raytracer::primitives::group(unsigned id, Primitive child)
 {
     return Primitive(std::make_shared<raytracer::primitives::_private_::Group>(id, child));
 }
