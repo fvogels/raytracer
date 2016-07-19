@@ -11,24 +11,24 @@ raytracer::raytracers::_private_::RayTracerV5::RayTracerV5(double minimum_weight
     // NOP
 }
 
-color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, const Ray& ray) const
+TraceResult raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, const Ray& ray) const
 {
     return trace(scene, ray, 1.0);
 }
 
-color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, const Ray& eye_ray, double weight) const
+TraceResult raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, const Ray& eye_ray, double weight) const
 {
     assert(weight >= 0);
 
     if (weight >= m_minimum_weight)
     {
         Hit hit;
-        color result = colors::black();
 
         if (scene.root->find_hit(eye_ray, &hit))
         {
             assert(hit.material);
 
+            color result = colors::black();
             auto material_properties = hit.material->at(hit.local_position);
 
             result += compute_ambient(material_properties);
@@ -39,13 +39,17 @@ color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& scene, c
             }
 
             result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
-        }
 
-        return result;
+            return TraceResult(result, hit.group_id);
+        }
+        else
+        {
+            return TraceResult::no_hit();
+        }
     }
     else
     {
-        return colors::black();
+        return TraceResult::no_hit();
     }
 }
 
@@ -56,7 +60,7 @@ color raytracer::raytracers::_private_::RayTracerV5::compute_reflection(const Sc
         Vector3D reflected = eye_ray.direction.reflect_by(hit.normal);
         Ray secundary_ray(hit.position + reflected * 0.00001, reflected);
 
-        return material_properties.reflectivity * trace(scene, secundary_ray, weight * material_properties.reflectivity);
+        return material_properties.reflectivity * trace(scene, secundary_ray, weight * material_properties.reflectivity).color;
     }
     else
     {
