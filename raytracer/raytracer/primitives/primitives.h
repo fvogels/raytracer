@@ -7,6 +7,7 @@
 #include "primitives/disk.h"
 #include "primitives/cropper.h"
 #include "primitives/cone.h"
+#include "primitives/group.h"
 #include "primitives/union.h"
 #include "primitives/decorator.h"
 #include "primitives/intersection.h"
