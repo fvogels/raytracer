@@ -35,37 +35,36 @@ namespace
 }
 
 
-color raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& scene, const Ray& ray) const
-{
-    return trace(scene, ray, 1.0);
-}
-
-color raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& scene, const Ray& eye_ray, double weight) const
+TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& scene, const Ray& eye_ray, double weight) const
 {
     assert(weight >= 0);
 
     if (weight >= m_minimum_weight)
     {
         Hit hit;
-        color result = colors::black();
-
+        
         if (scene.root->find_hit(eye_ray, &hit))
         {
             assert(hit.material);
 
+            color result = colors::black();
             auto material_properties = hit.material->at(hit.local_position);
 
             result += compute_ambient(material_properties);
             result += process_lights(scene, material_properties, hit, eye_ray);
             result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
             result += compute_refraction(scene, material_properties, hit, eye_ray, weight);
-        }
 
-        return result;
+            return TraceResult(result, hit.group_id);
+        }
+        else
+        {
+            return TraceResult::no_hit();
+        }
     }
     else
     {
-        return colors::black();
+        return TraceResult::no_hit();
     }
 }
 
@@ -109,7 +108,7 @@ color raytracer::raytracers::_private_::RayTracerV6::compute_refraction(const Sc
                     const Point3D refracted_origin = refracted_hit.position + 0.000001 * refracted_direction;
                     const Ray refracted_ray(refracted_origin, refracted_direction);
 
-                    return trace(scene, refracted_ray, material_properties.transparency * weight) * weight;
+                    return trace(scene, refracted_ray, material_properties.transparency * weight).color * weight;
                 }
                 else
                 {
