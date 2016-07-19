@@ -14,7 +14,7 @@ namespace math
     {
         namespace _private_
         {
-            Function<Point2D, const Point2D&> scale(double factor)
+            Function<Point2D, const Point2D&> scale2d(double factor)
             {
                 std::function<Point2D(const Point2D&)> lambda = [factor](const Point2D& p) -> Point2D {
                     return Point2D(p.x * factor, p.y * factor);
@@ -208,7 +208,7 @@ Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
 
     for (unsigned i = 2; i <= octaves; ++i)
     {
-        total = total + (_private_::scale(i) >> p) / double(i);
+        total = total + (_private_::scale2d(i) >> p) / double(i);
     }
 
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
@@ -246,7 +246,7 @@ Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
 
     for (unsigned i = 2; i <= octaves; ++i)
     {
-        total = total + (_private_::scale(i) >> p) / double(i);
+        total = total + (_private_::scale2d(i) >> p) / double(i);
     }
 
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
