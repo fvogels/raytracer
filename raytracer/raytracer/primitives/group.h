@@ -13,7 +13,7 @@ namespace raytracer
             class Group : public PrimitiveImplementation
             {
             public:
-                Group(Primitive, unsigned);
+                Group(unsigned, Primitive);
 
                 bool find_hit(const math::Ray&, Hit*) const override;
                 std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
@@ -25,6 +25,6 @@ namespace raytracer
             };
         }
 
-        Primitive group(math::Angle, Primitive);
+        Primitive group(unsigned, Primitive);
     }
 }

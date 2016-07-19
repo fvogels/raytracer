@@ -4,7 +4,7 @@ using namespace raytracer;
 using namespace raytracer::primitives;
 
 
-raytracer::primitives::_private_::Group::Group(Primitive child, unsigned id)
+raytracer::primitives::_private_::Group::Group(unsigned id, Primitive child)
     : m_child(child), m_id(id)
 {
     // NOP
@@ -45,4 +45,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Group::hits(
 math::Box raytracer::primitives::_private_::Group::bounding_box() const
 {
     return m_child->bounding_box();
+}
+
+Primitive group(unsigned id, Primitive child)
+{
+    return Primitive(std::make_shared<raytracer::primitives::_private_::Group>(id, child));
 }
