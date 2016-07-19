@@ -294,8 +294,8 @@ namespace
                     unsigned index = i & 0x7FFFFFF;
                     assert(index < boxes.size());
                     const BOX& b = boxes[index];
-                                    
-                    
+
+
                     bounding_box = bounding_box.merge(construct_bounding_box(b));
                 }
                 else
@@ -303,7 +303,7 @@ namespace
                     // i is triangle index
                     assert(i < triangles.size());
                     const TRIANGLE& t = triangles[i];
-                    
+
                     bounding_box = bounding_box.merge(construct_bounding_box(vertices.get(), t));
                 }
 
@@ -366,6 +366,153 @@ namespace
 
         return Primitive(std::make_shared<FastMesh>(std::move(vertices), std::move(ts), std::move(bs), unsigned(n_vertices), unsigned(triangles.size()), unsigned(boxes.size())));
     }
+
+    template<typename T>
+    T read(std::istream& in)
+    {
+        T result;
+
+        in.read(reinterpret_cast<char*>(&result), sizeof(T));
+
+        return result;
+    }
+
+    Primitive load_mesh_bbh_bin(std::istream& in)
+    {
+        TIMED_FUNC(timerObj);
+        CLOG(INFO, "mesh") << "Loading mesh...";
+
+        unsigned n_vertices = read<unsigned>(in);
+        CLOG(INFO, "mesh") << "Reading " << n_vertices << " vertices";
+
+        std::unique_ptr<XYZ[]> vertices(new XYZ[n_vertices]);
+
+        for (unsigned i = 0; i != n_vertices; ++i)
+        {
+            double x = read<float>(in), y = read<float>(in), z = read<float>(in);
+
+            vertices[i] = XYZ{ x, y, z };
+        }
+
+        CLOG(INFO, "mesh") << "Reading hierarchy";
+
+        std::vector<TRIANGLE> triangles;
+        std::vector<BOX> boxes;
+        std::stack<unsigned> indices;
+
+        unsigned tag;
+        while ((tag = read<unsigned>(in)) != 0xFFFFFFFF)
+        {
+            switch (tag)
+            {
+            case 0x11111111:
+            {
+                unsigned i = read<unsigned>(in), j = read<unsigned>(in), k = read<unsigned>(in);
+
+                assert(i < n_vertices);
+                assert(j < n_vertices);
+                assert(k < n_vertices);
+
+                Point3D p = to_point3d(vertices[i]);
+                Point3D q = to_point3d(vertices[j]);
+                Point3D r = to_point3d(vertices[k]);
+                Vector3D n = (q - p).cross(r - p).normalized();
+
+                assert(n.is_unit());
+
+                TRIANGLE triangle;
+                triangle.i = i;
+                triangle.j = j;
+                triangle.k = k;
+                triangle.n = n;
+                triangles.push_back(triangle);
+
+                indices.push(unsigned(triangles.size()) - 1);
+                break;
+            }
+            case 0x22222222:
+            {
+                unsigned i = indices.top();
+                indices.pop();
+                unsigned j = indices.top();
+                indices.pop();
+
+                Box bounding_box = Box::empty();
+                if (i & 0x80000000)
+                {
+                    // i is box index
+                    unsigned index = i & 0x7FFFFFF;
+                    assert(index < boxes.size());
+                    const BOX& b = boxes[index];
+
+
+                    bounding_box = bounding_box.merge(construct_bounding_box(b));
+                }
+                else
+                {
+                    // i is triangle index
+                    assert(i < triangles.size());
+                    const TRIANGLE& t = triangles[i];
+
+                    bounding_box = bounding_box.merge(construct_bounding_box(vertices.get(), t));
+                }
+
+                if (j & 0x80000000)
+                {
+                    // j is box index
+                    unsigned index = j & 0x7FFFFFFF;
+                    assert(index < boxes.size());
+                    const BOX& b = boxes[index];
+
+                    bounding_box = bounding_box.merge(construct_bounding_box(b));
+                }
+                else
+                {
+                    // j is triangle index
+                    assert(j < triangles.size());
+                    const TRIANGLE& t = triangles[j];
+
+                    bounding_box = bounding_box.merge(construct_bounding_box(vertices.get(), t));
+                }
+
+                BOX box;
+                box.i = i;
+                box.j = j;
+                box.min_x = bounding_box.x().lower;
+                box.max_x = bounding_box.x().upper;
+                box.min_y = bounding_box.y().lower;
+                box.max_y = bounding_box.y().upper;
+                box.min_z = bounding_box.z().lower;
+                box.max_z = bounding_box.z().upper;
+                boxes.push_back(box);
+
+                indices.push(0x80000000 | (unsigned(boxes.size()) - 1));
+                break;
+            }
+
+            default:
+                std::cerr << "Unrecognized tag " << tag << std::endl;
+                abort();
+            }
+        }
+
+        assert(indices.size() == 1);
+
+        std::unique_ptr<TRIANGLE[]> ts(new TRIANGLE[triangles.size()]);
+        std::unique_ptr<BOX[]> bs(new BOX[boxes.size()]);
+
+        for (unsigned i = 0; i != triangles.size(); ++i)
+        {
+            ts[i] = triangles[i];
+        }
+
+        for (unsigned i = 0; i != boxes.size(); ++i)
+        {
+            bs[i] = boxes[i];
+        }
+
+        return Primitive(std::make_shared<FastMesh>(std::move(vertices), std::move(ts), std::move(bs), unsigned(n_vertices), unsigned(triangles.size()), unsigned(boxes.size())));
+    }
 }
 
 Primitive raytracer::primitives::fast_mesh(std::istream& in)
@@ -384,6 +531,21 @@ Primitive raytracer::primitives::fast_mesh(std::istream& in)
     }
     else
     {
+        std::cerr << "Unrecognized mesh tag " << tag << std::endl;
+        abort();
+    }
+}
+
+Primitive raytracer::primitives::fast_mesh_bin(std::istream& in)
+{
+    unsigned tag = read<unsigned>(in);
+
+    switch (tag)
+    {
+    case 12345:
+        return load_mesh_bbh_bin(in);
+
+    default:
         std::cerr << "Unrecognized mesh tag " << tag << std::endl;
         abort();
     }
