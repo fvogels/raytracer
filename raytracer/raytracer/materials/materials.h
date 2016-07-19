@@ -2,6 +2,7 @@
 
 #include "materials/material.h"
 #include "materials/marble-material.h"
+#include "materials/wood-material.h"
 #include "math/function.h"
 #include "math/point2d.h"
 
