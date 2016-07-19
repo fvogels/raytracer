@@ -5,17 +5,17 @@ using namespace math;
 using namespace raytracer;
 
 
-color raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene& scene, const Ray& ray) const
+TraceResult raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene& scene, const Ray& ray) const
 {
     Hit hit;
 
     if (scene.root->find_hit(ray, &hit))
     {
-        return colors::white();
+        return TraceResult(colors::white(), hit.group_id);
     }
     else
     {
-        return colors::black();
+        return TraceResult::no_hit();
     }
 }
 

@@ -13,7 +13,7 @@ namespace raytracer
             class BinaryRayTracer : public RayTracerImplementation
             {
             public:
-                imaging::color trace(const Scene&, const math::Ray&) const override;
+                TraceResult trace(const Scene&, const math::Ray&) const override;
             };
         }
 
