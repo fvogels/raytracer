@@ -8,5 +8,5 @@
 
 namespace math
 {
-    using Vector2D = Vector<2>;
+    using Vector2D = Vector<2>;    
 }
