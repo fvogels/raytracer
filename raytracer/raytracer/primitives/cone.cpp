@@ -14,13 +14,13 @@ bool raytracer::primitives::_private_::ConeZ::find_hit(const math::Ray& ray, Hit
 {
     assert(hit);
 
-    Point2D O2D = Point2D(ray.origin.x, ray.origin.y);
-    Vector2D D2D = Vector2D(ray.direction.x, ray.direction.y);
-    Vector2D OP = O2D - Point2D::origin();
-    
-    double a = D2D.dot(D2D) - pow(ray.direction.z, 2);
-    double b = 2 * (D2D.dot(OP) - ray.direction.z * ray.origin.z);
-    double c = OP.dot(OP) - pow(ray.origin.z, 2);
+    Point2D O2D = point(ray.origin.x(), ray.origin.y());
+    Vector2D D2D = vector(ray.direction.x(), ray.direction.y());
+    Vector2D OP = O2D - point(0, 0);
+
+    double a = D2D.dot(D2D) - pow(ray.direction.z(), 2);
+    double b = 2 * (D2D.dot(OP) - ray.direction.z() * ray.origin.z());
+    double c = OP.dot(OP) - pow(ray.origin.z(), 2);
 
     QuadraticEquation eq(a, b, c);
 
@@ -49,21 +49,21 @@ bool raytracer::primitives::_private_::ConeZ::find_hit(const math::Ray& ray, Hit
         {
             Point3D position = ray.at(t);
 
-            if (position.x == 0 && position.y == 0 && position.z == 0)
+            if (position == point(0, 0, 0))
             {
                 return false;
             }
             else
             {
-                Point2D position_on_circle(position.x, position.y);
-                double height = position.z;
-                double theta = atan2(position.y, position.x);
+                Point2D position_on_circle = point(position.x(), position.y());
+                double height = position.z();
+                double theta = atan2(position.y(), position.x());
 
                 hit->t = t;
                 hit->position = position;
                 hit->local_position.xyz = position;
-                hit->local_position.uv = Point2D(theta, height);
-                hit->normal = Vector3D(position.x, position.y, -position.z).normalized();
+                hit->local_position.uv = point(theta, height);
+                hit->normal = vector(position.x(), position.y(), -position.z()).normalized();
 
                 return true;
             }
