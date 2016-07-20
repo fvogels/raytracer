@@ -10,8 +10,20 @@ namespace math
     class Vector
     {
     public:
-        Vector(const Vector<N>& p)
-            : m_coords(p.m_coords) { }
+        Vector(std::array<double, N>&& coords)
+            : m_coords(coords) { }
+
+        Vector()
+            : m_coords()
+        {
+            for (unsigned i = 0; i != N; ++i)
+            {
+                m_coords[i] = 0;
+            }
+        }
+
+        Vector(const Vector<N>&) = default;
+        Vector(Vector<N>&&) = default;
 
         template<unsigned I>
         double& coord()
