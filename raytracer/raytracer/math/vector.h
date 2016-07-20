@@ -1,6 +1,7 @@
 #pragma once
 
 #include "math/approx.h"
+#include <array>
 
 
 namespace math
