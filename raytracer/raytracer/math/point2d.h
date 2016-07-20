@@ -8,9 +8,4 @@
 namespace math
 {
     using Point2D = Point<2>;
-
-    Point2D point(double radius, Angle theta)
-    {
-        return point(radius * cos(theta), radius * sin(theta));
-    }
 }
