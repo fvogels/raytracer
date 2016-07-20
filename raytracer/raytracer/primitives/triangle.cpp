@@ -85,7 +85,7 @@ bool raytracer::primitives::_private_::Triangle::find_hit(const math::Ray& ray, 
                 hit->t = t;
                 hit->position = P;
                 hit->local_position.xyz = P;
-                hit->local_position.uv = Point2D(alpha, beta);
+                hit->local_position.uv = point(alpha, beta);
                 hit->normal = normal;
 
                 return true;
@@ -110,9 +110,9 @@ std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Triangle::hi
 
 math::Box raytracer::primitives::_private_::Triangle::bounding_box() const
 {
-    Interval<double> x_interval(min3(m_a.x, m_b.x, m_c.x), max3(m_a.x, m_b.x, m_c.x));
-    Interval<double> y_interval(min3(m_a.y, m_b.y, m_c.y), max3(m_a.y, m_b.y, m_c.y));
-    Interval<double> z_interval(min3(m_a.z, m_b.z, m_c.z), max3(m_a.z, m_b.z, m_c.z));
+    Interval<double> x_interval(min3(m_a.x(), m_b.x(), m_c.x()), max3(m_a.x(), m_b.x(), m_c.x()));
+    Interval<double> y_interval(min3(m_a.y(), m_b.y(), m_c.y()), max3(m_a.y(), m_b.y(), m_c.y()));
+    Interval<double> z_interval(min3(m_a.z(), m_b.z(), m_c.z()), max3(m_a.z(), m_b.z(), m_c.z()));
 
     return Box(x_interval, y_interval, z_interval);
 }
