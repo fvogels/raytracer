@@ -22,10 +22,10 @@ namespace math
 
                 double evaluate(const math::Point2D& p) const
                 {
-                    assert(0 <= p.x);
-                    assert(p.x <= 1);
-                    assert(0 <= p.y);
-                    assert(p.y <= 1);
+                    assert(0 <= p.x());
+                    assert(p.x() <= 1);
+                    assert(0 <= p.y());
+                    assert(p.y() <= 1);
 
                     return find_smallest_distance(p);
                 }
@@ -39,7 +39,7 @@ namespace math
 
                         double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
                         double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
-                        Point2D p(x + fx, y + fy);
+                        Point2D p = point(x + fx, y + fy);
 
                         callback(p);
                     }
@@ -47,8 +47,8 @@ namespace math
 
                 void enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
                 {
-                    int x = int(floor(p.x));
-                    int y = int(floor(p.y));
+                    int x = int(floor(p.x()));
+                    int y = int(floor(p.y()));
 
                     for (int dx = -1; dx <= 1; ++dx)
                     {
@@ -92,12 +92,12 @@ namespace math
 
                 double evaluate(const math::Point3D& p) const
                 {
-                    assert(0 <= p.x);
-                    assert(p.x <= 1);
-                    assert(0 <= p.y);
-                    assert(p.y <= 1);
-                    assert(0 <= p.z);
-                    assert(p.z <= 1);
+                    assert(0 <= p.x());
+                    assert(p.x() <= 1);
+                    assert(0 <= p.y());
+                    assert(p.y() <= 1);
+                    assert(0 <= p.z());
+                    assert(p.z() <= 1);
 
                     return find_smallest_distance(p);
                 }
@@ -112,7 +112,7 @@ namespace math
                         double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
                         double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
                         double fz = double(m_rng(k + 2)) / std::numeric_limits<unsigned>::max();
-                        Point3D p(x + fx, y + fy, z + fz);
+                        Point3D p = point(x + fx, y + fy, z + fz);
 
                         callback(p);
                     }
@@ -120,9 +120,9 @@ namespace math
 
                 void enumerate_points_around(const Point3D& p, std::function<void(const Point3D&)> callback) const
                 {
-                    int x = int(floor(p.x));
-                    int y = int(floor(p.y));
-                    int z = int(floor(p.z));
+                    int x = int(floor(p.x()));
+                    int y = int(floor(p.y()));
+                    int z = int(floor(p.z()));
 
                     for (int dx = -1; dx <= 1; ++dx)
                     {
