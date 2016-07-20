@@ -1,5 +1,6 @@
 #pragma once
 
+#include "math/vector.h"
 #include "math/approx.h"
 #include "math/angle.h"
 #include <iostream>
@@ -7,61 +8,7 @@
 
 namespace math
 {
-    struct Vector3D final
-    {
-        double x, y, z;
-
-        Vector3D(double x, double y, double z) noexcept
-            : x(x), y(y), z(z) { }
-
-        Vector3D(double r, math::Angle azimuth, math::Angle altitude)
-            : x(r * cos(azimuth) * cos(altitude)), y(r * sin(altitude)), z(r * sin(azimuth) * cos(altitude)) { }
-
-        Vector3D() noexcept
-            : x(0), y(0), z(0) { }
-
-        Vector3D(const Vector3D& v) noexcept = default;
-
-        static Vector3D zero() noexcept { return Vector3D(0, 0, 0); }
-        static Vector3D x_axis() noexcept { return Vector3D(1, 0, 0); }
-        static Vector3D y_axis() noexcept { return Vector3D(0, 1, 0); }
-        static Vector3D z_axis() noexcept { return Vector3D(0, 0, 1); }
-
-        Vector3D& operator =(const Vector3D&) noexcept = default;
-
-        double dot(const Vector3D&) const noexcept;
-        Vector3D cross(const Vector3D&) const noexcept;
-
-        double norm_sqr() const noexcept;
-        double norm() const noexcept;
-        void normalize() noexcept;
-        Vector3D normalized() const noexcept;
-        bool is_unit() const noexcept;
-
-        Vector3D& operator +=(const Vector3D&) noexcept;
-        Vector3D& operator -=(const Vector3D&) noexcept;
-        Vector3D& operator *=(double) noexcept;
-        Vector3D& operator /=(double) noexcept;
-
-        bool is_perpendicular_on(const Vector3D& v) const noexcept
-        {
-            return dot(v) == approx(0.0);
-        }
-
-        Vector3D reflect_by(const Vector3D&) const;
-    };
-
-    Vector3D operator +(const Vector3D&, const Vector3D&) noexcept;
-    Vector3D operator -(const Vector3D&) noexcept;
-    Vector3D operator -(const Vector3D&, const Vector3D&) noexcept;
-    Vector3D operator *(const Vector3D&, double) noexcept;
-    Vector3D operator *(double, const Vector3D&) noexcept;
-    Vector3D operator /(const Vector3D&, double) noexcept;
-
-    bool operator ==(const Vector3D&, const Vector3D&) noexcept;
-    bool operator !=(const Vector3D&, const Vector3D&) noexcept;
-
-    std::ostream& operator <<(std::ostream&, const Vector3D&);
+    using Vector3D = Vector<3>;
 
     template<>
     struct approximately<Vector3D>
