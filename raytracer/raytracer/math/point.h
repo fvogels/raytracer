@@ -137,6 +137,8 @@ namespace math
         Point<N>& operator =(const Point<N>& p)
         {
             m_coords = p.m_coords;
+            
+            return *this;
         }
 
         bool operator ==(const Point<N>& p) const
@@ -151,19 +153,7 @@ namespace math
 
     private:
         std::array<double, N> m_coords;
-
-        template<typename... Ts>
-        friend Point<sizeof...(Ts)> point(Ts...);
     };
-
-    template<typename... Ts>
-    Point<sizeof...(Ts)> point(Ts... coordinates)
-    {
-        constexpr unsigned n_dimensions = sizeof...(Ts);
-        std::array<double, n_dimensions> coordinates = { double(coordinates)... };
-
-        return Point<n_dimensions>(std::move(coordinates));
-    }
 
     template<unsigned N>
     Point<N> operator +(const Vector<N>& v, const Point<N> p)
@@ -174,31 +164,31 @@ namespace math
     namespace _private_
     {
         template<unsigned I, unsigned N>
-        struct VectorOutputHelper
+        struct PointOutputHelper
         {
             static void write(std::ostream& out, const Point<N>& p)
             {
                 out << ",";
                 out << p.coord<I>();
 
-                VectorOutputHelper<I + 1, N>::write();
+                PointOutputHelper<I + 1, N>::write(out, p);
             }
         };
 
         template<unsigned N>
-        struct VectorOutputHelper<0, N>
+        struct PointOutputHelper<0, N>
         {
             static void write(std::ostream& out, const Point<N>& p)
             {
                 out << "(";
                 out << p.coord<0>();
 
-                VectorOutputHelper<1, N>::write();
+                PointOutputHelper<1, N>::write(out, p);
             }
         };
 
         template<unsigned N>
-        struct VectorOutputHelper<N, N>
+        struct PointOutputHelper<N, N>
         {
             static void write(std::ostream& out, const Point<N>& p)
             {
@@ -210,7 +200,7 @@ namespace math
     template<unsigned N>
     std::ostream& operator <<(std::ostream& out, const Point<N>& p)
     {
-        _private_::OutputHelper<0, N>::write(out, p);
+        _private_::PointOutputHelper<0, N>::write(out, p);
 
         return out;
     }
@@ -219,5 +209,24 @@ namespace math
     double distance(const Point<N>& p, const Point<N>& q)
     {
         return (q - q).norm();
+    }
+
+    inline Point<2> point(double x, double y)
+    {
+        std::array<double, 2> coordinates = { x, y };
+
+        return Point<2>(std::move(coordinates));
+    }
+
+    inline Point<3> point(double x, double y, double z)
+    {
+        std::array<double, 3> coordinates = { x, y, z };
+
+        return Point<3>(std::move(coordinates));
+    }
+
+    inline Point<3> point(double r, math::Angle azimuth, math::Angle altitude)
+    {
+        return point(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
     }
 }
