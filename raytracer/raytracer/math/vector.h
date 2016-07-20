@@ -1,5 +1,6 @@
 #pragma once
 
+#include "math/angle.h"
 #include "math/approx.h"
 #include <array>
 
@@ -178,6 +179,8 @@ namespace math
         Vector<N>& operator =(const Vector<N>& p)
         {
             m_coords = p.m_coords;
+
+            return *this;
         }
 
         bool operator ==(const Vector<N>& p) const
@@ -223,7 +226,7 @@ namespace math
             return dot(v) == approx(0.0);
         }
 
-        Vector<N> reflect_by(const Vector<N>&) const
+        Vector<N> reflect_by(const Vector<N>& n) const
         {
             auto& v = *this;
 
@@ -234,13 +237,35 @@ namespace math
         std::array<double, N> m_coords;
     };
 
-    template<typename... Ts>
-    Vector<sizeof...(Ts)> vector(Ts... coordinates)
+    inline Vector<2> vector(double x, double y)
     {
-        constexpr unsigned n_dimensions = sizeof...(Ts);
-        std::array<double, n_dimensions> coordinates = { double(coordinates)... };
+        std::array<double, 2> coordinates = { x, y };
 
-        return Vector<n_dimensions>(std::move(coordinates));
+        return Vector<2>(std::move(coordinates));
+    }
+
+    inline Vector<3> vector(double x, double y, double z)
+    {
+        std::array<double, 3> coordinates = { x, y, z };
+
+        return Vector<3>(std::move(coordinates));
+    }
+
+    inline Vector<4> vector(double x, double y, double z, double w)
+    {
+        std::array<double, 4> coordinates = { x, y, z, w };
+
+        return Vector<4>(std::move(coordinates));
+    }
+
+    inline Vector<2> vector(double radius, Angle theta)
+    {
+        return vector(radius * cos(theta), radius * sin(theta));
+    }
+
+    inline Vector<3> vector(double r, math::Angle azimuth, math::Angle altitude)
+    {
+        return vector(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
     }
 
     template<unsigned N>
@@ -252,31 +277,31 @@ namespace math
     namespace _private_
     {
         template<unsigned I, unsigned N>
-        struct PointOutputHelper
+        struct VectorOutputHelper
         {
             static void write(std::ostream& out, const Vector<N>& p)
             {
                 out << ",";
                 out << p.coord<I>();
 
-                PointOutputHelper<I + 1, N>::write();
+                VectorOutputHelper<I + 1, N>::write(out, p);
             }
         };
 
         template<unsigned N>
-        struct PointOutputHelper<0, N>
+        struct VectorOutputHelper<0, N>
         {
             static void write(std::ostream& out, const Vector<N>& p)
             {
                 out << "(";
                 out << p.coord<0>();
 
-                PointOutputHelper<1, N>::write();
+                VectorOutputHelper<1, N>::write(out, p);
             }
         };
 
         template<unsigned N>
-        struct PointOutputHelper<N, N>
+        struct VectorOutputHelper<N, N>
         {
             static void write(std::ostream& out, const Vector<N>& p)
             {
@@ -288,7 +313,7 @@ namespace math
     template<unsigned N>
     std::ostream& operator <<(std::ostream& out, const Vector<N>& p)
     {
-        _private_::PointOutputHelper<0, N>::write(out, p);
+        _private_::VectorOutputHelper<0, N>::write(out, p);
 
         return out;
     }
