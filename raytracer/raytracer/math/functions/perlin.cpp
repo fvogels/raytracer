@@ -210,6 +210,67 @@ namespace math
 
                 Function<unsigned, unsigned> m_rng;
             };
+
+            //class PerlinNoise4D : public FunctionBody<double, const Point3D&>
+            //{
+            //public:
+            //    PerlinNoise4D(Function<unsigned, unsigned> rng)
+            //        : m_rng(rng)
+            //    {
+            //        // NOP
+            //    }
+
+            //    double evaluate(const math::Point4D& p) const
+            //    {
+            //        double fx = floor(p.x);
+            //        double fy = floor(p.y);
+            //        double fz = floor(p.z);
+
+            //        std::array<double, 3> coordinates = { p.x - fx, p.y - fy, p.z - fz };
+
+            //        HyperCube<3> hc
+            //        {
+            //            HyperCube<2> {
+            //            HyperCube<1> { z<0,0,0>(p), z<1,0,0>(p) },
+            //                HyperCube<1> { z<0,1,0>(p), z<1,1,0>(p) }
+            //        },
+            //            HyperCube<2> {
+            //            HyperCube<1> { z<0,0,1>(p), z<1,0,1>(p) },
+            //                HyperCube<1> { z<0,1,1>(p), z<1,1,1>(p) }
+            //        }
+            //        };
+
+            //        return interpolate(hc, coordinates);
+            //    }
+
+            //private:
+            //    Vector3D gradient_at(unsigned x, unsigned y, unsigned z) const
+            //    {
+            //        auto t1 = double(m_rng(x * 31 + 97 * y + 113 * z)) / std::numeric_limits<unsigned>::max();
+            //        auto t2 = double(m_rng(x * 31 + 97 * y + 113 * z) + 1) / std::numeric_limits<unsigned>::max();
+
+            //        return Vector3D(1, t1 * 360_degrees, t2 * 180_degrees);
+            //    }
+
+            //    template<unsigned X, unsigned Y, unsigned Z>
+            //    Node z(Point3D p) const
+            //    {
+            //        double fx = bound<X>(p.x);
+            //        double fy = bound<Y>(p.y);
+            //        double fz = bound<Z>(p.z);
+            //        Point3D fp(fx, fy, fz);
+
+            //        unsigned kx = unsigned(fx);
+            //        unsigned ky = unsigned(fy);
+            //        unsigned kz = unsigned(fz);
+
+            //        Vector3D v = gradient_at(kx, ky, kz);
+
+            //        return Node{ (p - fp).dot(v) };
+            //    }
+
+            //    Function<unsigned, unsigned> m_rng;
+            //};
         }
     }
 }
