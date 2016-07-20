@@ -785,5 +785,11 @@
     <ClInclude Include="math\vector4d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -363,8 +363,10 @@
     <ClInclude Include="Catch.h" />
     <ClInclude Include="data-structures\grid.h" />
     <ClInclude Include="demo\demos.h" />
+    <ClInclude Include="math\vector.h" />
     <ClInclude Include="math\vector4d.h" />
     <ClInclude Include="materials\wood-material.h" />
+    <ClInclude Include="math\point.h" />
     <ClInclude Include="primitives\group.h" />
     <ClInclude Include="rendering\cartoon-renderer.h" />
     <ClInclude Include="raytracing\ray-tracer-v4.h" />
