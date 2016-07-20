@@ -45,14 +45,14 @@ namespace math
             {
                 double x;
             };
-            
+
             template<unsigned K, unsigned N>
             struct InterpolationHelper
             {
                 static double interpolate(const HyperCube<K>& cube, const std::array<double, N>& coordinates)
                 {
                     using namespace math::functions::easing;
-                    
+
                     static_assert(K <= N, "Invalid index");
 
                     double x = InterpolationHelper<K - 1, N>::interpolate(cube.a, coordinates);
@@ -85,6 +85,22 @@ namespace math
 
             using Node = HyperCube<0>;
 
+            template<unsigned>
+            double bound(double);
+
+            template<>
+            double bound<0>(double x)
+            {
+                return floor(x);
+            }
+
+            template<>
+            double bound<1>(double x)
+            {
+                return ceil(x);
+            }
+
+
             class PerlinNoise2D : public FunctionBody<double, const Point2D&>
             {
             public:
@@ -99,30 +115,29 @@ namespace math
                     double fx = floor(p.x);
                     double fy = floor(p.y);
 
-                    unsigned x = unsigned(fx);
-                    unsigned y = unsigned(fy);
+                    //unsigned x = unsigned(fx);
+                    //unsigned y = unsigned(fy);
 
                     std::array<double, 2> coordinates = { p.x - fx, p.y - fy };
-                    // std::array<double, 2> coordinates = { 0.5, 0.75 };
 
-                    Point2D p00 = Point2D(fx, fy);
-                    Point2D p10 = Point2D(fx + 1, fy);
-                    Point2D p01 = Point2D(fx, fy + 1);
-                    Point2D p11 = Point2D(fx + 1, fy + 1);
+                    //Point2D p00(fx, fy);
+                    //Point2D p10(fx + 1, fy);
+                    //Point2D p01(fx, fy + 1);
+                    //Point2D p11(fx + 1, fy + 1);
 
-                    Vector2D v00 = at(x, y);
-                    Vector2D v10 = at(x + 1, y);
-                    Vector2D v01 = at(x, y + 1);
-                    Vector2D v11 = at(x + 1, y + 1);                    
+                    //Vector2D v00 = at(x, y);
+                    //Vector2D v10 = at(x + 1, y);
+                    //Vector2D v01 = at(x, y + 1);
+                    //Vector2D v11 = at(x + 1, y + 1);
 
-                    double z00 = (p - p00).dot(v00);
-                    double z10 = (p - p10).dot(v10);
-                    double z01 = (p - p01).dot(v01);
-                    double z11 = (p - p11).dot(v11);
+                    //double z00 = (p - p00).dot(v00);
+                    //double z10 = (p - p10).dot(v10);
+                    //double z01 = (p - p01).dot(v01);
+                    //double z11 = (p - p11).dot(v11);
 
-                    HyperCube<2> hc2{ 
-                        HyperCube<1> { Node{ z00 }, Node{ z10 } },
-                        HyperCube<1> { Node{ z01 }, Node{ z11 } },
+                    HyperCube<2> hc2{
+                        HyperCube<1> { Node{ z<0,0>(p) }, Node{ z<1,0>(p) } },
+                        HyperCube<1> { Node{ z<0,1>(p) }, Node{ z<1,1>(p) } },
                     };
 
                     return interpolate(hc2, coordinates);
@@ -134,6 +149,21 @@ namespace math
                     auto t = double(m_rng(x * 31 + 97 * y)) / std::numeric_limits<unsigned>::max();
 
                     return Vector2D(1, t * 360_degrees);
+                }
+
+                template<unsigned X, unsigned Y>
+                double z(Point2D p) const
+                {
+                    double fx = bound<X>(p.x);
+                    double fy = bound<Y>(p.y);
+                    Point2D fp(fx, fy);
+
+                    unsigned kx = unsigned(fx);
+                    unsigned ky = unsigned(fy);
+
+                    Vector2D v = at(kx, ky);
+
+                    return (p - fp).dot(v);
                 }
 
                 Function<unsigned, unsigned> m_rng;
