@@ -41,6 +41,16 @@ namespace math
             return m_coords[I];
         }
 
+        double& operator [](unsigned i)
+        {
+            return m_coords[i];
+        }
+
+        double operator [](unsigned i) const
+        {
+            return m_coords[i];
+        }
+
         double& x()
         {
             static_assert(N >= 1, "X-coordinate requires at least one dimension");
@@ -220,14 +230,8 @@ namespace math
             return v - 2 * v.dot(n) * n;
         }
 
-    private:
-        Vector(std::array<double, N>&& coords)
-            : m_coords(coords) { }
-
+    private:        
         std::array<double, N> m_coords;
-
-        template<typename... Ts>
-        friend Vector<sizeof...(Ts)> vector(Ts...);
     };
 
     template<typename... Ts>
