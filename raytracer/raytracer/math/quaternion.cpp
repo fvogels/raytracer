@@ -13,7 +13,7 @@ math::Quaternion::Quaternion(double a, double b, double c, double d)
 }
 
 math::Quaternion::Quaternion(const Point3D& p)
-    : a(0), b(p.x), c(p.y), d(p.z)
+    : a(0), b(p.x()), c(p.y()), d(p.z())
 {
     // NOP
 }
@@ -26,9 +26,9 @@ math::Quaternion::Quaternion(Angle angle, const Vector3D& v)
     double s = sin(angle / 2);
 
     this->a = c;
-    this->b = s * v.x;
-    this->c = s * v.y;
-    this->d = s * v.z;
+    this->b = s * v.x();
+    this->c = s * v.y();
+    this->d = s * v.z();
 }
 
 Quaternion math::Quaternion::conjugate() const
@@ -42,7 +42,7 @@ Point3D math::Quaternion::rotate(const Point3D& p) const
 
     assert(q.a == approx(0.0));
 
-    return Point3D(q.b, q.c, q.d);
+    return point(q.b, q.c, q.d);
 }
 
 Quaternion math::operator +(const Quaternion& q1, const Quaternion& q2)
