@@ -15,13 +15,13 @@ namespace
 {
     Point2D compute_uv_from_xyz(const Point2D& p, double height)
     {
-        double u = 0.5 + atan2(p.y, p.x) / (2 * M_PI);
+        double u = 0.5 + atan2(p.y(), p.x()) / (2 * M_PI);
         double v = height;
 
         assert(0 <= u);
         assert(u <= 1);
 
-        return Point2D(u, v);
+        return point(u, v);
     }
 
     void initialize_hit_x_cylinder(Hit* hit, const Ray& ray, double t)
@@ -29,14 +29,14 @@ namespace
         assert(hit);
 
         Point3D position = ray.at(t);
-        Point2D position_on_circle(position.y, position.z);
-        double height = position.x;
+        Point2D position_on_circle = point(position.y(), position.z());
+        double height = position.x();
 
         hit->t = t;
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = Vector3D(0, position.y, position.z);
+        hit->normal = vector(0.0, position.y(), position.z());
 
         assert(hit->normal.is_unit());
     }
@@ -46,14 +46,14 @@ namespace
         assert(hit);
 
         Point3D position = ray.at(t);
-        Point2D position_on_circle(position.x, position.z);
-        double height = position.y;
+        Point2D position_on_circle = point(position.x(), position.z());
+        double height = position.y();
 
         hit->t = t;
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = Vector3D(position.x, 0, position.z);
+        hit->normal = vector(position.x(), 0.0, position.z());
 
         assert(hit->normal.is_unit());
     }
@@ -63,25 +63,25 @@ namespace
         assert(hit);
 
         Point3D position = ray.at(t);
-        Point2D position_on_circle(position.x, position.y);
-        double height = position.z;
+        Point2D position_on_circle = point(position.x(), position.y());
+        double height = position.z();
 
         hit->t = t;
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = Vector3D(position.x, position.y, 0);
+        hit->normal = vector(position.x(), position.y(), 0);
 
         assert(hit->normal.is_unit());
     }
 
     bool find_intersections(const Point2D& O, const Vector2D& D, double* t1, double* t2)
     {
-        if ((O - Point2D()).norm_sqr() > 1)
+        if ((O - point(0, 0)).norm_sqr() > 1)
         {
             double a = D.dot(D);
-            double b = 2 * D.dot(O - Point2D());
-            double c = (O - Point2D()).norm_sqr() - 1;
+            double b = 2 * D.dot(O - point(0, 0));
+            double c = (O - point(0, 0)).norm_sqr() - 1;
 
             QuadraticEquation eq(a, b, c);
 
@@ -108,8 +108,8 @@ bool raytracer::primitives::_private_::CylinderX::find_hit(const Ray& ray, Hit* 
 {
     assert(hit != nullptr);
 
-    Point2D O(ray.origin.y, ray.origin.z);
-    Vector2D D(ray.direction.y, ray.direction.z);
+    auto O = point(ray.origin.y(), ray.origin.z());
+    auto D = vector(ray.direction.y(), ray.direction.z());
 
     double t1, t2;
     if (find_intersections(O, D, &t1, &t2))
@@ -140,8 +140,8 @@ bool raytracer::primitives::_private_::CylinderX::find_hit(const Ray& ray, Hit* 
 
 std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderX::hits(const math::Ray& ray) const
 {
-    Point2D O(ray.origin.y, ray.origin.z);
-    Vector2D D(ray.direction.y, ray.direction.z);
+    Point2D O = point(ray.origin.y(), ray.origin.z());
+    Vector2D D = vector(ray.direction.y(), ray.direction.z());
 
     double t1, t2;
     if (find_intersections(O, D, &t1, &t2))
@@ -171,8 +171,8 @@ bool raytracer::primitives::_private_::CylinderY::find_hit(const Ray& ray, Hit* 
 {
     assert(hit != nullptr);
 
-    Point2D O(ray.origin.x, ray.origin.z);
-    Vector2D D(ray.direction.x, ray.direction.z);
+    Point2D O = point(ray.origin.x(), ray.origin.z());
+    Vector2D D = vector(ray.direction.x(), ray.direction.z());
 
     double t1, t2;
     if (find_intersections(O, D, &t1, &t2))
@@ -203,8 +203,8 @@ bool raytracer::primitives::_private_::CylinderY::find_hit(const Ray& ray, Hit* 
 
 std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderY::hits(const math::Ray& ray) const
 {
-    Point2D O(ray.origin.x, ray.origin.z);
-    Vector2D D(ray.direction.x, ray.direction.z);
+    Point2D O = point(ray.origin.x(), ray.origin.z());
+    Vector2D D = vector(ray.direction.x(), ray.direction.z());
 
     double t1, t2;
     if (find_intersections(O, D, &t1, &t2))
@@ -234,8 +234,8 @@ bool raytracer::primitives::_private_::CylinderZ::find_hit(const Ray& ray, Hit* 
 {
     assert(hit != nullptr);
 
-    Point2D O(ray.origin.x, ray.origin.y);
-    Vector2D D(ray.direction.x, ray.direction.y);
+    Point2D O = point(ray.origin.x(), ray.origin.y());
+    Vector2D D = vector(ray.direction.x(), ray.direction.y());
 
     double t1, t2;
     if (find_intersections(O, D, &t1, &t2))
@@ -266,8 +266,8 @@ bool raytracer::primitives::_private_::CylinderZ::find_hit(const Ray& ray, Hit* 
 
 std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderZ::hits(const math::Ray& ray) const
 {
-    Point2D O(ray.origin.x, ray.origin.y);
-    Vector2D D(ray.direction.x, ray.direction.y);
+    Point2D O = point(ray.origin.x(), ray.origin.y());
+    Vector2D D = vector(ray.direction.x(), ray.direction.y());
 
     double t1, t2;
     if (find_intersections(O, D, &t1, &t2))
