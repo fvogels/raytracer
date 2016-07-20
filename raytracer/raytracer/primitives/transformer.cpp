@@ -54,17 +54,17 @@ math::Box raytracer::primitives::_private_::Transformer::bounding_box() const
     AUX(1, 1, 1);
 #undef AUX
 
-    double min_x = math::minimum(p000.x, p001.x, p010.x, p011.x, p100.x, p101.x, p110.x, p111.x);
-    double max_x = math::maximum(p000.x, p001.x, p010.x, p011.x, p100.x, p101.x, p110.x, p111.x);
+    double min_x = math::minimum(p000.x(), p001.x(), p010.x(), p011.x(), p100.x(), p101.x(), p110.x(), p111.x());
+    double max_x = math::maximum(p000.x(), p001.x(), p010.x(), p011.x(), p100.x(), p101.x(), p110.x(), p111.x());
 
-    double min_y = math::minimum(p000.y, p001.y, p010.y, p011.y, p100.y, p101.y, p110.y, p111.y);
-    double max_y = math::maximum(p000.y, p001.y, p010.y, p011.y, p100.y, p101.y, p110.y, p111.y);
+    double min_y = math::minimum(p000.y(), p001.y(), p010.y(), p011.y(), p100.y(), p101.y(), p110.y(), p111.y());
+    double max_y = math::maximum(p000.y(), p001.y(), p010.y(), p011.y(), p100.y(), p101.y(), p110.y(), p111.y());
 
-    double min_z = math::minimum(p000.z, p001.z, p010.z, p011.z, p100.z, p101.z, p110.z, p111.z);
-    double max_z = math::maximum(p000.z, p001.z, p010.z, p011.z, p100.z, p101.z, p110.z, p111.z);
+    double min_z = math::minimum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
+    double max_z = math::maximum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
 
-    Point3D lower_corner(min_x, min_y, min_z);
-    Point3D upper_corner(max_x, max_y, max_z);
+    Point3D lower_corner = point(min_x, min_y, min_z);
+    Point3D upper_corner = point(max_x, max_y, max_z);
 
     return Box::from_raw_corners(lower_corner, upper_corner);
 }
