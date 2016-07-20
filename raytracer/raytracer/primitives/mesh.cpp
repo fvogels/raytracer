@@ -29,7 +29,7 @@ namespace
 
             in >> x >> y >> z;
 
-            vertices.push_back(Point3D(x, y, z));
+            vertices.push_back(point(x, y, z));
         }
 
         unsigned n_triangles;
@@ -79,7 +79,7 @@ namespace
 
             in >> x >> y >> z;
 
-            vertices.push_back(Point3D(x, y, z));
+            vertices.push_back(point(x, y, z));
         }
 
         CLOG(INFO, "mesh") << "Reading hierarchy";
