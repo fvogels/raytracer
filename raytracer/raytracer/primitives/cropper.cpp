@@ -61,7 +61,7 @@ Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<
 {
     std::function<bool(const Point3D&)> predicate = [x_interval](const Point3D& p)
     {
-        return x_interval.contains(p.x);
+        return x_interval.contains(p.x());
     };
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
@@ -71,7 +71,7 @@ Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<
 {
     std::function<bool(const Point3D&)> predicate = [y_interval](const Point3D& p)
     {
-        return y_interval.contains(p.y);
+        return y_interval.contains(p.y());
     };
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
@@ -81,7 +81,7 @@ Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<
 {
     std::function<bool(const Point3D&)> predicate = [z_interval](const Point3D& p)
     {
-        return z_interval.contains(p.z);
+        return z_interval.contains(p.z());
     };
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
@@ -91,7 +91,7 @@ Primitive raytracer::primitives::crop_spherical(Primitive cropped, double radius
 {
     std::function<bool(const Point3D&)> predicate = [radius](const Point3D& p)
     {
-        return distance(Point3D(0, 0, 0), p) < radius;
+        return distance(point(0, 0, 0), p) < radius;
     };
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
