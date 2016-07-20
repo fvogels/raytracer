@@ -17,7 +17,7 @@ raytracer::rendering::_private_::MultithreadedRenderer::MultithreadedRenderer(un
 Bitmap raytracer::rendering::_private_::MultithreadedRenderer::render(const Scene& scene) const
 {
     Bitmap bitmap(m_horizontal_resolution, m_vertical_resolution);
-    Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+    Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
     Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
 
     std::atomic<unsigned> j(0);
