@@ -76,14 +76,14 @@ namespace
             using namespace raytracer::lights;
 
             std::vector<LightSource> light_sources;
-            light_sources.push_back(omnidirectional(Point3D(0, 5, 5), colors::white()));
+            light_sources.push_back(omnidirectional(point(0, 5, 5), colors::white()));
 
             return light_sources;
         }
 
         static raytracer::Camera create_camera(TimeStamp now)
         {
-            auto camera = raytracer::cameras::perspective(Point3D(0, 5, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+            auto camera = raytracer::cameras::perspective(point(0, 5, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
 
             return camera;
         }
