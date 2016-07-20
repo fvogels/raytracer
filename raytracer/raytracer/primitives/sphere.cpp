@@ -13,15 +13,15 @@ namespace
 {
     Point2D compute_uv_from_xyz(const Point3D& p)
     {
-        double u = 0.5 + atan2(p.z, p.x) / (2 * M_PI);
-        double v = 0.5 - asin(p.y) / M_PI;
+        double u = 0.5 + atan2(p.z(), p.x()) / (2 * M_PI);
+        double v = 0.5 - asin(p.y()) / M_PI;
 
         assert(0 <= u);
         assert(u <= 1);
         assert(0 <= v);
         assert(v <= 1);
 
-        return Point2D(u, v);
+        return point(u, v);
     }
 
     void initialize_hit(Hit* hit, const Ray& ray, double t)
@@ -39,7 +39,7 @@ bool raytracer::primitives::_private_::Sphere::find_hit(const Ray& ray, Hit* hit
     assert(hit != nullptr);
 
     double a = ray.direction.dot(ray.direction);
-    double b = 2 * ray.direction.dot(ray.origin - Point3D());
+    double b = 2 * ray.direction.dot(ray.origin - point(0, 0, 0));
     double c = (ray.origin - Point3D()).norm_sqr() - 1;
     double d = b * b - 4 * a * c;
 
