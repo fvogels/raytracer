@@ -35,7 +35,7 @@ namespace
 
 #pragma pack(pop)
 
-    class FastMesh : public _private_::PrimitiveImplementation
+    class FastMesh : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         FastMesh(std::unique_ptr<XYZ[]> vertices, std::unique_ptr<TRIANGLE[]> triangles, std::unique_ptr<BOX[]> boxes, unsigned vertex_count, unsigned triangle_count, unsigned box_count)
@@ -152,7 +152,7 @@ namespace
                         hit->t = t;
                         hit->position = P;
                         hit->local_position.xyz = P;
-                        hit->local_position.uv = Point2D(alpha, beta);
+                        hit->local_position.uv = math::point(alpha, beta);
                         hit->normal = normal;
 
                         return true;
@@ -173,12 +173,12 @@ namespace
         {
             assert(index < m_vertex_count);
 
-            return Point3D(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
+            return math::point(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
         }
 
         Vector3D vector(unsigned index) const
         {
-            return Vector3D(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
+            return math::vector(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
         }
 
         Box box(unsigned index) const
@@ -199,7 +199,7 @@ namespace
 
     Point3D to_point3d(XYZ xyz)
     {
-        return Point3D(xyz.x, xyz.y, xyz.z);
+        return point(xyz.x, xyz.y, xyz.z);
     }
 
     Box construct_bounding_box(const XYZ* vertices, const TRIANGLE& triangle)
