@@ -7,7 +7,7 @@ using namespace raytracer::materials;
 
 namespace
 {
-    class FunctionMaterial2D : public _private_::Material2D
+    class FunctionMaterial2D : public materials::_private_::Material2D
     {
     public:
         FunctionMaterial2D(math::Function<MaterialProperties, const Point2D&> function)
@@ -26,7 +26,7 @@ namespace
         math::Function<MaterialProperties, const Point2D&> m_function;
     };
 
-    class FunctionMaterial3D : public _private_::Material3D
+    class FunctionMaterial3D : public materials::_private_::Material3D
     {
     public:
         FunctionMaterial3D(math::Function<MaterialProperties, const Point3D&> function)
@@ -71,9 +71,9 @@ math::Function<Material, animation::TimeStamp> raytracer::to_animated_2d_materia
     std::function<Material(animation::TimeStamp)> lambda = [material](animation::TimeStamp ts) {
         std::function<MaterialProperties(const Point2D&)> lam = [material, ts](const Point2D& p) {
             HitPosition hp;
-            hp.xyz.x = p.x;
-            hp.xyz.y = p.y;
-            hp.xyz.z = ts.seconds();
+            hp.xyz.x() = p.x();
+            hp.xyz.y() = p.y();
+            hp.xyz.z() = ts.seconds();
             hp.uv = p;
 
             return material->at(hp);
