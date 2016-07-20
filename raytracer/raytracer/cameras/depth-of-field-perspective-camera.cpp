@@ -17,8 +17,8 @@ raytracer::cameras::_private_::DepthOfFieldPerspectiveCamera::DepthOfFieldPerspe
 
 void raytracer::cameras::_private_::DepthOfFieldPerspectiveCamera::enumerate_untransformed_rays(const Point2D& point, std::function<void(const math::Ray&)> callback) const
 {
-    assert(0 <= point.x && point.x <= 1);
-    assert(0 <= point.y && point.y <= 1);
+    assert(0 <= point.x() && point.x() <= 1);
+    assert(0 <= point.y() && point.y() <= 1);
 
     for (auto& camera : m_cameras)
     {
