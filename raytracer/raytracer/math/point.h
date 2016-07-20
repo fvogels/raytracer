@@ -2,6 +2,7 @@
 
 #include "math/vector.h"
 #include <array>
+#include <iostream>
 
 
 namespace math
@@ -105,5 +106,49 @@ namespace math
     Point<N> operator +(const Vector<N>& v, const Point<N> p)
     {
         return p + v;
+    }
+
+    namespace _private_
+    {
+        template<unsigned I, unsigned N>
+        struct VectorOutputHelper
+        {
+            static void write(std::ostream& out, const Point<N>& p)
+            {
+                out << ",";
+                out << p.coord<I>();
+
+                VectorOutputHelper<I + 1, N>::write();
+            }
+        };
+
+        template<unsigned N>
+        struct VectorOutputHelper<0, N>
+        {
+            static void write(std::ostream& out, const Point<N>& p)
+            {
+                out << "(";
+                out << p.coord<0>();
+
+                VectorOutputHelper<1, N>::write();
+            }
+        };
+
+        template<unsigned N>
+        struct VectorOutputHelper<N, N>
+        {
+            static void write(std::ostream& out, const Point<N>& p)
+            {
+                out << ")";
+            }
+        };
+    }
+
+    template<unsigned N>
+    std::ostream& operator <<(std::ostream& out, const Point<N>& p)
+    {
+        _private_::OutputHelper<0, N>::write(out, p);
+
+        return out;
     }
 }
