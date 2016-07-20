@@ -12,23 +12,23 @@ bool raytracer::primitives::_private_::Disk::find_hit(const math::Ray& ray, Hit*
 {
     assert(hit);
 
-    if (ray.direction.y == 0)
+    if (ray.direction.y() == 0)
     {
         return false;
     }
     else
     {
-        double t = -ray.origin.y / ray.direction.y;
+        double t = -ray.origin.y() / ray.direction.y();
         Point3D p = ray.at(t);
-        double r = distance(Point3D(0, 0, 0), p);
+        double r = distance(point(0, 0, 0), p);
 
         if (t < hit->t && t < 1)
         {
             hit->t = t;
-            hit->normal = Vector3D(0, sign(ray.origin.y), 0);
+            hit->normal = vector(0, sign(ray.origin.y()), 0);
             hit->position = p;
             hit->local_position.xyz = p;
-            hit->local_position.uv = Point2D(r, atan2(p.z, p.x));
+            hit->local_position.uv = point(r, atan2(p.z(), p.x()));
 
             return true;
         }
