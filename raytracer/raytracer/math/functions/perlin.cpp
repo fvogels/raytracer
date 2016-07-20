@@ -100,7 +100,6 @@ namespace math
                 return ceil(x);
             }
 
-
             class PerlinNoise2D : public FunctionBody<double, const Point2D&>
             {
             public:
@@ -115,25 +114,7 @@ namespace math
                     double fx = floor(p.x);
                     double fy = floor(p.y);
 
-                    //unsigned x = unsigned(fx);
-                    //unsigned y = unsigned(fy);
-
                     std::array<double, 2> coordinates = { p.x - fx, p.y - fy };
-
-                    //Point2D p00(fx, fy);
-                    //Point2D p10(fx + 1, fy);
-                    //Point2D p01(fx, fy + 1);
-                    //Point2D p11(fx + 1, fy + 1);
-
-                    //Vector2D v00 = at(x, y);
-                    //Vector2D v10 = at(x + 1, y);
-                    //Vector2D v01 = at(x, y + 1);
-                    //Vector2D v11 = at(x + 1, y + 1);
-
-                    //double z00 = (p - p00).dot(v00);
-                    //double z10 = (p - p10).dot(v10);
-                    //double z01 = (p - p01).dot(v01);
-                    //double z11 = (p - p11).dot(v11);
 
                     HyperCube<2> hc2{
                         HyperCube<1> { Node{ z<0,0>(p) }, Node{ z<1,0>(p) } },
@@ -144,7 +125,7 @@ namespace math
                 }
 
             private:
-                Vector2D at(unsigned x, unsigned y) const
+                Vector2D gradient_at(unsigned x, unsigned y) const
                 {
                     auto t = double(m_rng(x * 31 + 97 * y)) / std::numeric_limits<unsigned>::max();
 
@@ -161,7 +142,7 @@ namespace math
                     unsigned kx = unsigned(fx);
                     unsigned ky = unsigned(fy);
 
-                    Vector2D v = at(kx, ky);
+                    Vector2D v = gradient_at(kx, ky);
 
                     return (p - fp).dot(v);
                 }
@@ -180,78 +161,51 @@ namespace math
 
                 double evaluate(const math::Point3D& p) const
                 {
-                    using namespace math::functions::easing;
-
                     double fx = floor(p.x);
                     double fy = floor(p.y);
                     double fz = floor(p.z);
 
-                    unsigned x = unsigned(fx);
-                    unsigned y = unsigned(fy);
-                    unsigned z = unsigned(fz);
+                    std::array<double, 3> coordinates = { p.x - fx, p.y - fy, p.z - fz };
 
-                    Point3D q = Point3D(p.x - fx, p.y - fy, p.z - fz);
+                    HyperCube<3> hc
+                    {
+                        HyperCube<2> {
+                            HyperCube<1> { z<0,0,0>(p), z<1,0,0>(p) },
+                            HyperCube<1> { z<0,1,0>(p), z<1,1,0>(p) }
+                        },
+                        HyperCube<2> {
+                            HyperCube<1> { z<0,0,1>(p), z<1,0,1>(p) },
+                            HyperCube<1> { z<0,1,1>(p), z<1,1,1>(p) }
+                        }
+                    };
 
-                    Point3D p000 = Point3D(fx, fy, fz);
-                    Point3D p100 = Point3D(fx + 1, fy, fz);
-                    Point3D p010 = Point3D(fx, fy + 1, fz);
-                    Point3D p110 = Point3D(fx + 1, fy + 1, fz);
-                    Point3D p001 = Point3D(fx, fy, fz + 1);
-                    Point3D p101 = Point3D(fx + 1, fy, fz + 1);
-                    Point3D p011 = Point3D(fx, fy + 1, fz + 1);
-                    Point3D p111 = Point3D(fx + 1, fy + 1, fz + 1);
-
-                    Vector3D v000 = at(x, y, z);
-                    Vector3D v100 = at(x + 1, y, z);
-                    Vector3D v010 = at(x, y + 1, z);
-                    Vector3D v110 = at(x + 1, y + 1, z);
-                    Vector3D v001 = at(x, y, z + 1);
-                    Vector3D v101 = at(x + 1, y, z + 1);
-                    Vector3D v011 = at(x, y + 1, z + 1);
-                    Vector3D v111 = at(x + 1, y + 1, z + 1);
-
-                    double z000 = (p - p000).dot(v000);
-                    double z100 = (p - p100).dot(v100);
-                    double z010 = (p - p010).dot(v010);
-                    double z110 = (p - p110).dot(v110);
-                    double z001 = (p - p001).dot(v001);
-                    double z101 = (p - p101).dot(v101);
-                    double z011 = (p - p011).dot(v011);
-                    double z111 = (p - p111).dot(v111);
-
-                    auto f1 = easing_function<QUADRATIC, INOUT>(y_range(z000, z100));
-                    auto f2 = easing_function<QUADRATIC, INOUT>(y_range(z010, z110));
-                    auto f3 = easing_function<QUADRATIC, INOUT>(y_range(z001, z101));
-                    auto f4 = easing_function<QUADRATIC, INOUT>(y_range(z011, z111));
-
-                    double z0 = f1(q.x);
-                    double z1 = f2(q.x);
-                    double z2 = f3(q.x);
-                    double z3 = f4(q.x);
-
-                    auto g1 = easing_function<QUADRATIC, INOUT>(y_range(z0, z1));
-                    auto g2 = easing_function<QUADRATIC, INOUT>(y_range(z2, z3));
-
-                    double w0 = g1(q.y);
-                    double w1 = g2(q.y);
-
-                    auto h = easing_function<QUADRATIC, INOUT>(y_range(w0, w1));
-
-                    double result = (h(q.z) + 1) / 2;
-
-                    assert(0 <= result);
-                    assert(result <= 1);
-
-                    return result;
+                    return interpolate(hc, coordinates);
                 }
 
             private:
-                Vector3D at(unsigned x, unsigned y, unsigned z) const
+                Vector3D gradient_at(unsigned x, unsigned y, unsigned z) const
                 {
                     auto t1 = double(m_rng(x * 31 + 97 * y + 113 * z)) / std::numeric_limits<unsigned>::max();
                     auto t2 = double(m_rng(x * 31 + 97 * y + 113 * z) + 1) / std::numeric_limits<unsigned>::max();
 
                     return Vector3D(1, t1 * 360_degrees, t2 * 180_degrees);
+                }
+
+                template<unsigned X, unsigned Y, unsigned Z>
+                Node z(Point3D p) const
+                {
+                    double fx = bound<X>(p.x);
+                    double fy = bound<Y>(p.y);
+                    double fz = bound<Z>(p.z);
+                    Point3D fp(fx, fy, fz);
+
+                    unsigned kx = unsigned(fx);
+                    unsigned ky = unsigned(fy);
+                    unsigned kz = unsigned(fz);
+
+                    Vector3D v = gradient_at(kx, ky, kz);
+
+                    return Node{ (p - fp).dot(v) };
                 }
 
                 Function<unsigned, unsigned> m_rng;
