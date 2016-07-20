@@ -31,22 +31,22 @@ Matrix4D math::operator *(const Matrix4D& a, const Matrix4D& b)
 
 Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
 {
-#define AUX(row) a.x ## row ## 1 * v.x + a.x ## row ## 2 * v.y + a.x ## row ## 3 * v.z
+#define AUX(row) a.x ## row ## 1 * v.x() + a.x ## row ## 2 * v.y() + a.x ## row ## 3 * v.z()
 
-    return Vector3D{ AUX(1), AUX(2), AUX(3) };
+    return vector(AUX(1), AUX(2), AUX(3));
 
 #undef AUX
 }
 
 Point3D math::operator *(const Matrix4D& a, const Point3D& p)
 {
-#define AUX(row) a.x ## row ## 1 * p.x + a.x ## row ## 2 * p.y + a.x ## row ## 3 * p.z + a.x ## row ## 4
+#define AUX(row) a.x ## row ## 1 * p.x() + a.x ## row ## 2 * p.y() + a.x ## row ## 3 * p.z() + a.x ## row ## 4
 
     double x = AUX(1);
     double y = AUX(2);
     double z = AUX(3);
 
-    return Point3D{ x, y, z };
+    return point(x, y, z);
 
 #undef AUX
 }
@@ -64,9 +64,9 @@ Matrix4D math::transformation_matrices::identity()
 Matrix4D math::transformation_matrices::translation(const Vector3D& v)
 {
     return Matrix4D{
-        1, 0 , 0, v.x,
-        0, 1, 0, v.y,
-        0, 0, 1, v.z,
+        1, 0 , 0, v.x(),
+        0, 1, 0, v.y(),
+        0, 0, 1, v.z(),
         0, 0, 0, 1
     };
 }
@@ -123,9 +123,9 @@ Matrix4D math::transformation_matrices::rotation_around_z(const Angle& angle)
 Matrix4D math::transformation_matrices::coordinate_system(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis, const Vector3D& z_axis)
 {
     return Matrix4D{
-        x_axis.x, y_axis.x, z_axis.x, origin.x,
-        x_axis.y, y_axis.y, z_axis.y, origin.y,
-        x_axis.z, y_axis.z, z_axis.z, origin.z,
+        x_axis.x(), y_axis.x(), z_axis.x(), origin.x(),
+        x_axis.y(), y_axis.y(), z_axis.y(), origin.y(),
+        x_axis.z(), y_axis.z(), z_axis.z(), origin.z(),
         0, 0, 0, 1
     };
 }
