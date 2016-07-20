@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "math/functions/perlin.h"
+#include "math/vector2d.h"
 #include "math/functions/random-function.h"
 #include "math/functions/easing-functions.h"
 #include <assert.h>
@@ -18,7 +19,7 @@ namespace math
             Function<Point2D, const Point2D&> scale2d(double factor)
             {
                 std::function<Point2D(const Point2D&)> lambda = [factor](const Point2D& p) -> Point2D {
-                    return Point2D(p.x * factor, p.y * factor);
+                    return point(p.x() * factor, p.y() * factor);
                 };
 
                 return from_lambda(lambda);
@@ -27,7 +28,7 @@ namespace math
             Function<Point3D, const Point3D&> scale3d(double factor)
             {
                 std::function<Point3D(const Point3D&)> lambda = [factor](const Point3D& p) -> Point3D {
-                    return Point3D(p.x * factor, p.y * factor, p.z * factor);
+                    return point(p.x() * factor, p.y() * factor, p.z() * factor);
                 };
 
                 return from_lambda(lambda);
@@ -111,10 +112,10 @@ namespace math
 
                 double evaluate(const math::Point2D& p) const
                 {
-                    double fx = floor(p.x);
-                    double fy = floor(p.y);
+                    double fx = floor(p.x());
+                    double fy = floor(p.y());
 
-                    std::array<double, 2> coordinates = { p.x - fx, p.y - fy };
+                    std::array<double, 2> coordinates = { p.x() - fx, p.y() - fy };
 
                     HyperCube<2> hc2{
                         HyperCube<1> { Node{ z<0,0>(p) }, Node{ z<1,0>(p) } },
@@ -129,15 +130,15 @@ namespace math
                 {
                     auto t = double(m_rng(x * 31 + 97 * y)) / std::numeric_limits<unsigned>::max();
 
-                    return Vector2D(1, t * 360_degrees);
+                    return vector(1.0, t * 360_degrees);
                 }
 
                 template<unsigned X, unsigned Y>
                 double z(Point2D p) const
                 {
-                    double fx = bound<X>(p.x);
-                    double fy = bound<Y>(p.y);
-                    Point2D fp(fx, fy);
+                    double fx = bound<X>(p.x());
+                    double fy = bound<Y>(p.y());
+                    Point2D fp = point(fx, fy);
 
                     unsigned kx = unsigned(fx);
                     unsigned ky = unsigned(fy);
@@ -161,11 +162,11 @@ namespace math
 
                 double evaluate(const math::Point3D& p) const
                 {
-                    double fx = floor(p.x);
-                    double fy = floor(p.y);
-                    double fz = floor(p.z);
+                    double fx = floor(p.x());
+                    double fy = floor(p.y());
+                    double fz = floor(p.z());
 
-                    std::array<double, 3> coordinates = { p.x - fx, p.y - fy, p.z - fz };
+                    std::array<double, 3> coordinates = { p.x() - fx, p.y() - fy, p.z() - fz };
 
                     HyperCube<3> hc
                     {
@@ -188,16 +189,16 @@ namespace math
                     auto t1 = double(m_rng(x * 31 + 97 * y + 113 * z)) / std::numeric_limits<unsigned>::max();
                     auto t2 = double(m_rng(x * 31 + 97 * y + 113 * z) + 1) / std::numeric_limits<unsigned>::max();
 
-                    return Vector3D(1, t1 * 360_degrees, t2 * 180_degrees);
+                    return vector(1, t1 * 360_degrees, t2 * 180_degrees);
                 }
 
                 template<unsigned X, unsigned Y, unsigned Z>
                 Node z(Point3D p) const
                 {
-                    double fx = bound<X>(p.x);
-                    double fy = bound<Y>(p.y);
-                    double fz = bound<Z>(p.z);
-                    Point3D fp(fx, fy, fz);
+                    double fx = bound<X>(p.x());
+                    double fy = bound<Y>(p.y());
+                    double fz = bound<Z>(p.z());
+                    Point3D fp = point(fx, fy, fz);
 
                     unsigned kx = unsigned(fx);
                     unsigned ky = unsigned(fy);
@@ -300,7 +301,7 @@ Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
     }
 
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
-        double t = p.x + p.y;
+        double t = p.x() + p.y();
         return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
@@ -319,7 +320,7 @@ Noise3D math::functions::marble3d(unsigned octaves, double turbulence)
     }
 
     std::function<double(const Point3D&)> lambda = [total, turbulence](const Point3D& p) -> double {
-        double t = p.x + p.y;
+        double t = p.x() + p.y();
         return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
@@ -338,7 +339,7 @@ Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
     }
 
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
-        double t = sqrt(p.x * p.x + p.y * p.y);
+        double t = sqrt(p.x() * p.x() + p.y() * p.y());
         return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
