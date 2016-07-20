@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <limits>
 #include <math.h>
+#include <array>
 
 
 namespace math
@@ -32,6 +33,58 @@ namespace math
                 return from_lambda(lambda);
             }
 
+            template<unsigned N>
+            struct HyperCube
+            {
+                HyperCube<N - 1> a;
+                HyperCube<N - 1> b;
+            };
+
+            template<>
+            struct HyperCube<0>
+            {
+                double x;
+            };
+            
+            template<unsigned K, unsigned N>
+            struct InterpolationHelper
+            {
+                static double interpolate(const HyperCube<K>& cube, const std::array<double, N>& coordinates)
+                {
+                    using namespace math::functions::easing;
+                    
+                    static_assert(K <= N, "Invalid index");
+
+                    double x = InterpolationHelper<K - 1, N>::interpolate(cube.a, coordinates);
+                    double y = InterpolationHelper<K - 1, N>::interpolate(cube.b, coordinates);
+                    double t = coordinates[K - 1];
+
+                    auto f = easing_function<QUADRATIC, INOUT>(y_range(x, y));
+                    auto result = f(t);
+
+                    return result;
+                }
+            };
+
+            template<unsigned N>
+            struct InterpolationHelper<0, N>
+            {
+                static double interpolate(const HyperCube<0>& cube, const std::array<double, N>& coordinates)
+                {
+                    return cube.x;
+                }
+            };
+
+            template<unsigned K, unsigned N>
+            double interpolate(const HyperCube<K>& cube, const std::array<double, N>& coordinates)
+            {
+                static_assert(K <= N, "Invalid index");
+
+                return InterpolationHelper<K, N>::interpolate(cube, coordinates);
+            }
+
+            using Node = HyperCube<0>;
+
             class PerlinNoise2D : public FunctionBody<double, const Point2D&>
             {
             public:
@@ -43,15 +96,14 @@ namespace math
 
                 double evaluate(const math::Point2D& p) const
                 {
-                    using namespace math::functions::easing;
-
                     double fx = floor(p.x);
                     double fy = floor(p.y);
 
                     unsigned x = unsigned(fx);
                     unsigned y = unsigned(fy);
 
-                    Point2D q = Point2D(p.x - fx, p.y - fy);
+                    std::array<double, 2> coordinates = { p.x - fx, p.y - fy };
+                    // std::array<double, 2> coordinates = { 0.5, 0.75 };
 
                     Point2D p00 = Point2D(fx, fy);
                     Point2D p10 = Point2D(fx + 1, fy);
@@ -68,20 +120,60 @@ namespace math
                     double z01 = (p - p01).dot(v01);
                     double z11 = (p - p11).dot(v11);
 
-                    auto f = easing_function<QUADRATIC, INOUT>(y_range(z00, z10));
-                    auto g = easing_function<QUADRATIC, INOUT>(y_range(z01, z11));
+                    HyperCube<2> hc2{ 
+                        HyperCube<1> { Node{ z00 }, Node{ z10 } },
+                        HyperCube<1> { Node{ z01 }, Node{ z11 } },
+                    };
 
-                    double z0 = f(q.x);
-                    double z1 = g(q.x);
+                    //HyperCube<2> hc2{
+                    //    HyperCube<1> { Node{ 1 }, Node{ 5 } },
+                    //    HyperCube<1> { Node{ 4 }, Node{ 10 } },
+                    //};
 
-                    auto h = easing_function<QUADRATIC, INOUT>(y_range(z0, z1));
 
-                    double result = (h(q.y) + 1) / 2;
+                    return interpolate(hc2, coordinates);
 
-                    assert(0 <= result);
-                    assert(result <= 1);
+                    //using namespace math::functions::easing;
 
-                    return result;
+                    //double fx = floor(p.x);
+                    //double fy = floor(p.y);
+
+                    //unsigned x = unsigned(fx);
+                    //unsigned y = unsigned(fy);
+
+                    //Point2D q = Point2D(p.x - fx, p.y - fy);
+
+                    //Point2D p00 = Point2D(fx, fy);
+                    //Point2D p10 = Point2D(fx + 1, fy);
+                    //Point2D p01 = Point2D(fx, fy + 1);
+                    //Point2D p11 = Point2D(fx + 1, fy + 1);
+
+                    //Vector2D v00 = at(x, y);
+                    //Vector2D v10 = at(x + 1, y);
+                    //Vector2D v01 = at(x, y + 1);
+                    //Vector2D v11 = at(x + 1, y + 1);                    
+
+                    //double z00 = (p - p00).dot(v00);
+                    //double z10 = (p - p10).dot(v10);
+                    //double z01 = (p - p01).dot(v01);
+                    //double z11 = (p - p11).dot(v11);
+
+                    //auto f = easing_function<QUADRATIC, INOUT>(y_range(z00, z10));
+                    //auto g = easing_function<QUADRATIC, INOUT>(y_range(z01, z11));
+
+                    //double z0 = f(q.x);
+                    //double z1 = g(q.x);
+
+                    //auto h = easing_function<QUADRATIC, INOUT>(y_range(z0, z1));
+
+                    //double result = (h(q.y) + 1) / 2;
+
+                    //assert(0 <= result);
+                    //assert(result <= 1);
+
+                    //return result;
+
+
                 }
 
             private:
@@ -198,7 +290,6 @@ Noise3D math::functions::perlin3d(unsigned seed)
 {
     return Noise3D(std::make_shared<_private_::PerlinNoise3D>(random_function(seed)));
 }
-
 
 Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
 {
