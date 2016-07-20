@@ -27,32 +27,86 @@ namespace math
         Point(Point<N>&&) = default;
 
         template<unsigned I>
-        double& x()
+        double& coord()
         {
             static_assert(I < N, "Invalid coordinate index");
 
             return m_coords[I];
         }
 
-        Point<N> operator +(const Vector<N>& p) const
+        template<unsigned I>
+        double coord() const
+        {
+            static_assert(I < N, "Invalid coordinate index");
+
+            return m_coords[I];
+        }
+
+        double& operator [](unsigned i)
+        {
+            return m_coords[i];
+        }
+
+        double operator [](unsigned i) const
+        {
+            return m_coords[i];
+        }
+
+        double& x()
+        {
+            static_assert(N >= 1, "X-coordinate requires at least one dimension");
+            return m_coords[0];
+        }
+
+        double x() const
+        {
+            static_assert(N >= 1, "X-coordinate requires at least one dimension");
+            return m_coords[0];
+        }
+
+        double& y()
+        {
+            static_assert(N >= 2, "Y-coordinate requires at least two dimensions");
+            return m_coords[1];
+        }
+
+        double y() const
+        {
+            static_assert(N >= 2, "Y-coordinate requires at least two dimensions");
+            return m_coords[1];
+        }
+
+        double& z()
+        {
+            static_assert(N >= 3, "Z-coordinate requires at least three dimensions");
+            return m_coords[2];
+        }
+
+        double z() const
+        {
+            static_assert(N >= 3, "Z-coordinate requires at least three dimensions");
+            return m_coords[2];
+        }
+
+        Point<N> operator +(const Vector<N>& v) const
         {
             std::array<double, N> result;
 
             for (unsigned i = 0; i != N; ++i)
             {
-                result[i] = m_coords[i] + p.m_coords[i];
+                result[i] = m_coords[i] + v[i];
             }
 
             return Point<N>(std::move(result));
         }
 
-        Point<N> operator -(const Vector<N>& p) const
+        Point<N> operator -(const Vector<N>& v) const
         {
             std::array<double, N> result;
 
             for (unsigned i = 0; i != N; ++i)
             {
-                result[i] = m_coords[i] - p.m_coords[i];
+                result[i] = m_coords[i] - v[i];
             }
 
             return Point<N>(std::move(result));
@@ -96,9 +150,6 @@ namespace math
         }
 
     private:
-        Point(std::array<double, N>&& coords)
-            : m_coords(coords) { }
-
         std::array<double, N> m_coords;
 
         template<typename... Ts>
@@ -162,5 +213,11 @@ namespace math
         _private_::OutputHelper<0, N>::write(out, p);
 
         return out;
+    }
+
+    template<unsigned N>
+    double distance(const Point<N>& p, const Point<N>& q)
+    {
+        return (q - q).norm();
     }
 }
