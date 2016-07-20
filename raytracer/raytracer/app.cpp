@@ -108,8 +108,8 @@ raytracer::Camera create_camera(TimeStamp now)
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
     math::Function<double, double> t = math::functions::identity<double>();
-    Animation<double> camera_x = ease(make_animation(-2.5 + 5.0 * t, 1_s), easing_function<QUADRATIC, INOUT>());
-    Point3D camera_position = point(camera_x(now), 1, 5);
+    auto camera_position_animation = circular(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
+    Point3D camera_position = camera_position_animation(now);
     auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), vector(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
@@ -118,7 +118,7 @@ raytracer::Camera create_camera(TimeStamp now)
     return camera;
 }
 
-Animation<std::shared_ptr<Scene>> create_scene()
+Animation<std::shared_ptr<Scene>> create_scene_animation()
 {
     std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [](TimeStamp now) -> std::shared_ptr<Scene> {
         auto camera = create_camera(now);
@@ -163,18 +163,16 @@ void render()
 {
     logging::configure();
 
-    render_animation(create_scene(), 1);
+    render_animation(create_scene_animation(), 30);
 }
 
 int main()
 {
     TIMED_FUNC(timerObj);
 
-    // render();
+    render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
 
-    Point<3> p = math::point(1, 2, 3);
-    Point<3> q = math::point(4, 5, 6);
 }
 
 #endif
