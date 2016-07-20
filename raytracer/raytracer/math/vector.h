@@ -12,6 +12,22 @@ namespace math
         Vector(const Vector<N>& p)
             : m_coords(p.m_coords) { }
 
+        template<unsigned I>
+        double& coord()
+        {
+            static_assert(I < N, "Invalid coordinate index");
+
+            return m_coords[I];
+        }
+
+        template<unsigned I>
+        double coord() const
+        {
+            static_assert(I < N, "Invalid coordinate index");
+
+            return m_coords[I];
+        }
+
         double& x()
         {
             static_assert(N >= 1, "X-coordinate requires at least one dimension");
@@ -214,5 +230,49 @@ namespace math
     Vector<N> operator *(double constant, const Vector<N>& p)
     {
         return p * constant;
+    }
+
+    namespace _private_
+    {
+        template<unsigned I, unsigned N>
+        struct PointOutputHelper
+        {
+            static void write(std::ostream& out, const Vector<N>& p)
+            {
+                out << ",";
+                out << p.coord<I>();
+
+                PointOutputHelper<I + 1, N>::write();
+            }
+        };
+
+        template<unsigned N>
+        struct PointOutputHelper<0, N>
+        {
+            static void write(std::ostream& out, const Vector<N>& p)
+            {
+                out << "(";
+                out << p.coord<0>();
+
+                PointOutputHelper<1, N>::write();
+            }
+        };
+
+        template<unsigned N>
+        struct PointOutputHelper<N, N>
+        {
+            static void write(std::ostream& out, const Vector<N>& p)
+            {
+                out << ")";
+            }
+        };
+    }
+
+    template<unsigned N>
+    std::ostream& operator <<(std::ostream& out, const Vector<N>& p)
+    {
+        _private_::PointOutputHelper<0, N>::write(out, p);
+
+        return out;
     }
 }
