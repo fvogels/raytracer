@@ -7,11 +7,6 @@ namespace math
 {
     using Point3D = Point<3>;
 
-    Point3D point(double r, math::Angle azimuth, math::Angle altitude)
-    {
-        return point(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
-    }
-
     template<>
     struct approximately<Point3D>
     {
