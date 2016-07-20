@@ -215,7 +215,7 @@ namespace math
             double y = -(u.x() * v.z() - u.z() * v.x());
             double z = u.x() * v.y() - u.y() * v.x();
 
-            return Vector3D(x, y, z);
+            return vector(x, y, z);
         }
 
         bool is_perpendicular_on(const Vector<N>& v) const
