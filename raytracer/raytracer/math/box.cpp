@@ -35,46 +35,46 @@ bool math::Box::is_hit_by(const Ray& ray) const
 
 bool math::Box::hits_xy_face(const Ray& ray, double z, bool only_positive) const
 {
-    if (ray.direction.z == approx(0.0))
+    if (ray.direction.z() == approx(0.0))
     {
         return false;
     }
     else
     {
-        double t = -(ray.origin.z - z) / ray.direction.z;
+        double t = -(ray.origin.z() - z) / ray.direction.z();
         Point3D p = ray.at(t);
 
-        return (!only_positive || t > 0) && m_x_interval.contains(p.x) && m_y_interval.contains(p.y);
+        return (!only_positive || t > 0) && m_x_interval.contains(p.x()) && m_y_interval.contains(p.y());
     }
 }
 
 bool math::Box::hits_xz_face(const Ray& ray, double y, bool only_positive) const
 {
-    if (ray.direction.y == approx(0.0))
+    if (ray.direction.y() == approx(0.0))
     {
         return false;
     }
     else
     {
-        double t = -(ray.origin.y - y) / ray.direction.y;
+        double t = -(ray.origin.y() - y) / ray.direction.y();
         Point3D p = ray.at(t);
 
-        return (!only_positive || t > 0) && m_x_interval.contains(p.x) && m_z_interval.contains(p.z);
+        return (!only_positive || t > 0) && m_x_interval.contains(p.x()) && m_z_interval.contains(p.z());
     }
 }
 
 bool math::Box::hits_yz_face(const Ray& ray, double x, bool only_positive) const
 {
-    if (ray.direction.x == approx(0.0))
+    if (ray.direction.x() == approx(0.0))
     {
         return false;
     }
     else
     {
-        double t = -(ray.origin.x - x) / ray.direction.x;
+        double t = -(ray.origin.x() - x) / ray.direction.x();
         Point3D p = ray.at(t);
 
-        return (!only_positive || t > 0) && m_y_interval.contains(p.y) && m_z_interval.contains(p.z);
+        return (!only_positive || t > 0) && m_y_interval.contains(p.y()) && m_z_interval.contains(p.z());
     }
 }
 
@@ -94,9 +94,9 @@ Box math::Box::infinite()
 
 Box math::Box::from_raw_corners(const Point3D& lower_corner, const Point3D& upper_corner)
 {
-    Interval<double> x(lower_corner.x, upper_corner.x);
-    Interval<double> y(lower_corner.y, upper_corner.y);
-    Interval<double> z(lower_corner.z, upper_corner.z);
+    Interval<double> x(lower_corner.x(), upper_corner.x());
+    Interval<double> y(lower_corner.y(), upper_corner.y());
+    Interval<double> z(lower_corner.z(), upper_corner.z());
 
     return Box(x, y, z);
 }
@@ -104,9 +104,9 @@ Box math::Box::from_raw_corners(const Point3D& lower_corner, const Point3D& uppe
 Box math::Box::from_corners(const Point3D& p, const Point3D& q)
 {
     // Sort coordinates so that box is nonempty
-    auto x = Interval<double>::from_bounds(p.x, q.x);
-    auto y = Interval<double>::from_bounds(p.y, q.y);
-    auto z = Interval<double>::from_bounds(p.z, q.z);
+    auto x = Interval<double>::from_bounds(p.x(), q.x());
+    auto y = Interval<double>::from_bounds(p.y(), q.y());
+    auto z = Interval<double>::from_bounds(p.z(), q.z());
 
     return Box(x, y, z);
 }

@@ -33,7 +33,7 @@ namespace math
             static_assert(J == 0 || J == 1, "J must be either 0 or 1");
             static_assert(K == 0 || K == 1, "K must be either 0 or 1");
 
-            return Point3D(m_x_interval.bound<I>(), m_y_interval.bound<J>(), m_z_interval.bound<K>());
+            return point(m_x_interval.bound<I>(), m_y_interval.bound<J>(), m_z_interval.bound<K>());
         }
 
     private:
