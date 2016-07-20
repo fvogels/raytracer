@@ -19,6 +19,7 @@
 #include "easylogging++.h"
 #include "logging.h"
 #include "util/lazy.h"
+#include "math/point.h"
 // #include "chai/scripting.h"
 #include <assert.h>
 
@@ -28,7 +29,7 @@ const int BITMAP_SIZE = 500;
 const int FRAME_COUNT = 30 * 1;
 const int FRAME_START = 0;
 const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 1;
+const int SAMPLES = 2;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 100;
@@ -91,7 +92,7 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    Point3D light_position = Point3D(now.seconds() * 5 + 5, 5, 5);
+    Point3D light_position = point(0, 5, 5);
     light_sources.push_back(omnidirectional(light_position, colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 60_degrees, colors::white()));
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
@@ -107,10 +108,9 @@ raytracer::Camera create_camera(TimeStamp now)
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
     math::Function<double, double> t = math::functions::identity<double>();
-    // Animation<double> camera_x = ease(make_animation(-2.5 + 5.0 * t, 1_s), easing_function<LINEAR>());
-    Point3D camera_position(0, 1, 5);
-    // Point3D camera_position = camera_position_animation(now);
-    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+    Animation<double> camera_x = ease(make_animation(-2.5 + 5.0 * t, 1_s), easing_function<QUADRATIC, INOUT>());
+    Point3D camera_position = point(camera_x(now), 1, 5);
+    auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), vector(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
     // auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1, 0.5, samplers::grid(4, 4));
@@ -163,13 +163,18 @@ void render()
 {
     logging::configure();
 
-    render_animation(create_scene(), 30);
+    render_animation(create_scene(), 1);
 }
 
 int main()
 {
-    render();
+    TIMED_FUNC(timerObj);
+
+    // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
+
+    Point<3> p = math::point(1, 2, 3);
+    Point<3> q = math::point(4, 5, 6);
 }
 
 #endif
