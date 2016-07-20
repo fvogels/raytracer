@@ -11,8 +11,20 @@ namespace math
     class Point
     {
     public:
-        Point(const Point<N>& p)
-            : m_coords(p.m_coords) { }        
+        Point(std::array<double, N>&& coords)
+            : m_coords(coords) { }
+
+        Point()
+            : m_coords()
+        {
+            for (unsigned i = 0; i != N; ++i)
+            {
+                m_coords[i] = 0;
+            }
+        }
+
+        Point(const Point<N>&) = default;
+        Point(Point<N>&&) = default;
 
         template<unsigned I>
         double& x()
