@@ -27,45 +27,45 @@ namespace
 #define TEST_HIT(A, B, C, O, D) \
     TEST_CASE("[Triangle] Triangle " #A " " #B " " #C " is hit by ray " #O " + " #D + " * t", "[Triangle]") \
     { \
-        test_hit( Point3D(A), Point3D(B), Point3D(C), Point3D(O), Vector3D(D)); \
+        test_hit( point(A), point(B), point(C), point(O), vector(D)); \
     }
 
 TEST_CASE("[Triangle] Hits against triangle with a = (0,0,0), b = (1,0,0), c = (0,1,0)", "[Triangle]")
 {
-    auto tri = triangle(Point3D(0, 0, 0), Point3D(1, 0, 0), Point3D(0, 1, 0));
+    auto tri = triangle(point(0, 0, 0), point(1, 0, 0), point(0, 1, 0));
     Hit hit;
 
     SECTION("ray (0.1,0.1,1) + (0,0,-1)")
     {
-        Ray ray(Point3D(0.1, 0.1, 1), Vector3D(0, 0, -1));
+        Ray ray(point(0.1, 0.1, 1), vector(0, 0, -1));
 
         REQUIRE(tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (0.1,-0.1,1) + (0,0,-1)")
     {
-        Ray ray(Point3D(0.1, -0.1, 1), Vector3D(0, 0, -1));
+        Ray ray(point(0.1, -0.1, 1), vector(0, 0, -1));
 
         REQUIRE(!tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (-0.1,0.1,1) + (0,0,-1)")
     {
-        Ray ray(Point3D(-0.1, 0.1, 1), Vector3D(0, 0, -1));
+        Ray ray(point(-0.1, 0.1, 1), vector(0, 0, -1));
 
         REQUIRE(!tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (0.9,0.05,1) + (0,0,-1)")
     {
-        Ray ray(Point3D(0.9, 0.05, 1), Vector3D(0, 0, -1));
+        Ray ray(point(0.9, 0.05, 1), vector(0, 0, -1));
 
         REQUIRE(tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (0.05,0.9,1) + (0,0,-1)")
     {
-        Ray ray(Point3D(0.05, 0.9, 1), Vector3D(0, 0, -1));
+        Ray ray(point(0.05, 0.9, 1), vector(0, 0, -1));
 
         REQUIRE(tri->find_hit(ray, &hit));
     }
