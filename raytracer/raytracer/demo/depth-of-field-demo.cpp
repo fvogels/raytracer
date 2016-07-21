@@ -98,7 +98,7 @@ namespace
     }
 }
 
-void demos::depth_of_field_animation(const std::string& output_path)
+void demos::depth_of_field(const std::string& output_path)
 {
     render(output_path);
 }

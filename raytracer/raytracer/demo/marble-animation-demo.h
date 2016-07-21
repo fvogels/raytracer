@@ -4,5 +4,5 @@
 
 namespace demos
 {
-    void marble_animation(const std::string&);
+    void marble(const std::string&);
 }

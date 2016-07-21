@@ -4,5 +4,5 @@
 
 namespace demos
 {
-    void depth_of_field_animation(const std::string&);
+    void depth_of_field(const std::string&);
 }

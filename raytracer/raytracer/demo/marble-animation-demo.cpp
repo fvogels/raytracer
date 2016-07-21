@@ -86,7 +86,7 @@ namespace
     }
 }
 
-void demos::marble_animation(const std::string& output_path)
+void demos::marble(const std::string& output_path)
 {
     render(output_path);
 }
