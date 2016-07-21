@@ -11,16 +11,15 @@
 #include "materials/materials.h"
 #include "lights/lights.h"
 #include "raytracing/ray-tracers.h"
-#include "rendering/single-threaded-renderer.h"
-#include "rendering/multithreaded-renderer.h"
+#include "rendering/renderers.h"
 #include "rendering/cartoon-renderer.h"
 #include "animation/animation.h"
 #include "demo/demos.h"
-#include "easylogging++.h"
 #include "logging.h"
 #include "util/lazy.h"
 #include "math/point.h"
 // #include "scripting/scripting.h"
+#include "easylogging++.h"
 #include <assert.h>
 
 
