@@ -9,6 +9,5 @@ namespace imaging
     {
     public:
         virtual void consume(const Bitmap&) = 0;
-        virtual void finish() = 0;
     };
 }
