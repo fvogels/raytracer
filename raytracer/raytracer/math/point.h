@@ -215,7 +215,7 @@ namespace math
     template<unsigned N>
     double distance(const Point<N>& p, const Point<N>& q)
     {
-        return (q - q).norm();
+        return (p - q).norm();
     }
 
     inline Point<2> point(double x, double y)
