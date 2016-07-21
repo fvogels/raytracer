@@ -11,6 +11,13 @@ namespace math
     class Point
     {
     public:
+        template<typename... Ts>
+        Point(Ts... args)
+            : Point( std::array<double, sizeof...(Ts)> {{double(args)...}})
+        {
+            static_assert(sizeof...(Ts) == N, "Invalid number of arguments");
+        }
+
         Point(std::array<double, N>&& coords)
             : m_coords(coords) { }
 
