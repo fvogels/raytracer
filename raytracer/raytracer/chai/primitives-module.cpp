@@ -20,9 +20,9 @@ namespace
             return primitives::translate(displacement, primitive); 
         }
 
-        Primitive group(std::vector<Primitive>& children) const
+        Primitive make_union(std::vector<Primitive>& children) const
         {
-            return primitives::group(children);
+            return primitives::make_union(children);
         }
 
         Primitive decorate(Material material, Primitive decorated) const
@@ -43,7 +43,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 #define PRIMITIVE_WITH_NAME(FACTORY, NAME) module->add(fun(&PrimitiveLibrary::FACTORY), #NAME)
     PRIMITIVE(sphere);
     PRIMITIVE(translate);
-    PRIMITIVE_WITH_NAME(group, union);
+    PRIMITIVE_WITH_NAME(make_union, union);
     PRIMITIVE(decorate);
 #undef COLOR
 

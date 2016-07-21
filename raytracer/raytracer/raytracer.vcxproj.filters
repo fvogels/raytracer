@@ -102,24 +102,6 @@
     <ClCompile Include="tests\rasteriser-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\stream-line-reader-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\string-reader-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\tokenizer-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\parser-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\interpreter-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\combined-reader-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\camera-transformation-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -304,6 +286,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demo\depth-of-field-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\cameras-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\imaging-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\lights-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\materials-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\math-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\primitives-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\raytracing-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\rendering-module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chai\scripting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -657,6 +666,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\depth-of-field-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\cameras-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\imaging-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\lights-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\materials-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\math-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\primitives-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\raytracing-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\rendering-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chai\scripting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

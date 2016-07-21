@@ -26,16 +26,10 @@
 
 #ifdef NDEBUG
 const int BITMAP_SIZE = 500;
-const int FRAME_COUNT = 30 * 1;
-const int FRAME_START = 0;
-const int FRAME_END = FRAME_COUNT;
-const int SAMPLES = 2;
+const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 100;
-const int FRAME_COUNT = 30;
-const int FRAME_START = 0;
-const int FRAME_END = 1;
 const int SAMPLES = 1;
 const int N_THREADS = 1;
 #endif
@@ -129,7 +123,7 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
         return scene;
     };
 
-    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
+    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(2));
 }
 
 void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps)
@@ -139,7 +133,7 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
 
     auto ray_tracer = raytracer::raytracers::v6();
 
-    auto renderer = N_THREADS > 1 ? raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(2, 2), ray_tracer, N_THREADS) :
+    auto renderer = N_THREADS > 1 ? raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS) :
         raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
     // auto renderer = raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(2, 2), ray_tracer, N_THREADS, 4, 0.005);
 
@@ -147,7 +141,7 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
     {
         TIMED_SCOPE(timerObj, "single frame");
 
-        double t = double(frame) / FRAME_COUNT;
+        double t = double(frame) / fps;
         TimeStamp now = TimeStamp::from_epoch(1_s * t);
         auto scene = scene_animation(now);
 
@@ -163,16 +157,17 @@ void render()
 {
     logging::configure();
 
-    render_animation(create_scene_animation(), 30);
+    render_animation(create_scene_animation(), 10);
 }
 
 int main()
 {
     TIMED_FUNC(timerObj);
 
-    render();
-    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
+    demos::depth_of_field_animation("e:/temp/output/test.wif");
 
+    // render();
+    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
 }
 
 #endif

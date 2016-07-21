@@ -12,15 +12,9 @@ namespace
 {
     struct MaterialLibrary
     {
-        Material uniform(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity) const
+        Material uniform(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index) const
         {
-            MaterialProperties properties;
-
-            properties.ambient = ambient;
-            properties.diffuse = diffuse;
-            properties.specular = specular;
-            properties.specular_exponent = specular_exponent;
-            properties.reflectivity = reflectivity;
+            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
         }
