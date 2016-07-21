@@ -300,6 +300,12 @@
     <ClCompile Include="materials\wood-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="demo\marble-animation-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demo\depth-of-field-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -645,6 +651,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo\marble-animation-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo\depth-of-field-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

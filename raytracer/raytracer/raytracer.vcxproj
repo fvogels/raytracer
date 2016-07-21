@@ -204,6 +204,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -227,6 +228,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -241,6 +243,8 @@
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
+    <ClCompile Include="demo\depth-of-field-demo.cpp" />
+    <ClCompile Include="demo\marble-animation-demo.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="primitives\group.cpp" />
@@ -340,6 +344,8 @@
     <ClInclude Include="Catch.h" />
     <ClInclude Include="data-structures\grid.h" />
     <ClInclude Include="demo\demos.h" />
+    <ClInclude Include="demo\depth-of-field-demo.h" />
+    <ClInclude Include="demo\marble-animation-demo.h" />
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="math\vector4d.h" />
     <ClInclude Include="materials\wood-material.h" />
