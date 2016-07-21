@@ -60,10 +60,8 @@ namespace
         return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
     }
 
-    void render(const std::string& output_path)
+    void render(std::shared_ptr<imaging::BitmapConsumer> output)
     {
-        WIF wif(output_path);
-
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         auto renderer = raytracer::rendering::multithreaded(500, 500, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
@@ -81,12 +79,12 @@ namespace
 
             auto bitmap = renderer->render(*scene);
 
-            wif.write_frame(bitmap);
+            output->consume(bitmap);
         }
     }
 }
 
-void demos::marble(const std::string& output_path)
+void demos::marble(std::shared_ptr<imaging::BitmapConsumer> output)
 {
-    render(output_path);
+    render(output);
 }

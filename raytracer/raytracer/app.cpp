@@ -168,7 +168,7 @@ int main()
 {
     TIMED_FUNC(timerObj);
 
-    demos::depth_of_field("e:/temp/output/test.wif");
+    demos::depth_of_field(imaging::bitmap_consumers::wif("e:/temp/output/test.wif"));
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
