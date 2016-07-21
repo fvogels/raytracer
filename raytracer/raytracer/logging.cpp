@@ -13,6 +13,17 @@ void logging::configure()
 
     defaultConf.setToDefault();
     defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
-    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "false");
     el::Loggers::reconfigureLogger("mesh", defaultConf);
+
+    defaultConf.setToDefault();
+    defaultConf.set(el::Level::Info, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
+    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "false");
+    el::Loggers::reconfigureLogger("performance", defaultConf);
+
+    defaultConf.setToDefault();
+    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "false");
+    el::Loggers::reconfigureLogger("default", defaultConf);
+
+    // el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Enabled, "false");
 }
