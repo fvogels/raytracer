@@ -7,7 +7,7 @@ void imaging::bitmap_consumers::_private_::PpmBitmapConsumer::consume(const Bitm
     write_ppm(bitmap, std::cout);
 }
 
-std::shared_ptr<imaging::bitmap_consumers::_private_::PpmBitmapConsumer> ppm()
+std::shared_ptr<imaging::bitmap_consumers::_private_::PpmBitmapConsumer> imaging::bitmap_consumers::ppm()
 {
     return std::make_shared<imaging::bitmap_consumers::_private_::PpmBitmapConsumer>();
 }
