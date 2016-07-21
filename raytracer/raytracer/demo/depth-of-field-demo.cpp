@@ -19,7 +19,7 @@ using namespace imaging;
 namespace
 {
     constexpr unsigned ANTIALIASING = 1;
-    constexpr unsigned FPS = 50;
+    constexpr unsigned FPS = 30;
     constexpr unsigned HPIXELS = 500;
     constexpr unsigned VPIXELS = 500;
 
@@ -87,7 +87,7 @@ namespace
             TimeStamp now = TimeStamp::from_epoch(1_s * t);
             auto scene = scene_animation(now);
 
-            std::cout << "Rendering frame " << frame << std::endl;
+            LOG(INFO) << "Rendering frame " << frame << std::endl;
 
             auto bitmap = renderer->render(*scene);
 

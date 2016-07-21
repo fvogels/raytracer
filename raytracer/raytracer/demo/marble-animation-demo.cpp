@@ -75,7 +75,7 @@ namespace
             TimeStamp now = TimeStamp::from_epoch(1_s * t);
             auto scene = scene_animation(now);
 
-            std::cout << "Rendering frame " << frame << std::endl;
+            LOG(INFO) << "Rendering frame " << frame << std::endl;
 
             auto bitmap = renderer->render(*scene);
 
