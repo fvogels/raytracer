@@ -339,6 +339,7 @@
     <ClInclude Include="demo\demos.h" />
     <ClInclude Include="demo\depth-of-field-demo.h" />
     <ClInclude Include="demo\marble-animation-demo.h" />
+    <ClInclude Include="bitmap-consumers\bitmap-consumer.h" />
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="math\vector4d.h" />
     <ClInclude Include="materials\wood-material.h" />
