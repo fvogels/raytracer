@@ -11,6 +11,10 @@ namespace math
     class Vector
     {
     public:
+        template<typename... Ts>
+        Vector(Ts... args)
+            : Vector(std::array<double, sizeof...(Ts)> { {double(args)...}}) { }
+
         Vector(std::array<double, N>&& coords)
             : m_coords(coords) { }
 
