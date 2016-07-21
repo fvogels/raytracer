@@ -19,7 +19,9 @@ using namespace imaging;
 namespace
 {
     constexpr unsigned ANTIALIASING = 1;
-    constexpr unsigned FPS = 30;
+    constexpr unsigned FPS = 50;
+    constexpr unsigned HPIXELS = 500;
+    constexpr unsigned VPIXELS = 500;
 
     raytracer::Primitive create_root(TimeStamp now)
     {
@@ -27,7 +29,7 @@ namespace
         using namespace raytracer::materials;
 
         std::vector<Primitive> spheres;
-        for (double z = 0; z <= 12; z += 3)
+        for (double z = 0; z <= 24; z += 3)
         {
             spheres.push_back(translate(vector(2, 0, z), sphere()));
             spheres.push_back(translate(vector(-2, 0, z), sphere()));
@@ -51,7 +53,7 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::depth_of_field_perspective(point(0, 0, 0), point(0, 0, 1), vector(0, 1, 0), 1, 1, 1, samplers::grid(1, 1));
+        return raytracer::cameras::depth_of_field_perspective(point(0, 0, 0), point(0, 0, 1 + now.seconds() * 6), vector(0, 1, 0), 1, 1, 0.05, samplers::grid(3, 3));
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()
@@ -76,7 +78,7 @@ namespace
 
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::rendering::multithreaded(500, 500, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
+        auto renderer = raytracer::rendering::multithreaded(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
         const unsigned frame_count = unsigned(round(FPS * scene_animation.duration().seconds()));
 
         for (unsigned frame = 0; frame < frame_count; ++frame)
