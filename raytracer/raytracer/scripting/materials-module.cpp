@@ -1,4 +1,4 @@
-#include "chai/materials-module.h"
+#include "scripting/materials-module.h"
 #include "materials/materials.h"
 #include "imaging/color.h"
 

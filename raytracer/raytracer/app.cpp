@@ -20,7 +20,7 @@
 #include "logging.h"
 #include "util/lazy.h"
 #include "math/point.h"
-// #include "chai/scripting.h"
+// #include "scripting/scripting.h"
 #include <assert.h>
 
 

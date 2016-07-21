@@ -1,4 +1,4 @@
-#include "chai/rendering-module.h"
+#include "scripting/rendering-module.h"
 #include "rendering/renderers.h"
 #include "raytracing/ray-tracer.h"
 #include "sampling/samplers.h"

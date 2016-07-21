@@ -1,4 +1,4 @@
-#include "chai/math-module.h"
+#include "scripting/math-module.h"
 #include "math/point2d.h"
 #include "math/point3d.h"
 #include "math/vector2d.h"

@@ -1,4 +1,4 @@
-#include "chai/cameras-module.h"
+#include "scripting/cameras-module.h"
 #include "cameras/cameras.h"
 
 using namespace chaiscript;

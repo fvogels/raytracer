@@ -1,4 +1,4 @@
-#include "chai/lights-module.h"
+#include "scripting/lights-module.h"
 #include "lights/lights.h"
 
 using namespace chaiscript;

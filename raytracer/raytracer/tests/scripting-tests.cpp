@@ -1,7 +1,7 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "chai/scripting.h"
+#include "scripting/scripting.h"
 #include "math/vector3d.h"
 #include "math/point3d.h"
 #include "math/approx.h"

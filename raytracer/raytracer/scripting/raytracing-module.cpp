@@ -1,4 +1,4 @@
-#include "chai/raytracing-module.h"
+#include "scripting/raytracing-module.h"
 #include "raytracing/ray-tracers.h"
 
 using namespace chaiscript;

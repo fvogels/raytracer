@@ -288,31 +288,31 @@
     <ClCompile Include="demo\depth-of-field-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\cameras-module.cpp">
+    <ClCompile Include="scripting\cameras-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\imaging-module.cpp">
+    <ClCompile Include="scripting\imaging-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\lights-module.cpp">
+    <ClCompile Include="scripting\lights-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\materials-module.cpp">
+    <ClCompile Include="scripting\materials-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\math-module.cpp">
+    <ClCompile Include="scripting\math-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\primitives-module.cpp">
+    <ClCompile Include="scripting\primitives-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\raytracing-module.cpp">
+    <ClCompile Include="scripting\raytracing-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\rendering-module.cpp">
+    <ClCompile Include="scripting\rendering-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chai\scripting.cpp">
+    <ClCompile Include="scripting\scripting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -668,31 +668,31 @@
     <ClInclude Include="demo\depth-of-field-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\cameras-module.h">
+    <ClInclude Include="scripting\cameras-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\imaging-module.h">
+    <ClInclude Include="scripting\imaging-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\lights-module.h">
+    <ClInclude Include="scripting\lights-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\materials-module.h">
+    <ClInclude Include="scripting\materials-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\math-module.h">
+    <ClInclude Include="scripting\math-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\primitives-module.h">
+    <ClInclude Include="scripting\primitives-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\raytracing-module.h">
+    <ClInclude Include="scripting\raytracing-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\rendering-module.h">
+    <ClInclude Include="scripting\rendering-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="chai\scripting.h">
+    <ClInclude Include="scripting\scripting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

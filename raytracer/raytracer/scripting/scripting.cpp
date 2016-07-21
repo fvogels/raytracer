@@ -1,12 +1,12 @@
-#include "chai/scripting.h"
-#include "chai/math-module.h"
-#include "chai/imaging-module.h"
-#include "chai/primitives-module.h"
-#include "chai/cameras-module.h"
-#include "chai/lights-module.h"
-#include "chai/raytracing-module.h"
-#include "chai/materials-module.h"
-#include "chai/rendering-module.h"
+#include "scripting/scripting.h"
+#include "scripting/math-module.h"
+#include "scripting/imaging-module.h"
+#include "scripting/primitives-module.h"
+#include "scripting/cameras-module.h"
+#include "scripting/lights-module.h"
+#include "scripting/raytracing-module.h"
+#include "scripting/materials-module.h"
+#include "scripting/rendering-module.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 

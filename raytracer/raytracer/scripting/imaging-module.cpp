@@ -1,4 +1,4 @@
-#include "chai/imaging-module.h"
+#include "scripting/imaging-module.h"
 #include "imaging/color.h"
 
 using namespace chaiscript;

@@ -1,4 +1,4 @@
-#include "chai/primitives-module.h"
+#include "scripting/primitives-module.h"
 #include "primitives/primitives.h"
 
 using namespace chaiscript;
