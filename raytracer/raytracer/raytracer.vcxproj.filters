@@ -288,6 +288,9 @@
     <ClCompile Include="bitmap-consumers\wif-bitmap-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bitmap-consumers\ppm-bitmap-consumer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -645,6 +648,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bitmap-consumers\wif-bitmap-consumer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmap-consumers\ppm-bitmap-consumer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
