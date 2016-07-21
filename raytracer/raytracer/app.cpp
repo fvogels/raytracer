@@ -136,13 +136,13 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
 
     for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)
     {
-        TIMED_SCOPE(timerObj, "single frame");
+        // TIMED_SCOPE(timerObj, "single frame");
 
         double t = double(frame) / fps;
         TimeStamp now = TimeStamp::from_epoch(1_s * t);
         auto scene = scene_animation(now);
 
-        std::cout << "Rendering frame " << frame << std::endl;
+        LOG(INFO) << "Rendering frame " << frame << std::endl;
 
         auto bitmap = renderer->render(*scene);
 
@@ -159,17 +159,20 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
 
 void render()
 {
-    logging::configure();
+    
 
     render_animation(create_scene_animation(), 10);
 }
 
 int main()
 {
-    TIMED_FUNC(timerObj);
+    logging::configure();
+
+    // TIMED_FUNC(timerObj);
 
     using namespace imaging::bitmap_consumers;
 
+    // demos::depth_of_field(wif("e:/temp/output/test.wif"));
     demos::depth_of_field(ppm());
 
     // render();

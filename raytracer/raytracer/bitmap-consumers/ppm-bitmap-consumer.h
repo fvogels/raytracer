@@ -10,13 +10,20 @@ namespace imaging
     {
         namespace _private_
         {
-            class PpmBitmapConsumer : public BitmapConsumer
+            class TextPpmBitmapConsumer : public BitmapConsumer
+            {
+            public:
+                void consume(const Bitmap& bitmap) override;
+            };
+
+            class BinaryPpmBitmapConsumer : public BitmapConsumer
             {
             public:
                 void consume(const Bitmap& bitmap) override;
             };
         }
 
-        std::shared_ptr<_private_::PpmBitmapConsumer> ppm();
+        std::shared_ptr<_private_::TextPpmBitmapConsumer> ppm_text();
+        std::shared_ptr<_private_::BinaryPpmBitmapConsumer> ppm_binary();
     }
 }
