@@ -329,6 +329,7 @@
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\duration.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="bitmap-consumers\bitmap-consumers.h" />
     <ClInclude Include="bitmap-consumers\ppm-bitmap-consumer.h" />
     <ClInclude Include="bitmap-consumers\wif-bitmap-consumer.h" />
     <ClInclude Include="cameras\camera.h" />

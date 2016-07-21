@@ -18,6 +18,7 @@
 #include "logging.h"
 #include "util/lazy.h"
 #include "math/point.h"
+#include "bitmap-consumers/bitmap-consumers.h"
 // #include "scripting/scripting.h"
 #include "easylogging++.h"
 #include <assert.h>
@@ -125,11 +126,8 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
     return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(2));
 }
 
-void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps)
+void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps, std::shared_ptr<imaging::BitmapConsumer> bitmap_consumer)
 {
-    std::string output_path = "e:/temp/output/test.wif";
-    WIF wif(output_path);
-
     auto ray_tracer = raytracer::raytracers::v6();
 
     auto renderer = N_THREADS > 1 ? raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS) :
@@ -148,8 +146,15 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
 
         auto bitmap = renderer->render(*scene);
 
-        wif.write_frame(bitmap);
+        bitmap_consumer->consume(bitmap);
     }
+}
+
+void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps)
+{
+    std::string output_path = "e:/temp/output/test.wif";
+    
+    render_animation(scene_animation, fps, imaging::bitmap_consumers::wif(output_path));
 }
 
 void render()

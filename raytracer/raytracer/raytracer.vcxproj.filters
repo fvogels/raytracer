@@ -653,5 +653,8 @@
     <ClInclude Include="bitmap-consumers\ppm-bitmap-consumer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bitmap-consumers\bitmap-consumers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
