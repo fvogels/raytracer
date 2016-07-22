@@ -172,8 +172,7 @@ int main()
 
     using namespace imaging::bitmap_consumers;
 
-    // demos::depth_of_field(wif("e:/temp/output/test.wif"));
-    demos::depth_of_field(ppm());
+    demos::depth_of_field(wif("e:/temp/output/test.wif"));
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");

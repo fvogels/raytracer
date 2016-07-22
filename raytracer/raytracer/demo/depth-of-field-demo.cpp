@@ -1,4 +1,4 @@
-#include "demo/demos.h"
+#include "demo/depth-of-field-demo.h"
 #include "materials/materials.h"
 #include "cameras/cameras.h"
 #include "imaging/wif_format.h"

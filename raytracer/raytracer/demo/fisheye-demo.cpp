@@ -1,4 +1,4 @@
-#include "demo/marble-animation-demo.h"
+#include "demo/fisheye-demo.h"
 #include "materials/materials.h"
 #include "cameras/cameras.h"
 #include "imaging/wif_format.h"
@@ -18,15 +18,33 @@ using namespace imaging;
 
 namespace
 {
-    constexpr unsigned ANTIALIASING = 1;
+    constexpr unsigned ANTIALIASING = 2;
     constexpr unsigned FPS = 30;
+    constexpr unsigned HPIXELS = 500;
+    constexpr unsigned VPIXELS = 500;
 
     raytracer::Primitive create_root(TimeStamp now)
     {
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        return decorate(to_animated_2d_material(marble3d(4, 2))(now), xz_plane());
+        std::vector<Primitive> primitives;
+        for (double z = 0; z <= 24; z += 3)
+        {
+            primitives.push_back(translate(vector(2, 0, -z), sphere()));
+            primitives.push_back(translate(vector(-2, 0, -z), sphere()));
+        }
+
+        auto white = uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 10, 0.5, 0, 0));
+        auto black = uniform(MaterialProperties(colors::black() * 0.1, colors::black() * 0.8, colors::white(), 10, 0.5, 0, 0));
+        auto plane_material = checkered(white, black);
+        auto plane = decorate(plane_material, translate(Vector3D(0, -1, 0), xz_plane()));
+        primitives.push_back(plane);
+
+        auto primitive_union = primitives::accelerated_union(primitives);
+
+        MaterialProperties material_properties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.2, 0, 0);
+        return decorate(uniform(material_properties), primitive_union);
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -41,7 +59,8 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::perspective(point(0, 5, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
+        // return raytracer::cameras::perspective(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
+        return raytracer::cameras::fisheye(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()
@@ -64,7 +83,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::rendering::multithreaded(500, 500, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
+        auto renderer = raytracer::rendering::multithreaded(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
         const unsigned frame_count = unsigned(round(FPS * scene_animation.duration().seconds()));
 
         for (unsigned frame = 0; frame < frame_count; ++frame)
@@ -84,7 +103,7 @@ namespace
     }
 }
 
-void demos::marble(std::shared_ptr<imaging::BitmapConsumer> output)
+void demos::fisheye(std::shared_ptr<imaging::BitmapConsumer> output)
 {
     render(output);
 }

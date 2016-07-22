@@ -246,6 +246,7 @@
     <ClCompile Include="cameras\perspective-camera.cpp" />
     <ClCompile Include="demo\demos.cpp" />
     <ClCompile Include="demo\depth-of-field-demo.cpp" />
+    <ClCompile Include="demo\fisheye-demo.cpp" />
     <ClCompile Include="demo\marble-animation-demo.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="data-structures\grid.h" />
     <ClInclude Include="demo\demos.h" />
     <ClInclude Include="demo\depth-of-field-demo.h" />
+    <ClInclude Include="demo\fisheye-demo.h" />
     <ClInclude Include="demo\marble-animation-demo.h" />
     <ClInclude Include="bitmap-consumers\bitmap-consumer.h" />
     <ClInclude Include="math\vector.h" />
