@@ -255,9 +255,6 @@
     <ClCompile Include="raytracing\ray-tracer-v3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo\demos.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="raytracing\ray-tracer-v5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
