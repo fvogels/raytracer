@@ -74,10 +74,10 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto b = decorate(marble3d(4, 10), sphere());
-    // auto plane = decorate(wood2d(4, 0.4), translate(Vector3D(0, -1, 0), xz_plane()));
+    auto b = decorate(marble3d(4, 10), translate(Vector3D(now.seconds() * 0.1, 0, 0), sphere()));
+    auto plane = decorate(wood2d(4, 0.4), translate(Vector3D(0, -1, 0), xz_plane()));
 
-    return make_union(std::vector<Primitive> { b });
+    return make_union(std::vector<Primitive> { plane, b });
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -103,7 +103,7 @@ raytracer::Camera create_camera(TimeStamp now)
 
     math::Function<double, double> t = math::functions::identity<double>();
     auto camera_position_animation = circular(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
-    Point3D camera_position = camera_position_animation(now);
+    Point3D camera_position(0, 0, 5);
     auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), vector(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
@@ -136,7 +136,7 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
 
     for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)
     {
-        // TIMED_SCOPE(timerObj, "single frame");
+        TIMED_SCOPE(timerObj, "single frame");
 
         double t = double(frame) / fps;
         TimeStamp now = TimeStamp::from_epoch(1_s * t);
@@ -152,14 +152,17 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
 
 void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps)
 {
+    using namespace imaging::bitmap_consumers;
+
     std::string output_path = "e:/temp/output/test.wif";
-    
-    render_animation(scene_animation, fps, imaging::bitmap_consumers::wif(output_path));
+
+    // render_animation(scene_animation, fps, wif(output_path));
+    render_animation(scene_animation, fps, motion_blur(output_path));
 }
 
 void render()
 {
-    
+
 
     render_animation(create_scene_animation(), 10);
 }
@@ -170,11 +173,11 @@ int main()
 
     // TIMED_FUNC(timerObj);
 
-    using namespace imaging::bitmap_consumers;
+    //using namespace imaging::bitmap_consumers;
+    //demos::depth_of_field(wif("e:/temp/output/test.wif"));
 
-    demos::depth_of_field(wif("e:/temp/output/test.wif"));
 
-    // render();
+    render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
 }
 

@@ -291,6 +291,9 @@
     <ClCompile Include="demo\fisheye-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bitmap-consumers\motion-blur-consumer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -657,6 +660,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\fisheye-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmap-consumers\motion-blur-consumer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -236,6 +236,7 @@
     <ClCompile Include="animation\duration.cpp" />
     <ClCompile Include="animation\time-stamp.cpp" />
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="bitmap-consumers\motion-blur-consumer.cpp" />
     <ClCompile Include="bitmap-consumers\ppm-bitmap-consumer.cpp" />
     <ClCompile Include="bitmap-consumers\wif-bitmap-consumer.cpp" />
     <ClCompile Include="cameras\camera.cpp" />
@@ -330,6 +331,7 @@
     <ClInclude Include="animation\duration.h" />
     <ClInclude Include="animation\time-stamp.h" />
     <ClInclude Include="bitmap-consumers\bitmap-consumers.h" />
+    <ClInclude Include="bitmap-consumers\motion-blur-consumer.h" />
     <ClInclude Include="bitmap-consumers\ppm-bitmap-consumer.h" />
     <ClInclude Include="bitmap-consumers\wif-bitmap-consumer.h" />
     <ClInclude Include="cameras\camera.h" />
