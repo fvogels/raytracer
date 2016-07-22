@@ -17,7 +17,6 @@ void logging::configure()
     el::Loggers::reconfigureLogger("mesh", defaultConf);
 
     defaultConf.setToDefault();
-    defaultConf.set(el::Level::Info, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
     defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
     el::Loggers::reconfigureLogger("performance", defaultConf);
 
