@@ -15,6 +15,14 @@ namespace animation
 
         double seconds() const;
 
+        bool operator <(const TimeStamp&) const;
+        bool operator <=(const TimeStamp&) const;
+        bool operator >(const TimeStamp&) const;
+        bool operator >=(const TimeStamp&) const;
+
+        bool operator ==(const TimeStamp&) const;
+        bool operator !=(const TimeStamp&) const;
+
     private:
         TimeStamp(const Duration&);
 
@@ -25,4 +33,6 @@ namespace animation
         friend TimeStamp operator -(const TimeStamp&, const Duration&);
         friend Duration operator -(const TimeStamp&, const TimeStamp&);
     };
+
+    TimeStamp& operator +=(TimeStamp&, const Duration&);
 }

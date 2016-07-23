@@ -39,3 +39,38 @@ Duration animation::operator -(const TimeStamp& ts1, const TimeStamp& ts2)
 {
     return ts1.m_since_epoch - ts2.m_since_epoch;
 }
+
+bool animation::TimeStamp::operator <(const TimeStamp& ts) const
+{
+    return m_since_epoch < ts.m_since_epoch;
+}
+
+bool animation::TimeStamp::operator >(const TimeStamp& ts) const
+{
+    return m_since_epoch < ts.m_since_epoch;
+}
+
+bool animation::TimeStamp::operator <=(const TimeStamp& ts) const
+{
+    return m_since_epoch < ts.m_since_epoch;
+}
+
+bool animation::TimeStamp::operator >=(const TimeStamp& ts) const
+{
+    return m_since_epoch < ts.m_since_epoch;
+}
+
+TimeStamp& animation::operator +=(TimeStamp& ts, const Duration& duration)
+{
+    return (ts = ts + duration);
+}
+
+bool animation::TimeStamp::operator ==(const TimeStamp& ts) const
+{
+    return m_since_epoch == ts.m_since_epoch;
+}
+
+bool animation::TimeStamp::operator !=(const TimeStamp& ts) const
+{
+    return !(*this == ts);
+}
