@@ -294,6 +294,9 @@
     <ClCompile Include="bitmap-consumers\motion-blur-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\edge-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -663,6 +666,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bitmap-consumers\motion-blur-consumer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\edge-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
