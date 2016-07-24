@@ -42,7 +42,7 @@ void imaging::WIF::write_frame(const Bitmap& bitmap)
     {
         for (unsigned i = 0; i != bitmap.width(); ++i)
         {
-            RGB rgb(bitmap[position(i, j)]);
+            RGB rgb(bitmap[Position(i, j)]);
 
             out.write(reinterpret_cast<char*>(&rgb), sizeof(RGB));
         }

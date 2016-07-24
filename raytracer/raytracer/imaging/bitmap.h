@@ -19,10 +19,10 @@ namespace imaging
         Bitmap(const Bitmap&) = default;
         Bitmap(Bitmap&&) = default;
 
-        bool is_inside(const position&) const;
+        bool is_inside(const Position&) const;
 
-        Color& operator [](const position&);
-        const Color& operator [](const position&) const;
+        Color& operator [](const Position&);
+        const Color& operator [](const Position&) const;
 
         unsigned width() const;
         unsigned height() const;
@@ -32,7 +32,7 @@ namespace imaging
         Bitmap& operator *=(double);
         Bitmap& operator /=(double);
 
-        void for_each_position(std::function<void(const position&)>) const;
+        void for_each_position(std::function<void(const Position&)>) const;
 
         void clear(const Color&);
     };
