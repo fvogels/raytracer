@@ -18,7 +18,7 @@
 #include "logging.h"
 #include "util/lazy.h"
 #include "math/point.h"
-#include "bitmap-consumers/bitmap-consumers.h"
+#include "pipeline/pipelines.h"
 // #include "scripting/scripting.h"
 #include "easylogging++.h"
 #include <assert.h>
@@ -153,180 +153,19 @@ void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigne
     }
 }
 
-void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps)
-{
-    using namespace imaging::bitmap_consumers;
-
-    std::string output_path = "e:/temp/output/test.wif";
-
-    render_animation(scene_animation, fps, wif(output_path));
-    // render_animation(scene_animation, fps, motion_blur(output_path));
-}
-
-
-template<typename INPUT>
-class Consumer
-{
-public:
-    using input_type = INPUT;
-
-    virtual void consume(INPUT) = 0;
-};
-
-template<typename OUTPUT>
-class Producer
-{
-public:
-    using output_type = OUTPUT;
-
-    template<typename T>
-    T link_to(T receiver)
-    {
-        m_receiver = receiver;
-
-        return receiver;
-    }
-
-protected:
-    void produce(const OUTPUT& output)
-    {
-        if (m_receiver != nullptr)
-        {
-            m_receiver->consume(output);
-        }
-        else
-        {
-            throw std::runtime_error("Missing receiver");
-        }
-    }
-
-private:
-    std::shared_ptr<Consumer<OUTPUT>> m_receiver;
-};
-
-template<typename INPUT, typename OUTPUT>
-class Processor : public Consumer<INPUT>, public Producer<OUTPUT>
-{
-    // EMPTY
-};
-
-class SceneProducer : public Processor<Animation<std::shared_ptr<Scene>>, std::shared_ptr<Scene>>
-{
-public:
-    SceneProducer(double fps)
-        : m_fps(fps) { }
-
-    void consume(animation::Animation<std::shared_ptr<Scene>> animation) override
-    {
-        Duration frame_duration = Duration::from_seconds(1.0 / m_fps);
-        TimeStamp now = TimeStamp::zero();
-        TimeStamp end = TimeStamp::from_epoch(animation.duration());
-
-        while (now <= end)
-        {
-            std::shared_ptr<Scene> current_frame_scene = animation(now);
-            produce(current_frame_scene);
-            now += frame_duration;
-        }
-    }
-
-private:
-    double m_fps;
-};
-
-class Wif : public Consumer<std::shared_ptr<imaging::Bitmap>>
-{
-public:
-    Wif(const std::string& path)
-        : m_wif(path) { }
-
-    void consume(std::shared_ptr<imaging::Bitmap> bitmap) override
-    {
-        m_wif.write_frame(*bitmap);
-    }
-
-private:
-    WIF m_wif;
-};
-
-class RendererProcessor : public Processor<std::shared_ptr<Scene>, std::shared_ptr<Bitmap>>
-{
-public:
-    RendererProcessor(Renderer renderer)
-        : m_renderer(renderer) { }
-
-    void consume(std::shared_ptr<Scene> scene) override
-    {
-        TIMED_SCOPE(timer, "Rendering single frame");
-
-        assert(scene);
-
-        auto result = m_renderer->render(*scene);
-        produce(std::make_shared<Bitmap>(result)); // TODO!!
-    }
-
-private:
-    Renderer m_renderer;
-};
-
-class MotionBlurProcessor : public Processor<std::shared_ptr<Bitmap>, std::shared_ptr<Bitmap>>
-{
-public:
-    MotionBlurProcessor(unsigned frame_count, unsigned frame_offset, unsigned last_extra_weight)
-        : m_frame_count(frame_count), m_frame_offset(frame_offset), m_last_extra_weight(last_extra_weight) { }
-
-    void consume(std::shared_ptr<Bitmap> bitmap) override
-    {
-        m_frames.push_back(bitmap);
-
-        if (m_frames.size() == m_frame_count)
-        {
-            produce(compute_blur_of_current_frames());
-
-            for (unsigned i = 0; i != m_frame_offset; ++i)
-            {
-                m_frames.pop_front();
-            }
-        }
-    }
-
-private:
-    std::shared_ptr<Bitmap> compute_blur_of_current_frames()
-    {
-        auto result = std::make_shared<Bitmap>(m_frames.front()->width(), m_frames.front()->height());
-        result->clear(colors::black());
-
-        *result += *m_frames.back();
-        *result *= m_last_extra_weight;
-
-        for (auto frame : m_frames)
-        {
-            *result += *frame;
-        }        
-
-        *result /= (m_frame_count + m_last_extra_weight);
-
-        return result;
-    }
-
-    std::list<std::shared_ptr<Bitmap>> m_frames;
-    unsigned m_frame_count;
-    unsigned m_frame_offset;
-    unsigned m_last_extra_weight;
-};
-
-
 
 void render()
 {
+    using namespace raytracer;
+
     // render_animation(create_scene_animation(), 1);
     const std::string path = "e:/temp/output/test.wif";
 
-    auto scenes = std::make_shared<SceneProducer>(30);
+    auto scenes = pipeline::animation(30);
     // auto renderer = std::make_shared<RendererProcessor>(rendering::multithreaded(500, 500, samplers::grid(2, 2), raytracers::v6(), 4));
-    auto renderer = std::make_shared<RendererProcessor>(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01));
-    auto motion_blur = std::make_shared<MotionBlurProcessor>(30, 30, 1);
-    auto wif = std::make_shared<Wif>(path);
+    auto renderer = pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01));
+    auto motion_blur = pipeline::motion_blur(30, 30, 1);
+    auto wif = pipeline::wif(path);
 
     scenes->link_to(renderer)->link_to(motion_blur)->link_to(wif);
     scenes->consume(create_scene_animation());
