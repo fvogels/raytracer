@@ -11,7 +11,7 @@ raytracer::rendering::_private_::RendererImplementation::RendererImplementation(
 
 imaging::Color raytracer::rendering::_private_::RendererImplementation::render_pixel(const math::Rasterizer& window_rasterizer, int x, int y, const Scene& scene) const
 {
-    math::Rectangle2D pixel_rectangle = window_rasterizer[position(x, y)];
+    math::Rectangle2D pixel_rectangle = window_rasterizer[Position(x, y)];
     imaging::Color c = imaging::colors::black();
     int sample_count = 0;
 

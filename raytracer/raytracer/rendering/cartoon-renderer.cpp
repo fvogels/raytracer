@@ -13,7 +13,7 @@ using namespace raytracer::rendering;
 
 namespace
 {
-    double dist(const position& p, const position& q)
+    double dist(const Position& p, const Position& q)
     {
         double dx = p.x - q.x;
         double dy = p.y - q.y;
@@ -61,8 +61,8 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
                 for (int i = 0; i != bitmap.width(); ++i)
                 {
                     int x = i;
-                    position pixel_coordinates(x, y);
-                    math::Rectangle2D pixel_rectangle = window_rasterizer[position(x, y)];
+                    Position pixel_coordinates(x, y);
+                    math::Rectangle2D pixel_rectangle = window_rasterizer[Position(x, y)];
                     imaging::Color c = imaging::colors::black();
                     int sample_count = 0;
 
@@ -77,7 +77,7 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
 
                     c /= sample_count;
 
-                    bitmap[position(i, current)] = c.quantized(m_shade_count);
+                    bitmap[Position(i, current)] = c.quantized(m_shade_count);
                 }
             }
         }));
@@ -92,7 +92,7 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
     {
         for (unsigned x = 0; x != bitmap.width(); ++x)
         {
-            position pixel_position(x, y);
+            Position pixel_position(x, y);
             unsigned border_count = 0;
 
             for (auto& pair : group_grid[pixel_position])
@@ -101,7 +101,7 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
                 Point2D current_xy = pair.second;
                 bool is_border = false;
 
-                group_grid.around(pixel_position, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const position& neighbor_pixel_position) {
+                group_grid.around(pixel_position, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
                     for (auto& pair : group_grid[neighbor_pixel_position])
                     {
                         unsigned neighbor_id = pair.first;

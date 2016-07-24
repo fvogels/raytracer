@@ -24,7 +24,7 @@ imaging::Bitmap raytracer::rendering::_private_::SingleThreadedRenderer::render(
 
             Color c = render_pixel(window_rasterizer, x, y, scene);
 
-            bitmap[position(i, j)] = c;
+            bitmap[Position(i, j)] = c;
         }
     }
 
