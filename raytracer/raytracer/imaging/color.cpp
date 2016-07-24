@@ -38,6 +38,11 @@ color imaging::operator +(const color& c1, const color& c2)
     return color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
 }
 
+color imaging::operator -(const color& c1, const color& c2)
+{
+    return color(c1.r - c2.r, c1.g - c2.g, c1.b - c2.b);
+}
+
 color imaging::operator *(const color& c, double f)
 {
     return color(c.r * f, c.g * f, c.b * f);
@@ -61,6 +66,11 @@ color imaging::operator /(const color& c, double f)
 color& imaging::operator +=(color& c1, const color& c2)
 {
     return c1 = c1 + c2;
+}
+
+color& imaging::operator -=(color& c1, const color& c2)
+{
+    return c1 = c1 - c2;
 }
 
 color& imaging::operator *=(color& c, double f)
