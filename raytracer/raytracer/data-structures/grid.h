@@ -86,6 +86,17 @@ namespace data
             }
         }
 
+        void for_each_position(std::function<void(const position&)> callback) const
+        {
+            for (unsigned y = 0; y != m_height; ++y)
+            {
+                for (unsigned x = 0; x != m_width; ++x)
+                {
+                    callback(position(x, y));
+                }
+            }
+        }
+
     private:
         std::unique_ptr<T[]> m_elts;
         unsigned m_width;
