@@ -1,6 +1,6 @@
 #pragma once
 
-#include "imaging/Color.h"
+#include "imaging/color.h"
 #include "util/position.h"
 #include "data-structures/grid.h"
 #include <memory>
