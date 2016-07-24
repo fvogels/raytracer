@@ -88,3 +88,41 @@ void imaging::Bitmap::enumerate_positions(std::function<void(const position&)> c
         }
     }
 }
+
+Bitmap& imaging::Bitmap::operator +=(const Bitmap& bitmap)
+{
+    assert(m_width == bitmap.m_width);
+    assert(m_height == bitmap.m_height);
+
+    enumerate_positions([this, &bitmap](const position& p) {
+        (*this)[p] += bitmap[p];
+    });
+
+    return *this;
+}
+
+Bitmap& imaging::Bitmap::operator -=(const Bitmap& bitmap)
+{
+    assert(m_width == bitmap.m_width);
+    assert(m_height == bitmap.m_height);
+
+    enumerate_positions([this, &bitmap](const position& p) {
+        (*this)[p] -= bitmap[p];
+    });
+
+    return *this;
+}
+
+Bitmap& imaging::Bitmap::operator *=(double constant)
+{
+    enumerate_positions([this, constant](const position& p) {
+        (*this)[p] *= constant;
+    });
+
+    return *this;
+}
+
+Bitmap& imaging::Bitmap::operator /=(double constant)
+{
+    return *this *= 1 / constant;
+}

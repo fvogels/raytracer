@@ -29,6 +29,11 @@ namespace imaging
         unsigned width() const { return m_width; }
         unsigned height() const { return m_height; }
 
+        Bitmap& operator +=(const Bitmap&);
+        Bitmap& operator -=(const Bitmap&);
+        Bitmap& operator *=(double);
+        Bitmap& operator /=(double);
+
         void enumerate_positions(std::function<void(const position&)>) const;
 
         void clear(const color&);
