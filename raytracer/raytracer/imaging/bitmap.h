@@ -2,6 +2,7 @@
 
 #include "imaging/color.h"
 #include "util/position.h"
+#include "data-structures/grid.h"
 #include <memory>
 #include <string>
 #include <functional>
@@ -12,29 +13,27 @@ namespace imaging
     class Bitmap final
     {
     private:
-        std::unique_ptr<color[]> m_pixels;
-        unsigned m_width;
-        unsigned m_height;
+        data::Grid<color> m_pixels;
 
     public:
-        Bitmap(unsigned width, unsigned height);
-        Bitmap(const Bitmap&);
-        Bitmap(Bitmap&&);
+        Bitmap(unsigned, unsigned);
+        Bitmap(const Bitmap&) = default;
+        Bitmap(Bitmap&&) = default;
 
         bool is_inside(const position&) const;
 
         color& operator [](const position&);
         const color& operator [](const position&) const;
 
-        unsigned width() const { return m_width; }
-        unsigned height() const { return m_height; }
+        unsigned width() const;
+        unsigned height() const;
 
         Bitmap& operator +=(const Bitmap&);
         Bitmap& operator -=(const Bitmap&);
         Bitmap& operator *=(double);
         Bitmap& operator /=(double);
 
-        void enumerate_positions(std::function<void(const position&)>) const;
+        void for_each_position(std::function<void(const position&)>) const;
 
         void clear(const color&);
     };

@@ -22,79 +22,58 @@ namespace
 
 
 imaging::Bitmap::Bitmap(unsigned width, unsigned height)
-    : m_width(width)
-    , m_height(height)
-    , m_pixels(std::move(std::make_unique<color[]>(width * height)))
+    : m_pixels(width, height, colors::black())
 {
     // NOP
 }
 
-imaging::Bitmap::Bitmap(const Bitmap& bitmap)
-    : m_width(bitmap.m_width)
-    , m_height(bitmap.m_height)
-    , m_pixels(std::move(copy_pixels(bitmap.m_pixels.get(), bitmap.m_width, bitmap.m_height)))
+unsigned imaging::Bitmap::width() const
 {
-    // NOP
+    return m_pixels.width();
 }
 
-imaging::Bitmap::Bitmap(Bitmap&& other)
-    : m_width(other.m_width)
-    , m_height(other.m_height)
-    , m_pixels(std::move(other.m_pixels))
+unsigned imaging::Bitmap::height() const
 {
-    // NOP
+    return m_pixels.height();
 }
 
 bool imaging::Bitmap::is_inside(const position& p) const
 {
-    return p.x < m_width && p.y < m_height;
+    return p.x < width() && p.y < height();
 }
 
 color& imaging::Bitmap::operator[](const position& p)
 {
-    unsigned index = p.x + p.y * m_width;
+    assert(is_inside(p));
 
-    return m_pixels[index];
+    return m_pixels[p];
 }
 
 const color& imaging::Bitmap::operator[](const position& p) const
 {
     assert(is_inside(p));
 
-    unsigned index = p.x + p.y * m_width;
-    return m_pixels[index];
+    return m_pixels[p];
 }
 
 void imaging::Bitmap::clear(const color& color)
 {
-    for (unsigned y = 0; y != m_height; ++y)
-    {
-        for (unsigned x = 0; x != m_width; ++x)
-        {
-            position p{ x, y };
-
-            (*this)[p] = color;
-        }
-    }
+    for_each_position([this, &color](const position& p) {
+        m_pixels[p] = color;
+    });
 }
 
-void imaging::Bitmap::enumerate_positions(std::function<void(const position&)> callback) const
+void imaging::Bitmap::for_each_position(std::function<void(const position&)> callback) const
 {
-    for (unsigned y = 0; y != m_height; ++y)
-    {
-        for (unsigned x = 0; x != m_width; ++x)
-        {
-            callback(position(x, y));
-        }
-    }
+    m_pixels.for_each_position(callback);
 }
 
 Bitmap& imaging::Bitmap::operator +=(const Bitmap& bitmap)
 {
-    assert(m_width == bitmap.m_width);
-    assert(m_height == bitmap.m_height);
+    assert(width() == bitmap.width());
+    assert(height() == bitmap.height());
 
-    enumerate_positions([this, &bitmap](const position& p) {
+    for_each_position([this, &bitmap](const position& p) {
         (*this)[p] += bitmap[p];
     });
 
@@ -103,10 +82,10 @@ Bitmap& imaging::Bitmap::operator +=(const Bitmap& bitmap)
 
 Bitmap& imaging::Bitmap::operator -=(const Bitmap& bitmap)
 {
-    assert(m_width == bitmap.m_width);
-    assert(m_height == bitmap.m_height);
+    assert(width() == bitmap.width());
+    assert(height() == bitmap.height());
 
-    enumerate_positions([this, &bitmap](const position& p) {
+    for_each_position([this, &bitmap](const position& p) {
         (*this)[p] -= bitmap[p];
     });
 
@@ -115,7 +94,7 @@ Bitmap& imaging::Bitmap::operator -=(const Bitmap& bitmap)
 
 Bitmap& imaging::Bitmap::operator *=(double constant)
 {
-    enumerate_positions([this, constant](const position& p) {
+    for_each_position([this, constant](const position& p) {
         (*this)[p] *= constant;
     });
 
