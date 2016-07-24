@@ -262,7 +262,7 @@
     <ClCompile Include="logging.cpp" />
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
-    <ClCompile Include="imaging\bmp_format.cpp" />
+    <ClCompile Include="imaging\bmp-format.cpp" />
     <ClCompile Include="imaging\wif_format.cpp" />
     <ClCompile Include="materials\brdfs\diffuse-component.cpp" />
     <ClCompile Include="materials\brdfs\lambert.cpp" />

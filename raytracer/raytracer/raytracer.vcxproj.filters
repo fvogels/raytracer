@@ -60,9 +60,6 @@
     <ClCompile Include="primitives\decorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imaging\bmp_format.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imaging\wif_format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -295,6 +292,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rendering\edge-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imaging\bmp-format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
