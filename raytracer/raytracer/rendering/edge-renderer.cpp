@@ -86,8 +86,6 @@ Bitmap raytracer::rendering::_private_::EdgeRenderer::render(const Scene& scene)
     LOG(DEBUG) << "Finding edges";
     for (unsigned y = 0; y != bitmap.height(); ++y)
     {
-        LOG(DEBUG) << "Scanning line " << y << " out of " << bitmap.height();
-
         for (unsigned x = 0; x != bitmap.width(); ++x)
         {
             position pixel_position(x, y);
