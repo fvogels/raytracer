@@ -671,5 +671,8 @@
     <ClInclude Include="data-structures\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="imaging\bmp-format.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -36,7 +36,4 @@ namespace imaging
 
         void clear(const Color&);
     };
-
-    Bitmap load_bitmap(const std::string& path);
-    void save_bitmap(const std::string& path, const Bitmap& bitmap);
 }
