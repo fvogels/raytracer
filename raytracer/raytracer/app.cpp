@@ -1,7 +1,7 @@
 #ifndef TEST_BUILD
 
 #include "imaging/bitmap.h"
-#include "imaging/wif_format.h"
+#include "imaging/wif-format.h"
 #include "primitives/primitives.h"
 #include "cameras/cameras.h"
 #include "math/rasterizer.h"

@@ -267,7 +267,7 @@
     <ClCompile Include="imaging\bitmap.cpp" />
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\bmp-format.cpp" />
-    <ClCompile Include="imaging\wif_format.cpp" />
+    <ClCompile Include="imaging\wif-format.cpp" />
     <ClCompile Include="materials\brdfs\diffuse-component.cpp" />
     <ClCompile Include="materials\brdfs\lambert.cpp" />
     <ClCompile Include="materials\brdfs\phong.cpp" />
@@ -374,7 +374,7 @@
     <ClInclude Include="imaging\color-mapper.h" />
     <ClInclude Include="imaging\color.h" />
     <ClInclude Include="imaging\ppm-format.h" />
-    <ClInclude Include="imaging\wif_format.h" />
+    <ClInclude Include="imaging\wif-format.h" />
     <ClInclude Include="lights\area-light.h" />
     <ClInclude Include="lights\spot-light.h" />
     <ClInclude Include="lights\directional-light.h" />

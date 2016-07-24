@@ -1,7 +1,7 @@
 #pragma once
 
 #include "bitmap-consumers/bitmap-consumer.h"
-#include "imaging/wif_format.h"
+#include "imaging/wif-format.h"
 #include <memory>
 #include <string>
 

@@ -60,9 +60,6 @@
     <ClCompile Include="primitives\decorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imaging\wif_format.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\rasterizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -309,6 +306,9 @@
     <ClCompile Include="pipeline\motion-blur-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imaging\wif-format.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -375,9 +375,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\decorator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imaging\wif_format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\angle.h">
@@ -705,6 +702,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\pipelines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\wif-format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

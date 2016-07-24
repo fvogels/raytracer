@@ -1,5 +1,5 @@
 #include "pipeline/wif-consumer.h"
-#include "imaging/wif_format.h"
+#include "imaging/wif-format.h"
 
 using namespace raytracer::pipeline;
 using namespace imaging;

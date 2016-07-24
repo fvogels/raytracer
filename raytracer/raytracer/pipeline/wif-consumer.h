@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pipeline/processor.h"
-#include "imaging/wif_format.h"
+#include "imaging/wif-format.h"
 #include <string>
 
 

@@ -1,7 +1,7 @@
 #include "demo/depth-of-field-demo.h"
 #include "materials/materials.h"
 #include "cameras/cameras.h"
-#include "imaging/wif_format.h"
+#include "imaging/wif-format.h"
 #include "raytracing/ray-tracers.h"
 #include "rendering/renderers.h"
 #include "sampling/samplers.h"

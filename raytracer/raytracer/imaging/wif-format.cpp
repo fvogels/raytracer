@@ -1,4 +1,4 @@
-#include "wif_format.h"
+#include "wif-format.h"
 
 using namespace imaging;
 
