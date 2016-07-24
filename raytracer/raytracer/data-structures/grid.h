@@ -37,6 +37,12 @@ namespace data
             // NOP
         }
 
+        Grid(const Grid<T>& grid)
+            : Grid(grid.width(), grid.height(), [&grid](const position& p) { return grid[p]; })
+        {
+            // NOP
+        }
+
         T& operator [](const position& p)
         {
             return m_elts[p.x + p.y * m_width];
