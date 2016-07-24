@@ -383,9 +383,6 @@
     <ClInclude Include="cameras\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="util\maybe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\primitives.h">
       <Filter>Header Files</Filter>
     </ClInclude>

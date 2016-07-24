@@ -3,7 +3,6 @@
 #include "lights/light-source.h"
 #include "imaging/color.h"
 #include "math/point3d.h"
-#include "util/maybe.h"
 
 
 namespace raytracer
