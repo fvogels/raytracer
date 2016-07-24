@@ -36,7 +36,7 @@ Bitmap raytracer::rendering::_private_::MultithreadedRenderer::render(const Scen
                 {
                     int x = i;
 
-                    color c = render_pixel(window_rasterizer, x, y, scene);
+                    Color c = render_pixel(window_rasterizer, x, y, scene);
 
                     bitmap[position(i, current)] = c;
                 }

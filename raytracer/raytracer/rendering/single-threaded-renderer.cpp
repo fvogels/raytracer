@@ -22,7 +22,7 @@ imaging::Bitmap raytracer::rendering::_private_::SingleThreadedRenderer::render(
         {
             int x = i;
 
-            color c = render_pixel(window_rasterizer, x, y, scene);
+            Color c = render_pixel(window_rasterizer, x, y, scene);
 
             bitmap[position(i, j)] = c;
         }

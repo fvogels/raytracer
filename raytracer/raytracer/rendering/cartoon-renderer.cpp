@@ -63,7 +63,7 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
                     int x = i;
                     position pixel_coordinates(x, y);
                     math::Rectangle2D pixel_rectangle = window_rasterizer[position(x, y)];
-                    imaging::color c = imaging::colors::black();
+                    imaging::Color c = imaging::colors::black();
                     int sample_count = 0;
 
                     m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
