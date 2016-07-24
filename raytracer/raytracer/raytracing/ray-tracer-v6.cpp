@@ -47,7 +47,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
         {
             assert(hit.material);
 
-            color result = colors::black();
+            Color result = colors::black();
             auto material_properties = hit.material->at(hit.local_position);
 
             result += compute_ambient(material_properties);
@@ -68,7 +68,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
     }
 }
 
-color raytracer::raytracers::_private_::RayTracerV6::compute_refraction(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
+Color raytracer::raytracers::_private_::RayTracerV6::compute_refraction(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
 {
     if (material_properties.transparency > 0)
     {

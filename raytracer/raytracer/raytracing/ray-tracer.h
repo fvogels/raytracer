@@ -14,10 +14,10 @@ namespace raytracer
             return TraceResult(imaging::colors::black(), MISSING_ID);
         }
 
-        TraceResult(imaging::color color, unsigned group_id)
+        TraceResult(imaging::Color color, unsigned group_id)
             : color(color), group_id(group_id) { }
 
-        imaging::color color;
+        imaging::Color color;
         unsigned group_id;
     };
 

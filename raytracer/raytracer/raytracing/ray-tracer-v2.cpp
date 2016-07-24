@@ -13,7 +13,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
     {
         assert(hit.material);
 
-        color result = colors::black();
+        Color result = colors::black();
         auto material_properties = hit.material->at(hit.local_position);
 
         result += compute_ambient(material_properties);
@@ -27,9 +27,9 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
     }
 }
 
-imaging::color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray) const
+imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_lights(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray) const
 {
-    color result = colors::black();
+    Color result = colors::black();
 
     for (auto light_source : scene.light_sources)
     {
@@ -39,14 +39,14 @@ imaging::color raytracer::raytracers::_private_::RayTracerV2::process_lights(con
     return result;
 }
 
-imaging::color raytracer::raytracers::_private_::RayTracerV2::process_light_source(
+imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_light_source(
     const Scene& scene,
     const MaterialProperties& material_properties, 
     const Hit& hit,
     const math::Ray& eye_ray,
     LightSource light_source) const
 {
-    color result = colors::black();
+    Color result = colors::black();
 
     for (auto light_ray : light_source->lightrays_to(hit.position))
     {
@@ -56,21 +56,21 @@ imaging::color raytracer::raytracers::_private_::RayTracerV2::process_light_sour
     return result;
 }
 
-imaging::color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(
+imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(
     const Scene& scene,
     const MaterialProperties& material_properties,
     const Hit& hit,
     const math::Ray& eye_ray,
     const LightRay& light_ray) const
 {
-    color result = colors::black();
+    Color result = colors::black();
 
     result += compute_diffuse(material_properties, hit, eye_ray, light_ray);
 
     return result;
 }
 
-color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, const LightRay& light_ray) const
+Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, const LightRay& light_ray) const
 {
     Vector3D incoming = light_ray.ray.direction.normalized();
 

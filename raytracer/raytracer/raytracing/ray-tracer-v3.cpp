@@ -5,21 +5,21 @@ using namespace math;
 using namespace raytracer;
 
 
-imaging::color raytracer::raytracers::_private_::RayTracerV3::process_light_ray(
+imaging::Color raytracer::raytracers::_private_::RayTracerV3::process_light_ray(
     const Scene& scene,
     const MaterialProperties& material_properties,
     const Hit& hit,
     const math::Ray& eye_ray,
     const LightRay& light_ray) const
 {
-    color result = RayTracerV2::process_light_ray(scene, material_properties, hit, eye_ray, light_ray);
+    Color result = RayTracerV2::process_light_ray(scene, material_properties, hit, eye_ray, light_ray);
 
     result += compute_specular(material_properties, hit, eye_ray, light_ray);
 
     return result;
 }
 
-color raytracer::raytracers::_private_::RayTracerV3::compute_specular(const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, const LightRay& light_ray) const
+Color raytracer::raytracers::_private_::RayTracerV3::compute_specular(const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, const LightRay& light_ray) const
 {
     if (material_properties.specular != colors::black())
     {

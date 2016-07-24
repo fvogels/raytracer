@@ -5,7 +5,7 @@ using namespace math;
 using namespace raytracer;
 
 
-imaging::color raytracer::raytracers::_private_::RayTracerV4::process_light_ray(
+imaging::Color raytracer::raytracers::_private_::RayTracerV4::process_light_ray(
     const Scene& scene,
     const MaterialProperties& material_properties,
     const Hit& hit,
