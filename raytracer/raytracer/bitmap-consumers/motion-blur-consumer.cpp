@@ -16,7 +16,7 @@ imaging::bitmap_consumers::_private_::MotionBlurBitmapConsumer::~MotionBlurBitma
     {
         for (unsigned x = 0; x != m_accumulation->width(); ++x)
         {
-            position p(x, y);
+            Position p(x, y);
 
             (*m_accumulation)[p] /= m_count;
         }
@@ -40,7 +40,7 @@ void imaging::bitmap_consumers::_private_::MotionBlurBitmapConsumer::consume(con
         {
             for (unsigned x = 0; x != bitmap.width(); ++x)
             {
-                position p(x, y);
+                Position p(x, y);
 
                 (*m_accumulation)[p] += bitmap[p];
             }
