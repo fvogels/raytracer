@@ -3,9 +3,9 @@
 using namespace imaging;
 
 
-math::Function<color, double> imaging::color_mapping::grayscale()
+math::Function<Color, double> imaging::color_mapping::grayscale()
 {
-    std::function<color(double)> lambda = [](double x) -> color
+    std::function<Color(double)> lambda = [](double x) -> Color
     {
         return colors::white() * x;
     };
