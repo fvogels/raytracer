@@ -18,7 +18,7 @@ namespace animation
         Animation(math::Function<T, TimeStamp> function, animation::Duration duration)
             : m_function(function), m_duration(duration) { }
 
-        T operator ()(TimeStamp t)
+        T operator ()(TimeStamp t) const
         {
             return m_function(t);
         }
