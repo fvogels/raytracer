@@ -11,6 +11,6 @@ namespace raytracer
         LightRay(const math::Ray&, const imaging::Color&);
 
         math::Ray ray;
-        imaging::Color Color;
+        imaging::Color color;
     };
 }
