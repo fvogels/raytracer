@@ -25,6 +25,12 @@ namespace data
             }
         }
 
+        Grid(unsigned width, unsigned height, T initial_value)
+            : Grid(width, height, [&initial_value](const position&) { return initial_value; })
+        {
+            // NOP
+        }
+
         Grid(unsigned width, unsigned height)
             : m_elts(std::make_unique<T[]>(width * height)), m_width(width), m_height(height)
         {
