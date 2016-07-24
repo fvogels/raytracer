@@ -13,7 +13,7 @@ void raytracer::samplers::_private_::GridSampler::sample(const Rectangle2D& rect
     {
         for (int x = 0; x != this->columns; ++x)
         {
-            auto subrectangle = raster[position(x, y)];
+            auto subrectangle = raster[Position(x, y)];
 
             function(subrectangle.center());
         }
