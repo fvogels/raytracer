@@ -4,6 +4,7 @@
 #include "util/position.h"
 #include <memory>
 #include <string>
+#include <functional>
 
 
 namespace imaging
@@ -27,6 +28,8 @@ namespace imaging
 
         unsigned width() const { return m_width; }
         unsigned height() const { return m_height; }
+
+        void enumerate_positions(std::function<void(const position&)>) const;
 
         void clear(const color&);
     };

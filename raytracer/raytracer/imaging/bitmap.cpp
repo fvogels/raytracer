@@ -77,3 +77,14 @@ void imaging::Bitmap::clear(const color& color)
         }
     }
 }
+
+void imaging::Bitmap::enumerate_positions(std::function<void(const position&)> callback) const
+{
+    for (unsigned y = 0; y != m_height; ++y)
+    {
+        for (unsigned x = 0; x != m_width; ++x)
+        {
+            callback(position(x, y));
+        }
+    }
+}
