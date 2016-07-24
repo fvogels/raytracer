@@ -20,6 +20,6 @@ namespace math
 
         Rasterizer& operator =(const Rasterizer&) = default;
 
-        Rectangle2D operator [](const position&) const;
+        Rectangle2D operator [](const Position&) const;
     };
 }
