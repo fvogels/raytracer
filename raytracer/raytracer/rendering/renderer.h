@@ -18,7 +18,7 @@ namespace raytracer
             public:
                 RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer);
 
-                virtual imaging::Bitmap render(const Scene&) const = 0;
+                virtual std::shared_ptr<imaging::Bitmap> render(const Scene&) const = 0;
 
             protected:
                 unsigned m_horizontal_resolution, m_vertical_resolution;

@@ -21,7 +21,7 @@ namespace
             assert(scene);
 
             auto result = m_renderer->render(*scene);
-            produce(std::make_shared<Bitmap>(result)); // TODO!!
+            produce(result);
         }
 
     private:

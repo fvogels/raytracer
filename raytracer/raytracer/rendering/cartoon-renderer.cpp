@@ -39,9 +39,10 @@ raytracer::rendering::_private_::CartoonRenderer::CartoonRenderer(
     // NOP
 }
 
-Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& scene) const
+std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRenderer::render(const Scene& scene) const
 {
-    Bitmap bitmap(m_horizontal_resolution, m_vertical_resolution);
+    auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
+    Bitmap& bitmap = *result;
     Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
     Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
@@ -141,7 +142,7 @@ Bitmap raytracer::rendering::_private_::CartoonRenderer::render(const Scene& sce
         }
     }
 
-    return bitmap;
+    return result;
 }
 
 Renderer raytracer::rendering::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count, unsigned shade_count, double stroke_thickness)

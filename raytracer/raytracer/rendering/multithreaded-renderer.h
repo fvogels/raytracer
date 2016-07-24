@@ -13,7 +13,7 @@ namespace raytracer
             public:
                 MultithreadedRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
 
-                imaging::Bitmap render(const Scene&) const override;
+                std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
             private:
                 unsigned m_thread_count;

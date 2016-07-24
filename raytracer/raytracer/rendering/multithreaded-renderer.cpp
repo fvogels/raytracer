@@ -14,9 +14,10 @@ raytracer::rendering::_private_::MultithreadedRenderer::MultithreadedRenderer(un
     // NOP
 }
 
-Bitmap raytracer::rendering::_private_::MultithreadedRenderer::render(const Scene& scene) const
+std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::MultithreadedRenderer::render(const Scene& scene) const
 {
-    Bitmap bitmap(m_horizontal_resolution, m_vertical_resolution);
+    auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
+    Bitmap& bitmap = *result;
     Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
     Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
 
@@ -49,7 +50,7 @@ Bitmap raytracer::rendering::_private_::MultithreadedRenderer::render(const Scen
         thread.join();
     }
 
-    return bitmap;
+    return result;
 }
 
 Renderer raytracer::rendering::multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count)

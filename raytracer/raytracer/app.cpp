@@ -129,31 +129,6 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
     return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
 }
 
-void render_animation(Animation<std::shared_ptr<Scene>> scene_animation, unsigned fps, std::shared_ptr<imaging::BitmapConsumer> bitmap_consumer)
-{
-    auto ray_tracer = raytracer::raytracers::v6();
-
-    auto renderer = N_THREADS > 1 ? raytracer::rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer, N_THREADS) :
-        raytracer::rendering::single_threaded(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(SAMPLES, SAMPLES), ray_tracer);
-    // auto renderer = raytracer::rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, raytracer::samplers::grid(2, 2), ray_tracer, N_THREADS, 4, 0.005);
-
-    for (int frame = 0; frame < scene_animation.duration().seconds() * fps; ++frame)
-    {
-        TIMED_SCOPE(timerObj, "single frame");
-
-        double t = double(frame) / fps;
-        TimeStamp now = TimeStamp::from_epoch(1_s * t);
-        auto scene = scene_animation(now);
-
-        LOG(INFO) << "Rendering frame " << frame << std::endl;
-
-        auto bitmap = renderer->render(*scene);
-
-        bitmap_consumer->consume(bitmap);
-    }
-}
-
-
 void render()
 {
     using namespace raytracer;

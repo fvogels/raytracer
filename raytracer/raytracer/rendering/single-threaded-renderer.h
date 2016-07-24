@@ -14,7 +14,7 @@ namespace raytracer
             public:
                 using RendererImplementation::RendererImplementation;
 
-                imaging::Bitmap render(const Scene&) const override;
+                std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
             };
         }
 

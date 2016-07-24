@@ -91,7 +91,7 @@ namespace
 
             auto bitmap = renderer->render(*scene);
 
-            output->consume(bitmap);
+            output->consume(*bitmap);
         }
     }
 }

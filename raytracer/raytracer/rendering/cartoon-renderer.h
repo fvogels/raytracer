@@ -14,7 +14,7 @@ namespace raytracer
             public:
                 CartoonRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned, unsigned, double);
 
-                imaging::Bitmap render(const Scene&) const override;
+                std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
             private:
                 unsigned m_thread_count;
