@@ -1,7 +1,7 @@
 #include "lights/light-ray.h"
 
-raytracer::LightRay::LightRay(const math::Ray& ray, const imaging::color& color)
-    : ray(ray), color(color)
+raytracer::LightRay::LightRay(const math::Ray& ray, const imaging::Color& color)
+    : ray(ray), Color(color)
 {
     // NOP
 }

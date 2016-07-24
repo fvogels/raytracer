@@ -8,9 +8,9 @@ namespace raytracer
 {
     struct LightRay
     {
-        LightRay(const math::Ray&, const imaging::color&);
+        LightRay(const math::Ray&, const imaging::Color&);
 
         math::Ray ray;
-        imaging::color color;
+        imaging::Color Color;
     };
 }

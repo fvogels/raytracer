@@ -14,16 +14,16 @@ namespace raytracer
             class OmnidirectionalPointLight : public PointLightImplementation
             {
             public:
-                OmnidirectionalPointLight(const math::Point3D&, const imaging::color&);
+                OmnidirectionalPointLight(const math::Point3D&, const imaging::Color&);
 
             protected:
                 LightRay cast_lightray_to(const math::Point3D&) const override;
 
             private:
-                imaging::color m_color;
+                imaging::Color m_color;
             };
         }
 
-        LightSource omnidirectional(const math::Point3D&, const imaging::color&);
+        LightSource omnidirectional(const math::Point3D&, const imaging::Color&);
     }
 }

@@ -6,7 +6,7 @@ using namespace raytracer;
 using namespace imaging;
 
 
-raytracer::lights::_private_::SpotLight::SpotLight(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::color& color)
+raytracer::lights::_private_::SpotLight::SpotLight(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::Color& color)
     : PointLightImplementation(position), m_direction(direction), m_min_cos(cos(angle)), m_color(color)
 {
     assert(direction.is_unit());
@@ -27,12 +27,12 @@ LightRay raytracer::lights::_private_::SpotLight::cast_lightray_to(const math::P
     }
 }
 
-LightSource raytracer::lights::spot(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::color& color)
+LightSource raytracer::lights::spot(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::Color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::SpotLight>(position, direction, angle, color));
 }
 
-LightSource raytracer::lights::spot(const math::Point3D& position, const math::Point3D& pointed_at, math::Angle angle, const imaging::color& color)
+LightSource raytracer::lights::spot(const math::Point3D& position, const math::Point3D& pointed_at, math::Angle angle, const imaging::Color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::SpotLight>(position, (pointed_at - position).normalized(), angle, color));
 }

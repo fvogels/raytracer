@@ -6,7 +6,7 @@ using namespace raytracer;
 using namespace imaging;
 
 
-raytracer::lights::_private_::DirectionalLight::DirectionalLight(const math::Vector3D& direction, const imaging::color& color)
+raytracer::lights::_private_::DirectionalLight::DirectionalLight(const math::Vector3D& direction, const imaging::Color& color)
     : m_direction(direction), m_color(color)
 {
     assert(direction.is_unit());
@@ -20,7 +20,7 @@ std::vector<LightRay> raytracer::lights::_private_::DirectionalLight::lightrays_
     return std::vector<LightRay> { light_ray };
 }
 
-LightSource raytracer::lights::directional(const math::Vector3D& direction, const imaging::color& color)
+LightSource raytracer::lights::directional(const math::Vector3D& direction, const imaging::Color& color)
 {
     return LightSource(std::make_shared<raytracer::lights::_private_::DirectionalLight>(direction, color));
 }

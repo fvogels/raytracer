@@ -13,16 +13,16 @@ namespace raytracer
             class DirectionalLight : public LightSourceImplementation
             {
             public:
-                DirectionalLight(const math::Vector3D&, const imaging::color&);
+                DirectionalLight(const math::Vector3D&, const imaging::Color&);
 
                 std::vector<LightRay> lightrays_to(const math::Point3D&) const override;
 
             private:
                 math::Vector3D m_direction;
-                imaging::color m_color;
+                imaging::Color m_color;
             };
         }
 
-        LightSource directional(const math::Vector3D&, const imaging::color&);
+        LightSource directional(const math::Vector3D&, const imaging::Color&);
     }
 }
