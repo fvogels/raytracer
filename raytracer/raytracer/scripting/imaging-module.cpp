@@ -1,5 +1,5 @@
 #include "scripting/imaging-module.h"
-#include "imaging/color.h"
+#include "imaging/Color.h"
 
 using namespace chaiscript;
 using namespace imaging;
@@ -9,7 +9,7 @@ namespace
 {
     struct ColorLibrary
     {
-#define COLOR(NAME) color NAME() const { return colors::NAME(); }
+#define COLOR(NAME) Color NAME() const { return colors::NAME(); }
         COLOR(black)
         COLOR(white)
         COLOR(red)
@@ -40,23 +40,23 @@ ModulePtr raytracer::scripting::_private_::create_imaging_module()
     COLOR(cyan);
 #undef COLOR
 
-    module->add(fun([](const color& c1, const color& c2) {
+    module->add(fun([](const Color& c1, const Color& c2) {
         return c1 + c2;
     }), "+");
 
-    module->add(fun([](const color& c1, const color& c2) {
+    module->add(fun([](const Color& c1, const Color& c2) {
         return c1 * c2;
     }), "*");
 
-    module->add(fun([](const color& c, double f) {
+    module->add(fun([](const Color& c, double f) {
         return c * f;
     }), "*");
 
-    module->add(fun([](double f, const color& c) {
+    module->add(fun([](double f, const Color& c) {
         return c * f;
     }), "*");
 
-    module->add(fun([](const color& c, double f) {
+    module->add(fun([](const Color& c, double f) {
         return c / f;
     }), "/");
 

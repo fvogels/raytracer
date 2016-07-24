@@ -2,7 +2,7 @@
 #include "rendering/renderers.h"
 #include "raytracing/ray-tracer.h"
 #include "sampling/samplers.h"
-#include "imaging/wif_format.h"
+#include "imaging/wif-format.h"
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -18,7 +18,7 @@ namespace
         }
     };
 
-    imaging::Bitmap render(unsigned width, unsigned height, RayTracer ray_tracer, const Scene& scene)
+    std::shared_ptr<imaging::Bitmap> render(unsigned width, unsigned height, RayTracer ray_tracer, const Scene& scene)
     {
         auto renderer = raytracer::rendering::single_threaded(width, height, samplers::single(), ray_tracer);
 

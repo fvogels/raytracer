@@ -1,6 +1,6 @@
 #include "scripting/materials-module.h"
 #include "materials/materials.h"
-#include "imaging/color.h"
+#include "imaging/Color.h"
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -12,7 +12,7 @@ namespace
 {
     struct MaterialLibrary
     {
-        Material uniform(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index) const
+        Material uniform(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index) const
         {
             MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
 
