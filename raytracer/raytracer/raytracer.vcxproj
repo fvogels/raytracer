@@ -154,7 +154,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>NOMINMAX;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
@@ -173,7 +173,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>NOMINMAX;TEST_BUILD;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TEST_BUILD;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
@@ -215,7 +215,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NOMINMAX;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
@@ -319,6 +319,15 @@
     <ClCompile Include="sampling\grid-sampler.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
     <ClCompile Include="sampling\single-sampler.cpp" />
+    <ClCompile Include="scripting\cameras-module.cpp" />
+    <ClCompile Include="scripting\imaging-module.cpp" />
+    <ClCompile Include="scripting\lights-module.cpp" />
+    <ClCompile Include="scripting\materials-module.cpp" />
+    <ClCompile Include="scripting\math-module.cpp" />
+    <ClCompile Include="scripting\primitives-module.cpp" />
+    <ClCompile Include="scripting\raytracing-module.cpp" />
+    <ClCompile Include="scripting\rendering-module.cpp" />
+    <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
@@ -460,6 +469,15 @@
     <ClInclude Include="sampling\samplers.h" />
     <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="data-structures\array.h" />
+    <ClInclude Include="scripting\cameras-module.h" />
+    <ClInclude Include="scripting\imaging-module.h" />
+    <ClInclude Include="scripting\lights-module.h" />
+    <ClInclude Include="scripting\materials-module.h" />
+    <ClInclude Include="scripting\math-module.h" />
+    <ClInclude Include="scripting\primitives-module.h" />
+    <ClInclude Include="scripting\raytracing-module.h" />
+    <ClInclude Include="scripting\rendering-module.h" />
+    <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="data-structures\position.h" />
