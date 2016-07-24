@@ -86,5 +86,7 @@ namespace animation
         return preprocess<T>(timestamp_to_seconds() >> easing_function >> seconds_to_timestamp(), animation);
     }
 
+    Animation<double> straight(double, double, const Duration&);
+    Animation<math::Point3D> straight(const math::Point3D&, const math::Point3D&, const Duration&);
     Animation<math::Point3D> circular(const math::Point3D&, const math::Point3D&, const math::Vector3D&, const math::Interval<math::Angle>&, const Duration&);
 }
