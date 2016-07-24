@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util/position.h"
+#include "data-structures/position.h"
 #include <memory>
 #include <functional>
 

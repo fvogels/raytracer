@@ -305,9 +305,6 @@
     <ClInclude Include="imaging\color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="util\position.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\vector3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -669,6 +666,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\edge-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data-structures\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

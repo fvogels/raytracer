@@ -450,7 +450,7 @@
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\maybe.h" />
     <ClInclude Include="util\misc.h" />
-    <ClInclude Include="util\position.h" />
+    <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

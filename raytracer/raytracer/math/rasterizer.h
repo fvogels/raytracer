@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/rectangle2d.h"
-#include "util/position.h"
+#include "data-structures/position.h"
 
 namespace math
 {

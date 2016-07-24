@@ -2,6 +2,7 @@
 
 #include <vector>
 
+
 struct position final
 {
     unsigned x, y;

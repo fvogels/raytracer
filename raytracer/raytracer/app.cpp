@@ -42,21 +42,21 @@ using namespace imaging;
 using namespace animation;
 
 
-Material create_lambert_material(const color& c, bool reflective = false)
+Material create_lambert_material(const Color& c, bool reflective = false)
 {
     MaterialProperties properties(colors::black(), c, colors::black(), 0, 0, 0, 0);
 
     return raytracer::materials::uniform(properties);
 }
 
-Material create_phong_material(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity)
+Material create_phong_material(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity)
 {
     MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, 0, 0);
 
     return raytracer::materials::uniform(properties);
 }
 
-Material create_phong_material(const color& ambient, const color& diffuse, const color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index)
+Material create_phong_material(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index)
 {
     MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
 
@@ -325,7 +325,7 @@ void render()
     auto scenes = std::make_shared<SceneProducer>(30);
     // auto renderer = std::make_shared<RendererProcessor>(rendering::multithreaded(500, 500, samplers::grid(2, 2), raytracers::v6(), 4));
     auto renderer = std::make_shared<RendererProcessor>(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01));
-    auto motion_blur = std::make_shared<MotionBlurProcessor>(30, 30, 10);
+    auto motion_blur = std::make_shared<MotionBlurProcessor>(30, 30, 1);
     auto wif = std::make_shared<Wif>(path);
 
     scenes->link_to(renderer)->link_to(motion_blur)->link_to(wif);
