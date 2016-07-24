@@ -27,7 +27,7 @@ std::vector<LightRay> raytracer::lights::_private_::AreaLight::lightrays_to(cons
 
     for (auto& light_ray : light_rays)
     {
-        light_ray.Color /= count;
+        light_ray.color /= count;
     }
 
     return light_rays;
