@@ -7,9 +7,9 @@ struct RGB
 {
     uint8_t r, g, b;
 
-    RGB(const color& c)
+    RGB(const Color& c)
     {
-        color clamped = c.clamped();
+        Color clamped = c.clamped();
 
         r = uint8_t(clamped.r * 255);
         g = uint8_t(clamped.g * 255);
