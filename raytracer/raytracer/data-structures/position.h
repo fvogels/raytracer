@@ -3,11 +3,11 @@
 #include <vector>
 
 
-struct position final
+struct Position final
 {
     unsigned x, y;
 
-    position(unsigned x, unsigned y)
+    Position(unsigned x, unsigned y)
         : x(x), y(y) { }
 
     void move(int dx, int dy)
@@ -16,9 +16,9 @@ struct position final
         y += dy;
     }
 
-    position moved(int dx, int dy) const
+    Position moved(int dx, int dy) const
     {
-        position copy = *this;
+        Position copy = *this;
         copy.move(dx, dy);
         return copy;
     }
