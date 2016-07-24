@@ -1,6 +1,6 @@
 #pragma once
 
-#include "imaging/color.h"
+#include "imaging/Color.h"
 #include "util/position.h"
 #include "data-structures/grid.h"
 #include <memory>
@@ -13,7 +13,7 @@ namespace imaging
     class Bitmap final
     {
     private:
-        data::Grid<color> m_pixels;
+        data::Grid<Color> m_pixels;
 
     public:
         Bitmap(unsigned, unsigned);
@@ -22,8 +22,8 @@ namespace imaging
 
         bool is_inside(const position&) const;
 
-        color& operator [](const position&);
-        const color& operator [](const position&) const;
+        Color& operator [](const position&);
+        const Color& operator [](const position&) const;
 
         unsigned width() const;
         unsigned height() const;
@@ -35,7 +35,7 @@ namespace imaging
 
         void for_each_position(std::function<void(const position&)>) const;
 
-        void clear(const color&);
+        void clear(const Color&);
     };
 
     Bitmap load_bitmap(const std::string& path);

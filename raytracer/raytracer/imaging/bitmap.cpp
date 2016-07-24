@@ -7,9 +7,9 @@ using namespace imaging;
 
 namespace
 {
-    std::unique_ptr<color[]> copy_pixels(color* cs, unsigned width, unsigned height)
+    std::unique_ptr<Color[]> copy_pixels(Color* cs, unsigned width, unsigned height)
     {
-        auto result = std::make_unique<color[]>(width * height);
+        auto result = std::make_unique<Color[]>(width * height);
 
         for (size_t i = 0; i != width * height; ++i)
         {
@@ -42,24 +42,24 @@ bool imaging::Bitmap::is_inside(const position& p) const
     return p.x < width() && p.y < height();
 }
 
-color& imaging::Bitmap::operator[](const position& p)
+Color& imaging::Bitmap::operator[](const position& p)
 {
     assert(is_inside(p));
 
     return m_pixels[p];
 }
 
-const color& imaging::Bitmap::operator[](const position& p) const
+const Color& imaging::Bitmap::operator[](const position& p) const
 {
     assert(is_inside(p));
 
     return m_pixels[p];
 }
 
-void imaging::Bitmap::clear(const color& color)
+void imaging::Bitmap::clear(const Color& Color)
 {
-    for_each_position([this, &color](const position& p) {
-        m_pixels[p] = color;
+    for_each_position([this, &Color](const position& p) {
+        m_pixels[p] = Color;
     });
 }
 
