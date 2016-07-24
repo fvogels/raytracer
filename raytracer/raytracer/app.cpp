@@ -24,7 +24,6 @@
 #include <assert.h>
 #include <type_traits>
 #include <list>
-#undef IN
 
 #ifdef NDEBUG
 const int BITMAP_SIZE = 500;
@@ -76,7 +75,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto position_animation = animation::ease(animation::straight(Point3D(-2, 0, 0), Point3D(2, 0, 0), Duration::from_seconds(1)), math::functions::easing::easing_function<math::functions::easing::QUADRATIC, math::functions::easing::IN>());
+    auto position_animation = animation::ease(animation::straight(Point3D(-2, 0, 0), Point3D(2, 0, 0), Duration::from_seconds(1)), math::functions::easing::easing_function<math::functions::easing::QUADRATIC, math::functions::easing::in>());
     auto b = group(1, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), translate(position_animation(now) - Point3D(0, 0, 0), sphere())));
     // auto plane = decorate(wood2d(4, 0.4), translate(Vector3D(0, -1, 0), xz_plane()));
 

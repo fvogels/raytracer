@@ -26,9 +26,9 @@ namespace math
             struct is_side_parameter;
 
 #           define DEFINE_SIDE(NAME) struct NAME { }; template<> struct is_side_parameter<NAME> { typedef void t; }
-            DEFINE_SIDE(IN);
-            DEFINE_SIDE(OUT);
-            DEFINE_SIDE(INOUT);
+            DEFINE_SIDE(in);
+            DEFINE_SIDE(out);
+            DEFINE_SIDE(inout);
 #           undef DEFINE_SIDE
 
             namespace _private_
@@ -52,7 +52,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUADRATIC, IN>
+                struct EasingFunctionBuilder<QUADRATIC, in>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -61,7 +61,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUADRATIC, OUT>
+                struct EasingFunctionBuilder<QUADRATIC, out>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -70,7 +70,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUADRATIC, INOUT>
+                struct EasingFunctionBuilder<QUADRATIC, inout>
                 {
                     static math::functions::EasingFunction function()
                     {

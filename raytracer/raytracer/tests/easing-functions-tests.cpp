@@ -73,7 +73,7 @@ TEST_CASE("[EasingFunctions] Linear with x=1..3, y=1..7)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] QuadraticIn with x=2..3, y=3..7)", "[EasingFunctions]")
 {
-    auto f = easing_function<QUADRATIC, IN>(x_range(2, 3), y_range(3, 7));
+    auto f = easing_function<QUADRATIC, in>(x_range(2, 3), y_range(3, 7));
 
     CHECK(f(2) == Approx(3));
     CHECK(f(3) == Approx(7));
@@ -82,7 +82,7 @@ TEST_CASE("[EasingFunctions] QuadraticIn with x=2..3, y=3..7)", "[EasingFunction
 
 TEST_CASE("[EasingFunctions] QuadraticOut with x=2..3, y=3..7)", "[EasingFunctions]")
 {
-    auto f = easing_function<QUADRATIC, OUT>(x_range(2, 3), y_range(3, 7));
+    auto f = easing_function<QUADRATIC, out>(x_range(2, 3), y_range(3, 7));
 
     CHECK(f(2) == Approx(3));
     CHECK(f(3) == Approx(7));
@@ -91,7 +91,7 @@ TEST_CASE("[EasingFunctions] QuadraticOut with x=2..3, y=3..7)", "[EasingFunctio
 
 TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunctions]")
 {
-    auto f = easing_function<QUADRATIC, INOUT>(x_range(2, 3), y_range(3, 7));
+    auto f = easing_function<QUADRATIC, inout>(x_range(2, 3), y_range(3, 7));
 
     CHECK(f(2) == Approx(3));
     CHECK(f(3) == Approx(7));
