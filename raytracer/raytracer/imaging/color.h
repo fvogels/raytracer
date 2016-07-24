@@ -5,68 +5,68 @@
 
 namespace imaging
 {
-    struct color final
+    struct Color final
     {
         double r, g, b;
 
-        constexpr color() : color(0, 0, 0) { }
+        constexpr Color() noexcept : Color(0, 0, 0) { }
 
-        constexpr color(double r, double g, double b)
+        constexpr Color(double r, double g, double b) noexcept
             : r(r), g(g), b(b) { }
 
-        void clamp();
-        color clamped() const;
+        void clamp() noexcept;
+        Color clamped() const noexcept;
 
-        void quantize(unsigned);
-        color quantized(unsigned) const;
+        void quantize(unsigned) noexcept;
+        Color quantized(unsigned) const noexcept;
     };
 
-    color operator +(const color&, const color&);
-    color operator -(const color&, const color&);
-    color operator *(const color&, double);
-    color operator *(double, const color&);
-    color operator *(const color&, const color&);
-    color operator /(const color&, double);
+    Color operator +(const Color&, const Color&) noexcept;
+    Color operator -(const Color&, const Color&) noexcept;
+    Color operator *(const Color&, double) noexcept;
+    Color operator *(double, const Color&) noexcept;
+    Color operator *(const Color&, const Color&) noexcept;
+    Color operator /(const Color&, double) noexcept;
 
-    color& operator +=(color&, const color&);
-    color& operator -=(color&, const color&);
-    color& operator *=(color&, double);
-    color& operator /=(color&, double);
+    Color& operator +=(Color&, const Color&) noexcept;
+    Color& operator -=(Color&, const Color&) noexcept;
+    Color& operator *=(Color&, double) noexcept;
+    Color& operator /=(Color&, double) noexcept;
 
-    bool operator ==(const color&, const color&);
-    bool operator !=(const color&, const color&);
+    bool operator ==(const Color&, const Color&) noexcept;
+    bool operator !=(const Color&, const Color&) noexcept;
 
-    std::ostream& operator <<(std::ostream&, const color&);
+    std::ostream& operator <<(std::ostream&, const Color&);
 
-    // Example usage: color c = colors::black();
+    // Example usage: Color c = colors::black();
     namespace colors
     {
-        constexpr color black()   { return color{ 0, 0, 0 }; }
-        constexpr color white()   { return color{ 1, 1, 1 }; }
-        constexpr color red()     { return color{ 1, 0, 0 }; }
-        constexpr color green()   { return color{ 0, 1, 0 }; }
-        constexpr color blue()    { return color{ 0, 0, 1 }; }
-        constexpr color yellow()  { return color{ 1, 1, 0 }; }
-        constexpr color magenta() { return color{ 1, 0, 1 }; }
-        constexpr color cyan()    { return color{ 0, 1, 1 }; }
+        constexpr Color black()   noexcept { return Color{ 0, 0, 0 }; }
+        constexpr Color white()   noexcept { return Color{ 1, 1, 1 }; }
+        constexpr Color red()     noexcept { return Color{ 1, 0, 0 }; }
+        constexpr Color green()   noexcept { return Color{ 0, 1, 0 }; }
+        constexpr Color blue()    noexcept { return Color{ 0, 0, 1 }; }
+        constexpr Color yellow()  noexcept { return Color{ 1, 1, 0 }; }
+        constexpr Color magenta() noexcept { return Color{ 1, 0, 1 }; }
+        constexpr Color cyan()    noexcept { return Color{ 0, 1, 1 }; }
     }
 }
 
 namespace math
 {
     template<>
-    struct approximately<imaging::color>
+    struct approximately<imaging::Color>
     {
-        imaging::color value;
+        imaging::Color value;
         double delta;
 
-        explicit approximately(const imaging::color& value, double delta = 0.00001)
+        explicit approximately(const imaging::Color& value, double delta = 0.00001)
             :value(value), delta(delta)
         {
             // NOP
         }
 
-        bool close_enough(const imaging::color& other) const
+        bool close_enough(const imaging::Color& other) const
         {
             return
                 value.r == approx(other.r) &&

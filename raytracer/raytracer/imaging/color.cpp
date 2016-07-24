@@ -6,108 +6,108 @@ using namespace imaging;
 
 namespace
 {
-    double clamp(double x)
+    double clamp(double x) noexcept
     {
         if (x < 0) return 0;
         else if (x > 1) return 1;
         else return x;
     }
 
-    double quantize(double x, unsigned levels)
+    double quantize(double x, unsigned levels) noexcept
     {
         return round(x * levels) / levels;
     }
 }
 
-void imaging::color::clamp()
+void imaging::Color::clamp() noexcept
 {
     r = ::clamp(r);
     g = ::clamp(g);
     b = ::clamp(b);
 }
 
-color imaging::color::clamped() const
+Color imaging::Color::clamped() const noexcept
 {
-    color copy = *this;
+    Color copy = *this;
     copy.clamp();
     return copy;
 }
 
-color imaging::operator +(const color& c1, const color& c2)
+Color imaging::operator +(const Color& c1, const Color& c2) noexcept
 {
-    return color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
+    return Color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
 }
 
-color imaging::operator -(const color& c1, const color& c2)
+Color imaging::operator -(const Color& c1, const Color& c2) noexcept
 {
-    return color(c1.r - c2.r, c1.g - c2.g, c1.b - c2.b);
+    return Color(c1.r - c2.r, c1.g - c2.g, c1.b - c2.b);
 }
 
-color imaging::operator *(const color& c, double f)
+Color imaging::operator *(const Color& c, double f) noexcept
 {
-    return color(c.r * f, c.g * f, c.b * f);
+    return Color(c.r * f, c.g * f, c.b * f);
 }
 
-color imaging::operator *(double f, const color& c)
+Color imaging::operator *(double f, const Color& c) noexcept
 {
     return c * f;
 }
 
-color imaging::operator *(const color& c1, const color& c2)
+Color imaging::operator *(const Color& c1, const Color& c2) noexcept
 {
-    return color(c1.r * c2.r, c1.g * c2.g, c1.b * c2.b);
+    return Color(c1.r * c2.r, c1.g * c2.g, c1.b * c2.b);
 }
 
-color imaging::operator /(const color& c, double f)
+Color imaging::operator /(const Color& c, double f) noexcept
 {
     return c * (1 / f);
 }
 
-color& imaging::operator +=(color& c1, const color& c2)
+Color& imaging::operator +=(Color& c1, const Color& c2) noexcept
 {
     return c1 = c1 + c2;
 }
 
-color& imaging::operator -=(color& c1, const color& c2)
+Color& imaging::operator -=(Color& c1, const Color& c2) noexcept
 {
     return c1 = c1 - c2;
 }
 
-color& imaging::operator *=(color& c, double f)
+Color& imaging::operator *=(Color& c, double f) noexcept
 {
     return c = c * f;
 }
 
-color& imaging::operator /=(color& c, double f)
+Color& imaging::operator /=(Color& c, double f) noexcept
 {
     return c = c / f;
 }
 
-bool imaging::operator ==(const color& c1, const color& c2)
+bool imaging::operator ==(const Color& c1, const Color& c2) noexcept
 {
     return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
 }
 
-bool imaging::operator !=(const color& c1, const color& c2)
+bool imaging::operator !=(const Color& c1, const Color& c2) noexcept
 {
     return !(c1 == c2);
 }
 
-std::ostream& imaging::operator <<(std::ostream& out, const color& c)
+std::ostream& imaging::operator <<(std::ostream& out, const Color& c)
 {
     return out << "RGB[" << c.r << "," << c.g << "," << c.b << "]";
 }
 
-void imaging::color::quantize(unsigned levels)
+void imaging::Color::quantize(unsigned levels) noexcept
 {
     r = ::quantize(r, levels);
     g = ::quantize(g, levels);
     b = ::quantize(b, levels);
 }
 
-color imaging::color::quantized(unsigned levels) const
+Color imaging::Color::quantized(unsigned levels) const noexcept
 {
-    color copy = *this;
+    Color copy = *this;
 
     copy.quantize(levels);
 
