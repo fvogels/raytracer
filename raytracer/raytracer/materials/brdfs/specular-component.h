@@ -12,16 +12,16 @@ namespace raytracer
             class SpecularComponent : public BRDFBody
             {
             public:
-                SpecularComponent(const imaging::color&, double exponent);
+                SpecularComponent(const imaging::Color&, double exponent);
 
-                imaging::color evaluate(const math::Vector3D&, const imaging::color&, const math::Vector3D&, const math::Vector3D&) const override;
+                imaging::Color evaluate(const math::Vector3D&, const imaging::Color&, const math::Vector3D&, const math::Vector3D&) const override;
 
             private:
-                imaging::color m_color;
+                imaging::Color m_color;
                 double m_exponent;
             };
         }
 
-        BRDF specular_component(const imaging::color&, double exponent);
+        BRDF specular_component(const imaging::Color&, double exponent);
     }
 }

@@ -9,7 +9,7 @@ using namespace raytracer::brdfs;
 using namespace imaging;
 
 
-BRDF raytracer::brdfs::lambert(const color& c)
+BRDF raytracer::brdfs::lambert(const Color& c)
 {
     return diffuse_component(c);
 }

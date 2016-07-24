@@ -7,6 +7,6 @@ namespace raytracer
 {
     namespace brdfs
     {
-        BRDF phong(const imaging::color&, const imaging::color&, double);
+        BRDF phong(const imaging::Color&, const imaging::Color&, double);
     }
 }

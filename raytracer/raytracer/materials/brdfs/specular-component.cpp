@@ -8,15 +8,15 @@ using namespace raytracer::brdfs;
 using namespace imaging;
 
 
-raytracer::brdfs::_private_::SpecularComponent::SpecularComponent(const color& c, double exponent)
+raytracer::brdfs::_private_::SpecularComponent::SpecularComponent(const Color& c, double exponent)
     : m_color(c), m_exponent(exponent)
 {
     // NOP
 }
 
-color raytracer::brdfs::_private_::SpecularComponent::evaluate(
+Color raytracer::brdfs::_private_::SpecularComponent::evaluate(
     const math::Vector3D& incoming_direction,
-    const imaging::color& incoming_color,
+    const imaging::Color& incoming_color,
     const math::Vector3D& normal,
     const math::Vector3D& outgoing_direction) const
 {
@@ -37,7 +37,7 @@ color raytracer::brdfs::_private_::SpecularComponent::evaluate(
     }
 }
 
-BRDF raytracer::brdfs::specular_component(const color& c, double exponent)
+BRDF raytracer::brdfs::specular_component(const Color& c, double exponent)
 {
     return BRDF(std::make_shared<_private_::SpecularComponent>(c, exponent));
 }

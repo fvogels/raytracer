@@ -7,6 +7,6 @@ namespace raytracer
 {
     namespace brdfs
     {
-        BRDF lambert(const imaging::color&);
+        BRDF lambert(const imaging::Color&);
     }
 }

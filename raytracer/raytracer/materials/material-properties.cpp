@@ -2,9 +2,9 @@
 
 
 raytracer::MaterialProperties::MaterialProperties(
-    const imaging::color& ambient,
-    const imaging::color& diffuse,
-    const imaging::color& specular,
+    const imaging::Color& ambient,
+    const imaging::Color& diffuse,
+    const imaging::Color& specular,
     double specular_exponent,
     double reflectivity,
     double transparency,

@@ -7,11 +7,11 @@ namespace raytracer
 {
     struct MaterialProperties
     {
-        MaterialProperties(const imaging::color&, const imaging::color&, const imaging::color&, double, double, double, double);
+        MaterialProperties(const imaging::Color&, const imaging::Color&, const imaging::Color&, double, double, double, double);
 
-        const imaging::color ambient;
-        const imaging::color diffuse;
-        const imaging::color specular;
+        const imaging::Color ambient;
+        const imaging::Color diffuse;
+        const imaging::Color specular;
         const double specular_exponent;
         const double reflectivity;
         const double transparency;

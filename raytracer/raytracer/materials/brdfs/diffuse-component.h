@@ -12,15 +12,15 @@ namespace raytracer
             class DiffuseComponent : public BRDFBody
             {
             public:
-                DiffuseComponent(const imaging::color&);
+                DiffuseComponent(const imaging::Color&);
 
-                imaging::color evaluate(const math::Vector3D&, const imaging::color&, const math::Vector3D&, const math::Vector3D&) const override;
+                imaging::Color evaluate(const math::Vector3D&, const imaging::Color&, const math::Vector3D&, const math::Vector3D&) const override;
 
             private:
-                imaging::color m_color;
+                imaging::Color m_color;
             };
         }
 
-        BRDF diffuse_component(const imaging::color&);
+        BRDF diffuse_component(const imaging::Color&);
     }
 }

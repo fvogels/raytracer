@@ -8,15 +8,15 @@ using namespace raytracer::brdfs;
 using namespace imaging;
 
 
-raytracer::brdfs::_private_::DiffuseComponent::DiffuseComponent(const color& c)
+raytracer::brdfs::_private_::DiffuseComponent::DiffuseComponent(const Color& c)
     : m_color(c)
 {
     // NOP
 }
 
-color raytracer::brdfs::_private_::DiffuseComponent::evaluate(
+Color raytracer::brdfs::_private_::DiffuseComponent::evaluate(
     const math::Vector3D& incoming_direction,
-    const imaging::color& incoming_color,
+    const imaging::Color& incoming_color,
     const math::Vector3D& normal,
     const math::Vector3D& outgoing_direction) const
 {
@@ -30,7 +30,7 @@ color raytracer::brdfs::_private_::DiffuseComponent::evaluate(
     return incoming_color * m_color * reflectivity;
 }
 
-BRDF raytracer::brdfs::diffuse_component(const color& c)
+BRDF raytracer::brdfs::diffuse_component(const Color& c)
 {
     return BRDF(std::make_shared<_private_::DiffuseComponent>(c));
 }
