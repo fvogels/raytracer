@@ -152,9 +152,9 @@ namespace
 #pragma pack(pop, r1)
 
 
-    ARGB to_argb(const color& c)
+    ARGB to_argb(const Color& c)
     {
-        color clamped = c.clamped();
+        Color clamped = c.clamped();
 
         uint8_t a = 255;
         uint8_t r = uint8_t(clamped.r * 255);
@@ -164,22 +164,22 @@ namespace
         return ARGB{ b, g, r, a };
     }
 
-    color from_argb(const ARGB& argb)
+    Color from_argb(const ARGB& argb)
     {
         double r = argb.r / 255.0;
         double g = argb.g / 255.0;
         double b = argb.b / 255.0;
 
-        return color{ r, g, b };
+        return Color{ r, g, b };
     }
 
-    color from_rgb(const RGB& rgb)
+    Color from_rgb(const RGB& rgb)
     {
         double r = rgb.r / 255.0;
         double g = rgb.g / 255.0;
         double b = rgb.b / 255.0;
 
-        return color{ r, g, b };
+        return Color{ r, g, b };
     }
 
     unsigned file_size(std::ifstream& in)
