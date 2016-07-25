@@ -47,7 +47,7 @@ namespace raytracer
             }
         }
 
-        _private_::PipelineBuilderStart build()
+        inline _private_::PipelineBuilderStart build()
         {
             return _private_::PipelineBuilderStart();
         }
