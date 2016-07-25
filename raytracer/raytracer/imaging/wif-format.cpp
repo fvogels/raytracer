@@ -1,21 +1,24 @@
 #include "wif-format.h"
+#include "easylogging++.h"
 
 using namespace imaging;
 
-
-struct RGB
+namespace
 {
-    uint8_t r, g, b;
-
-    RGB(const Color& c)
+    struct RGBColor
     {
-        Color clamped = c.clamped();
+        uint8_t r, g, b;
 
-        r = uint8_t(clamped.r * 255);
-        g = uint8_t(clamped.g * 255);
-        b = uint8_t(clamped.b * 255);
-    }
-};
+        RGBColor(const Color& c)
+        {
+            Color clamped = c.clamped();
+
+            r = uint8_t(clamped.r * 255);
+            g = uint8_t(clamped.g * 255);
+            b = uint8_t(clamped.b * 255);
+        }
+    };
+}
 
 
 imaging::WIF::WIF(const std::string& path) : out(path, std::ios::binary)
@@ -32,8 +35,10 @@ imaging::WIF::~WIF()
 
 void imaging::WIF::write_frame(const Bitmap& bitmap)
 {
+    TIMED_FUNC(timerObj);
+
     uint32_t width = bitmap.width();
-    uint32_t height = bitmap.height();
+    uint32_t height = bitmap.height();   
 
     out.write(reinterpret_cast<char*>(&width), sizeof(uint32_t));
     out.write(reinterpret_cast<char*>(&height), sizeof(uint32_t));
@@ -42,9 +47,9 @@ void imaging::WIF::write_frame(const Bitmap& bitmap)
     {
         for (unsigned i = 0; i != bitmap.width(); ++i)
         {
-            RGB rgb(bitmap[Position(i, j)]);
+            RGBColor RGBColor(bitmap[Position(i, j)]);
 
-            out.write(reinterpret_cast<char*>(&rgb), sizeof(RGB));
+            out.write(reinterpret_cast<char*>(&RGBColor), sizeof(RGBColor));
         }
     }
 }
