@@ -28,14 +28,14 @@ namespace raytracer
                 PipelineBuilderStart(T& value)
                     : value(value) { }
 
-                template<typename T2>
-                PipelineBuilder<T, T2> operator >> (std::shared_ptr<pipeline::Processor<T, T2>> processor) const
-                {
-                    return PipelineBuilder<T, T2>(value, processor, processor);
-                }
-
                 T& value;
             };
+
+            template<typename T1, typename T2>
+            PipelineBuilder<T1, T2> operator >> (const PipelineBuilderStart<T1> start, std::shared_ptr<pipeline::Processor<T1, T2>> processor)
+            {
+                return PipelineBuilder<T1, T2>(start.value, processor, processor);
+            }
 
             template<typename T1, typename T2, typename C>
             std::enable_if_t<!pipeline::is_processor<C>::value> operator >> (const PipelineBuilder<T1, T2>& builder, std::shared_ptr<C> consumer)
