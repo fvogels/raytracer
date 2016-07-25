@@ -31,8 +31,7 @@ raytracer::rendering::_private_::CartoonRenderer::CartoonRenderer(
     unsigned thread_count,
     unsigned shade_count,
     double stroke_thickness)
-    : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer)
-    , m_thread_count(thread_count)
+    : MultithreadedRenderer(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count)
     , m_shade_count(shade_count)
     , m_stroke_thickness(stroke_thickness)
 {
@@ -47,47 +46,24 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
     Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 
-    std::atomic<unsigned> j(0);
-    std::vector<std::thread> threads;
+    for_each_pixel([&](const Position& pixel_coordinates) {
+        math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
+        imaging::Color c = imaging::colors::black();
+        unsigned sample_count = 0;
 
-    for (int k = 0; k != m_thread_count; ++k)
-    {
-        threads.push_back(std::thread([&]() {
-            unsigned current;
+        m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
+            scene.camera->enumerate_rays(p, [&](const Ray& ray) {
+                TraceResult tr = m_ray_tracer->trace(scene, ray);
+                group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
+                c += tr.color;
+                ++sample_count;
+            });
+        });
 
-            while ((current = j++) < bitmap.height())
-            {
-                int y = bitmap.height() - current - 1;
+        c /= sample_count;
 
-                for (int i = 0; i != bitmap.width(); ++i)
-                {
-                    int x = i;
-                    Position pixel_coordinates(x, y);
-                    math::Rectangle2D pixel_rectangle = window_rasterizer[Position(x, y)];
-                    imaging::Color c = imaging::colors::black();
-                    int sample_count = 0;
-
-                    m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
-                        scene.camera->enumerate_rays(p, [&](const Ray& ray) {
-                            TraceResult tr = m_ray_tracer->trace(scene, ray);
-                            group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
-                            c += tr.color;
-                            ++sample_count;
-                        });
-                    });
-
-                    c /= sample_count;
-
-                    bitmap[Position(i, current)] = c.quantized(m_shade_count);
-                }
-            }
-        }));
-    }
-
-    for (auto& thread : threads)
-    {
-        thread.join();
-    }
+        bitmap[pixel_coordinates] = c.quantized(m_shade_count);
+    });
 
     for (unsigned y = 0; y != bitmap.height(); ++y)
     {
