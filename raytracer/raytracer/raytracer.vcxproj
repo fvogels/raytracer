@@ -315,7 +315,6 @@
     <ClCompile Include="rendering\edge-renderer.cpp" />
     <ClCompile Include="rendering\multithreaded-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
-    <ClCompile Include="rendering\single-threaded-renderer.cpp" />
     <ClCompile Include="rendering\standard-multithreaded-renderer.cpp" />
     <ClCompile Include="sampling\grid-sampler.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
@@ -331,6 +330,7 @@
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
     <ClCompile Include="tests\triangle-tests.cpp" />
+    <ClCompile Include="util\looper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
@@ -455,7 +455,6 @@
     <ClInclude Include="rendering\multithreaded-renderer.h" />
     <ClInclude Include="rendering\renderer.h" />
     <ClInclude Include="rendering\renderers.h" />
-    <ClInclude Include="rendering\single-threaded-renderer.h" />
     <ClInclude Include="rendering\standard-multithreaded-renderer.h" />
     <ClInclude Include="sampling\grid-sampler.h" />
     <ClInclude Include="lights\light-ray.h" />
@@ -464,6 +463,7 @@
     <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="data-structures\array.h" />
     <ClInclude Include="util\lazy.h" />
+    <ClInclude Include="util\looper.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />

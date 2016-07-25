@@ -207,9 +207,6 @@
     <ClCompile Include="rendering\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\single-threaded-renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="rendering\multithreaded-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -310,6 +307,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rendering\standard-multithreaded-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -563,9 +563,6 @@
     <ClInclude Include="rendering\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\single-threaded-renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rendering\multithreaded-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -714,6 +711,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\standard-multithreaded-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\looper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
