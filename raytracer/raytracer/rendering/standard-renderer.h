@@ -23,6 +23,6 @@ namespace raytracer
             };
         }
 
-        Renderer standard_multithreaded(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
+        Renderer standard(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
     }
 }

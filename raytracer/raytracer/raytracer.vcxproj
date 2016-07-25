@@ -314,7 +314,7 @@
     <ClCompile Include="rendering\cartoon-renderer.cpp" />
     <ClCompile Include="rendering\edge-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
-    <ClCompile Include="rendering\standard-multithreaded-renderer.cpp" />
+    <ClCompile Include="rendering\standard-renderer.cpp" />
     <ClCompile Include="sampling\grid-sampler.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
     <ClCompile Include="sampling\single-sampler.cpp" />
@@ -453,7 +453,7 @@
     <ClInclude Include="rendering\edge-renderer.h" />
     <ClInclude Include="rendering\renderer.h" />
     <ClInclude Include="rendering\renderers.h" />
-    <ClInclude Include="rendering\standard-multithreaded-renderer.h" />
+    <ClInclude Include="rendering\standard-renderer.h" />
     <ClInclude Include="sampling\grid-sampler.h" />
     <ClInclude Include="lights\light-ray.h" />
     <ClInclude Include="sampling\sampler.h" />

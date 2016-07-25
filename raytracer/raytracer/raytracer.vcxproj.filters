@@ -303,10 +303,10 @@
     <ClCompile Include="imaging\wif-format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\standard-multithreaded-renderer.cpp">
+    <ClCompile Include="util\looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="util\looper.cpp">
+    <ClCompile Include="rendering\standard-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -704,10 +704,10 @@
     <ClInclude Include="pipeline\pipeline-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\standard-multithreaded-renderer.h">
+    <ClInclude Include="util\looper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="util\looper.h">
+    <ClInclude Include="rendering\standard-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

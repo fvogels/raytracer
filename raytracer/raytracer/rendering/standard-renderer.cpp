@@ -1,4 +1,4 @@
-#include "rendering/standard-multithreaded-renderer.h"
+#include "rendering/standard-renderer.h"
 
 using namespace imaging;
 using namespace math;
@@ -27,7 +27,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::StandardMultit
     return result;
 }
 
-Renderer raytracer::rendering::standard_multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
+Renderer raytracer::rendering::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
 {
     return Renderer(std::make_shared<rendering::_private_::StandardMultithreadedRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
 }
