@@ -1,10 +1,11 @@
 #pragma once
 
-#include "bitmap-consumers/bitmap-consumer.h"
+#include "imaging/bitmap.h"
+#include "pipeline/consumer.h"
 #include <string>
 
 
 namespace demos
 {
-    void fisheye(std::shared_ptr<imaging::BitmapConsumer>);
+    void fisheye(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>>);
 }

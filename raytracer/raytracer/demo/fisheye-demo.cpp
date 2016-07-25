@@ -8,6 +8,7 @@
 #include "raytracing/scene.h"
 #include "math/function.h"
 #include "animation/animation.h"
+#include "pipeline/pipelines.h"
 #include "easylogging++.h"
 
 using namespace raytracer;
@@ -59,7 +60,6 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        // return raytracer::cameras::perspective(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
         return raytracer::cameras::fisheye(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
     }
 
@@ -79,31 +79,21 @@ namespace
         return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
     }
 
-    void render(std::shared_ptr<imaging::BitmapConsumer> output)
+    void render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         auto renderer = raytracer::rendering::multithreaded(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
         const unsigned frame_count = unsigned(round(FPS * scene_animation.duration().seconds()));
 
-        for (unsigned frame = 0; frame < frame_count; ++frame)
-        {
-            TIMED_SCOPE(timerObj, "single frame");
-
-            double t = double(frame) / frame_count;
-            TimeStamp now = TimeStamp::from_epoch(1_s * t);
-            auto scene = scene_animation(now);
-
-            LOG(INFO) << "Rendering frame " << frame << std::endl;
-
-            auto bitmap = renderer->render(*scene);
-
-            output->consume(*bitmap);
-        }
+        pipeline::start(create_scene_animation())
+            >> pipeline::animation(FPS)
+            >> pipeline::renderer(renderer)
+            >> output;
     }
 }
 
-void demos::fisheye(std::shared_ptr<imaging::BitmapConsumer> output)
+void demos::fisheye(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
     render(output);
 }
