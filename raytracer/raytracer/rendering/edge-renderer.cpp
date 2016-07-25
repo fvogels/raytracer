@@ -32,8 +32,7 @@ raytracer::rendering::_private_::EdgeRenderer::EdgeRenderer(
     RayTracer ray_tracer,
     unsigned thread_count,
     double stroke_thickness)
-    : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer)
-    , m_thread_count(thread_count)
+    : MultithreadedRenderer(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count)
     , m_stroke_thickness(stroke_thickness)
 {
     // NOP
@@ -45,43 +44,16 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
     Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 
-    
+    for_each_pixel([&](const Position& pixel_coordinates) {
+        math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
 
-    std::atomic<unsigned> j(0);
-    std::vector<std::thread> threads;
-
-    LOG(DEBUG) << "Ray tracing";
-    for (int k = 0; k != m_thread_count; ++k)
-    {
-        threads.push_back(std::thread([&]() {
-            unsigned current;
-
-            while ((current = j++) < m_vertical_resolution)
-            {
-                int y = m_vertical_resolution - current - 1;
-
-                for (int i = 0; i != m_horizontal_resolution; ++i)
-                {
-                    int x = i;
-                    Position pixel_coordinates(x, y);
-                    math::Rectangle2D pixel_rectangle = window_rasterizer[Position(x, y)];
-
-                    m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
-                        scene.camera->enumerate_rays(p, [&](const Ray& ray) {
-                            TraceResult tr = m_ray_tracer->trace(scene, ray);
-                            group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
-                        });
-                    });
-
-                }
-            }
-        }));
-    }
-
-    for (auto& thread : threads)
-    {
-        thread.join();
-    }
+        m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
+            scene.camera->enumerate_rays(p, [&](const Ray& ray) {
+                TraceResult tr = m_ray_tracer->trace(scene, ray);
+                group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
+            });
+        });
+    });
 
     auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
     Bitmap& bitmap = *result;
