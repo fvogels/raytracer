@@ -27,7 +27,7 @@
 
 #ifdef NDEBUG
 const int BITMAP_SIZE = 500;
-const int SAMPLES = 2;
+const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
 const int BITMAP_SIZE = 100;
@@ -138,22 +138,14 @@ void render()
     const std::string path = "e:/temp/output/test.wif";
 
     auto scenes = pipeline::animation(30);
-    // auto renderer = std::make_shared<RendererProcessor>(rendering::multithreaded(500, 500, samplers::grid(2, 2), raytracers::v6(), 4));
-    auto renderer = pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01));
-    auto motion_blur = pipeline::motion_blur(30, 30, 1);
-    auto wif = pipeline::wif(path);
 
-    auto pipeline =
-        pipeline::build() >>
+    pipeline::build(create_scene_animation()) >>
         pipeline::animation(30) >>
-        pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01)) >>
-        pipeline::motion_blur(30, 30, 1) >>
+        pipeline::renderer(rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), 4)) >>
+        //pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01)) >>
+        //pipeline::motion_blur(30, 30, 1) >>
         pipeline::wif(path);
-
-    scenes->link_to(renderer)->link_to(motion_blur)->link_to(wif);
-    scenes->consume(create_scene_animation());
 }
-
 
 
 int main()
