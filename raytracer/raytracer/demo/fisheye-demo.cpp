@@ -83,7 +83,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::rendering::multithreaded(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
+        auto renderer = raytracer::rendering::standard_multithreaded(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
         const unsigned frame_count = unsigned(round(FPS * scene_animation.duration().seconds()));
 
         pipeline::start(create_scene_animation())

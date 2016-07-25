@@ -139,9 +139,9 @@ void render()
 
     auto scenes = pipeline::animation(30);
 
-    pipeline::build(create_scene_animation()) >>
+    pipeline::start(create_scene_animation()) >>
         pipeline::animation(30) >>
-        pipeline::renderer(rendering::multithreaded(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), 4)) >>
+        pipeline::renderer(rendering::standard_multithreaded(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), 4)) >>
         //pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01)) >>
         //pipeline::motion_blur(30, 30, 1) >>
         pipeline::wif(path);

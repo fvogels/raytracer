@@ -309,6 +309,9 @@
     <ClCompile Include="imaging\wif-format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\standard-multithreaded-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -708,6 +711,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\pipeline-builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\standard-multithreaded-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,8 +15,6 @@ namespace raytracer
             public:
                 MultithreadedRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
 
-                std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
-
             protected:
                 void for_each_pixel(std::function<void(const Position&)>) const;
 
@@ -25,6 +23,6 @@ namespace raytracer
             };
         }
 
-        Renderer multithreaded(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
+        
     }
 }
