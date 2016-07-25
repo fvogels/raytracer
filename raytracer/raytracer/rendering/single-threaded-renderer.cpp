@@ -23,7 +23,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::SingleThreaded
         {
             int x = i;
 
-            Color c = render_pixel(window_rasterizer, x, y, scene);
+            Color c = render_pixel(window_rasterizer, Position(x, y), scene);
 
             bitmap[Position(i, j)] = c;
         }

@@ -25,7 +25,7 @@ namespace raytracer
                 raytracer::Sampler m_sampler;
                 RayTracer m_ray_tracer;
 
-                imaging::Color render_pixel(const math::Rasterizer&, int, int, const Scene&) const;
+                imaging::Color render_pixel(const math::Rasterizer&, const Position&, const Scene&) const;
             };
         }
     }

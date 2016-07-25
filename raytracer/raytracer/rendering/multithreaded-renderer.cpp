@@ -16,11 +16,21 @@ raytracer::rendering::_private_::MultithreadedRenderer::MultithreadedRenderer(un
 
 std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::MultithreadedRenderer::render(const Scene& scene) const
 {
+    Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
+    Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
     auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
     Bitmap& bitmap = *result;
-    Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
-    Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
 
+    for_each_pixel([&](const Position& position) {
+        Color c = render_pixel(window_rasterizer, position, scene);
+        bitmap[position] = c;
+    });
+
+    return result;
+}
+
+void raytracer::rendering::_private_::MultithreadedRenderer::for_each_pixel(std::function<void(const Position&)> callback) const
+{
     std::atomic<unsigned> j(0);
     std::vector<std::thread> threads;
 
@@ -29,17 +39,13 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::MultithreadedR
         threads.push_back(std::thread([&]() {
             unsigned current;
 
-            while ((current = j++) < bitmap.height())
+            while ((current = j++) < m_vertical_resolution)
             {
-                int y = bitmap.height() - current - 1;
+                const int y = m_vertical_resolution - current - 1;
 
-                for (int i = 0; i != bitmap.width(); ++i)
+                for (int x = 0; x != m_horizontal_resolution; ++x)
                 {
-                    int x = i;
-
-                    Color c = render_pixel(window_rasterizer, x, y, scene);
-
-                    bitmap[Position(i, current)] = c;
+                    callback(Position(x, y));
                 }
             }
         }));
@@ -49,8 +55,6 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::MultithreadedR
     {
         thread.join();
     }
-
-    return result;
 }
 
 Renderer raytracer::rendering::multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count)
