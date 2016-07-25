@@ -41,16 +41,14 @@ raytracer::rendering::_private_::EdgeRenderer::EdgeRenderer(
 
 std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::render(const Scene& scene) const
 {
-    auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
-    Bitmap& bitmap = *result;
     Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
-    Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
+    Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
+
+    
 
     std::atomic<unsigned> j(0);
     std::vector<std::thread> threads;
-
-    bitmap.clear(colors::white());
 
     LOG(DEBUG) << "Ray tracing";
     for (int k = 0; k != m_thread_count; ++k)
@@ -58,11 +56,11 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
         threads.push_back(std::thread([&]() {
             unsigned current;
 
-            while ((current = j++) < bitmap.height())
+            while ((current = j++) < m_vertical_resolution)
             {
-                int y = bitmap.height() - current - 1;
+                int y = m_vertical_resolution - current - 1;
 
-                for (int i = 0; i != bitmap.width(); ++i)
+                for (int i = 0; i != m_horizontal_resolution; ++i)
                 {
                     int x = i;
                     Position pixel_coordinates(x, y);
@@ -84,6 +82,10 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
     {
         thread.join();
     }
+
+    auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
+    Bitmap& bitmap = *result;
+    bitmap.clear(colors::white());
 
     LOG(DEBUG) << "Finding edges";
     for (unsigned y = 0; y != bitmap.height(); ++y)
@@ -129,7 +131,6 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
             {
                 if (border_percentage < 1)
                 {
-                    // bitmap[pixel_position] *= (1 - border_percentage);
                     bitmap[pixel_position] = colors::white() * (1 - border_percentage);
                 }
                 else
