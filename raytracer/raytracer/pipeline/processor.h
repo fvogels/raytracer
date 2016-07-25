@@ -8,6 +8,12 @@ namespace raytracer
 {
     namespace pipeline
     {
+        template<typename T>
+        struct is_processor
+        {
+            static constexpr bool value = is_consumer<T>::value && is_producer<T>::value;
+        };
+
         template<typename INPUT, typename OUTPUT>
         class Processor : public Consumer<INPUT>, public Producer<OUTPUT>
         {

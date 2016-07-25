@@ -128,6 +128,8 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
     return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
 }
 
+
+
 void render()
 {
     using namespace raytracer;
@@ -141,9 +143,18 @@ void render()
     auto motion_blur = pipeline::motion_blur(30, 30, 1);
     auto wif = pipeline::wif(path);
 
+    auto pipeline =
+        pipeline::build() >>
+        pipeline::animation(30) >>
+        pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01)) >>
+        pipeline::motion_blur(30, 30, 1) >>
+        pipeline::wif(path);
+
     scenes->link_to(renderer)->link_to(motion_blur)->link_to(wif);
     scenes->consume(create_scene_animation());
 }
+
+
 
 int main()
 {
@@ -156,6 +167,7 @@ int main()
 
     render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
+
 }
 
 #endif

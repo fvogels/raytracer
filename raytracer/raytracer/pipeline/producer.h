@@ -8,8 +8,19 @@ namespace raytracer
 {
     namespace pipeline
     {
+        namespace _private_
+        {
+            class ProducerTag { };
+        }
+
+        template<typename T>
+        struct is_producer
+        {
+            static constexpr bool value = std::is_base_of<pipeline::_private_::ProducerTag, T>();
+        };
+
         template<typename OUTPUT>
-        class Producer
+        class Producer : public _private_::ProducerTag
         {
         public:
             using output_type = OUTPUT;
