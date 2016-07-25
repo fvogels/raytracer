@@ -55,7 +55,7 @@ namespace raytracer
         }
 
         template<typename T>
-        _private_::PipelineBuilderStart<T> build(T&& value)
+        _private_::PipelineBuilderStart<T> start(T&& value)
         {
             return _private_::PipelineBuilderStart<T>(value);
         }
