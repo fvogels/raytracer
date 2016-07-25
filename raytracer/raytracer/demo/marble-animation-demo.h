@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bitmap-consumers/bitmap-consumer.h"
+#include "imaging/bitmap.h"
 #include "pipeline/consumer.h"
 #include <string>
 
