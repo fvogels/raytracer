@@ -1,7 +1,7 @@
 #pragma once
 
 #include "rendering/renderer.h"
-#include "rendering/multithreaded-renderer.h"
+#include "rendering/renderer.h"
 #include <functional>
 
 
@@ -11,10 +11,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class StandardMultithreadedRenderer : public MultithreadedRenderer
+            class StandardMultithreadedRenderer : public RendererImplementation
             {
             public:
-                StandardMultithreadedRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
+                StandardMultithreadedRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
 
                 std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
@@ -23,6 +23,6 @@ namespace raytracer
             };
         }
 
-        Renderer standard_multithreaded(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned);
+        Renderer standard_multithreaded(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
     }
 }

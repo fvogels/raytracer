@@ -6,8 +6,8 @@ using namespace raytracer;
 using namespace raytracer::rendering;
 
 
-raytracer::rendering::_private_::StandardMultithreadedRenderer::StandardMultithreadedRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count)
-    : MultithreadedRenderer(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count)
+raytracer::rendering::_private_::StandardMultithreadedRenderer::StandardMultithreadedRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
+    : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
 {
     // NOP
 }
@@ -27,7 +27,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::StandardMultit
     return result;
 }
 
-Renderer raytracer::rendering::standard_multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count)
+Renderer raytracer::rendering::standard_multithreaded(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
 {
-    return Renderer(std::make_shared<_private_::StandardMultithreadedRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count));
+    return Renderer(std::make_shared<rendering::_private_::StandardMultithreadedRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
 }

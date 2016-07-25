@@ -30,9 +30,9 @@ raytracer::rendering::_private_::EdgeRenderer::EdgeRenderer(
     unsigned vertical_resolution,
     raytracer::Sampler sampler,
     RayTracer ray_tracer,
-    unsigned thread_count,
+    std::shared_ptr<util::Looper> looper,
     double stroke_thickness)
-    : MultithreadedRenderer(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count)
+    : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
     , m_stroke_thickness(stroke_thickness)
 {
     // NOP
@@ -116,7 +116,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
     return result;
 }
 
-Renderer raytracer::rendering::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count, double stroke_thickness)
+Renderer raytracer::rendering::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double stroke_thickness)
 {
-    return Renderer(std::make_shared<_private_::EdgeRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count, stroke_thickness));
+    return Renderer(std::make_shared<_private_::EdgeRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, stroke_thickness));
 }

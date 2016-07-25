@@ -19,6 +19,7 @@
 #include "util/lazy.h"
 #include "math/point.h"
 #include "pipeline/pipelines.h"
+#include "util/looper.h"
 // #include "scripting/scripting.h"
 #include "easylogging++.h"
 #include <assert.h>
@@ -39,6 +40,7 @@ using namespace math;
 using namespace raytracer;
 using namespace imaging;
 using namespace animation;
+using namespace util;
 
 
 Material create_lambert_material(const Color& c, bool reflective = false)
@@ -141,8 +143,8 @@ void render()
 
     pipeline::start(create_scene_animation()) >>
         pipeline::animation(30) >>
-        pipeline::renderer(rendering::standard_multithreaded(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), 4)) >>
-        //pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), 4, 0.01)) >>
+        //pipeline::renderer(rendering::standard_multithreaded(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), 4)) >>
+        pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), loopers::looper(N_THREADS), 0.01)) >>
         //pipeline::motion_blur(30, 30, 1) >>
         pipeline::wif(path);
 }

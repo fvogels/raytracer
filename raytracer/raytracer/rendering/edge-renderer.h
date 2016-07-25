@@ -1,6 +1,6 @@
 #pragma once
 
-#include "rendering/multithreaded-renderer.h"
+#include "rendering/renderer.h"
 
 
 namespace raytracer
@@ -9,10 +9,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class EdgeRenderer : public MultithreadedRenderer
+            class EdgeRenderer : public RendererImplementation
             {
             public:
-                EdgeRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned, double);
+                EdgeRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>, double);
 
                 std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
@@ -21,6 +21,6 @@ namespace raytracer
             };
         }
 
-        Renderer edge(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned, double);
+        Renderer edge(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>, double);
     }
 }

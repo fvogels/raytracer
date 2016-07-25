@@ -6,6 +6,7 @@
 #include "raytracing/ray-tracer.h"
 #include "math/rasterizer.h"
 #include "math/point2d.h"
+#include "util/looper.h"
 
 namespace raytracer
 {
@@ -16,7 +17,7 @@ namespace raytracer
             class RendererImplementation
             {
             public:
-                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer);
+                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
 
                 virtual std::shared_ptr<imaging::Bitmap> render(const Scene&) const = 0;
 
@@ -24,8 +25,13 @@ namespace raytracer
                 unsigned m_horizontal_resolution, m_vertical_resolution;
                 raytracer::Sampler m_sampler;
                 RayTracer m_ray_tracer;
+                
+                void for_each_pixel(std::function<void(const Position&)>) const;
 
                 imaging::Color render_pixel(const math::Rasterizer&, const Position&, const Scene&) const;
+
+            private:
+                std::shared_ptr<util::Looper> m_looper;
             };
         }
     }

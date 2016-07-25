@@ -28,10 +28,10 @@ raytracer::rendering::_private_::CartoonRenderer::CartoonRenderer(
     unsigned vertical_resolution,
     raytracer::Sampler sampler,
     RayTracer ray_tracer,
-    unsigned thread_count,
+    std::shared_ptr<util::Looper> looper,
     unsigned shade_count,
     double stroke_thickness)
-    : MultithreadedRenderer(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count)
+    : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
     , m_shade_count(shade_count)
     , m_stroke_thickness(stroke_thickness)
 {
@@ -121,7 +121,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
     return result;
 }
 
-Renderer raytracer::rendering::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, unsigned thread_count, unsigned shade_count, double stroke_thickness)
+Renderer raytracer::rendering::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, unsigned shade_count, double stroke_thickness)
 {
-    return Renderer(std::make_shared<_private_::CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, thread_count, shade_count, stroke_thickness));
+    return Renderer(std::make_shared<_private_::CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, shade_count, stroke_thickness));
 }

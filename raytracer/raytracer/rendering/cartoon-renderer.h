@@ -1,6 +1,6 @@
 #pragma once
 
-#include "rendering/multithreaded-renderer.h"
+#include "rendering/renderer.h"
 
 
 namespace raytracer
@@ -9,10 +9,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class CartoonRenderer : public MultithreadedRenderer
+            class CartoonRenderer : public RendererImplementation
             {
             public:
-                CartoonRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned, unsigned, double);
+                CartoonRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>, unsigned, double);
 
                 std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
@@ -22,6 +22,6 @@ namespace raytracer
             };
         }
 
-        Renderer cartoon(unsigned, unsigned, raytracer::Sampler, RayTracer, unsigned, unsigned, double);
+        Renderer cartoon(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>, unsigned, double);
     }
 }

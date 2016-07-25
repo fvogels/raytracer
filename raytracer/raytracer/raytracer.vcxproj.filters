@@ -207,9 +207,6 @@
     <ClCompile Include="rendering\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\multithreaded-renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cameras\displaceable-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -561,9 +558,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\multithreaded-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cameras\displaceable-camera.h">

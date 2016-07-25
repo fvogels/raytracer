@@ -21,6 +21,9 @@ namespace
 {
     constexpr unsigned ANTIALIASING = 1;
     constexpr unsigned FPS = 30;
+    constexpr unsigned HPIXELS = 500;
+    constexpr unsigned VPIXELS = 500;
+    constexpr unsigned N_THREADS = 4;
 
     raytracer::Primitive create_root(TimeStamp now)
     {
@@ -65,7 +68,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::rendering::standard_multithreaded(500, 500, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, 4);
+        auto renderer = raytracer::rendering::standard_multithreaded(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
  
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)

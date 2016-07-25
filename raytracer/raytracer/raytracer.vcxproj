@@ -313,7 +313,6 @@
     <ClCompile Include="raytracing\ray-tracer-v6.cpp" />
     <ClCompile Include="rendering\cartoon-renderer.cpp" />
     <ClCompile Include="rendering\edge-renderer.cpp" />
-    <ClCompile Include="rendering\multithreaded-renderer.cpp" />
     <ClCompile Include="rendering\renderer.cpp" />
     <ClCompile Include="rendering\standard-multithreaded-renderer.cpp" />
     <ClCompile Include="sampling\grid-sampler.cpp" />
@@ -452,7 +451,6 @@
     <ClInclude Include="raytracing\ray-tracers.h" />
     <ClInclude Include="raytracing\scene.h" />
     <ClInclude Include="rendering\edge-renderer.h" />
-    <ClInclude Include="rendering\multithreaded-renderer.h" />
     <ClInclude Include="rendering\renderer.h" />
     <ClInclude Include="rendering\renderers.h" />
     <ClInclude Include="rendering\standard-multithreaded-renderer.h" />
