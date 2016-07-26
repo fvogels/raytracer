@@ -68,58 +68,54 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
     bitmap.clear(colors::white());
 
     LOG(DEBUG) << "Finding edges";
-    for (unsigned y = 0; y != bitmap.height(); ++y)
-    {
-        for (unsigned x = 0; x != bitmap.width(); ++x)
+
+    for_each_pixel([&](Position pixel_position) {
+        unsigned border_count = 0;
+
+        for (auto& pair : group_grid[pixel_position])
         {
-            Position pixel_position(x, y);
-            unsigned border_count = 0;
+            unsigned current_id = pair.first;
+            Point2D current_xy = pair.second;
+            bool is_border = false;
 
-            for (auto& pair : group_grid[pixel_position])
-            {
-                unsigned current_id = pair.first;
-                Point2D current_xy = pair.second;
-                bool is_border = false;
+            group_grid.around(pixel_position, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
+                for (auto& pair : group_grid[neighbor_pixel_position])
+                {
+                    unsigned neighbor_id = pair.first;
+                    Point2D neighbor_xy = pair.second;
 
-                group_grid.around(pixel_position, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
-                    for (auto& pair : group_grid[neighbor_pixel_position])
+                    if (current_id != neighbor_id)
                     {
-                        unsigned neighbor_id = pair.first;
-                        Point2D neighbor_xy = pair.second;
+                        double dist = distance(current_xy, neighbor_xy);
 
-                        if (current_id != neighbor_id)
+                        if (dist < m_stroke_thickness)
                         {
-                            double dist = distance(current_xy, neighbor_xy);
-
-                            if (dist < m_stroke_thickness)
-                            {
-                                is_border = true;
-                            }
+                            is_border = true;
                         }
                     }
-                });
-
-                if (is_border)
-                {
-                    ++border_count;
                 }
-            }
+            });
 
-            double border_percentage = double(border_count) / group_grid[pixel_position].size();
-
-            if (border_percentage > 0)
+            if (is_border)
             {
-                if (border_percentage < 1)
-                {
-                    bitmap[pixel_position] = colors::white() * (1 - border_percentage);
-                }
-                else
-                {
-                    bitmap[pixel_position] = colors::black();
-                }
+                ++border_count;
             }
         }
-    }
+
+        double border_percentage = double(border_count) / group_grid[pixel_position].size();
+
+        if (border_percentage > 0)
+        {
+            if (border_percentage < 1)
+            {
+                bitmap[pixel_position] = colors::white() * (1 - border_percentage);
+            }
+            else
+            {
+                bitmap[pixel_position] = colors::black();
+            }
+        }
+    });
 
     return result;
 }
