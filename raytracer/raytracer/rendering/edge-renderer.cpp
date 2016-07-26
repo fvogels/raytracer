@@ -2,11 +2,7 @@
 #include "rendering/edge-renderer.h"
 #include "data-structures/grid.h"
 #include "easylogging++.h"
-#include <thread>
-#include <atomic>
 #include <vector>
-#include <utility>
-#include <future>
 
 using namespace imaging;
 using namespace math;
