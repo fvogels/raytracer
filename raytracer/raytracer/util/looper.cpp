@@ -41,7 +41,7 @@ namespace
 
                     while ((current = i++) < max)
                     {
-                        body(i);
+                        body(current);
                     }
                 }));
             }
