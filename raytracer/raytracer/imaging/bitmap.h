@@ -35,5 +35,6 @@ namespace imaging
         void for_each_position(std::function<void(const Position&)>) const;
 
         void clear(const Color&);
+        void invert();
     };
 }

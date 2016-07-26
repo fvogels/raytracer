@@ -105,3 +105,10 @@ Bitmap& imaging::Bitmap::operator /=(double constant)
 {
     return *this *= 1 / constant;
 }
+
+void imaging::Bitmap::invert()
+{
+    for_each_position([this](const Position& position) {
+        (*this)[position].invert();
+    });
+}
