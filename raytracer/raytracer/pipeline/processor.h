@@ -17,7 +17,11 @@ namespace raytracer
         template<typename INPUT, typename OUTPUT>
         class Processor : public Consumer<INPUT>, public Producer<OUTPUT>
         {
-            // EMPTY
+        public:
+            void end() override
+            {
+                produce_end();
+            }
         };
     }
 }

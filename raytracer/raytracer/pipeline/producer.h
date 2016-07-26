@@ -46,6 +46,11 @@ namespace raytracer
                 }
             }
 
+            void produce_end()
+            {
+                m_receiver->end();
+            }
+
         private:
             std::shared_ptr<Consumer<OUTPUT>> m_receiver;
         };

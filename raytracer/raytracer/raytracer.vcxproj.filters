@@ -309,6 +309,12 @@
     <ClCompile Include="rendering\standard-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pipeline\overprint-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pipeline\inverter-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -708,6 +714,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\standard-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipeline\overprint-processor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipeline\inverter-processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

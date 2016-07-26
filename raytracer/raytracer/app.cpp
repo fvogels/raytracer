@@ -27,7 +27,7 @@
 #include <list>
 
 #ifdef NDEBUG
-const int BITMAP_SIZE = 200;
+const int BITMAP_SIZE = 500;
 const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
@@ -77,7 +77,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto position_animation = animation::ease(animation::straight(Point3D(-2, 0, 0), Point3D(2, 0, 0), Duration::from_seconds(1)), math::functions::easing::easing_function<math::functions::easing::QUADRATIC, math::functions::easing::in>());
+    auto position_animation = animation::ease(animation::straight(Point3D(-2, 0, 0), Point3D(2, 0, 0), Duration::from_seconds(1)), math::functions::easing::easing_function<math::functions::easing::QUADRATIC, math::functions::easing::out>());
     auto b = group(1, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), translate(position_animation(now) - Point3D(0, 0, 0), sphere())));
     // auto plane = decorate(wood2d(4, 0.4), translate(Vector3D(0, -1, 0), xz_plane()));
 
@@ -144,7 +144,9 @@ void render()
     pipeline::start(create_scene_animation()) >>
         pipeline::animation(30) >>
         //pipeline::renderer(rendering::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), 4)) >>
-        pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v6(), loopers::looper(4), 0.01)) >>
+        pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v1(), loopers::looper(4), 0.002)) >>
+        pipeline::invert() >>
+        pipeline::overprint() >>
         //pipeline::motion_blur(30, 30, 1) >>
         pipeline::wif(path);
 }

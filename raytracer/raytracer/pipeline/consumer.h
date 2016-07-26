@@ -25,6 +25,7 @@ namespace raytracer
             using input_type = INPUT;
 
             virtual void consume(INPUT) = 0;
+            virtual void end() { }
         };
     }
 }

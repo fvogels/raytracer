@@ -251,7 +251,9 @@
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
+    <ClCompile Include="pipeline\inverter-processor.cpp" />
     <ClCompile Include="pipeline\motion-blur-processor.cpp" />
+    <ClCompile Include="pipeline\overprint-processor.cpp" />
     <ClCompile Include="pipeline\renderer-processor.cpp" />
     <ClCompile Include="pipeline\wif-consumer.cpp" />
     <ClCompile Include="primitives\group.cpp" />
@@ -360,7 +362,9 @@
     <ClInclude Include="math\point.h" />
     <ClInclude Include="pipeline\animation-processor.h" />
     <ClInclude Include="pipeline\consumer.h" />
+    <ClInclude Include="pipeline\inverter-processor.h" />
     <ClInclude Include="pipeline\motion-blur-processor.h" />
+    <ClInclude Include="pipeline\overprint-processor.h" />
     <ClInclude Include="pipeline\pipeline-builder.h" />
     <ClInclude Include="pipeline\pipelines.h" />
     <ClInclude Include="pipeline\processor.h" />

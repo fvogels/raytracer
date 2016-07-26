@@ -43,6 +43,7 @@ namespace raytracer
                 builder.last->link_to(consumer);
 
                 builder.first->consume(builder.value);
+                builder.first->end();
             }
 
             template<typename T1, typename T2, typename P>
