@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <iostream>
 
 
 struct Position final
@@ -23,3 +23,8 @@ struct Position final
         return copy;
     }
 };
+
+inline std::ostream& operator <<(std::ostream& out, const Position& p)
+{
+    return out << "(" << p.x << "," << p.y << ")";
+}
