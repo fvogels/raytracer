@@ -6,6 +6,7 @@
 #include <atomic>
 #include <vector>
 #include <utility>
+#include <future>
 
 using namespace imaging;
 using namespace math;
@@ -44,15 +45,22 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
     Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 
-    for_each_pixel([&](const Position& pixel_coordinates) {
+    for_each_pixel([&](Position pixel_coordinates) {
+        assert(pixel_coordinates.x < m_horizontal_resolution);
+        assert(pixel_coordinates.y < m_vertical_resolution);
+
         math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
+        std::vector<std::pair<unsigned, Point2D>> data;
 
         m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
             scene.camera->enumerate_rays(p, [&](const Ray& ray) {
                 TraceResult tr = m_ray_tracer->trace(scene, ray);
-                group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
+
+                data.push_back(std::make_pair(tr.group_id, p));
             });
         });
+
+        group_grid[pixel_coordinates] = data;
     });
 
     auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);

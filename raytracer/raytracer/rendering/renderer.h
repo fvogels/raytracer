@@ -26,7 +26,7 @@ namespace raytracer
                 raytracer::Sampler m_sampler;
                 RayTracer m_ray_tracer;
                 
-                void for_each_pixel(std::function<void(const Position&)>) const;
+                void for_each_pixel(std::function<void(Position)>) const;
 
                 imaging::Color render_pixel(const math::Rasterizer&, const Position&, const Scene&) const;
 

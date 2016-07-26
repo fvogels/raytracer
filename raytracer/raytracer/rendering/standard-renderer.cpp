@@ -19,7 +19,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::StandardMultit
     auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
     Bitmap& bitmap = *result;
 
-    for_each_pixel([&](const Position& position) {
+    for_each_pixel([&](Position position) {
         Color c = render_pixel(window_rasterizer, position, scene);
         bitmap[position] = c;
     });

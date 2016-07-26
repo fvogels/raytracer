@@ -46,7 +46,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
     Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 
-    for_each_pixel([&](const Position& pixel_coordinates) {
+    for_each_pixel([&](Position pixel_coordinates) {
         math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
         imaging::Color c = imaging::colors::black();
         unsigned sample_count = 0;
@@ -64,6 +64,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
 
         bitmap[pixel_coordinates] = c.quantized(m_shade_count);
     });
+
 
     for (unsigned y = 0; y != bitmap.height(); ++y)
     {
