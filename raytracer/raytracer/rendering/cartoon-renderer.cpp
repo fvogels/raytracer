@@ -1,9 +1,6 @@
 #include "rendering/cartoon-renderer.h"
 #include "data-structures/grid.h"
-#include <thread>
-#include <atomic>
 #include <vector>
-#include <utility>
 
 using namespace imaging;
 using namespace math;
