@@ -19,6 +19,9 @@ namespace imaging
 
         void quantize(unsigned) noexcept;
         Color quantized(unsigned) const noexcept;
+
+        void invert() noexcept;
+        Color inverted() const noexcept;
     };
 
     Color operator +(const Color&, const Color&) noexcept;

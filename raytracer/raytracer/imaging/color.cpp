@@ -113,3 +113,17 @@ Color imaging::Color::quantized(unsigned levels) const noexcept
 
     return copy;
 }
+
+void imaging::Color::invert() noexcept
+{
+    r = 1 - r;
+    g = 1 - g;
+    b = 1 - b;
+}
+
+Color imaging::Color::inverted() const noexcept
+{
+    Color copy = *this;
+    copy.invert();
+    return copy;
+}
