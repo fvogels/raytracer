@@ -270,16 +270,7 @@
     <ClCompile Include="demo\depth-of-field-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bitmap-consumers\wif-bitmap-consumer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bitmap-consumers\ppm-bitmap-consumer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="demo\fisheye-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bitmap-consumers\motion-blur-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rendering\edge-renderer.cpp">
@@ -653,22 +644,7 @@
     <ClInclude Include="demo\depth-of-field-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bitmap-consumers\bitmap-consumer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bitmap-consumers\wif-bitmap-consumer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bitmap-consumers\ppm-bitmap-consumer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bitmap-consumers\bitmap-consumers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="demo\fisheye-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bitmap-consumers\motion-blur-consumer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\edge-renderer.h">

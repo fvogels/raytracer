@@ -27,7 +27,7 @@
 #include <list>
 
 #ifdef NDEBUG
-const int BITMAP_SIZE = 500;
+const int BITMAP_SIZE = 1000;
 const int SAMPLES = 1;
 const int N_THREADS = 4;
 #else
@@ -147,6 +147,7 @@ void render()
         pipeline::renderer(rendering::edge(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(2, 2), raytracers::v1(), loopers::looper(4), 0.002)) >>
         pipeline::invert() >>
         pipeline::overprint() >>
+        pipeline::invert() >>
         //pipeline::motion_blur(30, 30, 1) >>
         pipeline::wif(path);
 }
