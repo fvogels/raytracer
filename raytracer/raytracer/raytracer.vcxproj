@@ -325,6 +325,7 @@
     <ClCompile Include="scripting\primitives-module.cpp" />
     <ClCompile Include="scripting\raytracing-module.cpp" />
     <ClCompile Include="scripting\rendering-module.cpp" />
+    <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
@@ -474,6 +475,7 @@
     <ClInclude Include="scripting\primitives-module.h" />
     <ClInclude Include="scripting\raytracing-module.h" />
     <ClInclude Include="scripting\rendering-module.h" />
+    <ClInclude Include="scripting\samplers-module.h" />
     <ClInclude Include="scripting\scripting-util.h" />
     <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="util\lazy.h" />
