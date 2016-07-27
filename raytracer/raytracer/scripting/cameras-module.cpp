@@ -30,6 +30,16 @@ namespace
         {
             return cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
         }
+
+        Camera fisheye(
+            const Point3D& eye,
+            const Point3D& look_at,
+            const Vector3D& up,
+            double horizontal_angle,
+            double vertical_angle) const
+        {
+            return cameras::orthographic(eye, look_at, up, horizontal_angle, vertical_angle);
+        }
     };
 
     Camera perspective(const std::map<std::string, Boxed_Value> argument_map)
@@ -52,6 +62,17 @@ namespace
         EXTRACT_ARGUMENT(double, aspect_ratio);
 
         return cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
+    }
+
+    Camera fisheye(const std::map<std::string, Boxed_Value> argument_map)
+    {
+        EXTRACT_ARGUMENT(Point3D, eye);
+        EXTRACT_ARGUMENT(Point3D, look_at);
+        EXTRACT_ARGUMENT(Vector3D, up);
+        EXTRACT_ARGUMENT(double, horizontal_angle);
+        EXTRACT_ARGUMENT(double, vertical_angle);
+
+        return cameras::fisheye(eye, look_at, up, Angle::degrees(horizontal_angle), Angle::degrees(vertical_angle));
     }
 
     Camera create_camera(const std::map<std::string, Boxed_Value> argument_map)
