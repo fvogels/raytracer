@@ -19,7 +19,17 @@ namespace
             double aspect_ratio) const
         {
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
-        }        
+        }
+
+        Camera orthographic(
+            const Point3D& eye,
+            const Point3D& look_at,
+            const Vector3D& up,
+            double window_width,
+            double aspect_ratio) const
+        {
+            return cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
+        }
     };
 
     Camera perspective(const std::map<std::string, Boxed_Value> argument_map)
@@ -33,11 +43,23 @@ namespace
         return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
     }
 
+    Camera orthographic(const std::map<std::string, Boxed_Value> argument_map)
+    {
+        EXTRACT_ARGUMENT(Point3D, eye);
+        EXTRACT_ARGUMENT(Point3D, look_at);
+        EXTRACT_ARGUMENT(Vector3D, up);
+        EXTRACT_ARGUMENT(double, window_width);
+        EXTRACT_ARGUMENT(double, aspect_ratio);
+
+        return cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
+    }
+
     Camera create_camera(const std::map<std::string, Boxed_Value> argument_map)
     {
         EXTRACT_ARGUMENT(std::string, type);
 
         FACTORY_TYPE_DISPATCH(perspective);
+        FACTORY_TYPE_DISPATCH(orthographic);
         HANDLE_UNKNOWN_TYPE;
     }
 }
