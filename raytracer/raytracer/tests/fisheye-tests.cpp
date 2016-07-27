@@ -46,7 +46,7 @@ namespace
 #define TEST(P, EYE, LOOK_AT, UP, HANGLE, VANGLE, EXPECTED_ORIGIN, EXPECTED_DIRECTION) \
     TEST_CASE("[FisheyeCamera] Eye = " #EYE ", Lookat = " #LOOK_AT ", Up = " #UP ", HAngle = " #HANGLE ", VAngle = " #VANGLE ", At " #P, "[FisheyeCamera]") \
     { \
-        auto camera = raytracer::cameras::fisheye(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), degrees(HANGLE), degrees(VANGLE)); \
+        auto camera = raytracer::cameras::fisheye(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), Angle::degrees(HANGLE), Angle::degrees(VANGLE)); \
         auto rays = camera->create_rays(Point2D(P)); \
         \
         REQUIRE(rays.size() == 1); \
