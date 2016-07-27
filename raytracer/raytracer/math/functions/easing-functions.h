@@ -20,6 +20,7 @@ namespace math
             DEFINE_SHAPE(LINEAR);
             DEFINE_SHAPE(QUADRATIC);
             DEFINE_SHAPE(CUBIC);
+            DEFINE_SHAPE(QUINTIC);
             DEFINE_SHAPE(BOUNCE);
 #           undef DEFINE_SHAPE
 
@@ -41,6 +42,9 @@ namespace math
                 math::functions::EasingFunction cubic_in();
                 math::functions::EasingFunction cubic_out();
                 math::functions::EasingFunction cubic_inout();
+                math::functions::EasingFunction quintic_in();
+                math::functions::EasingFunction quintic_out();
+                math::functions::EasingFunction quintic_inout();
                 math::functions::EasingFunction bounce();
 
                 template<typename, typename, typename = void>
@@ -106,6 +110,33 @@ namespace math
                     static math::functions::EasingFunction function()
                     {
                         return cubic_inout();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<QUINTIC, in>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return quintic_in();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<QUINTIC, out>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return quintic_out();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<QUINTIC, inout>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return quintic_inout();
                     }
                 };
 
