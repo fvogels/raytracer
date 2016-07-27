@@ -19,6 +19,7 @@ namespace math
 #           define DEFINE_SHAPE(NAME) struct NAME { }; template<> struct is_shape_parameter<NAME> { typedef void t; }
             DEFINE_SHAPE(LINEAR);
             DEFINE_SHAPE(QUADRATIC);
+            DEFINE_SHAPE(CUBIC);
             DEFINE_SHAPE(BOUNCE);
 #           undef DEFINE_SHAPE
 
@@ -37,6 +38,9 @@ namespace math
                 math::functions::EasingFunction quadratic_in();
                 math::functions::EasingFunction quadratic_out();
                 math::functions::EasingFunction quadratic_inout();
+                math::functions::EasingFunction cubic_in();
+                math::functions::EasingFunction cubic_out();
+                math::functions::EasingFunction cubic_inout();
                 math::functions::EasingFunction bounce();
 
                 template<typename, typename, typename = void>
@@ -75,6 +79,33 @@ namespace math
                     static math::functions::EasingFunction function()
                     {
                         return quadratic_inout();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<CUBIC, in>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return cubic_in();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<CUBIC, out>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return cubic_out();
+                    }
+                };
+
+                template<>
+                struct EasingFunctionBuilder<CUBIC, inout>
+                {
+                    static math::functions::EasingFunction function()
+                    {
+                        return cubic_inout();
                     }
                 };
 

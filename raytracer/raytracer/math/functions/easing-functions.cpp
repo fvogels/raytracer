@@ -51,6 +51,39 @@ EasingFunction math::functions::easing::_private_::quadratic_inout()
     return from_lambda(lambda);
 }
 
+EasingFunction math::functions::easing::_private_::cubic_in()
+{
+    std::function<double(double)> lambda = [](double t) {
+        assert(Interval<double>(0, 1).contains(t));
+
+        return pow(t, 3);
+    };
+
+    return from_lambda(lambda);
+}
+
+EasingFunction math::functions::easing::_private_::cubic_out()
+{
+    std::function<double(double)> lambda = [](double t) {
+        assert(Interval<double>(0, 1).contains(t));
+
+        return pow(t, 3) - 3 * pow(t, 2) + 3 * t;
+    };
+
+    return from_lambda(lambda);
+}
+
+EasingFunction math::functions::easing::_private_::cubic_inout()
+{
+    std::function<double(double)> lambda = [](double t) {
+        assert(Interval<double>(0, 1).contains(t));
+
+        return pow(t, 3) * (6 * pow(t, 2) - 15 * t + 10);
+    };
+
+    return from_lambda(lambda);
+}
+
 EasingFunction math::functions::easing::_private_::bounce()
 {
     std::function<double(double)> lambda = [](double t) {
