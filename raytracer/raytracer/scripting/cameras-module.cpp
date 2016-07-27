@@ -121,6 +121,9 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
 
 #define CAMERA(NAME) module->add(fun(&CameraLibrary::NAME), #NAME)
     CAMERA(perspective);
+    CAMERA(orthographic);
+    CAMERA(fisheye);
+    CAMERA(depth_of_field_perspective);
 #undef COLOR
 
     module->add(fun(&create_camera), "camera");
