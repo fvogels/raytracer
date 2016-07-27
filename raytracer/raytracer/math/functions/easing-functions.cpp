@@ -85,7 +85,14 @@ EasingFunction math::functions::easing::_private_::cubic_inout()
     std::function<double(double)> lambda = [](double t) {
         assert(Interval<double>(0, 1).contains(t));
 
-        return pow(t, 3) * (6 * pow(t, 2) - 15 * t + 10);
+        if (t <= 0.5)
+        {
+            return 4 * pow(t, 3);
+        }
+        else
+        {
+            return 4 * pow(t, 3) - 12 * pow(t, 2) + 12 * t - 3;
+        }
     };
 
     return from_lambda(lambda);
