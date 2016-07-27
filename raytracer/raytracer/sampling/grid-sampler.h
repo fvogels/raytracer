@@ -11,16 +11,16 @@ namespace raytracer
             class GridSampler : public SamplerImplementation
             {
             public:
-                GridSampler(int rows, int columns)
-                    : rows(rows), columns(columns) { }
+                GridSampler(unsigned rows, unsigned columns)
+                    : m_rows(rows), m_columns(columns) { }
 
                 void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override;
 
             private:
-                int rows, columns;
+                unsigned m_rows, m_columns;
             };
         }
 
-        Sampler grid(int rows, int columns);
+        Sampler grid(unsigned rows, unsigned columns);
     }
 }
