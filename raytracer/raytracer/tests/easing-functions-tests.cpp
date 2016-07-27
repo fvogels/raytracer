@@ -89,6 +89,16 @@ TEST_CASE("[EasingFunctions] QuadraticOut with x=2..3, y=3..7)", "[EasingFunctio
     CHECK(rderivative(f, 3) == Approx(0));
 }
 
+TEST_CASE("[EasingFunctions] QuadraticInOut with x=0..1, y=0..1)", "[EasingFunctions]")
+{
+    auto f = easing_function<QUADRATIC, inout>();
+
+    CHECK(f(0) == Approx(0));
+    CHECK(f(1) == Approx(1));
+    CHECK(lderivative(f, 0) == Approx(0).epsilon(0.000001));
+    CHECK(rderivative(f, 1) == Approx(0).epsilon(0.000001));
+}
+
 TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunctions]")
 {
     auto f = easing_function<QUADRATIC, inout>(x_range(2, 3), y_range(3, 7));
