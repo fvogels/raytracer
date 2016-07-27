@@ -1,5 +1,6 @@
 #include "scripting/cameras-module.h"
 #include "cameras/cameras.h"
+#include "scripting/scripting-util.h"
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -11,15 +12,34 @@ namespace
     struct CameraLibrary
     {
         Camera perspective(
-            const math::Point3D& eye,
-            const math::Point3D& look_at,
-            const math::Vector3D& up,
+            const Point3D& eye,
+            const Point3D& look_at,
+            const Vector3D& up,
             double distance,
             double aspect_ratio) const
         {
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
-        }
+        }        
     };
+
+    Camera perspective(const std::map<std::string, Boxed_Value> argument_map)
+    {
+        EXTRACT_ARGUMENT(Point3D, eye);
+        EXTRACT_ARGUMENT(Point3D, look_at);
+        EXTRACT_ARGUMENT(Vector3D, up);
+        EXTRACT_ARGUMENT(double, distance);
+        EXTRACT_ARGUMENT(double, aspect_ratio);
+
+        return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    }
+
+    Camera create_camera(const std::map<std::string, Boxed_Value> argument_map)
+    {
+        EXTRACT_ARGUMENT(std::string, type);
+
+        FACTORY_TYPE_DISPATCH(perspective);
+        HANDLE_UNKNOWN_TYPE;
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_cameras_module()
@@ -32,6 +52,8 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
 #define CAMERA(NAME) module->add(fun(&CameraLibrary::NAME), #NAME)
     CAMERA(perspective);
 #undef COLOR
+
+    module->add(fun(&create_camera), "camera");
 
     return module;
 }
