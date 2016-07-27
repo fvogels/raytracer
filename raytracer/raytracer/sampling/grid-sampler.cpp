@@ -5,22 +5,35 @@ using namespace math;
 using namespace raytracer;
 
 
-void raytracer::samplers::_private_::GridSampler::sample(const Rectangle2D& rectangle, std::function<void(const Point2D&)> function) const
+namespace
 {
-    Rasterizer raster(rectangle, this->m_columns, this->m_rows);
-    
-    for (int y = 0; y != this->m_rows; ++y)
+    class GridSampler : public raytracer::samplers::_private_::SamplerImplementation
     {
-        for (int x = 0; x != this->m_columns; ++x)
-        {
-            auto subrectangle = raster[Position(x, y)];
+    public:
+        GridSampler(unsigned rows, unsigned columns)
+            : m_rows(rows), m_columns(columns) { }
 
-            function(subrectangle.center());
+        void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override
+        {
+            Rasterizer raster(rectangle, this->m_columns, this->m_rows);
+
+            for (int y = 0; y != this->m_rows; ++y)
+            {
+                for (int x = 0; x != this->m_columns; ++x)
+                {
+                    auto subrectangle = raster[Position(x, y)];
+
+                    function(subrectangle.center());
+                }
+            }
         }
-    }
+
+    private:
+        unsigned m_rows, m_columns;
+    };
 }
 
 Sampler raytracer::samplers::grid(unsigned rows, unsigned columns)
 {
-    return Sampler(std::make_shared<_private_::GridSampler>(rows, columns));
+    return Sampler(std::make_shared<GridSampler>(rows, columns));
 }
