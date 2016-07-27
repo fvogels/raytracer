@@ -10,44 +10,34 @@ namespace math
         double radians() const noexcept { return m_radians; }
         double degrees() const noexcept { return m_radians * 180 / M_PI; }
 
+        static Angle degrees(long double x) noexcept { return Angle(x / 180 * M_PI); }
+        static Angle radians(long double x) noexcept { return Angle(x); }
+
     private:
         explicit Angle(double x) noexcept
             : m_radians(x) { }
         
-        friend Angle radians(long double) noexcept;
-        friend Angle degrees(long double) noexcept;
-        
         double m_radians;
     };
 
-    inline Angle radians(long double x) noexcept
-    {
-        return Angle(x);
-    }
-
-    inline Angle degrees(long double x) noexcept
-    {
-        return Angle(x / 180 * M_PI);
-    }
-
     inline Angle operator+(const Angle& x, const Angle& y) noexcept
     {
-      return radians(x.radians() + y.radians()); 
+      return Angle::radians(x.radians() + y.radians()); 
     }
 
     inline Angle operator-(const Angle& x) noexcept
     {
-      return radians(-x.radians()); 
+      return Angle::radians(-x.radians()); 
     }
 
     inline Angle operator-(const Angle& x, const Angle& y) noexcept
     {
-      return radians(x.radians() - y.radians()); 
+      return Angle::radians(x.radians() - y.radians()); 
     }
 
     inline Angle operator *(const Angle& angle, double factor) noexcept
     {
-        return radians(angle.radians() * factor);
+        return Angle::radians(angle.radians() * factor);
     }
 
     inline Angle operator *(double factor, const Angle& angle) noexcept
@@ -57,7 +47,7 @@ namespace math
 
     inline Angle operator /(const Angle& angle, double factor) noexcept
     {
-        return radians(angle.radians() / factor);
+        return Angle::radians(angle.radians() / factor);
     }
 
     inline Angle& operator +=(Angle& x, const Angle& y) noexcept
@@ -82,22 +72,22 @@ namespace math
 
     inline Angle operator""_rad(long double x) noexcept
     {
-        return radians(x);
+        return Angle::radians(x);
     }
 
     inline Angle operator""_degrees(long double x) noexcept
     {
-        return degrees(x);
+        return Angle::degrees(x);
     }
 
     inline Angle operator""_rad(long long unsigned x) noexcept
     {
-        return radians((long double) x);
+        return Angle::radians((long double) x);
     }
 
     inline Angle operator""_degrees(long long unsigned x) noexcept
     {
-        return degrees((long double) x);
+        return Angle::degrees((long double) x);
     }
 
     inline bool operator <(const Angle& a, const Angle& b) noexcept
