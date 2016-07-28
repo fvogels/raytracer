@@ -1,8 +1,10 @@
 #include "scripting/raytracing-module.h"
 #include "raytracing/ray-tracers.h"
+#include "scripting/scripting-util.h"
 
 using namespace chaiscript;
 using namespace raytracer;
+using namespace raytracer::scripting;
 
 
 namespace
@@ -11,6 +13,12 @@ namespace
     {
         RayTracer binary() const { return raytracer::raytracers::binary(); }
     };
+
+    std::shared_ptr<Scene> create_scene(Camera camera, Primitive root, const std::vector<Boxed_Value>& boxed_lights)
+    {
+        auto unboxed_lights = util::cast_vector_elements<LightSource>(boxed_lights);
+        return std::make_shared<Scene>(camera, root, unboxed_lights);
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_raytracing_module()
@@ -24,9 +32,11 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     RAYTRACER(binary);
 #undef COLOR
 
-    module->add(user_type<Scene>(), "Scene");
-    module->add(constructor<Scene(raytracer::Camera, raytracer::Primitive)>(), "Scene");
-    module->add(fun([](Scene& scene, LightSource light) { scene.light_sources.push_back(light); }), "add_light");
+    // module->add(user_type<Scene>(), "Scene");
+    // module->add(constructor<Scene(raytracer::Camera, raytracer::Primitive)>(), "Scene");
+    // module->add(fun([](Scene& scene, LightSource light) { scene.light_sources.push_back(light); }), "add_light");
+
+    module->add(fun(&create_scene), "scene");
 
     return module;
 }
