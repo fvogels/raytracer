@@ -15,13 +15,13 @@ namespace raytracer
         namespace util
         {
             template<typename T>
-            T get_argument(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
+            inline T get_argument(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
             {
                 return chaiscript::boxed_cast<T>(argument_map.at(name));
             }
 
             template<>
-            double get_argument<double>(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
+            inline double get_argument<double>(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
             {
                 auto value = argument_map.at(name);
 
