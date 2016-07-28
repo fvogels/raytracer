@@ -25,6 +25,7 @@ namespace
             : wrapped(wrapped) { }
 
         virtual void link_to(Wrapper*) = 0;
+        virtual void consume(Boxed_Value) = 0;
 
         std::shared_ptr<Pipeline> wrapped;
     };
@@ -41,6 +42,14 @@ namespace
         void link_to(Wrapper* wrapper) override
         {
             throw std::runtime_error("Nonproducers are only allowed at the end of the pipeline");
+        }
+
+        void consume(Boxed_Value boxed) override
+        {
+            auto unboxed = boxed_cast<T>(boxed);
+            auto consumer = std::dynamic_pointer_cast<Consumer<T>>(this->wrapped);
+
+            consumer->consume(unboxed);
         }
     };
 
@@ -64,6 +73,11 @@ namespace
                 producer->link_to(consumer);
             }
         }
+
+        void consume(Boxed_Value boxed) override
+        {
+            throw std::runtime_error("Pipeline cannot start with nonconsumer");
+        }
     };
 
     template<typename T1, typename T2>
@@ -85,6 +99,14 @@ namespace
             {
                 producer->link_to(consumer);
             }
+        }
+
+        void consume(Boxed_Value boxed) override
+        {
+            auto unboxed = boxed_cast<T1>(boxed);
+            auto consumer = std::dynamic_pointer_cast<Consumer<T1>>(this->wrapped);
+
+            consumer->consume(unboxed);
         }
     };
 
@@ -133,6 +155,8 @@ namespace
 
                 current->link_to(next);
             }
+
+            wrappers.front()->consume(initial);
         }
     }
 }
