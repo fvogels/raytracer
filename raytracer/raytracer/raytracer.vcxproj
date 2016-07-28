@@ -322,6 +322,7 @@
     <ClCompile Include="scripting\lights-module.cpp" />
     <ClCompile Include="scripting\materials-module.cpp" />
     <ClCompile Include="scripting\math-module.cpp" />
+    <ClCompile Include="scripting\pipeline-module.cpp" />
     <ClCompile Include="scripting\primitives-module.cpp" />
     <ClCompile Include="scripting\raytracing-module.cpp" />
     <ClCompile Include="scripting\rendering-module.cpp" />
@@ -473,6 +474,7 @@
     <ClInclude Include="scripting\lights-module.h" />
     <ClInclude Include="scripting\materials-module.h" />
     <ClInclude Include="scripting\math-module.h" />
+    <ClInclude Include="scripting\pipeline-module.h" />
     <ClInclude Include="scripting\primitives-module.h" />
     <ClInclude Include="scripting\raytracing-module.h" />
     <ClInclude Include="scripting\rendering-module.h" />
