@@ -23,6 +23,14 @@ namespace raytracer
             chai.add(create_modules());
             return chai.eval<T>(source);
         }
+
+        template<>
+        inline void evaluate(const std::string& source)
+        {
+            chaiscript::ChaiScript chai(chaiscript::Std_Lib::library());
+            chai.add(create_modules());
+            chai.eval(source);
+        }
 #       endif
     }
 }
