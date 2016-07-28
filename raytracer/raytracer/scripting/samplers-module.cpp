@@ -27,8 +27,8 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
-    auto camera_library = std::make_shared<SamplerLibrary>();
-    module->add_global_const(chaiscript::const_var(camera_library), "Samplers");
+    auto sampler_library = std::make_shared<SamplerLibrary>();
+    module->add_global_const(chaiscript::const_var(sampler_library), "Samplers");
 
 #define SAMPLER(NAME) module->add(fun(&SamplerLibrary::NAME), #NAME)
     SAMPLER(single);
