@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pipeline/pipeline.h"
 #include <memory>
 
 
@@ -19,7 +20,7 @@ namespace raytracer
         };
 
         template<typename INPUT>
-        class Consumer : public _private_::ConsumerTag
+        class Consumer : public _private_::ConsumerTag, public virtual Pipeline
         {
         public:
             using input_type = INPUT;

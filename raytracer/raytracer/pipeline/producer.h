@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pipeline/pipeline.h"
 #include "pipeline/consumer.h"
 #include <memory>
 
@@ -20,7 +21,7 @@ namespace raytracer
         };
 
         template<typename OUTPUT>
-        class Producer : public _private_::ProducerTag
+        class Producer : public _private_::ProducerTag, public virtual Pipeline
         {
         public:
             using output_type = OUTPUT;
