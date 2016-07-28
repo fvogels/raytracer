@@ -22,6 +22,9 @@ namespace raytracer
     class LightSource
     {
     public:
+        LightSource()
+            : LightSource(nullptr) { }
+
         LightSource(std::shared_ptr<lights::_private_::LightSourceImplementation> implementation)
             : m_implementation(implementation) { }
 
