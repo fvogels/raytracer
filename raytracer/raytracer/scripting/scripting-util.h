@@ -10,6 +10,7 @@
 
 #define START_ARGUMENTS(MAP)                    auto& _argument_map_ = MAP; raytracer::scripting::util::ArgumentMapParser _parser_
 #define ARGUMENT(TYPE, NAME)                    TYPE NAME; _parser_.add<TYPE>(#NAME, &NAME)
+#define OPTIONAL_ARGUMENT(TYPE, NAME, VALUE)    TYPE NAME = VALUE; _parser_.add<TYPE>(#NAME, &NAME, true)
 #define END_ARGUMENTS()                         _parser_.parse(_argument_map_)
 
 namespace raytracer
@@ -93,42 +94,61 @@ namespace raytracer
 
                 void parse(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
                 {
+                    parse_arguments(argument_map);
+                    verify(argument_map);
+                }
+
+            private:
+                void parse_arguments(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
+                {
                     for (auto argument_it : argument_map)
                     {
                         auto& tag = argument_it.first;
                         auto& boxed = argument_it.second;
 
-                        auto parser_it = m_parsers.find(tag);
-
-                        if (parser_it == m_parsers.end())
-                        {
-                            std::ostringstream ss;
-                            ss << "Invalid tag " << tag;
-
-                            throw std::runtime_error(ss.str());
-                        }
-                        else
-                        {
-                            parser_it->second->parse(boxed);
-                        }
+                        parse_argument(tag, boxed);
                     }
+                }
 
+                void parse_argument(const std::string& tag, chaiscript::Boxed_Value boxed)
+                {
+                    auto parser_it = m_parsers.find(tag);
+
+                    if (parser_it == m_parsers.end())
+                    {
+                        std::ostringstream ss;
+                        ss << "Invalid tag " << tag;
+
+                        throw std::runtime_error(ss.str());
+                    }
+                    else
+                    {
+                        parser_it->second->parse(boxed);
+                    }
+                }
+
+                void verify(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
+                {
                     for (auto parser_it : m_parsers)
                     {
                         auto& tag = parser_it.first;
                         auto& parser = parser_it.second;
 
-                        if (!parser->found && !parser->optional)
-                        {
-                            std::ostringstream ss;
-                            ss << "Missing nonoptional parameter " << tag;
-
-                            throw std::runtime_error(ss.str());
-                        }
+                        verify(tag, parser);
                     }
                 }
 
-            private:
+                void verify(const std::string& tag, std::shared_ptr<SingleArgumentParser> parser)
+                {
+                    if (!parser->found && !parser->optional)
+                    {
+                        std::ostringstream ss;
+                        ss << "Missing nonoptional parameter " << tag;
+
+                        throw std::runtime_error(ss.str());
+                    }
+                }
+
                 std::map<std::string, std::shared_ptr<SingleArgumentParser>> m_parsers;
             };
         }
