@@ -51,10 +51,11 @@ namespace raytracer
 
             struct SingleArgumentParser
             {
-                SingleArgumentParser()
-                    : found(false) { }
+                SingleArgumentParser(bool optional)
+                    : found(false), optional(optional) { }
 
                 bool found;
+                bool optional;
 
                 virtual void parse(chaiscript::Boxed_Value) = 0;
             };            
@@ -62,13 +63,20 @@ namespace raytracer
             template<typename T>
             struct SpecializedSingleArgumentParser : public SingleArgumentParser
             {
-                SpecializedSingleArgumentParser(T* storage)
-                    : storage(storage) { }
+                SpecializedSingleArgumentParser(T* storage, bool optional)
+                    : SingleArgumentParser(optional), storage(storage) { }
 
                 void parse(chaiscript::Boxed_Value boxed) override
                 {
-                    *storage = smart_boxed_cast<T>(boxed);
-                    found = true;
+                    if (!found)
+                    {
+                        *storage = smart_boxed_cast<T>(boxed);
+                        found = true;
+                    }
+                    else
+                    {
+                        throw std::runtime_error("Parameter assigned value twice");
+                    }
                 }
                 
                 T* storage;
@@ -78,9 +86,9 @@ namespace raytracer
             {
             public:
                 template<typename T>
-                void add(const std::string& tag, T* storage)
+                void add(const std::string& tag, T* storage, bool optional = false)
                 {
-                    m_parsers[tag] = std::make_shared<SpecializedSingleArgumentParser<T>>(storage);
+                    m_parsers[tag] = std::make_shared<SpecializedSingleArgumentParser<T>>(storage, optional);
                 }
 
                 void parse(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
@@ -110,10 +118,10 @@ namespace raytracer
                         auto& tag = parser_it.first;
                         auto& parser = parser_it.second;
 
-                        if (!parser->found)
+                        if (!parser->found && !parser->optional)
                         {
                             std::ostringstream ss;
-                            ss << "Missing parameter " << tag;
+                            ss << "Missing nonoptional parameter " << tag;
 
                             throw std::runtime_error(ss.str());
                         }
