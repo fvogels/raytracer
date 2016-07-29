@@ -15,6 +15,26 @@ namespace
         {
             return lights::omnidirectional(position, c);
         }
+
+        LightSource directional(const Vector3D& direction, const Color& c) const
+        {
+            return lights::directional(direction, c);
+        }
+
+        LightSource area(const math::Rectangle3D& rectangle, raytracer::Sampler sampler, const imaging::Color& color) const
+        {
+            return lights::area(rectangle, sampler, color);
+        }
+
+        LightSource spot_direction(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::Color& color)
+        {
+            return lights::spot(position, direction, angle, color);
+        }
+
+        LightSource spot_point_at(const math::Point3D& position, const math::Point3D& point_at, math::Angle angle, const imaging::Color& color)
+        {
+            return lights::spot(position, point_at, angle, color);
+        }
     };
 }
 
@@ -26,7 +46,12 @@ ModulePtr raytracer::scripting::_private_::create_lights_module()
     module->add_global_const(chaiscript::const_var(lights_library), "Lights");
 
 #define LIGHT(NAME) module->add(fun(&LightLibrary::NAME), #NAME)
+#define LIGHT_NAMED(INTERNAL, EXTERNAL) module->add(fun(&LightLibrary::INTERNAL), #EXTERNAL)
     LIGHT(omnidirectional);
+    LIGHT(directional);
+    LIGHT(area);
+    LIGHT_NAMED(spot_direction, spot);
+    LIGHT_NAMED(spot_point_at, spot);
 #undef LIGHT
 
     return module;
