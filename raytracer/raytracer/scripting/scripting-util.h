@@ -4,10 +4,14 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <memory>
+#include <sstream>
+
 
 #define EXTRACT_ARGUMENT(TYPE, NAME)            auto NAME = raytracer::scripting::util::get_argument<TYPE>(argument_map, #NAME)
 #define FACTORY_TYPE_DISPATCH(TYPE)             if ( type == #TYPE ) return TYPE(argument_map)
 #define HANDLE_UNKNOWN_TYPE                     throw std::runtime_error("Unknown type")
+
 
 namespace raytracer
 {
@@ -16,24 +20,28 @@ namespace raytracer
         namespace util
         {
             template<typename T>
-            inline T get_argument(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
+            T smart_boxed_cast(chaiscript::Boxed_Value boxed)
             {
-                return chaiscript::boxed_cast<T>(argument_map.at(name));
+                return chaiscript::boxed_cast<T>(boxed);
             }
 
             template<>
-            inline double get_argument<double>(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
+            inline double smart_boxed_cast(chaiscript::Boxed_Value boxed)
             {
-                auto value = argument_map.at(name);
-
-                if (*value.get_type_info().bare_type_info() == typeid(int))
+                if (*boxed.get_type_info().bare_type_info() == typeid(int))
                 {
-                    return chaiscript::boxed_cast<int>(value);
+                    return chaiscript::boxed_cast<int>(boxed);
                 }
                 else
                 {
-                    return chaiscript::boxed_cast<double>(value);
+                    return chaiscript::boxed_cast<double>(boxed);
                 }
+            }
+
+            template<typename T>
+            inline T get_argument(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
+            {
+                return smart_boxed_cast<T>(argument_map.at(name));
             }
 
             template<typename T>
@@ -47,6 +55,81 @@ namespace raytracer
 
                 return unboxed_values;
             }
+
+            struct SingleArgumentParser
+            {
+                SingleArgumentParser()
+                    : found(false) { }
+
+                bool found;
+
+                virtual void parse(chaiscript::Boxed_Value) = 0;
+            };            
+
+            template<typename T>
+            struct SpecializedSingleArgumentParser : public SingleArgumentParser
+            {
+                SpecializedSingleArgumentParser(T* storage)
+                    : storage(storage) { }
+
+                void parse(chaiscript::Boxed_Value boxed) override
+                {
+                    *storage = smart_boxed_cast<T>(boxed);
+                    found = true;
+                }
+                
+                T* storage;
+            };
+
+            class ArgumentMapParser
+            {
+            public:
+                template<typename T>
+                void add(const std::string& tag, T* storage)
+                {
+                    m_parsers[tag] = std::make_shared<SpecializedSingleArgumentParser<T>>(storage);
+                }
+
+                void parse(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
+                {
+                    for (auto argument_it : argument_map)
+                    {
+                        auto& tag = argument_it.first;
+                        auto& boxed = argument_it.second;
+
+                        auto parser_it = m_parsers.find(tag);
+
+                        if (parser_it == m_parsers.end())
+                        {
+                            std::ostringstream ss;
+                            ss << "Invalid tag " << tag;
+
+                            throw std::runtime_error(ss.str());
+                        }
+                        else
+                        {
+                            parser_it->second->parse(boxed);
+                        }
+                    }
+
+                    for (auto parser_it : m_parsers)
+                    {
+                        auto& tag = parser_it.first;
+                        auto& parser = parser_it.second;
+
+                        if (!parser->found)
+                        {
+                            std::ostringstream ss;
+                            ss << "Missing parameter " << tag;
+
+                            throw std::runtime_error(ss.str());
+                        }
+                    }
+                }
+
+            private:
+                std::map<std::string, std::shared_ptr<SingleArgumentParser>> m_parsers;
+            };
         }
     }
 }
