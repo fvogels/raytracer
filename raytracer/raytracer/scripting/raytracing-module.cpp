@@ -12,6 +12,12 @@ namespace
     struct RaytracerLibrary
     {
         RayTracer binary() const { return raytracer::raytracers::binary(); }
+        RayTracer v1() const { return raytracer::raytracers::v1(); }
+        RayTracer v2() const { return raytracer::raytracers::v2(); }
+        RayTracer v3() const { return raytracer::raytracers::v3(); }
+        RayTracer v4() const { return raytracer::raytracers::v4(); }
+        RayTracer v5() const { return raytracer::raytracers::v5(); }
+        RayTracer v6() const { return raytracer::raytracers::v6(); }
     };
 
     std::shared_ptr<Scene> create_scene(Camera camera, Primitive root, const std::vector<Boxed_Value>& boxed_lights)
@@ -30,6 +36,12 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 
 #define RAYTRACER(NAME) module->add(fun(&RaytracerLibrary::NAME), #NAME)
     RAYTRACER(binary);
+    RAYTRACER(v1);
+    RAYTRACER(v2);
+    RAYTRACER(v3);
+    RAYTRACER(v4);
+    RAYTRACER(v5);
+    RAYTRACER(v6);
 #undef COLOR
 
     // module->add(user_type<Scene>(), "Scene");
