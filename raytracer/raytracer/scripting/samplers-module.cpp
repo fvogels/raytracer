@@ -11,12 +11,12 @@ namespace
 {
     struct SamplerLibrary
     {
-        Sampler single()
+        Sampler single() const
         {
             return samplers::single();
         }
 
-        Sampler grid(unsigned horizontal, unsigned vertical)
+        Sampler grid(unsigned horizontal, unsigned vertical) const
         {
             return samplers::grid(horizontal, vertical);
         }
