@@ -20,6 +20,7 @@ namespace raytracer
 {
     namespace scripting
     {
+        // Must be in raytracer::scripting for testing purposes
         ModulePtr create_modules()
         {
             using namespace raytracer::scripting::_private_;
@@ -42,15 +43,26 @@ namespace raytracer
     }
 }
 
+namespace
+{
+    std::shared_ptr<ChaiScript> initialize_chai()
+    {
+        auto chai = std::make_shared<ChaiScript>(Std_Lib::library());
+
+        chai->add(create_modules());
+
+        return chai;
+    }
+}
+
 
 void raytracer::scripting::run_script(const std::string& path)
 {
-    ChaiScript chai(Std_Lib::library());
-    chai.add(create_modules());
+    auto chai = initialize_chai();
 
     try
     {
-        chai.eval_file(path);
+        chai->eval_file(path);
     }
     catch (const chaiscript::exception::eval_error& e)
     {
@@ -61,12 +73,11 @@ void raytracer::scripting::run_script(const std::string& path)
 
 void raytracer::scripting::run(const std::string& source)
 {
-    ChaiScript chai(Std_Lib::library());
-    chai.add(create_modules());
+    auto chai = initialize_chai();
 
     try
     {
-        chai.eval(source);
+        chai->eval(source);
     }
     catch (const chaiscript::exception::eval_error& e)
     {
