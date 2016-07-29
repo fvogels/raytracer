@@ -1,7 +1,9 @@
 #pragma once
 
 #include "math/angle.h"
+#include "math/interval.h"
 #include <cmath>
+#include <assert.h>
 
 
 namespace math
@@ -11,12 +13,7 @@ namespace math
         double x, y, z;
     };
 
-    struct SphericalRAZ
-    {
-        double radius, azimuth, zenith;
-    };
-
-    struct SphericalRAE
+    struct Spherical
     {
         double radius;
         math::Angle azimuth, elevation;
@@ -28,15 +25,32 @@ namespace math
         struct CoordinateConverter;
 
         template<>
-        struct CoordinateConverter<Cartesian3D, SphericalRAE>
+        struct CoordinateConverter<Cartesian3D, Spherical>
         {
-            static SphericalRAE convert(const Cartesian3D& cartesian)
+            static Spherical convert(const Cartesian3D& cartesian)
             {
                 double radius = sqrt(pow(cartesian.x, 2) + pow(cartesian.y, 2) + pow(cartesian.z, 2));
                 Angle azimuth = Angle::radians(atan2(cartesian.z, cartesian.x));
-                Angle elevation = 90_degrees - Angle::radians(acos(cartesian.y / radius));
+                Angle elevation = radius > 0 ? 90_degrees - Angle::radians(acos(cartesian.y / radius)) : 0_degrees;
 
-                return SphericalRAE{ radius, azimuth, elevation };
+                assert(radius >= 0);
+                assert(Interval<Angle>(-180_degrees, 180_degrees).contains(azimuth));
+                assert(Interval<Angle>(-90_degrees, 90_degrees).contains(elevation));
+
+                return Spherical{ radius, azimuth, elevation };
+            }
+        };
+
+        template<>
+        struct CoordinateConverter<Spherical, Cartesian3D>
+        {
+            static Cartesian3D convert(const Spherical& spherical)
+            {
+                double x = spherical.radius * cos(spherical.azimuth) * cos(spherical.elevation);
+                double y = spherical.radius * sin(spherical.elevation);
+                double z = spherical.radius * sin(spherical.azimuth) * cos(spherical.elevation);
+
+                return Cartesian3D{ x,y,z };
             }
         };
     }
