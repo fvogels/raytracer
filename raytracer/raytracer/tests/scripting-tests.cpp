@@ -85,51 +85,38 @@ using namespace raytracer::scripting;
 //    REQUIRE(!!result);
 //}
 //
-//TEST_CASE("[Scripting] Creating perspective camera using argument map", "[Scripting]")
-//{
-//    auto result = evaluate<raytracer::Camera>(R"(
-//        camera(["type": "perspective", "eye": pos(0,0,5), "look_at": pos(0,0,0), "up": vec(0,1,0), "distance": 1, "aspect_ratio": 1])
-//    )");
-//
-//    REQUIRE(!!result);
-//}
-//
-//TEST_CASE("[Scripting] Testing maps and casts", "[Scripting]")
-//{
-//    auto result = evaluate<std::map<std::string, chaiscript::Boxed_Value>>(R"(
-//        ["x": 1.0, "y": "hello"]
-//    )");
-//
-//    REQUIRE(result.size() == 2);
-//
-//    auto first = result["x"];
-//    auto second = result["y"];
-//
-//    REQUIRE(chaiscript::boxed_cast<double>(first) == 1);
-//    REQUIRE(chaiscript::boxed_cast<std::string>(second) == "hello");
-//}
-
-
-
-
-TEST_CASE("[Scripting] Testing pipeline", "[Scripting]")
+TEST_CASE("[Scripting] Creating perspective camera using argument map", "[Scripting]")
 {
-    evaluate<void>(R"(
-        var camera   = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
-        var material = Materials.uniform( Colors.white() * 0.2,
-                                          Colors.white() * 0.8,
-                                          Colors.white(),
-                                          20,
-                                          0.2,
-                                          0,
-                                          0 )
-        var root     = Primitives.decorate( material, Primitives.sphere() )
-        var lights   = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
-        var scene    = scene(camera, root, lights )
-        pipeline(scene, [ Pipeline.renderer()
-                        , Pipeline.wif("e:/temp/output/test.wif") ])
+    auto result = evaluate<raytracer::Camera>(R"(
+        Cameras.perspective(["eye": pos(0,0,5), "look_at": pos(0,0,0), "up": vec(0,1,0), "distance": 1, "aspect_ratio": 1])
     )");
+
+    REQUIRE(!!result);
 }
+
+
+
+
+
+
+//TEST_CASE("[Scripting] Testing pipeline", "[Scripting]")
+//{
+//    evaluate<void>(R"(
+//        var camera   = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
+//        var material = Materials.uniform( Colors.white() * 0.2,
+//                                          Colors.white() * 0.8,
+//                                          Colors.white(),
+//                                          20,
+//                                          0.2,
+//                                          0,
+//                                          0 )
+//        var root     = Primitives.decorate( material, Primitives.sphere() )
+//        var lights   = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
+//        var scene    = scene(camera, root, lights )
+//        pipeline(scene, [ Pipeline.renderer()
+//                        , Pipeline.wif("e:/temp/output/test.wif") ])
+//    )");
+//}
 
 
 //
