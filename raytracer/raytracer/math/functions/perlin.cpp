@@ -16,7 +16,7 @@ namespace math
     {
         namespace _private_
         {
-            Function<Point2D, const Point2D&> scale2d(double factor)
+            Function<Point2D(const Point2D&)> scale2d(double factor)
             {
                 std::function<Point2D(const Point2D&)> lambda = [factor](const Point2D& p) -> Point2D {
                     return point(p.x() * factor, p.y() * factor);
@@ -25,7 +25,7 @@ namespace math
                 return from_lambda(lambda);
             }
 
-            Function<Point3D, const Point3D&> scale3d(double factor)
+            Function<Point3D(const Point3D&)> scale3d(double factor)
             {
                 std::function<Point3D(const Point3D&)> lambda = [factor](const Point3D& p) -> Point3D {
                     return point(p.x() * factor, p.y() * factor, p.z() * factor);
@@ -104,7 +104,7 @@ namespace math
             class PerlinNoise2D : public FunctionBody<double, const Point2D&>
             {
             public:
-                PerlinNoise2D(Function<unsigned, unsigned> rng)
+                PerlinNoise2D(Function<unsigned(unsigned)> rng)
                     : m_rng(rng)
                 {
                     // NOP
@@ -148,13 +148,13 @@ namespace math
                     return (p - fp).dot(v);
                 }
 
-                Function<unsigned, unsigned> m_rng;
+                Function<unsigned(unsigned)> m_rng;
             };
 
             class PerlinNoise3D : public FunctionBody<double, const Point3D&>
             {
             public:
-                PerlinNoise3D(Function<unsigned, unsigned> rng)
+                PerlinNoise3D(Function<unsigned(unsigned)> rng)
                     : m_rng(rng)
                 {
                     // NOP
@@ -209,13 +209,13 @@ namespace math
                     return Node{ (p - fp).dot(v) };
                 }
 
-                Function<unsigned, unsigned> m_rng;
+                Function<unsigned(unsigned)> m_rng;
             };
 
             //class PerlinNoise4D : public FunctionBody<double, const Point3D&>
             //{
             //public:
-            //    PerlinNoise4D(Function<unsigned, unsigned> rng)
+            //    PerlinNoise4D(Function<unsigned(unsigned)> rng)
             //        : m_rng(rng)
             //    {
             //        // NOP
@@ -270,7 +270,7 @@ namespace math
             //        return Node{ (p - fp).dot(v) };
             //    }
 
-            //    Function<unsigned, unsigned> m_rng;
+            //    Function<unsigned(unsigned)> m_rng;
             //};
         }
     }

@@ -12,5 +12,5 @@ namespace raytracer
         // EMPTY
     };
 
-    typedef math::Function<imaging::Color, const math::Vector3D&, const imaging::Color&, const math::Vector3D&, const math::Vector3D&> BRDF;
+    typedef math::Function<imaging::Color(const math::Vector3D&, const imaging::Color&, const math::Vector3D&, const math::Vector3D&)> BRDF;
 }

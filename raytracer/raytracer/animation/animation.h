@@ -15,7 +15,7 @@ namespace animation
     class Animation
     {
     public:
-        Animation(math::Function<T, TimeStamp> function, animation::Duration duration)
+        Animation(math::Function<T(TimeStamp)> function, animation::Duration duration)
             : m_function(function), m_duration(duration) { }
 
         T operator ()(TimeStamp t) const
@@ -23,7 +23,7 @@ namespace animation
             return m_function(t);
         }
 
-        math::Function<T, TimeStamp> function() const
+        math::Function<T(TimeStamp)> function() const
         {
             return m_function;
         }
@@ -34,11 +34,11 @@ namespace animation
         }
 
     private:
-        math::Function<T, TimeStamp> m_function;
+        math::Function<T(TimeStamp)> m_function;
         animation::Duration m_duration;
     };
 
-    inline math::Function<TimeStamp, double> seconds_to_timestamp()
+    inline math::Function<TimeStamp(double)> seconds_to_timestamp()
     {
         std::function<TimeStamp(double)> lambda = [](double seconds) -> TimeStamp {
             return TimeStamp::from_epoch(Duration::from_seconds(seconds));
@@ -47,7 +47,7 @@ namespace animation
         return math::from_lambda<TimeStamp, double>(lambda);
     }
 
-    inline math::Function<double, TimeStamp> timestamp_to_seconds()
+    inline math::Function<double(TimeStamp)> timestamp_to_seconds()
     {
         std::function<double(TimeStamp)> lambda = [](TimeStamp ts) -> double {
             return ts.seconds();
@@ -57,25 +57,25 @@ namespace animation
     }
 
     template<typename T>
-    Animation<T> make_animation(math::Function<T, TimeStamp> function, animation::Duration duration)
+    Animation<T> make_animation(math::Function<T(TimeStamp)> function, animation::Duration duration)
     {
         return Animation<T>(function, duration);
     }
 
     template<typename T>
-    Animation<T> make_animation(math::Function<T, double> function, animation::Duration duration)
+    Animation<T> make_animation(math::Function<T(double)> function, animation::Duration duration)
     {
         return Animation<T>(timestamp_to_seconds() >> function, duration);
     }
 
     template<typename T>
-    Animation<T> preprocess(math::Function<TimeStamp, TimeStamp> function, Animation<T> animation)
+    Animation<T> preprocess(math::Function<TimeStamp(TimeStamp)> function, Animation<T> animation)
     {
         return make_animation<T>(function >> animation.function(), animation.duration());
     }
 
     template<typename T1, typename T2>
-    Animation<T2> postprocess(Animation<T1> animation, math::Function<T2, T1> function)
+    Animation<T2> postprocess(Animation<T1> animation, math::Function<T2(T1)> function)
     {
         return make_animation<T2>(animation.function() >> function, animation.duration());
     }

@@ -9,9 +9,9 @@ namespace raytracer
 {
     namespace lights
     {
-        LightSource anisotropic(const math::Point3D&, const math::Vector3D&, math::Function<imaging::Color, math::Angle>);
-        LightSource anisotropic(const math::Point3D&, const math::Point3D&, math::Function<imaging::Color, math::Angle>);
-        //LightSource anisotropic_monochromatic(const math::Point3D&, const math::Vector3D&, math::Function<double, double>, imaging::Color);
-        //LightSource anisotropic_monochromatic(const math::Point3D&, const math::Point3D&, math::Function<double, double>, imaging::Color);
+        LightSource anisotropic(const math::Point3D&, const math::Vector3D&, math::Function<imaging::Color(math::Angle)>);
+        LightSource anisotropic(const math::Point3D&, const math::Point3D&, math::Function<imaging::Color(math::Angle)>);
+        //LightSource anisotropic_monochromatic(const math::Point3D&, const math::Vector3D&, math::Function<double(double)>, imaging::Color);
+        //LightSource anisotropic_monochromatic(const math::Point3D&, const math::Point3D&, math::Function<double(double)>, imaging::Color);
     }
 }

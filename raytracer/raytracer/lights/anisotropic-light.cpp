@@ -12,7 +12,7 @@ namespace
     class AnisotropicLight : public lights::_private_::PointLightImplementation
     {
     public:
-        AnisotropicLight(const math::Point3D& position, const math::Vector3D& direction, const math::Vector3D& up, math::Function<imaging::Color, Angle, Angle> light_function)
+        AnisotropicLight(const math::Point3D& position, const math::Vector3D& direction, const math::Vector3D& up, math::Function<imaging::Color(Angle, Angle)> light_function)
             : lights::_private_::PointLightImplementation(position), m_direction(direction), m_right(direction.cross(up)), m_up(m_right.cross(m_direction)), m_light_function(light_function)
         {
             assert(m_direction.is_unit());
@@ -40,7 +40,7 @@ namespace
             assert(Interval<double>(-1, 1).contains(y));
             assert(Interval<double>(-1, 1).contains(z));
             assert(x * m_right + y * m_direction + z * m_up == approx(ray_direction));
-            
+
             Cartesian3D cartesian{ x,y,z };
             Spherical spherical = convert_coordinates<Spherical>(cartesian);
             Color color = m_light_function(spherical.azimuth, spherical.elevation);
@@ -52,12 +52,12 @@ namespace
         math::Vector3D m_direction;
         math::Vector3D m_right;
         math::Vector3D m_up; // Must appear last! Important for initialization order
-        math::Function<imaging::Color, Angle, Angle> m_light_function;
+        math::Function<imaging::Color(Angle, Angle)> m_light_function;
     };
 }
 
 
-LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Vector3D& direction, math::Function<imaging::Color, Angle> light_function)
+LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Vector3D& direction, math::Function<imaging::Color(Angle)> light_function)
 {
     assert(direction.is_unit());
 
@@ -74,23 +74,23 @@ LightSource raytracer::lights::anisotropic(const math::Point3D& position, const 
     return LightSource(std::make_shared<AnisotropicLight>(position, direction, up, from_lambda(lambda)));
 }
 
-LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Point3D& pointed_at,  math::Function<imaging::Color, Angle> light_function)
+LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Point3D& pointed_at, math::Function<imaging::Color(Angle)> light_function)
 {
     auto direction = (pointed_at - position).normalized();
 
     return anisotropic(position, direction, light_function);
 }
 
-//LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Vector3D& direction, math::Function<double, double> brightness_function, imaging::Color color)
+//LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Vector3D& direction, math::Function<double(double)> brightness_function, imaging::Color color)
 //{
-//    std::function<Color(double, double)> lambda = [=](double azimuth, double elevation) {
+//    std::Function<Color(double(double))> lambda = [=](double azimuth, double elevation) {
 //        return color * brightness_function(elevation);
 //    };
 //
 //    return LightSource(std::make_shared<AnisotropicLight>(position, direction, from_lambda(lambda)));
 //}
 //
-//LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Point3D& pointed_at, math::Function<double, double> brightness_function, imaging::Color color)
+//LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Point3D& pointed_at, math::Function<double(double)> brightness_function, imaging::Color color)
 //{
 //    return anisotropic_monochromatic(position, (pointed_at - position).normalized(), brightness_function, color);
 //}

@@ -14,7 +14,7 @@ namespace math
             class WorleyNoise2D : public FunctionBody<double, const Point2D&>
             {
             public:
-                WorleyNoise2D(Function<unsigned, unsigned> rng)
+                WorleyNoise2D(Function<unsigned(unsigned)> rng)
                     : m_rng(rng)
                 {
                     // NOP
@@ -78,13 +78,13 @@ namespace math
                     return result;
                 }
 
-                Function<unsigned, unsigned> m_rng;
+                Function<unsigned(unsigned)> m_rng;
             };
 
             class WorleyNoise3D : public FunctionBody<double, const Point3D&>
             {
             public:
-                WorleyNoise3D(Function<unsigned, unsigned> rng)
+                WorleyNoise3D(Function<unsigned(unsigned)> rng)
                     : m_rng(rng)
                 {
                     // NOP
@@ -155,7 +155,7 @@ namespace math
                     return result;
                 }
 
-                Function<unsigned, unsigned> m_rng;
+                Function<unsigned(unsigned)> m_rng;
             };
         }
     }

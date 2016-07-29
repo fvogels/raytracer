@@ -3,7 +3,7 @@
 using namespace math;
 
 
-math::Function<unsigned, unsigned> math::functions::random_function(unsigned parameter)
+math::Function<unsigned(unsigned)> math::functions::random_function(unsigned parameter)
 {
     std::function<unsigned(unsigned)> lambda = [parameter](unsigned x) -> unsigned
     {

@@ -19,7 +19,7 @@ namespace
     class MultiMaterial : public materials::_private_::MaterialImplementation
     {
     public:
-        MultiMaterial(math::Function<Material, const Point2D&> function)
+        MultiMaterial(math::Function<Material(const Point2D&)> function)
             : m_function(function) { }
 
         MaterialProperties at(const HitPosition& hp) const override
@@ -28,11 +28,11 @@ namespace
         }
 
     private:
-        math::Function<Material, const Point2D&> m_function;
+        math::Function<Material(const Point2D&)> m_function;
     };
 }
 
-Material raytracer::materials::pattern2d(math::Function<bool, const Point2D&> pattern, Material m1, Material m2)
+Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pattern, Material m1, Material m2)
 {
     auto bool_mapper = math::functions::bool_mapper(m1, m2);
 

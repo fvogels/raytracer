@@ -10,7 +10,7 @@ namespace
     class FunctionMaterial2D : public materials::_private_::Material2D
     {
     public:
-        FunctionMaterial2D(math::Function<MaterialProperties, const Point2D&> function)
+        FunctionMaterial2D(math::Function<MaterialProperties(const Point2D&)> function)
             : m_function(function) 
         {
             // NOP
@@ -23,13 +23,13 @@ namespace
         }
 
     private:
-        math::Function<MaterialProperties, const Point2D&> m_function;
+        math::Function<MaterialProperties(const Point2D&)> m_function;
     };
 
     class FunctionMaterial3D : public materials::_private_::Material3D
     {
     public:
-        FunctionMaterial3D(math::Function<MaterialProperties, const Point3D&> function)
+        FunctionMaterial3D(math::Function<MaterialProperties(const Point3D&)> function)
             : m_function(function)
         {
             // NOP
@@ -42,7 +42,7 @@ namespace
         }
 
     private:
-        math::Function<MaterialProperties, const Point3D&> m_function;
+        math::Function<MaterialProperties(const Point3D&)> m_function;
     };
 }
 
@@ -56,17 +56,17 @@ MaterialProperties raytracer::materials::_private_::Material3D::at(const HitPosi
     return at(hp.xyz);
 }
 
-Material raytracer::make_2d_material(math::Function<MaterialProperties, const Point2D&> function)
+Material raytracer::make_2d_material(math::Function<MaterialProperties(const Point2D&)> function)
 {
     return Material(std::make_shared<FunctionMaterial2D>(function));
 }
 
-Material raytracer::make_3d_material(math::Function<MaterialProperties, const Point3D&> function)
+Material raytracer::make_3d_material(math::Function<MaterialProperties(const Point3D&)> function)
 {
     return Material(std::make_shared<FunctionMaterial3D>(function));
 }
 
-math::Function<Material, animation::TimeStamp> raytracer::to_animated_2d_material(Material material)
+math::Function<Material( animation::TimeStamp)> raytracer::to_animated_2d_material(Material material)
 {
     std::function<Material(animation::TimeStamp)> lambda = [material](animation::TimeStamp ts) {
         std::function<MaterialProperties(const Point2D&)> lam = [material, ts](const Point2D& p) {

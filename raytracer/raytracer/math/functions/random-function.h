@@ -7,6 +7,6 @@ namespace math
 {
     namespace functions
     {
-        math::Function<unsigned, unsigned> random_function(unsigned);
+        math::Function<unsigned(unsigned)> random_function(unsigned);
     }
 }

@@ -7,6 +7,6 @@ namespace math
 {
     namespace functions
     {
-        math::Function<double, double> gauss(double center, double width);
+        math::Function<double(double)> gauss(double center, double width);
     }
 }

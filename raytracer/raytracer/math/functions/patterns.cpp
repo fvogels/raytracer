@@ -3,7 +3,7 @@
 using namespace math;
 
 
-Function<bool, const Point2D&> math::functions::checkered()
+Function<bool(const Point2D&)> math::functions::checkered()
 {
     std::function<bool(const Point2D&)> function = [](const Point2D& p)
     {
@@ -16,7 +16,7 @@ Function<bool, const Point2D&> math::functions::checkered()
     return from_lambda<bool, const Point2D&>(function);
 }
 
-Function<bool, const Point2D&> math::functions::horizontal_lines(double thickness)
+Function<bool(const Point2D&)> math::functions::horizontal_lines(double thickness)
 {
     std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
     {
@@ -28,7 +28,7 @@ Function<bool, const Point2D&> math::functions::horizontal_lines(double thicknes
     return from_lambda<bool, const Point2D&>(function);
 }
 
-Function<bool, const Point2D&> math::functions::vertical_lines(double thickness)
+Function<bool(const Point2D&)> math::functions::vertical_lines(double thickness)
 {
     std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
     {
@@ -40,7 +40,7 @@ Function<bool, const Point2D&> math::functions::vertical_lines(double thickness)
     return from_lambda<bool, const Point2D&>(function);
 }
 
-Function<bool, const Point2D&> math::functions::grid(double thickness)
+Function<bool(const Point2D&)> math::functions::grid(double thickness)
 {
     std::function<bool(const Point2D&)> function = [thickness](const Point2D& p)
     {

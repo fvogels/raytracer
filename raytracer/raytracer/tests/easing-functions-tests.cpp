@@ -9,12 +9,12 @@ using namespace math::functions::easing;
 
 namespace
 {
-    double lderivative(Function<double, double> f, double x, double dx = 0.00000001)
+    double lderivative(Function<double(double)> f, double x, double dx = 0.00000001)
     {
         return (f(x + dx) - f(x)) / dx;
     }
 
-    double rderivative(Function<double, double> f, double x, double dx = 0.00000001)
+    double rderivative(Function<double(double)> f, double x, double dx = 0.00000001)
     {
         return (f(x) - f(x - dx)) / dx;
     }

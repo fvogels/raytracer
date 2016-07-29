@@ -9,7 +9,7 @@ namespace math
 {
     namespace functions
     {
-        typedef math::Function<double, double> EasingFunction;
+        typedef math::Function<double(double)> EasingFunction;
 
         namespace easing
         {

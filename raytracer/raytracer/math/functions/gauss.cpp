@@ -4,7 +4,7 @@
 using namespace math;
 
 
-Function<double, double> math::functions::gauss(double center, double width)
+Function<double(double)> math::functions::gauss(double center, double width)
 {
     std::function<double(double)> lambda = [center, width](double t) {
         return exp(pow((t - center) / width, 2));
