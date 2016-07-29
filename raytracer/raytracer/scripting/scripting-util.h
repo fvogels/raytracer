@@ -12,9 +12,9 @@
 #define FACTORY_TYPE_DISPATCH(TYPE)             if ( type == #TYPE ) return TYPE(argument_map)
 #define HANDLE_UNKNOWN_TYPE                     throw std::runtime_error("Unknown type")
 
-#define START_ARGUMENTS(MAP)                    auto& _argument_map_ = MAP; raytracer::scripting::util::ArgumentMapParser _parser_;
+#define START_ARGUMENTS(MAP)                    auto& _argument_map_ = MAP; raytracer::scripting::util::ArgumentMapParser _parser_
 #define ARGUMENT(TYPE, NAME)                    TYPE NAME; _parser_.add<TYPE>(#NAME, &NAME)
-#define END_ARGUMENTS()                         _parser_.parse(_argument_map_);
+#define END_ARGUMENTS()                         _parser_.parse(_argument_map_)
 
 namespace raytracer
 {
