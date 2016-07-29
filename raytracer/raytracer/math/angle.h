@@ -2,6 +2,7 @@
 #define _USE_MATH_DEFINES
 #include "math/approx.h"
 #include <math.h>
+#include <iostream>
 
 
 namespace math
@@ -142,4 +143,9 @@ namespace math
             return (value.radians() - other.radians()) < delta;
         }
     };
+
+    inline std::ostream& operator <<(std::ostream& out, Angle angle)
+    {
+        return out << angle.degrees() << "°";
+    }
 }
