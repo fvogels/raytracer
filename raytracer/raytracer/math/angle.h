@@ -1,6 +1,8 @@
 #pragma once
 #define _USE_MATH_DEFINES
+#include "math/approx.h"
 #include <math.h>
+
 
 namespace math
 {
@@ -122,4 +124,22 @@ namespace math
 
     inline double sin(Angle a) { return ::sin(a.radians()); }
     inline double cos(Angle a) { return ::cos(a.radians()); }
+
+    template<>
+    struct approximately<Angle>
+    {
+        Angle value;
+        double delta;
+
+        explicit approximately(const Angle& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const Angle& other) const
+        {
+            return (value.radians() - other.radians()) < delta;
+        }
+    };
 }
