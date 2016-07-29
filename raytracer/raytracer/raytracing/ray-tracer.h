@@ -36,11 +36,16 @@ namespace raytracer
     class RayTracer
     {
     public:
+        RayTracer()
+            : RayTracer(nullptr) { }
+
         RayTracer(std::shared_ptr<raytracers::_private_::RayTracerImplementation> implementation)
             : m_implementation(implementation) { }
 
         const raytracers::_private_::RayTracerImplementation* operator ->() const
         {
+            assert(m_implementation);
+
             return m_implementation.get();
         }
 
