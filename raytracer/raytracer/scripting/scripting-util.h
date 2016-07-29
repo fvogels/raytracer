@@ -8,10 +8,6 @@
 #include <sstream>
 
 
-#define EXTRACT_ARGUMENT(TYPE, NAME)            auto NAME = raytracer::scripting::util::get_argument<TYPE>(argument_map, #NAME)
-#define FACTORY_TYPE_DISPATCH(TYPE)             if ( type == #TYPE ) return TYPE(argument_map)
-#define HANDLE_UNKNOWN_TYPE                     throw std::runtime_error("Unknown type")
-
 #define START_ARGUMENTS(MAP)                    auto& _argument_map_ = MAP; raytracer::scripting::util::ArgumentMapParser _parser_
 #define ARGUMENT(TYPE, NAME)                    TYPE NAME; _parser_.add<TYPE>(#NAME, &NAME)
 #define END_ARGUMENTS()                         _parser_.parse(_argument_map_)
@@ -39,12 +35,6 @@ namespace raytracer
                 {
                     return chaiscript::boxed_cast<double>(boxed);
                 }
-            }
-
-            template<typename T>
-            inline T get_argument(const std::map<std::string, chaiscript::Boxed_Value>& argument_map, const std::string& name)
-            {
-                return smart_boxed_cast<T>(argument_map.at(name));
             }
 
             template<typename T>
