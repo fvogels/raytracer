@@ -57,6 +57,18 @@ namespace
 }
 
 
+LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Vector3D& direction, const math::Vector3D& up, math::Function<imaging::Color(Angle, Angle)> light_function)
+{
+    return LightSource(std::make_shared<AnisotropicLight>(position, direction, up, light_function));
+}
+
+LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Point3D& pointed_at, const math::Vector3D& up, math::Function<imaging::Color(Angle, Angle)> light_function)
+{
+    auto direction = (pointed_at - position).normalized();
+
+    return anisotropic(position, direction, up, light_function);
+}
+
 LightSource raytracer::lights::anisotropic(const math::Point3D& position, const math::Vector3D& direction, math::Function<imaging::Color(Angle)> light_function)
 {
     assert(direction.is_unit());
@@ -81,16 +93,16 @@ LightSource raytracer::lights::anisotropic(const math::Point3D& position, const 
     return anisotropic(position, direction, light_function);
 }
 
-//LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Vector3D& direction, math::Function<double(double)> brightness_function, imaging::Color color)
-//{
-//    std::Function<Color(double(double))> lambda = [=](double azimuth, double elevation) {
-//        return color * brightness_function(elevation);
-//    };
-//
-//    return LightSource(std::make_shared<AnisotropicLight>(position, direction, from_lambda(lambda)));
-//}
-//
-//LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Point3D& pointed_at, math::Function<double(double)> brightness_function, imaging::Color color)
-//{
-//    return anisotropic_monochromatic(position, (pointed_at - position).normalized(), brightness_function, color);
-//}
+LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Vector3D& direction, math::Function<double(Angle)> brightness_function, imaging::Color color)
+{
+    std::function<Color(Angle)> lambda = [=](Angle elevation) -> Color {
+        return color * brightness_function(elevation);
+    };
+
+    return anisotropic(position, direction, from_lambda(lambda));
+}
+
+LightSource raytracer::lights::anisotropic_monochromatic(const math::Point3D& position, const math::Point3D& pointed_at, math::Function<double(Angle)> brightness_function, imaging::Color color)
+{
+    return anisotropic_monochromatic(position, (pointed_at - position).normalized(), brightness_function, color);
+}
