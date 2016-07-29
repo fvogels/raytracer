@@ -428,9 +428,6 @@
     <ClInclude Include="math\function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\functions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\hit-position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -717,6 +714,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\identity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

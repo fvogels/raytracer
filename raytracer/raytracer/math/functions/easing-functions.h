@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/function.h"
-#include "math/functions/functions.h"
+#include "math/functions.h"
 #include "math/interval.h"
 
 

@@ -5,7 +5,7 @@
 #include "primitives/primitives.h"
 #include "cameras/cameras.h"
 #include "math/rasterizer.h"
-#include "math/functions/functions.h"
+#include "math/functions.h"
 #include "math/functions/noise.h"
 #include "sampling/grid-sampler.h"
 #include "materials/materials.h"
