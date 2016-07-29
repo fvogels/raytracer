@@ -4,3 +4,4 @@
 #include "lights/spot-light.h"
 #include "lights/directional-light.h"
 #include "lights/area-light.h"
+#include "lights/anisotropic-light.h"

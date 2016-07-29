@@ -342,6 +342,9 @@
     <ClCompile Include="scripting\pipeline-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lights\anisotropic-light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -771,6 +774,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\pipeline-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lights\anisotropic-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
