@@ -19,7 +19,7 @@ LightRay raytracer::lights::_private_::SpotLight::cast_lightray_to(const math::P
 
     if (intensity > m_min_cos)
     {
-        return LightRay(ray, m_color * intensity);
+        return LightRay(ray, m_color);
     }
     else
     {
