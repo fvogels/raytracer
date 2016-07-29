@@ -713,5 +713,11 @@
     <ClInclude Include="tests\coordinate-system-tests.cpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\functions\constant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\identity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

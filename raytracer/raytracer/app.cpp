@@ -94,12 +94,13 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     Point3D light_position = point(0, 1, 0);
     // light_sources.push_back(omnidirectional(light_position, colors::white()));
-   // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 120_degrees, colors::white()));
+    // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 120_degrees, colors::white()));
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
     // light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
 
-    std::function<Color(double)> lambda = [](double t) -> Color {
-        return colors::white() * cos(90_degrees * (1-t) * 50);
+    std::function<Color(Angle)> lambda = [now](Angle t) -> Color {
+        if (t > 90_degrees * (1 - now.seconds())) return colors::white();
+        else return colors::black();
     };
 
     light_sources.push_back(anisotropic(light_position, Point3D(0, 0, 0), from_lambda(lambda)));
@@ -137,8 +138,6 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
     return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
 }
 
-
-
 void render()
 {
     using namespace raytracer;
@@ -149,7 +148,7 @@ void render()
     auto scenes = pipeline::animation(30);
 
     pipeline::start(create_scene_animation()) >>
-        pipeline::animation(1) >>
+        pipeline::animation(30) >>
         pipeline::renderer(rendering::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
 }
@@ -166,7 +165,6 @@ int main()
 
     render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
-
 }
 
 #endif

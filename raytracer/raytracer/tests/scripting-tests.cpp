@@ -85,35 +85,37 @@ using namespace raytracer::scripting;
 //    REQUIRE(!!result);
 //}
 //
-TEST_CASE("[Scripting] Creating perspective camera using argument map", "[Scripting]")
-{
-    auto result = evaluate<raytracer::Camera>(R"(
-        Cameras.perspective(["eye": pos(0,0,5), "look_at": pos(0,0,0), "up": vec(0,1,0), "distance": 1, "aspect_ratio": 1])
-    )");
+//TEST_CASE("[Scripting] Creating perspective camera using argument map", "[Scripting]")
+//{
+//    auto result = evaluate<raytracer::Camera>(R"(
+//        Cameras.perspective(["eye": pos(0,0,5), "look_at": pos(0,0,0), "up": vec(0,1,0), "distance": 1, "aspect_ratio": 1])
+//    )");
+//
+//    REQUIRE(!!result);
+//}
 
-    REQUIRE(!!result);
-}
 
-TEST_CASE("[Scripting] Testing pipeline", "[Scripting]")
-{
-    evaluate<void>(R"(
-        var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
-        var material   = Materials.uniform( Colors.white() * 0.2,
-                                            Colors.white() * 0.8,
-                                            Colors.white(),
-                                            20,
-                                            0.2,
-                                            0,
-                                            0 )
-        var root       = Primitives.decorate( material, Primitives.sphere() )
-        var lights     = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
-        var scene      = scene(camera, root, lights )
-        var ray_tracer = Raytracers.binary()
-        var renderer   = Renderers.standard(500, 500, Samplers.single(), ray_tracer)
-        pipeline(scene, [ Pipeline.renderer(renderer)
-                        , Pipeline.wif("e:/temp/output/test.wif") ])
-    )");
-}
+
+//TEST_CASE("[Scripting] Testing pipeline", "[Scripting]")
+//{
+//    evaluate<void>(R"(
+//        var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
+//        var material   = Materials.uniform( Colors.white() * 0.2,
+//                                            Colors.white() * 0.8,
+//                                            Colors.white(),
+//                                            20,
+//                                            0.2,
+//                                            0,
+//                                            0 )
+//        var root       = Primitives.decorate( material, Primitives.sphere() )
+//        var lights     = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
+//        var scene      = scene(camera, root, lights )
+//        var ray_tracer = Raytracers.binary()
+//        var renderer   = Renderers.standard(500, 500, Samplers.single(), ray_tracer)
+//        pipeline(scene, [ Pipeline.renderer(renderer)
+//                        , Pipeline.wif("e:/temp/output/test.wif") ])
+//    )");
+//}
 
 
 //

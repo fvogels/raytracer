@@ -351,6 +351,8 @@
     <ClInclude Include="demo\marble-animation-demo.h" />
     <ClInclude Include="imaging\bmp-format.h" />
     <ClInclude Include="math\coordinate-systems.h" />
+    <ClInclude Include="math\functions\constant.h" />
+    <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="math\vector4d.h" />
     <ClInclude Include="materials\wood-material.h" />
