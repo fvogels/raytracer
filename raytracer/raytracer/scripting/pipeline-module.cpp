@@ -123,14 +123,9 @@ namespace
             return wrap(raytracer::pipeline::wif(path));
         }
 
-        //std::shared_ptr<Consumer<std::shared_ptr<Scene>>> renderer(Renderer renderer) const
-        //{
-        //    return raytracer::pipeline::renderer(renderer);
-        //}
-
-        std::shared_ptr<Wrapper> renderer() const
+        std::shared_ptr<Wrapper> renderer(Renderer renderer) const
         {
-            return wrap(raytracer::pipeline::renderer(raytracer::rendering::standard(500, 500, samplers::single(), raytracer::raytracers::v1(), util::loopers::single_threaded())));
+            return wrap(raytracer::pipeline::renderer(renderer));
         }
     };
 
