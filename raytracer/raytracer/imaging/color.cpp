@@ -1,5 +1,6 @@
 #include "imaging/color.h"
 #include "math/approx.h"
+#include "math/quantize.h"
 
 using namespace imaging;
 
@@ -11,11 +12,6 @@ namespace
         if (x < 0) return 0;
         else if (x > 1) return 1;
         else return x;
-    }
-
-    double quantize(double x, unsigned levels) noexcept
-    {
-        return round(x * levels) / levels;
     }
 }
 
@@ -100,9 +96,9 @@ std::ostream& imaging::operator <<(std::ostream& out, const Color& c)
 
 void imaging::Color::quantize(unsigned levels) noexcept
 {
-    r = ::quantize(r, levels);
-    g = ::quantize(g, levels);
-    b = ::quantize(b, levels);
+    r = math::quantize(r, levels);
+    g = math::quantize(g, levels);
+    b = math::quantize(b, levels);
 }
 
 Color imaging::Color::quantized(unsigned levels) const noexcept
