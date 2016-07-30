@@ -13,11 +13,11 @@ namespace
     {
     public:
         AnisotropicLight(const math::Point3D& position, const math::Vector3D& direction, const math::Vector3D& up, math::Function<imaging::Color(Angle, Angle)> light_function)
-            : lights::_private_::PointLightImplementation(position), m_direction(direction), m_right(direction.cross(up)), m_up(m_right.cross(m_direction)), m_light_function(light_function)
+            : lights::_private_::PointLightImplementation(position), m_direction(direction), m_right(direction.cross(up).normalized()), m_up(m_right.cross(m_direction)), m_light_function(light_function)
         {
             assert(m_direction.is_unit());
-            assert(m_up.is_unit());
             assert(m_right.is_unit());
+            assert(m_up.is_unit());
             assert(m_direction.is_perpendicular_on(m_up));
             assert(m_direction.is_perpendicular_on(m_right));
             assert(m_right.is_perpendicular_on(m_up));
