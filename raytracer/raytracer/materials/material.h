@@ -2,8 +2,8 @@
 
 #include "imaging/color.h"
 #include "math/point2d.h"
+#include "math/function.h"
 #include "primitives/hit-position.h"
-#include "materials/brdf.h"
 #include "materials/material-properties.h"
 #include "animation/time-stamp.h"
 #include <assert.h>

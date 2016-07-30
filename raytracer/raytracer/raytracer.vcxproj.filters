@@ -117,18 +117,6 @@
     <ClCompile Include="cameras\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\brdfs\lambert.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="materials\brdfs\diffuse-component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="materials\brdfs\specular-component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="materials\brdfs\phong.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\cropper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -471,21 +459,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lights\lights.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\brdf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\brdfs\lambert.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\brdfs\diffuse-component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\brdfs\specular-component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\brdfs\phong.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracing\scene.h">

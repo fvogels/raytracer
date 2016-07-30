@@ -30,7 +30,7 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        return decorate(to_animated_2d_material(marble3d(4, 2))(now), xz_plane());
+        return decorate(to_animated_2d_material(marble3d(4, 2))(now), xy_plane());
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -38,14 +38,14 @@ namespace
         using namespace raytracer::lights;
 
         std::vector<LightSource> light_sources;
-        light_sources.push_back(omnidirectional(point(0, 5, 5), colors::white()));
+        light_sources.push_back(directional(Vector3D(0, 0, -1), colors::white()));
 
         return light_sources;
     }
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::perspective(point(0, 5, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
+        return raytracer::cameras::perspective(point(0, 0, 10), point(0, 0, 0), vector(0, 1, 0), 1, 1);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()

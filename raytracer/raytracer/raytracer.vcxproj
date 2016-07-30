@@ -270,10 +270,6 @@
     <ClCompile Include="imaging\color.cpp" />
     <ClCompile Include="imaging\bmp-format.cpp" />
     <ClCompile Include="imaging\wif-format.cpp" />
-    <ClCompile Include="materials\brdfs\diffuse-component.cpp" />
-    <ClCompile Include="materials\brdfs\lambert.cpp" />
-    <ClCompile Include="materials\brdfs\phong.cpp" />
-    <ClCompile Include="materials\brdfs\specular-component.cpp" />
     <ClCompile Include="materials\marble-material.cpp" />
     <ClCompile Include="materials\material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
@@ -389,11 +385,6 @@
     <ClInclude Include="lights\lights.h" />
     <ClInclude Include="lights\omnidirectional-point-light.h" />
     <ClInclude Include="lights\point-light.h" />
-    <ClInclude Include="materials\brdf.h" />
-    <ClInclude Include="materials\brdfs\diffuse-component.h" />
-    <ClInclude Include="materials\brdfs\lambert.h" />
-    <ClInclude Include="materials\brdfs\phong.h" />
-    <ClInclude Include="materials\brdfs\specular-component.h" />
     <ClInclude Include="materials\marble-material.h" />
     <ClInclude Include="materials\material-properties.h" />
     <ClInclude Include="materials\material.h" />

@@ -43,27 +43,6 @@ using namespace animation;
 using namespace util;
 
 
-Material create_lambert_material(const Color& c, bool reflective = false)
-{
-    MaterialProperties properties(colors::black(), c, colors::black(), 0, 0, 0, 0);
-
-    return raytracer::materials::uniform(properties);
-}
-
-Material create_phong_material(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity)
-{
-    MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, 0, 0);
-
-    return raytracer::materials::uniform(properties);
-}
-
-Material create_phong_material(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index)
-{
-    MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
-
-    return raytracer::materials::uniform(properties);
-}
-
 Lazy<raytracer::Primitive> bunny([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/bunny.bmesh", std::ios::binary)); });
 Lazy<raytracer::Primitive> buddha([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/buddha.bmesh", std::ios::binary)); });
 Lazy<raytracer::Primitive> dragon([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/dragon.bmesh", std::ios::binary)); });
@@ -80,7 +59,7 @@ raytracer::Primitive create_root(TimeStamp now)
     auto position_animation = animation::ease(animation::straight(Point3D(-2, 0, 0), Point3D(2, 0, 0), Duration::from_seconds(1)), math::functions::easing::easing_function<math::functions::easing::QUADRATIC, math::functions::easing::out>());
     // auto b = group(1, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), translate(position_animation(now) - Point3D(0, 0, 0), sphere())));
     auto plane = decorate(
-        uniform(MaterialProperties(colors::red() * 0.1, colors::red() * 0.8, colors::black(), 0, 0, 0, 0)),
+        uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0)),
         xz_plane());
 
     return make_union(std::vector<Primitive> { plane });
@@ -98,12 +77,22 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
     // light_sources.push_back(directional(Vector3D(1, 45_degrees, -45_degrees), colors::white()));
     // light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
 
-    std::function<Color(Angle)> lambda = [now](Angle t) -> Color {
-        if (t > 90_degrees * (1 - now.seconds())) return colors::white();
-        else return colors::black();
+
+    std::function<Color(Angle, Angle)> lambda = [=](Angle x, Angle y) -> Color {
+        double a = x.degrees() / 12;
+        double b = y.degrees() / 12;
+
+        if (a - round(a) < 0.1 || b - round(b) < 0.1)
+        {
+            return colors::black();
+        }
+        else
+        {
+            return colors::white();
+        }
     };
 
-    light_sources.push_back(anisotropic(light_position, Point3D(0, 0, 0), from_lambda(lambda)));
+    light_sources.push_back(anisotropic(light_position, Point3D(0, 0, 0), Vector3D(1, 1, 1).normalized(), from_lambda(lambda)));
 
     return light_sources;
 }
@@ -148,7 +137,7 @@ void render()
     auto scenes = pipeline::animation(30);
 
     pipeline::start(create_scene_animation()) >>
-        pipeline::animation(30) >>
+        pipeline::animation(1) >>
         pipeline::renderer(rendering::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
 }
@@ -161,10 +150,10 @@ int main()
     // TIMED_FUNC(timerObj);
 
     //using namespace imaging::bitmap_consumers;
-    //demos::fisheye(wif("e:/temp/output/test.wif"));
+    // demos::marble(pipeline::wif("e:/temp/output/test.wif"));
 
     render();
-    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");
+    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 }
 
 #endif
