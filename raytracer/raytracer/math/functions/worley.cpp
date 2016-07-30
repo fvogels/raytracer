@@ -22,11 +22,6 @@ namespace math
 
                 double evaluate(const math::Point2D& p) const
                 {
-                    assert(0 <= p.x());
-                    assert(p.x() <= 1);
-                    assert(0 <= p.y());
-                    assert(p.y() <= 1);
-
                     return find_smallest_distance(p);
                 }
 
@@ -92,13 +87,6 @@ namespace math
 
                 double evaluate(const math::Point3D& p) const
                 {
-                    assert(0 <= p.x());
-                    assert(p.x() <= 1);
-                    assert(0 <= p.y());
-                    assert(p.y() <= 1);
-                    assert(0 <= p.z());
-                    assert(p.z() <= 1);
-
                     return find_smallest_distance(p);
                 }
 
