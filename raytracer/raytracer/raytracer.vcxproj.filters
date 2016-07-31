@@ -332,16 +332,7 @@
     <ClInclude Include="imaging\color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\ray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\point3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\point2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\interval.h">
@@ -624,9 +615,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\wood-material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\vector4d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\point.h">

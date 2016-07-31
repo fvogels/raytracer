@@ -18,7 +18,7 @@ using namespace imaging;
 
 namespace
 {
-    constexpr unsigned ANTIALIASING = 2;
+    constexpr unsigned ANTIALIASING = 1;
     constexpr unsigned FPS = 30;
     constexpr unsigned HPIXELS = 500;
     constexpr unsigned VPIXELS = 500;
@@ -74,7 +74,7 @@ namespace
 
         auto function = from_lambda(lambda);
 
-        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
+        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(2));
     }
 
     void render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)

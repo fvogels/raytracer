@@ -2,7 +2,7 @@
 
 #include "lights/light-source.h"
 #include "imaging/color.h"
-#include "math/point3d.h"
+#include "math/point.h"
 
 
 namespace raytracer

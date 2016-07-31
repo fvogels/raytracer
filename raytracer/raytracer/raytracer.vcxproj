@@ -364,7 +364,6 @@
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\quantize.h" />
     <ClInclude Include="math\vector.h" />
-    <ClInclude Include="math\vector4d.h" />
     <ClInclude Include="materials\wood-material.h" />
     <ClInclude Include="math\point.h" />
     <ClInclude Include="pipeline\animation-processor.h" />
@@ -418,8 +417,6 @@
     <ClInclude Include="math\matrix4d.h" />
     <ClInclude Include="math\functions\noise.h" />
     <ClInclude Include="math\misc.h" />
-    <ClInclude Include="math\point2d.h" />
-    <ClInclude Include="math\point3d.h" />
     <ClInclude Include="math\quadratic_equation.h" />
     <ClInclude Include="math\quaternion.h" />
     <ClInclude Include="math\functions\random-function.h" />
@@ -427,7 +424,6 @@
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
     <ClInclude Include="math\transformation.h" />
-    <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
     <ClInclude Include="meta\indexing.h" />

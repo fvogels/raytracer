@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/function.h"
-#include "math/point3d.h"
+#include "math/point.h"
 #include "math/interval.h"
 #include "math/functions/easing-functions.h"
 #include "math/angle.h"

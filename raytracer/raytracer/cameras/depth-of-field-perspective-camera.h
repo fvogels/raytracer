@@ -1,9 +1,9 @@
 #pragma once
 
 #include "cameras/displaceable-camera.h"
-#include "math/vector3d.h"
-#include "math/point2d.h"
-#include "math/point3d.h"
+#include "math/vector.h"
+#include "math/point.h"
+#include "math/point.h"
 #include "math/rectangle2d.h"
 #include "math/rectangle3d.h"
 #include "sampling/sampler.h"

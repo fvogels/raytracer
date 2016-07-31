@@ -5,7 +5,7 @@
 #include "sampling/sampler.h"
 #include "raytracing/ray-tracer.h"
 #include "math/rasterizer.h"
-#include "math/point2d.h"
+#include "math/point.h"
 #include "util/looper.h"
 
 namespace raytracer

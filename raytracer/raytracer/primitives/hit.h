@@ -1,8 +1,8 @@
 #pragma once
 
-#include "math/vector3d.h"
-#include "math/point2d.h"
-#include "math/point3d.h"
+#include "math/vector.h"
+#include "math/point.h"
+#include "math/point.h"
 #include "imaging/color.h"
 #include "materials/material.h"
 #include "primitives/hit-position.h"

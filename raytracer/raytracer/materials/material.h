@@ -1,7 +1,7 @@
 #pragma once
 
 #include "imaging/color.h"
-#include "math/point2d.h"
+#include "math/point.h"
 #include "math/function.h"
 #include "primitives/hit-position.h"
 #include "materials/material-properties.h"

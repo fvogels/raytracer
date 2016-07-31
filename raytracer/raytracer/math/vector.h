@@ -237,7 +237,7 @@ namespace math
             return v - 2 * v.dot(n) * n;
         }
 
-    private:        
+    private:
         std::array<double, N> m_coords;
     };
 
@@ -277,6 +277,24 @@ namespace math
     {
         return p * constant;
     }
+
+    template<unsigned N>
+    struct approximately<Vector<N>>
+    {
+        Vector<N> value;
+        double delta;
+
+        explicit approximately(const Vector<N>& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const Vector<N>& other) const
+        {
+            return (value - other).norm() < delta;
+        }
+    };
 
     namespace _private_
     {
@@ -323,4 +341,6 @@ namespace math
     }
 
     using Vector2D = Vector<2>;
+    using Vector3D = Vector<3>;
+    using Vector4D = Vector<4>;
 }

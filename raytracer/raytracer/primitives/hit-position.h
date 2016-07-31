@@ -1,7 +1,7 @@
 #pragma once
 
-#include "math/point2d.h"
-#include "math/point3d.h"
+#include "math/point.h"
+#include "math/point.h"
 
 
 namespace raytracer

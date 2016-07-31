@@ -1,7 +1,7 @@
 #pragma once
 
 #include "lights/light-ray.h"
-#include "math/point3d.h"
+#include "math/point.h"
 #include <vector>
 #include <memory>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/ray.h"
-#include "math/point2d.h"
+#include "math/point.h"
 #include "math/ray.h"
 #include "math/matrix4d.h"
 #include <functional>

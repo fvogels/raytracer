@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/function.h"
-#include "math/point2d.h"
+#include "math/point.h"
 
 
 namespace math

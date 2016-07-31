@@ -236,4 +236,26 @@ namespace math
     {
         return point(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
     }
+
+    template<unsigned N>
+    struct approximately<Point<N>>
+    {
+        Point<N> value;
+        double delta;
+
+        explicit approximately(const Point<N>& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const Point<N>& other) const
+        {
+            return (value - other).norm() < delta;
+        }
+    };
+
+    using Point2D = Point<2>;
+    using Point3D = Point<3>;
+    using Point4D = Point<4>;
 }

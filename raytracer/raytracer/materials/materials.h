@@ -5,7 +5,7 @@
 #include "materials/wood-material.h"
 #include "materials/texture-material.h"
 #include "math/function.h"
-#include "math/point2d.h"
+#include "math/point.h"
 
 namespace raytracer
 {

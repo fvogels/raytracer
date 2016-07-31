@@ -1,6 +1,6 @@
 #include "primitives/fast-mesh.h"
 #include "primitives/triangle.h"
-#include "math/point3d.h"
+#include "math/point.h"
 #include "math/box.h"
 #include "easylogging++.h"
 #include <memory>
