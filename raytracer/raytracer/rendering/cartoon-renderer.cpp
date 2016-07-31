@@ -44,6 +44,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
     data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 
     for_each_pixel([&](Position pixel_coordinates) {
+        Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
         math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
         imaging::Color c = imaging::colors::black();
         unsigned sample_count = 0;
@@ -59,7 +60,7 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
 
         c /= sample_count;
 
-        bitmap[pixel_coordinates] = c.quantized(m_shade_count);
+        bitmap[bitmap_coordinates] = c.quantized(m_shade_count);
     });
 
 
@@ -67,16 +68,17 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
     {
         for (unsigned x = 0; x != bitmap.width(); ++x)
         {
-            Position pixel_position(x, y);
+            Position pixel_coordinates(x, y);
+            Position bitmap_coordinates(x, bitmap.height() - y - 1);
             unsigned border_count = 0;
 
-            for (auto& pair : group_grid[pixel_position])
+            for (auto& pair : group_grid[pixel_coordinates])
             {
                 unsigned current_id = pair.first;
                 Point2D current_xy = pair.second;
                 bool is_border = false;
 
-                group_grid.around(pixel_position, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
+                group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
                     for (auto& pair : group_grid[neighbor_pixel_position])
                     {
                         unsigned neighbor_id = pair.first;
@@ -100,17 +102,17 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
                 }
             }
 
-            double border_percentage = double(border_count) / group_grid[pixel_position].size();
+            double border_percentage = double(border_count) / group_grid[pixel_coordinates].size();
                         
             if (border_percentage > 0)
             {
                 if (border_percentage < 1)
                 {
-                    bitmap[pixel_position] *= (1 - border_percentage);
+                    bitmap[bitmap_coordinates] *= (1 - border_percentage);
                 }
                 else
                 {
-                    bitmap[pixel_position] = colors::black();
+                    bitmap[bitmap_coordinates] = colors::black();
                 }
             }
         }
