@@ -13,8 +13,8 @@ namespace
     class SplitDepthRenderer : public raytracer::rendering::_private_::RendererImplementation
     {
     public:
-        SplitDepthRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
-            : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
+        SplitDepthRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double split_thickness, double split_depth)
+            : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper), m_split_thickness_in_pixels(int(split_thickness * horizontal_resolution)), m_split_depth(split_depth)
         {
             // NOP
         }
@@ -63,20 +63,21 @@ namespace
     private:
         bool is_on_split(const Position& pixel_coordinates) const
         {
-            return abs(int(pixel_coordinates.x) - int(m_horizontal_resolution / 3)) < 10 ||
-                abs(int(pixel_coordinates.x) - int(2 * m_horizontal_resolution / 3)) < 10;
+            return abs(int(pixel_coordinates.x) - int(m_horizontal_resolution / 3)) < m_split_thickness_in_pixels / 2 ||
+                abs(int(pixel_coordinates.x) - int(2 * m_horizontal_resolution / 3)) < m_split_thickness_in_pixels / 2;
         }
 
         bool is_in_front_of_split(double distance) const
         {
-            return distance < 5;
+            return distance < m_split_depth;
         }
 
-        double m_stroke_thickness;
+        int m_split_thickness_in_pixels;
+        double m_split_depth;
     };
 }
 
-Renderer raytracer::rendering::split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
+Renderer raytracer::rendering::split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double split_thickness, double split_depth)
 {
-    return Renderer(std::make_shared<SplitDepthRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
+    return Renderer(std::make_shared<SplitDepthRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, split_thickness, split_depth));
 }

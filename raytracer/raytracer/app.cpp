@@ -136,7 +136,7 @@ void render()
 
     pipeline::start(create_scene_animation()) >>
         pipeline::animation(60) >>
-        pipeline::renderer(rendering::split_depth(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
+        pipeline::renderer(rendering::split_depth(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4), 0.05, 5)) >>
         pipeline::wif(path);
 }
 
