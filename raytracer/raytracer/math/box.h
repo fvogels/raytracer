@@ -36,6 +36,8 @@ namespace math
             return point(m_x_interval.bound<I>(), m_y_interval.bound<J>(), m_z_interval.bound<K>());
         }
 
+        Point3D center() const;
+
     private:
         bool math::Box::hits_xy_face(const Ray&, double, bool) const;
         bool math::Box::hits_xz_face(const Ray&, double, bool) const;

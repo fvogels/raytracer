@@ -135,3 +135,8 @@ Interval<double> math::Box::z() const
 {
     return m_z_interval;
 }
+
+Point3D math::Box::center() const
+{
+    return Point3D(m_x_interval.center(), m_y_interval.center(), m_z_interval.center());
+}
