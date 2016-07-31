@@ -6,43 +6,57 @@ using namespace raytracer;
 using namespace raytracer::primitives;
 
 
-bool raytracer::primitives::_private_::Bumpifier::find_hit(const Ray& ray, Hit* hit) const
+namespace
 {
-    if (m_perturbee->find_hit(ray, hit))
+    class Bumpifier : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        perturb(hit);
+    public:
+        Bumpifier(math::Function<math::Vector3D(const math::Point3D&)> normal_perturbator, Primitive perturbee)
+            : m_normal_perturbator(normal_perturbator), m_perturbee(perturbee) { }
 
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+        bool find_hit(const Ray& ray, Hit* hit) const override
+        {
+            if (m_perturbee->find_hit(ray, hit))
+            {
+                perturb(hit);
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Bumpifier::hits(const math::Ray& ray) const
-{
-    auto hits = m_perturbee->hits(ray);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-    for (auto& hit : hits)
-    {
-        perturb(hit.get());
-    }
+        std::vector<std::shared_ptr<Hit>> Bumpifier::hits(const math::Ray& ray) const override
+        {
+            auto hits = m_perturbee->hits(ray);
 
-    return hits;
-}
+            for (auto& hit : hits)
+            {
+                perturb(hit.get());
+            }
 
-void raytracer::primitives::_private_::Bumpifier::perturb(Hit* hit) const
-{
-    hit->normal = (hit->normal + m_normal_perturbator(hit->local_position.xyz)).normalized();
-}
+            return hits;
+        }
 
-math::Box raytracer::primitives::_private_::Bumpifier::bounding_box() const
-{
-    return m_perturbee->bounding_box();
+        math::Box bounding_box() const override
+        {
+            return m_perturbee->bounding_box();
+        }
+
+    private:
+        void perturb(Hit* hit) const
+        {
+            hit->normal = (hit->normal + m_normal_perturbator(hit->local_position.xyz)).normalized();
+        }
+
+        math::Function<math::Vector3D(const math::Point3D&)> m_normal_perturbator;
+        Primitive m_perturbee;
+    };
 }
 
 Primitive raytracer::primitives::bumpify(math::Function<math::Vector3D(const math::Point3D&)> function, Primitive primitive)
 {
-    return Primitive(std::make_shared<raytracer::primitives::_private_::Bumpifier>(function, primitive));
+    return Primitive(std::make_shared<Bumpifier>(function, primitive));
 }
