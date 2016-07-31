@@ -10,11 +10,6 @@ namespace raytracer
 {
     namespace lights
     {
-        namespace _private_
-        {
-            
-        }
-
         LightSource area(const math::Rectangle3D&, raytracer::Sampler, const imaging::Color&);
     }
 }
