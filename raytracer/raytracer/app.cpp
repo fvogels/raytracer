@@ -57,26 +57,12 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto position_animation = animation::ease(animation::straight(Point3D(-2, 0, 0), Point3D(2, 0, 0), Duration::from_seconds(1)), math::functions::easing::easing_function<math::functions::easing::QUADRATIC, math::functions::easing::out>());
-    // auto b = group(1, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), bunny.value()));
+    auto position_animation = circular(point(0, 0, 2), point(0, 0, 0), vector(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
+    auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)),
+        translate(position_animation(now) - Point3D(0, 0, 0), sphere()));
     // auto s = decorate(materials::texture("e:/temp/earth2.bmp"), translate(Vector3D(0,now.seconds(), 0), sphere()));
 
-    auto p = decorate(
-        uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0)),
-        translate(Vector3D(0, 0, -10), xy_plane()));
-    auto s = group(1, decorate(
-        uniform(MaterialProperties(colors::red() * 0.1, colors::red() * 0.8, colors::white(), 20, 0, 0, 0)),
-        translate(Vector3D(0, 0, 0), sphere())));
-
-    auto s2 = group(2, decorate(
-        uniform(MaterialProperties(colors::green() * 0.1, colors::green() * 0.8, colors::white(), 20, 0, 0, 0)),
-        translate(Vector3D(-2, 0, -2), sphere())));
-
-    auto s3 = group(2, decorate(
-        uniform(MaterialProperties(colors::blue() * 0.1, colors::blue() * 0.8, colors::white(), 20, 0, 0, 0)),
-        translate(Vector3D(2, 1, 0), sphere())));
-
-    return make_union(std::vector<Primitive> { p, s, s2, s3 });
+    return make_union(std::vector<Primitive> { b });
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -117,8 +103,8 @@ raytracer::Camera create_camera(TimeStamp now)
 
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
-    auto camera_position_animation = circular(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
-    Point3D camera_position(0.5, 0.5, 5);
+    auto camera_position_animation = circular(point(0, 0, 3), point(0, 0, 0), vector(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
+    Point3D camera_position(0, 0, 5);
     auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), vector(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
@@ -148,11 +134,9 @@ void render()
     // render_animation(create_scene_animation(), 1);
     const std::string path = "e:/temp/output/test.wif";
 
-    auto scenes = pipeline::animation(0);
-
     pipeline::start(create_scene_animation()) >>
-        pipeline::animation(1) >>
-        pipeline::renderer(rendering::cartoon(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4), 4, 0.005)) >>
+        pipeline::animation(60) >>
+        pipeline::renderer(rendering::split_depth(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
 }
 

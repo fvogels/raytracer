@@ -312,6 +312,9 @@
     <ClCompile Include="imaging\bitmap-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\split-depth-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -711,6 +714,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\bitmap-function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\split-depth-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
