@@ -11,7 +11,7 @@ TraceResult raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene
 
     if (scene.root->find_hit(ray, &hit))
     {
-        return TraceResult(colors::white(), hit.group_id);
+        return TraceResult(colors::white(), hit.group_id, distance(ray.origin, hit.position));
     }
     else
     {

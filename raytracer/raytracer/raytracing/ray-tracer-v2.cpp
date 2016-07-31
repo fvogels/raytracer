@@ -19,7 +19,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV2::trace(const Scene& sc
         result += compute_ambient(material_properties);
         result += process_lights(scene, material_properties, hit, eye_ray);
 
-        return TraceResult(result, hit.group_id);
+        return TraceResult(result, hit.group_id, distance(eye_ray.origin, hit.position));
     }
     else
     {
