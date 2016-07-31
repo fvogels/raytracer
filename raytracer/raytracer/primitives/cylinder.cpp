@@ -102,223 +102,235 @@ namespace
             return false;
         }
     }
-}
 
-bool raytracer::primitives::_private_::CylinderX::find_hit(const Ray& ray, Hit* hit) const
-{
-    assert(hit != nullptr);
-
-    auto O = point(ray.origin.y(), ray.origin.z());
-    auto D = vector(ray.direction.y(), ray.direction.z());
-
-    double t1, t2;
-    if (find_intersections(O, D, &t1, &t2))
+    class CylinderX : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        double t;
-        if (!smallest_greater_than_zero(t1, t2, &t))
+    public:
+        bool find_hit(const Ray& ray, Hit* hit) const override
         {
-            // Both hits are behind the eye
-            return false;
+            assert(hit != nullptr);
+
+            auto O = point(ray.origin.y(), ray.origin.z());
+            auto D = vector(ray.direction.y(), ray.direction.z());
+
+            double t1, t2;
+            if (find_intersections(O, D, &t1, &t2))
+            {
+                double t;
+                if (!smallest_greater_than_zero(t1, t2, &t))
+                {
+                    // Both hits are behind the eye
+                    return false;
+                }
+
+                if (t < hit->t)
+                {
+                    initialize_hit_x_cylinder(hit, ray, t);
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        if (t < hit->t)
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
-            initialize_hit_x_cylinder(hit, ray, t);
+            Point2D O = point(ray.origin.y(), ray.origin.z());
+            Vector2D D = vector(ray.direction.y(), ray.direction.z());
 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    else
-    {
-        return false;
-    }
-}
+            double t1, t2;
+            if (find_intersections(O, D, &t1, &t2))
+            {
+                sort(t1, t2);
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderX::hits(const math::Ray& ray) const
-{
-    Point2D O = point(ray.origin.y(), ray.origin.z());
-    Vector2D D = vector(ray.direction.y(), ray.direction.z());
+                auto hits = std::vector<std::shared_ptr<Hit>>();
 
-    double t1, t2;
-    if (find_intersections(O, D, &t1, &t2))
-    {
-        sort(t1, t2);
+                auto hit1 = std::make_shared<Hit>();
+                auto hit2 = std::make_shared<Hit>();
 
-        auto hits = std::vector<std::shared_ptr<Hit>>();
+                initialize_hit_x_cylinder(hit1.get(), ray, t1);
+                initialize_hit_x_cylinder(hit2.get(), ray, t2);
 
-        auto hit1 = std::make_shared<Hit>();
-        auto hit2 = std::make_shared<Hit>();
+                hits.push_back(hit1);
+                hits.push_back(hit2);
 
-        initialize_hit_x_cylinder(hit1.get(), ray, t1);
-        initialize_hit_x_cylinder(hit2.get(), ray, t2);
-
-        hits.push_back(hit1);
-        hits.push_back(hit2);
-
-        return hits;
-    }
-    else
-    {
-        return std::vector<std::shared_ptr<Hit>>();
-    }
-}
-
-bool raytracer::primitives::_private_::CylinderY::find_hit(const Ray& ray, Hit* hit) const
-{
-    assert(hit != nullptr);
-
-    Point2D O = point(ray.origin.x(), ray.origin.z());
-    Vector2D D = vector(ray.direction.x(), ray.direction.z());
-
-    double t1, t2;
-    if (find_intersections(O, D, &t1, &t2))
-    {
-        double t;
-        if (!smallest_greater_than_zero(t1, t2, &t))
-        {
-            // Both hits are behind the eye
-            return false;
+                return hits;
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
         }
 
-        if (t < hit->t)
+        Box bounding_box() const override
         {
-            initialize_hit_y_cylinder(hit, ray, t);
-
-            return true;
+            return Box(Interval<double>::infinite(), Interval<double>(-1, 1), Interval<double>(-1, 1));
         }
-        else
+    };
+
+    class CylinderY : public raytracer::primitives::_private_::PrimitiveImplementation
+    {
+    public:
+        bool find_hit(const Ray& ray, Hit* hit) const override
         {
-            return false;
-        }
-    }
-    else
-    {
-        return false;
-    }
-}
+            assert(hit != nullptr);
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderY::hits(const math::Ray& ray) const
-{
-    Point2D O = point(ray.origin.x(), ray.origin.z());
-    Vector2D D = vector(ray.direction.x(), ray.direction.z());
+            Point2D O = point(ray.origin.x(), ray.origin.z());
+            Vector2D D = vector(ray.direction.x(), ray.direction.z());
 
-    double t1, t2;
-    if (find_intersections(O, D, &t1, &t2))
-    {
-        sort(t1, t2);
+            double t1, t2;
+            if (find_intersections(O, D, &t1, &t2))
+            {
+                double t;
+                if (!smallest_greater_than_zero(t1, t2, &t))
+                {
+                    // Both hits are behind the eye
+                    return false;
+                }
 
-        auto hits = std::vector<std::shared_ptr<Hit>>();
+                if (t < hit->t)
+                {
+                    initialize_hit_y_cylinder(hit, ray, t);
 
-        auto hit1 = std::make_shared<Hit>();
-        auto hit2 = std::make_shared<Hit>();
-
-        initialize_hit_y_cylinder(hit1.get(), ray, t1);
-        initialize_hit_y_cylinder(hit2.get(), ray, t2);
-
-        hits.push_back(hit1);
-        hits.push_back(hit2);
-
-        return hits;
-    }
-    else
-    {
-        return std::vector<std::shared_ptr<Hit>>();
-    }
-}
-
-bool raytracer::primitives::_private_::CylinderZ::find_hit(const Ray& ray, Hit* hit) const
-{
-    assert(hit != nullptr);
-
-    Point2D O = point(ray.origin.x(), ray.origin.y());
-    Vector2D D = vector(ray.direction.x(), ray.direction.y());
-
-    double t1, t2;
-    if (find_intersections(O, D, &t1, &t2))
-    {
-        double t;
-        if (!smallest_greater_than_zero(t1, t2, &t))
-        {
-            // Both hits are behind the eye
-            return false;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        if (t < hit->t)
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
-            initialize_hit_z_cylinder(hit, ray, t);
+            Point2D O = point(ray.origin.x(), ray.origin.z());
+            Vector2D D = vector(ray.direction.x(), ray.direction.z());
 
-            return true;
+            double t1, t2;
+            if (find_intersections(O, D, &t1, &t2))
+            {
+                sort(t1, t2);
+
+                auto hits = std::vector<std::shared_ptr<Hit>>();
+
+                auto hit1 = std::make_shared<Hit>();
+                auto hit2 = std::make_shared<Hit>();
+
+                initialize_hit_y_cylinder(hit1.get(), ray, t1);
+                initialize_hit_y_cylinder(hit2.get(), ray, t2);
+
+                hits.push_back(hit1);
+                hits.push_back(hit2);
+
+                return hits;
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
         }
-        else
+
+        Box bounding_box() const override
         {
-            return false;
+            return Box(Interval<double>(-1, 1), Interval<double>::infinite(), Interval<double>(-1, 1));
         }
-    }
-    else
+    };
+
+    class CylinderZ : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        return false;
-    }
-}
+    public:
+        bool find_hit(const Ray& ray, Hit* hit) const override
+        {
+            assert(hit != nullptr);
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::CylinderZ::hits(const math::Ray& ray) const
-{
-    Point2D O = point(ray.origin.x(), ray.origin.y());
-    Vector2D D = vector(ray.direction.x(), ray.direction.y());
+            Point2D O = point(ray.origin.x(), ray.origin.y());
+            Vector2D D = vector(ray.direction.x(), ray.direction.y());
 
-    double t1, t2;
-    if (find_intersections(O, D, &t1, &t2))
-    {
-        sort(t1, t2);
+            double t1, t2;
+            if (find_intersections(O, D, &t1, &t2))
+            {
+                double t;
+                if (!smallest_greater_than_zero(t1, t2, &t))
+                {
+                    // Both hits are behind the eye
+                    return false;
+                }
 
-        auto hits = std::vector<std::shared_ptr<Hit>>();
+                if (t < hit->t)
+                {
+                    initialize_hit_z_cylinder(hit, ray, t);
 
-        auto hit1 = std::make_shared<Hit>();
-        auto hit2 = std::make_shared<Hit>();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-        initialize_hit_z_cylinder(hit1.get(), ray, t1);
-        initialize_hit_z_cylinder(hit2.get(), ray, t2);
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        {
+            Point2D O = point(ray.origin.x(), ray.origin.y());
+            Vector2D D = vector(ray.direction.x(), ray.direction.y());
 
-        hits.push_back(hit1);
-        hits.push_back(hit2);
+            double t1, t2;
+            if (find_intersections(O, D, &t1, &t2))
+            {
+                sort(t1, t2);
 
-        return hits;
-    }
-    else
-    {
-        return std::vector<std::shared_ptr<Hit>>();
-    }
-}
+                auto hits = std::vector<std::shared_ptr<Hit>>();
 
-Box raytracer::primitives::_private_::CylinderX::bounding_box() const
-{
-    return Box(Interval<double>::infinite(), Interval<double>(-1, 1), Interval<double>(-1, 1));
-}
+                auto hit1 = std::make_shared<Hit>();
+                auto hit2 = std::make_shared<Hit>();
 
-Box raytracer::primitives::_private_::CylinderY::bounding_box() const
-{
-    return Box(Interval<double>(-1, 1), Interval<double>::infinite(), Interval<double>(-1, 1));
-}
+                initialize_hit_z_cylinder(hit1.get(), ray, t1);
+                initialize_hit_z_cylinder(hit2.get(), ray, t2);
 
-Box raytracer::primitives::_private_::CylinderZ::bounding_box() const
-{
-    return Box(Interval<double>(-1, 1), Interval<double>(-1, 1), Interval<double>::infinite());
+                hits.push_back(hit1);
+                hits.push_back(hit2);
+
+                return hits;
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
+        }
+
+        Box bounding_box() const override
+        {
+            return Box(Interval<double>(-1, 1), Interval<double>(-1, 1), Interval<double>::infinite());
+        }
+    };
 }
 
 Primitive raytracer::primitives::cylinder_along_x()
 {
-    return Primitive(std::make_shared<raytracer::primitives::_private_::CylinderX>());
+    return Primitive(std::make_shared<CylinderX>());
 }
 
 Primitive raytracer::primitives::cylinder_along_y()
 {
-    return Primitive(std::make_shared<raytracer::primitives::_private_::CylinderY>());
+    return Primitive(std::make_shared<CylinderY>());
 }
 
 Primitive raytracer::primitives::cylinder_along_z()
 {
-    return Primitive(std::make_shared<raytracer::primitives::_private_::CylinderZ>());
+    return Primitive(std::make_shared<CylinderZ>());
 }
