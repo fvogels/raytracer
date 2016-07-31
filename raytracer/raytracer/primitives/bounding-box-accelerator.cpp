@@ -65,49 +65,56 @@ namespace
 
         return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
     }
-}
 
-
-raytracer::primitives::_private_::BoundingBoxAccelerator::BoundingBoxAccelerator(Primitive child)
-    : m_child(child), m_bounding_box(child->bounding_box())
-{
-    // NOP
-}
-
-bool raytracer::primitives::_private_::BoundingBoxAccelerator::find_hit(const math::Ray& ray, Hit* hit) const
-{
-    if (m_bounding_box.is_hit_positively_by(ray))
+    class BoundingBoxAccelerator : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        return m_child->find_hit(ray, hit);
-    }
-    else
-    {
-        assert(!m_child->find_hit(ray, hit));
+    public:
+        BoundingBoxAccelerator::BoundingBoxAccelerator(Primitive child)
+            : m_child(child), m_bounding_box(child->bounding_box())
+        {
+            // NOP
+        }
 
-        return false;
-    }
-}
+        bool BoundingBoxAccelerator::find_hit(const math::Ray& ray, Hit* hit) const override
+        {
+            if (m_bounding_box.is_hit_positively_by(ray))
+            {
+                return m_child->find_hit(ray, hit);
+            }
+            else
+            {
+                assert(!m_child->find_hit(ray, hit));
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::BoundingBoxAccelerator::hits(const math::Ray& ray) const
-{
-    if (m_bounding_box.is_hit_by(ray))
-    {
-        return m_child->hits(ray);
-    }
-    else
-    {
-        return std::vector<std::shared_ptr<Hit>>();
-    }
-}
+                return false;
+            }
+        }
 
-math::Box raytracer::primitives::_private_::BoundingBoxAccelerator::bounding_box() const
-{
-    return m_bounding_box;
+        std::vector<std::shared_ptr<Hit>> BoundingBoxAccelerator::hits(const math::Ray& ray) const override
+        {
+            if (m_bounding_box.is_hit_by(ray))
+            {
+                return m_child->hits(ray);
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
+        }
+
+        math::Box BoundingBoxAccelerator::bounding_box() const override
+        {
+            return m_bounding_box;
+        }
+
+    private:
+        Primitive m_child;
+        math::Box m_bounding_box;
+    };
 }
 
 Primitive raytracer::primitives::bounding_box_accelerator(Primitive primitive)
 {
-    return Primitive(std::make_shared<_private_::BoundingBoxAccelerator>(primitive));
+    return Primitive(std::make_shared<BoundingBoxAccelerator>(primitive));
 }
 
 Primitive raytracer::primitives::accelerated_union(std::vector<Primitive>& primitives)
