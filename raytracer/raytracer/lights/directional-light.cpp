@@ -31,7 +31,6 @@ namespace
     };
 }
 
-
 LightSource raytracer::lights::directional(const math::Vector3D& direction, const imaging::Color& color)
 {
     return LightSource(std::make_shared<DirectionalLight>(direction, color));
