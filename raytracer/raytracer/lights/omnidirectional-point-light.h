@@ -9,11 +9,6 @@ namespace raytracer
 {
     namespace lights
     {
-        namespace _private_
-        {
-            
-        }
-
         LightSource omnidirectional(const math::Point3D&, const imaging::Color&);
     }
 }
