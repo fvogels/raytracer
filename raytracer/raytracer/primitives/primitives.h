@@ -16,3 +16,4 @@
 #include "primitives/bounding-box-accelerator.h"
 #include "primitives/mesh.h"
 #include "primitives/fast-mesh.h"
+#include "primitives/bumpifier.h"

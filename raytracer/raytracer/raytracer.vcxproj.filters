@@ -315,6 +315,9 @@
     <ClCompile Include="rendering\split-depth-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\bumpifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -720,6 +723,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracing\trace-result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\bumpifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

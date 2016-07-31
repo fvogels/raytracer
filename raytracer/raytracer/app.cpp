@@ -57,9 +57,17 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
+    auto perlin = math::functions::perlin3d();
+    std::function<Vector3D(const Point3D&)> bumpificator = [perlin](const Point3D& p) -> Vector3D {
+        Point3D q(p.x() * 10, p.y() * 10, p.z() * 10);
+        double x = perlin(q);
+
+        return Vector3D(x, x, x);
+    };
+
     auto position_animation = circular(point(0, 0, 2), point(0, 0, 0), vector(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
-    auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)),
-        translate(position_animation(now) - Point3D(0, 0, 0), sphere()));
+    auto b = bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)),
+        translate(position_animation(now) - Point3D(0, 0, 0), sphere())));
     // auto s = decorate(materials::texture("e:/temp/earth2.bmp"), translate(Vector3D(0,now.seconds(), 0), sphere()));
 
     return make_union(std::vector<Primitive> { b });
