@@ -1,4 +1,5 @@
 #include "demo/marble-animation-demo.h"
 #include "demo/depth-of-field-demo.h"
 #include "demo/fisheye-demo.h"
-#include "demo/bumpifier-demo.h"
+#include "demo/sphere-bumpifier-demo.h"
+#include "demo/plane-bumpifier-demo.h"

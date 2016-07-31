@@ -318,7 +318,10 @@
     <ClCompile Include="primitives\bumpifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo\bumpifier-demo.cpp">
+    <ClCompile Include="demo\sphere-bumpifier-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demo\plane-bumpifier-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -731,7 +734,10 @@
     <ClInclude Include="primitives\bumpifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demo\bumpifier-demo.h">
+    <ClInclude Include="demo\sphere-bumpifier-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo\plane-bumpifier-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

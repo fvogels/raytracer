@@ -2,7 +2,6 @@
 
 #include "imaging/bitmap.h"
 #include "pipeline/consumer.h"
-#include <string>
 
 
 namespace demos

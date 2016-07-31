@@ -7,8 +7,10 @@ namespace math
 {
     namespace functions
     {
-        Noise2D perlin2d(unsigned seed = 0);
-        Noise3D perlin3d(unsigned seed = 0);
+        Noise2D perlin2d(unsigned);
+        Noise2D perlin2d(unsigned, unsigned);
+        Noise3D perlin3d(unsigned);
+        Noise3D perlin3d(unsigned, unsigned);
         Noise2D marble2d(unsigned, double);
         Noise3D marble3d(unsigned, double);
         Noise2D wood2d(unsigned, double);

@@ -1,4 +1,4 @@
-#include "demo/bumpifier-demo.h"
+#include "demo/sphere-bumpifier-demo.h"
 #include "materials/materials.h"
 #include "cameras/cameras.h"
 #include "imaging/wif-format.h"
@@ -29,7 +29,7 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        auto perlin = math::functions::perlin3d();
+        auto perlin = math::functions::perlin3d(78);
         std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
             Point3D q(p.x() * 10, p.y() * 10, p.z() * 10);
             double x = perlin(q);
@@ -87,7 +87,7 @@ namespace
     }
 }
 
-void demos::bumpify(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
+void demos::bumpify_sphere(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
     render(output);
 }

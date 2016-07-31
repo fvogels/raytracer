@@ -286,9 +286,35 @@ Noise2D math::functions::perlin2d(unsigned seed)
     return Noise2D(std::make_shared<PerlinNoise2D>(random_function(seed)));
 }
 
+Noise2D math::functions::perlin2d(unsigned seed, unsigned octaves)
+{
+    auto perlin = perlin2d(seed);
+    auto total = perlin;
+
+    for (unsigned i = 2; i <= octaves; ++i)
+    {
+        total = total + (scale2d(i) >> perlin) / double(i);
+    }
+
+    return total;
+}
+
 Noise3D math::functions::perlin3d(unsigned seed)
 {
     return Noise3D(std::make_shared<PerlinNoise3D>(random_function(seed)));
+}
+
+Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
+{
+    auto perlin = perlin3d(seed);
+    auto total = perlin;
+
+    for (unsigned i = 2; i <= octaves; ++i)
+    {
+        total = total + (scale3d(i) >> perlin) / double(i);
+    }
+
+    return total;
 }
 
 Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
