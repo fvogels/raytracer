@@ -14,10 +14,7 @@ bool raytracer::primitives::_private_::Group::find_hit(const math::Ray& ray, Hit
 {
     if (m_child->find_hit(ray, hit))
     {
-        if (hit->group_id == MISSING_ID)
-        {
-            hit->group_id = m_id;
-        }
+        hit->group_id = m_id;
 
         return true;
     }
