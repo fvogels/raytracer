@@ -53,14 +53,14 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::CartoonRendere
             scene.camera->enumerate_rays(p, [&](const Ray& ray) {
                 TraceResult tr = m_ray_tracer->trace(scene, ray);
                 group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
-                c += tr.color;
+                c += tr.color.quantized(m_shade_count);
                 ++sample_count;
             });
         });
 
         c /= sample_count;
 
-        bitmap[bitmap_coordinates] = c.quantized(m_shade_count);
+        bitmap[bitmap_coordinates] = c;
     });
 
 
