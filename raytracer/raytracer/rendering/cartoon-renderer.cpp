@@ -36,7 +36,7 @@ namespace
             // NOP
         }
 
-        std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const
+        std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const override
         {
             auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
             Bitmap& bitmap = *result;
