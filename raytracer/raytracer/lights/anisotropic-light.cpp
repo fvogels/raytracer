@@ -25,7 +25,7 @@ namespace
         }
 
     protected:
-        LightRay cast_lightray_to(const math::Point3D& p) const
+        LightRay cast_lightray_to(const math::Point3D& p) const override
         {
             assert(m_direction.is_unit());
 
