@@ -99,3 +99,9 @@ Primitive raytracer::primitives::rotate_around_z(math::Angle angle, Primitive tr
     return transform(math::transformations::rotate_z(angle), transformee);
 }
 
+Primitive raytracer::primitives::center(const Point3D& center, Primitive primitive)
+{
+    Point3D primitive_center = primitive->bounding_box().center();
+
+    return translate(center - primitive_center, primitive);
+}
