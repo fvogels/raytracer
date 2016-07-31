@@ -65,17 +65,18 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
 
     LOG(DEBUG) << "Finding edges";
 
-    for_each_pixel([&](Position pixel_position) {
+    for_each_pixel([&](Position pixel_coordinates) {
+        Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
         unsigned border_count = 0;
 
-        for (auto& pair : group_grid[pixel_position])
+        for (auto& pair : group_grid[pixel_coordinates])
         {
             unsigned current_id = pair.first;
             Point2D current_xy = pair.second;
             bool is_border = false;
 
-            group_grid.around(pixel_position, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
-                for (auto& pair : group_grid[neighbor_pixel_position])
+            group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_coordinates) {
+                for (auto& pair : group_grid[neighbor_pixel_coordinates])
                 {
                     unsigned neighbor_id = pair.first;
                     Point2D neighbor_xy = pair.second;
@@ -98,17 +99,17 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::EdgeRenderer::
             }
         }
 
-        double border_percentage = double(border_count) / group_grid[pixel_position].size();
+        double border_percentage = double(border_count) / group_grid[pixel_coordinates].size();
 
         if (border_percentage > 0)
         {
             if (border_percentage < 1)
             {
-                bitmap[pixel_position] = colors::white() * (1 - border_percentage);
+                bitmap[bitmap_coordinates] = colors::white() * (1 - border_percentage);
             }
             else
             {
-                bitmap[pixel_position] = colors::black();
+                bitmap[bitmap_coordinates] = colors::black();
             }
         }
     });
