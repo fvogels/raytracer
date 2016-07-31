@@ -76,5 +76,10 @@ namespace math
 
             return I == 0 ? this->lower : this->upper;
         }
+
+        T center() const noexcept
+        {
+            return lower + size() / 2;
+        }
     };
 }
