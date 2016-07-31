@@ -6,58 +6,69 @@ using namespace raytracer::primitives;
 using namespace math;
 
 
-raytracer::primitives::_private_::Decorator::Decorator(Material material, Primitive child)
-    : material(material), child(child)
+namespace
 {
-    assert(material);
-    assert(child);
-}
-
-bool raytracer::primitives::_private_::Decorator::find_hit(const Ray& ray, Hit* hit) const
-{
-    Material old_material = hit->material;
-    hit->material = Material();
-
-    bool result = child->find_hit(ray, hit);
-
-    if (result)
+    class Decorator : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        if (!hit->material)
+    public:
+        Decorator(Material material, Primitive child)
+            : material(material), child(child)
         {
-            hit->material = this->material;
+            assert(material);
+            assert(child);
         }
-    }
-    else
-    {
-        hit->material = old_material;
-    }
-    
-    assert(!result || hit->material);
 
-    return result;
-}
-
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Decorator::hits(const math::Ray& ray) const
-{
-    auto hits = this->child->hits(ray);
-
-    for (auto hit : hits)
-    {
-        if (!hit->material)
+        bool find_hit(const Ray& ray, Hit* hit) const override
         {
-            hit->material = this->material;
+            Material old_material = hit->material;
+            hit->material = Material();
+
+            bool result = child->find_hit(ray, hit);
+
+            if (result)
+            {
+                if (!hit->material)
+                {
+                    hit->material = this->material;
+                }
+            }
+            else
+            {
+                hit->material = old_material;
+            }
+
+            assert(!result || hit->material);
+
+            return result;
         }
-    }
 
-    return hits;
-}
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        {
+            auto hits = this->child->hits(ray);
 
-math::Box raytracer::primitives::_private_::Decorator::bounding_box() const
-{
-    return child->bounding_box();
+            for (auto hit : hits)
+            {
+                if (!hit->material)
+                {
+                    hit->material = this->material;
+                }
+            }
+
+            return hits;
+        }
+
+        math::Box bounding_box() const override
+        {
+            return child->bounding_box();
+        }
+
+    private:
+        Material material;
+        Primitive child;
+    };
 }
 
 Primitive raytracer::primitives::decorate(Material material, Primitive child)
 {
-    return Primitive(std::make_shared<raytracer::primitives::_private_::Decorator>(material, child));
+    return Primitive(std::make_shared<Decorator>(material, child));
 }
