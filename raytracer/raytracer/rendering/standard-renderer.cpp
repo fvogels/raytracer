@@ -20,9 +20,10 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::StandardRender
     Bitmap& bitmap = *result;
 
     for_each_pixel([&](Position pixel_coordinates) {
+        Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
         Color c = render_pixel(window_rasterizer, pixel_coordinates, scene);
 
-        bitmap[pixel_coordinates] = c;
+        bitmap[bitmap_coordinates] = c;
     });
 
     return result;
