@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "math/functions/perlin.h"
-#include "math/vector2d.h"
+#include "math/vector.h"
 #include "math/functions/random-function.h"
 #include "math/functions/easing-functions.h"
 #include <assert.h>

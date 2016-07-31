@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/vector2d.h"
+#include "math/vector.h"
 #include "math/point2d.h"
 
 namespace math

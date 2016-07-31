@@ -419,7 +419,6 @@
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
     <ClInclude Include="math\transformation.h" />
-    <ClInclude Include="math\vector2d.h" />
     <ClInclude Include="math\vector3d.h" />
     <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />

@@ -321,4 +321,6 @@ namespace math
 
         return out;
     }
+
+    using Vector2D = Vector<2>;
 }
