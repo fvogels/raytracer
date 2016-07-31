@@ -28,8 +28,6 @@ namespace raytracer
                 
                 void for_each_pixel(std::function<void(Position)>) const;
 
-                
-
             private:
                 std::shared_ptr<util::Looper> m_looper;
             };
