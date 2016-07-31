@@ -719,5 +719,8 @@
     <ClInclude Include="rendering\split-depth-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="raytracing\trace-result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

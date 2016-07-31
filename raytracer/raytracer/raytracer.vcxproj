@@ -375,6 +375,7 @@
     <ClInclude Include="pipeline\renderer-processor.h" />
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="primitives\group.h" />
+    <ClInclude Include="raytracing\trace-result.h" />
     <ClInclude Include="rendering\cartoon-renderer.h" />
     <ClInclude Include="raytracing\ray-tracer-v4.h" />
     <ClInclude Include="easylogging++.h" />
