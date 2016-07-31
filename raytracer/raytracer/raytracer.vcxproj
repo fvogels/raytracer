@@ -235,6 +235,7 @@
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />
     <ClCompile Include="animation\time-stamp.cpp" />
+    <ClCompile Include="imaging\bitmap-function.cpp" />
     <ClCompile Include="lights\anisotropic-light.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="cameras\camera.cpp" />
@@ -247,6 +248,7 @@
     <ClCompile Include="demo\fisheye-demo.cpp" />
     <ClCompile Include="demo\marble-animation-demo.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
+    <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\quantize.cpp" />
@@ -333,6 +335,7 @@
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\duration.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="imaging\bitmap-function.h" />
     <ClInclude Include="lights\anisotropic-light.h" />
     <ClInclude Include="cameras\camera.h" />
     <ClInclude Include="cameras\cameras.h" />
@@ -348,6 +351,7 @@
     <ClInclude Include="demo\fisheye-demo.h" />
     <ClInclude Include="demo\marble-animation-demo.h" />
     <ClInclude Include="imaging\bmp-format.h" />
+    <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\gauss.h" />

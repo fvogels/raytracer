@@ -1,0 +1,29 @@
+#include "materials/texture-material.h"
+#include "imaging/bitmap-function.h"
+#include "imaging/bmp-format.h"
+
+using namespace raytracer;
+using namespace imaging;
+using namespace math;
+
+
+Material raytracer::materials::texture(Function<Color(const Point2D&)> color_function)
+{
+    std::function<MaterialProperties(const Point2D&)> converter = [color_function](const Point2D& p) -> MaterialProperties {
+        MaterialProperties properties(colors::black(), color_function(p), colors::black(), 0.0, 0.0, 0.0, 0.0);
+
+        return properties;
+    };
+
+    return make_2d_material(from_lambda(converter));
+}
+
+Material raytracer::materials::texture(std::shared_ptr<imaging::Bitmap> bitmap)
+{
+    return raytracer::materials::texture(bitmap_function(bitmap));
+}
+
+Material raytracer::materials::texture(const std::string& path)
+{
+    return raytracer::materials::texture(imaging::load_bitmap(path));
+}
