@@ -155,10 +155,9 @@ int main()
 
     // TIMED_FUNC(timerObj);
 
-    //using namespace imaging::bitmap_consumers;
-    // demos::marble(pipeline::wif("e:/temp/output/test.wif"));
+    demos::bumpify(pipeline::wif("e:/temp/output/test.wif"));
 
-    render();
+    // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 }
 

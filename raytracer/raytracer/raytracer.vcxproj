@@ -235,6 +235,7 @@
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />
     <ClCompile Include="animation\time-stamp.cpp" />
+    <ClCompile Include="demo\bumpifier-demo.cpp" />
     <ClCompile Include="imaging\bitmap-function.cpp" />
     <ClCompile Include="lights\anisotropic-light.cpp" />
     <ClCompile Include="app.cpp" />
@@ -337,6 +338,7 @@
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\duration.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="demo\bumpifier-demo.h" />
     <ClInclude Include="imaging\bitmap-function.h" />
     <ClInclude Include="lights\anisotropic-light.h" />
     <ClInclude Include="cameras\camera.h" />
