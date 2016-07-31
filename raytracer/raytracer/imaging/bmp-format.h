@@ -5,6 +5,6 @@
 
 namespace imaging
 {
-    Bitmap load_bitmap(const std::string&);
+    std::shared_ptr<Bitmap> load_bitmap(const std::string&);
     void save_bitmap(const std::string&, const Bitmap&);
 }

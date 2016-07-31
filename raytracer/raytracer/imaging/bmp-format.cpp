@@ -290,7 +290,7 @@ namespace
     }
 }
 
-Bitmap imaging::load_bitmap(const std::string& path)
+std::shared_ptr<Bitmap> imaging::load_bitmap(const std::string& path)
 {
     array<uint8_t> data = read_data(path);
     BITMAP_FILE_V5* file = reinterpret<BITMAP_FILE_V5>(data);
@@ -301,18 +301,18 @@ Bitmap imaging::load_bitmap(const std::string& path)
     unsigned width = std::abs(file->bitmap_header.Width);
     unsigned height = std::abs(file->bitmap_header.Height);
 
-    Bitmap bitmap(width, height);
+    auto bitmap = std::make_shared<Bitmap>(width, height);
 
     array<uint8_t> pixels = data.slice(file->file_header.BitmapOffset);
 
     switch (file->bitmap_header.BitsPerPixel)
     {
     case 24:
-        read_24bit_pixels(bitmap, pixels);
+        read_24bit_pixels(*bitmap, pixels);
         break;
 
     case 32:
-        read_32bit_pixels(bitmap, pixels);
+        read_32bit_pixels(*bitmap, pixels);
         break;
 
     default:
