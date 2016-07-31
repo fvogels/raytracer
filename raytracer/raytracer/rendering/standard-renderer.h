@@ -11,10 +11,10 @@ namespace raytracer
     {
         namespace _private_
         {
-            class StandardMultithreadedRenderer : public RendererImplementation
+            class StandardRenderer : public RendererImplementation
             {
             public:
-                StandardMultithreadedRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
+                StandardRenderer(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
 
                 std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
