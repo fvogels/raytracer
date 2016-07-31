@@ -28,7 +28,7 @@ namespace raytracer
                 
                 void for_each_pixel(std::function<void(Position)>) const;
 
-                imaging::Color render_pixel(const math::Rasterizer&, const Position&, const Scene&) const;
+                
 
             private:
                 std::shared_ptr<util::Looper> m_looper;

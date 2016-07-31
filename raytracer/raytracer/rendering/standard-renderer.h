@@ -19,6 +19,8 @@ namespace raytracer
                 std::shared_ptr<imaging::Bitmap> render(const Scene&) const override;
 
             private:
+                imaging::Color render_pixel(const math::Rasterizer&, const Position&, const Scene&) const;
+
                 unsigned m_thread_count;
             };
         }

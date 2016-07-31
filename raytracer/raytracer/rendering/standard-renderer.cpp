@@ -29,6 +29,22 @@ std::shared_ptr<imaging::Bitmap> raytracer::rendering::_private_::StandardRender
     return result;
 }
 
+imaging::Color raytracer::rendering::_private_::StandardRenderer::render_pixel(const math::Rasterizer& window_rasterizer, const Position& position, const Scene& scene) const
+{
+    math::Rectangle2D pixel_rectangle = window_rasterizer[position];
+    imaging::Color c = imaging::colors::black();
+    int sample_count = 0;
+
+    m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const Point2D& p) {
+        scene.camera->enumerate_rays(p, [this, &c, &sample_count, &scene](const Ray& ray) {
+            c += m_ray_tracer->trace(scene, ray).color;
+            ++sample_count;
+        });
+    });
+
+    return c / sample_count;
+}
+
 Renderer raytracer::rendering::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
 {
     return Renderer(std::make_shared<rendering::_private_::StandardRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
