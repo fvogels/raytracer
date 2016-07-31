@@ -7,54 +7,65 @@ using namespace raytracer;
 using namespace raytracer::primitives;
 
 
-raytracer::primitives::_private_::Cropper::Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate)
-    : m_cropped(cropped), m_predicate(predicate)
+namespace
 {
-    assert(cropped);
-    assert(predicate);
-}
-
-bool raytracer::primitives::_private_::Cropper::find_hit(const math::Ray& ray, Hit* hit) const
-{
-    auto hs = hits(ray);
-
-    for (auto h : hs)
+    class Cropper : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        assert(h);
-
-        if (h->t > 0)
+    public:
+        Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate)
+            : m_cropped(cropped), m_predicate(predicate)
         {
-            *hit = *h;
-
-            return true;
+            assert(cropped);
+            assert(predicate);
         }
-    }
 
-    return false;
-}
+        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        {
+            auto hs = hits(ray);
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Cropper::hits(const math::Ray& ray) const
-{
-    auto hits = m_cropped->hits(ray);
+            for (auto h : hs)
+            {
+                assert(h);
 
-    auto new_end = std::remove_if(hits.begin(), hits.end(), [this](std::shared_ptr<Hit> hit)
-    {
-        return !this->m_predicate(hit->position);
-    });
+                if (h->t > 0)
+                {
+                    *hit = *h;
 
-    hits.erase(new_end, hits.end());
+                    return true;
+                }
+            }
 
-    return hits;
-}
+            return false;
+        }
 
-Box raytracer::primitives::_private_::Cropper::bounding_box() const
-{
-    return m_cropped->bounding_box();
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        {
+            auto hits = m_cropped->hits(ray);
+
+            auto new_end = std::remove_if(hits.begin(), hits.end(), [this](std::shared_ptr<Hit> hit)
+            {
+                return !this->m_predicate(hit->position);
+            });
+
+            hits.erase(new_end, hits.end());
+
+            return hits;
+        }
+
+        Box bounding_box() const override
+        {
+            return m_cropped->bounding_box();
+        }
+
+    private:
+        Primitive m_cropped;
+        math::Function<bool(const math::Point3D&)> m_predicate;
+    };
 }
 
 Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool(const Point3D&)> predicate)
 {
-    return Primitive(std::make_shared<_private_::Cropper>(cropped, predicate));
+    return Primitive(std::make_shared<Cropper>(cropped, predicate));
 }
 
 Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<double>& x_interval)
