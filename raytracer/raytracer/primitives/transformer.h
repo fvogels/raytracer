@@ -8,24 +8,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        namespace _private_
-        {
-            class Transformer : public PrimitiveImplementation
-            {
-            public:
-                Transformer(const math::Transformation& transformer, Primitive transformee)
-                    : transformer(transformer), transformee(transformee) { }
-
-                bool find_hit(const math::Ray&, Hit*) const override;
-                std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override;
-                math::Box bounding_box() const override;
-
-            private:
-                math::Transformation transformer;
-                Primitive transformee;
-            };
-        }
-
         Primitive transform(const math::Transformation&, Primitive);
         Primitive translate(const math::Vector3D&, Primitive);
         Primitive scale(double, double, double, Primitive);
