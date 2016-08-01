@@ -4,3 +4,4 @@
 #include "demo/sphere-bumpifier-demo.h"
 #include "demo/plane-bumpifier-demo.h"
 #include "demo/split-depth-demo.h"
+#include "demo/sampler-demo.h"
