@@ -20,7 +20,7 @@ namespace raytracer
         public:
             void end() override
             {
-                produce_end();
+                Producer<OUTPUT>::produce_end();
             }
         };
     }
