@@ -7,11 +7,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        namespace _private_
-        {
-            
-        }
-
         Primitive sphere();
     }
 }
