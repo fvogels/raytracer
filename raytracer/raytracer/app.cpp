@@ -44,11 +44,27 @@ using namespace animation;
 using namespace util;
 
 
-Lazy<raytracer::Primitive> bunny([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/bunny.bmesh", std::ios::binary)); });
-Lazy<raytracer::Primitive> buddha([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/buddha.bmesh", std::ios::binary)); });
-Lazy<raytracer::Primitive> dragon([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/dragon.bmesh", std::ios::binary)); });
-Lazy<raytracer::Primitive> statuette([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/statuette.bmesh", std::ios::binary)); });
-Lazy<raytracer::Primitive> lucy([]() { return raytracer::primitives::fast_mesh_bin(std::ifstream("e:/temp/lucy.bmesh", std::ios::binary)); });
+Primitive load_mesh(const std::string& path)
+{
+  std::ifstream in(path);
+  return raytracer::primitives::fast_mesh_bin(in); 
+}
+
+Lazy<raytracer::Primitive> bunny([]() { 
+    return load_mesh("e:/temp/bunny.bmesh");
+  });
+Lazy<raytracer::Primitive> buddha([]() {
+    return load_mesh("e:/temp/buddha.bmesh");
+  });
+Lazy<raytracer::Primitive> dragon([]() {
+    return load_mesh("e:/temp/dragon.bmesh"); 
+  });
+Lazy<raytracer::Primitive> statuette([]() {
+    return load_mesh("e:/temp/statuette.bmesh");
+  });
+Lazy<raytracer::Primitive> lucy([]() {
+    return load_mesh("e:/temp/lucy.bmesh");
+});
 
 raytracer::Primitive create_root(TimeStamp now)
 {
