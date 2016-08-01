@@ -321,6 +321,7 @@
     <ClCompile Include="rendering\renderer.cpp" />
     <ClCompile Include="rendering\split-depth-renderer.cpp" />
     <ClCompile Include="rendering\standard-renderer.cpp" />
+    <ClCompile Include="sampling\nrooks-sampler.cpp" />
     <ClCompile Include="sampling\stratified-fixed-sampler.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
     <ClCompile Include="sampling\random-sampler.cpp" />
@@ -464,6 +465,7 @@
     <ClInclude Include="rendering\renderers.h" />
     <ClInclude Include="rendering\split-depth-renderer.h" />
     <ClInclude Include="rendering\standard-renderer.h" />
+    <ClInclude Include="sampling\nrooks-sampler.h" />
     <ClInclude Include="sampling\stratified-fixed-sampler.h" />
     <ClInclude Include="lights\light-ray.h" />
     <ClInclude Include="sampling\random-sampler.h" />
