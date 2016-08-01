@@ -424,9 +424,7 @@
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
     <ClInclude Include="math\transformation.h" />
-    <ClInclude Include="meta\function-traits.h" />
     <ClInclude Include="logging.h" />
-    <ClInclude Include="meta\indexing.h" />
     <ClInclude Include="primitives\bounding-box-accelerator.h" />
     <ClInclude Include="primitives\cone.h" />
     <ClInclude Include="primitives\cropper.h" />
