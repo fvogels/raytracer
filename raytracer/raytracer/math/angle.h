@@ -146,6 +146,6 @@ namespace math
 
     inline std::ostream& operator <<(std::ostream& out, Angle angle)
     {
-        return out << angle.degrees() << "°";
+        return out << angle.degrees() << "deg";
     }
 }
