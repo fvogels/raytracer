@@ -249,13 +249,13 @@ namespace math
         {
             static_assert(N == 3, "Cross product is only defined on 3D vectors");
 
-            const Vector3D& u = *this;
+            const Vector<3>& u = *this;
 
             double x = u.y() * v.z() - u.z() * v.y();
             double y = -(u.x() * v.z() - u.z() * v.x());
             double z = u.x() * v.y() - u.y() * v.x();
 
-            return Vector3D(x, y, z);
+            return Vector<3>(x, y, z);
         }
 
         bool is_perpendicular_on(const Vector<N>& v) const
@@ -303,31 +303,31 @@ namespace math
         template<unsigned I, unsigned N>
         struct VectorOutputHelper
         {
-            static void write(std::ostream& out, const Vector<N>& p)
+            static void write(std::ostream& out, const Vector<N>& v)
             {
                 out << ",";
-                out << p.coord<I>();
+                out << v.coord<I>();
 
-                VectorOutputHelper<I + 1, N>::write(out, p);
+                VectorOutputHelper<I + 1, N>::write(out, v);
             }
         };
 
         template<unsigned N>
         struct VectorOutputHelper<0, N>
         {
-            static void write(std::ostream& out, const Vector<N>& p)
+            static void write(std::ostream& out, const Vector<N>& v)
             {
                 out << "(";
-                out << p.coord<0>();
+                out << v.coord<0>();
 
-                VectorOutputHelper<1, N>::write(out, p);
+                VectorOutputHelper<1, N>::write(out, v);
             }
         };
 
         template<unsigned N>
         struct VectorOutputHelper<N, N>
         {
-            static void write(std::ostream& out, const Vector<N>& p)
+            static void write(std::ostream& out, const Vector<N>& v)
             {
                 out << ")";
             }
@@ -335,9 +335,9 @@ namespace math
     }
 
     template<unsigned N>
-    std::ostream& operator <<(std::ostream& out, const Vector<N>& p)
+    std::ostream& operator <<(std::ostream& out, const Vector<N>& v)
     {
-        _private_::VectorOutputHelper<0, N>::write(out, p);
+        _private_::VectorOutputHelper<0, N>::write(out, v);
 
         return out;
     }
