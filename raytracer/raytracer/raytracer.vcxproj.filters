@@ -324,6 +324,9 @@
     <ClCompile Include="demo\plane-bumpifier-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sampling\random-sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -720,6 +723,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\plane-bumpifier-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\random-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

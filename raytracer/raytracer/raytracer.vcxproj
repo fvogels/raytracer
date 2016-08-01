@@ -321,6 +321,7 @@
     <ClCompile Include="rendering\standard-renderer.cpp" />
     <ClCompile Include="sampling\grid-sampler.cpp" />
     <ClCompile Include="lights\light-ray.cpp" />
+    <ClCompile Include="sampling\random-sampler.cpp" />
     <ClCompile Include="sampling\single-sampler.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
@@ -459,6 +460,7 @@
     <ClInclude Include="rendering\standard-renderer.h" />
     <ClInclude Include="sampling\grid-sampler.h" />
     <ClInclude Include="lights\light-ray.h" />
+    <ClInclude Include="sampling\random-sampler.h" />
     <ClInclude Include="sampling\sampler.h" />
     <ClInclude Include="sampling\samplers.h" />
     <ClInclude Include="sampling\single-sampler.h" />
