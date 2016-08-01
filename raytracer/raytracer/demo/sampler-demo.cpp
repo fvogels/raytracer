@@ -20,8 +20,8 @@ namespace
 {
     constexpr unsigned ANTIALIASING = 2;
     constexpr unsigned FPS = 30;
-    constexpr unsigned HPIXELS = 500;
-    constexpr unsigned VPIXELS = 500;
+    constexpr unsigned HPIXELS = 1000;
+    constexpr unsigned VPIXELS = 1000;
     constexpr unsigned N_THREADS = 4;
 
     raytracer::Primitive create_root(TimeStamp now)
@@ -72,10 +72,12 @@ namespace
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         // auto sampler = raytracer::samplers::single();
+        // auto sampler = raytracer::samplers::random(4);
         // auto sampler = raytracer::samplers::stratified_fixed(2, 2);
         // auto sampler = raytracer::samplers::stratified_jittered(2, 2);
-        auto sampler = raytracer::samplers::stratified_half_jittered(2, 2);
-        // auto sampler = raytracer::samplers::random(4);
+        // auto sampler = raytracer::samplers::stratified_half_jittered(2, 2);
+        // auto sampler = raytracer::samplers::nrooks(4);
+        auto sampler = raytracer::samplers::multi_jittered(2);
         auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, sampler, ray_tracer, util::loopers::looper(N_THREADS));
 
         pipeline::start(create_scene_animation())

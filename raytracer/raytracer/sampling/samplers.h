@@ -4,3 +4,4 @@
 #include "sampling/stratified-jittered-sampler.h"
 #include "sampling/stratified-half-jittered-sampler.h"
 #include "sampling/nrooks-sampler.h"
+#include "sampling/multi-jittered-sampler.h"

@@ -342,6 +342,9 @@
     <ClCompile Include="sampling\nrooks-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sampling\multi-jittered-sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -756,6 +759,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sampling\nrooks-sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\multi-jittered-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
