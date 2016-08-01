@@ -64,7 +64,7 @@ namespace
 
         auto function = from_lambda(lambda);
 
-        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(2));
+        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
     }
 
     void render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
@@ -72,7 +72,8 @@ namespace
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         // auto sampler = raytracer::samplers::single();
-        auto sampler = raytracer::samplers::stratified_fixed(2, 2);
+        // auto sampler = raytracer::samplers::stratified_fixed(2, 2);
+        auto sampler = raytracer::samplers::stratified_jittered(2, 2);
         // auto sampler = raytracer::samplers::random(4);
         auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, sampler, ray_tracer, util::loopers::looper(N_THREADS));
 

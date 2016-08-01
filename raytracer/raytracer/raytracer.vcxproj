@@ -325,6 +325,7 @@
     <ClCompile Include="lights\light-ray.cpp" />
     <ClCompile Include="sampling\random-sampler.cpp" />
     <ClCompile Include="sampling\single-sampler.cpp" />
+    <ClCompile Include="sampling\stratified-jittered-sampler.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
@@ -470,6 +471,7 @@
     <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="data-structures\array.h" />
     <ClCompile Include="tests\coordinate-system-tests.cpp" />
+    <ClInclude Include="sampling\stratified-jittered-sampler.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\looper.h" />
     <ClInclude Include="util\misc.h" />
