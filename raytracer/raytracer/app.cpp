@@ -76,7 +76,8 @@ raytracer::Primitive create_root(TimeStamp now)
     auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane());
     // auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), xz_plane());
 
-    return make_union(std::vector<Primitive> { b });
+    std::vector<Primitive> children = { b };
+    return make_union(children);
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
