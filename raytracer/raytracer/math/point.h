@@ -176,7 +176,7 @@ namespace math
             static void write(std::ostream& out, const Point<N>& p)
             {
                 out << ",";
-                out << p.coord<I>();
+                out << p.template coord<I>();
 
                 PointOutputHelper<I + 1, N>::write(out, p);
             }
@@ -188,7 +188,7 @@ namespace math
             static void write(std::ostream& out, const Point<N>& p)
             {
                 out << "(";
-                out << p.coord<0>();
+                out << p.template coord<0>();
 
                 PointOutputHelper<1, N>::write(out, p);
             }
