@@ -9,7 +9,7 @@ Point2D math::Rectangle2D::center() const
 
 Point2D math::Rectangle2D::from_relative(const Point2D& p) const
 {
-    return origin + x_axis * p.x + y_axis * p.y;
+    return origin + x_axis * p.x() + y_axis * p.y();
 }
 
 bool math::operator ==(const Rectangle2D& r1, const Rectangle2D& r2)
