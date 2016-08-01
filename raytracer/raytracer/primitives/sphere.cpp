@@ -32,110 +32,114 @@ namespace
         hit->local_position.uv = compute_uv_from_xyz(hit->position);
         hit->normal = hit->position - Point3D();
     }
-}
 
-bool raytracer::primitives::_private_::Sphere::find_hit(const Ray& ray, Hit* hit) const
-{
-    assert(hit != nullptr);
-
-    double a = ray.direction.dot(ray.direction);
-    double b = 2 * ray.direction.dot(ray.origin - point(0, 0, 0));
-    double c = (ray.origin - Point3D()).norm_sqr() - 1;
-    double d = b * b - 4 * a * c;
-
-    if (d >= 0)
+    class Sphere : public raytracer::primitives::_private_::PrimitiveImplementation
     {
-        double sqrt_d = sqrt(d);
-
-        // Compute t's at which ray intersects sphere
-        double t1 = (-b - sqrt_d) / (2 * a);
-        double t2 = (-b + sqrt_d) / (2 * a);
-
-        // Find closest t > 0
-        double t;
-
-        if (t1 > t2)
+    public:
+        bool find_hit(const Ray& ray, Hit* hit) const override
         {
-            swap(t1, t2);
+            assert(hit != nullptr);
+
+            double a = ray.direction.dot(ray.direction);
+            double b = 2 * ray.direction.dot(ray.origin - point(0, 0, 0));
+            double c = (ray.origin - Point3D()).norm_sqr() - 1;
+            double d = b * b - 4 * a * c;
+
+            if (d >= 0)
+            {
+                double sqrt_d = sqrt(d);
+
+                // Compute t's at which ray intersects sphere
+                double t1 = (-b - sqrt_d) / (2 * a);
+                double t2 = (-b + sqrt_d) / (2 * a);
+
+                // Find closest t > 0
+                double t;
+
+                if (t1 > t2)
+                {
+                    swap(t1, t2);
+                }
+
+                if (t1 > 0)
+                {
+                    t = t1;
+                }
+                else if (t2 > 0)
+                {
+                    t = t2;
+                }
+                else
+                {
+                    // Both hits occur behind the eye
+                    return false;
+                }
+
+                if (t < hit->t)
+                {
+                    initialize_hit(hit, ray, t);
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        if (t1 > 0)
+        std::vector<std::shared_ptr<Hit>> hits(const Ray& ray) const override
         {
-            t = t1;
-        }
-        else if (t2 > 0)
-        {
-            t = t2;
-        }
-        else
-        {
-            // Both hits occur behind the eye
-            return false;
-        }
+            double a = ray.direction.dot(ray.direction);
+            double b = 2 * ray.direction.dot(ray.origin - Point3D());
+            double c = (ray.origin - Point3D()).norm_sqr() - 1;
+            double d = b * b - 4 * a * c;
 
-        if (t < hit->t)
-        {
-            initialize_hit(hit, ray, t);
+            if (d >= 0)
+            {
+                double sqrt_d = sqrt(d);
 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    else
-    {
-        return false;
-    }
-}
+                double t1 = (-b - sqrt_d) / (2 * a);
+                double t2 = (-b + sqrt_d) / (2 * a);
 
-std::vector<std::shared_ptr<Hit>> raytracer::primitives::_private_::Sphere::hits(const Ray& ray) const
-{
-    double a = ray.direction.dot(ray.direction);
-    double b = 2 * ray.direction.dot(ray.origin - Point3D());
-    double c = (ray.origin - Point3D()).norm_sqr() - 1;
-    double d = b * b - 4 * a * c;
+                if (t1 > t2)
+                {
+                    swap(t1, t2);
+                }
 
-    if (d >= 0)
-    {
-        double sqrt_d = sqrt(d);
+                std::vector<std::shared_ptr<Hit>> hits;
 
-        double t1 = (-b - sqrt_d) / (2 * a);
-        double t2 = (-b + sqrt_d) / (2 * a);
+                auto hit1 = std::make_shared<Hit>();
+                auto hit2 = std::make_shared<Hit>();
 
-        if (t1 > t2)
-        {
-            swap(t1, t2);
+                initialize_hit(hit1.get(), ray, t1);
+                initialize_hit(hit2.get(), ray, t2);
+
+                hits.push_back(hit1);
+                hits.push_back(hit2);
+
+                return hits;
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits;
+        math::Box bounding_box() const override
+        {
+            Interval<double> interval(-1, 1);
 
-        auto hit1 = std::make_shared<Hit>();
-        auto hit2 = std::make_shared<Hit>();
-
-        initialize_hit(hit1.get(), ray, t1);
-        initialize_hit(hit2.get(), ray, t2);
-
-        hits.push_back(hit1);
-        hits.push_back(hit2);
-
-        return hits;
-    }
-    else
-    {
-        return std::vector<std::shared_ptr<Hit>>();
-    }
-}
-
-math::Box raytracer::primitives::_private_::Sphere::bounding_box() const
-{
-    Interval<double> interval(-1, 1);
-
-    return Box(interval, interval, interval);
+            return Box(interval, interval, interval);
+        }
+    };
 }
 
 Primitive raytracer::primitives::sphere()
 {
-    return Primitive(std::make_shared<raytracer::primitives::_private_::Sphere>());
+    return Primitive(std::make_shared<Sphere>());
 }
