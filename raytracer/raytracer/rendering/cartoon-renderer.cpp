@@ -40,7 +40,7 @@ namespace
         {
             auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
             Bitmap& bitmap = *result;
-            Rectangle2D window(point(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+            Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
             Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
             data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 

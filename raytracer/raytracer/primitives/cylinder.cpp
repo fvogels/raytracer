@@ -21,7 +21,7 @@ namespace
         assert(0 <= u);
         assert(u <= 1);
 
-        return point(u, v);
+        return Point2D(u, v);
     }
 
     void initialize_hit_x_cylinder(Hit* hit, const Ray& ray, double t)
@@ -29,7 +29,7 @@ namespace
         assert(hit);
 
         Point3D position = ray.at(t);
-        Point2D position_on_circle = point(position.y(), position.z());
+        Point2D position_on_circle(position.y(), position.z());
         double height = position.x();
 
         hit->t = t;
@@ -46,7 +46,7 @@ namespace
         assert(hit);
 
         Point3D position = ray.at(t);
-        Point2D position_on_circle = point(position.x(), position.z());
+        Point2D position_on_circle(position.x(), position.z());
         double height = position.y();
 
         hit->t = t;
@@ -63,7 +63,7 @@ namespace
         assert(hit);
 
         Point3D position = ray.at(t);
-        Point2D position_on_circle = point(position.x(), position.y());
+        Point2D position_on_circle(position.x(), position.y());
         double height = position.z();
 
         hit->t = t;
@@ -77,11 +77,11 @@ namespace
 
     bool find_intersections(const Point2D& O, const Vector2D& D, double* t1, double* t2)
     {
-        if ((O - point(0, 0)).norm_sqr() > 1)
+        if ((O - Point2D(0, 0)).norm_sqr() > 1)
         {
             double a = D.dot(D);
-            double b = 2 * D.dot(O - point(0, 0));
-            double c = (O - point(0, 0)).norm_sqr() - 1;
+            double b = 2 * D.dot(O - Point2D(0, 0));
+            double c = (O - Point2D(0, 0)).norm_sqr() - 1;
 
             QuadraticEquation eq(a, b, c);
 

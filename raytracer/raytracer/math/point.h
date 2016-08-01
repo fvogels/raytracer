@@ -218,25 +218,6 @@ namespace math
         return (p - q).norm();
     }
 
-    inline Point<2> point(double x, double y)
-    {
-        std::array<double, 2> coordinates = { x, y };
-
-        return Point<2>(std::move(coordinates));
-    }
-
-    inline Point<3> point(double x, double y, double z)
-    {
-        std::array<double, 3> coordinates = { x, y, z };
-
-        return Point<3>(std::move(coordinates));
-    }
-
-    inline Point<3> point(double r, math::Angle azimuth, math::Angle altitude)
-    {
-        return Point<3>(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
-    }
-
     template<unsigned N>
     struct approximately<Point<N>>
     {

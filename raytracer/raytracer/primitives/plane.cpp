@@ -41,7 +41,7 @@ namespace
             }
             else
             {
-                double numer = -((ray.origin - point(0, 0, 0)).dot(normal));
+                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(normal));
                 double t = numer / denom;
 
                 if (0 < t && t < hit->t)
@@ -49,7 +49,7 @@ namespace
                     hit->t = t;
                     hit->position = ray.at(hit->t);
                     hit->local_position.xyz = hit->position;
-                    hit->local_position.uv = point(hit->position.x(), hit->position.y());
+                    hit->local_position.uv = Point2D(hit->position.x(), hit->position.y());
                     hit->normal = ray.origin.z() > 0 ? normal : -normal;
 
                     return true;
@@ -83,7 +83,7 @@ namespace
             }
             else
             {
-                double numer = -((ray.origin - point(0, 0, 0)).dot(normal));
+                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(normal));
                 double t = numer / denom;
 
                 if (0 < t && t < hit->t)
@@ -91,7 +91,7 @@ namespace
                     hit->t = t;
                     hit->position = ray.at(hit->t);
                     hit->local_position.xyz = hit->position;
-                    hit->local_position.uv = point(hit->position.x(), hit->position.z());
+                    hit->local_position.uv = Point2D(hit->position.x(), hit->position.z());
                     hit->normal = ray.origin.y() > 0 ? normal : -normal;
 
                     return true;
@@ -125,7 +125,7 @@ namespace
             }
             else
             {
-                double numer = -((ray.origin - point(0, 0, 0)).dot(normal));
+                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(normal));
                 double t = numer / denom;
 
                 if (0 < t && t < hit->t)
@@ -133,7 +133,7 @@ namespace
                     hit->t = t;
                     hit->position = ray.at(hit->t);
                     hit->local_position.xyz = hit->position;
-                    hit->local_position.uv = point(hit->position.y(), hit->position.z());
+                    hit->local_position.uv = Point2D(hit->position.y(), hit->position.z());
                     hit->normal = ray.origin.x() > 0 ? normal : -normal;
 
                     return true;

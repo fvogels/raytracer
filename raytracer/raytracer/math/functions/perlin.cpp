@@ -22,7 +22,7 @@ namespace
     Function<Point2D(const Point2D&)> scale2d(double factor)
     {
         std::function<Point2D(const Point2D&)> lambda = [factor](const Point2D& p) -> Point2D {
-            return point(p.x() * factor, p.y() * factor);
+            return Point2D(p.x() * factor, p.y() * factor);
         };
 
         return from_lambda(lambda);
@@ -141,7 +141,7 @@ namespace
         {
             double fx = bound<X>(p.x());
             double fy = bound<Y>(p.y());
-            Point2D fp = point(fx, fy);
+            Point2D fp(fx, fy);
 
             unsigned kx = unsigned(fx);
             unsigned ky = unsigned(fy);

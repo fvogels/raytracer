@@ -69,7 +69,7 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    Point3D light_position = point(0, 0, -15);
+    Point3D light_position(0, 0, -15);
     // light_sources.push_back(omnidirectional(light_position, colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 120_degrees, colors::white()));
     light_sources.push_back(directional(Vector3D(0, -0.1, 1).normalized(), colors::white()));
@@ -101,9 +101,9 @@ raytracer::Camera create_camera(TimeStamp now)
 
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
-    auto camera_position_animation = circular(point(0, 0, 3), point(0, 0, 0), Vector3D(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
+    auto camera_position_animation = circular(Point3D(0, 0, 3), Point3D(0, 0, 0), Vector3D(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
     Point3D camera_position(0, 2, 5);
-    auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
     // auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1, 0.5, samplers::grid(4, 4));

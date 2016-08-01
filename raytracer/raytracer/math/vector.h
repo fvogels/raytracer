@@ -280,16 +280,6 @@ namespace math
         return v * constant;
     }
 
-    inline Vector<2> vector(double radius, Angle theta)
-    {
-        return Vector<2>(radius * cos(theta), radius * sin(theta));
-    }
-
-    inline Vector<3> vector(double r, math::Angle azimuth, math::Angle altitude)
-    {
-        return Vector<3>(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
-    }
-
     template<unsigned N>
     struct approximately<Vector<N>>
     {

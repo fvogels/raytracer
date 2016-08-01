@@ -70,8 +70,8 @@ namespace
             double min_z = math::minimum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
             double max_z = math::maximum(p000.z(), p001.z(), p010.z(), p011.z(), p100.z(), p101.z(), p110.z(), p111.z());
 
-            Point3D lower_corner = point(min_x, min_y, min_z);
-            Point3D upper_corner = point(max_x, max_y, max_z);
+            Point3D lower_corner(min_x, min_y, min_z);
+            Point3D upper_corner(max_x, max_y, max_z);
 
             return Box::from_raw_corners(lower_corner, upper_corner);
         }

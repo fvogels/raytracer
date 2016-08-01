@@ -34,7 +34,7 @@ namespace math
 
                         double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
                         double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
-                        Point2D p = point(x + fx, y + fy);
+                        Point2D p(x + fx, y + fy);
 
                         callback(p);
                     }

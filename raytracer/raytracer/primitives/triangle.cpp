@@ -75,7 +75,7 @@ namespace
                         hit->t = t;
                         hit->position = P;
                         hit->local_position.xyz = P;
-                        hit->local_position.uv = point(alpha, beta);
+                        hit->local_position.uv = Point2D(alpha, beta);
                         hit->normal = normal;
 
                         return true;

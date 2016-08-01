@@ -21,7 +21,7 @@ namespace
         assert(0 <= v);
         assert(v <= 1);
 
-        return point(u, v);
+        return Point2D(u, v);
     }
 
     void initialize_hit(Hit* hit, const Ray& ray, double t)
@@ -41,7 +41,7 @@ namespace
             assert(hit != nullptr);
 
             double a = ray.direction.dot(ray.direction);
-            double b = 2 * ray.direction.dot(ray.origin - point(0, 0, 0));
+            double b = 2 * ray.direction.dot(ray.origin - Point3D(0, 0, 0));
             double c = (ray.origin - Point3D()).norm_sqr() - 1;
             double d = b * b - 4 * a * c;
 

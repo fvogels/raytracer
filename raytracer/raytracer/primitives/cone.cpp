@@ -60,14 +60,14 @@ namespace
                     }
                     else
                     {
-                        Point2D position_on_circle = point(position.x(), position.y());
+                        Point2D position_on_circle = Point2D(position.x(), position.y());
                         double height = position.z();
                         double theta = atan2(position.y(), position.x());
 
                         hit->t = t;
                         hit->position = position;
                         hit->local_position.xyz = position;
-                        hit->local_position.uv = point(theta, height);
+                        hit->local_position.uv = Point2D(theta, height);
                         hit->normal = Vector3D(position.x(), position.y(), -position.z()).normalized();
 
                         return true;

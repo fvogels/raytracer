@@ -24,7 +24,7 @@ namespace
             {
                 double t = -ray.origin.y() / ray.direction.y();
                 Point3D p = ray.at(t);
-                double r = distance(point(0, 0, 0), p);
+                double r = distance(Point3D(0, 0, 0), p);
 
                 if (t < hit->t && t < 1)
                 {
@@ -32,7 +32,7 @@ namespace
                     hit->normal = Vector3D(0, sign(ray.origin.y()), 0);
                     hit->position = p;
                     hit->local_position.xyz = p;
-                    hit->local_position.uv = point(r, atan2(p.z(), p.x()));
+                    hit->local_position.uv = Point2D(r, atan2(p.z(), p.x()));
 
                     return true;
                 }

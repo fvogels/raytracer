@@ -152,7 +152,7 @@ namespace
                         hit->t = t;
                         hit->position = P;
                         hit->local_position.xyz = P;
-                        hit->local_position.uv = math::point(alpha, beta);
+                        hit->local_position.uv = Point2D(alpha, beta);
                         hit->normal = normal;
 
                         return true;
@@ -173,7 +173,7 @@ namespace
         {
             assert(index < m_vertex_count);
 
-            return math::point(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
+            return math::Point3D(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
         }
 
         Vector3D vector(unsigned index) const
@@ -199,7 +199,7 @@ namespace
 
     Point3D to_point3d(XYZ xyz)
     {
-        return point(xyz.x, xyz.y, xyz.z);
+        return Point3D(xyz.x, xyz.y, xyz.z);
     }
 
     Box construct_bounding_box(const XYZ* vertices, const TRIANGLE& triangle)
