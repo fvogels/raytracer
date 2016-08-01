@@ -306,7 +306,7 @@ namespace math
             static void write(std::ostream& out, const Vector<N>& v)
             {
                 out << ",";
-                out << v.coord<I>();
+                out << v.template coord<I>();
 
                 VectorOutputHelper<I + 1, N>::write(out, v);
             }
@@ -318,7 +318,7 @@ namespace math
             static void write(std::ostream& out, const Vector<N>& v)
             {
                 out << "(";
-                out << v.coord<0>();
+                out << v.template coord<0>();
 
                 VectorOutputHelper<1, N>::write(out, v);
             }
