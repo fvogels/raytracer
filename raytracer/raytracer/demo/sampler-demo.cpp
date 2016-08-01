@@ -72,8 +72,8 @@ namespace
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         // auto sampler = raytracer::samplers::single();
-        // auto sampler = raytracer::samplers::grid(2, 2);
-        auto sampler = raytracer::samplers::random(4);
+        auto sampler = raytracer::samplers::stratified_fixed(2, 2);
+        // auto sampler = raytracer::samplers::random(4);
         auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, sampler, ray_tracer, util::loopers::looper(N_THREADS));
 
         pipeline::start(create_scene_animation())

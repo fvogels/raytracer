@@ -7,6 +7,6 @@ namespace raytracer
 {
     namespace samplers
     {
-        Sampler grid(unsigned, unsigned);
+        Sampler stratified_fixed(unsigned, unsigned);
     }
 }

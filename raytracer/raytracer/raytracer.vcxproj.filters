@@ -183,9 +183,6 @@
     <ClCompile Include="tests\cone-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sampling\grid-sampler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sampling\single-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -331,6 +328,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demo\sampler-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sampling\stratified-fixed-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -531,9 +531,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\cone.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sampling\grid-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sampling\sampler.h">
@@ -738,6 +735,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\sampler-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\stratified-fixed-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

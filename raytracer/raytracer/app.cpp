@@ -7,7 +7,7 @@
 #include "math/rasterizer.h"
 #include "math/functions.h"
 #include "math/functions/noise.h"
-#include "sampling/grid-sampler.h"
+#include "sampling/samplers.h"
 #include "materials/materials.h"
 #include "lights/lights.h"
 #include "raytracing/ray-tracers.h"
@@ -144,7 +144,7 @@ void render()
 
     pipeline::start(create_scene_animation()) >>
         pipeline::animation(30) >>
-        pipeline::renderer(rendering::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::grid(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
+        pipeline::renderer(rendering::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::stratified_fixed(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
 }
 

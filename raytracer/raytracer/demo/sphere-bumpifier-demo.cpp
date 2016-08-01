@@ -78,7 +78,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
+        auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)

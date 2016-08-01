@@ -1,4 +1,4 @@
-#include "sampling/grid-sampler.h"
+#include "sampling/stratified-fixed-sampler.h"
 #include "math/rasterizer.h"
 
 using namespace math;
@@ -7,10 +7,10 @@ using namespace raytracer;
 
 namespace
 {
-    class GridSampler : public raytracer::samplers::_private_::SamplerImplementation
+    class StratiefiedFixedSampler : public raytracer::samplers::_private_::SamplerImplementation
     {
     public:
-        GridSampler(unsigned rows, unsigned columns)
+        StratiefiedFixedSampler(unsigned rows, unsigned columns)
             : m_rows(rows), m_columns(columns) { }
 
         void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override
@@ -33,7 +33,7 @@ namespace
     };
 }
 
-Sampler raytracer::samplers::grid(unsigned rows, unsigned columns)
+Sampler raytracer::samplers::stratified_fixed(unsigned rows, unsigned columns)
 {
-    return Sampler(std::make_shared<GridSampler>(rows, columns));
+    return Sampler(std::make_shared<StratiefiedFixedSampler>(rows, columns));
 }

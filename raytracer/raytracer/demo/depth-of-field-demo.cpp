@@ -55,7 +55,7 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::depth_of_field_perspective(point(0, 0, 0), point(0, 0, 1 + now.seconds() * 6), vector(0, 1, 0), 1, 1, 0.05, samplers::grid(3, 3));
+        return raytracer::cameras::depth_of_field_perspective(point(0, 0, 0), point(0, 0, 1 + now.seconds() * 6), vector(0, 1, 0), 1, 1, 0.05, samplers::stratified_fixed(3, 3));
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()
@@ -78,7 +78,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, raytracer::samplers::grid(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
+        auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)
