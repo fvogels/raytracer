@@ -241,6 +241,12 @@ namespace math
         std::array<double, N> m_coords;
     };
 
+    template<unsigned N>
+    Vector<N> operator *(double constant, const Vector<N>& v)
+    {
+        return v * constant;
+    }
+
     inline Vector<2> vector(double x, double y)
     {
         std::array<double, 2> coordinates = { x, y };
@@ -270,12 +276,6 @@ namespace math
     inline Vector<3> vector(double r, math::Angle azimuth, math::Angle altitude)
     {
         return vector(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
-    }
-
-    template<unsigned N>
-    Vector<N> operator *(double constant, const Vector<N>& p)
-    {
-        return p * constant;
     }
 
     template<unsigned N>
