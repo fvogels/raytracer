@@ -10,18 +10,6 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    template<typename T>
-    T min3(T x, T y, T z)
-    {
-        return std::min(x, std::min(y, z));
-    }
-
-    template<typename T>
-    T max3(T x, T y, T z)
-    {
-        return std::max(x, std::max(y, z));
-    }
-
     class Triangle : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
@@ -112,9 +100,9 @@ namespace
 
         math::Box bounding_box() const override
         {
-            Interval<double> x_interval(min3(m_a.x(), m_b.x(), m_c.x()), max3(m_a.x(), m_b.x(), m_c.x()));
-            Interval<double> y_interval(min3(m_a.y(), m_b.y(), m_c.y()), max3(m_a.y(), m_b.y(), m_c.y()));
-            Interval<double> z_interval(min3(m_a.z(), m_b.z(), m_c.z()), max3(m_a.z(), m_b.z(), m_c.z()));
+            Interval<double> x_interval(minimum(m_a.x(), m_b.x(), m_c.x()), maximum(m_a.x(), m_b.x(), m_c.x()));
+            Interval<double> y_interval(minimum(m_a.y(), m_b.y(), m_c.y()), maximum(m_a.y(), m_b.y(), m_c.y()));
+            Interval<double> z_interval(minimum(m_a.z(), m_b.z(), m_c.z()), maximum(m_a.z(), m_b.z(), m_c.z()));
 
             return Box(x_interval, y_interval, z_interval);
         }
