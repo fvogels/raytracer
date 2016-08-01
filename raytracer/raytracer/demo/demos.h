@@ -3,3 +3,4 @@
 #include "demo/fisheye-demo.h"
 #include "demo/sphere-bumpifier-demo.h"
 #include "demo/plane-bumpifier-demo.h"
+#include "demo/split-depth-demo.h"

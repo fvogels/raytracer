@@ -155,7 +155,7 @@ int main()
 
     // TIMED_FUNC(timerObj);
 
-    demos::bumpify_plane(pipeline::wif("e:/temp/output/test.wif"));
+    demos::split_depth(pipeline::wif("e:/temp/output/test.wif"));
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
