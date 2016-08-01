@@ -31,7 +31,7 @@ namespace
 
         MaterialProperties white(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0);
         MaterialProperties black(colors::black() * 0.1, colors::black() * 0.8, colors::black(), 0, 0, 0, 0);
-        auto material = grid(0.1, uniform(white), uniform(black));
+        auto material = checkered(uniform(white), uniform(black));
 
         return decorate(material, xz_plane());
     }
@@ -48,7 +48,7 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::perspective(point(0, 1, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
+        return raytracer::cameras::perspective(point(5, 1, 5), point(0, 0, 0), vector(0, 1, 0), 1, 1);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()
