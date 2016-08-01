@@ -39,9 +39,9 @@ namespace math
         Point3D center() const;
 
     private:
-        bool math::Box::hits_xy_face(const Ray&, double, bool) const;
-        bool math::Box::hits_xz_face(const Ray&, double, bool) const;
-        bool math::Box::hits_yz_face(const Ray&, double, bool) const;
+        bool hits_xy_face(const Ray&, double, bool) const;
+        bool hits_xz_face(const Ray&, double, bool) const;
+        bool hits_yz_face(const Ray&, double, bool) const;
 
         Interval<double> m_x_interval, m_y_interval, m_z_interval;
     };
