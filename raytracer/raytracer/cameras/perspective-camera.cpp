@@ -20,7 +20,7 @@ void raytracer::cameras::_private_::PerspectiveCamera::enumerate_untransformed_r
 
     Point3D p = m_view_window.project(point);
 
-    callback(Ray(math::point(0,0,0), p));
+    callback(Ray(math::Point3D(0,0,0), p));
 }
 
 Camera raytracer::cameras::perspective(
@@ -34,9 +34,9 @@ Camera raytracer::cameras::perspective(
 
     double view_window_width = aspect_ratio;
     double view_window_height = 1;
-    Point3D view_window_origin = point(view_window_width / 2, -view_window_height / 2, distance);
-    Vector3D view_window_right = vector(-view_window_width, 0, 0);
-    Vector3D view_window_up = vector(0, view_window_height, 0);
+    Point3D view_window_origin = Point3D(view_window_width / 2, -view_window_height / 2, distance);
+    Vector3D view_window_right = Vector3D(-view_window_width, 0, 0);
+    Vector3D view_window_up = Vector3D(0, view_window_height, 0);
     Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
     Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
 

@@ -33,8 +33,8 @@ namespace
         std::vector<Primitive> primitives;
         for (double z = 0; z <= 24; z += 3)
         {
-            primitives.push_back(translate(vector(2, 0, -z), sphere()));
-            primitives.push_back(translate(vector(-2, 0, -z), sphere()));
+            primitives.push_back(translate(Vector3D(2, 0, -z), sphere()));
+            primitives.push_back(translate(Vector3D(-2, 0, -z), sphere()));
         }
 
         auto white = uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 10, 0.5, 0, 0));
@@ -54,14 +54,14 @@ namespace
         using namespace raytracer::lights;
 
         std::vector<LightSource> light_sources;
-        light_sources.push_back(omnidirectional(point(0, 5, 5), colors::white()));
+        light_sources.push_back(omnidirectional(Point3D(0, 5, 5), colors::white()));
 
         return light_sources;
     }
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::fisheye(point(0, 0, 5), point(0, 0, 0), vector(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
+        return raytracer::cameras::fisheye(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()

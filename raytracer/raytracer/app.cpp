@@ -57,17 +57,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto perlin = math::functions::perlin3d(0, 4);
-    std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
-        Point3D q(p.x(), now.seconds(), p.z());
-        double x = perlin(q);
-        double y = perlin(q + Vector3D(100, 100, 100));
-        double z = perlin(q - Vector3D(100, 100, 100));
-
-        return Vector3D(x, y, z) * 0.1;
-    };
-
-    auto b = bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
+    auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane());
     // auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), xz_plane());
 
     return make_union(std::vector<Primitive> { b });
@@ -111,9 +101,9 @@ raytracer::Camera create_camera(TimeStamp now)
 
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
-    auto camera_position_animation = circular(point(0, 0, 3), point(0, 0, 0), vector(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
+    auto camera_position_animation = circular(point(0, 0, 3), point(0, 0, 0), Vector3D(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
     Point3D camera_position(0, 2, 5);
-    auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), vector(0, 1, 0), 1, 1);
+    auto camera = raytracer::cameras::perspective(camera_position, point(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
     // auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1, 0.5, samplers::grid(4, 4));
@@ -153,9 +143,9 @@ int main()
 {
     logging::configure();
 
-    // TIMED_FUNC(timerObj);
+    TIMED_FUNC(timerObj);
 
-    demos::samplers(pipeline::wif("e:/temp/output/test.wif"));
+    demos::split_depth(pipeline::wif("e:/temp/output/test.wif"));
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    

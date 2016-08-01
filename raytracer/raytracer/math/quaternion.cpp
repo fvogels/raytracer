@@ -42,7 +42,7 @@ Point3D math::Quaternion::rotate(const Point3D& p) const
 
     assert(q.a == approx(0.0));
 
-    return point(q.b, q.c, q.d);
+    return Point3D(q.b, q.c, q.d);
 }
 
 Quaternion math::operator +(const Quaternion& q1, const Quaternion& q2)

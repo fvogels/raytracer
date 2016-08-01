@@ -31,7 +31,7 @@ namespace
     Function<Point3D(const Point3D&)> scale3d(double factor)
     {
         std::function<Point3D(const Point3D&)> lambda = [factor](const Point3D& p) -> Point3D {
-            return point(p.x() * factor, p.y() * factor, p.z() * factor);
+            return Point3D(p.x() * factor, p.y() * factor, p.z() * factor);
         };
 
         return from_lambda(lambda);
@@ -133,7 +133,7 @@ namespace
         {
             auto t = double(uint16_t(m_rng(x * 31 + 97 * y))) / std::numeric_limits<uint16_t>::max();
 
-            return vector(1.0, t * 360_degrees);
+            return Vector2D::polar(1.0, t * 360_degrees);
         }
 
         template<unsigned X, unsigned Y>
@@ -193,7 +193,7 @@ namespace
             auto t1 = double(uint16_t(m_rng(i))) / std::numeric_limits<uint16_t>::max();
             auto t2 = double(uint16_t(m_rng(i + 1))) / std::numeric_limits<uint16_t>::max();
 
-            return vector(1, t1 * 360_degrees, t2 * 180_degrees);
+            return Vector3D::spherical(1, t1 * 360_degrees, t2 * 180_degrees);
         }
 
         template<unsigned X, unsigned Y, unsigned Z>
@@ -202,7 +202,7 @@ namespace
             double fx = bound<X>(p.x());
             double fy = bound<Y>(p.y());
             double fz = bound<Z>(p.z());
-            Point3D fp = point(fx, fy, fz);
+            Point3D fp = Point3D(fx, fy, fz);
 
             unsigned kx = unsigned(fx);
             unsigned ky = unsigned(fy);

@@ -29,8 +29,8 @@ Matrix4D raytracer::cameras::_private_::create_transformation(const Point3D& eye
 
     Matrix4D transformation = math::transformation_matrices::coordinate_system(origin, x_axis, y_axis, z_axis);
 
-    assert(transformation * vector(0, 1, 0) == approx(fixed_up));
-    assert(transformation * vector(0, 0, 1) == approx(look_direction));
+    assert(transformation * Vector3D(0, 1, 0) == approx(fixed_up));
+    assert(transformation * Vector3D(0, 0, 1) == approx(look_direction));
 
     return transformation;
 }

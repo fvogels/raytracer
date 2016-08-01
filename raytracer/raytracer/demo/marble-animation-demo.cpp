@@ -45,7 +45,7 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp now)
     {
-        return raytracer::cameras::perspective(point(0, 0, 10), point(0, 0, 0), vector(0, 1, 0), 1, 1);
+        return raytracer::cameras::perspective(Point3D(0, 0, 10), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()

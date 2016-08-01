@@ -37,35 +37,35 @@ TEST_CASE("[Triangle] Hits against triangle with a = (0,0,0), b = (1,0,0), c = (
 
     SECTION("ray (0.1,0.1,1) + (0,0,-1)")
     {
-        Ray ray(point(0.1, 0.1, 1), vector(0, 0, -1));
+        Ray ray(point(0.1, 0.1, 1), Vector3D(0, 0, -1));
 
         REQUIRE(tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (0.1,-0.1,1) + (0,0,-1)")
     {
-        Ray ray(point(0.1, -0.1, 1), vector(0, 0, -1));
+        Ray ray(point(0.1, -0.1, 1), Vector3D(0, 0, -1));
 
         REQUIRE(!tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (-0.1,0.1,1) + (0,0,-1)")
     {
-        Ray ray(point(-0.1, 0.1, 1), vector(0, 0, -1));
+        Ray ray(point(-0.1, 0.1, 1), Vector3D(0, 0, -1));
 
         REQUIRE(!tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (0.9,0.05,1) + (0,0,-1)")
     {
-        Ray ray(point(0.9, 0.05, 1), vector(0, 0, -1));
+        Ray ray(point(0.9, 0.05, 1), Vector3D(0, 0, -1));
 
         REQUIRE(tri->find_hit(ray, &hit));
     }
 
     SECTION("Ray (0.05,0.9,1) + (0,0,-1)")
     {
-        Ray ray(point(0.05, 0.9, 1), vector(0, 0, -1));
+        Ray ray(point(0.05, 0.9, 1), Vector3D(0, 0, -1));
 
         REQUIRE(tri->find_hit(ray, &hit));
     }

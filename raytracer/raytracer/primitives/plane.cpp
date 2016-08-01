@@ -32,7 +32,7 @@ namespace
         {
             assert(hit != nullptr);
 
-            const Vector3D normal = vector(0, 0, 1);
+            const Vector3D normal = Vector3D(0, 0, 1);
             double denom = ray.direction.dot(normal);
 
             if (denom == approx(0.0))
@@ -74,7 +74,7 @@ namespace
         {
             assert(hit != nullptr);
 
-            const Vector3D normal = vector(0, 1, 0);
+            const Vector3D normal = Vector3D(0, 1, 0);
             double denom = ray.direction.dot(normal);
 
             if (denom == approx(0.0))
@@ -116,7 +116,7 @@ namespace
         {
             assert(hit != nullptr);
 
-            const Vector3D normal = vector(1, 0, 0);
+            const Vector3D normal = Vector3D(1, 0, 0);
             double denom = ray.direction.dot(normal);
 
             if (denom == approx(0.0))

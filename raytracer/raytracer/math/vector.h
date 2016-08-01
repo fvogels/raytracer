@@ -2,13 +2,46 @@
 
 #include "math/angle.h"
 #include "math/approx.h"
+#include "math/coordinate-systems.h"
 #include <array>
 
 
 namespace math
 {
+    namespace _private_
+    {
+        template<unsigned N, typename T>
+        class DimensionSpecificMembers { };
+
+        template<typename T>
+        class DimensionSpecificMembers<2, T>
+        {
+        public:
+            static T polar(double radius, math::Angle theta)
+            {
+                Polar polar{ radius, theta };
+                Cartesian2D cartesian = convert_coordinates<Cartesian2D>(polar);
+
+                return T(cartesian.x, cartesian.y);
+            }
+        };
+
+        template<typename T>
+        class DimensionSpecificMembers<3, T>
+        {
+        public:
+            static T spherical(double radius, math::Angle azimuth, math::Angle elevation)
+            {
+                Spherical spherical{ radius,azimuth,elevation };
+                Cartesian3D cartesian = convert_coordinates<Cartesian3D>(spherical);
+
+                return T(cartesian.x, cartesian.y, cartesian.z);
+            }
+        };
+    }
+
     template<unsigned N>
-    class Vector
+    class Vector : public _private_::DimensionSpecificMembers<N, Vector<N>>
     {
     public:
         template<typename... Ts>
@@ -222,7 +255,7 @@ namespace math
             double y = -(u.x() * v.z() - u.z() * v.x());
             double z = u.x() * v.y() - u.y() * v.x();
 
-            return vector(x, y, z);
+            return Vector3D(x, y, z);
         }
 
         bool is_perpendicular_on(const Vector<N>& v) const
@@ -247,35 +280,14 @@ namespace math
         return v * constant;
     }
 
-    inline Vector<2> vector(double x, double y)
-    {
-        std::array<double, 2> coordinates = { x, y };
-
-        return Vector<2>(std::move(coordinates));
-    }
-
-    inline Vector<3> vector(double x, double y, double z)
-    {
-        std::array<double, 3> coordinates = { x, y, z };
-
-        return Vector<3>(std::move(coordinates));
-    }
-
-    inline Vector<4> vector(double x, double y, double z, double w)
-    {
-        std::array<double, 4> coordinates = { x, y, z, w };
-
-        return Vector<4>(std::move(coordinates));
-    }
-
     inline Vector<2> vector(double radius, Angle theta)
     {
-        return vector(radius * cos(theta), radius * sin(theta));
+        return Vector<2>(radius * cos(theta), radius * sin(theta));
     }
 
     inline Vector<3> vector(double r, math::Angle azimuth, math::Angle altitude)
     {
-        return vector(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
+        return Vector<3>(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
     }
 
     template<unsigned N>

@@ -33,7 +33,7 @@ Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
 {
 #define AUX(row) a.x ## row ## 1 * v.x() + a.x ## row ## 2 * v.y() + a.x ## row ## 3 * v.z()
 
-    return vector(AUX(1), AUX(2), AUX(3));
+    return Vector3D(AUX(1), AUX(2), AUX(3));
 
 #undef AUX
 }
@@ -46,7 +46,7 @@ Point3D math::operator *(const Matrix4D& a, const Point3D& p)
     double y = AUX(2);
     double z = AUX(3);
 
-    return point(x, y, z);
+    return Point3D(x, y, z);
 
 #undef AUX
 }

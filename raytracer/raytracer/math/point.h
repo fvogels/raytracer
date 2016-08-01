@@ -8,7 +8,7 @@
 namespace math
 {
     template<unsigned N>
-    class Point
+    class Point : public _private_::DimensionSpecificMembers<N, Point<N>>
     {
     public:
         template<typename... Ts>
@@ -234,7 +234,7 @@ namespace math
 
     inline Point<3> point(double r, math::Angle azimuth, math::Angle altitude)
     {
-        return point(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
+        return Point<3>(r * cos(azimuth) * cos(altitude), r * sin(altitude), r * sin(azimuth) * cos(altitude));
     }
 
     template<unsigned N>

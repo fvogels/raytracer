@@ -54,7 +54,7 @@ TEST_CASE("[CameraTransformation] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0)"
 {
     Point3D eye = point(0, 0, 0);
     Point3D lookat = point(0, 0, 1);
-    Vector3D up = vector(0, 1, 0);
+    Vector3D up = Vector3D(0, 1, 0);
 
     auto matrix = create_transformation(eye, lookat, up);
     auto expected = math::transformation_matrices::identity();
@@ -62,7 +62,7 @@ TEST_CASE("[CameraTransformation] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0)"
     assert_equals(matrix, expected);
     assert_equals(eye, matrix * point(0, 0, 0));
     assert_equals(lookat, matrix * point(0, 0, 1));
-    assert_equals(up, matrix * vector(0, 1, 0));
+    assert_equals(up, matrix * Vector3D(0, 1, 0));
 }
 
 TEST_CASE("[CameraTransformation] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0)", "[CameraTransformation]")
@@ -75,7 +75,7 @@ TEST_CASE("[CameraTransformation] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0)"
 
     assert_equals(eye, matrix * point(0, 0, 0));
     assert_equals(lookat, matrix * point(0, 0, 1));
-    assert_equals(up, matrix * vector(0, 1, 0));
+    assert_equals(up, matrix * Vector3D(0, 1, 0));
 }
 
 TEST_CASE("[CameraTransformation] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0)", "[CameraTransformation]")
@@ -88,7 +88,7 @@ TEST_CASE("[CameraTransformation] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0)"
 
     assert_equals(matrix * point(0, 0, 0), eye);
     assert_equals(matrix * point(0, 0, 1), lookat);
-    assert_equals(matrix * vector(0, 1, 0), up);
+    assert_equals(matrix * Vector3D(0, 1, 0), up);
 }
 
 TEST_CASE("[CameraTransformation] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0)", "[CameraTransformation]")
@@ -101,7 +101,7 @@ TEST_CASE("[CameraTransformation] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0)"
 
     assert_equals(matrix * point(0, 0, 0), eye);
     assert_equals(matrix * point(0, 0, 1), lookat);
-    assert_equals(matrix * vector(0, 1, 0), up);
+    assert_equals(matrix * Vector3D(0, 1, 0), up);
 }
 
 #endif

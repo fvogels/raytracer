@@ -102,7 +102,7 @@ Primitive raytracer::primitives::crop_spherical(Primitive cropped, double radius
 {
     std::function<bool(const Point3D&)> predicate = [radius](const Point3D& p)
     {
-        return distance(point(0, 0, 0), p) < radius;
+        return distance(Point3D(0, 0, 0), p) < radius;
     };
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));

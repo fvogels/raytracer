@@ -19,9 +19,9 @@ namespace
         {
             assert(hit);
 
-            Point2D O2D = point(ray.origin.x(), ray.origin.y());
-            Vector2D D2D = vector(ray.direction.x(), ray.direction.y());
-            Vector2D OP = O2D - point(0, 0);
+            Point2D O2D = Point2D(ray.origin.x(), ray.origin.y());
+            Vector2D D2D = Vector2D(ray.direction.x(), ray.direction.y());
+            Vector2D OP = O2D - Point2D(0, 0);
 
             double a = D2D.dot(D2D) - pow(ray.direction.z(), 2);
             double b = 2 * (D2D.dot(OP) - ray.direction.z() * ray.origin.z());
@@ -54,7 +54,7 @@ namespace
                 {
                     Point3D position = ray.at(t);
 
-                    if (position == point(0, 0, 0))
+                    if (position == Point3D(0, 0, 0))
                     {
                         return false;
                     }
@@ -68,7 +68,7 @@ namespace
                         hit->position = position;
                         hit->local_position.xyz = position;
                         hit->local_position.uv = point(theta, height);
-                        hit->normal = vector(position.x(), position.y(), -position.z()).normalized();
+                        hit->normal = Vector3D(position.x(), position.y(), -position.z()).normalized();
 
                         return true;
                     }

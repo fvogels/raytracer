@@ -8,7 +8,7 @@ using namespace math;
 
 
 raytracer::cameras::_private_::OrthographicCamera::OrthographicCamera(const math::Matrix4D& transformation, double window_width, double window_height)
-    : DisplaceableCamera(transformation), m_eye_window(point(window_width / 2, -window_height / 2, 0), vector(-window_width, 0, 0), vector(0, window_height, 0))
+    : DisplaceableCamera(transformation), m_eye_window(Point3D(window_width / 2, -window_height / 2, 0), Vector3D(-window_width, 0, 0), Vector3D(0, window_height, 0))
 {
     // NOP
 }
@@ -20,7 +20,7 @@ void raytracer::cameras::_private_::OrthographicCamera::enumerate_untransformed_
 
     Point3D from = m_eye_window.project(point);
 
-    callback(Ray(from, vector(0, 0, 1)));
+    callback(Ray(from, Vector3D(0, 0, 1)));
 }
 
 Camera raytracer::cameras::orthographic(

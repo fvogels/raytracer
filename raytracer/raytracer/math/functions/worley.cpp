@@ -100,7 +100,7 @@ namespace math
                         double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
                         double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
                         double fz = double(m_rng(k + 2)) / std::numeric_limits<unsigned>::max();
-                        Point3D p = point(x + fx, y + fy, z + fz);
+                        Point3D p = Point3D(x + fx, y + fy, z + fz);
 
                         callback(p);
                     }

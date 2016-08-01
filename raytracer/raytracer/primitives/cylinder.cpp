@@ -36,7 +36,7 @@ namespace
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = vector(0.0, position.y(), position.z());
+        hit->normal = Vector3D(0.0, position.y(), position.z());
 
         assert(hit->normal.is_unit());
     }
@@ -53,7 +53,7 @@ namespace
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = vector(position.x(), 0.0, position.z());
+        hit->normal = Vector3D(position.x(), 0.0, position.z());
 
         assert(hit->normal.is_unit());
     }
@@ -70,7 +70,7 @@ namespace
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = vector(position.x(), position.y(), 0);
+        hit->normal = Vector3D(position.x(), position.y(), 0);
 
         assert(hit->normal.is_unit());
     }
@@ -110,8 +110,8 @@ namespace
         {
             assert(hit != nullptr);
 
-            auto O = point(ray.origin.y(), ray.origin.z());
-            auto D = vector(ray.direction.y(), ray.direction.z());
+            Point2D O(ray.origin.y(), ray.origin.z());
+            Vector2D D(ray.direction.y(), ray.direction.z());
 
             double t1, t2;
             if (find_intersections(O, D, &t1, &t2))
@@ -142,8 +142,8 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
-            Point2D O = point(ray.origin.y(), ray.origin.z());
-            Vector2D D = vector(ray.direction.y(), ray.direction.z());
+            Point2D O(ray.origin.y(), ray.origin.z());
+            Vector2D D(ray.direction.y(), ray.direction.z());
 
             double t1, t2;
             if (find_intersections(O, D, &t1, &t2))
@@ -182,8 +182,8 @@ namespace
         {
             assert(hit != nullptr);
 
-            Point2D O = point(ray.origin.x(), ray.origin.z());
-            Vector2D D = vector(ray.direction.x(), ray.direction.z());
+            Point2D O(ray.origin.x(), ray.origin.z());
+            Vector2D D(ray.direction.x(), ray.direction.z());
 
             double t1, t2;
             if (find_intersections(O, D, &t1, &t2))
@@ -214,8 +214,8 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
-            Point2D O = point(ray.origin.x(), ray.origin.z());
-            Vector2D D = vector(ray.direction.x(), ray.direction.z());
+            Point2D O(ray.origin.x(), ray.origin.z());
+            Vector2D D(ray.direction.x(), ray.direction.z());
 
             double t1, t2;
             if (find_intersections(O, D, &t1, &t2))
@@ -254,8 +254,8 @@ namespace
         {
             assert(hit != nullptr);
 
-            Point2D O = point(ray.origin.x(), ray.origin.y());
-            Vector2D D = vector(ray.direction.x(), ray.direction.y());
+            Point2D O(ray.origin.x(), ray.origin.y());
+            Vector2D D(ray.direction.x(), ray.direction.y());
 
             double t1, t2;
             if (find_intersections(O, D, &t1, &t2))
@@ -286,8 +286,8 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
-            Point2D O = point(ray.origin.x(), ray.origin.y());
-            Vector2D D = vector(ray.direction.x(), ray.direction.y());
+            Point2D O(ray.origin.x(), ray.origin.y());
+            Vector2D D(ray.direction.x(), ray.direction.y());
 
             double t1, t2;
             if (find_intersections(O, D, &t1, &t2))

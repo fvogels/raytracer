@@ -43,7 +43,7 @@ Animation<math::Point3D> animation::circular(
     const math::Interval<math::Angle>& angle_interval,
     const Duration& duration)
 {
-    Vector3D translation = center - math::point(0.0, 0.0, 0.0);
+    Vector3D translation = center - math::Point3D(0.0, 0.0, 0.0);
 
     std::function<Point3D(TimeStamp)> lambda = [point, translation, rotation_axis, angle_interval, duration](TimeStamp ts)
     {

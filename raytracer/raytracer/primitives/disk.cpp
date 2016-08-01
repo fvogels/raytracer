@@ -29,7 +29,7 @@ namespace
                 if (t < hit->t && t < 1)
                 {
                     hit->t = t;
-                    hit->normal = vector(0, sign(ray.origin.y()), 0);
+                    hit->normal = Vector3D(0, sign(ray.origin.y()), 0);
                     hit->position = p;
                     hit->local_position.xyz = p;
                     hit->local_position.uv = point(r, atan2(p.z(), p.x()));

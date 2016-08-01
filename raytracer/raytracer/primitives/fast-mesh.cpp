@@ -178,7 +178,7 @@ namespace
 
         Vector3D vector(unsigned index) const
         {
-            return math::vector(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
+            return math::Vector3D(m_vertices[index].x, m_vertices[index].y, m_vertices[index].z);
         }
 
         Box box(unsigned index) const

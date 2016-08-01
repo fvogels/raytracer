@@ -38,7 +38,7 @@ namespace
 
         std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const
         {
-            Rectangle2D window(point(0, 0), vector(1, 0), vector(0, 1));
+            Rectangle2D window(point(0, 0), Vector2D(1, 0), Vector2D(0, 1));
             Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
             data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
 

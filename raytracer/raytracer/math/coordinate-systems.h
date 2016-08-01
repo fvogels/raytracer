@@ -8,6 +8,17 @@
 
 namespace math
 {
+    struct Cartesian2D
+    {
+        double x, y;
+    };
+
+    struct Polar
+    {
+        double radius;
+        math::Angle theta;
+    };
+
     struct Cartesian3D
     {
         double x, y, z;
@@ -23,6 +34,30 @@ namespace math
     {
         template<typename, typename>
         struct CoordinateConverter;
+
+        template<>
+        struct CoordinateConverter<Cartesian2D, Polar>
+        {
+            static Polar convert(const Cartesian2D& cartesian)
+            {
+                double radius = sqrt(pow(cartesian.x, 2) + pow(cartesian.y, 2));
+                Angle theta = Angle::radians(atan2(cartesian.y, cartesian.x));
+
+                return Polar{ radius, theta };
+            }
+        };
+
+        template<>
+        struct CoordinateConverter<Polar, Cartesian2D>
+        {
+            static Cartesian2D convert(const Polar& polar)
+            {
+                double x = polar.radius * cos(polar.theta);
+                double y = polar.radius * sin(polar.theta);
+
+                return Cartesian2D{ x, y };
+            }
+        };
 
         template<>
         struct CoordinateConverter<Cartesian3D, Spherical>

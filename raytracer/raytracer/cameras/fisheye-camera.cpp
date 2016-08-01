@@ -21,7 +21,7 @@ void raytracer::cameras::_private_::FisheyeCamera::enumerate_untransformed_rays(
     assert(0 <= point.x() && point.x() <= 1);
     assert(0 <= point.y() && point.y() <= 1);
 
-    Point3D eye = math::point(0, 0, 0);
+    Point3D eye = math::Point3D(0, 0, 0);
 
     Interval<double> x_interval(0, 1);
     Interval<Angle> azimuth_interval(90_degrees - m_horizontal_view_angle / 2, 90_degrees + m_horizontal_view_angle / 2);
@@ -33,7 +33,7 @@ void raytracer::cameras::_private_::FisheyeCamera::enumerate_untransformed_rays(
     IntervalMapper<double, Angle> altitude_mapper(y_interval, altitude_interval);
     Angle altitude = altitude_mapper[point.y()];
 
-    Point3D through = math::point(1.0, azimuth, altitude);
+    Point3D through = Point3D::spherical(1.0, azimuth, altitude);
 
     callback(Ray(eye, through));
 }
