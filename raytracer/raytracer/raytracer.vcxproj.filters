@@ -336,6 +336,9 @@
     <ClCompile Include="sampling\stratified-jittered-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sampling\stratified-half-jittered-sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -744,6 +747,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sampling\stratified-jittered-sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sampling\stratified-half-jittered-sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

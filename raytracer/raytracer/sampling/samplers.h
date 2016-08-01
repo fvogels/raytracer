@@ -2,3 +2,4 @@
 #include "sampling/random-sampler.h"
 #include "sampling/stratified-fixed-sampler.h"
 #include "sampling/stratified-jittered-sampler.h"
+#include "sampling/stratified-half-jittered-sampler.h"
