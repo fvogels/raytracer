@@ -27,7 +27,7 @@ namespace math
         Box intersect(const Box&) const;
 
         template<unsigned I, unsigned J, unsigned K>
-        constexpr Point3D corner() const
+        Point3D corner() const
         {
             static_assert(I == 0 || I == 1, "I must be either 0 or 1");
             static_assert(J == 0 || J == 1, "J must be either 0 or 1");
