@@ -103,18 +103,18 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Program Files\chaiscript 5.8.1\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Program Files\chaiscript 5.8.1\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Program Files\chaiscript 5.8.1\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -329,6 +329,17 @@
     <ClCompile Include="sampling\single-sampler.cpp" />
     <ClCompile Include="sampling\stratified-half-jittered-sampler.cpp" />
     <ClCompile Include="sampling\stratified-jittered-sampler.cpp" />
+    <ClCompile Include="scripting\cameras-module.cpp" />
+    <ClCompile Include="scripting\imaging-module.cpp" />
+    <ClCompile Include="scripting\lights-module.cpp" />
+    <ClCompile Include="scripting\materials-module.cpp" />
+    <ClCompile Include="scripting\math-module.cpp" />
+    <ClCompile Include="scripting\pipeline-module.cpp" />
+    <ClCompile Include="scripting\primitives-module.cpp" />
+    <ClCompile Include="scripting\raytracing-module.cpp" />
+    <ClCompile Include="scripting\rendering-module.cpp" />
+    <ClCompile Include="scripting\samplers-module.cpp" />
+    <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
@@ -346,6 +357,43 @@
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\duration.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="chaiscript\chaiscript.hpp" />
+    <ClInclude Include="chaiscript\chaiscript_defines.hpp" />
+    <ClInclude Include="chaiscript\chaiscript_stdlib.hpp" />
+    <ClInclude Include="chaiscript\chaiscript_threading.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\any.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\bad_boxed_cast.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\bind_first.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\bootstrap.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\bootstrap_stl.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\boxed_cast.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\boxed_cast_helper.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\boxed_number.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\boxed_value.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\callable_traits.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\dispatchkit.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\dynamic_object.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\dynamic_object_detail.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\exception_specification.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\function_call.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\function_call_detail.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\handle_return.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\operators.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\proxy_constructors.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\proxy_functions.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\proxy_functions_detail.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\register_function.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\type_conversions.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\type_info.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_algebraic.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_common.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_engine.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_eval.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_parser.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_prelude_docs.hpp" />
+    <ClInclude Include="chaiscript\utility\json.hpp" />
+    <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
+    <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="demo\plane-bumpifier-demo.h" />
     <ClInclude Include="demo\sampler-demo.h" />
     <ClInclude Include="demo\sphere-bumpifier-demo.h" />
@@ -478,6 +526,18 @@
     <ClCompile Include="tests\coordinate-system-tests.cpp" />
     <ClInclude Include="sampling\stratified-half-jittered-sampler.h" />
     <ClInclude Include="sampling\stratified-jittered-sampler.h" />
+    <ClInclude Include="scripting\cameras-module.h" />
+    <ClInclude Include="scripting\imaging-module.h" />
+    <ClInclude Include="scripting\lights-module.h" />
+    <ClInclude Include="scripting\materials-module.h" />
+    <ClInclude Include="scripting\math-module.h" />
+    <ClInclude Include="scripting\pipeline-module.h" />
+    <ClInclude Include="scripting\primitives-module.h" />
+    <ClInclude Include="scripting\raytracing-module.h" />
+    <ClInclude Include="scripting\rendering-module.h" />
+    <ClInclude Include="scripting\samplers-module.h" />
+    <ClInclude Include="scripting\scripting-util.h" />
+    <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\looper.h" />
     <ClInclude Include="util\misc.h" />
