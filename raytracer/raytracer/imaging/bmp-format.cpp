@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <memory>
 #include <assert.h>
+#include <cstring>
 
 using namespace imaging;
 
