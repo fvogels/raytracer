@@ -49,7 +49,7 @@ $TESTS
 END
 
   test_template = <<'END'
-TEST_CASE("[FisheyeCamera] Eye = $EYE, Lookat = $LOOK_AT, Up = $UP, HAngle = $HANGLE, VAngle = $VANGLE, At $POSITION", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = ($EYE), Lookat = ($LOOK_AT), Up = ($UP), HAngle = $HANGLE, VAngle = $VANGLE, At ($POSITION)", "[FisheyeCamera]")
 {
     Point3D eye($EYE);
     Point3D look_at($LOOK_AT);
@@ -71,7 +71,7 @@ TEST_CASE("[FisheyeCamera] Eye = $EYE, Lookat = $LOOK_AT, Up = $UP, HAngle = $HA
 }
 END
 
-  File.open('fisheye-tests.cpp', 'w') do |out|
+  File.open('fisheye-camera-tests.cpp', 'w') do |out|
     
     tests = [ { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', hangle: '180', vangle: '180', position: '0.5,0.5', expected_origin: '0,0,0', expected_direction: '0,0,1' },
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', hangle: '180', vangle: '180', position: '0,0.5', expected_origin: '0,0,0', expected_direction: '1,0,0' },
@@ -141,7 +141,7 @@ END
 
   test_template = <<'END'
 
-TEST_CASE("[PerspectiveCamera] Eye = $EYE, Lookat = $LOOK_AT, Up = $UP, Distance = $DISTANCE, Aspect Ratio = $ASPECT_RATIO, At $POSITION", "[PerspectiveCamera]")
+TEST_CASE("[PerspectiveCamera] Eye = ($EYE), Lookat = ($LOOK_AT), Up = ($UP), Distance = $DISTANCE, Aspect Ratio = $ASPECT_RATIO, At ($POSITION)", "[PerspectiveCamera]")
 {
     Point3D eye($EYE);
     Point3D look_at($LOOK_AT);
@@ -161,7 +161,6 @@ TEST_CASE("[PerspectiveCamera] Eye = $EYE, Lookat = $LOOK_AT, Up = $UP, Distance
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 END
 
   File.open('perspective-camera-tests.cpp', 'w') do |out|
