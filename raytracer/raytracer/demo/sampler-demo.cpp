@@ -24,7 +24,7 @@ namespace
     constexpr unsigned VPIXELS = 1000;
     constexpr unsigned N_THREADS = 4;
 
-    raytracer::Primitive create_root(TimeStamp now)
+    raytracer::Primitive create_root(TimeStamp)
     {
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
