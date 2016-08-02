@@ -1,8 +1,6 @@
 #include "scripting/math-module.h"
-#include "math/point2d.h"
-#include "math/point3d.h"
-#include "math/vector2d.h"
-#include "math/vector3d.h"
+#include "math/point.h"
+#include "math/vector.h"
 
 using namespace chaiscript;
 using namespace raytracer;
