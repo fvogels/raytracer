@@ -16,9 +16,9 @@ namespace
             return samplers::single();
         }
 
-        Sampler grid(unsigned horizontal, unsigned vertical) const
+        Sampler stratified(unsigned horizontal, unsigned vertical) const
         {
-            return samplers::grid(horizontal, vertical);
+            return samplers::stratified_fixed(horizontal, vertical);
         }
     };
 }
@@ -32,7 +32,7 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
 
 #define SAMPLER(NAME) module->add(fun(&SamplerLibrary::NAME), #NAME)
     SAMPLER(single);
-    SAMPLER(grid);
+    SAMPLER(stratified);
 #undef COLOR
 
     return module;
