@@ -41,9 +41,7 @@ namespace
             return Vector3D(x, y, z) * 0.1;
         };
 
-        auto b = bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
-
-        return make_union(b);
+        return bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
