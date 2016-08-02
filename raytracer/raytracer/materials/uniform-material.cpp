@@ -4,14 +4,28 @@ using namespace math;
 using namespace raytracer;
 using namespace imaging;
 
-
-raytracer::materials::UniformMaterial::UniformMaterial(const MaterialProperties& properties)
-    : m_properties(properties)
+namespace
 {
-    // NOP
+    class UniformMaterial : public raytracer::materials::_private_::MaterialImplementation
+    {
+    public:
+        UniformMaterial(const MaterialProperties& properties)
+            : m_properties(properties)
+        {
+            // NOP
+        }
+
+        MaterialProperties at(const HitPosition&) const
+        {
+            return m_properties;
+        }
+
+    private:
+        MaterialProperties m_properties;
+    };
 }
 
-MaterialProperties raytracer::materials::UniformMaterial::at(const HitPosition&) const
+Material raytracer::materials::uniform(const MaterialProperties& properties)
 {
-    return m_properties;
+    return Material(std::make_shared<UniformMaterial>(properties));
 }

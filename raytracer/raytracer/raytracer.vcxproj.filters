@@ -63,9 +63,6 @@
     <ClCompile Include="math\rasterizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\materials.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\cylinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -376,6 +373,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\scripting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="materials\pattern-materials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -942,6 +942,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\scripting-util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\pattern-materials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -222,6 +222,7 @@
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -252,6 +253,7 @@
     <ClCompile Include="demo\fisheye-demo.cpp" />
     <ClCompile Include="demo\marble-animation-demo.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
+    <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
@@ -280,7 +282,6 @@
     <ClCompile Include="materials\marble-material.cpp" />
     <ClCompile Include="materials\material.cpp" />
     <ClCompile Include="materials\uniform-material.cpp" />
-    <ClCompile Include="materials\materials.cpp" />
     <ClCompile Include="materials\worley-material.cpp" />
     <ClCompile Include="math\box.cpp" />
     <ClCompile Include="math\functions\easing-functions.cpp" />
@@ -414,6 +415,7 @@
     <ClInclude Include="demo\fisheye-demo.h" />
     <ClInclude Include="demo\marble-animation-demo.h" />
     <ClInclude Include="imaging\bmp-format.h" />
+    <ClInclude Include="materials\pattern-materials.h" />
     <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />
     <ClInclude Include="math\functions\constant.h" />

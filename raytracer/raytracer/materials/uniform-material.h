@@ -7,15 +7,6 @@ namespace raytracer
 {
     namespace materials
     {
-        class UniformMaterial : public _private_::MaterialImplementation
-        {
-        public:
-            UniformMaterial(const MaterialProperties&);
-
-            MaterialProperties at(const HitPosition&) const override;
-
-        private:
-            MaterialProperties m_properties;
-        };
+        Material uniform(const MaterialProperties&);
     }
 }
