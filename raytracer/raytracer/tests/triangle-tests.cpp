@@ -9,27 +9,6 @@ using namespace raytracer;
 using namespace raytracer::primitives;
 
 
-namespace
-{
-    void test_hit(const Point3D& a, const Point3D& b, const Point3D& c, const Point3D& o, const Vector3D& d)
-    {
-        auto tri = triangle(a, b, c);
-        Ray ray(o, d);
-        Hit hit;
-
-        REQUIRE(tri->find_hit(ray, &hit));
-    }
-}
-
-
-#define XYZ(...) __VA_ARGS__
-
-#define TEST_HIT(A, B, C, O, D) \
-    TEST_CASE("[Triangle] Triangle " #A " " #B " " #C " is hit by ray " #O " + " #D + " * t", "[Triangle]") \
-    { \
-        test_hit( point(A), point(B), point(C), point(O), vector(D)); \
-    }
-
 TEST_CASE("[Triangle] Hits against triangle with a = (0,0,0), b = (1,0,0), c = (0,1,0)", "[Triangle]")
 {
     auto tri = triangle(Point3D(0, 0, 0), Point3D(1, 0, 0), Point3D(0, 1, 0));
