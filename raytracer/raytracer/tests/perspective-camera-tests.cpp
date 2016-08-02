@@ -34,46 +34,326 @@ namespace
     }
 }
 
-#define XY(...)  __VA_ARGS__
-#define XYZ(...) __VA_ARGS__
 
-#define TEST_SIMPLE(P, EXPECTED_DIRECTION) \
-    TEST(P, XYZ(0,0,0), XYZ(0,0,1), XYZ(0,1,0), 1, 1, XYZ(0,0,0), EXPECTED_DIRECTION)
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(0,0,1);
 
-#define TEST_DISTANCE_RATIO(P, DISTANCE, ASPECT_RATIO, EXPECTED_DIRECTION) \
-    TEST(P, XYZ(0,0,0), XYZ(0,0,1), XYZ(0,1,0), DISTANCE, ASPECT_RATIO, XYZ(0,0,0), EXPECTED_DIRECTION)
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
 
-#define TEST_EYE_LOOKAT(P, EYE, LOOK_AT, EXPECTED_DIRECTION) \
-    TEST(P, EYE, LOOK_AT, XYZ(0,1,0), 1, 1, EYE, EXPECTED_DIRECTION)
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
 
-#define TEST(P, EYE, LOOK_AT, UP, DISTANCE, ASPECT_RATIO, EXPECTED_ORIGIN, EXPECTED_DIRECTION) \
-    TEST_CASE("[PerspectiveCamera] Eye = " #EYE ", Lookat = " #LOOK_AT ", Up = " #UP ", Distance = " #DISTANCE ", Aspect Ratio = " #ASPECT_RATIO ", At " #P, "[PerspectiveCamera]") \
-    { \
-        auto camera = raytracer::cameras::perspective(Point3D(EYE), Point3D(LOOK_AT), Vector3D(UP), DISTANCE, ASPECT_RATIO); \
-        auto rays = camera->create_rays(Point2D(P)); \
-        \
-        REQUIRE(rays.size() == 1); \
-        auto ray = rays.front(); \
-        INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(Point3D(EXPECTED_ORIGIN), Vector3D(EXPECTED_DIRECTION)))); \
-        assert_equals(ray.origin, Point3D(EXPECTED_ORIGIN)); \
-        assert_equals(ray.direction, Vector3D(EXPECTED_DIRECTION)); \
-    }
 
-TEST_SIMPLE(XY(0.5, 0.5), XYZ(0, 0, 1))
-TEST_SIMPLE(XY(0, 0.5), XYZ(0.5, 0, 1))
-TEST_SIMPLE(XY(1, 0.5), XYZ(-0.5, 0, 1))
 
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(1, 0, 0), XYZ(1, 0, 1), XYZ(0, 0, 1))
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(-1, 0, 0), XYZ(-1, 0, 1), XYZ(0, 0, 1))
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(-2, 0, 0), XYZ(-2, 0, 1), XYZ(0, 0, 1))
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(0, 0, 0), XYZ(1, 0, 0), XYZ(1, 0, 0))
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(1, 0, 1), XYZ(0, 0, 0), XYZ(-sin(45_degrees), 0, -sin(45_degrees)))
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(-1, 0, 1), XYZ(0, 0, 0), XYZ(sin(45_degrees), 0, -sin(45_degrees)))
-TEST_EYE_LOOKAT(XY(0.5, 0.5), XYZ(0, 0, 1), XYZ(0, 0, 0), XYZ(0, 0, -1))
-TEST_EYE_LOOKAT(XY(0, 0.5), XYZ(0, 0, 1), XYZ(0, 0, 0), XYZ(-0.5, 0, -1))
-TEST_EYE_LOOKAT(XY(1, 0.5), XYZ(0, 0, 1), XYZ(0, 0, 0), XYZ(0.5, 0, -1))
-TEST_EYE_LOOKAT(XY(0, 0.5), XYZ(0, 0, 0), XYZ(0, 0, -1), XYZ(-0.5, 0, -1))
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(0.5,0,1);
 
-TEST_DISTANCE_RATIO(XY(0.5, 0.5), 0.5, 1, XYZ(0, 0, 0.5))
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (1,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(1,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(-0.5,0,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(1,0,0);
+    Point3D look_at(1,0,1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(1,0,0);
+    Vector3D expected_direction(0,0,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (-1,0,0), Lookat = (-1,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(-1,0,0);
+    Point3D look_at(-1,0,1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(-1,0,0);
+    Vector3D expected_direction(0,0,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (-2,0,0), Lookat = (-2,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(-2,0,0);
+    Point3D look_at(-2,0,1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(-2,0,0);
+    Vector3D expected_direction(0,0,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(1,0,0);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(1,0,0);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (1,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(1,0,1);
+    Point3D look_at(0,0,0);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(1,0,1);
+    Vector3D expected_direction(-sin(45_degrees),0,-sin(45_degrees));
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (-1,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(-1,0,1);
+    Point3D look_at(0,0,0);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(-1,0,1);
+    Vector3D expected_direction(sin(45_degrees),0,-sin(45_degrees));
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,1);
+    Point3D look_at(0,0,0);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(0,0,1);
+    Vector3D expected_direction(0,0,-1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,1);
+    Point3D look_at(0,0,0);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0,0.5);
+    Point3D expected_origin(0,0,1);
+    Vector3D expected_direction(-0.5,0,-1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (1,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,1);
+    Point3D look_at(0,0,0);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(1,0.5);
+    Point3D expected_origin(0,0,1);
+    Vector3D expected_direction(0.5,0,-1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,-1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,-1);
+    Vector3D up(0,1,0);
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(-0.5,0,-1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 0.5, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up(0,1,0);
+    double distance = 0.5;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(0,0,0.5);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
 
 #endif
