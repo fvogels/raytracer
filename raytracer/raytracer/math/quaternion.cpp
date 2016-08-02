@@ -1,4 +1,4 @@
-#include "math/Quaternion.h"
+#include "math/quaternion.h"
 #include <assert.h>
 #include <math.h>
 #include "math/approx.h"
