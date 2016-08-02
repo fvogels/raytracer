@@ -10,7 +10,9 @@ namespace math
         template<typename R>
         Function<R(R)> identity()
         {
-            return from_lambda<R, R>([](R x) { return x; });
+            std::function<R(R)> lambda = [](R x) { return x; };
+
+            return from_lambda<R, R>(lambda);
         }
     }
 }

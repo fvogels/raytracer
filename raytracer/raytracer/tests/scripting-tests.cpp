@@ -2,10 +2,10 @@
 
 #include "Catch.h"
 #include "scripting/scripting.h"
-#include "math/vector3d.h"
-#include "math/point3d.h"
+#include "math/vector.h"
+#include "math/point.h"
 #include "math/approx.h"
-#include "imaging/Color.h"
+#include "imaging/color.h"
 #include "raytracing/scene.h"
 #include <sstream>
 
