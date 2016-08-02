@@ -2,6 +2,7 @@
 #include "math/functions/easing-functions.h"
 #include <assert.h>
 #include <math.h>
+#include <cmath>
 
 using namespace math;
 using namespace math::functions;
@@ -143,7 +144,7 @@ EasingFunction math::functions::easing::_private_::bounce()
     std::function<double(double)> lambda = [](double t) {
         assert(Interval<double>(0, 1).contains(t));
 
-        return 1 - abs(cos(5.5 * 180_degrees * t)) * exp(-3 * t);
+        return 1 - std::abs(cos(5.5 * 180_degrees * t)) * exp(-3 * t);
     };
 
     return from_lambda(lambda);
