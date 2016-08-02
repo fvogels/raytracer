@@ -2,7 +2,7 @@ CC=g++
 COMMONFLAGS=-I. -std=c++14 -pthread
 DEBUG_FLAGS=$(COMMONFLAGS) -g -ort-debug -O0 -Wall -Wextra
 RELEASE_FLAGS=$(COMMONFLAGS) -DNDEBUG -O3 -s -ort-release
-TEST_FLAGS=$(DEBUG_FLAGS) -DTEST_BUILD
+TEST_FLAGS=$(DEBUG_FLAGS) -DTEST_BUILD -ort-test
 
 FILES=`find -type f -name "*.cpp"`
 
