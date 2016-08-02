@@ -5,22 +5,6 @@
 using namespace imaging;
 
 
-namespace
-{
-    std::unique_ptr<Color[]> copy_pixels(Color* cs, unsigned width, unsigned height)
-    {
-        auto result = std::make_unique<Color[]>(width * height);
-
-        for (size_t i = 0; i != width * height; ++i)
-        {
-            result[i] = cs[i];
-        }
-
-        return result;
-    }
-}
-
-
 imaging::Bitmap::Bitmap(unsigned width, unsigned height)
     : m_pixels(width, height, colors::black())
 {

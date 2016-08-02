@@ -34,7 +34,7 @@ namespace
             std::atomic<unsigned> i(0);
             std::vector<std::thread> threads;
 
-            for (int k = 0; k != m_thread_count; ++k)
+            for (unsigned k = 0; k != m_thread_count; ++k)
             {
                 threads.push_back(std::thread([&]() {
                     unsigned current;

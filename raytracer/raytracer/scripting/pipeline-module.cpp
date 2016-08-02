@@ -39,7 +39,7 @@ namespace
         SpecializedWrapper(std::shared_ptr<Consumer<T>> wrapped)
             : Wrapper(wrapped) { }
 
-        void link_to(Wrapper* wrapper) override
+        void link_to(Wrapper*) override
         {
             throw std::runtime_error("Nonproducers are only allowed at the end of the pipeline");
         }

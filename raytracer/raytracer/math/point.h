@@ -197,7 +197,7 @@ namespace math
         template<unsigned N>
         struct PointOutputHelper<N, N>
         {
-            static void write(std::ostream& out, const Point<N>& p)
+            static void write(std::ostream& out, const Point<N>&)
             {
                 out << ")";
             }

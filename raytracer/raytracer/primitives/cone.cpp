@@ -60,9 +60,9 @@ namespace
                     }
                     else
                     {
-                        Point2D position_on_circle = Point2D(position.x(), position.y());
+                        Point2D position_on_circle(position.x(), position.y());
                         double height = position.z();
-                        double theta = atan2(position.y(), position.x());
+                        double theta = atan2(position_on_circle.y(), position_on_circle.x());
 
                         hit->t = t;
                         hit->position = position;
@@ -84,7 +84,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override
         {
             // TODO
             abort();

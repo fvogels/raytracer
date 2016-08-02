@@ -44,7 +44,7 @@ namespace
         return bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
     }
 
-    std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
+    std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
     {
         using namespace raytracer::lights;
 
@@ -54,7 +54,7 @@ namespace
         return light_sources;
     }
 
-    raytracer::Camera create_camera(TimeStamp now)
+    raytracer::Camera create_camera(TimeStamp)
     {
         return raytracer::cameras::perspective(Point3D(0, 2, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     }

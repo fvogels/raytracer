@@ -95,7 +95,7 @@ namespace raytracer
                 void parse(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
                 {
                     parse_arguments(argument_map);
-                    verify(argument_map);
+                    verify();
                 }
 
             private:
@@ -127,7 +127,7 @@ namespace raytracer
                     }
                 }
 
-                void verify(const std::map<std::string, chaiscript::Boxed_Value>& argument_map)
+                void verify()
                 {
                     for (auto parser_it : m_parsers)
                     {

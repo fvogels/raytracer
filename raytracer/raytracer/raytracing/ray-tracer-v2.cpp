@@ -57,7 +57,7 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_light_sour
 }
 
 imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(
-    const Scene& scene,
+    const Scene&,
     const MaterialProperties& material_properties,
     const Hit& hit,
     const math::Ray& eye_ray,
@@ -70,7 +70,7 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_light_ray(
     return result;
 }
 
-Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, const LightRay& light_ray) const
+Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const MaterialProperties& material_properties, const Hit& hit, const math::Ray&, const LightRay& light_ray) const
 {
     Vector3D incoming = light_ray.ray.direction.normalized();
 

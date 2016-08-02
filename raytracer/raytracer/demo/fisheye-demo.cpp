@@ -49,7 +49,7 @@ namespace
         return decorate(uniform(material_properties), primitive_union);
     }
 
-    std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
+    std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
     {
         using namespace raytracer::lights;
 
@@ -59,7 +59,7 @@ namespace
         return light_sources;
     }
 
-    raytracer::Camera create_camera(TimeStamp now)
+    raytracer::Camera create_camera(TimeStamp)
     {
         return raytracer::cameras::fisheye(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
     }
@@ -85,7 +85,6 @@ namespace
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
-        const unsigned frame_count = unsigned(round(FPS * scene_animation.duration().seconds()));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)

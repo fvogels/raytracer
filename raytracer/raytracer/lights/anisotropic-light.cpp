@@ -73,7 +73,7 @@ LightSource raytracer::lights::anisotropic(const math::Point3D& position, const 
 {
     assert(direction.is_unit());
 
-    std::function<Color(Angle, Angle)> lambda = [=](Angle azimuth, Angle elevation) {
+    std::function<Color(Angle, Angle)> lambda = [=](Angle, Angle elevation) {
         return light_function(elevation);
     };
 

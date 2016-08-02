@@ -36,7 +36,7 @@ namespace
         return decorate(material, xz_plane());
     }
 
-    std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
+    std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
     {
         using namespace raytracer::lights;
 
@@ -46,7 +46,7 @@ namespace
         return light_sources;
     }
 
-    raytracer::Camera create_camera(TimeStamp now)
+    raytracer::Camera create_camera(TimeStamp)
     {
         return raytracer::cameras::perspective(Point3D(5, 1, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
     }

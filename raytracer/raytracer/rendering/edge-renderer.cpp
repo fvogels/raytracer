@@ -12,14 +12,6 @@ using namespace raytracer::rendering;
 
 namespace
 {
-    double dist(const Position& p, const Position& q)
-    {
-        double dx = p.x - q.x;
-        double dy = p.y - q.y;
-
-        return sqrt(dx * dx + dy * dy);
-    }
-
     class EdgeRenderer : public raytracer::rendering::_private_::RendererImplementation
     {
     public:

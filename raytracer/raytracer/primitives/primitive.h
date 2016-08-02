@@ -39,7 +39,7 @@ namespace raytracer
             return m_impl.get();
         }
 
-        bool operator ==(const Primitive& p) const
+        bool operator ==(const Primitive&) const
         {
             // TODO
             throw std::runtime_error("Cannot compare primitives");

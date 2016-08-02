@@ -25,7 +25,7 @@ namespace
     constexpr unsigned VPIXELS = 500;
     constexpr unsigned N_THREADS = 4;
 
-    raytracer::Primitive create_root(TimeStamp now)
+    raytracer::Primitive create_root(TimeStamp)
     {
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
@@ -50,7 +50,7 @@ namespace
         return make_union( children );
     }
 
-    std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
+    std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
     {
         using namespace raytracer::lights;
 

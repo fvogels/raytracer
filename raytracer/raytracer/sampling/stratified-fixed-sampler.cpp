@@ -17,9 +17,9 @@ namespace
         {
             Rasterizer raster(rectangle, this->m_columns, this->m_rows);
 
-            for (int y = 0; y != this->m_rows; ++y)
+            for (unsigned y = 0; y != this->m_rows; ++y)
             {
-                for (int x = 0; x != this->m_columns; ++x)
+                for (unsigned x = 0; x != this->m_columns; ++x)
                 {
                     auto subrectangle = raster[Position(x, y)];
 

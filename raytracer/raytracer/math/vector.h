@@ -327,7 +327,7 @@ namespace math
         template<unsigned N>
         struct VectorOutputHelper<N, N>
         {
-            static void write(std::ostream& out, const Vector<N>& v)
+            static void write(std::ostream& out, const Vector<N>&)
             {
                 out << ")";
             }

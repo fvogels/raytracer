@@ -73,7 +73,7 @@ namespace
     template<unsigned long N>
     struct InterpolationHelper<0, N>
     {
-        static double interpolate(const HyperCube<0>& cube, const std::array<double, N>& coordinates)
+        static double interpolate(const HyperCube<0>& cube, const std::array<double, N>&)
         {
             return cube.x;
         }
