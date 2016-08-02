@@ -32,8 +32,8 @@ namespace
 
         std::vector<Primitive> left_primitives(primitives.begin(), middle);
         std::vector<Primitive> right_primitives(middle, primitives.end());
-
-        return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
+        std::vector<Primitive> all_primitives = { accelerated_union(left_primitives), accelerated_union(right_primitives) };
+        return bounding_box_accelerator(make_union(all_primitives));
     }
 
     Primitive accelerated_union_along_y(std::vector<Primitive>& primitives)
@@ -47,8 +47,9 @@ namespace
 
         std::vector<Primitive> left_primitives(primitives.begin(), middle);
         std::vector<Primitive> right_primitives(middle, primitives.end());
+        std::vector<Primitive> all_primitives = { accelerated_union(left_primitives), accelerated_union(right_primitives) };
 
-        return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
+        return bounding_box_accelerator(make_union(all_primitives));
     }
 
     Primitive accelerated_union_along_z(std::vector<Primitive>& primitives)
@@ -62,20 +63,21 @@ namespace
 
         std::vector<Primitive> left_primitives(primitives.begin(), middle);
         std::vector<Primitive> right_primitives(middle, primitives.end());
+        std::vector<Primitive> all_primitives = { accelerated_union(left_primitives), accelerated_union(right_primitives) };
 
-        return bounding_box_accelerator(make_union(std::vector<Primitive> { accelerated_union(left_primitives), accelerated_union(right_primitives) }));
+        return bounding_box_accelerator(make_union(all_primitives));
     }
 
     class BoundingBoxAccelerator : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        BoundingBoxAccelerator::BoundingBoxAccelerator(Primitive child)
+        BoundingBoxAccelerator(Primitive child)
             : m_child(child), m_bounding_box(child->bounding_box())
         {
             // NOP
         }
 
-        bool BoundingBoxAccelerator::find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_hit(const math::Ray& ray, Hit* hit) const override
         {
             if (m_bounding_box.is_hit_positively_by(ray))
             {
@@ -89,7 +91,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> BoundingBoxAccelerator::hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
             if (m_bounding_box.is_hit_by(ray))
             {
@@ -101,7 +103,7 @@ namespace
             }
         }
 
-        math::Box BoundingBoxAccelerator::bounding_box() const override
+        math::Box bounding_box() const override
         {
             return m_bounding_box;
         }
