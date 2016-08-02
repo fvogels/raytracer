@@ -16,9 +16,34 @@ namespace
             return samplers::single();
         }
 
+        Sampler random(unsigned sample_count) const
+        {
+            return samplers::random(sample_count);
+        }
+
         Sampler stratified(unsigned horizontal, unsigned vertical) const
         {
             return samplers::stratified_fixed(horizontal, vertical);
+        }
+
+        Sampler jittered(unsigned horizontal, unsigned vertical) const
+        {
+            return samplers::stratified_jittered(horizontal, vertical);
+        }
+
+        Sampler halfjittered(unsigned horizontal, unsigned vertical) const
+        {
+            return samplers::stratified_half_jittered(horizontal, vertical);
+        }
+
+        Sampler nrooks(unsigned sample_count) const
+        {
+            return samplers::nrooks(sample_count);
+        }
+
+        Sampler multijittered(unsigned sqrt_sample_count) const
+        {
+            return samplers::multi_jittered(sqrt_sample_count);
         }
     };
 }
@@ -32,7 +57,12 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
 
 #define SAMPLER(NAME) module->add(fun(&SamplerLibrary::NAME), #NAME)
     SAMPLER(single);
+    SAMPLER(random);
     SAMPLER(stratified);
+    SAMPLER(jittered);
+    SAMPLER(halfjittered);
+    SAMPLER(nrooks);
+    SAMPLER(multijittered);
 #undef COLOR
 
     return module;
