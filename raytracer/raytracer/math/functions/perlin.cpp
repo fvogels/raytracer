@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <algorithm>
 #include <limits>
-#include <math.h>
+#include <cmath>
 #include <array>
 
 using namespace math;
@@ -37,7 +37,7 @@ namespace
         return from_lambda(lambda);
     }
 
-    template<unsigned N>
+    template<unsigned long N>
     struct HyperCube
     {
         HyperCube<N - 1> a;
@@ -50,7 +50,7 @@ namespace
         double x;
     };
 
-    template<unsigned K, unsigned N>
+    template<unsigned long K, unsigned long N>
     struct InterpolationHelper
     {
         static double interpolate(const HyperCube<K>& cube, const std::array<double, N>& coordinates)
@@ -70,7 +70,7 @@ namespace
         }
     };
 
-    template<unsigned N>
+    template<unsigned long N>
     struct InterpolationHelper<0, N>
     {
         static double interpolate(const HyperCube<0>& cube, const std::array<double, N>& coordinates)
@@ -79,7 +79,7 @@ namespace
         }
     };
 
-    template<unsigned K, unsigned N>
+    template<unsigned long K, unsigned long N>
     double interpolate(const HyperCube<K>& cube, const std::array<double, N>& coordinates)
     {
         static_assert(K <= N, "Invalid index");
@@ -89,7 +89,7 @@ namespace
 
     using Node = HyperCube<0>;
 
-    template<unsigned>
+    template<unsigned long>
     double bound(double);
 
     template<>
@@ -125,7 +125,7 @@ namespace
                 HyperCube<1> { Node{ z<0,1>(p) }, Node{ z<1,1>(p) } },
             };
 
-            return normalize(interpolate(hc2, coordinates));
+            return normalize(interpolate<2, 2>(hc2, coordinates));
         }
 
     private:
@@ -330,7 +330,7 @@ Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
 
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
         double t = p.x() + p.y();
-        return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
+        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
     return from_lambda<double, const Point2D&>(lambda);
@@ -349,7 +349,7 @@ Noise3D math::functions::marble3d(unsigned octaves, double turbulence)
 
     std::function<double(const Point3D&)> lambda = [total, turbulence](const Point3D& p) -> double {
         double t = p.x() + p.y();
-        return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
+        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
     return from_lambda<double, const Point3D&>(lambda);
@@ -368,7 +368,7 @@ Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
 
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
         double t = sqrt(p.x() * p.x() + p.y() * p.y());
-        return abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
+        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
     };
 
     return from_lambda<double, const Point2D&>(lambda);
