@@ -34,7 +34,6 @@ namespace
     }
 }
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(0,0,0);
@@ -55,7 +54,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0,0.5)", "[PerspectiveCamera]")
@@ -80,7 +78,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 }
 
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (1,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(0,0,0);
@@ -101,7 +98,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
@@ -126,7 +122,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0), Di
 }
 
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (-1,0,0), Lookat = (-1,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(-1,0,0);
@@ -147,7 +142,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (-1,0,0), Lookat = (-1,0,1), Up = (0,1,0), 
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (-2,0,0), Lookat = (-2,0,1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
@@ -172,7 +166,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (-2,0,0), Lookat = (-2,0,1), Up = (0,1,0), 
 }
 
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(0,0,0);
@@ -193,7 +186,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0), Di
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (1,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
@@ -218,7 +210,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (1,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 }
 
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (-1,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(-1,0,1);
@@ -239,7 +230,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (-1,0,1), Lookat = (0,0,0), Up = (0,1,0), D
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
@@ -264,7 +254,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 }
 
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(0,0,1);
@@ -285,7 +274,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (1,0.5)", "[PerspectiveCamera]")
@@ -310,7 +298,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 }
 
 
-
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,-1), Up = (0,1,0), Distance = 1, Aspect Ratio = 1, At (0,0.5)", "[PerspectiveCamera]")
 {
     Point3D eye(0,0,0);
@@ -331,7 +318,6 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,-1), Up = (0,1,0), D
     assert_equals(ray.origin, Point3D(expected_origin));
     assert_equals(ray.direction, Vector3D(expected_direction));
 }
-
 
 
 TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Distance = 0.5, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
