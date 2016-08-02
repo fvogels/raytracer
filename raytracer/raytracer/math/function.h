@@ -104,84 +104,112 @@ namespace math
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator +(const Function<R(Ts...)>& f, const R& constant)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return f(ts...) + constant;});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return f(ts...) + constant; };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator +(const R& constant, const Function<R(Ts...)>& f)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return constant + f(ts...);});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return constant + f(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator +(const Function<R(Ts...)>& f, const Function<R(Ts...)>& g)
     {
-        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) + g(ts...);});
+        std::function<R(Ts...)> lambda = [f, g](Ts... ts) { return f(ts...) + g(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator -(const Function<R(Ts...)>& f, const R& constant)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return f(ts...) - constant;});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return f(ts...) - constant; };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator -(const R& constant, const Function<R(Ts...)>& f)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return constant - f(ts...);});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return constant - f(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator -(const Function<R(Ts...)>& f, const Function<R(Ts...)>& g)
     {
-        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) - g(ts...);});
+        std::function<R(Ts...)> lambda = [f, g](Ts... ts) { return f(ts...) - g(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator *(const Function<R(Ts...)>& f, const R& constant)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return f(ts...) * constant;});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return f(ts...) * constant; };
+
+        return from_lambda<R, Ts...>( lambda );
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator *(const R& constant, const Function<R(Ts...)>& f)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return constant * f(ts...);});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return constant * f(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator *(const Function<R(Ts...)>& f, const Function<R(Ts...)>& g)
     {
-        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) * g(ts...);});
+        std::function<R(Ts...)> lambda = [f, g](Ts... ts) { return f(ts...) * g(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator /(const Function<R(Ts...)>& f, const R& constant)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return f(ts...) / constant;});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return f(ts...) / constant; };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator /(const R& constant, const Function<R(Ts...)>& f)
     {
-        return from_lambda<R, Ts...>([f, constant](Ts... ts) { return constant / f(ts...);});
+        std::function<R(Ts...)> lambda = [f, constant](Ts... ts) { return constant / f(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator /(const Function<R(Ts...)>& f, const Function<R(Ts...)>& g)
     {
-        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) / g(ts...);});
+        std::function<R(Ts...)> lambda = [f, g](Ts... ts) { return f(ts...) / g(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator &&(const Function<R(Ts...)>& f, const Function<R(Ts...)>& g)
     {
-        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) && g(ts...);});
+        std::function<R(Ts...)> lambda = [f, g](Ts... ts) { return f(ts...) && g(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 
     template<typename R, typename... Ts>
     Function<R(Ts...)> operator ||(const Function<R(Ts...)>& f, const Function<R(Ts...)>& g)
     {
-        return from_lambda<R, Ts...>([f, g](Ts... ts) { return f(ts...) || g(ts...);});
+        std::function<R(Ts...)> lambda = [f, g](Ts... ts) { return f(ts...) || g(ts...); };
+
+        return from_lambda<R, Ts...>(lambda);
     }
 }
