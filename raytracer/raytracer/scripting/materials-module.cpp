@@ -1,6 +1,6 @@
 #include "scripting/materials-module.h"
 #include "materials/materials.h"
-#include "imaging/Color.h"
+#include "imaging/color.h"
 
 using namespace chaiscript;
 using namespace raytracer;

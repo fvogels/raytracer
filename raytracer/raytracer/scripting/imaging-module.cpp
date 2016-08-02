@@ -1,5 +1,5 @@
 #include "scripting/imaging-module.h"
-#include "imaging/Color.h"
+#include "imaging/color.h"
 
 using namespace chaiscript;
 using namespace imaging;

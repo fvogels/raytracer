@@ -129,7 +129,7 @@ namespace
         }
     };
 
-    void link(Boxed_Value initial, const std::vector<Boxed_Value>& pipeline_segments)
+    void pipeline_builder(Boxed_Value initial, const std::vector<Boxed_Value>& pipeline_segments)
     {
         if (pipeline_segments.size() == 0)
         {
@@ -166,9 +166,9 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 #define PIPELINE(NAME) module->add(fun(&PipelineLibrary::NAME), #NAME)
     PIPELINE(wif);
     PIPELINE(renderer);
-#undef COLOR
+#undef PIPELINE
 
-    module->add(fun(&link), "pipeline");
+    module->add(fun(&pipeline_builder), "pipeline");
 
     return module;
 }

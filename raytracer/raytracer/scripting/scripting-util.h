@@ -43,8 +43,8 @@ namespace raytracer
             {
                 std::vector<T> unboxed_values(boxed_values.size());
  
-                std::transform(boxed_values.begin(), boxed_values.end(), unboxed_values.begin(), [](Boxed_Value boxed_value) {
-                    return boxed_cast<T>(boxed_value);
+                std::transform(boxed_values.begin(), boxed_values.end(), unboxed_values.begin(), [](chaiscript::Boxed_Value boxed_value) {
+                    return chaiscript::boxed_cast<T>(boxed_value);
                 });
 
                 return unboxed_values;
