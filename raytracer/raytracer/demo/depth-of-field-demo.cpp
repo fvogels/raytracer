@@ -46,7 +46,8 @@ namespace
         auto plane = decorate(checkered(uniform(white), uniform(black)),
             translate(Vector3D(0, -1, 0), xz_plane()));
 
-        return make_union(std::vector<Primitive> { plane, decorated_spheres } );
+        std::vector<Primitive> children = { plane, decorated_spheres };
+        return make_union( children );
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
