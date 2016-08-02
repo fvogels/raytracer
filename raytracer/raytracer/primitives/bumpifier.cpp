@@ -28,7 +28,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> Bumpifier::hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
             auto hits = m_perturbee->hits(ray);
 
