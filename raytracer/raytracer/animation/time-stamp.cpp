@@ -22,7 +22,7 @@ double animation::TimeStamp::seconds() const
 
 TimeStamp animation::operator +(const TimeStamp& ts, const Duration& d)
 {
-    return TimeStamp(ts.m_since_epoch + d);
+    return TimeStamp::from_epoch(Duration::from_seconds(ts.seconds() + d.seconds()));
 }
 
 TimeStamp animation::operator +(const Duration& d, const TimeStamp& ts)
@@ -37,7 +37,7 @@ TimeStamp animation::operator -(const TimeStamp& ts, const Duration& d)
 
 Duration animation::operator -(const TimeStamp& ts1, const TimeStamp& ts2)
 {
-    return ts1.m_since_epoch - ts2.m_since_epoch;
+    return Duration::from_seconds(ts1.seconds() - ts2.seconds());
 }
 
 bool animation::TimeStamp::operator <(const TimeStamp& ts) const
