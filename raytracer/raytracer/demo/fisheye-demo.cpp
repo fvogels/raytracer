@@ -25,7 +25,7 @@ namespace
     constexpr unsigned VPIXELS = 500;
     constexpr unsigned N_THREADS = 4;
 
-    raytracer::Primitive create_root(TimeStamp now)
+    raytracer::Primitive create_root(TimeStamp)
     {
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
@@ -59,7 +59,7 @@ namespace
         return light_sources;
     }
 
-    raytracer::Camera create_camera(TimeStamp)
+    raytracer::Camera create_camera(TimeStamp now)
     {
         return raytracer::cameras::fisheye(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
     }
