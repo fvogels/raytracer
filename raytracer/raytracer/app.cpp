@@ -1,5 +1,7 @@
 #ifndef TEST_BUILD
 
+#define COULD_BE_UNUSED(X) (void)(X)
+
 #include "imaging/bitmap.h"
 #include "imaging/wif-format.h"
 #include "primitives/primitives.h"
@@ -68,6 +70,8 @@ Lazy<raytracer::Primitive> lucy([]() {
 
 raytracer::Primitive create_root(TimeStamp now)
 {
+    COULD_BE_UNUSED(now);
+
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
@@ -82,6 +86,8 @@ raytracer::Primitive create_root(TimeStamp now)
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 {
+    COULD_BE_UNUSED(now);
+
     using namespace raytracer::lights;
 
     std::vector<LightSource> light_sources;
@@ -114,6 +120,8 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
 raytracer::Camera create_camera(TimeStamp now)
 {
+    COULD_BE_UNUSED(now);
+
     using namespace math::functions::easing;
 
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
