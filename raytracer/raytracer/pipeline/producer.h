@@ -3,6 +3,7 @@
 #include "pipeline/pipeline.h"
 #include "pipeline/consumer.h"
 #include <memory>
+#include <stdexcept>
 
 
 namespace raytracer
