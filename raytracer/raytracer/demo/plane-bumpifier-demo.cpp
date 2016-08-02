@@ -43,7 +43,7 @@ namespace
 
         auto b = bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
 
-        return make_union(std::vector<Primitive> { b });
+        return make_union(b);
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
