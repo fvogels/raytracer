@@ -102,9 +102,6 @@
     <ClCompile Include="tests\orthographic-camera-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\fisheye-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lights\point-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -376,6 +373,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="materials\pattern-materials.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\fisheye-camera-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
