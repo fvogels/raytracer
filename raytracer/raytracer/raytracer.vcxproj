@@ -223,6 +223,7 @@
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
