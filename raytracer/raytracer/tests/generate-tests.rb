@@ -144,7 +144,7 @@ TEST_CASE("[PerspectiveCamera] Eye = ($EYE), Lookat = ($LOOK_AT), Up = ($UP), Di
 {
     Point3D eye($EYE);
     Point3D look_at($LOOK_AT);
-    Vector3D up($UP);
+    Vector3D up = Vector3D($UP).normalized();
     double distance = $DISTANCE;
     double aspect_ratio = $ASPECT_RATIO;
     Point2D position($POSITION);
@@ -191,6 +191,12 @@ END
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '0.5,0', expected_origin: '0,0,0', expected_direction: '0,-0.5,1' },
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '0,0.5', expected_origin: '0,0,0', expected_direction: '1,0,1' },
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '1,0.5', expected_origin: '0,0,0', expected_direction: '-1,0,1' },
+
+              { eye: '0,0,0', look_at: '0,0,1', up: '1,0,0', distance: '1', aspect_ratio: '1', position: '0.5,0.5', expected_origin: '0,0,0', expected_direction: '0,0,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '1,0,0', distance: '1', aspect_ratio: '1', position: '0,0', expected_origin: '0,0,0', expected_direction: '-0.5,-0.5,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '1,0,0', distance: '1', aspect_ratio: '1', position: '1,0', expected_origin: '0,0,0', expected_direction: '-0.5,0.5,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '1,0,0', distance: '1', aspect_ratio: '1', position: '0,1', expected_origin: '0,0,0', expected_direction: '0.5,-0.5,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '1,0,0', distance: '1', aspect_ratio: '1', position: '1,1', expected_origin: '0,0,0', expected_direction: '0.5,0.5,1' },
             ].map do |hash|
       apply_template(test_template, hash)
     end.join("\n\n")

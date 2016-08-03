@@ -38,7 +38,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -60,7 +60,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0,0.5);
@@ -82,7 +82,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(1,0.5);
@@ -104,7 +104,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,1);
@@ -126,7 +126,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0);
@@ -148,7 +148,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0), Di
 {
     Point3D eye(1,0,0);
     Point3D look_at(1,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -170,7 +170,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (-1,0,0), Lookat = (-1,0,1), Up = (0,1,0), 
 {
     Point3D eye(-1,0,0);
     Point3D look_at(-1,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -192,7 +192,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (-2,0,0), Lookat = (-2,0,1), Up = (0,1,0), 
 {
     Point3D eye(-2,0,0);
     Point3D look_at(-2,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -214,7 +214,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(1,0,0);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -236,7 +236,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (1,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 {
     Point3D eye(1,0,1);
     Point3D look_at(0,0,0);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -258,7 +258,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (-1,0,1), Lookat = (0,0,0), Up = (0,1,0), D
 {
     Point3D eye(-1,0,1);
     Point3D look_at(0,0,0);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -280,7 +280,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 {
     Point3D eye(0,0,1);
     Point3D look_at(0,0,0);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -302,7 +302,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 {
     Point3D eye(0,0,1);
     Point3D look_at(0,0,0);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0,0.5);
@@ -324,7 +324,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,1), Lookat = (0,0,0), Up = (0,1,0), Di
 {
     Point3D eye(0,0,1);
     Point3D look_at(0,0,0);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(1,0.5);
@@ -346,7 +346,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,-1), Up = (0,1,0), D
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,-1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 1;
     Point2D position(0,0.5);
@@ -368,7 +368,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 0.5;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -390,7 +390,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 2;
     double aspect_ratio = 1;
     Point2D position(0.5,0.5);
@@ -412,7 +412,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 2;
     Point2D position(0.5,0.5);
@@ -434,7 +434,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 2;
     Point2D position(0.5,1);
@@ -456,7 +456,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 2;
     Point2D position(0.5,0);
@@ -478,7 +478,7 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 2;
     Point2D position(0,0.5);
@@ -500,12 +500,122 @@ TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), Di
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
-    Vector3D up(0,1,0);
+    Vector3D up = Vector3D(0,1,0).normalized();
     double distance = 1;
     double aspect_ratio = 2;
     Point2D position(1,0.5);
     Point3D expected_origin(0,0,0);
     Vector3D expected_direction(-1,0,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (1,0,0), Distance = 1, Aspect Ratio = 1, At (0.5,0.5)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up = Vector3D(1,0,0).normalized();
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0.5,0.5);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(0,0,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (1,0,0), Distance = 1, Aspect Ratio = 1, At (0,0)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up = Vector3D(1,0,0).normalized();
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0,0);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(-0.5,-0.5,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (1,0,0), Distance = 1, Aspect Ratio = 1, At (1,0)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up = Vector3D(1,0,0).normalized();
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(1,0);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(-0.5,0.5,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (1,0,0), Distance = 1, Aspect Ratio = 1, At (0,1)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up = Vector3D(1,0,0).normalized();
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(0,1);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(0.5,-0.5,1);
+
+    auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
+    auto rays = camera->create_rays(position);
+
+    REQUIRE(rays.size() == 1);
+    auto ray = rays.front();
+    INFO( "Actual ray: " + show(ray) + "\nExpected ray: " + show(Ray(expected_origin, expected_direction)) );
+    assert_equals(ray.origin, Point3D(expected_origin));
+    assert_equals(ray.direction, Vector3D(expected_direction));
+}
+
+
+TEST_CASE("[PerspectiveCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (1,0,0), Distance = 1, Aspect Ratio = 1, At (1,1)", "[PerspectiveCamera]")
+{
+    Point3D eye(0,0,0);
+    Point3D look_at(0,0,1);
+    Vector3D up = Vector3D(1,0,0).normalized();
+    double distance = 1;
+    double aspect_ratio = 1;
+    Point2D position(1,1);
+    Point3D expected_origin(0,0,0);
+    Vector3D expected_direction(0.5,0.5,1);
 
     auto camera = raytracer::cameras::perspective(eye, look_at, up, distance, aspect_ratio);
     auto rays = camera->create_rays(position);
