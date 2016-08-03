@@ -11,7 +11,7 @@
 
 namespace raytracer
 {
-    const unsigned MISSING_ID = -1;
+    const unsigned MISSING_ID = unsigned(-1);
 
     struct Hit
     {
