@@ -132,6 +132,26 @@ namespace
         {
             return wrap(raytracer::pipeline::renderer(renderer));
         }
+
+        std::shared_ptr<Wrapper> inverter() const
+        {
+            return wrap(raytracer::pipeline::invert());
+        }
+
+        std::shared_ptr<Wrapper> motion_blur(unsigned frame_count, unsigned frame_offset, unsigned last_extra_weight) const
+        {
+            return wrap(raytracer::pipeline::motion_blur(frame_count, frame_offset, last_extra_weight));
+        }
+
+        std::shared_ptr<Wrapper> motion_blur_zerolew(unsigned frame_count, unsigned frame_offset) const
+        {
+            return motion_blur(frame_count, frame_offset, 0);
+        }
+
+        std::shared_ptr<Wrapper> overprint() const
+        {
+            return wrap(raytracer::pipeline::overprint());
+        }
     };
 
     void pipeline_builder(Boxed_Value initial, const std::vector<Boxed_Value>& pipeline_segments)
@@ -169,9 +189,15 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
     module->add_global_const(chaiscript::const_var(pipeline_library), "Pipeline");
 
 #define PIPELINE(NAME) module->add(fun(&PipelineLibrary::NAME), #NAME)
+#define PIPELINE_NAMED(INTERNAL, EXTERNAL) module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
     PIPELINE(wif);
     PIPELINE(ppm);
     PIPELINE(renderer);
+    PIPELINE(inverter);
+    PIPELINE(motion_blur);
+    PIPELINE_NAMED(motion_blur_zerolew, motion_blur);
+    PIPELINE(overprint);
+#undef PIPELINE_NAMED
 #undef PIPELINE
 
     module->add(fun(&pipeline_builder), "pipeline");
