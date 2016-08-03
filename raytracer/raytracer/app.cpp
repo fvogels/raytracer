@@ -48,22 +48,22 @@ using namespace util;
 
 Primitive load_mesh(const std::string& path)
 {
-  std::ifstream in(path);
-  return raytracer::primitives::fast_mesh_bin(in); 
+    std::ifstream in(path);
+    return raytracer::primitives::fast_mesh_bin(in);
 }
 
-Lazy<raytracer::Primitive> bunny([]() { 
+Lazy<raytracer::Primitive> bunny([]() {
     return load_mesh("e:/temp/bunny.bmesh");
-  });
+});
 Lazy<raytracer::Primitive> buddha([]() {
     return load_mesh("e:/temp/buddha.bmesh");
-  });
+});
 Lazy<raytracer::Primitive> dragon([]() {
-    return load_mesh("e:/temp/dragon.bmesh"); 
-  });
+    return load_mesh("e:/temp/dragon.bmesh");
+});
 Lazy<raytracer::Primitive> statuette([]() {
     return load_mesh("e:/temp/statuette.bmesh");
-  });
+});
 Lazy<raytracer::Primitive> lucy([]() {
     return load_mesh("e:/temp/lucy.bmesh");
 });
@@ -77,10 +77,11 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane());
+    auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0, 0, 0)), sphere());
+    auto c = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::red() * 0.8, colors::white(), 20, 0, 0, 0)), translate(Vector3D(1, 0, 0), sphere()));
     // auto b = decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)), xz_plane());
 
-    std::vector<Primitive> children = { b };
+    std::vector<Primitive> children = { b, c };
     return make_union(children);
 }
 
@@ -92,10 +93,10 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    Point3D light_position(0, 0, -15);
-    // light_sources.push_back(omnidirectional(light_position, colors::white()));
+    Point3D light_position(0, 5, 5);
+    light_sources.push_back(omnidirectional(light_position, colors::white()));
     // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 120_degrees, colors::white()));
-    light_sources.push_back(directional(Vector3D(0, -0.1, 1).normalized(), colors::white()));
+    // light_sources.push_back(directional(Vector3D(0, -0.1, 1).normalized(), colors::white()));
     // light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
 
 
@@ -127,8 +128,10 @@ raytracer::Camera create_camera(TimeStamp now)
     // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
 
     auto camera_position_animation = circular(Point3D(0, 0, 3), Point3D(0, 0, 0), Vector3D(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
-    Point3D camera_position(0, 2, 5);
-    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+    Point3D camera_position(0, 0, 5);
+    Vector3D up(sin(360_degrees * now.seconds()), cos(360_degrees * now.seconds()), 0);
+    // Vector3D up(1, 0, 0);
+    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), up, 1, 1);
     // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
     // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
     // auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1, 0.5, samplers::grid(4, 4));
@@ -170,11 +173,11 @@ int main()
 
     TIMED_FUNC(timerObj);
 
-    demos::split_depth(pipeline::wif("e:/temp/output/test.wif"));
+    // demos::split_depth(pipeline::wif("e:/temp/output/test.wif"));
 
-    // render();
+    render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
-    
+
     std::cerr << '\a';
 }
 
