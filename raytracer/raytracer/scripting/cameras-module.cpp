@@ -121,7 +121,7 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
     CAMERA(orthographic);
     CAMERA(fisheye);
     CAMERA(depth_of_field_perspective);
-#undef COLOR
+#undef CAMERA
 
     return module;
 }

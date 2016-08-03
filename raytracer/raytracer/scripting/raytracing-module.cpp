@@ -42,7 +42,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     RAYTRACER(v4);
     RAYTRACER(v5);
     RAYTRACER(v6);
-#undef COLOR
+#undef RAYTRACER
 
     // module->add(user_type<Scene>(), "Scene");
     // module->add(constructor<Scene(raytracer::Camera, raytracer::Primitive)>(), "Scene");

@@ -30,7 +30,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
 
 #define MATERIAL(NAME) module->add(fun(&MaterialLibrary::NAME), #NAME)
     MATERIAL(uniform);
-#undef COLOR
+#undef MATERIAL
 
     return module;
 }

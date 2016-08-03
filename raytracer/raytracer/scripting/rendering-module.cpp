@@ -105,7 +105,7 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     RENDERER(cartoon, cartoon);
     RENDERER(cartoon2, cartoon);
     RENDERER(cartoon_by_map, cartoon);
-#undef COLOR
+#undef RENDERER
 
     return module;
 }

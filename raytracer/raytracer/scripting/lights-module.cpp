@@ -52,6 +52,7 @@ ModulePtr raytracer::scripting::_private_::create_lights_module()
     LIGHT(area);
     LIGHT_NAMED(spot_direction, spot);
     LIGHT_NAMED(spot_point_at, spot);
+#undef LIGHT_NAMED
 #undef LIGHT
 
     return module;

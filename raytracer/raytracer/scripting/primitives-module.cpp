@@ -45,7 +45,8 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     PRIMITIVE(translate);
     PRIMITIVE_WITH_NAME(make_union, union);
     PRIMITIVE(decorate);
-#undef COLOR
+#undef PRIMITIVE
+#undef PRIMITIVE_WITH_NAME
 
     return module;
 }

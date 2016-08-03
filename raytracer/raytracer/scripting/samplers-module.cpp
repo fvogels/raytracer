@@ -63,7 +63,7 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
     SAMPLER(halfjittered);
     SAMPLER(nrooks);
     SAMPLER(multijittered);
-#undef COLOR
+#undef SAMPLER
 
     return module;
 }
