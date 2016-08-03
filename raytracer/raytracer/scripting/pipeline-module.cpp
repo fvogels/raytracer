@@ -123,6 +123,11 @@ namespace
             return wrap(raytracer::pipeline::wif(path));
         }
 
+        std::shared_ptr<Wrapper> ppm() const
+        {
+            return wrap(raytracer::pipeline::ppm());
+        }
+
         std::shared_ptr<Wrapper> renderer(Renderer renderer) const
         {
             return wrap(raytracer::pipeline::renderer(renderer));
@@ -165,6 +170,7 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 
 #define PIPELINE(NAME) module->add(fun(&PipelineLibrary::NAME), #NAME)
     PIPELINE(wif);
+    PIPELINE(ppm);
     PIPELINE(renderer);
 #undef PIPELINE
 
