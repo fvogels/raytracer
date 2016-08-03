@@ -339,6 +339,15 @@
     <ClCompile Include="sampling\multi-jittered-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="materials\pattern-materials.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\fisheye-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pipeline\ppm-consumer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="scripting\cameras-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -370,12 +379,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\scripting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="materials\pattern-materials.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\fisheye-camera-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -908,6 +911,12 @@
     <ClInclude Include="chaiscript\chaiscript_threading.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="materials\pattern-materials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipeline\ppm-consumer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="scripting\cameras-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -942,9 +951,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\scripting-util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="materials\pattern-materials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

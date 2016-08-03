@@ -2,6 +2,7 @@
 #include "pipeline/renderer-processor.h"
 #include "pipeline/motion-blur-processor.h"
 #include "pipeline/wif-consumer.h"
+#include "pipeline/ppm-consumer.h"
 #include "pipeline/overprint-processor.h"
 #include "pipeline/inverter-processor.h"
 #include "pipeline/pipeline-builder.h"
