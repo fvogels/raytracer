@@ -13,8 +13,8 @@ namespace math
         double radians() const noexcept { return m_radians; }
         double degrees() const noexcept { return m_radians * 180 / M_PI; }
 
-        static Angle degrees(long double x) noexcept { return Angle(x / 180 * M_PI); }
-        static Angle radians(long double x) noexcept { return Angle(x); }
+        static Angle degrees(long double x) noexcept { return Angle(double(x) / 180 * M_PI); }
+        static Angle radians(long double x) noexcept { return Angle(double(x)); }
 
     private:
         explicit Angle(double x) noexcept
