@@ -167,6 +167,8 @@ END
     tests = [ { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0.5,0.5', expected_origin: '0,0,0', expected_direction: '0,0,1' },
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0,0.5', expected_origin: '0,0,0', expected_direction: '0.5,0,1' },
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '1,0.5', expected_origin: '0,0,0', expected_direction: '-0.5,0,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0.5,1', expected_origin: '0,0,0', expected_direction: '0,0.5,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0.5,0', expected_origin: '0,0,0', expected_direction: '0,-0.5,1' },
 
               { eye: '1,0,0', look_at: '1,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0.5,0.5', expected_origin: '1,0,0', expected_direction: '0,0,1' },
               { eye: '-1,0,0', look_at: '-1,0,1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0.5,0.5', expected_origin: '-1,0,0', expected_direction: '0,0,1' },
@@ -182,6 +184,13 @@ END
               { eye: '0,0,0', look_at: '0,0,-1', up: '0,1,0', distance: '1', aspect_ratio: '1', position: '0,0.5', expected_origin: '0,0,0', expected_direction: '-0.5,0,-1' },
 
               { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '0.5', aspect_ratio: '1', position: '0.5,0.5', expected_origin: '0,0,0', expected_direction: '0,0,0.5' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '2', aspect_ratio: '1', position: '0.5,0.5', expected_origin: '0,0,0', expected_direction: '0,0,2' },
+
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '0.5,0.5', expected_origin: '0,0,0', expected_direction: '0,0,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '0.5,1', expected_origin: '0,0,0', expected_direction: '0,0.5,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '0.5,0', expected_origin: '0,0,0', expected_direction: '0,-0.5,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '0,0.5', expected_origin: '0,0,0', expected_direction: '1,0,1' },
+              { eye: '0,0,0', look_at: '0,0,1', up: '0,1,0', distance: '1', aspect_ratio: '2', position: '1,0.5', expected_origin: '0,0,0', expected_direction: '-1,0,1' },
             ].map do |hash|
       apply_template(test_template, hash)
     end.join("\n\n")
