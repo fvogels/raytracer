@@ -6,6 +6,7 @@
 #include <memory>
 #include <stack>
 #include <vector>
+#include <algorithm>
 
 using namespace raytracer;
 using namespace raytracer::primitives;
@@ -14,6 +15,18 @@ using namespace math;
 
 namespace
 {
+    bool ends_with(const std::string& string, const std::string& suffix)
+    {
+        if (string.size() < suffix.size())
+        {
+            return false;
+        }
+        else
+        {
+            return std::equal(suffix.rbegin(), suffix.rend(), string.rbegin());
+        }
+    }
+
 #pragma pack(push, 1)
 
     struct XYZ
@@ -548,5 +561,24 @@ Primitive raytracer::primitives::fast_mesh_bin(std::istream& in)
     default:
         std::cerr << "Unrecognized mesh tag " << tag << std::endl;
         abort();
+    }
+}
+
+Primitive raytracer::primitives::fast_mesh(const std::string& path)
+{
+    std::string binary_extension = ".bmesh";
+    std::string text_extension = ".mesh";
+
+    if (ends_with(path, binary_extension))
+    {
+        std::ifstream in(path, std::ios::binary);
+
+        return fast_mesh_bin(in);
+    }
+    else
+    {
+        std::ifstream in(path);
+
+        return fast_mesh(in);
     }
 }
