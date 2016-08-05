@@ -266,6 +266,7 @@
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\quantize.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
+    <ClCompile Include="pipeline\bmp-consumer.cpp" />
     <ClCompile Include="pipeline\inverter-processor.cpp" />
     <ClCompile Include="pipeline\motion-blur-processor.cpp" />
     <ClCompile Include="pipeline\overprint-processor.cpp" />
@@ -349,6 +350,7 @@
     <ClCompile Include="scripting\rendering-module.cpp" />
     <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
+    <ClCompile Include="scripting\utility-module.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
@@ -359,6 +361,7 @@
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
+    <ClCompile Include="tests\scripting-tests.cpp" />
     <ClCompile Include="tests\triangle-tests.cpp" />
     <ClCompile Include="util\looper.cpp" />
   </ItemGroup>
@@ -434,6 +437,7 @@
     <ClInclude Include="materials\wood-material.h" />
     <ClInclude Include="math\point.h" />
     <ClInclude Include="pipeline\animation-processor.h" />
+    <ClInclude Include="pipeline\bmp-consumer.h" />
     <ClInclude Include="pipeline\consumer.h" />
     <ClInclude Include="pipeline\inverter-processor.h" />
     <ClInclude Include="pipeline\motion-blur-processor.h" />
@@ -549,6 +553,7 @@
     <ClInclude Include="scripting\samplers-module.h" />
     <ClInclude Include="scripting\scripting-util.h" />
     <ClInclude Include="scripting\scripting.h" />
+    <ClInclude Include="scripting\utility-module.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\looper.h" />
     <ClInclude Include="util\misc.h" />
