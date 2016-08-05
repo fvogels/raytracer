@@ -232,6 +232,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Profile>true</Profile>
     </Link>
+    <PostBuildEvent>
+      <Command>ruby $(ProjectDir)post-release.rb $(TargetPath) </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>ruby $(ProjectDir)prebuild.rb</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation\animation.cpp" />
@@ -548,6 +554,7 @@
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />
+    <ClInclude Include="version.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
