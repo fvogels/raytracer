@@ -364,6 +364,7 @@
     <ClCompile Include="tests\scripting-tests.cpp" />
     <ClCompile Include="tests\triangle-tests.cpp" />
     <ClCompile Include="util\looper.cpp" />
+    <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation.h" />
