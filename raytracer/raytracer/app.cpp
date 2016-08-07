@@ -22,9 +22,11 @@
 #include "math/point.h"
 #include "imaging/bitmap-function.h"
 #include "pipeline/pipelines.h"
+#include "util/misc.h"
 #include "util/looper.h"
 #include "scripting/scripting.h"
 #include "easylogging++.h"
+#include "version.h"
 #include <assert.h>
 #include <type_traits>
 #include <list>
@@ -175,24 +177,41 @@ void render()
 
 void process_command_line_arguments(int argc, char** argv)
 {
-    for (int i = 0; i < argc - 1; ++i)
+    int i = 1;
+
+    while (i < argc)
     {
         std::string current = argv[i];
 
-        if (current == "--script" )
+        if (starts_with("-s", current))
         {
-            std::string path = argv[i + 1];
+            std::string path = current.substr(2);
 
+            LOG(INFO) << "Rendering " << path;
+            TIMED_SCOPE(timer, "Rendering " + path);
             scripting::run_script(path);
         }
+        else if (current == "--quiet")
+        {
+            logging::quiet();
+        }
+        else if (current == "--version")
+        {
+            std::cout << "Build " << BUILD_NUMBER << std::endl;
+        }
+        else
+        {
+            std::cerr << "Unknown flag " << current << std::endl;
+            abort();
+        }
+
+        ++i;
     }
 }
 
 int main(int argc, char** argv)
-{
+{    
     logging::configure();
-
-    START_EASYLOGGINGPP(argc, argv);
 
     process_command_line_arguments(argc, argv);
 
@@ -201,7 +220,7 @@ int main(int argc, char** argv)
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 
-    std::cerr << '\a';
+    LOG(INFO) << "Done!\a";
 }
 
 #endif
