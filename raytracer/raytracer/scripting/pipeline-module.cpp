@@ -128,6 +128,11 @@ namespace
             return wrap(raytracer::pipeline::ppm());
         }
 
+        std::shared_ptr<Wrapper> bmp(const std::string& path) const
+        {
+            return wrap(raytracer::pipeline::bmp(path));
+        }
+
         std::shared_ptr<Wrapper> renderer(Renderer renderer) const
         {
             return wrap(raytracer::pipeline::renderer(renderer));
@@ -192,6 +197,7 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 #define PIPELINE_NAMED(INTERNAL, EXTERNAL) module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
     PIPELINE(wif);
     PIPELINE(ppm);
+    PIPELINE(bmp);
     PIPELINE(renderer);
     PIPELINE(inverter);
     PIPELINE(motion_blur);
