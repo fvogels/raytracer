@@ -37,12 +37,12 @@ namespace
             return raytracer::materials::uniform(properties);
         }
 
-        Material texture(const std::string& path)
+        Material texture(const std::string& path) const
         {
             return raytracer::materials::texture(path);
         }
 
-        Material checkered(Material x, Material y)
+        Material checkered(Material x, Material y) const
         {
             return raytracer::materials::checkered(x, y);
         }
