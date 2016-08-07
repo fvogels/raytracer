@@ -4,4 +4,5 @@
 namespace logging
 {
     void configure();
+    void quiet();
 }
