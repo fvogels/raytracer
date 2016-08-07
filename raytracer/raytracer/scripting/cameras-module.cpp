@@ -80,7 +80,7 @@ namespace
             return cameras::fisheye(eye, look_at, up, Angle::degrees(horizontal_angle), Angle::degrees(vertical_angle));
         }
 
-        Camera depth_of_field_perspective(
+        Camera depth_of_field(
             const math::Point3D& eye,
             const math::Point3D& look_at,
             const math::Vector3D& up,
@@ -92,7 +92,7 @@ namespace
             return cameras::depth_of_field_perspective(eye, look_at, up, distance, aspect_ratio, eye_size, eye_sampler);
         }
 
-        Camera depth_of_field_perspective_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Camera depth_of_field_by_map(const std::map<std::string, Boxed_Value> argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
@@ -120,7 +120,7 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
     CAMERA(perspective);
     CAMERA(orthographic);
     CAMERA(fisheye);
-    CAMERA(depth_of_field_perspective);
+    CAMERA(depth_of_field);
 #undef CAMERA
 
     return module;
