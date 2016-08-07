@@ -2,6 +2,7 @@
 #include "primitives/triangle.h"
 #include "math/point.h"
 #include "math/box.h"
+#include "util/misc.h"
 #include "easylogging++.h"
 #include <memory>
 #include <stack>
@@ -15,18 +16,6 @@ using namespace math;
 
 namespace
 {
-    bool ends_with(const std::string& string, const std::string& suffix)
-    {
-        if (string.size() < suffix.size())
-        {
-            return false;
-        }
-        else
-        {
-            return std::equal(suffix.rbegin(), suffix.rend(), string.rbegin());
-        }
-    }
-
 #pragma pack(push, 1)
 
     struct XYZ
