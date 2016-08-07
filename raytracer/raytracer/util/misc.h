@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+
+
 template<typename T>
 void swap(T& x, T& y)
 {
@@ -39,3 +42,6 @@ bool smallest_greater_than_zero(T x, T y, T* result)
         return false;
     }
 }
+
+bool starts_with(const std::string&, const std::string&);
+bool ends_with(const std::string&, const std::string&);
