@@ -37,8 +37,14 @@ namespace raytracer
     class Renderer
     {
     public:
-        Renderer(std::shared_ptr<rendering::_private_::RendererImplementation> implementation)
+        Renderer()
+            : m_implementation(nullptr) { }
+
+        explicit Renderer(std::shared_ptr<rendering::_private_::RendererImplementation> implementation)
             : m_implementation(implementation) { }
+
+        Renderer(const Renderer& r) = default;
+        Renderer(Renderer&& r) = default;
 
         const rendering::_private_::RendererImplementation* operator ->() const { return m_implementation.get(); }
 

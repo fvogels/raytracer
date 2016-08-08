@@ -10,8 +10,6 @@ raytracer::rendering::_private_::RendererImplementation::RendererImplementation(
     // NOP
 }
 
-
-
 void raytracer::rendering::_private_::RendererImplementation::for_each_pixel(std::function<void(Position)> callback) const
 {
     m_looper->loop(m_vertical_resolution, [this, callback](unsigned y) {
