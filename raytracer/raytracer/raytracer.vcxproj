@@ -339,6 +339,7 @@
     <ClCompile Include="sampling\single-sampler.cpp" />
     <ClCompile Include="sampling\stratified-half-jittered-sampler.cpp" />
     <ClCompile Include="sampling\stratified-jittered-sampler.cpp" />
+    <ClCompile Include="scripting\animation-module.cpp" />
     <ClCompile Include="scripting\cameras-module.cpp" />
     <ClCompile Include="scripting\imaging-module.cpp" />
     <ClCompile Include="scripting\lights-module.cpp" />
@@ -543,6 +544,7 @@
     <ClCompile Include="tests\coordinate-system-tests.cpp" />
     <ClInclude Include="sampling\stratified-half-jittered-sampler.h" />
     <ClInclude Include="sampling\stratified-jittered-sampler.h" />
+    <ClInclude Include="scripting\animation-module.h" />
     <ClInclude Include="scripting\cameras-module.h" />
     <ClInclude Include="scripting\imaging-module.h" />
     <ClInclude Include="scripting\lights-module.h" />
