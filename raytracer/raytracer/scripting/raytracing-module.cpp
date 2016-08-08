@@ -44,11 +44,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     RAYTRACER(v6);
 #undef RAYTRACER
 
-    // module->add(user_type<Scene>(), "Scene");
-    // module->add(constructor<Scene(raytracer::Camera, raytracer::Primitive)>(), "Scene");
-    // module->add(fun([](Scene& scene, LightSource light) { scene.light_sources.push_back(light); }), "add_light");
-
-    module->add(fun(&create_scene), "scene");
+    module->add(fun(&create_scene), "create_scene");
 
     return module;
 }
