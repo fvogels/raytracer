@@ -442,6 +442,7 @@
     <ClInclude Include="pipeline\consumer.h" />
     <ClInclude Include="pipeline\inverter-processor.h" />
     <ClInclude Include="pipeline\motion-blur-processor.h" />
+    <ClInclude Include="pipeline\null-consumer.h" />
     <ClInclude Include="pipeline\overprint-processor.h" />
     <ClInclude Include="pipeline\pipeline-builder.h" />
     <ClInclude Include="pipeline\pipeline.h" />

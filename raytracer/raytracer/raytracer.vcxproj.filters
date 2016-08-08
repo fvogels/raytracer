@@ -974,5 +974,8 @@
     <ClInclude Include="scripting\utility-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pipeline\null-consumer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

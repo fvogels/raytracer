@@ -7,3 +7,4 @@
 #include "pipeline/overprint-processor.h"
 #include "pipeline/inverter-processor.h"
 #include "pipeline/pipeline-builder.h"
+#include "pipeline/null-consumer.h"
