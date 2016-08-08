@@ -63,7 +63,10 @@ namespace
     raytracer::Camera create_camera(TimeStamp now)
     {
         auto sampler = samplers::multi_jittered(3);
-        return raytracer::cameras::depth_of_field_perspective(Point3D(0, 0, 0), Point3D(0, 0, 1 + now.seconds() * 6), Vector3D(0, 1, 0), 1, 1, 0.05, sampler);
+
+        auto lookat_animation = animation::straight(Point3D(0, 0, 1), Point3D(0, 0, 7), Duration::from_seconds(1));
+
+        return raytracer::cameras::depth_of_field_perspective(Point3D(0, 0, 0), lookat_animation(now), Vector3D(0, 1, 0), 1, 1, 0.05, sampler);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()

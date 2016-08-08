@@ -39,8 +39,10 @@ namespace
             return Vector3D(x, y, z) * 0.1;
         };
 
+        auto angle_animation = animation::interval(0_degrees, 90_degrees, 1_s);
+
         return bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)),
-            rotate_around_y(Angle::degrees(90 * now.seconds()), sphere())));
+            rotate_around_y(angle_animation(now), sphere())));
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
