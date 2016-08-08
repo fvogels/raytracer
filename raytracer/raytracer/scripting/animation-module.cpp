@@ -25,7 +25,12 @@ namespace
             return animation::circular(point, center, rotation_axis, angle_interval, duration);
         }
 
-        Animation<Point3D> straight(const Point3D& from, const Point3D& to, const Duration& duration) const
+        Animation<Point3D> point_animation(const Point3D& from, const Point3D& to, const Duration& duration) const
+        {
+            return animation::straight(from, to, duration);
+        }
+
+        Animation<double> double_animation(double from, double to, Duration duration)
         {
             return animation::straight(from, to, duration);
         }
@@ -36,7 +41,6 @@ namespace
         return Duration::from_seconds(s);
     }
 
-    // Animation<std::shared_ptr<Scene>> make_scene_animation(std::function<std::shared_ptr<Scene>(TimeStamp)> function, Duration duration)
     Animation<std::shared_ptr<Scene>> make_scene_animation(std::function<std::shared_ptr<Scene>(TimeStamp)> function, Duration duration)
     {
         return Animation<std::shared_ptr<Scene>>(from_lambda(function), duration);
@@ -53,7 +57,8 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #define ANIMATION_NAMED(INTERNAL, EXTERNAL) module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
 #define ANIMATION(NAME)                     ANIMATION_NAMED(NAME, NAME)
     ANIMATION(circular);
-    ANIMATION(straight);
+    ANIMATION(point_animation);
+    ANIMATION(double_animation);
 #undef ANIMATION
 #undef ANIMATION_NAMED
 
