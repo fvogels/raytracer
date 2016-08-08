@@ -53,6 +53,8 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
+    util::register_type<Material>(*module, "Material");
+
     auto material_library = std::make_shared<MaterialLibrary>();
     module->add_global_const(chaiscript::const_var(material_library), "Materials");
 

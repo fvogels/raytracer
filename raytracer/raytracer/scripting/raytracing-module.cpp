@@ -2,6 +2,7 @@
 #include "raytracing/ray-tracers.h"
 #include "scripting/scripting-util.h"
 
+
 using namespace chaiscript;
 using namespace raytracer;
 using namespace raytracer::scripting;
@@ -30,6 +31,13 @@ namespace
 ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
+
+    //chaiscript::utility::add_class<raytracer::RayTracer>(*module,
+    //    "RayTracer",
+    //    { constructor<raytracer::RayTracer(const raytracer::RayTracer&)>() },
+    //    { } );
+
+    raytracer::scripting::util::register_type<raytracer::RayTracer>(*module, "RayTracer");
 
     auto raytracer_library = std::make_shared<RaytracerLibrary>();
     module->add_global_const(chaiscript::const_var(raytracer_library), "Raytracers");

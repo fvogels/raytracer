@@ -91,6 +91,11 @@ namespace
             return raytracer::rendering::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, util::loopers::looper(thread_count), split_thickness, split_depth);
         }
 
+        Renderer split_depth2(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, double split_depth) const
+        {
+            return this->split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, split_thickness, split_depth, 4);
+        }
+
         Renderer split_depth_by_map(const std::map<std::string, Boxed_Value> argument_map) const
         {
             START_ARGUMENTS(argument_map);
@@ -112,6 +117,8 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
+    util::register_type<Renderer>(*module, "Renderer");
+
     auto renderer_library = std::make_shared<RendererLibrary>();
     module->add_global_const(chaiscript::const_var(renderer_library), "Renderers");
 
@@ -125,6 +132,9 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     RENDERER(cartoon, cartoon);
     RENDERER(cartoon2, cartoon);
     RENDERER(cartoon_by_map, cartoon);
+    RENDERER(split_depth, split_depth);
+    RENDERER(split_depth2, split_depth);
+    RENDERER(split_depth_by_map, split_depth);
 #undef RENDERER
 
     return module;

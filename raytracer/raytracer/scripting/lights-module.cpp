@@ -1,4 +1,5 @@
 #include "scripting/lights-module.h"
+#include "scripting/scripting-util.h"
 #include "lights/lights.h"
 
 using namespace chaiscript;
@@ -41,6 +42,8 @@ namespace
 ModulePtr raytracer::scripting::_private_::create_lights_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
+
+    util::register_type<LightSource>(*module, "LightSource");
 
     auto lights_library = std::make_shared<LightLibrary>();
     module->add_global_const(chaiscript::const_var(lights_library), "Lights");

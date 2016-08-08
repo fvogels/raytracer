@@ -52,6 +52,8 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
+    util::register_type<Sampler>(*module, "Sampler");
+
     auto sampler_library = std::make_shared<SamplerLibrary>();
     module->add_global_const(chaiscript::const_var(sampler_library), "Samplers");
 

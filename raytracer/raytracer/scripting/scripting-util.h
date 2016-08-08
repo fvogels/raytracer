@@ -1,6 +1,7 @@
 #pragma once
 
-#include <chaiscript/chaiscript.hpp>
+#include "chaiscript/chaiscript.hpp"
+#include "chaiscript/utility/utility.hpp"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -26,7 +27,7 @@ namespace raytracer
             }
 
             template<>
-            inline double smart_boxed_cast(chaiscript::Boxed_Value boxed)
+            inline double smart_boxed_cast<double>(chaiscript::Boxed_Value boxed)
             {
                 if (*boxed.get_type_info().bare_type_info() == typeid(int))
                 {
@@ -35,6 +36,19 @@ namespace raytracer
                 else
                 {
                     return chaiscript::boxed_cast<double>(boxed);
+                }
+            }
+
+            template<>
+            inline unsigned smart_boxed_cast<unsigned>(chaiscript::Boxed_Value boxed)
+            {
+                if (*boxed.get_type_info().bare_type_info() == typeid(int))
+                {
+                    return unsigned(chaiscript::boxed_cast<int>(boxed));
+                }
+                else
+                {
+                    return chaiscript::boxed_cast<unsigned>(boxed);
                 }
             }
 
@@ -151,6 +165,15 @@ namespace raytracer
 
                 std::map<std::string, std::shared_ptr<SingleArgumentParser>> m_parsers;
             };
+
+            template<typename T>
+            void register_type(chaiscript::Module& module, const std::string& name)
+            {
+                chaiscript::utility::add_class<T>(module,
+                    name,
+                    { constructor<T(const T&)>() },
+                    {});
+            }
         }
     }
 }
