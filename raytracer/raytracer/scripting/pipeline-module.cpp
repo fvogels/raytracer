@@ -6,6 +6,7 @@
 #include "sampling/samplers.h"
 #include "raytracing/ray-tracers.h"
 #include "util/looper.h"
+#include "animation/animation.h"
 #include "easylogging++.h"
 #include <typeinfo>
 #include <algorithm>
@@ -157,6 +158,16 @@ namespace
         {
             return wrap(raytracer::pipeline::overprint());
         }
+
+        std::shared_ptr<Wrapper> animation(double fps) const
+        {
+            return wrap(pipeline::animation(fps));
+        }
+
+        std::shared_ptr<Wrapper> null_bitmap_consumer() const
+        {
+            return wrap(pipeline::null<std::shared_ptr<Bitmap>>());
+        }
     };
 
     void pipeline_builder(Boxed_Value initial, const std::vector<Boxed_Value>& pipeline_segments)
@@ -172,7 +183,7 @@ namespace
             std::transform(pipeline_segments.begin(), pipeline_segments.end(), wrappers.begin(), [](Boxed_Value value) {
                 return boxed_cast<Wrapper*>(value);
             });
-            
+
             for (auto it = wrappers.begin(); it + 1 != wrappers.end(); ++it)
             {
                 auto current = *it;
@@ -198,11 +209,13 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
     PIPELINE(wif);
     PIPELINE(ppm);
     PIPELINE(bmp);
+    PIPELINE(animation);
     PIPELINE(renderer);
     PIPELINE(inverter);
     PIPELINE(motion_blur);
     PIPELINE_NAMED(motion_blur_zerolew, motion_blur);
     PIPELINE(overprint);
+    PIPELINE(null_bitmap_consumer);
 #undef PIPELINE_NAMED
 #undef PIPELINE
 
