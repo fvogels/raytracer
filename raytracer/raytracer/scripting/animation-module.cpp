@@ -58,7 +58,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #undef ANIMATION_NAMED
 
     module->add(fun(&seconds), "seconds");
-    module->add(fun(&Animation<Point3D>::operator()), "()");
+    module->add(fun(&Animation<Point3D>::operator()), "[]");
     module->add(fun(&make_scene_animation), "scene_animation");
 
     return module;
