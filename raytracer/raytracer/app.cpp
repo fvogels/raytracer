@@ -199,6 +199,10 @@ void process_command_line_arguments(int argc, char** argv)
         {
             std::cout << "Build " << BUILD_NUMBER << std::endl;
         }
+        else if (current == "--beep")
+        {
+            std::cout << "\a";
+        }
         else
         {
             std::cerr << "Unknown flag " << current << std::endl;
@@ -220,7 +224,7 @@ int main(int argc, char** argv)
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 
-    LOG(INFO) << "Done!\a";
+    
 }
 
 #endif
