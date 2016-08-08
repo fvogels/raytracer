@@ -85,6 +85,26 @@ namespace
 
             return cartoon2(width, height, sampler, ray_tracer, shade_count, edge_thickness, thread_count);
         }
+
+        Renderer split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, double split_depth, unsigned thread_count) const
+        {
+            return raytracer::rendering::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, util::loopers::looper(thread_count), split_thickness, split_depth);
+        }
+
+        Renderer split_depth_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        {
+            START_ARGUMENTS(argument_map);
+            ARGUMENT(unsigned, width);
+            ARGUMENT(unsigned, height);
+            ARGUMENT(Sampler, sampler);
+            ARGUMENT(RayTracer, ray_tracer);
+            ARGUMENT(double, split_thickness);
+            ARGUMENT(double, split_depth);
+            OPTIONAL_ARGUMENT(unsigned, thread_count, 4);
+            END_ARGUMENTS();
+
+            return this->split_depth(width, height, sampler, ray_tracer, split_thickness, split_depth, thread_count);
+        }
     };
 }
 
