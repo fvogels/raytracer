@@ -154,7 +154,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>ELPP_THREAD_SAFE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ELPP_CUSTOM_COUT=std::cerr;ELPP_THREAD_SAFE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
@@ -173,7 +173,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>ELPP_THREAD_SAFE;TEST_BUILD;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ELPP_CUSTOM_COUT=std::cerr;ELPP_THREAD_SAFE;TEST_BUILD;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
@@ -215,7 +215,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>ELPP_THREAD_SAFE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ELPP_CUSTOM_COUT=std::cerr;ELPP_THREAD_SAFE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
