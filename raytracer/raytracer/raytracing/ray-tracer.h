@@ -27,13 +27,8 @@ namespace raytracer
         RayTracer()
             : RayTracer(nullptr) { }
 
-        RayTracer(const RayTracer&) = default;
-        RayTracer(RayTracer&&) = default;
-
         explicit RayTracer(std::shared_ptr<raytracers::_private_::RayTracerImplementation> implementation)
             : m_implementation(implementation) { }
-
-        RayTracer& operator =(const RayTracer&) = default;
 
         const raytracers::_private_::RayTracerImplementation* operator ->() const
         {
