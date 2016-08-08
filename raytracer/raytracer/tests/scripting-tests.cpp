@@ -96,26 +96,26 @@ using namespace raytracer::scripting;
 
 
 
-//TEST_CASE("[Scripting] Pipeline creation", "[Scripting]")
-//{
-//    evaluate<void>(R"(
-//        var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
-//        var material   = Materials.uniform( Colors.white() * 0.2,
-//                                            Colors.white() * 0.8,
-//                                            Colors.white(),
-//                                            20,
-//                                            0.2,
-//                                            0,
-//                                            0 )
-//        var root       = decorate( material, sphere() )
-//        var lights     = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
-//        var scene      = scene(camera, root, lights )
-//        var ray_tracer = Raytracers.binary()
-//        var renderer   = Renderers.standard(500, 500, Samplers.single(), ray_tracer)
-//        pipeline(scene, [ Pipeline.renderer(renderer)
-//                        , Pipeline.null_bitmap_consumer() ])
-//    )");
-//}
+TEST_CASE("[Scripting] Pipeline creation", "[Scripting]")
+{
+    evaluate<void>(R"(
+        var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
+        var material   = Materials.uniform( Colors.white() * 0.2,
+                                            Colors.white() * 0.8,
+                                            Colors.white(),
+                                            20,
+                                            0.2,
+                                            0,
+                                            0 )
+        var root       = decorate( material, sphere() )
+        var lights     = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
+        var scene      = create_scene(camera, root, lights )
+        var ray_tracer = Raytracers.binary()
+        var renderer   = Renderers.standard(50, 50, Samplers.single(), ray_tracer)
+        pipeline(scene, [ Pipeline.renderer(renderer)
+                        , Pipeline.null_bitmap_consumer() ])
+    )");
+}
 
 
 //TEST_CASE("[Scripting] Pipeline creation test", "[Scripting]")
@@ -123,7 +123,7 @@ using namespace raytracer::scripting;
 //    evaluate<void>(R"(
 //
 //        var ray_tracer = Raytracers.binary()
-//        var renderer   = Renderers.standard(500, 500, Samplers.single(), ray_tracer)
+//        var renderer   = Renderers.standard(50, 50, Samplers.single(), ray_tracer)
 //
 //        def scene_at(now) {
 //            var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
@@ -144,60 +144,88 @@ using namespace raytracer::scripting;
 //    )");
 //}
 
+//
+//TEST_CASE("[Scripting] Animation pipeline", "[Scripting]")
+//{
+//    evaluate<void>(R"(
+//        def scene_at(now) {
+//            var animation   = Animations.circular( pos(0, 0, 5),
+//                                                   pos(0, 0, 0),
+//                                                   vec(0, 1, 0),
+//                                                   interval( degrees(0), degrees(360) ),
+//                                                   seconds(1) )
+//
+//            var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
+//            var material   = Materials.uniform( Colors.white() * 0.2,
+//                                                Colors.white() * 0.8,
+//                                                Colors.white(),
+//                                                20,
+//                                                0.2,
+//                                                0,
+//                                                0 )
+//            var root       = decorate( material, translate( animation[now] - pos(0,0,0), sphere() ) )
+//            var lights     = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
+//
+//            create_scene(camera, root, lights)
+//        }
+//
+//        var raytracer   = Raytracers.v6()
+//        var renderer    = Renderers.standard(50, 50, Samplers.multijittered(2), raytracer)
+//
+//        var anim = scene_animation(scene_at, seconds(1))
+//
+//        pipeline( anim,
+//                  [ Pipeline.animation(1),
+//                    Pipeline.renderer(renderer),
+//                    Pipeline.null_bitmap_consumer() ] )
+//    )");
+//}
 
 TEST_CASE("[Scripting] Animation pipeline", "[Scripting]")
 {
     evaluate<void>(R"(
-        def scene_at(now) {
-            var animation   = Animations.circular( pos(0, 0, 5),
-                                                   pos(0, 0, 0),
-                                                   vec(0, 1, 0),
-                                                   interval( degrees(0), degrees(360) ),
-                                                   seconds(1) )
+        def scene_at(now)
+        {
+            var camera = Cameras.perspective(["eye":pos(0, 0, 5),
+                "look_at" : pos(0, 0, 0),
+                "up" : vec(0, 1, 0),
+                "distance" : 1,
+                "aspect_ratio" : 1])
 
-            var camera     = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
-            var material   = Materials.uniform( Colors.white() * 0.2,
-                                                Colors.white() * 0.8,
-                                                Colors.white(),
-                                                20,
-                                                0.2,
-                                                0,
-                                                0 )
-            var root       = decorate( material, translate( animation[now] - pos(0,0,0), sphere() ) )
-            var lights     = [ Lights.omnidirectional(pos(0,5,0), Colors.white()) ]
+                var white = Materials.uniform(["ambient":Colors.white() * 0.1,
+                    "diffuse" : Colors.white() * 0.8,
+                    "specular" : Colors.white(),
+                    "specular_exponent" : 20,
+                    "reflectivity" : 0,
+                    "transparency" : 0,
+                    "refractive_index" : 0])
 
-            create_scene(camera, root, lights)
+                var animation = Animations.circular(pos(0, 0, 2.5),
+                    pos(0, 0, 0),
+                    vec(0, 1, 0),
+                    interval(degrees(0), degrees(360)),
+                    seconds(1))
+
+                var root = decorate(white, translate(animation[now] - pos(0, 0, 0), sphere()))
+                var lights = [Lights.omnidirectional(pos(0, 5, 5), Colors.white())]
+
+                return create_scene(camera, root, lights)
         }
-
-        var raytracer   = Raytracers.v6()
-        var renderer    = Renderers.standard(500, 500, Samplers.multijittered(2), raytracer)
 
         var anim = scene_animation(scene_at, seconds(1))
 
-        var output_file = "pinhole.bmp"
+        var raytracer = Raytracers.v6()
 
-        pipeline( anim,
-                  [ Pipeline.animation(1),
-                    Pipeline.renderer(renderer),
-                    Pipeline.bmp(output_file) ] )
+        var renderer = Renderers.split_depth(["width":500,
+            "height" : 500,
+            "sampler" : Samplers.single(),
+            "ray_tracer" : raytracer,
+            "split_thickness" : 0.1,
+            "split_depth" : 5.0])
     )");
 }
 
 
-//
-//TEST_CASE("[Scripting] Adding light to scene", "[Scripting]")
-//{
-//    auto result = evaluate<raytracer::Scene>(R"(
-//        var camera = Cameras.perspective(pos(0,0,5), pos(0,0,0), vec(0,1,0), 1, 1)
-//        var root   = sphere()
-//        var scene  = Scene(camera, root)
-//
-//        add_light( scene, Lights.omnidirectional(pos(0,5,0), Colors.white()) )
-//
-//        scene
-//    )");
-//
-//    REQUIRE(result.light_sources.size() == 1);
-//}
+
 
 #endif
