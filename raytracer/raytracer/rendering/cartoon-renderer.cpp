@@ -5,12 +5,12 @@
 using namespace imaging;
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::rendering;
+using namespace raytracer::renderers;
 
 
 namespace
 {
-    class CartoonRenderer : public raytracer::rendering::_private_::RendererImplementation
+    class CartoonRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
         CartoonRenderer(
@@ -120,7 +120,7 @@ namespace
     };
 }
 
-Renderer raytracer::rendering::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, unsigned shade_count, double stroke_thickness)
+Renderer raytracer::renderers::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, unsigned shade_count, double stroke_thickness)
 {
     return Renderer(std::make_shared<CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, shade_count, stroke_thickness));
 }

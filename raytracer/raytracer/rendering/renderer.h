@@ -10,7 +10,7 @@
 
 namespace raytracer
 {
-    namespace rendering
+    namespace renderers
     {
         namespace _private_
         {
@@ -40,17 +40,17 @@ namespace raytracer
         Renderer()
             : m_implementation(nullptr) { }
 
-        explicit Renderer(std::shared_ptr<rendering::_private_::RendererImplementation> implementation)
+        explicit Renderer(std::shared_ptr<renderers::_private_::RendererImplementation> implementation)
             : m_implementation(implementation) { }
 
         Renderer(const Renderer& r) = default;
         Renderer(Renderer&& r) = default;
 
-        const rendering::_private_::RendererImplementation* operator ->() const { return m_implementation.get(); }
+        const renderers::_private_::RendererImplementation* operator ->() const { return m_implementation.get(); }
 
         operator bool() const { return m_implementation != nullptr; }
 
     private:
-        std::shared_ptr<rendering::_private_::RendererImplementation> m_implementation;
+        std::shared_ptr<renderers::_private_::RendererImplementation> m_implementation;
     };
 }

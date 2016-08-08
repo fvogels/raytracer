@@ -78,7 +78,7 @@ namespace
         // auto sampler = raytracer::samplers::stratified_half_jittered(2, 2);
         // auto sampler = raytracer::samplers::nrooks(4);
         auto sampler = raytracer::samplers::multi_jittered(2);
-        auto renderer = raytracer::rendering::standard(HPIXELS, VPIXELS, sampler, ray_tracer, util::loopers::looper(N_THREADS));
+        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, sampler, ray_tracer, util::loopers::looper(N_THREADS));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(1)

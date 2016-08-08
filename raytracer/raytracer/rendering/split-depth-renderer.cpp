@@ -5,12 +5,12 @@
 using namespace imaging;
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::rendering;
+using namespace raytracer::renderers;
 
 
 namespace
 {
-    class SplitDepthRenderer : public raytracer::rendering::_private_::RendererImplementation
+    class SplitDepthRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
         SplitDepthRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double split_thickness, double split_depth)
@@ -77,7 +77,7 @@ namespace
     };
 }
 
-Renderer raytracer::rendering::split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double split_thickness, double split_depth)
+Renderer raytracer::renderers::split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double split_thickness, double split_depth)
 {
     return Renderer(std::make_shared<SplitDepthRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, split_thickness, split_depth));
 }

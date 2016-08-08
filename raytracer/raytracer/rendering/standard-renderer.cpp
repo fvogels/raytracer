@@ -3,12 +3,12 @@
 using namespace imaging;
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::rendering;
+using namespace raytracer::renderers;
 
 
 namespace
 {
-    class StandardRenderer : public raytracer::rendering::_private_::RendererImplementation
+    class StandardRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
         StandardRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
@@ -55,7 +55,7 @@ namespace
     };
 }
 
-Renderer raytracer::rendering::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
+Renderer raytracer::renderers::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
 {
     return Renderer(std::make_shared<StandardRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
 }

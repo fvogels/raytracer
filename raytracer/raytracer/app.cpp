@@ -171,7 +171,7 @@ void render()
 
     pipeline::start(create_scene_animation()) >>
         pipeline::animation(30) >>
-        pipeline::renderer(rendering::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::stratified_fixed(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
+        pipeline::renderer(renderers::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::stratified_fixed(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
 }
 

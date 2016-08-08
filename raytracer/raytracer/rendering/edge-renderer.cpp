@@ -7,12 +7,12 @@
 using namespace imaging;
 using namespace math;
 using namespace raytracer;
-using namespace raytracer::rendering;
+using namespace raytracer::renderers;
 
 
 namespace
 {
-    class EdgeRenderer : public raytracer::rendering::_private_::RendererImplementation
+    class EdgeRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
         EdgeRenderer(
@@ -115,7 +115,7 @@ namespace
     };
 }
 
-Renderer raytracer::rendering::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double stroke_thickness)
+Renderer raytracer::renderers::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double stroke_thickness)
 {
     return Renderer(std::make_shared<EdgeRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, stroke_thickness));
 }
