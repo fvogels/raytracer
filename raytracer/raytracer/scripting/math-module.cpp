@@ -18,6 +18,16 @@ namespace
     {
         return Vector3D(x, y, z);
     }
+
+    Angle degrees(double x)
+    {
+        return Angle::degrees(x);
+    }
+
+    Interval<Angle> angle_interval(Angle lower, Angle upper)
+    {
+        return Interval<Angle>(lower, upper);
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_math_module()
@@ -32,6 +42,8 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     module->add(fun([](const Vector3D& u, const Vector3D& v) { return u - v; }), "-");
     module->add(fun([](const Point3D& p, const Vector3D& v) { return p - v; }), "-");
     module->add(fun([](const Point3D& p, const Point3D& q) { return p - q; }), "-");
+    module->add(fun(&degrees), "degrees");
+    module->add(fun(&angle_interval), "interval");
 
     return module;
 }
