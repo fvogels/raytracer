@@ -28,18 +28,27 @@ namespace
 
             for_each_pixel([&](Position pixel_coordinates) {
                 Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+                bool on_split = is_on_split(pixel_coordinates);
 
                 math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
                 imaging::Color color = imaging::colors::black();
                 int sample_count = 0;
-                double smallest_distance = std::numeric_limits<double>::infinity();
+                // double smallest_distance = std::numeric_limits<double>::infinity();
 
-                m_sampler->sample(pixel_rectangle, [this, &color, &sample_count, &scene, &smallest_distance](const Point2D& p) {
-                    scene.camera->enumerate_rays(p, [this, &color, &sample_count, &scene, &smallest_distance](const Ray& ray) {
+                m_sampler->sample(pixel_rectangle, [this, on_split, &color, &sample_count, &scene](const Point2D& p) {
+                    scene.camera->enumerate_rays(p, [this, on_split, &color, &sample_count, &scene](const Ray& ray) {
                         auto trace_result = m_ray_tracer->trace(scene, ray);
-                        color += trace_result.color;
 
-                        smallest_distance = std::min(smallest_distance, trace_result.distance_to_hit);
+                        if (!on_split || is_in_front_of_split(trace_result.distance_to_hit))
+                        {
+                            color += trace_result.color;
+                        }
+                        else
+                        {
+                            color += colors::white();
+                        }
+
+                        // smallest_distance = std::min(smallest_distance, trace_result.distance_to_hit);
 
                         ++sample_count;
                     });
@@ -47,14 +56,7 @@ namespace
 
                 color /= sample_count;
 
-                if (!is_on_split(pixel_coordinates) || is_in_front_of_split(smallest_distance))
-                {
-                    bitmap[bitmap_coordinates] = color;
-                }
-                else
-                {
-                    bitmap[bitmap_coordinates] = colors::white();
-                }
+                bitmap[bitmap_coordinates] = color;
             });
 
             return result;
