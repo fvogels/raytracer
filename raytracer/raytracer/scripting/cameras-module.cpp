@@ -26,9 +26,9 @@ namespace
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
             ARGUMENT(Point3D, look_at);
-            ARGUMENT(Vector3D, up);
-            ARGUMENT(double, distance);
-            ARGUMENT(double, aspect_ratio);
+            OPTIONAL_ARGUMENT(Vector3D, up, Vector3D(0, 1, 0));
+            OPTIONAL_ARGUMENT(double, distance, 1);
+            OPTIONAL_ARGUMENT(double, aspect_ratio, 1);
             END_ARGUMENTS();
 
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
@@ -49,9 +49,9 @@ namespace
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
             ARGUMENT(Point3D, look_at);
-            ARGUMENT(Vector3D, up);
+            OPTIONAL_ARGUMENT(Vector3D, up, Vector3D(0, 1, 0));
             ARGUMENT(double, window_width);
-            ARGUMENT(double, aspect_ratio);
+            OPTIONAL_ARGUMENT(double, aspect_ratio, 1);
             END_ARGUMENTS();
 
             return cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
@@ -97,9 +97,9 @@ namespace
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
             ARGUMENT(Point3D, look_at);
-            ARGUMENT(Vector3D, up);
-            ARGUMENT(double, distance);
-            ARGUMENT(double, aspect_ratio);
+            OPTIONAL_ARGUMENT(Vector3D, up, Vector3D(0, 1, 0));
+            OPTIONAL_ARGUMENT(double, distance, 1);
+            OPTIONAL_ARGUMENT(double, aspect_ratio, 1);
             ARGUMENT(double, eye_size);
             ARGUMENT(Sampler, eye_sampler);
             END_ARGUMENTS();
