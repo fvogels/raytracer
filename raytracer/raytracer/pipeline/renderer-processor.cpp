@@ -16,8 +16,6 @@ namespace
 
         void consume(std::shared_ptr<Scene> scene) override
         {
-            TIMED_SCOPE(timer, "Rendering single frame");
-
             assert(scene);
 
             auto result = m_renderer->render(*scene);
