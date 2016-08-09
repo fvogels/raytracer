@@ -1004,5 +1004,8 @@
     <ClInclude Include="util\beep.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="animation\redimensioner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

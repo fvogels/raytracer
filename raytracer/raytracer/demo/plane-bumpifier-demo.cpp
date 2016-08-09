@@ -8,6 +8,7 @@
 #include "raytracing/scene.h"
 #include "math/function.h"
 #include "animation/animations.h"
+#include "animation/redimensioner.h"
 #include "pipeline/pipelines.h"
 
 using namespace raytracer;
@@ -29,19 +30,20 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        std::vector<Primitive> primitives;        
+        //auto perlin = math::functions::perlin3d(0, 4);
+        //std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
+        //    Point3D q = animation::interval(Point3D(p.x(), 0, p.z()), Point3D(p.x(), 1, p.z()), 1_s)(now);
+        //    double x = perlin(q);
+        //    double y = perlin(q + Vector3D(100, 100, 100));
+        //    double z = perlin(q - Vector3D(100, 100, 100));
 
-        auto perlin = math::functions::perlin3d(0, 4);
-        std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
-            Point3D q = animation::interval(Point3D(p.x(), 0, p.z()), Point3D(p.x(), 1, p.z()), 1_s)(now);
-            double x = perlin(q);
-            double y = perlin(q + Vector3D(100, 100, 100));
-            double z = perlin(q - Vector3D(100, 100, 100));
+        //    return Vector3D(x, y, z) * 0.1;
+        //};
 
-            return Vector3D(x, y, z) * 0.1;
-        };
+        auto perlin = math::functions::perlin_vector3d(1);
+        auto bumpificator = animation::xyz_to_xyzt(perlin, now);
 
-        return bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
+        return bumpify(bumpificator, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp)

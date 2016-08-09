@@ -570,6 +570,7 @@
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />
+    <ClInclude Include="animation\redimensioner.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
