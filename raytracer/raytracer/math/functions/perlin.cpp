@@ -19,6 +19,15 @@ namespace
         return (t + 1) / 2;
     }
 
+    Function<double(double)> scale1d(double factor)
+    {
+        std::function<double(double)> lambda = [factor](double x) -> double {
+            return x * factor;
+        };
+
+        return from_lambda(lambda);
+    }
+
     Function<Point2D(const Point2D&)> scale2d(double factor)
     {
         std::function<Point2D(const Point2D&)> lambda = [factor](const Point2D& p) -> Point2D {
@@ -290,6 +299,19 @@ Noise1D math::functions::perlin1d(unsigned seed)
     };
 
     return from_lambda(lambda);
+}
+
+Noise1D math::functions::perlin1d(unsigned seed, unsigned octaves)
+{
+    auto perlin = perlin1d(seed);
+    auto total = perlin;
+
+    for (unsigned i = 2; i <= octaves; ++i)
+    {
+        total = total + (scale1d(i) >> perlin) / double(i);
+    }
+
+    return total;
 }
 
 Noise2D math::functions::perlin2d(unsigned seed)
