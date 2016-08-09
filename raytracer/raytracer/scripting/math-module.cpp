@@ -33,24 +33,30 @@ namespace
         return Interval<Angle>(lower, upper);
     }
 
-    struct FunctionLibrary
+    struct Perlin1DLibrary
     {
-        Noise1D perlin1d(unsigned octaves) const
+        Noise1D scalar(unsigned octaves) const
         {
             return math::functions::perlin1d(78643, octaves);
         }
+    };
 
-        Noise2D perlin2d(unsigned octaves) const
+    struct Perlin2DLibrary
+    {
+        Noise2D scalar(unsigned octaves) const
         {
             return math::functions::perlin2d(78643, octaves);
         }
+    };
 
-        Noise3D perlin3d(unsigned octaves) const
+    struct Perlin3DLibrary
+    {
+        Noise3D scalar(unsigned octaves) const
         {
             return math::functions::perlin3d(78643, octaves);
         }
 
-        Function<Vector3D(const Point3D&)> perlin_vector3d(unsigned octaves) const
+        Function<Vector3D(const Point3D&)> vector3d(unsigned octaves) const
         {
             return math::functions::perlin_vector3d(octaves);
         }
@@ -80,17 +86,23 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     module->add(fun(&Vector3D::normalize), "normalize");
     module->add(fun(&Vector3D::normalized), "normalized");
 
-    auto function_library = std::make_shared<FunctionLibrary>();
-    module->add_global_const(chaiscript::const_var(function_library), "Functions");
+    auto perlin1d_library = std::make_shared<Perlin1DLibrary>();
+    module->add_global_const(chaiscript::const_var(perlin1d_library), "Perlin1D");
 
-#define FUNCTION(NAME)                      module->add(fun(&FunctionLibrary::NAME), #NAME)
-#define RENAMED_FUNCTION(FACTORY, NAME)     module->add(fun(&FunctionLibrary::FACTORY), #NAME)
-    FUNCTION(perlin1d);
-    FUNCTION(perlin2d);
-    FUNCTION(perlin3d);
-    FUNCTION(perlin_vector3d);
-#undef RENAMED_FUNCTION
-#undef FUNCTION
+    auto perlin2d_library = std::make_shared<Perlin2DLibrary>();
+    module->add_global_const(chaiscript::const_var(perlin2d_library), "Perlin2D");
+
+    auto perlin3d_library = std::make_shared<Perlin3DLibrary>();
+    module->add_global_const(chaiscript::const_var(perlin3d_library), "Perlin3D");
+
+#define BIND(N, NAME)                 BIND_AS(N, NAME, NAME)
+#define BIND_AS(N, FACTORY, NAME)     module->add(fun(&Perlin ## N ## Library::FACTORY), #NAME)
+    BIND(1D, scalar);
+    BIND(2D, scalar);
+    BIND(3D, scalar);
+    BIND(3D, vector3d);
+#undef BIND_AS
+#undef BIND
 
     return module;
 }
