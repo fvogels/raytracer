@@ -1,6 +1,9 @@
 #include "scripting/primitives-module.h"
 #include "scripting/scripting-util.h"
 #include "primitives/primitives.h"
+#include "math/functions.h"
+#include "animation/time-stamp.h"
+#include "animation/redimensioner.h"
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -68,7 +71,14 @@ namespace
     Primitive intersection(Primitive child1, Primitive child2)
     {
         return primitives::intersection(child1, child2);
-    }
+    }    
+
+    Primitive bumpify2d_timed(Function<Vector3D(const Point3D&)> noise, Primitive primitive, animation::TimeStamp now)
+    {
+        auto perlin = animation::xyz_to_xyt(noise);
+
+        return primitives::bumpify(perlin(now), primitive);
+    }    
 }
 
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
@@ -90,6 +100,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     PRIMITIVE(center);
     PRIMITIVE(group);
     PRIMITIVE(intersection);
+    PRIMITIVE_WITH_NAME(bumpify2d_timed, bumpify);
 #undef PRIMITIVE
 #undef PRIMITIVE_WITH_NAME
 
