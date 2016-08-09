@@ -1,4 +1,5 @@
 #include "rendering/split-depth-renderer.h"
+#include "easylogging++.h"
 #include <limits>
 #include <cmath>
 
@@ -21,6 +22,8 @@ namespace
 
         std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const override
         {
+            TIMED_FUNC(timer);
+
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
             Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
             auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
@@ -33,7 +36,6 @@ namespace
                 math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
                 imaging::Color color = imaging::colors::black();
                 int sample_count = 0;
-                // double smallest_distance = std::numeric_limits<double>::infinity();
 
                 m_sampler->sample(pixel_rectangle, [this, on_split, &color, &sample_count, &scene](const Point2D& p) {
                     scene.camera->enumerate_rays(p, [this, on_split, &color, &sample_count, &scene](const Ray& ray) {
@@ -47,8 +49,6 @@ namespace
                         {
                             color += colors::white();
                         }
-
-                        // smallest_distance = std::min(smallest_distance, trace_result.distance_to_hit);
 
                         ++sample_count;
                     });
