@@ -373,3 +373,16 @@ Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
 
     return from_lambda<double, const Point2D&>(lambda);
 }
+
+Function<Vector3D(const Point3D&)> math::functions::perlin_vector3d(unsigned octaves)
+{
+    auto perlin = math::functions::perlin3d(0, 4);
+
+    std::function<Vector3D(const Point3D&)> bumpificator = [perlin](const Point3D& p) -> Vector3D {
+        double x = perlin(p);
+        double y = perlin(p + Vector3D(1000, 1000, 1000));
+        double z = perlin(p - Vector3D(1000, 1000, 1000));
+
+        return Vector3D(x, y, z) * 0.1;
+    };
+}

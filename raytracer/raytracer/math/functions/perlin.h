@@ -14,5 +14,7 @@ namespace math
         Noise2D marble2d(unsigned, double);
         Noise3D marble3d(unsigned, double);
         Noise2D wood2d(unsigned, double);
+
+        Function<Vector3D(const Point3D&)> perlin_vector3d(unsigned);
     }
 }
