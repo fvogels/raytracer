@@ -32,11 +32,6 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
-    //chaiscript::utility::add_class<raytracer::RayTracer>(*module,
-    //    "RayTracer",
-    //    { constructor<raytracer::RayTracer(const raytracer::RayTracer&)>() },
-    //    { } );
-
     raytracer::scripting::util::register_type<raytracer::RayTracer>(*module, "RayTracer");
 
     auto raytracer_library = std::make_shared<RaytracerLibrary>();
