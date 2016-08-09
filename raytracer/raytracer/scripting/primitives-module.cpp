@@ -1,4 +1,5 @@
 #include "scripting/primitives-module.h"
+#include "scripting/scripting-util.h"
 #include "primitives/primitives.h"
 
 using namespace chaiscript;
@@ -73,6 +74,8 @@ namespace
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
+
+    util::register_type<Primitive>(*module, "Primitive");
 
 #define PRIMITIVE(NAME) module->add(fun(&NAME), #NAME)
 #define PRIMITIVE_WITH_NAME(FACTORY, NAME) module->add(fun(&FACTORY), #NAME)
