@@ -17,5 +17,6 @@ namespace imaging
 
     private:
         std::ofstream out;
+        unsigned m_frame_index;
     };
 }

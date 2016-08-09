@@ -21,7 +21,8 @@ namespace
 }
 
 
-imaging::WIF::WIF(const std::string& path) : out(path, std::ios::binary)
+imaging::WIF::WIF(const std::string& path)
+    : out(path, std::ios::binary), m_frame_index(0)
 {
     // NOP
 }
@@ -35,7 +36,7 @@ imaging::WIF::~WIF()
 
 void imaging::WIF::write_frame(const Bitmap& bitmap)
 {
-    TIMED_FUNC(timerObj);
+    LOG(INFO) << "Writing WIF frame #" << m_frame_index;
 
     uint32_t width = bitmap.width();
     uint32_t height = bitmap.height();   
@@ -52,4 +53,6 @@ void imaging::WIF::write_frame(const Bitmap& bitmap)
             out.write(reinterpret_cast<char*>(&RGBColor), sizeof(RGBColor));
         }
     }
+
+    ++m_frame_index;
 }
