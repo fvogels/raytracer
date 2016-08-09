@@ -37,15 +37,15 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     auto raytracer_library = std::make_shared<RaytracerLibrary>();
     module->add_global_const(chaiscript::const_var(raytracer_library), "Raytracers");
 
-#define RAYTRACER(NAME) module->add(fun(&RaytracerLibrary::NAME), #NAME)
-    RAYTRACER(binary);
-    RAYTRACER(v1);
-    RAYTRACER(v2);
-    RAYTRACER(v3);
-    RAYTRACER(v4);
-    RAYTRACER(v5);
-    RAYTRACER(v6);
-#undef RAYTRACER
+#define BIND(NAME) module->add(fun(&RaytracerLibrary::NAME), #NAME)
+    BIND(binary);
+    BIND(v1);
+    BIND(v2);
+    BIND(v3);
+    BIND(v4);
+    BIND(v5);
+    BIND(v6);
+#undef BIND
 
     module->add(fun(&create_scene), "create_scene");
 

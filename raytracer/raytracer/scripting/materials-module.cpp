@@ -58,14 +58,14 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     auto material_library = std::make_shared<MaterialLibrary>();
     module->add_global_const(chaiscript::const_var(material_library), "Materials");
 
-#define MATERIAL_NAMED(INTERNAL, EXTERNAL) module->add(fun(&MaterialLibrary::INTERNAL), #EXTERNAL)
-#define MATERIAL(NAME) MATERIAL_NAMED(NAME, NAME)
-    MATERIAL(uniform);
-    MATERIAL_NAMED(uniform_by_map, uniform);
-    MATERIAL(texture);
-    MATERIAL(checkered);
-#undef MATERIAL
-#undef MATERIAL_NAMED
+#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&MaterialLibrary::INTERNAL), #EXTERNAL)
+#define BIND(NAME)                      BIND_AS(NAME, NAME)
+    BIND(uniform);
+    BIND_AS(uniform_by_map, uniform);
+    BIND(texture);
+    BIND(checkered);
+#undef BIND
+#undef BIND_AS
 
     return module;
 }

@@ -118,12 +118,14 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
     auto camera_library = std::make_shared<CameraLibrary>();
     module->add_global_const(chaiscript::const_var(camera_library), "Cameras");
 
-#define CAMERA(NAME) module->add(fun(&CameraLibrary::NAME), #NAME); module->add(fun(&CameraLibrary::NAME ## _by_map), #NAME)
-    CAMERA(perspective);
-    CAMERA(orthographic);
-    CAMERA(fisheye);
-    CAMERA(depth_of_field);
-#undef CAMERA
+#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&CameraLibrary::INTERNAL), #EXTERNAL); module->add(fun(&CameraLibrary::INTERNAL ## _by_map), #EXTERNAL)
+#define BIND(NAME)                      BIND_AS(NAME, NAME)
+    BIND(perspective);
+    BIND(orthographic);
+    BIND(fisheye);
+    BIND(depth_of_field);
+#undef BIND
+#undef BIND_AS
 
     return module;
 }

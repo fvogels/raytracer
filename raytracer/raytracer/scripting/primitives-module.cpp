@@ -87,22 +87,22 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 
     util::register_type<Primitive>(*module, "Primitive");
 
-#define PRIMITIVE(NAME) module->add(fun(&NAME), #NAME)
-#define PRIMITIVE_WITH_NAME(FACTORY, NAME) module->add(fun(&FACTORY), #NAME)
-    PRIMITIVE(sphere);
-    PRIMITIVE(xy_plane);
-    PRIMITIVE(xz_plane);
-    PRIMITIVE(yz_plane);
-    PRIMITIVE(translate);
-    PRIMITIVE_WITH_NAME(make_union, union);
-    PRIMITIVE(decorate);
-    PRIMITIVE(mesh);
-    PRIMITIVE(center);
-    PRIMITIVE(group);
-    PRIMITIVE(intersection);
-    PRIMITIVE_WITH_NAME(bumpify2d_timed, bumpify);
-#undef PRIMITIVE
-#undef PRIMITIVE_WITH_NAME
+#define BIND(NAME)              BIND_AS(NAME, NAME)
+#define BIND_AS(FACTORY, NAME)  module->add(fun(&FACTORY), #NAME)
+    BIND(sphere);
+    BIND(xy_plane);
+    BIND(xz_plane);
+    BIND(yz_plane);
+    BIND(translate);
+    BIND_AS(make_union, union);
+    BIND(decorate);
+    BIND(mesh);
+    BIND(center);
+    BIND(group);
+    BIND(intersection);
+    BIND_AS(bumpify2d_timed, bumpify);
+#undef BIND_AS
+#undef BIND
 
     return module;
 }

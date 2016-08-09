@@ -204,20 +204,20 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
     auto pipeline_library = std::make_shared<PipelineLibrary>();
     module->add_global_const(chaiscript::const_var(pipeline_library), "Pipeline");
 
-#define PIPELINE(NAME) module->add(fun(&PipelineLibrary::NAME), #NAME)
-#define PIPELINE_NAMED(INTERNAL, EXTERNAL) module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
-    PIPELINE(wif);
-    PIPELINE(ppm);
-    PIPELINE(bmp);
-    PIPELINE(animation);
-    PIPELINE(renderer);
-    PIPELINE(inverter);
-    PIPELINE(motion_blur);
-    PIPELINE_NAMED(motion_blur_zerolew, motion_blur);
-    PIPELINE(overprint);
-    PIPELINE(null_bitmap_consumer);
-#undef PIPELINE_NAMED
-#undef PIPELINE
+#define BIND(NAME)                      BIND_AS(NAME, NAME)
+#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
+    BIND(wif);
+    BIND(ppm);
+    BIND(bmp);
+    BIND(animation);
+    BIND(renderer);
+    BIND(inverter);
+    BIND(motion_blur);
+    BIND_AS(motion_blur_zerolew, motion_blur);
+    BIND(overprint);
+    BIND(null_bitmap_consumer);
+#undef BIND_AS
+#undef BIND
 
     module->add(fun(&pipeline_builder), "pipeline");
 

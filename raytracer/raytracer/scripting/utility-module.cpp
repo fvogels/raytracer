@@ -16,9 +16,9 @@ ModulePtr raytracer::scripting::_private_::create_utility_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
-#define UTILITY(NAME) module->add(fun(NAME), #NAME)
-    UTILITY(println);
-#undef UTILITY
+#define BIND(NAME)  module->add(fun(NAME), #NAME)
+    BIND(println);
+#undef BIND
 
     return module;
 }

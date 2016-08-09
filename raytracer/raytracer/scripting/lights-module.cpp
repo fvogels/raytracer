@@ -48,15 +48,15 @@ ModulePtr raytracer::scripting::_private_::create_lights_module()
     auto lights_library = std::make_shared<LightLibrary>();
     module->add_global_const(chaiscript::const_var(lights_library), "Lights");
 
-#define LIGHT(NAME) module->add(fun(&LightLibrary::NAME), #NAME)
-#define LIGHT_NAMED(INTERNAL, EXTERNAL) module->add(fun(&LightLibrary::INTERNAL), #EXTERNAL)
-    LIGHT(omnidirectional);
-    LIGHT(directional);
-    LIGHT(area);
-    LIGHT_NAMED(spot_direction, spot);
-    LIGHT_NAMED(spot_point_at, spot);
-#undef LIGHT_NAMED
-#undef LIGHT
+#define BIND(NAME)                      BIND_AS(NAME, NAME)
+#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&LightLibrary::INTERNAL), #EXTERNAL)
+    BIND(omnidirectional);
+    BIND(directional);
+    BIND(area);
+    BIND_AS(spot_direction, spot);
+    BIND_AS(spot_point_at, spot);
+#undef BIND_AS
+#undef BIND
 
     return module;
 }

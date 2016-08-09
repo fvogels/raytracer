@@ -61,14 +61,14 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     auto animation_library = std::make_shared<AnimationLibrary>();
     module->add_global_const(chaiscript::const_var(animation_library), "Animations");
 
-#define ANIMATION_NAMED(INTERNAL, EXTERNAL) module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
-#define ANIMATION(NAME)                     ANIMATION_NAMED(NAME, NAME)
-    ANIMATION(circular);
-    ANIMATION(point_animation);
-    ANIMATION(double_animation);
-    ANIMATION_NAMED(point_animation, animate);
-#undef ANIMATION
-#undef ANIMATION_NAMED
+#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
+#define BIND(NAME)                      BIND_AS(NAME, NAME)
+    BIND(circular);
+    BIND(point_animation);
+    BIND(double_animation);
+    BIND_AS(point_animation, animate);
+#undef BIND
+#undef BIND_AS
 
     module->add(fun(&redim_xyz_to_xyt<Vector3D>), "xyz_to_xyt");
     module->add(fun(&seconds), "seconds");
