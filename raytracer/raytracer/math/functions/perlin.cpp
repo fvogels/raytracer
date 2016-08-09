@@ -291,7 +291,7 @@ using namespace math;
 using namespace math::functions;
 
 
-Noise1D math::functions::perlin1d(unsigned seed, unsigned octaves)
+Noise1D math::functions::_private_::perlin1d(unsigned seed, unsigned octaves)
 {
     auto noise2d = perlin2d(seed, octaves);
 
@@ -302,7 +302,7 @@ Noise1D math::functions::perlin1d(unsigned seed, unsigned octaves)
     return from_lambda(lambda);
 }
 
-Noise2D math::functions::perlin2d(unsigned seed, unsigned octaves)
+Noise2D math::functions::_private_::perlin2d(unsigned seed, unsigned octaves)
 {
     auto perlin = Noise2D(std::make_shared<PerlinNoise2D>(random_function(seed)));
     auto total = perlin;
@@ -315,7 +315,7 @@ Noise2D math::functions::perlin2d(unsigned seed, unsigned octaves)
     return total;
 }
 
-Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
+Noise3D math::functions::_private_::perlin3d(unsigned seed, unsigned octaves)
 {
     auto perlin = Noise3D(std::make_shared<PerlinNoise3D>(random_function(seed)));
     auto total = perlin;
@@ -328,9 +328,9 @@ Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
     return total;
 }
 
-Function<Vector3D(const Point3D&)> math::functions::perlin_vector3d(unsigned seed, unsigned octaves)
+Function<Vector3D(const Point3D&)> math::functions::_private_::perlin_vector3d(unsigned seed, unsigned octaves)
 {
-    auto perlin = math::functions::perlin3d(seed, octaves);
+    auto perlin = math::functions::_private_::perlin3d(seed, octaves);
 
     std::function<Vector3D(const Point3D&)> lambda = [perlin](const Point3D& p) -> Vector3D {
         double x = perlin(p);
