@@ -23,6 +23,7 @@
 
 
 #if defined(CHAISCRIPT_MSVC) && defined(max) && defined(min)
+#define CHAISCRIPT_PUSHEDMINMAX
 #pragma push_macro("max") // Why Microsoft? why? This is worse than bad
 #undef max
 #pragma push_macro("min")
@@ -2438,7 +2439,7 @@ namespace chaiscript
 }
 
 
-#ifdef CHAISCRIPT_MSVC
+#ifdef CHAISCRIPT_PUSHEDMINMAX
 #pragma pop_macro("min")
 #pragma pop_macro("max")
 #endif
