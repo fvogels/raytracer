@@ -74,11 +74,7 @@ namespace animation
         return make_animation<T2>(animation.function() >> function, animation.duration());
     }
 
-    template<typename T>
-    Animation<T> ease(Animation<T> animation, math::functions::EasingFunction easing_function)
-    {
-        return preprocess<T>(timestamp_to_seconds() >> easing_function >> seconds_to_timestamp(), animation);
-    }
+    
 
     Animation<double> straight(double, double, const Duration&);
 }
