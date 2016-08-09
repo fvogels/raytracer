@@ -37,7 +37,7 @@ namespace
     {
         Noise1D scalar(unsigned octaves) const
         {
-            return math::functions::perlin1d(78643, octaves);
+            return math::functions::perlin<double, double>(octaves, 45623);
         }
     };
 
@@ -45,7 +45,7 @@ namespace
     {
         Noise2D scalar(unsigned octaves) const
         {
-            return math::functions::perlin2d(78643, octaves);
+            return math::functions::perlin<double, Point2D>(octaves, 78465);
         }
     };
 
@@ -53,12 +53,12 @@ namespace
     {
         Noise3D scalar(unsigned octaves) const
         {
-            return math::functions::perlin3d(78643, octaves);
+            return math::functions::perlin<double, Point3D>(octaves, 12319);
         }
 
         Function<Vector3D(const Point3D&)> vector3d(unsigned octaves) const
         {
-            return math::functions::perlin_vector3d(octaves);
+            return math::functions::perlin<Vector3D, Point3D>(octaves, 98101);
         }
     };
 }
