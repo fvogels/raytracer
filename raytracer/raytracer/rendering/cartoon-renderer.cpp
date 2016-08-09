@@ -66,59 +66,55 @@ namespace
             {
                 TIMED_SCOPE(timer, "Edge detected phase");
 
-                for (unsigned y = 0; y != bitmap.height(); ++y)
+                for_each_pixel([&](Position pixel_coordinates)
                 {
-                    for (unsigned x = 0; x != bitmap.width(); ++x)
+                    Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+                    unsigned border_count = 0;
+
+                    for (auto& pair : group_grid[pixel_coordinates])
                     {
-                        Position pixel_coordinates(x, y);
-                        Position bitmap_coordinates(x, bitmap.height() - y - 1);
-                        unsigned border_count = 0;
+                        unsigned current_id = pair.first;
+                        Point2D current_xy = pair.second;
+                        bool is_border = false;
 
-                        for (auto& pair : group_grid[pixel_coordinates])
-                        {
-                            unsigned current_id = pair.first;
-                            Point2D current_xy = pair.second;
-                            bool is_border = false;
+                        group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
+                            for (auto& pair : group_grid[neighbor_pixel_position])
+                            {
+                                unsigned neighbor_id = pair.first;
+                                Point2D neighbor_xy = pair.second;
 
-                            group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
-                                for (auto& pair : group_grid[neighbor_pixel_position])
+                                if (current_id != neighbor_id)
                                 {
-                                    unsigned neighbor_id = pair.first;
-                                    Point2D neighbor_xy = pair.second;
+                                    double dist = distance(current_xy, neighbor_xy);
 
-                                    if (current_id != neighbor_id)
+                                    if (dist < m_stroke_thickness)
                                     {
-                                        double dist = distance(current_xy, neighbor_xy);
-
-                                        if (dist < m_stroke_thickness)
-                                        {
-                                            is_border = true;
-                                        }
+                                        is_border = true;
                                     }
                                 }
-                            });
-
-                            if (is_border)
-                            {
-                                ++border_count;
                             }
-                        }
+                        });
 
-                        double border_percentage = double(border_count) / group_grid[pixel_coordinates].size();
-
-                        if (border_percentage > 0)
+                        if (is_border)
                         {
-                            if (border_percentage < 1)
-                            {
-                                bitmap[bitmap_coordinates] *= (1 - border_percentage);
-                            }
-                            else
-                            {
-                                bitmap[bitmap_coordinates] = colors::black();
-                            }
+                            ++border_count;
                         }
                     }
-                }
+
+                    double border_percentage = double(border_count) / group_grid[pixel_coordinates].size();
+
+                    if (border_percentage > 0)
+                    {
+                        if (border_percentage < 1)
+                        {
+                            bitmap[bitmap_coordinates] *= (1 - border_percentage);
+                        }
+                        else
+                        {
+                            bitmap[bitmap_coordinates] = colors::black();
+                        }
+                    }
+                });
             }
 
             return result;
