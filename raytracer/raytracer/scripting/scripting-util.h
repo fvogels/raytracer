@@ -2,6 +2,7 @@
 
 #include "chaiscript/chaiscript.hpp"
 #include "chaiscript/utility/utility.hpp"
+#include "easylogging++.h"
 #include <string>
 #include <map>
 #include <algorithm>
@@ -130,6 +131,8 @@ namespace raytracer
 
                     if (parser_it == m_parsers.end())
                     {
+                        LOG(ERROR) << "Invalid tag " << tag;
+
                         std::ostringstream ss;
                         ss << "Invalid tag " << tag;
 
@@ -156,6 +159,8 @@ namespace raytracer
                 {
                     if (!parser->found && !parser->optional)
                     {
+                        LOG(ERROR) << "Missing nonoptional parameter " << tag;
+
                         std::ostringstream ss;
                         ss << "Missing nonoptional parameter " << tag;
 
