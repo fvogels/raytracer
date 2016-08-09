@@ -7,7 +7,7 @@
 #include "sampling/samplers.h"
 #include "raytracing/scene.h"
 #include "math/function.h"
-#include "animation/animation.h"
+#include "animation/animations.h"
 #include "pipeline/pipelines.h"
 #include "easylogging++.h"
 

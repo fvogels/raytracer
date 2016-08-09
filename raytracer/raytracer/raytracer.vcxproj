@@ -373,6 +373,7 @@
     <ClInclude Include="animation\animations.h" />
     <ClInclude Include="animation\circular-animation.h" />
     <ClInclude Include="animation\duration.h" />
+    <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />
     <ClInclude Include="chaiscript\chaiscript_defines.hpp" />
