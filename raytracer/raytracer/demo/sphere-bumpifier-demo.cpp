@@ -29,7 +29,7 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        auto perlin = math::functions::perlin3d(78);
+        auto perlin = math::functions::perlin<double, Point3D>(4, 78);
         std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
             Point3D q(p.x() * 10, p.y() * 10, p.z() * 10);
             double x = perlin(q);

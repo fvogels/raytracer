@@ -9,7 +9,7 @@ using namespace math::functions;
 
 Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
 {
-    auto noise = perlin2d(15, octaves);
+    auto noise = perlin<double, Point2D>(octaves, 15);
 
     std::function<double(const Point2D&)> lambda = [noise, turbulence](const Point2D& p) -> double {
         double t = p.x() + p.y();
@@ -21,7 +21,7 @@ Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
 
 Noise3D math::functions::marble3d(unsigned octaves, double turbulence)
 {
-    auto noise = perlin3d(71, octaves);
+    auto noise = perlin<double, Point3D>(octaves, 71);
 
     std::function<double(const Point3D&)> lambda = [noise, turbulence](const Point3D& p) -> double {
         double t = p.x() + p.y();

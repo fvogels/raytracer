@@ -9,7 +9,7 @@ using namespace math::functions;
 
 Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
 {
-    auto noise = perlin2d(15, octaves);
+    auto noise = perlin<double, Point2D>(octaves, 7879);
 
     std::function<double(const Point2D&)> lambda = [noise, turbulence](const Point2D& p) -> double {
         double t = sqrt(p.x() * p.x() + p.y() * p.y());
