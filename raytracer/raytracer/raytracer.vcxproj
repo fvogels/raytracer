@@ -265,6 +265,7 @@
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
+    <ClCompile Include="math\functions\marble.cpp" />
     <ClCompile Include="math\quantize.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
     <ClCompile Include="pipeline\bmp-consumer.cpp" />
@@ -440,6 +441,7 @@
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\identity.h" />
+    <ClInclude Include="math\functions\marble.h" />
     <ClInclude Include="math\quantize.h" />
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="materials\wood-material.h" />

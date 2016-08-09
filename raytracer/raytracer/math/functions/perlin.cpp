@@ -350,44 +350,6 @@ Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
     return total;
 }
 
-Noise2D math::functions::marble2d(unsigned octaves, double turbulence)
-{
-    auto p = perlin2d(15);
-
-    Noise2D total = p;
-
-    for (unsigned i = 2; i <= octaves; ++i)
-    {
-        total = total + (scale2d(i) >> p) / double(i);
-    }
-
-    std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
-        double t = p.x() + p.y();
-        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
-    };
-
-    return from_lambda<double, const Point2D&>(lambda);
-}
-
-Noise3D math::functions::marble3d(unsigned octaves, double turbulence)
-{
-    auto p = perlin3d(71);
-
-    Noise3D total = p;
-
-    for (unsigned i = 2; i <= octaves; ++i)
-    {
-        total = total + (scale3d(i) >> p) / double(i);
-    }
-
-    std::function<double(const Point3D&)> lambda = [total, turbulence](const Point3D& p) -> double {
-        double t = p.x() + p.y();
-        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
-    };
-
-    return from_lambda<double, const Point3D&>(lambda);
-}
-
 Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
 {
     auto p = perlin2d(15);
@@ -398,7 +360,7 @@ Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
     {
         total = total + (scale2d(i) >> p) / double(i);
     }
-
+    
     std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
         double t = sqrt(p.x() * p.x() + p.y() * p.y());
         return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));

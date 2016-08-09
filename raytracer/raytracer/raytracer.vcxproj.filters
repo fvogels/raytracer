@@ -402,6 +402,9 @@
     <ClCompile Include="util\beep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\functions\marble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1005,6 +1008,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\redimensioner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\marble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

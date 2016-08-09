@@ -3,6 +3,7 @@
 #include "math/functions/bool-mapper.h"
 #include "math/functions/easing-functions.h"
 #include "math/functions/perlin.h"
+#include "math/functions/marble.h"
 #include "math/functions/worley.h"
 #include "math/functions/patterns.h"
 #include "math/functions/random-function.h"
