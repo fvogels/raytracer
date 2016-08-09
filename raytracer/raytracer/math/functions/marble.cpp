@@ -2,11 +2,6 @@
 #include "math/functions/marble.h"
 #include "math/functions/perlin.h"
 #include "math/vector.h"
-#include <assert.h>
-#include <algorithm>
-#include <limits>
-#include <cmath>
-#include <array>
 
 using namespace math;
 using namespace math::functions;

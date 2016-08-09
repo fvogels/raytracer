@@ -405,6 +405,9 @@
     <ClCompile Include="math\functions\marble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\functions\wood.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1011,6 +1014,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\marble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\wood.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

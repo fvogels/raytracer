@@ -1,5 +1,5 @@
 #include "materials/wood-material.h"
-#include "math/functions/perlin.h"
+#include "math/functions.h"
 
 using namespace raytracer;
 using namespace imaging;

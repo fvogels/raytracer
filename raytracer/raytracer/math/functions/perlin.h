@@ -7,13 +7,9 @@ namespace math
 {
     namespace functions
     {
-        Noise1D perlin1d(unsigned, unsigned);
-        Noise1D perlin1d(unsigned);
-        Noise2D perlin2d(unsigned);
-        Noise2D perlin2d(unsigned, unsigned);
-        Noise3D perlin3d(unsigned);
-        Noise3D perlin3d(unsigned, unsigned);
-        Noise2D wood2d(unsigned, double);
+        Noise1D perlin1d(unsigned, unsigned = 1);
+        Noise2D perlin2d(unsigned, unsigned = 1);
+        Noise3D perlin3d(unsigned, unsigned = 1);
 
         Function<Vector3D(const Point3D&)> perlin_vector3d(unsigned);
     }

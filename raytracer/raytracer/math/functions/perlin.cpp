@@ -290,9 +290,10 @@ namespace
 using namespace math;
 using namespace math::functions;
 
-Noise1D math::functions::perlin1d(unsigned seed)
+
+Noise1D math::functions::perlin1d(unsigned seed, unsigned octaves)
 {
-    auto noise2d = Noise2D(std::make_shared<PerlinNoise2D>(random_function(seed)));
+    auto noise2d = perlin2d(seed, octaves);
 
     std::function<double(double)> lambda = [=](double t) {
         return noise2d(Point2D(t, 0));
@@ -301,27 +302,9 @@ Noise1D math::functions::perlin1d(unsigned seed)
     return from_lambda(lambda);
 }
 
-Noise1D math::functions::perlin1d(unsigned seed, unsigned octaves)
-{
-    auto perlin = perlin1d(seed);
-    auto total = perlin;
-
-    for (unsigned i = 2; i <= octaves; ++i)
-    {
-        total = total + (scale1d(i) >> perlin) / double(i);
-    }
-
-    return total;
-}
-
-Noise2D math::functions::perlin2d(unsigned seed)
-{
-    return Noise2D(std::make_shared<PerlinNoise2D>(random_function(seed)));
-}
-
 Noise2D math::functions::perlin2d(unsigned seed, unsigned octaves)
 {
-    auto perlin = perlin2d(seed);
+    auto perlin = Noise2D(std::make_shared<PerlinNoise2D>(random_function(seed)));
     auto total = perlin;
 
     for (unsigned i = 2; i <= octaves; ++i)
@@ -332,14 +315,9 @@ Noise2D math::functions::perlin2d(unsigned seed, unsigned octaves)
     return total;
 }
 
-Noise3D math::functions::perlin3d(unsigned seed)
-{
-    return Noise3D(std::make_shared<PerlinNoise3D>(random_function(seed)));
-}
-
 Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
 {
-    auto perlin = perlin3d(seed);
+    auto perlin = Noise3D(std::make_shared<PerlinNoise3D>(random_function(seed)));
     auto total = perlin;
 
     for (unsigned i = 2; i <= octaves; ++i)
@@ -348,25 +326,6 @@ Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
     }
 
     return total;
-}
-
-Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
-{
-    auto p = perlin2d(15);
-
-    Noise2D total = p;
-
-    for (unsigned i = 2; i <= octaves; ++i)
-    {
-        total = total + (scale2d(i) >> p) / double(i);
-    }
-    
-    std::function<double(const Point2D&)> lambda = [total, turbulence](const Point2D& p) -> double {
-        double t = sqrt(p.x() * p.x() + p.y() * p.y());
-        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * total(p)));
-    };
-
-    return from_lambda<double, const Point2D&>(lambda);
 }
 
 Function<Vector3D(const Point3D&)> math::functions::perlin_vector3d(unsigned octaves)
