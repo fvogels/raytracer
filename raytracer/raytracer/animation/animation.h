@@ -63,12 +63,6 @@ namespace animation
     }
 
     template<typename T>
-    Animation<T> make_animation(math::Function<T(double)> function, animation::Duration duration)
-    {
-        return Animation<T>(timestamp_to_seconds() >> function, duration);
-    }
-
-    template<typename T>
     Animation<T> preprocess(math::Function<TimeStamp(TimeStamp)> function, Animation<T> animation)
     {
         return make_animation<T>(function >> animation.function(), animation.duration());
