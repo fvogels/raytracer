@@ -399,6 +399,9 @@
     <ClCompile Include="animation\circular-animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="util\beep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -996,6 +999,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\ease-animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\beep.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

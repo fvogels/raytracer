@@ -24,6 +24,7 @@
 #include "pipeline/pipelines.h"
 #include "util/misc.h"
 #include "util/looper.h"
+#include "util/beep.h"
 #include "scripting/scripting.h"
 #include "easylogging++.h"
 #include "version.h"
@@ -201,7 +202,7 @@ void process_command_line_arguments(int argc, char** argv)
         }
         else if (current == "--beep")
         {
-            std::cerr << "\a";
+            beep();
         }
         else
         {
@@ -219,7 +220,7 @@ int main(int argc, char** argv)
 
     process_command_line_arguments(argc, argv);
 
-    // demos::split_depth(pipeline::wif("e:/temp/output/test.wif"));
+    // demos::bumpify_plane(pipeline::wif("e:/temp/output/test.wif"));
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
