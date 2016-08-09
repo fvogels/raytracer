@@ -31,7 +31,7 @@ namespace
             return animation::interval(from, to, duration);
         }
 
-        Animation<double> double_animation(double from, double to, Duration duration)
+        Animation<double> double_animation(double from, double to, Duration duration) const
         {
             return animation::interval(from, to, duration);
         }
@@ -66,6 +66,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     ANIMATION(circular);
     ANIMATION(point_animation);
     ANIMATION(double_animation);
+    ANIMATION_NAMED(point_animation, animate);
 #undef ANIMATION
 #undef ANIMATION_NAMED
 
