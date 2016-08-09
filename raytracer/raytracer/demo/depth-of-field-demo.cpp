@@ -7,7 +7,7 @@
 #include "sampling/samplers.h"
 #include "raytracing/scene.h"
 #include "math/function.h"
-#include "animation/animation.h"
+#include "animation/animations.h"
 #include "pipeline/pipelines.h"
 #include "easylogging++.h"
 
@@ -64,7 +64,7 @@ namespace
     {
         auto sampler = samplers::multi_jittered(3);
 
-        auto lookat_animation = animation::straight(Point3D(0, 0, 1), Point3D(0, 0, 7), Duration::from_seconds(1));
+        auto lookat_animation = animation::interval(Point3D(0, 0, 1), Point3D(0, 0, 7), Duration::from_seconds(1));
 
         return raytracer::cameras::depth_of_field_perspective(Point3D(0, 0, 0), lookat_animation(now), Vector3D(0, 1, 0), 1, 1, 0.05, sampler);
     }

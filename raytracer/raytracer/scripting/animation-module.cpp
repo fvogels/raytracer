@@ -27,12 +27,12 @@ namespace
 
         Animation<Point3D> point_animation(const Point3D& from, const Point3D& to, const Duration& duration) const
         {
-            return animation::straight(from, to, duration);
+            return animation::interval(from, to, duration);
         }
 
         Animation<double> double_animation(double from, double to, Duration duration)
         {
-            return animation::straight(from, to, duration);
+            return animation::interval(from, to, duration);
         }
     };
 

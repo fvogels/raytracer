@@ -87,6 +87,4 @@ namespace animation
     }
 
     Animation<double> straight(double, double, const Duration&);
-    Animation<math::Point3D> straight(const math::Point3D&, const math::Point3D&, const Duration&);
-    Animation<math::Vector3D> straight(const math::Vector3D&, const math::Vector3D&, const Duration&);
 }
