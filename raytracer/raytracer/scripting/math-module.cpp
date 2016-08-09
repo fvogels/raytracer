@@ -2,10 +2,13 @@
 #include "scripting/scripting-util.h"
 #include "math/point.h"
 #include "math/vector.h"
+#include "math/functions.h"
+
 
 using namespace chaiscript;
 using namespace raytracer;
 using namespace math;
+using namespace math::functions;
 
 
 namespace
@@ -29,6 +32,29 @@ namespace
     {
         return Interval<Angle>(lower, upper);
     }
+
+    struct FunctionLibrary
+    {
+        Noise1D perlin1d(unsigned octaves) const
+        {
+            return math::functions::perlin1d(78643, octaves);
+        }
+
+        Noise2D perlin2d(unsigned octaves) const
+        {
+            return math::functions::perlin2d(78643, octaves);
+        }
+
+        Noise3D perlin3d(unsigned octaves) const
+        {
+            return math::functions::perlin3d(78643, octaves);
+        }
+
+        Function<Vector3D(const Point3D&)> perlin_vector3d(unsigned octaves) const
+        {
+            return math::functions::perlin_vector3d(octaves);
+        }
+    };
 }
 
 ModulePtr raytracer::scripting::_private_::create_math_module()
@@ -49,6 +75,22 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     module->add(fun([](const Point3D& p, const Point3D& q) { return p - q; }), "-");
     module->add(fun(&degrees), "degrees");
     module->add(fun(&angle_interval), "interval");
+    
+    module->add(fun(&Vector3D::norm), "norm");
+    module->add(fun(&Vector3D::normalize), "normalize");
+    module->add(fun(&Vector3D::normalized), "normalized");
+
+    auto function_library = std::make_shared<FunctionLibrary>();
+    module->add_global_const(chaiscript::const_var(function_library), "Functions");
+
+#define FUNCTION(NAME)                      module->add(fun(&FunctionLibrary::NAME), #NAME)
+#define RENAMED_FUNCTION(FACTORY, NAME)     module->add(fun(&FunctionLibrary::FACTORY), #NAME)
+    FUNCTION(perlin1d);
+    FUNCTION(perlin2d);
+    FUNCTION(perlin3d);
+    FUNCTION(perlin_vector3d);
+#undef RENAMED_FUNCTION
+#undef FUNCTION
 
     return module;
 }
