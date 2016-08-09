@@ -1,4 +1,5 @@
 #include "scripting/math-module.h"
+#include "scripting/scripting-util.h"
 #include "math/point.h"
 #include "math/vector.h"
 
@@ -33,6 +34,10 @@ namespace
 ModulePtr raytracer::scripting::_private_::create_math_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
+
+    util::register_type<math::Angle>(*module, "Angle");
+    util::register_type<math::Point3D>(*module, "Point3D");
+    util::register_type<math::Vector3D>(*module, "Vector3D");
 
     module->add(fun(create_point3d), "pos");
     module->add(fun(create_vector3d), "vec");
