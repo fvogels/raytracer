@@ -8,6 +8,7 @@ namespace raytracer
 {
     namespace primitives
     {
+        Primitive bumpify(math::Function<math::Vector3D(const math::Point2D&)>, Primitive);
         Primitive bumpify(math::Function<math::Vector3D(const math::Point3D&)>, Primitive);
     }
 }
