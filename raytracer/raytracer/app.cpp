@@ -197,11 +197,11 @@ void process_command_line_arguments(int argc, char** argv)
         }
         else if (current == "--version")
         {
-            std::cout << "Build " << BUILD_NUMBER << std::endl;
+            std::cerr << "Build " << BUILD_NUMBER << std::endl;
         }
         else if (current == "--beep")
         {
-            std::cout << "\a";
+            std::cerr << "\a";
         }
         else
         {
