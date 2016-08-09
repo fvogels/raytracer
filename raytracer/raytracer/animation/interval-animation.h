@@ -8,7 +8,7 @@ namespace animation
     template<typename T>
     Animation<T> interval(const math::Interval<T> iv, animation::Duration duration)
     {
-        auto double_animation = straight(0, 1, duration);
+        auto double_animation = basic(0, 1, duration);
 
         std::function<T(TimeStamp)> lambda = [double_animation, iv](TimeStamp now) {
             return iv.from_relative(double_animation(now));

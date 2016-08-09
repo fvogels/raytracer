@@ -6,7 +6,7 @@ using namespace animation;
 using namespace math;
 
 
-Animation<double> animation::straight(double from, double to, const Duration& duration)
+Animation<double> animation::basic(double from, double to, const Duration& duration)
 {
     Interval<double> position_interval(from, to);
     Interval<TimeStamp> time_interval(TimeStamp::zero(), TimeStamp::from_epoch(duration));
