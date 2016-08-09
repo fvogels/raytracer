@@ -7,7 +7,7 @@
 namespace animation
 {
     template<typename T>
-    animation::Animation<math::Function<T(const math::Point2D&)>> xyz_to_xyt(math::Function<T(const math::Point3D&)> function, Duration duration)
+    animation::Animation<math::Function<T(const math::Point2D&)>> xyz_to_xyt(math::Function<T(const math::Point3D&)> function)
     {
         using result_type = math::Function<T(const math::Point2D&)>;
 
@@ -23,11 +23,11 @@ namespace animation
             return function;
         };
 
-        return make_animation<result_type>(from_lambda(lambda), duration);
+        return make_animation<result_type>(from_lambda(lambda), Duration::infinite());
     }
 
     template<typename T>
-    animation::Animation<math::Function<T(const math::Point2D&)>> xyz_to_tyz(math::Function<T(const math::Point3D&)> function, Duration duration)
+    animation::Animation<math::Function<T(const math::Point2D&)>> xyz_to_tyz(math::Function<T(const math::Point3D&)> function)
     {
         using result_type = math::Function<T(const math::Point2D&)>;
 
@@ -43,11 +43,11 @@ namespace animation
             return function;
         };
 
-        return make_animation<result_type>(from_lambda(lambda), duration);
+        return make_animation<result_type>(from_lambda(lambda), Duration::infinite());
     }
 
     template<typename T>
-    animation::Animation<math::Function<T(const math::Point2D&)>> xyz_to_xtz(math::Function<T(const math::Point3D&)> function, Duration duration)
+    animation::Animation<math::Function<T(const math::Point2D&)>> xyz_to_xtz(math::Function<T(const math::Point3D&)> function)
     {
         using result_type = math::Function<T(const math::Point2D&)>;
 
@@ -63,6 +63,6 @@ namespace animation
             return function;
         };
 
-        return make_animation<result_type>(from_lambda(lambda), duration);
+        return make_animation<result_type>(from_lambda(lambda), Duration::infinite());
     }
 }
