@@ -3,7 +3,8 @@
 #include "raytracing/scene.h"
 #include "animation/animations.h"
 #include "animation/redimensioner.h"
-#include "imaging/color.h"
+#include "math/angle.h"
+
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -32,6 +33,11 @@ namespace
         }
 
         Animation<double> double_animation(double from, double to, Duration duration) const
+        {
+            return animation::interval(from, to, duration);
+        }
+
+        Animation<Angle> angle_animation(Angle from, Angle to, Duration duration) const
         {
             return animation::interval(from, to, duration);
         }
@@ -67,6 +73,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND(point_animation);
     BIND(double_animation);
     BIND_AS(point_animation, animate);
+    BIND_AS(angle_animation, animate);
 #undef BIND
 #undef BIND_AS
 
