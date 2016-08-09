@@ -295,7 +295,7 @@ Noise1D math::functions::perlin1d(unsigned seed, unsigned octaves)
 {
     auto noise2d = perlin2d(seed, octaves);
 
-    std::function<double(double)> lambda = [=](double t) {
+    std::function<double(const double&)> lambda = [=](const double& t) {
         return noise2d(Point2D(t, 0));
     };
 
@@ -328,9 +328,9 @@ Noise3D math::functions::perlin3d(unsigned seed, unsigned octaves)
     return total;
 }
 
-Function<Vector3D(const Point3D&)> math::functions::perlin_vector3d(unsigned octaves)
+Function<Vector3D(const Point3D&)> math::functions::perlin_vector3d(unsigned seed, unsigned octaves)
 {
-    auto perlin = math::functions::perlin3d(0, octaves);
+    auto perlin = math::functions::perlin3d(seed, octaves);
 
     std::function<Vector3D(const Point3D&)> lambda = [perlin](const Point3D& p) -> Vector3D {
         double x = perlin(p);
