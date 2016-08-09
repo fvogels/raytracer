@@ -1,4 +1,5 @@
 #include "rendering/standard-renderer.h"
+#include "easylogging++.h"
 
 using namespace imaging;
 using namespace math;
@@ -19,6 +20,8 @@ namespace
 
         std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const override
         {
+            TIMED_FUNC(timer);
+
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
             Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
             auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
