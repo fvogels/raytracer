@@ -31,7 +31,7 @@ namespace
         using namespace raytracer::materials;
 
         auto perlin = math::functions::perlin_vector3d(4);
-        auto bumpificator = animation::xyz_to_xyt(perlin, now);
+        auto bumpificator = animation::xyz_to_xyt<Vector3D>(perlin, Duration::infinite())(now);
 
         return bumpify(bumpificator, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
     }
