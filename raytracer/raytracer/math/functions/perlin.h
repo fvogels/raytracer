@@ -7,6 +7,8 @@ namespace math
 {
     namespace functions
     {
+        Noise1D perlin1d(unsigned, unsigned);
+        Noise1D perlin1d(unsigned);
         Noise2D perlin2d(unsigned);
         Noise2D perlin2d(unsigned, unsigned);
         Noise3D perlin3d(unsigned);
