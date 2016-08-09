@@ -2,6 +2,7 @@
 #include "scripting/scripting-util.h"
 #include "raytracing/scene.h"
 #include "animation/animations.h"
+#include "animation/redimensioner.h"
 #include "imaging/color.h"
 
 using namespace chaiscript;
@@ -45,6 +46,12 @@ namespace
     {
         return Animation<std::shared_ptr<Scene>>(from_lambda(function), duration);
     }
+
+    template<typename T>
+    Function<T(const math::Point2D&)> redim_xyz_to_xyt(math::Function<T(const math::Point3D&)> function, TimeStamp now)
+    {
+        return animation::xyz_to_xyt(function)(now);
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_animation_module()
@@ -62,6 +69,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #undef ANIMATION
 #undef ANIMATION_NAMED
 
+    module->add(fun(&redim_xyz_to_xyt<Vector3D>), "xyz_to_xyt");
     module->add(fun(&seconds), "seconds");
     module->add(fun(&Animation<Point3D>::operator()), "[]");
     module->add(fun(&make_scene_animation), "scene_animation");
