@@ -396,6 +396,9 @@
     <ClCompile Include="scripting\animation-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="animation\circular-animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -981,6 +984,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\animation-module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\circular-animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\animations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,7 +15,7 @@
 #include "raytracing/ray-tracers.h"
 #include "rendering/renderers.h"
 #include "rendering/cartoon-renderer.h"
-#include "animation/animation.h"
+#include "animation/animations.h"
 #include "demo/demos.h"
 #include "logging.h"
 #include "util/lazy.h"

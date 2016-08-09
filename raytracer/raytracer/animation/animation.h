@@ -89,7 +89,7 @@ namespace animation
     Animation<double> straight(double, double, const Duration&);
     Animation<math::Point3D> straight(const math::Point3D&, const math::Point3D&, const Duration&);
     Animation<math::Vector3D> straight(const math::Vector3D&, const math::Vector3D&, const Duration&);
-    Animation<math::Point3D> circular(const math::Point3D&, const math::Point3D&, const math::Vector3D&, const math::Interval<math::Angle>&, const Duration&);
+    
 
     template<typename T>
     Animation<T> interval(const math::Interval<T> iv, animation::Duration duration)

@@ -1,7 +1,7 @@
 #include "scripting/animation-module.h"
 #include "scripting/scripting-util.h"
 #include "raytracing/scene.h"
-#include "animation/animation.h"
+#include "animation/animations.h"
 #include "imaging/color.h"
 
 using namespace chaiscript;
