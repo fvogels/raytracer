@@ -30,18 +30,8 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        //auto perlin = math::functions::perlin3d(0, 4);
-        //std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
-        //    Point3D q = animation::interval(Point3D(p.x(), 0, p.z()), Point3D(p.x(), 1, p.z()), 1_s)(now);
-        //    double x = perlin(q);
-        //    double y = perlin(q + Vector3D(100, 100, 100));
-        //    double z = perlin(q - Vector3D(100, 100, 100));
-
-        //    return Vector3D(x, y, z) * 0.1;
-        //};
-
-        auto perlin = math::functions::perlin_vector3d(1);
-        auto bumpificator = animation::xyz_to_xyzt(perlin, now);
+        auto perlin = math::functions::perlin_vector3d(4);
+        auto bumpificator = animation::xyz_to_xyt(perlin, now);
 
         return bumpify(bumpificator, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 1.5)), xz_plane()));
     }
@@ -74,7 +64,7 @@ namespace
 
         auto function = from_lambda(lambda);
 
-        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(2));
+        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
     }
 
     void render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
