@@ -1,3 +1,4 @@
+#ifndef EXCLUDE_SCRIPTING
 #ifdef TEST_BUILD
 
 #include "Catch.h"
@@ -225,7 +226,5 @@ TEST_CASE("[Scripting] Animation pipeline", "[Scripting]")
     )");
 }
 
-
-
-
+#endif
 #endif

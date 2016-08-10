@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/cameras-module.h"
 #include "cameras/cameras.h"
 #include "scripting/scripting-util.h"
@@ -129,3 +131,5 @@ ModulePtr raytracer::scripting::_private_::create_cameras_module()
 
     return module;
 }
+
+#endif

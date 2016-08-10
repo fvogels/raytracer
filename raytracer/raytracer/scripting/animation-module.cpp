@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/animation-module.h"
 #include "scripting/scripting-util.h"
 #include "raytracing/scene.h"
@@ -88,3 +90,5 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 
     return module;
 }
+
+#endif

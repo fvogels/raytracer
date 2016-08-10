@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/pipeline-module.h"
 #include "pipeline/pipelines.h"
 #include "scripting/scripting-util.h"
@@ -223,3 +225,5 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 
     return module;
 }
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/materials-module.h"
 #include "scripting/scripting-util.h"
 #include "materials/materials.h"
@@ -69,3 +71,5 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
 
     return module;
 }
+
+#endif

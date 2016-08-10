@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef EXCLUDE_SCRIPTING
+
 #include <chaiscript/chaiscript.hpp>
 
 
@@ -13,3 +15,5 @@ namespace raytracer
         }
     }
 }
+
+#endif

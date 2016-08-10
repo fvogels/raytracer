@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/scripting.h"
 #include "scripting/math-module.h"
 #include "scripting/imaging-module.h"
@@ -88,3 +90,4 @@ void raytracer::scripting::run(const std::string& source)
     }
 }
 
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef EXCLUDE_SCRIPTING
+
 #include <string>
 #ifdef TEST_BUILD
 #include <chaiscript/chaiscript.hpp>
@@ -34,3 +36,5 @@ namespace raytracer
 #       endif
     }
 }
+
+#endif

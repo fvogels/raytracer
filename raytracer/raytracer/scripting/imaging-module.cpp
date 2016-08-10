@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/imaging-module.h"
 #include "imaging/color.h"
 
@@ -69,3 +71,5 @@ ModulePtr raytracer::scripting::_private_::create_imaging_module()
 
     return module;
 }
+
+#endif

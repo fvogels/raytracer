@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/primitives-module.h"
 #include "scripting/scripting-util.h"
 #include "primitives/primitives.h"
@@ -106,3 +108,5 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 
     return module;
 }
+
+#endif

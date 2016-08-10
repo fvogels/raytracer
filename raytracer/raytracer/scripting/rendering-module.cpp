@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/rendering-module.h"
 #include "scripting/scripting-util.h"
 #include "rendering/renderers.h"
@@ -139,3 +141,5 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
 
     return module;
 }
+
+#endif

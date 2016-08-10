@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/samplers-module.h"
 #include "sampling/samplers.h"
 #include "scripting/scripting-util.h"
@@ -69,3 +71,5 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
 
     return module;
 }
+
+#endif

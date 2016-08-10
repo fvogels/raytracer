@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/math-module.h"
 #include "scripting/scripting-util.h"
 #include "math/point.h"
@@ -110,3 +112,5 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
 
     return module;
 }
+
+#endif

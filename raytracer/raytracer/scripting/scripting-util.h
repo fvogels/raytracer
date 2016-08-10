@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef EXCLUDE_SCRIPTING
+
 #include "chaiscript/chaiscript.hpp"
 #include "chaiscript/utility/utility.hpp"
 #include "easylogging++.h"
@@ -192,3 +194,5 @@ namespace raytracer
         }
     }
 }
+
+#endif

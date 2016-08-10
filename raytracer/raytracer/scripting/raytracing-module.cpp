@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/raytracing-module.h"
 #include "raytracing/ray-tracers.h"
 #include "scripting/scripting-util.h"
@@ -51,3 +53,5 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 
     return module;
 }
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef EXCLUDE_SCRIPTING
+
 #include "scripting/lights-module.h"
 #include "scripting/scripting-util.h"
 #include "lights/lights.h"
@@ -60,3 +62,5 @@ ModulePtr raytracer::scripting::_private_::create_lights_module()
 
     return module;
 }
+
+#endif
