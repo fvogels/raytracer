@@ -70,8 +70,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
 #define BIND(NAME)                      BIND_AS(NAME, NAME)
     BIND(circular);
-    BIND(point_animation);
-    BIND(double_animation);
+    BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
     BIND_AS(angle_animation, animate);
 #undef BIND
