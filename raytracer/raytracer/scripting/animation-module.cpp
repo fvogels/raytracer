@@ -64,6 +64,9 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
+    util::register_to_string<Duration>(*module);
+    util::register_to_string<TimeStamp>(*module);
+
     auto animation_library = std::make_shared<AnimationLibrary>();
     module->add_global_const(chaiscript::const_var(animation_library), "Animations");
 

@@ -369,6 +369,9 @@
     <ClCompile Include="tests\interval-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\animation-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="scripting\animation-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

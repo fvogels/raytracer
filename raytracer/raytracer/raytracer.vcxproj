@@ -357,6 +357,7 @@
     <ClCompile Include="scripting\rendering-module.cpp" />
     <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
+    <ClCompile Include="tests\animation-tests.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
