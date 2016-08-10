@@ -29,7 +29,7 @@ namespace
             return animation::circular(point, center, rotation_axis, angle_interval, duration);
         }
 
-        Animation<Point3D> circular_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Animation<Point3D> circular_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             Duration duration = Duration::zero();
 
@@ -90,7 +90,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
 #define BIND(NAME)                      BIND_AS(NAME, NAME)
     BIND(circular);
-    BIND_AS(circular_by_map, "circular");
+    BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
     BIND_AS(angle_animation, animate);
