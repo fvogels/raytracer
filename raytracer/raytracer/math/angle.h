@@ -10,6 +10,8 @@ namespace math
     class Angle final
     {
     public:
+        Angle() noexcept : Angle(0) { }
+
         double radians() const noexcept { return m_radians; }
         double degrees() const noexcept { return m_radians * 180 / M_PI; }
 
