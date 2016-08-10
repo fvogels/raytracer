@@ -26,7 +26,7 @@ namespace
             return raytracer::renderers::standard(width, height, sampler, ray_tracer, util::loopers::looper(thread_count));
         }
 
-        Renderer standard_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Renderer standard_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(unsigned, width);
@@ -49,7 +49,7 @@ namespace
             return raytracer::renderers::edge(width, height, sampler, ray_tracer, util::loopers::looper(thread_count), edge_thickness);
         }
 
-        Renderer edge_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Renderer edge_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(unsigned, width);
@@ -73,7 +73,7 @@ namespace
             return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, util::loopers::looper(thread_count), shade_count, edge_thickness);
         }
 
-        Renderer cartoon_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Renderer cartoon_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(unsigned, width);
@@ -98,7 +98,7 @@ namespace
             return this->split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, split_thickness, split_depth, 4);
         }
 
-        Renderer split_depth_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Renderer split_depth_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(unsigned, width);

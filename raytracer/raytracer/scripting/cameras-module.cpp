@@ -23,7 +23,7 @@ namespace
             return cameras::perspective(eye, look_at, up, distance, aspect_ratio);
         }
 
-        Camera perspective_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Camera perspective_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
@@ -69,7 +69,7 @@ namespace
             return cameras::orthographic(eye, look_at, up, horizontal_angle, vertical_angle);
         }
 
-        Camera fisheye_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Camera fisheye_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
@@ -94,7 +94,7 @@ namespace
             return cameras::depth_of_field_perspective(eye, look_at, up, distance, aspect_ratio, eye_size, eye_sampler);
         }
 
-        Camera depth_of_field_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Camera depth_of_field_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);

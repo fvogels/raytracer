@@ -22,7 +22,7 @@ namespace
             return raytracer::materials::uniform(properties);
         }
 
-        Material uniform_by_map(const std::map<std::string, Boxed_Value> argument_map) const
+        Material uniform_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
             ARGUMENT(Color, ambient);
