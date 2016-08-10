@@ -387,9 +387,6 @@
     <ClCompile Include="pipeline\bmp-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scripting\utility-module.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="util\misc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -984,9 +981,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\bmp-consumer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scripting\utility-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\null-consumer.h">

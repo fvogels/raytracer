@@ -354,7 +354,6 @@
     <ClCompile Include="scripting\rendering-module.cpp" />
     <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
-    <ClCompile Include="scripting\utility-module.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
@@ -567,7 +566,6 @@
     <ClInclude Include="scripting\samplers-module.h" />
     <ClInclude Include="scripting\scripting-util.h" />
     <ClInclude Include="scripting\scripting.h" />
-    <ClInclude Include="scripting\utility-module.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\looper.h" />

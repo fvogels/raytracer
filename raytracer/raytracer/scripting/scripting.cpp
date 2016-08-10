@@ -10,7 +10,6 @@
 #include "scripting/samplers-module.h"
 #include "scripting/pipeline-module.h"
 #include "scripting/animation-module.h"
-#include "scripting/utility-module.h"
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_stdlib.hpp>
 
@@ -40,7 +39,6 @@ namespace raytracer
             module->add(create_samplers_module());
             module->add(create_pipeline_module());
             module->add(create_animation_module());
-            module->add(create_utility_module());
 
             return module;
         }
