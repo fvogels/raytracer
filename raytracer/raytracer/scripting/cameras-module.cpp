@@ -72,12 +72,12 @@ namespace
             START_ARGUMENTS(argument_map);
             ARGUMENT(Point3D, eye);
             ARGUMENT(Point3D, look_at);
-            ARGUMENT(Vector3D, up);
-            ARGUMENT(double, horizontal_angle);
-            ARGUMENT(double, vertical_angle);
+            OPTIONAL_ARGUMENT(Vector3D, up, Vector3D(0, 1, 0));
+            ARGUMENT(Angle, horizontal_angle);
+            ARGUMENT(Angle, vertical_angle);
             END_ARGUMENTS();
 
-            return cameras::fisheye(eye, look_at, up, Angle::degrees(horizontal_angle), Angle::degrees(vertical_angle));
+            return cameras::fisheye(eye, look_at, up, horizontal_angle, vertical_angle);
         }
 
         Camera depth_of_field(
