@@ -1,5 +1,4 @@
 #include "animation/animation.h"
-#include "math/quaternion.h"
 #include <functional>
 
 using namespace animation;
