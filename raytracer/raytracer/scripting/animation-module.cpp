@@ -80,6 +80,8 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     module->add(fun(&redim_xyz_to_xyt<Vector3D>), "xyz_to_xyt");
     module->add(fun(&seconds), "seconds");
     module->add(fun(&Animation<Point3D>::operator()), "[]");
+    module->add(fun(&Animation<Angle>::operator()), "[]");
+    module->add(fun(&Animation<double>::operator()), "[]");
     module->add(fun(&make_scene_animation), "scene_animation");
 
     return module;
