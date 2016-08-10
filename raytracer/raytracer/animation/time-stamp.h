@@ -35,4 +35,27 @@ namespace animation
     Duration operator -(const TimeStamp&, const TimeStamp&);
 
     TimeStamp& operator +=(TimeStamp&, const Duration&);
+
+    std::ostream& operator <<(std::ostream&, const TimeStamp&);
+}
+
+namespace math
+{
+    template<>
+    struct approximately<animation::TimeStamp>
+    {
+        animation::TimeStamp value;
+        double delta;
+
+        explicit approximately(const animation::TimeStamp& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const animation::TimeStamp& other) const
+        {
+            return (value.seconds() - other.seconds()) < delta;
+        }
+    };
 }

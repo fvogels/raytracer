@@ -74,3 +74,8 @@ bool animation::TimeStamp::operator !=(const TimeStamp& ts) const
 {
     return !(*this == ts);
 }
+
+std::ostream& animation::operator <<(std::ostream& out, const TimeStamp& duration)
+{
+    return out << "@" << duration.seconds() << "s";
+}
