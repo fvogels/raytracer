@@ -372,6 +372,9 @@
     <ClCompile Include="tests\animation-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\scripting-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="scripting\animation-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -406,9 +409,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\scripting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\scripting-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
