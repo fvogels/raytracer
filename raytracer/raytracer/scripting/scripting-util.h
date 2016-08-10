@@ -13,7 +13,8 @@
 
 
 #define START_ARGUMENTS(MAP)                    auto& _argument_map_ = MAP; raytracer::scripting::util::ArgumentMapParser _parser_
-#define ARGUMENT(TYPE, NAME)                    TYPE NAME; _parser_.add<TYPE>(#NAME, &NAME)
+#define BIND_ARGUMENT(NAME)                     _parser_.add<decltype(NAME)>(#NAME, &NAME)
+#define ARGUMENT(TYPE, NAME)                    TYPE NAME; BIND_ARGUMENT(NAME)
 #define OPTIONAL_ARGUMENT(TYPE, NAME, VALUE)    TYPE NAME = VALUE; _parser_.add<TYPE>(#NAME, &NAME, true)
 #define END_ARGUMENTS()                         _parser_.parse(_argument_map_)
 
