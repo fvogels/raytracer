@@ -363,6 +363,7 @@
     <ClCompile Include="tests\easing-functions-tests.cpp" />
     <ClCompile Include="tests\fisheye-camera-tests.cpp" />
     <ClCompile Include="tests\intersection-tests.cpp" />
+    <ClCompile Include="tests\interval-tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
