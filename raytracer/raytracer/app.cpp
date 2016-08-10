@@ -190,7 +190,12 @@ void process_command_line_arguments(int argc, char** argv)
 
             LOG(INFO) << "Rendering " << path;
             TIMED_SCOPE(timer, "Rendering " + path);
+
+#ifdef EXCLUDE_SCRIPTING
+            abort("Cannot run script - scripting was excluded");
+#else
             scripting::run_script(path);
+#endif
         }
         else if (current == "--quiet")
         {
