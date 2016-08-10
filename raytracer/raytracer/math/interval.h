@@ -15,26 +15,26 @@ namespace math
         constexpr Interval(T lower, T upper)
             : lower(lower), upper(upper) { }
 
-        Interval(const Interval&) = default;
+        Interval(const Interval<T>&) = default;
 
-        static constexpr Interval empty()
+        static constexpr Interval<T> empty()
         {
-            return Interval(std::numeric_limits<T>::infinity(), -std::numeric_limits<T>::infinity());
+            return Interval<T>(std::numeric_limits<T>::infinity(), -std::numeric_limits<T>::infinity());
         }
 
-        static constexpr Interval infinite()
+        static constexpr Interval<T> infinite()
         {
-            return Interval(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
+            return Interval<T>(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
         }
 
         // Bounds are taken as is. If x > y, then interval is empty.
-        static constexpr Interval from_raw_bounds(double x, double y)
+        static constexpr Interval<T> from_raw_bounds(double x, double y)
         {
             return Interval(x, y);
         }
 
         // Bounds are "sorted" so that interval is not empty
-        static constexpr Interval from_bounds(double x, double y)
+        static constexpr Interval<T> from_bounds(double x, double y)
         {
             return Interval(std::min(x, y), std::max(x, y));
         }
