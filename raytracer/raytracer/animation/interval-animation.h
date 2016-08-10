@@ -6,12 +6,16 @@
 namespace animation
 {
     template<typename T>
-    Animation<T> interval(const math::Interval<T> iv, animation::Duration duration)
+    Animation<T> interval(const math::Interval<T> interval, animation::Duration duration)
     {
         auto double_animation = basic(0, 1, duration);
 
-        std::function<T(TimeStamp)> lambda = [double_animation, iv](TimeStamp now) {
-            return iv.from_relative(double_animation(now));
+        std::function<T(TimeStamp)> lambda = [double_animation, interval](TimeStamp now) {
+            double t = double_animation(now);
+
+            assert(Interval<double>(0, 1).contains(t));
+
+            return interval.from_relative(double_animation(now));
         };
 
         return make_animation(math::from_lambda(lambda), duration);
