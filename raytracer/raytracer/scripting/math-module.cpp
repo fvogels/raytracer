@@ -71,6 +71,10 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     util::register_type<math::Point3D>(*module, "Point3D");
     util::register_type<math::Vector3D>(*module, "Vector3D");
 
+    util::register_to_string<math::Angle>(*module);
+    util::register_to_string<math::Point3D>(*module);
+    util::register_to_string<math::Vector3D>(*module);
+
     module->add(fun(create_point3d), "pos");
     module->add(fun(create_vector3d), "vec");
     module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
