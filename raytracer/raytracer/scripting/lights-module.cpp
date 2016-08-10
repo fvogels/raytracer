@@ -29,12 +29,12 @@ namespace
             return lights::area(rectangle, sampler, color);
         }
 
-        LightSource spot_direction(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::Color& color)
+        LightSource spot_direction(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::Color& color) const
         {
             return lights::spot(position, direction, angle, color);
         }
 
-        LightSource spot_point_at(const math::Point3D& position, const math::Point3D& point_at, math::Angle angle, const imaging::Color& color)
+        LightSource spot_point_at(const math::Point3D& position, const math::Point3D& point_at, math::Angle angle, const imaging::Color& color) const
         {
             return lights::spot(position, point_at, angle, color);
         }
