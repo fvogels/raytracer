@@ -85,7 +85,11 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     module->add(fun([](const Vector3D& u, const Vector3D& v) { return u - v; }), "-");
     module->add(fun([](const Point3D& p, const Vector3D& v) { return p - v; }), "-");
     module->add(fun([](const Point3D& p, const Point3D& q) { return p - q; }), "-");
+
     module->add(fun(&degrees), "degrees");
+    module->add(fun([](const Angle& a, const Angle& b) { return a + b; }), "+");
+    module->add(fun([](const Angle& a, const Angle& b) { return a - b; }), "-");
+
     module->add(fun(&angle_interval), "interval");
     
     module->add(fun(&Vector3D::norm), "norm");
