@@ -104,3 +104,8 @@ bool animation::operator !=(const Duration& d1, const Duration& d2)
 {
     return d1.milliseconds() != d2.milliseconds();
 }
+
+std::ostream& animation::operator <<(std::ostream& out, const Duration& duration)
+{
+    return out << duration.seconds() << "s";
+}

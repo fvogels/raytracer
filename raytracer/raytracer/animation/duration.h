@@ -1,5 +1,9 @@
 #pragma once
 
+#include "math/approx.h"
+#include <iostream>
+
+
 namespace animation
 {
     class Duration
@@ -54,4 +58,27 @@ namespace animation
 
     bool operator ==(const Duration&, const Duration&);
     bool operator !=(const Duration&, const Duration&);
+
+    std::ostream& operator <<(std::ostream&, const Duration&);
+}
+
+namespace math
+{
+    template<>
+    struct approximately<animation::Duration>
+    {
+        animation::Duration value;
+        double delta;
+
+        explicit approximately(const animation::Duration& value, double delta = 0.00001)
+            :value(value), delta(delta)
+        {
+            // NOP
+        }
+
+        bool close_enough(const animation::Duration& other) const
+        {
+            return (value.seconds() - other.seconds()) < delta;
+        }
+    };
 }
