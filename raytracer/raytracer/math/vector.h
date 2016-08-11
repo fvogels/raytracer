@@ -17,6 +17,11 @@ namespace math
         class DimensionSpecificMembers<2, T>
         {
         public:
+            static T cartesian(double x, double y)
+            {
+                return T(x, y);
+            }
+
             static T polar(double radius, math::Angle theta)
             {
                 Polar polar{ radius, theta };
@@ -24,18 +29,73 @@ namespace math
 
                 return T(cartesian.x, cartesian.y);
             }
+
+            static T x_axis()
+            {
+                return T(1, 0);
+            }
+
+            static T y_axis()
+            {
+                return T(0, 1);
+            }
         };
 
         template<typename T>
         class DimensionSpecificMembers<3, T>
         {
         public:
+            static T cartesian(double x, double y, double z)
+            {
+                return T(x, y, z);
+            }
+
+            static T cartesian(const Cartesian3D& cartesian)
+            {
+                return DimensionSpecificMembers<3, T>::cartesian(cartesian.x, cartesian.y, cartesian.z);
+            }
+
             static T spherical(double radius, math::Angle azimuth, math::Angle elevation)
             {
                 Spherical spherical{ radius,azimuth,elevation };
-                Cartesian3D cartesian = convert_coordinates<Cartesian3D>(spherical);
 
-                return T(cartesian.x, cartesian.y, cartesian.z);
+                return cartesian(convert_coordinates<Cartesian3D>(spherical));
+            }
+
+            static T cylindrical_x(double radius, math::Angle azimuth, double x)
+            {
+                CylindricalX cyl{ radius, azimuth, x };
+
+                return cartesian(convert_coordinates<Cartesian3D>(cyl));
+            }
+
+            static T cylindrical_y(double radius, math::Angle azimuth, double y)
+            {
+                CylindricalY cyl{ radius, azimuth, y };
+
+                return cartesian(convert_coordinates<Cartesian3D>(cyl));
+            }
+
+            static T cylindrical_z(double radius, math::Angle azimuth, double z)
+            {
+                CylindricalZ cyl{ radius, azimuth, z };
+
+                return cartesian(convert_coordinates<Cartesian3D>(cyl));
+            }
+
+            static T x_axis()
+            {
+                return T(1, 0, 0);
+            }
+
+            static T y_axis()
+            {
+                return T(0, 1, 0);
+            }
+
+            static T z_axis()
+            {
+                return T(0, 0, 1);
             }
         };
     }
