@@ -58,6 +58,29 @@ namespace
         {
             return animation::interval(from, to, duration);
         }
+
+        Animation<Point3D> lissajous_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
+        {
+            Duration duration = Duration::zero();
+
+            START_ARGUMENTS(argument_map);
+            OPTIONAL_ARGUMENT(double, x_amplitude, 0);
+            OPTIONAL_ARGUMENT(double, x_frequency, 0);
+            OPTIONAL_ARGUMENT(Angle, x_phase, 0_degrees);
+            OPTIONAL_ARGUMENT(double, y_amplitude, 0);
+            OPTIONAL_ARGUMENT(double, y_frequency, 0);
+            OPTIONAL_ARGUMENT(Angle, y_phase, 0_degrees);
+            OPTIONAL_ARGUMENT(double, z_amplitude, 0);
+            OPTIONAL_ARGUMENT(double, z_frequency, 0);
+            OPTIONAL_ARGUMENT(Angle, z_phase, 0_degrees);
+            BIND_ARGUMENT(duration);
+            END_ARGUMENTS();
+
+            return animation::lissajous(
+                LissajousParameters{ x_amplitude, x_frequency, x_phase },
+                LissajousParameters{ y_amplitude, y_frequency, y_phase },
+                LissajousParameters{ z_amplitude, z_frequency, z_phase }, duration );
+        }
     };
 
     Duration seconds(double s)
@@ -94,6 +117,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
     BIND_AS(angle_animation, animate);
+    BIND_AS(lissajous_by_map, lissajous);
 #undef BIND
 #undef BIND_AS
 
