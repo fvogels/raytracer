@@ -19,7 +19,7 @@ Animation<math::Point3D> animation::circular(
         Interval<TimeStamp> time_interval(TimeStamp::zero(), TimeStamp::from_epoch(duration));
         double t = time_interval.to_relative(ts);
         Angle angle = angle_interval.from_relative(t);
-        Quaternion q(angle, rotation_axis);
+        Quaternion q = Quaternion::rotation(angle, rotation_axis);
         Point3D result = q.rotate(point - translation) + translation;
 
         return result;
