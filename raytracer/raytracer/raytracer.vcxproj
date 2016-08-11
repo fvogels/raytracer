@@ -596,6 +596,7 @@
     <ClCompile Include="tests\fisheye-camera-tests.cpp" />
     <ClCompile Include="tests\intersection-tests.cpp" />
     <ClCompile Include="tests\interval-tests.cpp" />
+    <ClCompile Include="animation\lissajous.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
@@ -803,6 +804,7 @@
     <ClInclude Include="scripting\samplers-module.h" />
     <ClInclude Include="scripting\scripting-util.h" />
     <ClInclude Include="scripting\scripting.h" />
+    <ClInclude Include="animation\lissajous.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\looper.h" />
