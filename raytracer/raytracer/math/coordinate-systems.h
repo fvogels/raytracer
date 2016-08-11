@@ -106,7 +106,7 @@ namespace math
             static Spherical convert(const Cartesian3D& cartesian)
             {
                 double radius = sqrt(pow(cartesian.x, 2) + pow(cartesian.y, 2) + pow(cartesian.z, 2));
-                Angle azimuth = Angle::radians(atan2(cartesian.z, cartesian.x));
+                Angle azimuth = Angle::radians(atan2(-cartesian.z, cartesian.x));
                 Angle elevation = radius > 0 ? 90_degrees - Angle::radians(acos(cartesian.y / radius)) : 0_degrees;
 
                 assert(radius >= 0);
@@ -124,7 +124,7 @@ namespace math
             {
                 double x = spherical.radius * cos(spherical.azimuth) * cos(spherical.elevation);
                 double y = spherical.radius * sin(spherical.elevation);
-                double z = spherical.radius * sin(spherical.azimuth) * cos(spherical.elevation);
+                double z = -spherical.radius * sin(spherical.azimuth) * cos(spherical.elevation);
 
                 return Cartesian3D{ x,y,z };
             }
@@ -159,7 +159,7 @@ namespace math
         {
             static CylindricalY convert(const Cartesian3D& c3d)
             {
-                Cartesian2D c2d{ c3d.x, c3d.z };
+                Cartesian2D c2d{ c3d.x, -c3d.z };
                 Polar polar = CoordinateConverter<Cartesian2D, Polar>::convert(c2d);
 
                 return CylindricalY{ polar.radius, polar.theta, c3d.y };
@@ -174,7 +174,7 @@ namespace math
                 Polar polar{ cyl.radius, cyl.azimuth };
                 Cartesian2D c2d = CoordinateConverter<Polar, Cartesian2D>::convert(polar);
 
-                return Cartesian3D{ c2d.x, cyl.y, c2d.y };
+                return Cartesian3D{ c2d.x, cyl.y, -c2d.y };
             }
         };
 
