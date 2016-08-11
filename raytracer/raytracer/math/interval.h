@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <algorithm>
+#include <iostream>
 
 
 namespace math
@@ -82,4 +83,10 @@ namespace math
             return lower + size() / 2;
         }
     };
+
+    template<typename T>
+    std::ostream& operator <<(std::ostream& out, const Interval<T>& interval)
+    {
+        return out << "[" << interval.lower << ", " << interval.upper << "]";
+    }
 }
