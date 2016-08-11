@@ -31,7 +31,7 @@ Animation<math::Point3D> animation::lissajous(const LissajousParameters& x_param
 
     std::function<Point3D(TimeStamp)> lambda = [=](TimeStamp now)
     {
-        return Point3D(x_anim(now), y_anim(now), y_anim(now));
+        return Point3D(x_anim(now), y_anim(now), z_anim(now));
     };
 
     return make_animation(from_lambda(lambda), duration);
