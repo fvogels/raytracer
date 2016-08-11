@@ -59,6 +59,28 @@ namespace
         }
     };
 
+    struct PointFactories
+    {
+        Point2D cartesian2d(double x, double y) const { return Point2D::cartesian(x, y); }
+        Point2D polar(double radius, Angle theta) const { return Point2D::polar(radius, theta); }
+        Point3D cartesian3d(double x, double y, double z) const { return Point3D::cartesian(x, y, z); }
+        Point3D spherical(double radius, Angle azimuth, Angle elevation) const { return Point3D::spherical(radius, azimuth, elevation); }
+        Point3D cylindrical_x(double radius, Angle azimuth, double x) const { return Point3D::cylindrical_x(radius, azimuth, x); }
+        Point3D cylindrical_y(double radius, Angle azimuth, double y) const { return Point3D::cylindrical_x(radius, azimuth, y); }
+        Point3D cylindrical_z(double radius, Angle azimuth, double z) const { return Point3D::cylindrical_x(radius, azimuth, z); }
+    };
+
+    struct VectorFactories
+    {
+        Vector2D cartesian2d(double x, double y) const { return Vector2D::cartesian(x, y); }
+        Vector2D polar(double radius, Angle theta) const { return Vector2D::polar(radius, theta); }
+        Vector3D cartesian3d(double x, double y, double z) const { return Vector3D::cartesian(x, y, z); }
+        Vector3D spherical(double radius, Angle azimuth, Angle elevation) const { return Vector3D::spherical(radius, azimuth, elevation); }
+        Vector3D cylindrical_x(double radius, Angle azimuth, double x) const { return Vector3D::cylindrical_x(radius, azimuth, x); }
+        Vector3D cylindrical_y(double radius, Angle azimuth, double y) const { return Vector3D::cylindrical_x(radius, azimuth, y); }
+        Vector3D cylindrical_z(double radius, Angle azimuth, double z) const { return Vector3D::cylindrical_x(radius, azimuth, z); }
+    };
+
     void add_points_and_vectors(Module& module)
     {
         raytracer::scripting::util::register_type<math::Point3D>(module, "Point3D");
@@ -80,6 +102,18 @@ namespace
         module.add(fun(&Vector3D::normalize), "normalize");
         module.add(fun(&Vector3D::normalized), "normalized");
 
+        auto point_factories = std::make_shared<PointFactories>();
+        auto vector_factories = std::make_shared<VectorFactories>();
+
+#define BIND(NAME)                  module.add(fun(&PointFactories::NAME), #NAME); module.add(fun(&VectorFactories::NAME), #NAME)
+        BIND(cartesian2d);
+        BIND(polar);
+        BIND(cartesian3d);
+        BIND(spherical);
+        BIND(cylindrical_x);
+        BIND(cylindrical_y);
+        BIND(cylindrical_z);
+#undef BIND
     }
 
     void add_angle(Module& module)
