@@ -2,6 +2,7 @@
 #include "math/misc.h"
 #include "math/quadratic_equation.h"
 #include "util/misc.h"
+#include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
 
@@ -86,6 +87,8 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override
         {
+            LOG(ERROR) << "Not yet implemented: Cone::hits";
+
             // TODO
             abort();
         }
