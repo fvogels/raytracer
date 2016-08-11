@@ -24,7 +24,7 @@ void raytracer::cameras::_private_::FisheyeCamera::enumerate_untransformed_rays(
     Point3D eye = math::Point3D(0, 0, 0);
 
     Interval<double> x_interval(0, 1);
-    Interval<Angle> azimuth_interval(90_degrees - m_horizontal_view_angle / 2, 90_degrees + m_horizontal_view_angle / 2);
+    Interval<Angle> azimuth_interval(-90_degrees + m_horizontal_view_angle / 2, -90_degrees - m_horizontal_view_angle / 2);
     IntervalMapper<double, Angle> azimuth_mapper(x_interval, azimuth_interval);
     Angle azimuth = azimuth_mapper[point.x()];
 
