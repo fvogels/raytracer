@@ -4,6 +4,7 @@
 #include "scripting/scripting-util.h"
 #include "math/point.h"
 #include "math/vector.h"
+#include "math/rectangle3d.h"
 #include "math/functions.h"
 
 
@@ -23,6 +24,11 @@ namespace
     Vector3D create_vector3d(double x, double y, double z)
     {
         return Vector3D(x, y, z);
+    }
+
+    Rectangle3D create_rectangle3d(const Point3D& origin, const Vector3D& x_axis, const Vector3D& y_axis)
+    {
+        return Rectangle3D(origin, x_axis, y_axis);
     }
 
     Interval<Angle> angle_interval(Angle lower, Angle upper)
@@ -159,6 +165,11 @@ namespace
 
         module.add(fun(&angle_interval), "interval");
     }
+
+    void add_rectangle3d(Module& module)
+    {
+        module.add(fun(&create_rectangle3d), "rect3d");
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_math_module()
@@ -166,6 +177,7 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     auto module = std::make_shared<chaiscript::Module>();
     
     add_points_and_vectors(*module);
+    add_rectangle3d(*module);
     add_angle(*module);
     add_perlin(*module);
     add_interval(*module);
