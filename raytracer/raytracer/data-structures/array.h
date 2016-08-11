@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include <assert.h>
+#include "easylogging++.h"
 
 template<typename T>
 class array
@@ -35,6 +36,8 @@ public:
     {
         if (!is_valid_index(index))
         {
+            LOG(ERROR) << "Index out of bounds: index=" << index << ", size=" << m_size;
+
             abort();
         }
         else
@@ -47,6 +50,8 @@ public:
     {
         if (!is_valid_index(index))
         {
+            LOG(ERROR) << "Index out of bounds: index=" << index << ", size=" << m_size;
+
             abort();
         }
         else
