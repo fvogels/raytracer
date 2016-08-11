@@ -58,61 +58,83 @@ namespace
             return math::functions::perlin<Vector3D, Point3D>(octaves, 98101);
         }
     };
+
+    void add_points_and_vectors(Module& module)
+    {
+        raytracer::scripting::util::register_type<math::Point3D>(module, "Point3D");
+        raytracer::scripting::util::register_type<math::Vector3D>(module, "Vector3D");
+
+        raytracer::scripting::util::register_to_string<math::Point3D>(module);
+        raytracer::scripting::util::register_to_string<math::Vector3D>(module);
+
+        module.add(fun(create_point3d), "pos");
+        module.add(fun(create_vector3d), "vec");
+        module.add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
+        module.add(fun([](const Point3D& p, const Vector3D& v) { return p + v; }), "+");
+        module.add(fun([](const Vector3D& u, const Point3D& p) { return u + p; }), "+");
+        module.add(fun([](const Vector3D& u, const Vector3D& v) { return u - v; }), "-");
+        module.add(fun([](const Point3D& p, const Vector3D& v) { return p - v; }), "-");
+        module.add(fun([](const Point3D& p, const Point3D& q) { return p - q; }), "-");
+
+        module.add(fun(&Vector3D::norm), "norm");
+        module.add(fun(&Vector3D::normalize), "normalize");
+        module.add(fun(&Vector3D::normalized), "normalized");
+
+    }
+
+    void add_angle(Module& module)
+    {
+        raytracer::scripting::util::register_type<math::Angle>(module, "Angle");
+        raytracer::scripting::util::register_to_string<math::Angle>(module);
+
+        module.add(fun([](double x) { return Angle::degrees(x); }), "degrees");
+        module.add(fun([](double x) { return Angle::radians(x); }), "radians");
+        module.add(fun([](const Angle& a, const Angle& b) { return a + b; }), "+");
+        module.add(fun([](const Angle& a, double constant) { return a * constant; }), "*");
+        module.add(fun([](double constant, const Angle& a) { return constant * a; }), "*");
+        module.add(fun([](const Angle& a, const Angle& b) { return a - b; }), "-");
+        module.add(fun([](const Angle& a) { return sin(a); }), "sin");
+        module.add(fun([](const Angle& a) { return cos(a); }), "cos");
+    }
+
+    void add_perlin(Module& module)
+    {
+        auto perlin1d_library = std::make_shared<Perlin1DLibrary>();
+        module.add_global_const(chaiscript::const_var(perlin1d_library), "Perlin1D");
+
+        auto perlin2d_library = std::make_shared<Perlin2DLibrary>();
+        module.add_global_const(chaiscript::const_var(perlin2d_library), "Perlin2D");
+
+        auto perlin3d_library = std::make_shared<Perlin3DLibrary>();
+        module.add_global_const(chaiscript::const_var(perlin3d_library), "Perlin3D");
+
+#define BIND(N, NAME)                 BIND_AS(N, NAME, NAME)
+#define BIND_AS(N, FACTORY, NAME)     module.add(fun(&Perlin ## N ## Library::FACTORY), #NAME)
+        BIND(1D, scalar);
+        BIND(2D, scalar);
+        BIND(3D, scalar);
+        BIND(3D, vector3d);
+#undef BIND_AS
+#undef BIND
+    }
+
+    void add_interval(Module& module)
+    {
+        raytracer::scripting::util::register_type<math::Interval<Angle>>(module, "Angle");
+        raytracer::scripting::util::register_to_string<math::Interval<Angle>>(module);
+
+        module.add(fun(&angle_interval), "interval");
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_math_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
-
-    util::register_type<math::Angle>(*module, "Angle");
-    util::register_type<math::Point3D>(*module, "Point3D");
-    util::register_type<math::Vector3D>(*module, "Vector3D");
-
-    util::register_to_string<math::Angle>(*module);
-    util::register_to_string<math::Point3D>(*module);
-    util::register_to_string<math::Vector3D>(*module);
-
-    module->add(fun(create_point3d), "pos");
-    module->add(fun(create_vector3d), "vec");
-    module->add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
-    module->add(fun([](const Point3D& p, const Vector3D& v) { return p + v; }), "+");
-    module->add(fun([](const Vector3D& u, const Point3D& p) { return u + p; }), "+");
-    module->add(fun([](const Vector3D& u, const Vector3D& v) { return u - v; }), "-");
-    module->add(fun([](const Point3D& p, const Vector3D& v) { return p - v; }), "-");
-    module->add(fun([](const Point3D& p, const Point3D& q) { return p - q; }), "-");
-
-    module->add(fun([](double x) { return Angle::degrees(x); }), "degrees");
-    module->add(fun([](double x) { return Angle::radians(x); }), "radians");
-    module->add(fun([](const Angle& a, const Angle& b) { return a + b; }), "+");
-    module->add(fun([](const Angle& a, double constant) { return a * constant; }), "*");
-    module->add(fun([](double constant, const Angle& a) { return constant * a; }), "*");
-    module->add(fun([](const Angle& a, const Angle& b) { return a - b; }), "-");
-    module->add(fun([](const Angle& a) { return sin(a); }), "sin");
-    module->add(fun([](const Angle& a) { return cos(a); }), "cos");
-
-    module->add(fun(&angle_interval), "interval");
     
-    module->add(fun(&Vector3D::norm), "norm");
-    module->add(fun(&Vector3D::normalize), "normalize");
-    module->add(fun(&Vector3D::normalized), "normalized");
-
-    auto perlin1d_library = std::make_shared<Perlin1DLibrary>();
-    module->add_global_const(chaiscript::const_var(perlin1d_library), "Perlin1D");
-
-    auto perlin2d_library = std::make_shared<Perlin2DLibrary>();
-    module->add_global_const(chaiscript::const_var(perlin2d_library), "Perlin2D");
-
-    auto perlin3d_library = std::make_shared<Perlin3DLibrary>();
-    module->add_global_const(chaiscript::const_var(perlin3d_library), "Perlin3D");
-
-#define BIND(N, NAME)                 BIND_AS(N, NAME, NAME)
-#define BIND_AS(N, FACTORY, NAME)     module->add(fun(&Perlin ## N ## Library::FACTORY), #NAME)
-    BIND(1D, scalar);
-    BIND(2D, scalar);
-    BIND(3D, scalar);
-    BIND(3D, vector3d);
-#undef BIND_AS
-#undef BIND
+    add_points_and_vectors(*module);
+    add_angle(*module);
+    add_perlin(*module);
+    add_interval(*module);
 
     return module;
 }
