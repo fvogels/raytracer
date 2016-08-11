@@ -382,10 +382,10 @@ namespace
     Primitive load_mesh_bbh_bin(std::istream& in)
     {
         TIMED_FUNC(timerObj);
-        CLOG(INFO, "mesh") << "Loading mesh...";
+        LOG(INFO) << "Loading mesh...";
 
         unsigned n_vertices = read<unsigned>(in);
-        CLOG(INFO, "mesh") << "Reading " << n_vertices << " vertices";
+        LOG(INFO) << "Reading " << n_vertices << " vertices";
 
         std::unique_ptr<XYZ[]> vertices(new XYZ[n_vertices]);
 
@@ -396,7 +396,7 @@ namespace
             vertices[i] = XYZ{ x, y, z };
         }
 
-        CLOG(INFO, "mesh") << "Reading hierarchy";
+        LOG(INFO) << "Reading hierarchy";
 
         std::vector<TRIANGLE> triangles;
         std::vector<BOX> boxes;
@@ -493,7 +493,7 @@ namespace
             }
 
             default:
-                std::cerr << "Unrecognized tag " << tag << std::endl;
+                LOG(ERROR) << "Unrecognized tag " << tag << std::endl;
                 abort();
             }
         }
@@ -524,7 +524,7 @@ Primitive raytracer::primitives::fast_mesh(std::istream& in)
 
     if (tag == "raw")
     {
-        std::cerr << "raw not supported" << std::endl;
+        LOG(ERROR) << "raw not supported" << std::endl;
         abort();
     }
     else if (tag == "bbh")
@@ -533,7 +533,7 @@ Primitive raytracer::primitives::fast_mesh(std::istream& in)
     }
     else
     {
-        std::cerr << "Unrecognized mesh tag " << tag << std::endl;
+        LOG(ERROR) << "Unrecognized mesh tag " << tag << std::endl;
         abort();
     }
 }
@@ -548,7 +548,7 @@ Primitive raytracer::primitives::fast_mesh_bin(std::istream& in)
         return load_mesh_bbh_bin(in);
 
     default:
-        std::cerr << "Unrecognized mesh tag " << tag << std::endl;
+        LOG(ERROR) << "Unrecognized mesh tag " << tag << std::endl;
         abort();
     }
 }
