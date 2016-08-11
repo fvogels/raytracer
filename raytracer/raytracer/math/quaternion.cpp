@@ -18,17 +18,14 @@ math::Quaternion::Quaternion(const Point3D& p)
     // NOP
 }
 
-math::Quaternion::Quaternion(Angle angle, const Vector3D& v)
+Quaternion math::Quaternion::rotation(Angle angle, const Vector3D& axis)
 {
-    assert(v.norm() == approx(1.0));
+    assert(axis.norm() == approx(1.0));
 
     double c = cos(angle / 2);
     double s = sin(angle / 2);
 
-    this->a = c;
-    this->b = s * v.x();
-    this->c = s * v.y();
-    this->d = s * v.z();
+    return Quaternion(c, s * axis.x(), s * axis.y(), s * axis.z());
 }
 
 Quaternion math::Quaternion::conjugate() const

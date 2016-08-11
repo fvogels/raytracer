@@ -11,9 +11,10 @@ namespace math
     public:
         double a, b, c, d;
 
+        static Quaternion rotation(Angle, const Vector3D&);
+
         Quaternion(double a, double b, double c, double d);
         explicit Quaternion(const Point3D& p);
-        Quaternion(Angle angle, const Vector3D& v);
 
         Quaternion conjugate() const;
 
