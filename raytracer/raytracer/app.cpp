@@ -42,6 +42,7 @@ const int SAMPLES = 1;
 const int N_THREADS = 1;
 #endif
 
+
 using namespace math;
 using namespace raytracer;
 using namespace imaging;
@@ -78,20 +79,17 @@ raytracer::Primitive create_root(TimeStamp now)
     using namespace raytracer::primitives;
     using namespace raytracer::materials;
 
+    auto white = uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0));
+
     std::vector<Primitive> primitives;
 
-    auto front = translate(Vector3D(0, 0, 4.75), scale(5, 5, 5, sphere()));
-    auto back = translate(Vector3D(0, 0, -4.75), scale(5, 5, 5, sphere()));
-    auto lens_material = uniform(MaterialProperties(colors::white() * 0.1, colors::red() * 0.2, colors::white(), 20, 0, 0.8, 1 + now.seconds()));
-    auto lens = decorate(lens_material, intersection(front, back));
+    auto a = animation::ease(animation::interval(Point3D(0, 0, 0), Point3D(0, 1, 0), 1_s), functions::easing::easing_function<functions::easing::QUADRATIC, functions::easing::in>());
+    auto b = animation::interval(Point3D(0, 1, 0), Point3D(1, 1, 0), 1_s);
+
+    auto s = translate(sequence(a,b)(now) - Point3D(0, 0, 0), decorate(white, sphere()));
 
 
-    auto obj_material = texture("e:/temp/earth2.bmp");
-    // auto obj_position = animation::straight(Vector3D(4, 0, -3), Vector3D(-4, 0, -3), Duration::from_seconds(1))(now);
-    auto obj_position = Vector3D(0, 0, -3);
-    auto obj = decorate(obj_material, translate(obj_position, rotate_around_y(360_degrees * now.seconds(), sphere())));
-
-    std::vector<Primitive> children = { lens, obj };
+    std::vector<Primitive> children = { s };
     return make_union(children);
 }
 
@@ -103,12 +101,8 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
 
     std::vector<LightSource> light_sources;
 
-    Point3D light_position(0, 5, 2);
+    Point3D light_position(0, 5, 5);
     light_sources.push_back(omnidirectional(light_position, colors::white()));
-    // light_sources.push_back(spot(light_position, Point3D(0, 0, 0), 120_degrees, colors::white()));
-    // light_sources.push_back(directional(Vector3D(0, -0.1, 1).normalized(), colors::white()));
-    // light_sources.push_back(area(Rectangle3D(Point3D(-0.5, 3, 5.5), Vector3D(1, 0, 0), Vector3D(0, 0, 1)), samplers::grid(3, 3), colors::white()));
-
 
    /* std::function<Color(Angle, Angle)> lambda = [=](Angle x, Angle y) -> Color {
         double a = x.degrees() / 12;
@@ -135,16 +129,8 @@ raytracer::Camera create_camera(TimeStamp now)
 
     using namespace math::functions::easing;
 
-    // auto camera_position_animation = circular(Point3D(0, 1, 5), Point3D(0, 0, 0), Vector3D::y_axis(), Interval<Angle>(0_degrees, 360_degrees), 1_s);
-
-    auto camera_position_animation = circular(Point3D(0, 0, 3), Point3D(0, 0, 0), Vector3D(0, 1, 0).normalized(), math::Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(1));
     Point3D camera_position = Point3D(0, 0, 5);
-    // Point3D camera_position = camera_position_animation(now);
-    Vector3D up(0, 1, 0);
-    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), up, 1, 1);
-    // auto camera = raytracer::cameras::orthographic(Point3D(-5+10*t, 0, 0), Point3D(0, 0, 0), Vector3D(0, 1, 0), 10, 1);
-    // auto camera = raytracer::cameras::fisheye(Point3D(0, 0, 0), Point3D(0, 0, 5), Vector3D(0, 1, 0), 180_degrees + 180_degrees * t, 180_degrees);
-    // auto camera = raytracer::cameras::depth_of_field_perspective(camera_position, Point3D(0, 1, -5 * now.seconds()), Vector3D(0, 1, 0), 1, 1, 0.5, samplers::grid(4, 4));
+    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 
     return camera;
 }
@@ -160,7 +146,7 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
         return scene;
     };
 
-    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
+    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(2));
 }
 
 void render()
@@ -192,7 +178,8 @@ void process_command_line_arguments(int argc, char** argv)
             TIMED_SCOPE(timer, "Rendering " + path);
 
 #ifdef EXCLUDE_SCRIPTING
-            abort("Cannot run script - scripting was excluded");
+            LOG(ERROR) << "Cannot run script - scripting was excluded";
+            abort();
 #else
             scripting::run_script(path);
 #endif
@@ -203,7 +190,7 @@ void process_command_line_arguments(int argc, char** argv)
         }
         else if (current == "--version")
         {
-            std::cerr << "Build " << BUILD_NUMBER << std::endl;
+            LOG(INFO) << "Build " << BUILD_NUMBER << std::endl;
         }
         else if (current == "--beep")
         {
@@ -211,7 +198,7 @@ void process_command_line_arguments(int argc, char** argv)
         }
         else
         {
-            std::cerr << "Unknown flag " << current << std::endl;
+            LOG(ERROR) << "Unknown flag " << current << std::endl;
             abort();
         }
 
@@ -223,11 +210,11 @@ int main(int argc, char** argv)
 {    
     logging::configure();
 
-    process_command_line_arguments(argc, argv);
+    // process_command_line_arguments(argc, argv);
 
     // demos::bumpify_plane(pipeline::wif("e:/temp/output/test.wif"));
 
-    // render();
+    render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 
     

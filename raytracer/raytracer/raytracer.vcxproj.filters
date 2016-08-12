@@ -1028,5 +1028,8 @@
     <ClInclude Include="animation\lissajous.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="animation\animation-sequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,3 +2,4 @@
 #include "animation/circular-animation.h"
 #include "animation/ease-animation.h"
 #include "animation/lissajous.h"
+#include "animation/animation-sequence.h"

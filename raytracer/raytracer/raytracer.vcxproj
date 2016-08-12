@@ -609,6 +609,7 @@
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation\animation-sequence.h" />
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\animations.h" />
     <ClInclude Include="animation\circular-animation.h" />
