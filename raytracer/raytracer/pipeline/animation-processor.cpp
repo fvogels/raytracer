@@ -19,7 +19,7 @@ namespace
             TimeStamp now = TimeStamp::zero();
             TimeStamp end = TimeStamp::from_epoch(animation.duration());
 
-            while (now <= end)
+            while (now < end)
             {
                 std::shared_ptr<Scene> current_frame_scene = animation(now);
                 produce(current_frame_scene);
