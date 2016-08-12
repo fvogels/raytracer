@@ -47,17 +47,17 @@ bool animation::TimeStamp::operator <(const TimeStamp& ts) const
 
 bool animation::TimeStamp::operator >(const TimeStamp& ts) const
 {
-    return m_since_epoch < ts.m_since_epoch;
+    return m_since_epoch > ts.m_since_epoch;
 }
 
 bool animation::TimeStamp::operator <=(const TimeStamp& ts) const
 {
-    return m_since_epoch < ts.m_since_epoch;
+    return m_since_epoch <= ts.m_since_epoch;
 }
 
 bool animation::TimeStamp::operator >=(const TimeStamp& ts) const
 {
-    return m_since_epoch < ts.m_since_epoch;
+    return m_since_epoch >= ts.m_since_epoch;
 }
 
 TimeStamp& animation::operator +=(TimeStamp& ts, const Duration& duration)
