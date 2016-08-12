@@ -147,7 +147,7 @@ namespace
 
         math::Box bounding_box() const override
         {
-            return Box(Interval<double>(-0.01, 0.01), Interval<double>(-1E10, 1E10), Interval<double>(-1E10, 1E10));
+            return Box(Interval<double>(-0.01, 0.01), Interval<double>::infinite(), Interval<double>::infinite());
         }
     };
 }
