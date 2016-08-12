@@ -12,11 +12,17 @@ namespace
     class Cropper : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate)
-            : m_cropped(cropped), m_predicate(predicate)
+        Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate, const math::Box& bounding_box)
+            : m_cropped(cropped), m_predicate(predicate), m_bounding_box(bounding_box)
         {
             assert(cropped);
             assert(predicate);
+        }
+
+        Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate)
+            : m_cropped(cropped), m_predicate(predicate), m_bounding_box(cropped->bounding_box())
+        {
+            // NOP
         }
 
         bool find_hit(const math::Ray& ray, Hit* hit) const override
@@ -54,13 +60,19 @@ namespace
 
         Box bounding_box() const override
         {
-            return m_cropped->bounding_box();
+            return m_bounding_box;
         }
 
     private:
         Primitive m_cropped;
         math::Function<bool(const math::Point3D&)> m_predicate;
+        math::Box m_bounding_box;
     };
+}
+
+Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool(const Point3D&)> predicate, const Box& box)
+{
+    return Primitive(std::make_shared<Cropper>(cropped, predicate, box));
 }
 
 Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool(const Point3D&)> predicate)
@@ -75,7 +87,10 @@ Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<
         return x_interval.contains(p.x());
     };
 
-    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
+    Box original_box = cropped->bounding_box();
+    Box box(x_interval, original_box.y(), original_box.z());
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate), box);
 }
 
 Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<double>& y_interval)
@@ -84,6 +99,9 @@ Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<
     {
         return y_interval.contains(p.y());
     };
+
+    Box original_box = cropped->bounding_box();
+    Box box(original_box.x(), y_interval, original_box.z());
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
 }
@@ -95,6 +113,9 @@ Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<
         return z_interval.contains(p.z());
     };
 
+    Box original_box = cropped->bounding_box();
+    Box box(original_box.x(), original_box.y(), z_interval);
+
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
 }
 
@@ -105,5 +126,8 @@ Primitive raytracer::primitives::crop_spherical(Primitive cropped, double radius
         return distance(Point3D(0, 0, 0), p) < radius;
     };
 
-    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
+    Interval<double> interval(-radius, radius);
+    Box box(interval, interval, interval);
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate), box);
 }
