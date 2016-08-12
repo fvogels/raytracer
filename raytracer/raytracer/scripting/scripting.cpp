@@ -12,8 +12,9 @@
 #include "scripting/samplers-module.h"
 #include "scripting/pipeline-module.h"
 #include "scripting/animation-module.h"
-#include <chaiscript/chaiscript.hpp>
-#include <chaiscript/chaiscript_stdlib.hpp>
+#include "easylogging++.h"
+#include "chaiscript/chaiscript.hpp"
+#include "chaiscript/chaiscript_stdlib.hpp"
 
 using namespace raytracer::scripting;
 using namespace chaiscript;
@@ -70,7 +71,7 @@ void raytracer::scripting::run_script(const std::string& path)
     }
     catch (const chaiscript::exception::eval_error& e)
     {
-        std::cerr << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
+        LOG(ERROR) << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
         abort();
     }
 }
@@ -85,7 +86,7 @@ void raytracer::scripting::run(const std::string& source)
     }
     catch (const chaiscript::exception::eval_error& e)
     {
-        std::cerr << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
+        LOG(ERROR) << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
         abort();
     }
 }
