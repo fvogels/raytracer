@@ -15,5 +15,6 @@ namespace raytracer
         Primitive rotate_around_y(math::Angle, Primitive);
         Primitive rotate_around_z(math::Angle, Primitive);
         Primitive center(const math::Point3D&, Primitive);
+        Primitive align_y_to(const math::Vector3D, Primitive);
     }
 }

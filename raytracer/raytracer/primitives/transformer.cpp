@@ -1,10 +1,12 @@
 #include "primitives/transformer.h"
 #include "math/misc.h"
 #include <algorithm>
+#include <assert.h>
 
 using namespace math;
 using namespace raytracer;
 using namespace raytracer::primitives;
+
 
 namespace
 {
@@ -117,4 +119,13 @@ Primitive raytracer::primitives::center(const Point3D& center, Primitive primiti
     Point3D primitive_center = primitive->bounding_box().center();
 
     return translate(center - primitive_center, primitive);
+}
+
+Primitive raytracer::primitives::align_y_to(const math::Vector3D y_axis, Primitive primitive)
+{
+    assert(y_axis.is_unit());
+
+    auto transformation = math::transformations::rotate_align_y(y_axis);
+
+    return Primitive(std::make_shared<Transformer>(transformation, primitive));
 }
