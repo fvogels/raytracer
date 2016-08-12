@@ -30,6 +30,11 @@ namespace
     {
         return Rectangle3D(origin, x_axis, y_axis);
     }
+    
+    Interval<double> scalar_interval(double lower, double upper)
+    {
+        return Interval<double>(lower, upper);
+    }
 
     Interval<Angle> angle_interval(Angle lower, Angle upper)
     {
@@ -163,6 +168,7 @@ namespace
         raytracer::scripting::util::register_type<math::Interval<Angle>>(module, "Angle");
         raytracer::scripting::util::register_to_string<math::Interval<Angle>>(module);
 
+        module.add(fun(&scalar_interval), "interval");
         module.add(fun(&angle_interval), "interval");
     }
 
