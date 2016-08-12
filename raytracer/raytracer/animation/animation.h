@@ -7,6 +7,8 @@
 #include "math/angle.h"
 #include "animation/duration.h"
 #include "animation/time-stamp.h"
+#include "easylogging++.h"
+#include <assert.h>
 
 
 namespace animation
@@ -18,9 +20,28 @@ namespace animation
         Animation(math::Function<T(TimeStamp)> function, animation::Duration duration)
             : m_function(function), m_duration(duration) { }
 
+        static Animation<T> empty()
+        {
+            std::function<T(TimeStamp)> lambda = [](TimeStamp ts) -> T {
+                LOG(ERROR) << "Cannot run empty animation";
+
+                abort();
+            };
+
+            return Animation<T>(from_lambda(lambda), Duration::zero());
+        }
+
         T operator ()(TimeStamp t) const
         {
-            return m_function(t);
+            if (t >= TimeStamp::from_epoch(m_duration))
+            {
+                LOG(ERROR) << "Animation out of bounds: cannot ask " << t.seconds() << " of animation with duration " << m_duration;
+                abort();
+            }
+            else
+            {
+                return m_function(t);
+            }
         }
 
         math::Function<T(TimeStamp)> function() const
