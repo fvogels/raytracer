@@ -83,14 +83,11 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto a = animation::ease(animation::interval(Point3D(0, 0, 0), Point3D(0, 1, 0), 1_s), functions::easing::easing_function<functions::easing::quadratic, functions::easing::in>());
-    auto b = animation::interval(Point3D(0, 1, 0), Point3D(1, 1, 0), 1_s);
-
-    auto s = translate(sequence(a,b)(now) - Point3D(0, 0, 0), decorate(white, sphere()));
+    primitives.push_back(translate(Vector3D(0, 5, 0), sphere()));
+    primitives.push_back(cylinder_along_x());
 
 
-    std::vector<Primitive> children = { s };
-    return make_union(children);
+    return decorate(white, make_union(primitives));
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -129,7 +126,7 @@ raytracer::Camera create_camera(TimeStamp now)
 
     using namespace math::functions::easing;
 
-    Point3D camera_position = Point3D(0, 0, 5);
+    Point3D camera_position = Point3D(20, 20, 20);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 
     return camera;
@@ -146,7 +143,7 @@ Animation<std::shared_ptr<Scene>> create_scene_animation()
         return scene;
     };
 
-    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(2));
+    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
 }
 
 void render()
@@ -157,7 +154,7 @@ void render()
     const std::string path = "e:/temp/output/test.wif";
 
     pipeline::start(create_scene_animation()) >>
-        pipeline::animation(30) >>
+        pipeline::animation(1) >>
         pipeline::renderer(renderers::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::stratified_fixed(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
 }
