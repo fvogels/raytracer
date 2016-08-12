@@ -17,11 +17,11 @@ namespace math
             struct is_shape_parameter;
 
 #           define DEFINE_SHAPE(NAME) struct NAME { }; template<> struct is_shape_parameter<NAME> { typedef void t; }
-            DEFINE_SHAPE(LINEAR);
-            DEFINE_SHAPE(QUADRATIC);
-            DEFINE_SHAPE(CUBIC);
-            DEFINE_SHAPE(QUINTIC);
-            DEFINE_SHAPE(BOUNCE);
+            DEFINE_SHAPE(linear);
+            DEFINE_SHAPE(quadratic);
+            DEFINE_SHAPE(cubic);
+            DEFINE_SHAPE(quintic);
+            DEFINE_SHAPE(bounce);
 #           undef DEFINE_SHAPE
 
             template<typename T>
@@ -51,7 +51,7 @@ namespace math
                 struct EasingFunctionBuilder;
 
                 template<>
-                struct EasingFunctionBuilder<LINEAR, void>
+                struct EasingFunctionBuilder<math::functions::easing::linear, void>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -60,7 +60,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUADRATIC, in>
+                struct EasingFunctionBuilder<math::functions::easing::quadratic, math::functions::easing::in>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -69,7 +69,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUADRATIC, out>
+                struct EasingFunctionBuilder<math::functions::easing::quadratic, math::functions::easing::out>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -78,7 +78,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUADRATIC, inout>
+                struct EasingFunctionBuilder<math::functions::easing::quadratic, math::functions::easing::inout>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -87,7 +87,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<CUBIC, in>
+                struct EasingFunctionBuilder<math::functions::easing::cubic, math::functions::easing::in>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -96,7 +96,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<CUBIC, out>
+                struct EasingFunctionBuilder<math::functions::easing::cubic, math::functions::easing::out>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -105,7 +105,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<CUBIC, inout>
+                struct EasingFunctionBuilder<math::functions::easing::cubic, math::functions::easing::inout>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -114,7 +114,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUINTIC, in>
+                struct EasingFunctionBuilder<math::functions::easing::quintic, math::functions::easing::in>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -123,7 +123,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUINTIC, out>
+                struct EasingFunctionBuilder<math::functions::easing::quintic, math::functions::easing::out>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -132,7 +132,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<QUINTIC, inout>
+                struct EasingFunctionBuilder<math::functions::easing::quintic, math::functions::easing::inout>
                 {
                     static math::functions::EasingFunction function()
                     {
@@ -141,7 +141,7 @@ namespace math
                 };
 
                 template<>
-                struct EasingFunctionBuilder<BOUNCE, void>
+                struct EasingFunctionBuilder<math::functions::easing::bounce, void>
                 {
                     static math::functions::EasingFunction function()
                     {

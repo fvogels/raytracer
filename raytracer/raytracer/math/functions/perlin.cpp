@@ -72,7 +72,7 @@ namespace
             double y = InterpolationHelper<K - 1, N>::interpolate(cube.b, coordinates);
             double t = coordinates[K - 1];
 
-            auto f = easing_function<QUADRATIC, inout>(y_range(x, y));
+            auto f = easing_function<quadratic, inout>(y_range(x, y));
             auto result = f(t);
 
             return result;

@@ -83,7 +83,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    auto a = animation::ease(animation::interval(Point3D(0, 0, 0), Point3D(0, 1, 0), 1_s), functions::easing::easing_function<functions::easing::QUADRATIC, functions::easing::in>());
+    auto a = animation::ease(animation::interval(Point3D(0, 0, 0), Point3D(0, 1, 0), 1_s), functions::easing::easing_function<functions::easing::quadratic, functions::easing::in>());
     auto b = animation::interval(Point3D(0, 1, 0), Point3D(1, 1, 0), 1_s);
 
     auto s = translate(sequence(a,b)(now) - Point3D(0, 0, 0), decorate(white, sphere()));
