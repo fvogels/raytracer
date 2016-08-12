@@ -31,12 +31,13 @@ namespace
         Point3D position = ray.at(t);
         Point2D position_on_circle(position.y(), position.z());
         double height = position.x();
+        Vector3D normal(0.0, position.y(), position.z());
 
         hit->t = t;
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = Vector3D(0.0, position.y(), position.z());
+        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
 
         assert(hit->normal.is_unit());
     }
@@ -48,12 +49,13 @@ namespace
         Point3D position = ray.at(t);
         Point2D position_on_circle(position.x(), position.z());
         double height = position.y();
+        Vector3D normal(position.x(), 0.0, position.z());
 
         hit->t = t;
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = Vector3D(position.x(), 0.0, position.z());
+        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
 
         assert(hit->normal.is_unit());
     }
@@ -65,37 +67,31 @@ namespace
         Point3D position = ray.at(t);
         Point2D position_on_circle(position.x(), position.y());
         double height = position.z();
+        Vector3D normal(position.x(), position.y(), 0);
 
         hit->t = t;
         hit->position = position;
         hit->local_position.xyz = position;
         hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = Vector3D(position.x(), position.y(), 0);
+        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
 
         assert(hit->normal.is_unit());
     }
 
     bool find_intersections(const Point2D& O, const Vector2D& D, double* t1, double* t2)
     {
-        if ((O - Point2D(0, 0)).norm_sqr() > 1)
+        double a = D.dot(D);
+        double b = 2 * D.dot(O - Point2D(0, 0));
+        double c = (O - Point2D(0, 0)).norm_sqr() - 1;
+
+        QuadraticEquation eq(a, b, c);
+
+        if (eq.has_solutions())
         {
-            double a = D.dot(D);
-            double b = 2 * D.dot(O - Point2D(0, 0));
-            double c = (O - Point2D(0, 0)).norm_sqr() - 1;
+            *t1 = eq.x1();
+            *t2 = eq.x2();
 
-            QuadraticEquation eq(a, b, c);
-
-            if (eq.has_solutions())
-            {
-                *t1 = eq.x1();
-                *t2 = eq.x2();
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
         else
         {
