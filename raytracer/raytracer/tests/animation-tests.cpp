@@ -17,7 +17,7 @@ TEST_CASE("[Animations] basic", "[Animations]")
 
         CHECK(anim(0_S) == Approx(0));
         CHECK(anim(0.5_S) == Approx(0.5));
-        CHECK(anim(1_S) == Approx(1));
+        CHECK(anim(0.99999_S) == Approx(1));
     }
 
     SECTION("From 0 to 2 in 1s")
@@ -27,7 +27,7 @@ TEST_CASE("[Animations] basic", "[Animations]")
 
         CHECK(anim(0_S) == Approx(0));
         CHECK(anim(0.5_S) == Approx(1));
-        CHECK(anim(1_S) == Approx(2));
+        CHECK(anim(0.999999_S) == Approx(2));
     }
 
     SECTION("From 1 to 3 in 1s")
@@ -37,7 +37,7 @@ TEST_CASE("[Animations] basic", "[Animations]")
 
         CHECK(anim(0_S) == Approx(1));
         CHECK(anim(0.5_S) == Approx(2));
-        CHECK(anim(1_S) == Approx(3));
+        CHECK(anim(0.999999_S) == Approx(3));
     }
 }
 
