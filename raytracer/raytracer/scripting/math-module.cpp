@@ -78,6 +78,7 @@ namespace
         Point3D spherical(double radius, Angle azimuth, Angle elevation) const { return Point3D::spherical(radius, azimuth, elevation); }
         Point3D cylindrical_x(double radius, Angle azimuth, double x) const { return Point3D::cylindrical_x(radius, azimuth, x); }
         Point3D cylindrical_y(double radius, Angle azimuth, double y) const { return Point3D::cylindrical_y(radius, azimuth, y); }
+        Point3D cylindrical_z(double radius, Angle azimuth, double z) const { return Point3D::cylindrical_z(radius, azimuth, z); }
     };
 
     struct VectorFactories
