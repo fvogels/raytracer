@@ -204,20 +204,20 @@ void process_command_line_arguments(int argc, char** argv)
 
         ++i;
     }
+
+    LOG(INFO) << "Terminated successfully";
 }
 
 int main(int argc, char** argv)
 {    
     logging::configure();
 
-    // process_command_line_arguments(argc, argv);
+    process_command_line_arguments(argc, argv);
 
     // demos::bumpify_plane(pipeline::wif("e:/temp/output/test.wif"));
 
-    render();
+    // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
-
-    
 }
 
 #endif
