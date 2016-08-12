@@ -8,11 +8,11 @@ namespace math
     class Transformation
     {
     public:
-        Transformation(const Matrix4D& Transformation_matrix, const Matrix4D& inverse_Transformation_matrix)
-            : transformation_matrix(Transformation_matrix), inverse_Transformation_matrix(inverse_Transformation_matrix)  { }
+        Transformation(const Matrix4D& transformation_matrix, const Matrix4D& inverse_transformation_matrix)
+            : transformation_matrix(transformation_matrix), inverse_transformation_matrix(inverse_transformation_matrix)  { }
     
         Matrix4D transformation_matrix;
-        Matrix4D inverse_Transformation_matrix;
+        Matrix4D inverse_transformation_matrix;
     };
 
     namespace transformations
@@ -22,5 +22,6 @@ namespace math
         Transformation rotate_x(const Angle&);
         Transformation rotate_y(const Angle&);
         Transformation rotate_z(const Angle&);
+        Transformation rotate_align_y(const Vector3D&);
     }
 }

@@ -16,7 +16,7 @@ namespace
 
         bool find_hit(const Ray& ray, Hit* hit) const override
         {
-            Ray transformed_ray = ray.transform(this->transformer.inverse_Transformation_matrix);
+            Ray transformed_ray = ray.transform(this->transformer.inverse_transformation_matrix);
 
             if (this->transformee->find_hit(transformed_ray, hit))
             {
@@ -33,7 +33,7 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
         {
-            Ray transformed_ray = ray.transform(this->transformer.inverse_Transformation_matrix);
+            Ray transformed_ray = ray.transform(this->transformer.inverse_transformation_matrix);
 
             auto hits = this->transformee->hits(transformed_ray);
 
