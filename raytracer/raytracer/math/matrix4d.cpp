@@ -129,3 +129,13 @@ Matrix4D math::transformation_matrices::coordinate_system(const Point3D& origin,
         0, 0, 0, 1
     };
 }
+
+Matrix4D math::transpose(const Matrix4D& m)
+{
+    return Matrix4D{
+        m.x11, m.x21, m.x31, m.x41,
+        m.x12, m.x22, m.x32, m.x42,
+        m.x13, m.x23, m.x33, m.x43,
+        m.x14, m.x24, m.x34, m.x44,
+    };
+}
