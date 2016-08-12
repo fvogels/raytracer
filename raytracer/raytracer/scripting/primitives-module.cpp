@@ -54,6 +54,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_NS(raytracer::primitives, cylinder_along_x);
     BIND_NS(raytracer::primitives, cylinder_along_y);
     BIND_NS(raytracer::primitives, cylinder_along_z);
+    BIND_NS(raytracer::primitives, triangle);
     BIND_NS(raytracer::primitives, translate);
     BIND_AS(make_union, union);
     BIND_NS(raytracer::primitives, decorate);
