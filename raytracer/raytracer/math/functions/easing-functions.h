@@ -13,10 +13,7 @@ namespace math
 
         namespace easing
         {
-            template<typename T>
-            struct is_shape_parameter;
-
-#           define DEFINE_SHAPE(NAME) struct NAME { }; template<> struct is_shape_parameter<NAME> { typedef void t; }
+#           define DEFINE_SHAPE(NAME) struct NAME { }
             DEFINE_SHAPE(linear);
             DEFINE_SHAPE(quadratic);
             DEFINE_SHAPE(cubic);
@@ -27,7 +24,7 @@ namespace math
             template<typename T>
             struct is_side_parameter;
 
-#           define DEFINE_SIDE(NAME) struct NAME { }; template<> struct is_side_parameter<NAME> { typedef void t; }
+#           define DEFINE_SIDE(NAME) struct NAME { }
             DEFINE_SIDE(in);
             DEFINE_SIDE(out);
             DEFINE_SIDE(inout);
