@@ -14,31 +14,6 @@ using namespace math;
 
 namespace
 {
-    Primitive sphere()
-    {
-        return primitives::sphere(); 
-    }
-
-    Primitive xy_plane()
-    {
-        return primitives::xy_plane();
-    }
-
-    Primitive xz_plane()
-    {
-        return primitives::xz_plane();
-    }
-
-    Primitive yz_plane()
-    {
-        return primitives::yz_plane();
-    }
-
-    Primitive translate(const Vector3D& displacement, Primitive primitive) 
-    {
-        return primitives::translate(displacement, primitive); 
-    }
-
     Primitive make_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
     {
         std::vector<Primitive> children(boxed_children.size());
@@ -50,30 +25,10 @@ namespace
         return primitives::make_union(children);
     }
 
-    Primitive decorate(Material material, Primitive decorated)
-    {
-        return primitives::decorate(material, decorated);
-    }
-
     Primitive mesh(const std::string& path)
     {
         return primitives::fast_mesh(path);
     }
-
-    Primitive center(const Point3D& center, Primitive primitive)
-    {
-        return primitives::center(center, primitive);
-    }
-
-    Primitive group(unsigned group_id, Primitive primitive)
-    {
-        return primitives::group(group_id, primitive);
-    }
-
-    Primitive intersection(Primitive child1, Primitive child2)
-    {
-        return primitives::intersection(child1, child2);
-    }    
 
     Primitive bumpify2d_timed(Function<Vector3D(const Point3D&)> noise, Primitive primitive, animation::TimeStamp now)
     {
@@ -89,19 +44,27 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 
     util::register_type<Primitive>(*module, "Primitive");
 
-#define BIND(NAME)              BIND_AS(NAME, NAME)
-#define BIND_AS(FACTORY, NAME)  module->add(fun(&FACTORY), #NAME)
-    BIND(sphere);
-    BIND(xy_plane);
-    BIND(xz_plane);
-    BIND(yz_plane);
-    BIND(translate);
+#define BIND(NAME)                  BIND_AS(NAME, NAME)
+#define BIND_NS(NAMESPACE, NAME)    BIND_AS(NAMESPACE::NAME, NAME)
+#define BIND_AS(FACTORY, NAME)      module->add(fun(&FACTORY), #NAME)
+    BIND_NS(raytracer::primitives, sphere);
+    BIND_NS(raytracer::primitives, xy_plane);
+    BIND_NS(raytracer::primitives, xz_plane);
+    BIND_NS(raytracer::primitives, yz_plane);
+    BIND_NS(raytracer::primitives, cylinder_along_x);
+    BIND_NS(raytracer::primitives, cylinder_along_y);
+    BIND_NS(raytracer::primitives, cylinder_along_z);
+    BIND_NS(raytracer::primitives, translate);
     BIND_AS(make_union, union);
-    BIND(decorate);
+    BIND_NS(raytracer::primitives, decorate);
     BIND(mesh);
-    BIND(center);
-    BIND(group);
-    BIND(intersection);
+    BIND_NS(raytracer::primitives, center);
+    BIND_NS(raytracer::primitives, group);
+    BIND_NS(raytracer::primitives, intersection);
+    BIND_NS(raytracer::primitives, crop_along_x);
+    BIND_NS(raytracer::primitives, crop_along_y);
+    BIND_NS(raytracer::primitives, crop_along_z);
+    BIND_NS(raytracer::primitives, crop_spherical);
     BIND_AS(bumpify2d_timed, bumpify);
 #undef BIND_AS
 #undef BIND
