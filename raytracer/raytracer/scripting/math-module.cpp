@@ -30,7 +30,7 @@ namespace
     {
         return Rectangle3D(origin, x_axis, y_axis);
     }
-    
+
     Interval<double> scalar_interval(double lower, double upper)
     {
         return Interval<double>(lower, upper);
@@ -77,8 +77,7 @@ namespace
         Point3D cartesian3d(double x, double y, double z) const { return Point3D::cartesian(x, y, z); }
         Point3D spherical(double radius, Angle azimuth, Angle elevation) const { return Point3D::spherical(radius, azimuth, elevation); }
         Point3D cylindrical_x(double radius, Angle azimuth, double x) const { return Point3D::cylindrical_x(radius, azimuth, x); }
-        Point3D cylindrical_y(double radius, Angle azimuth, double y) const { return Point3D::cylindrical_x(radius, azimuth, y); }
-        Point3D cylindrical_z(double radius, Angle azimuth, double z) const { return Point3D::cylindrical_x(radius, azimuth, z); }
+        Point3D cylindrical_y(double radius, Angle azimuth, double y) const { return Point3D::cylindrical_y(radius, azimuth, y); }
     };
 
     struct VectorFactories
@@ -88,14 +87,14 @@ namespace
         Vector3D cartesian3d(double x, double y, double z) const { return Vector3D::cartesian(x, y, z); }
         Vector3D spherical(double radius, Angle azimuth, Angle elevation) const { return Vector3D::spherical(radius, azimuth, elevation); }
         Vector3D cylindrical_x(double radius, Angle azimuth, double x) const { return Vector3D::cylindrical_x(radius, azimuth, x); }
-        Vector3D cylindrical_y(double radius, Angle azimuth, double y) const { return Vector3D::cylindrical_x(radius, azimuth, y); }
-        Vector3D cylindrical_z(double radius, Angle azimuth, double z) const { return Vector3D::cylindrical_x(radius, azimuth, z); }
+        Vector3D cylindrical_y(double radius, Angle azimuth, double y) const { return Vector3D::cylindrical_y(radius, azimuth, y); }
+        Vector3D cylindrical_z(double radius, Angle azimuth, double z) const { return Vector3D::cylindrical_z(radius, azimuth, z); }
     };
 
     void add_points_and_vectors(Module& module)
     {
-        raytracer::scripting::util::register_type<math::Point3D>(module, "Point3D");
-        raytracer::scripting::util::register_type<math::Vector3D>(module, "Vector3D");
+        raytracer::scripting::util::register_type<math::Point3D>(module, "Point");
+        raytracer::scripting::util::register_type<math::Vector3D>(module, "Vector");
 
         raytracer::scripting::util::register_to_string<math::Point3D>(module);
         raytracer::scripting::util::register_to_string<math::Vector3D>(module);
@@ -114,7 +113,9 @@ namespace
         module.add(fun(&Vector3D::normalized), "normalized");
 
         auto point_factories = std::make_shared<PointFactories>();
+        module.add_global_const(chaiscript::const_var(point_factories), "Pos");
         auto vector_factories = std::make_shared<VectorFactories>();
+        module.add_global_const(chaiscript::const_var(vector_factories), "Vec");
 
 #define BIND(NAME)                  module.add(fun(&PointFactories::NAME), #NAME); module.add(fun(&VectorFactories::NAME), #NAME)
         BIND(cartesian2d);
@@ -137,6 +138,7 @@ namespace
         module.add(fun([](const Angle& a, const Angle& b) { return a + b; }), "+");
         module.add(fun([](const Angle& a, double constant) { return a * constant; }), "*");
         module.add(fun([](double constant, const Angle& a) { return constant * a; }), "*");
+        module.add(fun([](const Angle& a, double constant) { return a / constant; }), "/");
         module.add(fun([](const Angle& a, const Angle& b) { return a - b; }), "-");
         module.add(fun([](const Angle& a) { return sin(a); }), "sin");
         module.add(fun([](const Angle& a) { return cos(a); }), "cos");
@@ -181,7 +183,7 @@ namespace
 ModulePtr raytracer::scripting::_private_::create_math_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
-    
+
     add_points_and_vectors(*module);
     add_rectangle3d(*module);
     add_angle(*module);
