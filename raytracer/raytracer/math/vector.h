@@ -405,4 +405,22 @@ namespace math
     using Vector2D = Vector<2>;
     using Vector3D = Vector<3>;
     using Vector4D = Vector<4>;
+
+    inline Vector3D find_perpendicular_on(const Vector3D& v)
+    {
+        Vector3D result;
+
+        if (v.x() != 0)
+        {
+            result = Vector3D(v.y(), -v.x(), 0);
+        }
+        else
+        {
+            result = Vector3D(0, v.z(), -v.y());
+        }
+
+        assert(result.is_perpendicular_on(v));
+
+        return result;
+    }
 }
