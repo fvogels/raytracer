@@ -44,9 +44,36 @@ namespace
             return circular(position, around, axis, angle_interval, duration);
         }
 
-        Animation<Point3D> point_animation(const Point3D& from, const Point3D& to, const Duration& duration) const
+        Animation<Point3D> point_animation(const Point3D& from, const Point3D& to, Duration duration) const
         {
             return animation::interval(from, to, duration);
+        }
+
+        Animation<Point3D> point_animation_seq(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration) const
+        {
+            if (boxed_checkpoints.size() < 2)
+            {
+                throw std::runtime_error("At least 2 checkpoints needed");
+            }
+            else
+            {
+                std::vector<Point3D> checkpoints(boxed_checkpoints.size());
+
+                std::transform(boxed_checkpoints.begin(), boxed_checkpoints.end(), checkpoints.begin(), [](Boxed_Value boxed) {
+                    return boxed_cast<Point3D>(boxed);
+                });
+
+                Animation<Point3D> animation = Animation<Point3D>::empty();
+
+                for (size_t i = 0; i < checkpoints.size() - 1; ++i)
+                {
+                    auto anim = animation::interval(Interval<Point3D>(checkpoints[i], checkpoints[i + 1]), duration / double(checkpoints.size() - 1));
+
+                    animation = sequence(animation, ease(anim, math::functions::easing::easing_function<math::functions::easing::quadratic, math::functions::easing::inout>()));
+                }
+
+                return animation;
+            }
         }
 
         Animation<double> double_animation(double from, double to, Duration duration) const
@@ -79,7 +106,7 @@ namespace
             return animation::lissajous(
                 LissajousParameters{ x_amplitude, x_frequency, x_phase },
                 LissajousParameters{ y_amplitude, y_frequency, y_phase },
-                LissajousParameters{ z_amplitude, z_frequency, z_phase }, duration );
+                LissajousParameters{ z_amplitude, z_frequency, z_phase }, duration);
         }
     };
 
@@ -116,6 +143,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
+    BIND_AS(point_animation_seq, animate);
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
 #undef BIND
