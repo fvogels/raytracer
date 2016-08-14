@@ -2,6 +2,10 @@
 
 using namespace math;
 
+
+math::Rectangle2D::Rectangle2D(const Point2D& origin, const Vector2D& x_axis, const Vector2D& y_axis)
+    : origin(origin), x_axis(x_axis), y_axis(y_axis) { }
+
 Point2D math::Rectangle2D::center() const
 {
     return origin + x_axis / 2 + y_axis / 2;
