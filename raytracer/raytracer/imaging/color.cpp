@@ -7,7 +7,7 @@ using namespace imaging;
 
 namespace
 {
-    double clamp(double x) noexcept
+    double clamp(double x)
     {
         if (x < 0) return 0;
         else if (x > 1) return 1;
@@ -15,51 +15,51 @@ namespace
     }
 }
 
-void imaging::Color::clamp() noexcept
+void imaging::Color::clamp()
 {
     r = ::clamp(r);
     g = ::clamp(g);
     b = ::clamp(b);
 }
 
-Color imaging::Color::clamped() const noexcept
+Color imaging::Color::clamped() const
 {
     Color copy = *this;
     copy.clamp();
     return copy;
 }
 
-Color imaging::operator +(const Color& c1, const Color& c2) noexcept
+Color imaging::operator +(const Color& c1, const Color& c2)
 {
     return Color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
 }
 
-Color imaging::operator -(const Color& c1, const Color& c2) noexcept
+Color imaging::operator -(const Color& c1, const Color& c2)
 {
     return Color(c1.r - c2.r, c1.g - c2.g, c1.b - c2.b);
 }
 
-Color imaging::operator *(const Color& c, double f) noexcept
+Color imaging::operator *(const Color& c, double f)
 {
     return Color(c.r * f, c.g * f, c.b * f);
 }
 
-Color imaging::operator *(double f, const Color& c) noexcept
+Color imaging::operator *(double f, const Color& c)
 {
     return c * f;
 }
 
-Color imaging::operator *(const Color& c1, const Color& c2) noexcept
+Color imaging::operator *(const Color& c1, const Color& c2)
 {
     return Color(c1.r * c2.r, c1.g * c2.g, c1.b * c2.b);
 }
 
-Color imaging::operator /(const Color& c, double f) noexcept
+Color imaging::operator /(const Color& c, double f)
 {
     return c * (1 / f);
 }
 
-Color& imaging::operator +=(Color& c1, const Color& c2) noexcept
+Color& imaging::operator +=(Color& c1, const Color& c2)
 {
     return c1 = c1 + c2;
 }
