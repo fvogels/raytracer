@@ -11,29 +11,7 @@ using namespace math;
 
 namespace
 {
-    Point2D compute_uv_from_xyz(const Point3D& p)
-    {
-        double u = 0.5 + atan2(p.z(), p.x()) / (2 * M_PI);
-        double v = 0.5 - asin(p.y()) / M_PI;
 
-        assert(0 <= u);
-        assert(u <= 1);
-        assert(0 <= v);
-        assert(v <= 1);
-
-        return Point2D(u, v);
-    }
-
-    void initialize_hit(Hit* hit, const Ray& ray, double t)
-    {
-        hit->t = t;
-        hit->position = ray.at(t);
-        hit->local_position.xyz = hit->position;
-        hit->local_position.uv = compute_uv_from_xyz(hit->position);
-
-        Vector3D outward_normal = hit->position - Point3D();
-        hit->normal = ray.direction.dot(outward_normal) < 0 ? outward_normal : -outward_normal;
-    }
 
     class Sphere : public raytracer::primitives::_private_::PrimitiveImplementation
     {
@@ -137,6 +115,45 @@ namespace
             auto range = interval(-1.0, 1.0);
 
             return Box(range, range, range);
+        }
+
+    private:
+        Point2D compute_uv_from_xyz(const Point3D& p) const
+        {
+            double u = 0.5 + atan2(p.z(), p.x()) / (2 * M_PI);
+            double v = 0.5 - asin(p.y()) / M_PI;
+
+            assert(0 <= u);
+            assert(u <= 1);
+            assert(0 <= v);
+            assert(v <= 1);
+
+            return Point2D(u, v);
+        }
+
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const
+        {
+            hit->t = t;
+            hit->position = ray.at(t);
+            hit->local_position.xyz = hit->position;
+            hit->local_position.uv = compute_uv_from_xyz(hit->position);
+            hit->normal = compute_normal_at(ray, hit->position);
+            
+
+            assert(is_on_sphere(hit->position));
+        }
+
+        Vector3D compute_normal_at(const Ray& ray, const Point3D& position) const
+        {
+            assert(is_on_sphere(position));
+
+            Vector3D outward_normal = position - Point3D();
+            return ray.direction.dot(outward_normal) < 0 ? outward_normal : -outward_normal;
+        }
+
+        bool is_on_sphere(const Point3D& p) const
+        {
+            return distance(Point3D(0, 0, 0), p) == approx(1.0);
         }
     };
 }
