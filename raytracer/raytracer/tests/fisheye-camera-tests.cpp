@@ -31,7 +31,7 @@ namespace
     }
 }
 
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -52,8 +52,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -74,8 +73,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (1,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 1,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -96,8 +94,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,1)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,1", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -118,8 +115,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,0)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,0", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -140,8 +136,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 1,0,0, Lookat = 1,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,0.5", "[FisheyeCamera]")
 {
     Point3D eye(1,0,0);
     Point3D look_at(1,0,1);
@@ -162,8 +157,7 @@ TEST_CASE("[FisheyeCamera] Eye = (1,0,0), Lookat = (1,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (-1,0,0), Lookat = (-1,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = -1,0,0, Lookat = -1,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,0.5", "[FisheyeCamera]")
 {
     Point3D eye(-1,0,0);
     Point3D look_at(-1,0,1);
@@ -184,8 +178,7 @@ TEST_CASE("[FisheyeCamera] Eye = (-1,0,0), Lookat = (-1,0,1), Up = (0,1,0), HAng
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (-2,0,0), Lookat = (-2,0,1), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = -2,0,0, Lookat = -2,0,1, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,0.5", "[FisheyeCamera]")
 {
     Point3D eye(-2,0,0);
     Point3D look_at(-2,0,1);
@@ -206,8 +199,7 @@ TEST_CASE("[FisheyeCamera] Eye = (-2,0,0), Lookat = (-2,0,1), Up = (0,1,0), HAng
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0), HAngle = 180, VAngle = 180, At (0.5,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 1,0,0, Up = 0,1,0, HAngle = 180, VAngle = 180, At 0.5,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(1,0,0);
@@ -228,8 +220,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (1,0,0), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 360, VAngle = 180, At (0.5,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 360, VAngle = 180, At 0.5,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -250,8 +241,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 360, VAngle = 180, At (1,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 360, VAngle = 180, At 1,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -272,8 +262,7 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.direction, expected_direction);
 }
 
-
-TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle = 360, VAngle = 180, At (0,0.5)", "[FisheyeCamera]")
+TEST_CASE("[FisheyeCamera] Eye = 0,0,0, Lookat = 0,0,1, Up = 0,1,0, HAngle = 360, VAngle = 180, At 0,0.5", "[FisheyeCamera]")
 {
     Point3D eye(0,0,0);
     Point3D look_at(0,0,1);
@@ -293,6 +282,5 @@ TEST_CASE("[FisheyeCamera] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0), HAngle
     assert_equals(ray.origin, expected_origin);
     assert_equals(ray.direction, expected_direction);
 }
-
 
 #endif

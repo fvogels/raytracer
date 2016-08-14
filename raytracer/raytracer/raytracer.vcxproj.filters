@@ -342,9 +342,6 @@
     <ClCompile Include="materials\pattern-materials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\fisheye-camera-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pipeline\ppm-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -424,6 +421,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="angle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\fisheye-camera-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
