@@ -43,7 +43,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
     {
         Hit hit;
         
-        if (scene.root->find_hit(eye_ray, &hit))
+        if (scene.root->find_first_positive_hit(eye_ray, &hit))
         {
             assert(hit.material);
 
@@ -85,7 +85,7 @@ Color raytracer::raytracers::_private_::RayTracerV6::compute_refraction(const Sc
             const Ray refracted_ray(refracted_origin, refracted_direction);
 
             Hit refracted_hit;
-            if (!scene.root->find_hit(refracted_ray, &refracted_hit))
+            if (!scene.root->find_first_positive_hit(refracted_ray, &refracted_hit))
             {
                 return colors::black();
             }

@@ -16,11 +16,11 @@ namespace
         Transformer(const math::Transformation& transformer, Primitive transformee)
             : transformer(transformer), transformee(transformee) { }
 
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             Ray transformed_ray = ray.transform(this->transformer.inverse_transformation_matrix);
 
-            if (this->transformee->find_hit(transformed_ray, hit))
+            if (this->transformee->find_first_positive_hit(transformed_ray, hit))
             {
                 hit->position = this->transformer.transformation_matrix * hit->position;
                 hit->normal = (this->transformer.transformation_matrix * hit->normal).normalized();

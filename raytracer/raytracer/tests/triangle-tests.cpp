@@ -18,35 +18,35 @@ TEST_CASE("[Triangle] Hits against triangle with a = (0,0,0), b = (1,0,0), c = (
     {
         Ray ray(Point3D(0.1, 0.1, 1), Vector3D(0, 0, -1));
 
-        REQUIRE(tri->find_hit(ray, &hit));
+        REQUIRE(tri->find_first_positive_hit(ray, &hit));
     }
 
     SECTION("Ray (0.1,-0.1,1) + (0,0,-1)")
     {
         Ray ray(Point3D(0.1, -0.1, 1), Vector3D(0, 0, -1));
 
-        REQUIRE(!tri->find_hit(ray, &hit));
+        REQUIRE(!tri->find_first_positive_hit(ray, &hit));
     }
 
     SECTION("Ray (-0.1,0.1,1) + (0,0,-1)")
     {
         Ray ray(Point3D(-0.1, 0.1, 1), Vector3D(0, 0, -1));
 
-        REQUIRE(!tri->find_hit(ray, &hit));
+        REQUIRE(!tri->find_first_positive_hit(ray, &hit));
     }
 
     SECTION("Ray (0.9,0.05,1) + (0,0,-1)")
     {
         Ray ray(Point3D(0.9, 0.05, 1), Vector3D(0, 0, -1));
 
-        REQUIRE(tri->find_hit(ray, &hit));
+        REQUIRE(tri->find_first_positive_hit(ray, &hit));
     }
 
     SECTION("Ray (0.05,0.9,1) + (0,0,-1)")
     {
         Ray ray(Point3D(0.05, 0.9, 1), Vector3D(0, 0, -1));
 
-        REQUIRE(tri->find_hit(ray, &hit));
+        REQUIRE(tri->find_first_positive_hit(ray, &hit));
     }
 }
 

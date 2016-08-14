@@ -16,7 +16,7 @@ namespace
             assert(second);
         }
 
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             auto first_hits = m_first->hits(ray);
             auto second_hits = m_second->hits(ray);

@@ -16,13 +16,13 @@ namespace
             // NOP
         }
 
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             bool found_hit = false;
 
             for (const auto& child : this->children)
             {
-                found_hit = child->find_hit(ray, hit) || found_hit;
+                found_hit = child->find_first_positive_hit(ray, hit) || found_hit;
             }
 
             return found_hit;

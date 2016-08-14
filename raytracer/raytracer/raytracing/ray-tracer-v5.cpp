@@ -24,7 +24,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& sc
     {
         Hit hit;
 
-        if (scene.root->find_hit(eye_ray, &hit))
+        if (scene.root->find_first_positive_hit(eye_ray, &hit))
         {
             assert(hit.material);
 

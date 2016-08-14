@@ -14,9 +14,9 @@ namespace
             // NOP
         }
 
-        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
-            if (m_child->find_hit(ray, hit))
+            if (m_child->find_first_positive_hit(ray, hit))
             {
                 hit->group_id = m_id;
 

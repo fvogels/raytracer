@@ -12,7 +12,7 @@ namespace
     class Disk : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
             assert(hit);
 
@@ -47,7 +47,7 @@ namespace
         {
             auto hit = std::make_shared<Hit>();
 
-            if (find_hit(ray, hit.get()))
+            if (find_first_positive_hit(ray, hit.get()))
             {
                 return std::vector<std::shared_ptr<Hit>> { hit };
             }

@@ -9,7 +9,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
 {
     Hit hit;
 
-    if (scene.root->find_hit(ray, &hit))
+    if (scene.root->find_first_positive_hit(ray, &hit))
     {
         assert(hit.material);
 

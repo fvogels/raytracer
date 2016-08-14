@@ -34,7 +34,7 @@ test_file 'cone-tests' do
 
             Hit hit;
 
-            REQUIRE(primitive->find_hit(ray, &hit));
+            REQUIRE(primitive->find_first_positive_hit(ray, &hit));
             CHECK(hit.t == Approx(#{expected_t}));
             CHECK(hit.position == approx(Point3D#{expected_hit_position}));
             CHECK(hit.normal == approx(Vector3D#{expected_normal_position}.normalized()));
@@ -144,7 +144,7 @@ test_file 'cone-tests' do
 
             Hit hit;
 
-            REQUIRE(!primitive->find_hit(ray, &hit));
+            REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
         }
       END
     end

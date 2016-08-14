@@ -38,7 +38,7 @@ namespace
     class Sphere : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             assert(hit != nullptr);
 

@@ -14,9 +14,9 @@ namespace
         Bumpifier2D(math::Function<math::Vector3D(const math::Point2D&)> normal_perturbator, Primitive perturbee)
             : m_normal_perturbator(normal_perturbator), m_perturbee(perturbee) { }
 
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
-            if (m_perturbee->find_hit(ray, hit))
+            if (m_perturbee->find_first_positive_hit(ray, hit))
             {
                 perturb(hit);
 
@@ -61,9 +61,9 @@ namespace
         Bumpifier3D(math::Function<math::Vector3D(const math::Point3D&)> normal_perturbator, Primitive perturbee)
             : m_normal_perturbator(normal_perturbator), m_perturbee(perturbee) { }
 
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
-            if (m_perturbee->find_hit(ray, hit))
+            if (m_perturbee->find_first_positive_hit(ray, hit))
             {
                 perturb(hit);
 

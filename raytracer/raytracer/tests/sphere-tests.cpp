@@ -19,7 +19,7 @@ TEST_CASE("[Sphere] First hit (0,0,5) + (0,0,-1) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(4));
     CHECK(hit.position == approx(Point3D(0,0,1)));
     CHECK(hit.normal == approx(Vector3D(0,0,1)));
@@ -35,7 +35,7 @@ TEST_CASE("[Sphere] First hit (0,0,3) + (0,0,-1) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(2));
     CHECK(hit.position == approx(Point3D(0,0,1)));
     CHECK(hit.normal == approx(Vector3D(0,0,1)));
@@ -51,7 +51,7 @@ TEST_CASE("[Sphere] First hit (0,0,-3) + (0,0,+1) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(2));
     CHECK(hit.position == approx(Point3D(0,0,-1)));
     CHECK(hit.normal == approx(Vector3D(0,0,-1)));
@@ -67,7 +67,7 @@ TEST_CASE("[Sphere] First hit (4,0,0) + (-1,0,0) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(3));
     CHECK(hit.position == approx(Point3D(1,0,0)));
     CHECK(hit.normal == approx(Vector3D(1,0,0)));
@@ -83,7 +83,7 @@ TEST_CASE("[Sphere] First hit (-8,0,0) + (1,0,0) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(7));
     CHECK(hit.position == approx(Point3D(-1,0,0)));
     CHECK(hit.normal == approx(Vector3D(-1,0,0)));
@@ -99,7 +99,7 @@ TEST_CASE("[Sphere] First hit (0,4,0) + (0,-1,0) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(3));
     CHECK(hit.position == approx(Point3D(0,1,0)));
     CHECK(hit.normal == approx(Vector3D(0,1,0)));
@@ -115,7 +115,7 @@ TEST_CASE("[Sphere] First hit (0,-2,0) + (0,1,0) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(1));
     CHECK(hit.position == approx(Point3D(0,-1,0)));
     CHECK(hit.normal == approx(Vector3D(0,-1,0)));
@@ -131,7 +131,7 @@ TEST_CASE("[Sphere] First hit (0,0,0) + (0,1,0) * t", "[Sphere]")
 
     Hit hit;
 
-    REQUIRE(sphere->find_hit(ray, &hit));
+    REQUIRE(sphere->find_first_positive_hit(ray, &hit));
     CHECK(hit.t == Approx(1));
     CHECK(hit.position == approx(Point3D(0,1,0)));
     CHECK(hit.normal == approx(Vector3D(0,-1,0)));

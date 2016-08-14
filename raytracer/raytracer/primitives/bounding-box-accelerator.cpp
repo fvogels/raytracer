@@ -77,15 +77,15 @@ namespace
             // NOP
         }
 
-        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
             if (m_bounding_box.is_hit_positively_by(ray))
             {
-                return m_child->find_hit(ray, hit);
+                return m_child->find_first_positive_hit(ray, hit);
             }
             else
             {
-                assert(!m_child->find_hit(ray, hit));
+                assert(!m_child->find_first_positive_hit(ray, hit));
 
                 return false;
             }

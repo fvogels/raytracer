@@ -14,7 +14,7 @@ namespace
         {
             auto hit = std::make_shared<Hit>();
 
-            if (find_hit(ray, hit.get()))
+            if (find_first_positive_hit(ray, hit.get()))
             {
                 return std::vector<std::shared_ptr<Hit>> { hit };
             }
@@ -28,7 +28,7 @@ namespace
     class PlaneXY : public CoordinatePlane
     {
     public:
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             assert(hit != nullptr);
 
@@ -70,7 +70,7 @@ namespace
     class PlaneXZ : public CoordinatePlane
     {
     public:
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             assert(hit != nullptr);
 
@@ -112,7 +112,7 @@ namespace
     class PlaneYZ : public CoordinatePlane
     {
     public:
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             assert(hit != nullptr);
 

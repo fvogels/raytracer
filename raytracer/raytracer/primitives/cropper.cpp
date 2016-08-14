@@ -25,7 +25,7 @@ namespace
             // NOP
         }
 
-        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
             auto hs = hits(ray);
 

@@ -43,9 +43,9 @@ namespace
         FastMesh(std::unique_ptr<XYZ[]> vertices, std::unique_ptr<TRIANGLE[]> triangles, std::unique_ptr<BOX[]> boxes, unsigned vertex_count, unsigned triangle_count, unsigned box_count)
             : m_vertices(std::move(vertices)), m_triangles(std::move(triangles)), m_boxes(std::move(boxes)), m_vertex_count(vertex_count), m_triangle_count(triangle_count), m_box_count(box_count) { }
 
-        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
-            return find_hit(ray, hit, 0x80000000 | (m_box_count - 1));
+            return find_first_positive_hit(ray, hit, 0x80000000 | (m_box_count - 1));
         }
 
         std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override
@@ -60,7 +60,7 @@ namespace
         }
 
     private:
-        bool find_hit(const Ray& ray, Hit* hit, unsigned index) const
+        bool find_first_positive_hit(const Ray& ray, Hit* hit, unsigned index) const
         {
             if (index & 0x80000000)
             {
@@ -79,8 +79,8 @@ namespace
 
             if (b.is_hit_positively_by(ray))
             {
-                bool b1 = find_hit(ray, hit, box.i);
-                bool b2 = find_hit(ray, hit, box.j);
+                bool b1 = find_first_positive_hit(ray, hit, box.i);
+                bool b2 = find_first_positive_hit(ray, hit, box.j);
 
                 return b1 || b2;
             }

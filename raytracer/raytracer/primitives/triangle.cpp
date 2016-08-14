@@ -19,7 +19,7 @@ namespace
             m_normal = (b - a).cross(c - a).normalized();
         }
 
-        bool find_hit(const math::Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
             Vector3D normal = ray.direction.dot(m_normal) > 0 ? -m_normal : m_normal;
             double denom = m_normal.dot(ray.direction);

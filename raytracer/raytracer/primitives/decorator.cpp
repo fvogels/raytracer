@@ -18,12 +18,12 @@ namespace
             assert(child);
         }
 
-        bool find_hit(const Ray& ray, Hit* hit) const override
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
             Material old_material = hit->material;
             hit->material = Material();
 
-            bool result = child->find_hit(ray, hit);
+            bool result = child->find_first_positive_hit(ray, hit);
 
             if (result)
             {

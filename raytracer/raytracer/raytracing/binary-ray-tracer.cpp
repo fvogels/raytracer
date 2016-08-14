@@ -9,7 +9,7 @@ TraceResult raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene
 {
     Hit hit;
 
-    if (scene.root->find_hit(ray, &hit))
+    if (scene.root->find_first_positive_hit(ray, &hit))
     {
         return TraceResult(colors::white(), hit.group_id, distance(ray.origin, hit.position));
     }
