@@ -22,7 +22,7 @@ Function<bool(const Point2D&)> math::functions::horizontal_lines(double thicknes
     {
         auto y = p.y();
 
-        return fabs(y - round(y)) < thickness / 2;
+        return std::abs(y - round(y)) < thickness / 2;
     };
 
     return from_lambda<bool, const Point2D&>(function);
@@ -34,7 +34,7 @@ Function<bool(const Point2D&)> math::functions::vertical_lines(double thickness)
     {
         auto x = p.x();
 
-        return fabs(x - round(x)) < thickness / 2;
+        return std::abs(x - round(x)) < thickness / 2;
     };
 
     return from_lambda<bool, const Point2D&>(function);
@@ -47,7 +47,7 @@ Function<bool(const Point2D&)> math::functions::grid(double thickness)
         auto x = p.x();
         auto y = p.y();
 
-        return fabs(x - round(x)) < thickness / 2 || fabs(y - round(y)) < thickness / 2;
+        return std::abs(x - round(x)) < thickness / 2 || std::abs(y - round(y)) < thickness / 2;
     };
 
     return from_lambda<bool, const Point2D&>(function);
