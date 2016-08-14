@@ -29,7 +29,7 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        auto anim = animation::circular(Point3D(0, 0, 2), Point3D(0, 0, 0), Vector3D(0, 1, 0), Interval<Angle>(0_degrees, 360_degrees), Duration::from_seconds(2));
+        auto anim = animation::circular(Point3D(0, 0, 2), Point3D(0, 0, 0), Vector3D(0, 1, 0), interval(0_degrees, 360_degrees), Duration::from_seconds(2));
 
         return decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)),
             translate(anim(now) - Point3D(0, 0, 0), sphere()));

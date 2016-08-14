@@ -167,7 +167,7 @@ namespace
 
         Box bounding_box() const override
         {
-            return Box(Interval<double>::infinite(), Interval<double>(-1, 1), Interval<double>(-1, 1));
+            return Box(Interval<double>::infinite(), interval(-1.0, 1.0), interval(-1.0, 1.0));
         }
     };
 
@@ -239,7 +239,7 @@ namespace
 
         Box bounding_box() const override
         {
-            return Box(Interval<double>(-1, 1), Interval<double>::infinite(), Interval<double>(-1, 1));
+            return Box(interval(-1.0, 1.0), Interval<double>::infinite(), interval(-1.0, 1.0));
         }
     };
 
@@ -311,7 +311,7 @@ namespace
 
         Box bounding_box() const override
         {
-            return Box(Interval<double>(-1, 1), Interval<double>(-1, 1), Interval<double>::infinite());
+            return Box(interval(-1.0, 1.0), interval(-1.0, 1.0), Interval<double>::infinite());
         }
     };
 }

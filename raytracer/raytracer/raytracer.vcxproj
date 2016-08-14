@@ -294,6 +294,7 @@
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -316,6 +317,7 @@
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -339,6 +341,7 @@
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -358,6 +361,7 @@
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -425,6 +429,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -457,6 +462,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

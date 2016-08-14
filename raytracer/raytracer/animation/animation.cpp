@@ -7,8 +7,8 @@ using namespace math;
 
 Animation<double> animation::basic(double from, double to, const Duration& duration)
 {
-    Interval<double> position_interval(from, to);
-    Interval<TimeStamp> time_interval(TimeStamp::zero(), TimeStamp::from_epoch(duration));
+    auto position_interval = interval(from, to);
+    auto time_interval = interval(TimeStamp::zero(), TimeStamp::from_epoch(duration));
 
     std::function<double(TimeStamp)> lambda = [position_interval, time_interval](TimeStamp now) -> double {
         double t = time_interval.to_relative(now);

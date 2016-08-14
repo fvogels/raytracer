@@ -59,7 +59,7 @@ namespace
 
         math::Box bounding_box() const override
         {
-            return Box(Interval<double>(-1, 1), Interval<double>(-0.01, 0.01), Interval<double>(-1, 1));
+            return Box(interval(-1.0, 1.0), interval(-0.01, 0.01), interval(-1.0, 1.0));
         }
     };
 }

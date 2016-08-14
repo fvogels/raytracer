@@ -36,9 +36,9 @@ namespace
             double y = ray_direction.dot(m_direction);
             double z = ray_direction.dot(m_up);
 
-            assert(Interval<double>(-1, 1).contains(x));
-            assert(Interval<double>(-1, 1).contains(y));
-            assert(Interval<double>(-1, 1).contains(z));
+            assert(interval(-1.0, 1.0).contains(x));
+            assert(interval(-1.0, 1.0).contains(y));
+            assert(interval(-1.0, 1.0).contains(z));
             assert(x * m_right + y * m_direction + z * m_up == approx(ray_direction));
 
             Cartesian3D cartesian{ x,y,z };

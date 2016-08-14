@@ -12,7 +12,6 @@ namespace math
     {
         T lower, upper;
 
-        // TODO Make private and make use of factory methods
         constexpr Interval(T lower, T upper)
             : lower(lower), upper(upper) { }
 
@@ -93,5 +92,41 @@ namespace math
     std::ostream& operator <<(std::ostream& out, const Interval<T>& interval)
     {
         return out << "[" << interval.lower << ", " << interval.upper << "]";
+    }
+
+    /// <summary>
+    /// Factory function for intervals. Easier to use than the constructor
+    /// as it is not necessary to specify the type T. If <paramref name="lower" /> is greater than
+    /// <paramref name="upper" />, the interval will be considered empty.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// // Creates the object Interval&lt;double&gt;(0, 5)
+    /// auto range = interval(0.0, 5.0);
+    /// </code>
+    /// </example>
+    template<typename T>
+    constexpr Interval<T> interval(const T& lower, const T& upper)
+    {
+        static_assert(!std::is_same<T, int>::value, "fkl");
+
+        return Interval<T>(lower, upper);
+    }    
+
+    /// <summary>
+    /// Factory function for intervals. Easier to use than the constructor
+    /// as it is not necessary to specify the type T. If <paramref name="lower" /> is greater than
+    /// <paramref name="upper" />, the bounds will be switched around so as to make the interval nonempty.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// // Switches bounds resulting in Interval&lt;double&gt;(5, 7)
+    /// auto range = nonempty_interval(7.0, 5.0);
+    /// </code>
+    /// </example>
+    template<typename T>
+    constexpr Interval<T> nonempty_interval(const T& lower, const T& upper)
+    {
+        return lower <= upper ? interval(lower, upper) : interval(upper, lower);
     }
 }

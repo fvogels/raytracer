@@ -9,7 +9,7 @@ namespace
 {
     Animation<double> create_from_parameters(const LissajousParameters& parameters, Duration duration)
     {
-        auto angle_animation = animation::interval<Angle>(Interval<Angle>(0_degrees, 360_degrees), duration);
+        auto angle_animation = animation::interval<Angle>(math::interval(0_degrees, 360_degrees), duration);
 
         std::function<double(TimeStamp)> lambda = [=](TimeStamp now) -> double
         {

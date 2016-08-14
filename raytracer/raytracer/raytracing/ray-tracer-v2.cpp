@@ -76,7 +76,7 @@ Color raytracer::raytracers::_private_::RayTracerV2::compute_diffuse(const Mater
 
     assert(hit.normal.is_unit());
     double cos = -hit.normal.dot(incoming);
-    assert(Interval<double>(-1, 1).contains(cos));
+    assert(interval(-1.0, 1.0).contains(cos));
 
     if (cos > 0)
     {

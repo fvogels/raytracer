@@ -26,7 +26,8 @@ Color raytracer::raytracers::_private_::RayTracerV3::compute_specular(const Mate
         assert(hit.normal.is_unit());
         Vector3D reflected = eye_ray.direction.reflect_by(hit.normal).normalized();
         double cos = -reflected.dot(light_ray.ray.direction.normalized());
-        assert(Interval<double>(-1, 1).contains(cos));
+
+        assert(interval(-1.0, 1.0).contains(cos));
 
         if (cos > 0)
         {

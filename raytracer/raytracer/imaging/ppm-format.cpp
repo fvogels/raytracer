@@ -24,9 +24,9 @@ void imaging::write_text_ppm(const Bitmap& bitmap, std::ostream& out)
         {
             Color c = bitmap[Position(x, y)].clamped();
 
-            assert(Interval<double>(0, 1).contains(c.r));
-            assert(Interval<double>(0, 1).contains(c.g));
-            assert(Interval<double>(0, 1).contains(c.b));
+            assert(interval(0.0, 1.0).contains(c.r));
+            assert(interval(0.0, 1.0).contains(c.g));
+            assert(interval(0.0, 1.0).contains(c.b));
 
             unsigned r = unsigned(c.r * MAX_LEVEL);
             unsigned g = unsigned(c.g * MAX_LEVEL);
@@ -54,9 +54,9 @@ void imaging::write_binary_ppm(const Bitmap& bitmap, std::ostream& out)
         {
             Color c = bitmap[Position(x, y)].clamped();
 
-            assert(Interval<double>(0, 1).contains(c.r));
-            assert(Interval<double>(0, 1).contains(c.g));
-            assert(Interval<double>(0, 1).contains(c.b));
+            assert(interval(0.0, 1.0).contains(c.r));
+            assert(interval(0.0, 1.0).contains(c.g));
+            assert(interval(0.0, 1.0).contains(c.b));
 
             uint8_t r = (uint8_t)(c.r * MAX_LEVEL);
             uint8_t g = (uint8_t)(c.g * MAX_LEVEL);

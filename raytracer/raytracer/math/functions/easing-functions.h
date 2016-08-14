@@ -174,7 +174,7 @@ namespace math
 
             constexpr _private_::XInterval x_range(double from, double to)
             {
-                return _private_::XInterval{ Interval<double>(from, to) };
+                return _private_::XInterval{ interval(from, to) };
             }
 
             constexpr _private_::DeltaY dy(double y)
@@ -184,7 +184,7 @@ namespace math
 
             constexpr _private_::YInterval y_range(double from, double to)
             {
-                return _private_::YInterval{ Interval<double>(from, to) };
+                return _private_::YInterval{ interval(from, to) };
             }
 
             template<typename SHAPE, typename SIDES = void>

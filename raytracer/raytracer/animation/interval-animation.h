@@ -5,25 +5,27 @@
 
 namespace animation
 {
+    // TODO Rename
     template<typename T>
-    Animation<T> interval(const math::Interval<T> interval, animation::Duration duration)
+    Animation<T> interval(const math::Interval<T> animation_interval, animation::Duration duration)
     {
         auto double_animation = basic(0, 1, duration);
 
-        std::function<T(TimeStamp)> lambda = [double_animation, interval](TimeStamp now) {
+        std::function<T(TimeStamp)> lambda = [double_animation, animation_interval](TimeStamp now) {
             double t = double_animation(now);
 
-            assert(Interval<double>(0, 1).contains(t));
+            assert(math::interval(0.0, 1.0).contains(t));
 
-            return interval.from_relative(double_animation(now));
+            return animation_interval.from_relative(double_animation(now));
         };
 
         return make_animation(math::from_lambda(lambda), duration);
     }
 
+    // TODO Rename
     template<typename T>
     Animation<T> interval(T from, T to, animation::Duration duration)
     {
-        return interval(math::Interval<T>(from, to), duration);
+        return interval(math::interval(from, to), duration);
     }
 }

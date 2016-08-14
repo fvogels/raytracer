@@ -100,9 +100,9 @@ namespace
 
         math::Box bounding_box() const override
         {
-            Interval<double> x_interval(minimum(m_a.x(), m_b.x(), m_c.x()), maximum(m_a.x(), m_b.x(), m_c.x()));
-            Interval<double> y_interval(minimum(m_a.y(), m_b.y(), m_c.y()), maximum(m_a.y(), m_b.y(), m_c.y()));
-            Interval<double> z_interval(minimum(m_a.z(), m_b.z(), m_c.z()), maximum(m_a.z(), m_b.z(), m_c.z()));
+            auto x_interval = interval(minimum(m_a.x(), m_b.x(), m_c.x()), maximum(m_a.x(), m_b.x(), m_c.x()));
+            auto y_interval = interval(minimum(m_a.y(), m_b.y(), m_c.y()), maximum(m_a.y(), m_b.y(), m_c.y()));
+            auto z_interval = interval(minimum(m_a.z(), m_b.z(), m_c.z()), maximum(m_a.z(), m_b.z(), m_c.z()));
 
             return Box(x_interval, y_interval, z_interval);
         }

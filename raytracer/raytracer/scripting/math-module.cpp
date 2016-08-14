@@ -33,12 +33,12 @@ namespace
 
     Interval<double> scalar_interval(double lower, double upper)
     {
-        return Interval<double>(lower, upper);
+        return interval(lower, upper);
     }
 
     Interval<Angle> angle_interval(Angle lower, Angle upper)
     {
-        return Interval<Angle>(lower, upper);
+        return interval(lower, upper);
     }
 
     struct Perlin1DLibrary

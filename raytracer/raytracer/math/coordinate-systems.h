@@ -110,8 +110,8 @@ namespace math
                 Angle elevation = radius > 0 ? 90_degrees - Angle::radians(acos(cartesian.y / radius)) : 0_degrees;
 
                 assert(radius >= 0);
-                assert(Interval<Angle>(-180_degrees, 180_degrees).contains(azimuth));
-                assert(Interval<Angle>(-90_degrees, 90_degrees).contains(elevation));
+                assert(interval(-180_degrees, 180_degrees).contains(azimuth));
+                assert(interval(-90_degrees, 90_degrees).contains(elevation));
 
                 return Spherical{ radius, azimuth, elevation };
             }

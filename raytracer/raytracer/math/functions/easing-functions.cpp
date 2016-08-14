@@ -11,7 +11,7 @@ using namespace math::functions;
 EasingFunction math::functions::easing::_private_::linear()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return t;
     };
@@ -22,7 +22,7 @@ EasingFunction math::functions::easing::_private_::linear()
 EasingFunction math::functions::easing::_private_::quadratic_in()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return t * t;
     };
@@ -33,7 +33,7 @@ EasingFunction math::functions::easing::_private_::quadratic_in()
 EasingFunction math::functions::easing::_private_::quadratic_out()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return 2 * t - t * t;
     };
@@ -44,7 +44,7 @@ EasingFunction math::functions::easing::_private_::quadratic_out()
 EasingFunction math::functions::easing::_private_::quadratic_inout()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         if (t < 0.5)
         {
@@ -62,7 +62,7 @@ EasingFunction math::functions::easing::_private_::quadratic_inout()
 EasingFunction math::functions::easing::_private_::cubic_in()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return pow(t, 3);
     };
@@ -73,7 +73,7 @@ EasingFunction math::functions::easing::_private_::cubic_in()
 EasingFunction math::functions::easing::_private_::cubic_out()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return pow(t, 3) - 3 * pow(t, 2) + 3 * t;
     };
@@ -84,7 +84,7 @@ EasingFunction math::functions::easing::_private_::cubic_out()
 EasingFunction math::functions::easing::_private_::cubic_inout()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         if (t <= 0.5)
         {
@@ -102,7 +102,7 @@ EasingFunction math::functions::easing::_private_::cubic_inout()
 EasingFunction math::functions::easing::_private_::quintic_in()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return pow(t, 5);
     };
@@ -113,7 +113,7 @@ EasingFunction math::functions::easing::_private_::quintic_in()
 EasingFunction math::functions::easing::_private_::quintic_out()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return t * (pow(t, 4) - 5 * pow(t, 3) + 10 * pow(t, 2) - 10 * t + 5);
     };
@@ -124,7 +124,7 @@ EasingFunction math::functions::easing::_private_::quintic_out()
 EasingFunction math::functions::easing::_private_::quintic_inout()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         if (t <= 0.5)
         {
@@ -142,7 +142,7 @@ EasingFunction math::functions::easing::_private_::quintic_inout()
 EasingFunction math::functions::easing::_private_::bounce()
 {
     std::function<double(double)> lambda = [](double t) {
-        assert(Interval<double>(0, 1).contains(t));
+        assert(interval(0.0, 1.0).contains(t));
 
         return 1 - std::abs(cos(5.5 * 180_degrees * t)) * exp(-3 * t);
     };

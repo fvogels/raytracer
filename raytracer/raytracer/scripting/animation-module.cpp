@@ -37,7 +37,7 @@ namespace
             ARGUMENT(Point3D, position);
             ARGUMENT(Point3D, around);
             OPTIONAL_ARGUMENT(Vector3D, axis, Vector3D(0, 1, 0));
-            OPTIONAL_ARGUMENT(math::Interval<math::Angle>, angle_interval, math::Interval<math::Angle>(0_degrees, 360_degrees));
+            OPTIONAL_ARGUMENT(math::Interval<math::Angle>, angle_interval, math::interval(0_degrees, 360_degrees));
             BIND_ARGUMENT(duration);
             END_ARGUMENTS();
 
@@ -67,7 +67,7 @@ namespace
 
                 for (size_t i = 0; i < checkpoints.size() - 1; ++i)
                 {
-                    auto anim = animation::interval(Interval<Point3D>(checkpoints[i], checkpoints[i + 1]), duration / double(checkpoints.size() - 1));
+                    auto anim = animation::interval(math::interval(checkpoints[i], checkpoints[i + 1]), duration / double(checkpoints.size() - 1));
 
                     animation = sequence(animation, ease(anim, math::functions::easing::easing_function<math::functions::easing::quadratic, math::functions::easing::inout>()));
                 }

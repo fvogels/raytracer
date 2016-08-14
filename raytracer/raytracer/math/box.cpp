@@ -80,23 +80,23 @@ bool math::Box::hits_yz_face(const Ray& ray, double x, bool only_positive) const
 
 Box math::Box::empty()
 {
-    Interval<double> interval = Interval<double>::empty();
+    auto interval = Interval<double>::empty();
 
     return Box(interval, interval, interval);
 }
 
 Box math::Box::infinite()
 {
-    Interval<double> interval = Interval<double>::infinite();
+    auto interval = Interval<double>::infinite();
 
     return Box(interval, interval, interval);
 }
 
 Box math::Box::from_raw_corners(const Point3D& lower_corner, const Point3D& upper_corner)
 {
-    Interval<double> x(lower_corner.x(), upper_corner.x());
-    Interval<double> y(lower_corner.y(), upper_corner.y());
-    Interval<double> z(lower_corner.z(), upper_corner.z());
+    auto x = interval(lower_corner.x(), upper_corner.x());
+    auto y = interval(lower_corner.y(), upper_corner.y());
+    auto z = interval(lower_corner.z(), upper_corner.z());
 
     return Box(x, y, z);
 }
@@ -104,9 +104,9 @@ Box math::Box::from_raw_corners(const Point3D& lower_corner, const Point3D& uppe
 Box math::Box::from_corners(const Point3D& p, const Point3D& q)
 {
     // Sort coordinates so that box is nonempty
-    auto x = Interval<double>::from_bounds(p.x(), q.x());
-    auto y = Interval<double>::from_bounds(p.y(), q.y());
-    auto z = Interval<double>::from_bounds(p.z(), q.z());
+    auto x = nonempty_interval(p.x(), q.x());
+    auto y = nonempty_interval(p.y(), q.y());
+    auto z = nonempty_interval(p.z(), q.z());
 
     return Box(x, y, z);
 }

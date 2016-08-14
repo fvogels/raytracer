@@ -186,9 +186,9 @@ namespace
         Box box(unsigned index) const
         {
             const BOX& box = m_boxes[index];
-            Interval<double> x_interval(box.min_x, box.max_x);
-            Interval<double> y_interval(box.min_y, box.max_y);
-            Interval<double> z_interval(box.min_z, box.max_z);
+            auto x_interval = interval(box.min_x, box.max_x);
+            auto y_interval = interval(box.min_y, box.max_y);
+            auto z_interval = interval(box.min_z, box.max_z);
 
             return Box(x_interval, y_interval, z_interval);
         }
@@ -218,9 +218,9 @@ namespace
 
     Box construct_bounding_box(const BOX& box)
     {
-        auto x = Interval<double>::from_raw_bounds(box.min_x, box.max_x);
-        auto y = Interval<double>::from_raw_bounds(box.min_y, box.max_y);
-        auto z = Interval<double>::from_raw_bounds(box.min_z, box.max_z);
+        auto x = interval(box.min_x, box.max_x);
+        auto y = interval(box.min_y, box.max_y);
+        auto z = interval(box.min_z, box.max_z);
 
         return Box(x, y, z);
     }

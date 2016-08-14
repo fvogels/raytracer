@@ -134,9 +134,9 @@ namespace
 
         math::Box bounding_box() const override
         {
-            Interval<double> interval(-1, 1);
+            auto range = interval(-1.0, 1.0);
 
-            return Box(interval, interval, interval);
+            return Box(range, range, range);
         }
     };
 }
