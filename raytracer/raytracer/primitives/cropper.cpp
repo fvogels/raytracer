@@ -33,7 +33,7 @@ namespace
             {
                 assert(h);
 
-                if (h->t > 0)
+                if (Interval<double>(0, hit->t).contains(h->t))
                 {
                     *hit = *h;
 
@@ -103,7 +103,7 @@ Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<
     Box original_box = cropped->bounding_box();
     Box box(original_box.x(), y_interval, original_box.z());
 
-    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate), box);
 }
 
 Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<double>& z_interval)
@@ -116,7 +116,7 @@ Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<
     Box original_box = cropped->bounding_box();
     Box box(original_box.x(), original_box.y(), z_interval);
 
-    return crop(cropped, from_lambda<bool, const Point3D&>(predicate));
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate), box);
 }
 
 Primitive raytracer::primitives::crop_spherical(Primitive cropped, double radius)
