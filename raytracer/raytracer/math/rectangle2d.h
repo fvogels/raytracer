@@ -6,7 +6,7 @@
 namespace math
 {
     /// <summary>
-    /// Represents a rectangle (actually a parallelogram) in 2D space. 
+    /// Represents a rectangle (actually a parallelogram if x_axis and y_axis are not perpendicular) in 2D space. 
     /// </summary>
     struct Rectangle2D
     {
