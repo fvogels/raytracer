@@ -82,6 +82,11 @@ namespace math
         {
             return lower + size() / 2;
         }
+
+        bool is_infinite() const noexcept
+        {
+            return lower == -std::numeric_limits<T>::infinity() || upper == std::numeric_limits<T>::infinity();
+        }
     };
 
     template<typename T>
