@@ -7,22 +7,36 @@
 
 namespace math
 {
+    /// <summary>
+    /// A ray is a 3D geometric entity. It has a starting point (origin) and a direction.
+    /// </summary>
     struct Ray final
     {
         Point3D origin;
         Vector3D direction;
 
-        Ray(const Point3D& origin, const Vector3D& direction)
-            : origin(origin), direction(direction) { }
+        /// <summary>
+        /// Creates a ray from an origin and a direction.
+        /// </summary>
+        Ray(const Point3D& origin, const Vector3D& direction);
 
-        Ray(const Point3D& origin, const Point3D& through)
-            : Ray(origin, through - origin) { }
+        /// <summary>
+        /// Creates a ray from two points, so that the first point <paramref name="origin" /> acts as the origin of the ray
+        /// and the ray passes through the second point <paramref name="through" /> at t = 1.
+        /// </summary>
+        Ray(const Point3D& origin, const Point3D& through);
 
-        Ray(const Ray&) = default;
+        /// <summary>
+        /// Returns the point on the ray at the location specified by <paramref name="t">.
+        /// <code>ray.at(0)</code> returns the origin, <code>ray.at(1)</code>
+        /// returns one step away from the origin in the ray's direction.
+        /// </summary>
+        Point3D at(double t) const;
 
-        Point3D at(double t) const { return origin + direction * t; }
-
-        Ray transform(const Matrix4D&) const;
+        /// <summary>
+        /// Returns a new ray equal to the transformation matrix <paramref name="m"> applied to this ray.
+        /// </summary>
+        Ray transform(const Matrix4D& m) const;
     };
 
     std::ostream& operator <<(std::ostream& out, const Ray&);
