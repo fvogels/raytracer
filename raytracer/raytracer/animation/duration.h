@@ -23,22 +23,22 @@ namespace animation
         double m_milliseconds;
     };
 
-    inline Duration operator""_ms(long long unsigned x) noexcept
+    inline Duration operator""_ms(long long unsigned x)
     {
         return Duration::from_milliseconds(double(x));
     }
 
-    inline Duration operator""_ms(long double x) noexcept
+    inline Duration operator""_ms(long double x)
     {
         return Duration::from_milliseconds(double(x));
     }
 
-    inline Duration operator""_s(long long unsigned x) noexcept
+    inline Duration operator""_s(long long unsigned x)
     {
         return Duration::from_seconds(double(x));
     }
 
-    inline Duration operator""_s(long double x) noexcept
+    inline Duration operator""_s(long double x)
     {
         return Duration::from_seconds(double(x));
     }

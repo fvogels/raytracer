@@ -52,7 +52,7 @@ namespace math
             return Interval(std::min(lower, other.lower), std::max(upper, other.upper));
         }
 
-        Interval<T> intersect(const Interval& other) const noexcept
+        Interval<T> intersect(const Interval& other) const
         {
             return Interval(std::max(lower, other.lower), std::min(upper, other.upper));
         }
@@ -65,12 +65,12 @@ namespace math
             return I == 0 ? this->lower : this->upper;
         }
 
-        T center() const noexcept
+        T center() const
         {
             return lower + size() / 2;
         }
 
-        bool is_infinite() const noexcept
+        bool is_infinite() const
         {
             return lower == -std::numeric_limits<T>::infinity() || upper == std::numeric_limits<T>::infinity();
         }

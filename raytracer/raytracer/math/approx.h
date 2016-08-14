@@ -14,7 +14,7 @@ namespace math
         double value;
         double delta;
 
-        explicit approximately(double value, double delta = 0.00001) noexcept
+        explicit approximately(double value, double delta = 0.00001)
             : value(value), delta(delta) { }
 
         bool close_enough(double other) const
@@ -30,25 +30,25 @@ namespace math
     }
 
     template<typename T>
-    bool operator ==(const approximately<T>& x, T y) noexcept
+    bool operator ==(const approximately<T>& x, T y)
     {
         return x.close_enough(y);
     }
 
     template<typename T>
-    bool operator ==(T x, const approximately<T>& y) noexcept
+    bool operator ==(T x, const approximately<T>& y)
     {
         return y == x;
     }
 
     template<typename T>
-    bool operator !=(const approximately<T>& x, T y) noexcept
+    bool operator !=(const approximately<T>& x, T y)
     {
         return !(x == y);
     }
 
     template<typename T>
-    bool operator !=(double x, const approximately<T>& y) noexcept
+    bool operator !=(double x, const approximately<T>& y)
     {
         return !(x == y);
     }

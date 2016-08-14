@@ -64,27 +64,27 @@ Color& imaging::operator +=(Color& c1, const Color& c2)
     return c1 = c1 + c2;
 }
 
-Color& imaging::operator -=(Color& c1, const Color& c2) noexcept
+Color& imaging::operator -=(Color& c1, const Color& c2)
 {
     return c1 = c1 - c2;
 }
 
-Color& imaging::operator *=(Color& c, double f) noexcept
+Color& imaging::operator *=(Color& c, double f)
 {
     return c = c * f;
 }
 
-Color& imaging::operator /=(Color& c, double f) noexcept
+Color& imaging::operator /=(Color& c, double f)
 {
     return c = c / f;
 }
 
-bool imaging::operator ==(const Color& c1, const Color& c2) noexcept
+bool imaging::operator ==(const Color& c1, const Color& c2)
 {
     return c1.r == c2.r && c1.g == c2.g && c1.b == c2.b;
 }
 
-bool imaging::operator !=(const Color& c1, const Color& c2) noexcept
+bool imaging::operator !=(const Color& c1, const Color& c2)
 {
     return !(c1 == c2);
 }
@@ -94,14 +94,14 @@ std::ostream& imaging::operator <<(std::ostream& out, const Color& c)
     return out << "RGB[" << c.r << "," << c.g << "," << c.b << "]";
 }
 
-void imaging::Color::quantize(unsigned levels) noexcept
+void imaging::Color::quantize(unsigned levels)
 {
     r = math::quantize(r, levels);
     g = math::quantize(g, levels);
     b = math::quantize(b, levels);
 }
 
-Color imaging::Color::quantized(unsigned levels) const noexcept
+Color imaging::Color::quantized(unsigned levels) const
 {
     Color copy = *this;
 
@@ -110,14 +110,14 @@ Color imaging::Color::quantized(unsigned levels) const noexcept
     return copy;
 }
 
-void imaging::Color::invert() noexcept
+void imaging::Color::invert()
 {
     r = 1 - r;
     g = 1 - g;
     b = 1 - b;
 }
 
-Color imaging::Color::inverted() const noexcept
+Color imaging::Color::inverted() const
 {
     Color copy = *this;
     copy.invert();
