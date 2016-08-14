@@ -480,6 +480,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="angle.cpp" />
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\circular-animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />

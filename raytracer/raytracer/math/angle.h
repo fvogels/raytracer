@@ -1,129 +1,54 @@
 #pragma once
-#define _USE_MATH_DEFINES
 #include "math/approx.h"
-#include <math.h>
 #include <iostream>
 
 
 namespace math
 {
+    /// <summary>
+    /// Represents an angle. Used to be able to distinguish angles from other double values.
+    /// Also ensures that no mistakes are made w.r.t. degrees vs radians.
+    /// </summary>
     class Angle final
     {
     public:
-        Angle() : Angle(0) { }
+        Angle();
 
-        double radians() const { return m_radians; }
-        double degrees() const { return m_radians * 180 / M_PI; }
+        double radians() const;
+        double degrees() const;
 
-        static Angle degrees(long double x) { return Angle(double(x) / 180 * M_PI); }
-        static Angle radians(long double x) { return Angle(double(x)); }
+        static Angle degrees(long double);
+        static Angle radians(long double);
 
     private:
-        explicit Angle(double x)
-            : m_radians(x) { }
+        explicit Angle(double);
         
         double m_radians;
     };
 
-    inline Angle operator+(const Angle& x, const Angle& y)
-    {
-      return Angle::radians(x.radians() + y.radians()); 
-    }
+    Angle operator+(const Angle& x, const Angle& y);
+    Angle operator-(const Angle& x);
+    Angle operator-(const Angle& x, const Angle& y);
+    Angle operator *(const Angle& angle, double factor);
+    Angle operator *(double factor, const Angle& angle);
+    Angle operator /(const Angle& angle, double factor);
 
-    inline Angle operator-(const Angle& x)
-    {
-      return Angle::radians(-x.radians()); 
-    }
+    Angle& operator +=(Angle& x, const Angle& y);
+    Angle& operator -=(Angle& x, const Angle& y);
+    Angle& operator *=(Angle& x, double f);
+    Angle& operator /=(Angle& x, double f);
 
-    inline Angle operator-(const Angle& x, const Angle& y)
-    {
-      return Angle::radians(x.radians() - y.radians()); 
-    }
+    Angle operator""_rad(long double x);
+    Angle operator""_degrees(long double x);
+    Angle operator""_rad(long long unsigned x);
+    Angle operator""_degrees(long long unsigned x);
 
-    inline Angle operator *(const Angle& angle, double factor)
-    {
-        return Angle::radians(angle.radians() * factor);
-    }
-
-    inline Angle operator *(double factor, const Angle& angle)
-    {
-        return angle * factor;
-    }
-
-    inline Angle operator /(const Angle& angle, double factor)
-    {
-        return Angle::radians(angle.radians() / factor);
-    }
-
-    inline Angle& operator +=(Angle& x, const Angle& y)
-    {
-        return (x = x + y);
-    }
-
-    inline Angle& operator -=(Angle& x, const Angle& y)
-    {
-        return (x = x - y);
-    }
-
-    inline Angle& operator *=(Angle& x, double f)
-    {
-        return (x = x * f);
-    }
-
-    inline Angle& operator /=(Angle& x, double f)
-    {
-        return (x = x / f);
-    }
-
-    inline Angle operator""_rad(long double x)
-    {
-        return Angle::radians(x);
-    }
-
-    inline Angle operator""_degrees(long double x)
-    {
-        return Angle::degrees(x);
-    }
-
-    inline Angle operator""_rad(long long unsigned x)
-    {
-        return Angle::radians((long double) x);
-    }
-
-    inline Angle operator""_degrees(long long unsigned x)
-    {
-        return Angle::degrees((long double) x);
-    }
-
-    inline bool operator <(const Angle& a, const Angle& b)
-    {
-        return a.radians() < b.radians();
-    }
-
-    inline bool operator >(const Angle& a, const Angle& b)
-    {
-        return a.radians() > b.radians();
-    }
-
-    inline bool operator <=(const Angle& a, const Angle& b)
-    {
-        return a.radians() <= b.radians();
-    }
-
-    inline bool operator >=(const Angle& a, const Angle& b)
-    {
-        return a.radians() >= b.radians();
-    }
-
-    inline bool operator ==(const Angle& a, const Angle& b)
-    {
-        return a.radians() == b.radians();
-    }
-
-    inline bool operator !=(const Angle& a, const Angle& b)
-    {
-        return a.radians() != b.radians();
-    }
+    bool operator <(const Angle& a, const Angle& b);
+    bool operator >(const Angle& a, const Angle& b);
+    bool operator <=(const Angle& a, const Angle& b);
+    bool operator >=(const Angle& a, const Angle& b);
+    bool operator ==(const Angle& a, const Angle& b);
+    bool operator !=(const Angle& a, const Angle& b);
 
     inline double sin(Angle a) { return ::sin(a.radians()); }
     inline double cos(Angle a) { return ::cos(a.radians()); }
