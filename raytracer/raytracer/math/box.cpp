@@ -140,3 +140,8 @@ Point3D math::Box::center() const
 {
     return Point3D(m_x_interval.center(), m_y_interval.center(), m_z_interval.center());
 }
+
+bool math::Box::is_infinite() const
+{
+    return m_x_interval.is_infinite() || m_y_interval.is_infinite() || m_z_interval.is_infinite();
+}

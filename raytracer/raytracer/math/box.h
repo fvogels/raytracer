@@ -20,6 +20,8 @@ namespace math
         Interval<double> y() const;
         Interval<double> z() const;
 
+        bool is_infinite() const;
+
         bool is_hit_positively_by(const math::Ray&) const;
         bool is_hit_by(const math::Ray&) const;
 
