@@ -12,13 +12,40 @@ namespace math
     class Angle final
     {
     public:
+        /// <summary>
+        /// Default constructor. Creates zero angle.
+        /// </summary>
         Angle();
 
+        /// <summary>
+        /// Returns the angle in radians.
+        /// </summary>
         double radians() const;
+
+        /// <summary>
+        /// Returns the angle in degrees.
+        /// </summary>
         double degrees() const;
 
-        static Angle degrees(long double);
-        static Angle radians(long double);
+        /// <summary>
+        /// Creates a new angle from a value expressed in degrees.
+        /// If the size is known at compile time, you can also use the more readable user-defined literal (e.g. 90_degrees)
+        /// </summary>
+        /// <param name="size_in_degrees">Size of angle expressed in degrees.</param>
+        /// <example>
+        /// <code>
+        /// auto angle = Angle::degrees(5);
+        /// auto same_angle = 5_degrees;
+        /// </code>
+        /// </example>
+        static Angle degrees(long double size_in_degrees);
+
+        /// <summary>
+        /// Creates a new angle from a value expressed in radians.
+        /// If the size is known at compile time, you can also use the more readable user-defined literal (e.g. 0_rad)
+        /// </summary>
+        /// <param name="size_in_radians">Size of angle expressed in degrees.</param>
+        static Angle radians(long double size_in_radians);
 
     private:
         explicit Angle(double);
@@ -50,9 +77,10 @@ namespace math
     bool operator ==(const Angle& a, const Angle& b);
     bool operator !=(const Angle& a, const Angle& b);
 
-    inline double sin(Angle a) { return ::sin(a.radians()); }
-    inline double cos(Angle a) { return ::cos(a.radians()); }
-
+    double sin(Angle);
+    double cos(Angle);
+    
+    // Allows to compare angles, e.g. to check whether an angle x is close to 10 degrees, use x == approx(10_degrees)
     template<>
     struct approximately<Angle>
     {
@@ -71,8 +99,5 @@ namespace math
         }
     };
 
-    inline std::ostream& operator <<(std::ostream& out, Angle angle)
-    {
-        return out << angle.degrees() << "deg";
-    }
+    std::ostream& operator <<(std::ostream&, Angle);
 }

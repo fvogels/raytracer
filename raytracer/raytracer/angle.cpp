@@ -134,3 +134,18 @@ bool math::operator !=(const Angle& a, const Angle& b)
 {
     return a.radians() != b.radians();
 }
+
+double math::sin(Angle a)
+{
+    return ::sin(a.radians()); 
+}
+
+double math::cos(Angle a)
+{
+    return ::cos(a.radians()); 
+}
+
+std::ostream& math::operator <<(std::ostream& out, Angle angle)
+{
+    return out << angle.degrees() << "deg";
+}

@@ -216,6 +216,8 @@ int main(int argc, char** argv)
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 
+    auto x = 150_degrees;
+    Angle::degrees()
 }
 
 #endif
