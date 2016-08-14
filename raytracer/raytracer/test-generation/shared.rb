@@ -64,6 +64,7 @@ end
 class TestFileContext
   def template
     @template = yield.unindent
+    @tests = []
   end
   
   def test_suite(&block)
@@ -71,16 +72,25 @@ class TestFileContext
     context.instance_eval(&block)
     tests = context.tests
 
-    @template.gsub(%r{<<<TESTS>>>}, tests.join("\n\n"))
+    @tests += tests
   end
+
+  def generate_source
+    @template.gsub(%r{<<<TESTS>>>}, @tests.join("\n\n"))
+  end
+
+  attr_reader :tests
 end
 
 
 def test_file(filename, &block)
   context = TestFileContext.new
-  source = context.instance_eval(&block)
+  context.instance_eval(&block)
+  path = "../tests/#{filename}.cpp"
 
-  File.open("../tests/#{filename}.cpp", 'w') do |out|
-    out.puts source
+  puts "Writing #{path}"
+  
+  File.open(path, 'w') do |out|
+    out.puts( context.generate_source )
   end
 end
