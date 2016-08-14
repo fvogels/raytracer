@@ -5,9 +5,8 @@
 
 namespace animation
 {
-    // TODO Rename
     template<typename T>
-    Animation<T> interval(const math::Interval<T> animation_interval, animation::Duration duration)
+    Animation<T> animate(const math::Interval<T> animation_interval, animation::Duration duration)
     {
         auto double_animation = basic(0, 1, duration);
 
@@ -22,10 +21,9 @@ namespace animation
         return make_animation(math::from_lambda(lambda), duration);
     }
 
-    // TODO Rename
     template<typename T>
-    Animation<T> interval(T from, T to, animation::Duration duration)
+    Animation<T> animate(T from, T to, animation::Duration duration)
     {
-        return interval(math::interval(from, to), duration);
+        return animate(math::interval(from, to), duration);
     }
 }

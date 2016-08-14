@@ -46,7 +46,7 @@ namespace
 
         Animation<Point3D> point_animation(const Point3D& from, const Point3D& to, Duration duration) const
         {
-            return animation::interval(from, to, duration);
+            return animation::animate(from, to, duration);
         }
 
         Animation<Point3D> point_animation_seq(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration) const
@@ -67,7 +67,7 @@ namespace
 
                 for (size_t i = 0; i < checkpoints.size() - 1; ++i)
                 {
-                    auto anim = animation::interval(math::interval(checkpoints[i], checkpoints[i + 1]), duration / double(checkpoints.size() - 1));
+                    auto anim = animation::animate(checkpoints[i], checkpoints[i + 1], duration / double(checkpoints.size() - 1));
 
                     animation = sequence(animation, ease(anim, math::functions::easing::easing_function<math::functions::easing::quadratic, math::functions::easing::inout>()));
                 }
@@ -78,12 +78,12 @@ namespace
 
         Animation<double> double_animation(double from, double to, Duration duration) const
         {
-            return animation::interval(from, to, duration);
+            return animation::animate(from, to, duration);
         }
 
         Animation<Angle> angle_animation(Angle from, Angle to, Duration duration) const
         {
-            return animation::interval(from, to, duration);
+            return animation::animate(from, to, duration);
         }
 
         Animation<Point3D> lissajous_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
