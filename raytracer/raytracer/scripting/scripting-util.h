@@ -94,7 +94,8 @@ namespace raytracer
                     }
                     else
                     {
-                        throw std::runtime_error("Parameter assigned value twice");
+                        LOG(ERROR) << "Parameter assigned value twice";
+                        abort();
                     }
                 }
                 
@@ -135,11 +136,7 @@ namespace raytracer
                     if (parser_it == m_parsers.end())
                     {
                         LOG(ERROR) << "Invalid tag " << tag;
-
-                        std::ostringstream ss;
-                        ss << "Invalid tag " << tag;
-
-                        throw std::runtime_error(ss.str());
+                        abort();
                     }
                     else
                     {
@@ -163,11 +160,7 @@ namespace raytracer
                     if (!parser->found && !parser->optional)
                     {
                         LOG(ERROR) << "Missing nonoptional parameter " << tag;
-
-                        std::ostringstream ss;
-                        ss << "Missing nonoptional parameter " << tag;
-
-                        throw std::runtime_error(ss.str());
+                        abort();
                     }
                 }
 

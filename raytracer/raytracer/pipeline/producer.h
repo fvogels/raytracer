@@ -2,6 +2,7 @@
 
 #include "pipeline/pipeline.h"
 #include "pipeline/consumer.h"
+#include "easylogging++.h"
 #include <memory>
 #include <stdexcept>
 
@@ -44,7 +45,8 @@ namespace raytracer
                 }
                 else
                 {
-                    throw std::runtime_error("Missing receiver");
+                    LOG(ERROR) << "Missing receiver";
+                    abort();
                 }
             }
 

@@ -44,7 +44,8 @@ namespace
 
         void link_to(Wrapper*) override
         {
-            throw std::runtime_error("Nonproducers are only allowed at the end of the pipeline");
+            LOG(ERROR) << "Nonproducers are only allowed at the end of the pipeline";
+            abort();
         }
 
         void consume(Boxed_Value boxed) override
@@ -69,7 +70,8 @@ namespace
 
             if (producer == nullptr || consumer == nullptr)
             {
-                throw std::runtime_error("Producer/consumer error");
+                LOG(ERROR) << "Pipeline should only contain producers and consumers";
+                abort();
             }
             else
             {
@@ -79,7 +81,8 @@ namespace
 
         void consume(Boxed_Value boxed) override
         {
-            throw std::runtime_error("Pipeline cannot start with nonconsumer");
+            LOG(ERROR) << "Pipeline cannot start with nonconsumer";
+            abort();
         }
     };
 
@@ -96,7 +99,8 @@ namespace
 
             if (producer == nullptr || consumer == nullptr)
             {
-                throw std::runtime_error("Producer/consumer error");
+                LOG(ERROR) << "Pipeline should only contain producers and consumers";
+                abort();
             }
             else
             {
@@ -176,7 +180,8 @@ namespace
     {
         if (pipeline_segments.size() == 0)
         {
-            throw std::runtime_error("Pipeline requires at least one segment");
+            LOG(ERROR) << "Pipeline requires at least one segment";
+            abort();
         }
         else
         {

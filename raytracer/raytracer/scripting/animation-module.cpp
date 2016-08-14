@@ -53,7 +53,8 @@ namespace
         {
             if (boxed_checkpoints.size() < 2)
             {
-                throw std::runtime_error("At least 2 checkpoints needed");
+                LOG(ERROR) << "At least 2 checkpoints needed";
+                abort();
             }
             else
             {
