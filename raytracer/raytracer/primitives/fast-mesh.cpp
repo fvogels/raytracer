@@ -50,7 +50,7 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const override
         {
-            std::cerr << "Not supported (yet)" << std::endl;
+            LOG(ERROR) << "Not supported (yet)" << std::endl;
             abort();
         }
 
@@ -346,7 +346,7 @@ namespace
             }
             else
             {
-                std::cerr << "Unrecognized tag " << tag << std::endl;
+                LOG(ERROR) << "Unrecognized tag " << tag << std::endl;
                 abort();
             }
         }

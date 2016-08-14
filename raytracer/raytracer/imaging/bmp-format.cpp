@@ -1,5 +1,6 @@
 #include "imaging/bmp-format.h"
 #include "data-structures/array.h"
+#include "easylogging++.h"
 #include <stdint.h>
 #include <fstream>
 #include <iostream>
@@ -199,7 +200,7 @@ namespace
 
         if (!in)
         {
-            std::cerr << "Could not open file " << path << std::endl;
+            LOG(ERROR) << "Could not open file " << path << std::endl;
             abort();
         }
         else
@@ -216,7 +217,7 @@ namespace
     {
         if (p->FileType != 0x4D42)
         {
-            std::cerr << "Invalid file type" << std::endl;
+            LOG(ERROR) << "Invalid file type" << std::endl;
             abort();
         }
     }
@@ -225,31 +226,31 @@ namespace
     {
         if (p->Size != sizeof(BITMAP_HEADER_V5))
         {
-            std::cerr << "Invalid size " << p->Size << ", only support " << sizeof(BITMAP_HEADER_V5) << std::endl;
+            LOG(ERROR) << "Invalid size " << p->Size << ", only support " << sizeof(BITMAP_HEADER_V5) << std::endl;
             abort();
         }
 
         if (p->Compression != 0)
         {
-            std::cerr << "Unsupported compression " << p->Compression << std::endl;
+            LOG(ERROR) << "Unsupported compression " << p->Compression << std::endl;
             abort();
         }
 
         if (p->Planes != 1)
         {
-            std::cerr << "Unsupported plane count " << p->Planes << std::endl;
+            LOG(ERROR) << "Unsupported plane count " << p->Planes << std::endl;
             abort();
         }
 
         if (p->BitsPerPixel != 24 && p->BitsPerPixel != 32)
         {
-            std::cerr << "Unsupported bits per pixel " << p->BitsPerPixel << std::endl;
+            LOG(ERROR) << "Unsupported bits per pixel " << p->BitsPerPixel << std::endl;
             abort();
         }
 
         if (p->Height < 0)
         {
-            std::cerr << "Unsupported height " << p->Height << std::endl;
+            LOG(ERROR) << "Unsupported height " << p->Height << std::endl;
             abort();
         }
     }

@@ -118,7 +118,7 @@ namespace
             }
             else
             {
-                std::cerr << "Unrecognized tag " << tag << std::endl;
+                LOG(ERROR) << "Unrecognized tag " << tag << std::endl;
                 abort();
             }
         }
@@ -144,7 +144,7 @@ Primitive raytracer::primitives::load_mesh(std::istream& in)
     }
     else
     {
-        std::cerr << "Unrecognized mesh tag " << tag << std::endl;
+        LOG(ERROR) << "Unrecognized mesh tag " << tag << std::endl;
         abort();
     }
 }
