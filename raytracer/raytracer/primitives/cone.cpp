@@ -130,12 +130,13 @@ namespace
                 Point2D position_on_circle(position.x(), position.y());
                 double height = position.z();
                 double theta = atan2(position_on_circle.y(), position_on_circle.x());
+                Vector3D outward_normal = Vector3D(position.x(), position.y(), -position.z()).normalized();
 
                 hit->t = t;
                 hit->position = position;
                 hit->local_position.xyz = position;
                 hit->local_position.uv = Point2D(theta, height);
-                hit->normal = Vector3D(position.x(), position.y(), -position.z()).normalized();
+                hit->normal = outward_normal.dot(ray.direction) < 0 ? outward_normal : -outward_normal;
 
                 return true;
             }
