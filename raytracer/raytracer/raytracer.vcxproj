@@ -603,6 +603,7 @@
     <ClCompile Include="tests\quaternion-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
     <ClCompile Include="tests\scripting-tests.cpp" />
+    <ClCompile Include="tests\sphere-tests.cpp" />
     <ClCompile Include="tests\transformation-tests.cpp" />
     <ClCompile Include="tests\triangle-tests.cpp" />
     <ClCompile Include="util\beep.cpp" />
