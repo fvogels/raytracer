@@ -112,6 +112,7 @@ namespace
         module.add(fun(&Vector3D::norm), "norm");
         module.add(fun(&Vector3D::normalize), "normalize");
         module.add(fun(&Vector3D::normalized), "normalized");
+        module.add(fun([](const Point3D& p, const Point3D& q) -> double { return math::distance(p, q); }), "distance");
 
         auto point_factories = std::make_shared<PointFactories>();
         module.add_global_const(chaiscript::const_var(point_factories), "Pos");
