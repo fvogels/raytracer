@@ -95,7 +95,6 @@ namespace
 
         math::Box bounding_box() const override
         {
-            // TODO
             return Box::infinite();
         }
     };
