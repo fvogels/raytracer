@@ -70,6 +70,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_NS(raytracer::primitives, rotate_around_x);
     BIND_NS(raytracer::primitives, rotate_around_y);
     BIND_NS(raytracer::primitives, rotate_around_z);
+    BIND_NS(raytracer::primitives, align_y_to);
     BIND_NS(raytracer::primitives, scale);
     BIND_AS(make_union, union);
     BIND_AS(make_accelerated_union, bbunion);
