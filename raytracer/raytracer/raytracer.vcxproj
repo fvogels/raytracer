@@ -517,6 +517,7 @@
     <ClCompile Include="pipeline\ppm-consumer.cpp" />
     <ClCompile Include="pipeline\renderer-processor.cpp" />
     <ClCompile Include="pipeline\wif-consumer.cpp" />
+    <ClCompile Include="primitive.cpp" />
     <ClCompile Include="primitives\bumpifier.cpp" />
     <ClCompile Include="primitives\group.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />

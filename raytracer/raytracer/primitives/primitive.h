@@ -16,7 +16,7 @@ namespace raytracer
             class PrimitiveImplementation
             {
             public:
-                virtual bool find_first_positive_hit(const math::Ray&, Hit*) const = 0;
+                virtual bool find_first_positive_hit(const math::Ray&, Hit*) const;
                 virtual std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const = 0;
                 virtual math::Box bounding_box() const = 0;
             };
