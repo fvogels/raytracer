@@ -28,9 +28,9 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
-            auto hit_list = m_child->hits(ray);
+            auto hit_list = m_child->find_all_hits(ray);
 
             for (auto& hit : hit_list)
             {

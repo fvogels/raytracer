@@ -94,7 +94,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
         {
             double a = ray.direction.dot(ray.direction);
             double b = 2 * ray.direction.dot(ray.origin - Point3D());

@@ -91,11 +91,11 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             if (m_bounding_box.is_hit_by(ray))
             {
-                return m_child->hits(ray);
+                return m_child->find_all_hits(ray);
             }
             else
             {

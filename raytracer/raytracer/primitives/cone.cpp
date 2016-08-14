@@ -66,7 +66,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             Point2D Oxy = Point2D(ray.origin.x(), ray.origin.y());
             Vector2D Dxy = Vector2D(ray.direction.x(), ray.direction.y());

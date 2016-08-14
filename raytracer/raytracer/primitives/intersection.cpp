@@ -18,8 +18,8 @@ namespace
 
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
         {
-            auto first_hits = m_first->hits(ray);
-            auto second_hits = m_second->hits(ray);
+            auto first_hits = m_first->find_all_hits(ray);
+            auto second_hits = m_second->find_all_hits(ray);
 
             auto i1 = first_hits.begin();
             auto i2 = second_hits.begin();
@@ -63,12 +63,12 @@ namespace
             return false;
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             std::vector<std::shared_ptr<Hit>> result;
 
-            auto first_hits = m_first->hits(ray);
-            auto second_hits = m_second->hits(ray);
+            auto first_hits = m_first->find_all_hits(ray);
+            auto second_hits = m_second->find_all_hits(ray);
 
             auto i1 = first_hits.begin();
             auto i2 = second_hits.begin();

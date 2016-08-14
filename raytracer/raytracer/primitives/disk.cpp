@@ -43,7 +43,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             auto hit = std::make_shared<Hit>();
 

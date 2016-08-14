@@ -196,7 +196,7 @@ test_file 'cone-tests' do
 
             auto primitive = raytracer::primitives::cone_along_z();
             Ray ray(ray_origin, ray_direction);
-            auto hits = primitive->hits(ray);
+            auto hits = primitive->find_all_hits(ray);
 
             REQUIRE(hits.size() == 2);
             REQUIRE(hits[0]->t <= hits[1]->t);

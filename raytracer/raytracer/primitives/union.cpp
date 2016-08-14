@@ -28,13 +28,13 @@ namespace
             return found_hit;
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             std::vector<std::shared_ptr<Hit>> hits;
 
             for (const auto& child : this->children)
             {
-                for (auto hit : child->hits(ray))
+                for (auto hit : child->find_all_hits(ray))
                 {
                     hits.push_back(hit);
                 }

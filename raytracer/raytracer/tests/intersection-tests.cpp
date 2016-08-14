@@ -16,7 +16,7 @@ TEST_CASE("[Intersection] Hits of Sphere(0,0,0) + Sphere(0,0,0) with (0,0,0)+(1,
 
     auto i = intersection(s1, s2);
 
-    auto hits = i->hits(ray);
+    auto hits = i->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t == Approx(-1));
@@ -33,7 +33,7 @@ TEST_CASE("[Intersection] Hits of Sphere(0,0,0) + Sphere(0,0,0) with (-2,0,0)+(1
 
     auto i = intersection(s1, s2);
 
-    auto hits = i->hits(ray);
+    auto hits = i->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t == Approx(1));
@@ -50,7 +50,7 @@ TEST_CASE("[Intersection] Hits of Sphere(0,0,0) + Sphere(1,0,0) with (-2,0,0)+(1
 
     auto i = intersection(s1, s2);
 
-    auto hits = i->hits(ray);
+    auto hits = i->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t == Approx(2));

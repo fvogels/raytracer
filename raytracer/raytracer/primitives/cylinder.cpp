@@ -136,7 +136,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             Point2D O(ray.origin.y(), ray.origin.z());
             Vector2D D(ray.direction.y(), ray.direction.z());
@@ -208,7 +208,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             Point2D O(ray.origin.x(), ray.origin.z());
             Vector2D D(ray.direction.x(), ray.direction.z());
@@ -280,7 +280,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             Point2D O(ray.origin.x(), ray.origin.y());
             Vector2D D(ray.direction.x(), ray.direction.y());

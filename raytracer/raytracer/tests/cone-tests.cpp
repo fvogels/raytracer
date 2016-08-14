@@ -283,7 +283,7 @@ TEST_CASE("[Cone] All hits between cone along z and (5,0,1) + (-1,0,0) * t", "[C
 
     auto primitive = raytracer::primitives::cone_along_z();
     Ray ray(ray_origin, ray_direction);
-    auto hits = primitive->hits(ray);
+    auto hits = primitive->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t <= hits[1]->t);
@@ -298,7 +298,7 @@ TEST_CASE("[Cone] All hits between cone along z and (6,0,1) + (-1,0,0) * t", "[C
 
     auto primitive = raytracer::primitives::cone_along_z();
     Ray ray(ray_origin, ray_direction);
-    auto hits = primitive->hits(ray);
+    auto hits = primitive->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t <= hits[1]->t);
@@ -313,7 +313,7 @@ TEST_CASE("[Cone] All hits between cone along z and (6,0,2) + (-1,0,0) * t", "[C
 
     auto primitive = raytracer::primitives::cone_along_z();
     Ray ray(ray_origin, ray_direction);
-    auto hits = primitive->hits(ray);
+    auto hits = primitive->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t <= hits[1]->t);
@@ -328,7 +328,7 @@ TEST_CASE("[Cone] All hits between cone along z and (6,0,3) + (-1,0,0) * t", "[C
 
     auto primitive = raytracer::primitives::cone_along_z();
     Ray ray(ray_origin, ray_direction);
-    auto hits = primitive->hits(ray);
+    auto hits = primitive->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t <= hits[1]->t);
@@ -343,7 +343,7 @@ TEST_CASE("[Cone] All hits between cone along z and (7,0,3) + (-1,0,0) * t", "[C
 
     auto primitive = raytracer::primitives::cone_along_z();
     Ray ray(ray_origin, ray_direction);
-    auto hits = primitive->hits(ray);
+    auto hits = primitive->find_all_hits(ray);
 
     REQUIRE(hits.size() == 2);
     REQUIRE(hits[0]->t <= hits[1]->t);

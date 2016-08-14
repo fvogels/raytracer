@@ -33,11 +33,11 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             Ray transformed_ray = ray.transform(this->transformer.inverse_transformation_matrix);
 
-            auto hits = this->transformee->hits(transformed_ray);
+            auto hits = this->transformee->find_all_hits(transformed_ray);
 
             for (auto& hit : hits)
             {

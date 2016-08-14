@@ -92,7 +92,7 @@ namespace
             }
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const override
         {
             // TODO
             abort();

@@ -27,7 +27,7 @@ namespace
 
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
-            auto hs = hits(ray);
+            auto hs = find_all_hits(ray);
 
             for (auto h : hs)
             {
@@ -44,9 +44,9 @@ namespace
             return false;
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray& ray) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
-            auto hits = m_cropped->hits(ray);
+            auto hits = m_cropped->find_all_hits(ray);
 
             auto new_end = std::remove_if(hits.begin(), hits.end(), [this](std::shared_ptr<Hit> hit)
             {

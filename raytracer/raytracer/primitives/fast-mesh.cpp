@@ -48,7 +48,7 @@ namespace
             return find_first_positive_hit(ray, hit, 0x80000000 | (m_box_count - 1));
         }
 
-        std::vector<std::shared_ptr<Hit>> hits(const math::Ray&) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const override
         {
             std::cerr << "Not supported (yet)" << std::endl;
             abort();
