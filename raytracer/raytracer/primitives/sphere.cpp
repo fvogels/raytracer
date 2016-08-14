@@ -30,7 +30,9 @@ namespace
         hit->position = ray.at(t);
         hit->local_position.xyz = hit->position;
         hit->local_position.uv = compute_uv_from_xyz(hit->position);
-        hit->normal = hit->position - Point3D();
+
+        Vector3D outward_normal = hit->position - Point3D();
+        hit->normal = ray.direction.dot(outward_normal) < 0 ? outward_normal : -outward_normal;
     }
 
     class Sphere : public raytracer::primitives::_private_::PrimitiveImplementation
