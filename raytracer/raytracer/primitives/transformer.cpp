@@ -52,6 +52,8 @@ namespace
         {
             auto box = transformee->bounding_box();
 
+            assert(!box.is_infinite());
+
 #define AUX(I, J, K)       Point3D p ## I ## J ## K = this->transformer.transformation_matrix * box.corner<I, J, K>()
             AUX(0, 0, 0);
             AUX(0, 0, 1);
