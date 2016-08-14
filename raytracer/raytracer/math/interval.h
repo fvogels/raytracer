@@ -27,18 +27,6 @@ namespace math
             return Interval<T>(-std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
         }
 
-        // Bounds are taken as is. If x > y, then interval is empty.
-        static constexpr Interval<T> from_raw_bounds(double x, double y)
-        {
-            return Interval(x, y);
-        }
-
-        // Bounds are "sorted" so that interval is not empty
-        static constexpr Interval<T> from_bounds(double x, double y)
-        {
-            return Interval(std::min(x, y), std::max(x, y));
-        }
-
         constexpr decltype(upper-lower) size() const
         {
             return upper - lower;
@@ -64,7 +52,7 @@ namespace math
             return Interval(std::min(lower, other.lower), std::max(upper, other.upper));
         }
 
-        Interval<T> intersect(const Interval& other) const
+        Interval<T> intersect(const Interval& other) const noexcept
         {
             return Interval(std::max(lower, other.lower), std::min(upper, other.upper));
         }
@@ -108,7 +96,8 @@ namespace math
     template<typename T>
     constexpr Interval<T> interval(const T& lower, const T& upper)
     {
-        static_assert(!std::is_same<T, int>::value, "fkl");
+        // To catch interval(0, 1) vs interval(0.0, 1.0) errors
+        static_assert(!std::is_same<T, int>::value, "Interval of ints is forbidden");
 
         return Interval<T>(lower, upper);
     }    
@@ -127,6 +116,9 @@ namespace math
     template<typename T>
     constexpr Interval<T> nonempty_interval(const T& lower, const T& upper)
     {
+        // To catch interval(0, 1) vs interval(0.0, 1.0) errors
+        static_assert(!std::is_same<T, int>::value, "Interval of ints is forbidden");
+
         return lower <= upper ? interval(lower, upper) : interval(upper, lower);
     }
 }
