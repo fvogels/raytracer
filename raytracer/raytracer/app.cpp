@@ -102,22 +102,22 @@ std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
     Point3D light_position(0, 5, 5);
     light_sources.push_back(omnidirectional(light_position, colors::white()));
 
-   /* std::function<Color(Angle, Angle)> lambda = [=](Angle x, Angle y) -> Color {
-        double a = x.degrees() / 12;
-        double b = y.degrees() / 12;
+    /* std::function<Color(Angle, Angle)> lambda = [=](Angle x, Angle y) -> Color {
+         double a = x.degrees() / 12;
+         double b = y.degrees() / 12;
 
-        if (a - round(a) < 0.1 || b - round(b) < 0.1)
-        {
-            return colors::black();
-        }
-        else
-        {
-            return colors::white();
-        }
-    };
+         if (a - round(a) < 0.1 || b - round(b) < 0.1)
+         {
+             return colors::black();
+         }
+         else
+         {
+             return colors::white();
+         }
+     };
 
-    light_sources.push_back(anisotropic(light_position, Point3D(0, 0, 0), Vector3D(1, 1, 1).normalized(), from_lambda(lambda)));
-*/
+     light_sources.push_back(anisotropic(light_position, Point3D(0, 0, 0), Vector3D(1, 1, 1).normalized(), from_lambda(lambda)));
+ */
     return light_sources;
 }
 
@@ -160,8 +160,53 @@ void render()
         pipeline::wif(path);
 }
 
+namespace
+{
+    void render_script(const std::string& filename)
+    {
+        LOG(INFO) << "Rendering " << filename;
+        TIMED_SCOPE(timer, "Rendering " + filename);
+
+#       ifdef EXCLUDE_SCRIPTING
+        LOG(ERROR) << "Cannot run script - scripting was excluded";
+        abort();
+#       else
+        raytracer::scripting::run_script(filename);
+#       endif
+    }
+
+    void quiet(const std::string&)
+    {
+        logging::quiet();
+    }
+
+    void show_version(const std::string&)
+    {
+        LOG(INFO) << "Build " << BUILD_NUMBER << std::endl;
+    }
+
+    void emit_beep(const std::string&)
+    {
+        ::beep();
+    }
+}
+
+void process_command_line_arguments(int argc, char** argv)
+{
+    CommandLineProcessor processor;
+
+    processor.register_processor("-s", render_script);
+    processor.register_processor("--quiet", quiet);
+    processor.register_processor("--version", show_version);
+    processor.register_processor("--beep", emit_beep);
+
+    processor.process(argc, argv);
+
+    LOG(INFO) << "Terminated successfully";
+}
+
 int main(int argc, char** argv)
-{    
+{
     logging::configure();
 
     process_command_line_arguments(argc, argv);
@@ -170,9 +215,6 @@ int main(int argc, char** argv)
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
-
-    Rectangle2D *r;
-    
 }
 
 #endif
