@@ -1,5 +1,6 @@
 #include "primitives/triangle.h"
 #include "math/misc.h"
+#include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
 
@@ -94,7 +95,7 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const override
         {
-            // TODO
+            LOG(ERROR) << "Not yet implemented";
             abort();
         }
 
