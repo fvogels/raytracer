@@ -20,4 +20,9 @@ void logging::configure()
 void logging::quiet()
 {
     el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Enabled, "false");
+
+    el::Configurations defaultConf;
+    defaultConf.setToDefault();
+    defaultConf.set(el::Level::Error, el::ConfigurationType::Enabled, "true");
+    el::Loggers::reconfigureLogger("default", defaultConf);
 }
