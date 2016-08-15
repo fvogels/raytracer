@@ -44,17 +44,24 @@ end
 
 
 class TestSuiteContext
-  def template(&block)
-    @template = block
+  def initialize
     @tests = []
   end
 
-  def test_case
-    data = Store.new
-    yield data
-    test_code = data.instance_eval(&@template)
+  def template(&block)
+    @template = block
+  end
 
-    @tests << test_code.unindent
+  def test_case
+    if not @template then
+      raise "Missing template"
+    else    
+      data = Store.new
+      yield data
+      test_code = data.instance_eval(&@template)
+
+      @tests << test_code.unindent
+    end
   end
 
   attr_reader :tests
@@ -62,9 +69,12 @@ end
 
 
 class TestFileContext
+  def initialize
+    @tests = []
+  end
+  
   def template
     @template = yield.unindent
-    @tests = []
   end
   
   def test_suite(&block)
@@ -76,7 +86,11 @@ class TestFileContext
   end
 
   def generate_source
-    @template.gsub(%r{<<<TESTS>>>}, @tests.join("\n\n"))
+    if not @template then
+      raise "Missing template"
+    else
+      @template.gsub(%r{<<<TESTS>>>}, @tests.join("\n\n"))
+    end
   end
 
   attr_reader :tests
