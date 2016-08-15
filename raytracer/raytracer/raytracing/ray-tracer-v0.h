@@ -10,13 +10,13 @@ namespace raytracer
     {
         namespace _private_
         {
-            class BinaryRayTracer : public RayTracerImplementation
+            class RayTracerV0 : public RayTracerImplementation
             {
             public:
                 TraceResult trace(const Scene&, const math::Ray&) const override;
             };
         }
 
-        RayTracer binary();
+        RayTracer v0();
     }
 }

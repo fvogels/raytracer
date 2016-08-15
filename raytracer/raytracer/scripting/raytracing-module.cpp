@@ -14,7 +14,7 @@ namespace
 {
     struct RaytracerLibrary
     {
-        RayTracer binary() const { return raytracer::raytracers::binary(); }
+        RayTracer v0() const { return raytracer::raytracers::v0(); }
         RayTracer v1() const { return raytracer::raytracers::v1(); }
         RayTracer v2() const { return raytracer::raytracers::v2(); }
         RayTracer v3() const { return raytracer::raytracers::v3(); }
@@ -40,7 +40,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     module->add_global_const(chaiscript::const_var(raytracer_library), "Raytracers");
 
 #define BIND(NAME) module->add(fun(&RaytracerLibrary::NAME), #NAME)
-    BIND(binary);
+    BIND(v0);
     BIND(v1);
     BIND(v2);
     BIND(v3);

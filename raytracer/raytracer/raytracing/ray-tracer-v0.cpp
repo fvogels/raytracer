@@ -5,7 +5,7 @@ using namespace math;
 using namespace raytracer;
 
 
-TraceResult raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene& scene, const Ray& ray) const
+TraceResult raytracer::raytracers::_private_::RayTracerV0::trace(const Scene& scene, const Ray& ray) const
 {
     Hit hit;
 
@@ -19,7 +19,7 @@ TraceResult raytracer::raytracers::_private_::BinaryRayTracer::trace(const Scene
     }
 }
 
-raytracer::RayTracer raytracer::raytracers::binary()
+raytracer::RayTracer raytracer::raytracers::v0()
 {
-    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::BinaryRayTracer>());
+    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV0>());
 }
