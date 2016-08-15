@@ -610,6 +610,7 @@
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
+    <ClCompile Include="tests\plane-tests.cpp" />
     <ClCompile Include="tests\quaternion-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
     <ClCompile Include="tests\scripting-tests.cpp" />
