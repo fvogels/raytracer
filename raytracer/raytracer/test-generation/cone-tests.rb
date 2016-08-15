@@ -143,6 +143,7 @@ test_file 'cone-tests' do
             Ray ray(ray_origin, ray_direction);
 
             Hit hit;
+            hit.t = #{t};
 
             REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
         }
@@ -152,36 +153,49 @@ test_file 'cone-tests' do
     test_case do |data|
       data.ray_origin = '(10,0,1)'
       data.ray_direction = '(1,0,0)'
+      data.t = 100
     end
 
     test_case do |data|
       data.ray_origin = '(2,0,1)'
       data.ray_direction = '(1,0,0)'
+      data.t = 100
     end
 
     test_case do |data|
       data.ray_origin = '(-2,0,1)'
       data.ray_direction = '(-1,0,0)'
+      data.t = 100
     end
 
     test_case do |data|
       data.ray_origin = '(0,2,1)'
       data.ray_direction = '(0,1,0)'
+      data.t = 100
     end
 
     test_case do |data|
       data.ray_origin = '(0,5,4)'
       data.ray_direction = '(0,1,0)'
+      data.t = 100
     end
 
     test_case do |data|
       data.ray_origin = '(0,-5,4)'
       data.ray_direction = '(0,-1,0)'
+      data.t = 100
     end
 
     test_case do |data|
       data.ray_origin = '(0,0,1)'
       data.ray_direction = '(0,0,1)'
+      data.t = 100
+    end
+
+    test_case do |data|
+      data.ray_origin = '(10,0,1)'
+      data.ray_direction = '(-1,0,0)'
+      data.t = 5
     end
   end
 

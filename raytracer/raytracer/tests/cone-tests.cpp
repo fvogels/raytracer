@@ -194,6 +194,7 @@ TEST_CASE("[Cone] No hit between cone along z and (10,0,1) + (1,0,0) * t", "[Con
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
@@ -207,6 +208,7 @@ TEST_CASE("[Cone] No hit between cone along z and (2,0,1) + (1,0,0) * t", "[Cone
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
@@ -220,6 +222,7 @@ TEST_CASE("[Cone] No hit between cone along z and (-2,0,1) + (-1,0,0) * t", "[Co
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
@@ -233,6 +236,7 @@ TEST_CASE("[Cone] No hit between cone along z and (0,2,1) + (0,1,0) * t", "[Cone
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
@@ -246,6 +250,7 @@ TEST_CASE("[Cone] No hit between cone along z and (0,5,4) + (0,1,0) * t", "[Cone
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
@@ -259,6 +264,7 @@ TEST_CASE("[Cone] No hit between cone along z and (0,-5,4) + (0,-1,0) * t", "[Co
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
@@ -272,6 +278,21 @@ TEST_CASE("[Cone] No hit between cone along z and (0,0,1) + (0,0,1) * t", "[Cone
     Ray ray(ray_origin, ray_direction);
 
     Hit hit;
+    hit.t = 100;
+
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Cone] No hit between cone along z and (10,0,1) + (-1,0,0) * t", "[Cone]")
+{
+    Point3D ray_origin(10,0,1);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::cone_along_z();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    hit.t = 5;
 
     REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
 }
