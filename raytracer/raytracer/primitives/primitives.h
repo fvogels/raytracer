@@ -17,3 +17,4 @@
 #include "primitives/mesh.h"
 #include "primitives/fast-mesh.h"
 #include "primitives/bumpifier.h"
+#include "primitives/material-scaler.h"
