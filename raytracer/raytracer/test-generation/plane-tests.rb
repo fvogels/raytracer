@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'plane-tests' do
+test_file 'xy-plane-tests' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
@@ -82,7 +82,70 @@ test_file 'plane-tests' do
     end
   end
 
-    test_suite do
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Plane] No hit between XY plane and #{ray_origin} + #{ray_direction} * t", "[Plane]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Vector3D ray_direction#{ray_direction};
+
+            auto primitive = raytracer::primitives::xy_plane();
+            Ray ray(ray_origin, ray_direction);
+
+            Hit hit;
+            REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+        }
+      END
+    end
+
+    [-2,0,2].each do |x|
+      [-2,0,2].each do |y|
+        [1,5,10].each do |z|
+          [0,1,10].each do |dz|
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(0,0,#{dz})"
+              data.expected_t = z
+              data.expected_hit_position = "(#{x},#{y},0)"
+              data.expected_normal_position = "(0,0,1)"
+            end
+
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},-#{z})"
+              data.ray_direction = "(0,0,-#{dz})"
+              data.expected_t = z
+              data.expected_hit_position = "(#{x},#{y},0)"
+              data.expected_normal_position = "(0,0,1)"
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+test_file 'xz-plane-tests' do
+  template do
+    <<-'END'
+      #ifdef TEST_BUILD
+
+      #include "Catch.h"
+      #include "primitives/primitives.h"
+      #include "math/approx.h"
+
+      using namespace math;
+      using namespace raytracer;
+      using namespace raytracer::primitives;
+
+
+      <<<TESTS>>>
+
+      #endif
+    END
+  end
+
+  test_suite do
     template do
       <<-END
         TEST_CASE("[Plane] Hit between XZ plane and #{ray_origin} + #{ray_direction} * t", "[Plane]")
@@ -137,10 +200,8 @@ test_file 'plane-tests' do
             data.expected_hit_position = "(#{x},0,#{z+y})"
             data.expected_normal_position = "(0,1,0)"
           end
-          
         end
       end
     end
   end
-
 end

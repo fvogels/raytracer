@@ -435,7 +435,10 @@
     <ClCompile Include="primitives\material-scaler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\plane-tests.cpp">
+    <ClCompile Include="tests\xy-plane-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\xz-plane-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
