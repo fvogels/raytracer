@@ -25,25 +25,6 @@ namespace
             // NOP
         }
 
-        bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
-        {
-            auto hs = find_all_hits(ray);
-
-            for (auto h : hs)
-            {
-                assert(h);
-
-                if (interval(0.0, hit->t).contains(h->t))
-                {
-                    *hit = *h;
-
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             auto hits = m_cropped->find_all_hits(ray);
