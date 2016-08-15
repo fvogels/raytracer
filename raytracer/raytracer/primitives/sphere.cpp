@@ -11,8 +11,6 @@ using namespace math;
 
 namespace
 {
-
-
     class Sphere : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
