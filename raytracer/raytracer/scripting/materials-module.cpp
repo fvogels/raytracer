@@ -48,6 +48,16 @@ namespace
         {
             return raytracer::materials::checkered(x, y);
         }
+
+        Material marble2d(unsigned octaves, double turbulence) const
+        {
+            return raytracer::materials::marble2d(octaves, turbulence);
+        }
+
+        Material marble3d(unsigned octaves, double turbulence) const
+        {
+            return raytracer::materials::marble3d(octaves, turbulence);
+        }
     };
 }
 
@@ -66,6 +76,8 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
     BIND(checkered);
+    BIND(marble2d);
+    BIND(marble3d);
 #undef BIND
 #undef BIND_AS
 
