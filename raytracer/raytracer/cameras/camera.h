@@ -20,7 +20,7 @@ namespace raytracer
             class CameraImplementation
             {
             public:
-                virtual std::vector<math::Ray> create_rays(const math::Point2D&) const;
+                virtual std::vector<math::Ray> create_rays(const math::Point2D& p) const;
                 virtual void enumerate_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const = 0;
             };
         }        

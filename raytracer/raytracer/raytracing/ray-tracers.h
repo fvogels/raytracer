@@ -1,4 +1,4 @@
-#include "raytracing/binary-ray-tracer.h"
+#include "raytracing/ray-tracer-v0.h"
 #include "raytracing/ray-tracer-v1.h"
 #include "raytracing/ray-tracer-v2.h"
 #include "raytracing/ray-tracer-v3.h"
