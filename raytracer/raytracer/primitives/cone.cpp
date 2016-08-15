@@ -1,4 +1,5 @@
 #include "primitives/cone.h"
+#include "primitives/transformer.h"
 #include "math/misc.h"
 #include "math/quadratic_equation.h"
 #include "util/misc.h"
@@ -157,4 +158,14 @@ namespace
 Primitive raytracer::primitives::cone_along_z()
 {
     return Primitive(std::make_shared<ConeZ>());
+}
+
+Primitive raytracer::primitives::cone_along_x()
+{
+    return rotate_around_y(90_degrees, cone_along_z());
+}
+
+Primitive raytracer::primitives::cone_along_y()
+{
+    return rotate_around_x(-90_degrees, cone_along_z());
 }
