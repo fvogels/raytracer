@@ -22,7 +22,7 @@ namespace
         RayTracer v5() const { return raytracer::raytracers::v5(); }
         RayTracer v6() const { return raytracer::raytracers::v6(); }
 
-        RayTracer v(int version)
+        RayTracer v(int version) const
         {
 #           define DISPATCH(N) if ( version == N ) return v ## N()
             DISPATCH(0);
