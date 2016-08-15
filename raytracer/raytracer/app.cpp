@@ -28,6 +28,7 @@
 #include "scripting/scripting.h"
 #include "easylogging++.h"
 #include "version.h"
+#include "command-line-processor.h"
 #include <assert.h>
 #include <type_traits>
 #include <list>
@@ -157,52 +158,6 @@ void render()
         pipeline::animation(1) >>
         pipeline::renderer(renderers::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::stratified_fixed(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
         pipeline::wif(path);
-}
-
-void process_command_line_arguments(int argc, char** argv)
-{
-    int i = 1;
-
-    while (i < argc)
-    {
-        std::string current = argv[i];
-
-        if (starts_with("-s", current))
-        {
-            std::string path = current.substr(2);
-
-            LOG(INFO) << "Rendering " << path;
-            TIMED_SCOPE(timer, "Rendering " + path);
-
-#ifdef EXCLUDE_SCRIPTING
-            LOG(ERROR) << "Cannot run script - scripting was excluded";
-            abort();
-#else
-            scripting::run_script(path);
-#endif
-        }
-        else if (current == "--quiet")
-        {
-            logging::quiet();
-        }
-        else if (current == "--version")
-        {
-            LOG(INFO) << "Build " << BUILD_NUMBER << std::endl;
-        }
-        else if (current == "--beep")
-        {
-            beep();
-        }
-        else
-        {
-            LOG(ERROR) << "Unknown flag " << current << std::endl;
-            abort();
-        }
-
-        ++i;
-    }
-
-    LOG(INFO) << "Terminated successfully";
 }
 
 int main(int argc, char** argv)

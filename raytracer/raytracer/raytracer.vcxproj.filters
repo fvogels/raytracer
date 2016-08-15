@@ -429,6 +429,9 @@
     <ClCompile Include="raytracing\ray-tracer-v0.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="command-line-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1041,6 +1044,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracing\ray-tracer-v0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="command-line-processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
