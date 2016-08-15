@@ -12,7 +12,7 @@ namespace
     {
     public:
         Decorator(Material material, Primitive child)
-            : material(material), child(child)
+            : m_material(material), m_child(child)
         {
             assert(material);
             assert(child);
@@ -23,13 +23,13 @@ namespace
             Material old_material = hit->material;
             hit->material = Material();
 
-            bool result = child->find_first_positive_hit(ray, hit);
+            bool result = m_child->find_first_positive_hit(ray, hit);
 
             if (result)
             {
                 if (!hit->material)
                 {
-                    hit->material = this->material;
+                    hit->material = this->m_material;
                 }
             }
             else
@@ -44,13 +44,13 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
-            auto hits = this->child->find_all_hits(ray);
+            auto hits = this->m_child->find_all_hits(ray);
 
             for (auto hit : hits)
             {
                 if (!hit->material)
                 {
-                    hit->material = this->material;
+                    hit->material = this->m_material;
                 }
             }
 
@@ -59,12 +59,12 @@ namespace
 
         math::Box bounding_box() const override
         {
-            return child->bounding_box();
+            return m_child->bounding_box();
         }
 
     private:
-        Material material;
-        Primitive child;
+        Material m_material;
+        Primitive m_child;
     };
 }
 
