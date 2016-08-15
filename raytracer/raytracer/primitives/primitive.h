@@ -47,10 +47,4 @@ namespace raytracer
     private:
         std::shared_ptr<primitives::_private_::PrimitiveImplementation> m_impl;
     };
-
-    inline std::ostream& operator <<(std::ostream& out, const Primitive&)
-    {
-        // TODO
-        return out << "<primitive>";
-    }
 }
