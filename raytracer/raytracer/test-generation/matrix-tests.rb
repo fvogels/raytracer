@@ -235,5 +235,179 @@ test_file 'matrix-tests' do
       data.second = 'translation(Vector3D(0,0,2))'
       data.expected = 'translation(Vector3D(1,0,2))'
     end
- end
+
+    test_case do |data|
+      data.first = 'translation(Vector3D(1,0,0))'
+      data.second = 'Vector3D(0,0,0)'
+      data.expected = 'Vector3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'translation(Vector3D(0,1,0))'
+      data.second = 'Vector3D(0,0,0)'
+      data.expected = 'Vector3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'translation(Vector3D(0,0,1))'
+      data.second = 'Vector3D(0,0,0)'
+      data.expected = 'Vector3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'translation(Vector3D(1,0,0))'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(1,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'translation(Vector3D(0,1,0))'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(0,1,0)'
+    end
+
+    test_case do |data|
+      data.first = 'translation(Vector3D(0,0,1))'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(0,0,1)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(2,1,1)'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(2,1,1)'
+      data.second = 'Point3D(1,0,0)'
+      data.expected = 'Point3D(2,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(2,3,4)'
+      data.second = 'Point3D(1,1,1)'
+      data.expected = 'Point3D(2,3,4)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(2,3,4)'
+      data.second = 'Point3D(2,2,2)'
+      data.expected = 'Point3D(4,6,8)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(180_degrees)'
+      data.second = 'Point3D(2,2,2)'
+      data.expected = 'Point3D(2,-2,-2)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(180_degrees)'
+      data.second = 'Point3D(2,2,2)'
+      data.expected = 'Point3D(-2,2,-2)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(180_degrees)'
+      data.second = 'Point3D(2,2,2)'
+      data.expected = 'Point3D(-2,-2,2)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(180_degrees)'
+      data.second = 'Vector3D(2,2,2)'
+      data.expected = 'Vector3D(2,-2,-2)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(180_degrees)'
+      data.second = 'Vector3D(2,2,2)'
+      data.expected = 'Vector3D(-2,2,-2)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(180_degrees)'
+      data.second = 'Vector3D(2,2,2)'
+      data.expected = 'Vector3D(-2,-2,2)'
+    end
+    
+    test_case do |data|
+      data.first = 'rotation_around_x(90_degrees)'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(90_degrees)'
+      data.second = 'Point3D(1,0,0)'
+      data.expected = 'Point3D(1,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(90_degrees)'
+      data.second = 'Point3D(0,1,0)'
+      data.expected = 'Point3D(0,0,1)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(90_degrees)'
+      data.second = 'Point3D(0,0,1)'
+      data.expected = 'Point3D(0,-1,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(90_degrees)'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(90_degrees)'
+      data.second = 'Point3D(0,1,0)'
+      data.expected = 'Point3D(0,1,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(90_degrees)'
+      data.second = 'Point3D(1,0,0)'
+      data.expected = 'Point3D(0,0,-1)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(90_degrees)'
+      data.second = 'Point3D(0,0,-1)'
+      data.expected = 'Point3D(-1,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(90_degrees)'
+      data.second = 'Point3D(-1,0,0)'
+      data.expected = 'Point3D(0,0,1)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(90_degrees)'
+      data.second = 'Point3D(0,0,0)'
+      data.expected = 'Point3D(0,0,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(90_degrees)'
+      data.second = 'Point3D(0,0,1)'
+      data.expected = 'Point3D(0,0,1)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(90_degrees)'
+      data.second = 'Point3D(1,0,0)'
+      data.expected = 'Point3D(0,1,0)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(90_degrees)'
+      data.second = 'Point3D(0,1,0)'
+      data.expected = 'Point3D(-1,0,0)'
+    end
+  end
 end
