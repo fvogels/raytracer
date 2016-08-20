@@ -4,17 +4,45 @@
 #include "math/point.h"
 #include "math/angle.h"
 #include "math/approx.h"
+#include <iostream>
+#include <memory>
+#include <array>
 
 
 namespace math
 {
-    struct Matrix4D
+    class Matrix4D
     {
-        double
-            x11, x12, x13, x14,
-            x21, x22, x23, x24,
-            x31, x32, x33, x34,
-            x41, x42, x43, x44;
+    public:
+        Matrix4D(std::array<double, 16>& elements)
+            : m_elements(std::make_unique<std::array<double, 16>>(elements)) { }
+
+        Matrix4D(std::unique_ptr<std::array<double, 16>> elements)
+            : m_elements(std::move(elements)) { }
+
+        Matrix4D(const Matrix4D& m)
+            : m_elements(std::make_unique<std::array<double, 16>>(*m.m_elements)) { }
+
+        Matrix4D(Matrix4D&& m)
+            : m_elements(std::move(m.m_elements)) { }
+
+        Matrix4D& operator =(const Matrix4D& m)
+        {
+            *m_elements = *m.m_elements;
+        }
+
+        double& at(unsigned row, unsigned col)
+        {
+            return (*m_elements)[row * 4 + col];
+        }
+
+        double at(unsigned row, unsigned col) const
+        {
+            return (*m_elements)[row * 4 + col];
+        }
+
+    private:
+        std::unique_ptr<std::array<double, 16>> m_elements;
     };
 
     Matrix4D operator *(const Matrix4D&, const Matrix4D&);
@@ -22,8 +50,11 @@ namespace math
     Point3D operator *(const Matrix4D&, const Point3D&);
     Matrix4D transpose(const Matrix4D&);
 
+    std::ostream& operator <<(std::ostream&, const Matrix4D&);
+
     namespace transformation_matrices
     {
+        Matrix4D zero();
         Matrix4D identity();
         Matrix4D coordinate_system(const Point3D&, const Vector3D&, const Vector3D&, const Vector3D&);
         Matrix4D translation(const Vector3D&);
@@ -47,23 +78,18 @@ namespace math
 
         bool close_enough(const Matrix4D& other) const
         {
-            return
-                value.x11 == approx(other.x11) &&
-                value.x12 == approx(other.x12) &&
-                value.x13 == approx(other.x13) &&
-                value.x14 == approx(other.x14) &&
-                value.x21 == approx(other.x21) &&
-                value.x22 == approx(other.x22) &&
-                value.x23 == approx(other.x23) &&
-                value.x24 == approx(other.x24) &&
-                value.x31 == approx(other.x31) &&
-                value.x32 == approx(other.x32) &&
-                value.x33 == approx(other.x33) &&
-                value.x34 == approx(other.x34) &&
-                value.x41 == approx(other.x41) &&
-                value.x42 == approx(other.x42) &&
-                value.x43 == approx(other.x43) &&
-                value.x44 == approx(other.x44);
+            for (unsigned row = 0; row != 4; ++row)
+            {
+                for (unsigned col = 0; col != 4; ++col)
+                {
+                    if (value.at(row, col) != approx(other.at(row, col)))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     };
 }
