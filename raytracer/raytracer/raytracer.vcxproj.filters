@@ -90,18 +90,6 @@
     <ClCompile Include="cameras\fisheye-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\rasteriser-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\camera-transformation-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\perspective-camera-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\orthographic-camera-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lights\point-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -117,22 +105,13 @@
     <ClCompile Include="primitives\disk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\intersection-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\quadratic_equation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\cylinder-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lights\directional-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\triangle-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\box.cpp">
@@ -174,9 +153,6 @@
     <ClCompile Include="primitives\cone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\cone-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sampling\single-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -196,9 +172,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\functions\easing-functions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\easing-functions-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\functions\perlin.cpp">
@@ -288,9 +261,6 @@
     <ClCompile Include="math\functions\gauss.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\coordinate-system-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\quantize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -360,15 +330,6 @@
     <ClCompile Include="math\functions\wood.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\interval-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\animation-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\scripting-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scripting\animation-module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -405,22 +366,10 @@
     <ClCompile Include="scripting\scripting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\quaternion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="animation\lissajous.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\transformation-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\sphere-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="angle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\fisheye-camera-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitive.cpp">
@@ -433,6 +382,60 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\material-scaler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\matrix-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\animation-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\camera-transformation-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\cone-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\coordinate-system-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\cylinder-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\easing-functions-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\fisheye-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\intersection-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\interval-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\orthographic-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\perspective-camera-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\quaternion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\rasteriser-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\scripting-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\sphere-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\transformation-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\triangle-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\xy-plane-tests.cpp">

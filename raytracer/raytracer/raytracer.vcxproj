@@ -598,16 +598,18 @@
     <ClCompile Include="scripting\rendering-module.cpp" />
     <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
+    <ClCompile Include="animation\lissajous.cpp" />
     <ClCompile Include="tests\animation-tests.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
+    <ClCompile Include="tests\coordinate-system-tests.cpp" />
     <ClCompile Include="tests\cylinder-tests.cpp" />
     <ClCompile Include="tests\easing-functions-tests.cpp" />
     <ClCompile Include="tests\fisheye-camera-tests.cpp" />
     <ClCompile Include="tests\intersection-tests.cpp" />
     <ClCompile Include="tests\interval-tests.cpp" />
-    <ClCompile Include="animation\lissajous.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="tests\matrix-tests.cpp" />
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\quaternion-tests.cpp" />
@@ -805,7 +807,6 @@
     <ClInclude Include="sampling\samplers.h" />
     <ClInclude Include="sampling\single-sampler.h" />
     <ClInclude Include="data-structures\array.h" />
-    <ClCompile Include="tests\coordinate-system-tests.cpp" />
     <ClInclude Include="sampling\stratified-half-jittered-sampler.h" />
     <ClInclude Include="sampling\stratified-jittered-sampler.h" />
     <ClInclude Include="scripting\animation-module.h" />
