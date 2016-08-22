@@ -19,7 +19,18 @@ namespace math
 
         bool close_enough(double other) const
         {
-            return std::abs(other - value) < delta;
+            if (value == std::numeric_limits<double>::infinity())
+            {
+                return other == std::numeric_limits<double>::infinity();
+            }
+            else if (value == -std::numeric_limits<double>::infinity())
+            {
+                return other == -std::numeric_limits<double>::infinity();
+            }
+            else
+            {
+                return  std::abs(other - value) < delta;
+            }
         }
     };
 
