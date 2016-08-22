@@ -4,7 +4,7 @@
 #include "math/ray.h"
 #include "math/point.h"
 #include "math/ray.h"
-#include "math/matrix4d.h"
+#include "math/matrix.h"
 #include <functional>
 #include <memory>
 #include <vector>

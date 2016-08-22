@@ -1,7 +1,7 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "math/matrix4d.h"
+#include "math/matrix.h"
 
 using namespace math;
 using namespace math::transformation_matrices;

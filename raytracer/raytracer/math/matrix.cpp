@@ -1,66 +1,8 @@
-#include "math/matrix4d.h"
+#include "math/matrix.h"
 #include <assert.h>
 
 using namespace math;
 
-Matrix4D math::operator *(const Matrix4D& a, const Matrix4D& b)
-{
-    Matrix4D result = transformation_matrices::zero();
-
-    for (unsigned row = 0; row != 4; ++row)
-    {
-        for (unsigned col = 0; col != 4; ++col)
-        {
-            double& target = result.at(row, col);
-            target = 0;
-
-            for (unsigned i = 0; i != 4; ++i)
-            {
-                target += a.at(row, i) * b.at(i, col);
-            }
-        }
-    }
-
-    return result;
-}
-
-Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
-{
-#define AUX(row) a.at(row, 0) * v.x() + a.at(row, 1) * v.y() + a.at(row, 2) * v.z()
-
-    double x = AUX(0);
-    double y = AUX(1);
-    double z = AUX(2);
-
-    return Vector3D(x, y, z);
-
-#undef AUX
-}
-
-Point3D math::operator *(const Matrix4D& a, const Point3D& p)
-{
-#define AUX(row) a.at(row, 0) * p.x() + a.at(row, 1) * p.y() + a.at(row, 2) * p.z() + a.at(row, 3)
-
-    double x = AUX(0);
-    double y = AUX(1);
-    double z = AUX(2);
-
-    return Point3D(x, y, z);
-
-#undef AUX
-}
-
-Matrix4D math::transformation_matrices::zero()
-{
-    std::array<double, 16> xs = {
-        0, 0 , 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0
-    };
-
-    return Matrix4D(xs);
-}
 
 Matrix4D math::transformation_matrices::identity()
 {
@@ -155,22 +97,53 @@ Matrix4D math::transformation_matrices::coordinate_system(const Point3D& origin,
     return Matrix4D(xs);
 }
 
-Matrix4D math::transpose(const Matrix4D& m)
+Vector2D math::operator *(const Matrix3D& a, const Vector2D& v)
 {
-    Matrix4D result = transformation_matrices::zero();
+#   define AUX(row) a.at(row, 0) * v.x() + a.at(row, 1) * v.y()
 
-    for (unsigned row = 0; row != 4; ++row)
-    {
-        for (unsigned col = 0; col != 4; ++col)
-        {
-            result.at(row, col) = m.at(col, row);
-        }
-    }
+    double x = AUX(0);
+    double y = AUX(1);
 
-    return result;
+    return Vector2D(x, y);
+
+#   undef AUX
 }
 
-std::ostream& math::operator <<(std::ostream& out, const Matrix4D& m)
+
+Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
 {
-    return out << "Matrix4D";
+#   define AUX(row) a.at(row, 0) * v.x() + a.at(row, 1) * v.y() + a.at(row, 2) * v.z()
+
+    double x = AUX(0);
+    double y = AUX(1);
+    double z = AUX(2);
+
+    return Vector3D(x, y, z);
+
+#   undef AUX
+}
+
+Point2D math::operator *(const Matrix3D& a, const Point2D& p)
+{
+#   define AUX(row) a.at(row, 0) * p.x() + a.at(row, 1) * p.y() + a.at(row, 2)
+
+    double x = AUX(0);
+    double y = AUX(1);
+
+    return Point2D(x, y);
+
+#   undef AUX
+}
+
+Point3D math::operator *(const Matrix4D& a, const Point3D& p)
+{
+#   define AUX(row) a.at(row, 0) * p.x() + a.at(row, 1) * p.y() + a.at(row, 2) * p.z() + a.at(row, 3)
+
+    double x = AUX(0);
+    double y = AUX(1);
+    double z = AUX(2);
+
+    return Point3D(x, y, z);
+
+#   undef AUX
 }

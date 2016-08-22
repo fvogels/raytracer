@@ -39,9 +39,6 @@
     <ClCompile Include="primitives\union.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\matrix4d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\transformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -444,6 +441,9 @@
     <ClCompile Include="tests\xz-plane-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -480,9 +480,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\union.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\matrix4d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\transformation.h">
@@ -1062,6 +1059,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\material-scaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

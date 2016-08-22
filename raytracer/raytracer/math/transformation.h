@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/matrix4d.h"
+#include "math/matrix.h"
 #include "math/angle.h"
 
 namespace math
