@@ -55,48 +55,49 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 
     util::register_type<Primitive>(*module, "Primitive");
 
-#define BIND(NAME)                  BIND_AS(NAME, NAME)
-#define BIND_NS(NAMESPACE, NAME)    BIND_AS(NAMESPACE::NAME, NAME)
-#define BIND_AS(FACTORY, NAME)      module->add(fun(&FACTORY), #NAME)
-    BIND_NS(raytracer::primitives, sphere);
-    BIND_NS(raytracer::primitives, xy_plane);
-    BIND_NS(raytracer::primitives, xz_plane);
-    BIND_NS(raytracer::primitives, yz_plane);
-    BIND_NS(raytracer::primitives, cylinder_along_x);
-    BIND_NS(raytracer::primitives, cylinder_along_y);
-    BIND_NS(raytracer::primitives, cylinder_along_z);
-    BIND_NS(raytracer::primitives, cone_along_x);
-    BIND_NS(raytracer::primitives, cone_along_y);
-    BIND_NS(raytracer::primitives, cone_along_z);
-    BIND_NS(raytracer::primitives, triangle);
-    BIND_NS(raytracer::primitives, translate);
-    BIND_NS(raytracer::primitives, rotate_around_x);
-    BIND_NS(raytracer::primitives, rotate_around_y);
-    BIND_NS(raytracer::primitives, rotate_around_z);
-    BIND_NS(raytracer::primitives, align_y_to);
-    BIND_NS(raytracer::primitives, scale);
-    BIND_AS(make_union, union);
-    BIND_AS(make_accelerated_union, bbunion);
-    BIND_NS(raytracer::primitives, decorate);
-    BIND_NS(raytracer::primitives, translate_material2d);
-    BIND_NS(raytracer::primitives, translate_material3d);
-    BIND_NS(raytracer::primitives, scale_material2d);
-    BIND_NS(raytracer::primitives, scale_material3d);
-    BIND_NS(raytracer::primitives, rotate_material);
-    BIND_NS(raytracer::primitives, rotate_material_around_x);
-    BIND_NS(raytracer::primitives, rotate_material_around_y);
-    BIND_NS(raytracer::primitives, rotate_material_around_z);   
-    BIND(mesh);
-    BIND_NS(raytracer::primitives, center);
-    BIND_NS(raytracer::primitives, group);
-    BIND_NS(raytracer::primitives, intersection);
-    BIND_NS(raytracer::primitives, crop_along_x);
-    BIND_NS(raytracer::primitives, crop_along_y);
-    BIND_NS(raytracer::primitives, crop_along_z);
-    BIND_NS(raytracer::primitives, crop_spherical);
-    BIND_AS(bumpify2d_timed, bumpify);
-#undef BIND_AS
-#undef BIND
+#define BIND_HELPER_FUNCTION(NAME)                  BIND_HELPER_FUNCTION_AS(NAME, NAME)
+#define BIND_DIRECTLY(NAME)                         BIND_HELPER_FUNCTION_AS(raytracer::primitives::NAME, NAME)
+#define BIND_HELPER_FUNCTION_AS(FACTORY, NAME)      module->add(fun(&FACTORY), #NAME)
+    BIND_DIRECTLY(sphere);
+    BIND_DIRECTLY(xy_plane);
+    BIND_DIRECTLY(xz_plane);
+    BIND_DIRECTLY(yz_plane);
+    BIND_DIRECTLY(cylinder_along_x);
+    BIND_DIRECTLY(cylinder_along_y);
+    BIND_DIRECTLY(cylinder_along_z);
+    BIND_DIRECTLY(cone_along_x);
+    BIND_DIRECTLY(cone_along_y);
+    BIND_DIRECTLY(cone_along_z);
+    BIND_DIRECTLY(triangle);
+    BIND_DIRECTLY(translate);
+    BIND_DIRECTLY(rotate_around_x);
+    BIND_DIRECTLY(rotate_around_y);
+    BIND_DIRECTLY(rotate_around_z);
+    BIND_DIRECTLY(align_y_to);
+    BIND_DIRECTLY(scale);
+    BIND_HELPER_FUNCTION_AS(make_union, union);
+    BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
+    BIND_DIRECTLY(decorate);
+    BIND_DIRECTLY(translate_material2d);
+    BIND_DIRECTLY(translate_material3d);
+    BIND_DIRECTLY(scale_material2d);
+    BIND_DIRECTLY(scale_material3d);
+    BIND_DIRECTLY(rotate_material);
+    BIND_DIRECTLY(rotate_material_around_x);
+    BIND_DIRECTLY(rotate_material_around_y);
+    BIND_DIRECTLY(rotate_material_around_z);   
+    BIND_HELPER_FUNCTION(mesh);
+    BIND_DIRECTLY(center);
+    BIND_DIRECTLY(group);
+    BIND_DIRECTLY(intersection);
+    BIND_DIRECTLY(crop_along_x);
+    BIND_DIRECTLY(crop_along_y);
+    BIND_DIRECTLY(crop_along_z);
+    BIND_DIRECTLY(crop_spherical);
+    BIND_HELPER_FUNCTION_AS(bumpify2d_timed, bumpify);
+#undef BIND_HELPER_FUNCTION_AS
+#undef BIND_DIRECTLY
+#undef BIND_HELPER_FUNCTION
 
     return module;
 }
