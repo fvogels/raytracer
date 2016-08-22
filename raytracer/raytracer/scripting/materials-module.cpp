@@ -25,13 +25,13 @@ namespace
         Material uniform_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
-            ARGUMENT(Color, ambient);
-            ARGUMENT(Color, diffuse);
-            ARGUMENT(Color, specular);
-            ARGUMENT(double, specular_exponent);
-            ARGUMENT(double, reflectivity);
-            ARGUMENT(double, transparency);
-            ARGUMENT(double, refractive_index);
+            OPTIONAL_ARGUMENT(Color, ambient, colors::black());
+            OPTIONAL_ARGUMENT(Color, diffuse, colors::black());
+            OPTIONAL_ARGUMENT(Color, specular, colors::black());
+            OPTIONAL_ARGUMENT(double, specular_exponent, 10);
+            OPTIONAL_ARGUMENT(double, reflectivity, 0.0);
+            OPTIONAL_ARGUMENT(double, transparency, 0.0);
+            OPTIONAL_ARGUMENT(double, refractive_index, 1.0);
             END_ARGUMENTS();
 
             MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
