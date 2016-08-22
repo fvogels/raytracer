@@ -13,9 +13,9 @@ namespace math
         Matrix4D translation(const Vector3D&);
         Matrix3D scaling(double sx, double sy);
         Matrix4D scaling(double sx, double sy, double sz);
-        Matrix3D rotation(const Angle&);
-        Matrix4D rotation_around_x(const Angle&);
-        Matrix4D rotation_around_y(const Angle&);
-        Matrix4D rotation_around_z(const Angle&);
+        Matrix3D rotation(Angle);
+        Matrix4D rotation_around_x(Angle);
+        Matrix4D rotation_around_y(Angle);
+        Matrix4D rotation_around_z(Angle);
     }
 }

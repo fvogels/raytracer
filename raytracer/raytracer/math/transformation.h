@@ -19,9 +19,9 @@ namespace math
     {
         Transformation translation(const Vector3D&);
         Transformation scale(double, double, double);
-        Transformation rotate_x(const Angle&);
-        Transformation rotate_y(const Angle&);
-        Transformation rotate_z(const Angle&);
+        Transformation rotate_x(Angle);
+        Transformation rotate_y(Angle);
+        Transformation rotate_z(Angle);
         Transformation rotate_align_y(const Vector3D&);
     }
 }

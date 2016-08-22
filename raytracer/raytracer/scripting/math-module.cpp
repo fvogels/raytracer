@@ -137,13 +137,13 @@ namespace
 
         module.add(fun([](double x) { return Angle::degrees(x); }), "degrees");
         module.add(fun([](double x) { return Angle::radians(x); }), "radians");
-        module.add(fun([](const Angle& a, const Angle& b) { return a + b; }), "+");
-        module.add(fun([](const Angle& a, double constant) { return a * constant; }), "*");
-        module.add(fun([](double constant, const Angle& a) { return constant * a; }), "*");
-        module.add(fun([](const Angle& a, double constant) { return a / constant; }), "/");
-        module.add(fun([](const Angle& a, const Angle& b) { return a - b; }), "-");
-        module.add(fun([](const Angle& a) { return sin(a); }), "sin");
-        module.add(fun([](const Angle& a) { return cos(a); }), "cos");
+        module.add(fun([](Angle a, Angle b) { return a + b; }), "+");
+        module.add(fun([](Angle a, double constant) { return a * constant; }), "*");
+        module.add(fun([](double constant, Angle a) { return constant * a; }), "*");
+        module.add(fun([](Angle a, double constant) { return a / constant; }), "/");
+        module.add(fun([](Angle a, Angle b) { return a - b; }), "-");
+        module.add(fun([](Angle a) { return sin(a); }), "sin");
+        module.add(fun([](Angle a) { return cos(a); }), "cos");
     }
 
     void add_perlin(Module& module)

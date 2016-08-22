@@ -28,7 +28,7 @@ Matrix4D math::transformation_matrices::scaling(double sx, double sy, double sz)
     return Matrix4D(xs);
 }
 
-Matrix4D math::transformation_matrices::rotation_around_x(const Angle& angle)
+Matrix4D math::transformation_matrices::rotation_around_x(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -43,7 +43,7 @@ Matrix4D math::transformation_matrices::rotation_around_x(const Angle& angle)
     return Matrix4D(xs);
 }
 
-Matrix4D math::transformation_matrices::rotation_around_y(const Angle& angle)
+Matrix4D math::transformation_matrices::rotation_around_y(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -58,7 +58,7 @@ Matrix4D math::transformation_matrices::rotation_around_y(const Angle& angle)
     return Matrix4D(xs);
 }
 
-Matrix4D math::transformation_matrices::rotation_around_z(const Angle& angle)
+Matrix4D math::transformation_matrices::rotation_around_z(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);
@@ -107,7 +107,7 @@ Matrix3D math::transformation_matrices::scaling(double sx, double sy)
     return Matrix3D(xs);
 }
 
-Matrix3D math::transformation_matrices::rotation(const Angle& angle)
+Matrix3D math::transformation_matrices::rotation(Angle angle)
 {
     double s = sin(angle);
     double c = cos(angle);

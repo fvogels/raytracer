@@ -20,7 +20,7 @@ Transformation math::transformations::scale(double sx, double sy, double sz)
     return Transformation(tm, itm);
 }
 
-Transformation math::transformations::rotate_x(const Angle& angle)
+Transformation math::transformations::rotate_x(Angle angle)
 {
     Matrix4D tm = transformation_matrices::rotation_around_x(angle);
     Matrix4D itm = transformation_matrices::rotation_around_x(-angle);
@@ -28,7 +28,7 @@ Transformation math::transformations::rotate_x(const Angle& angle)
     return Transformation(tm, itm);
 }
 
-Transformation math::transformations::rotate_y(const Angle& angle)
+Transformation math::transformations::rotate_y(Angle angle)
 {
     Matrix4D tm = transformation_matrices::rotation_around_y(angle);
     Matrix4D itm = transformation_matrices::rotation_around_y(-angle);
@@ -36,7 +36,7 @@ Transformation math::transformations::rotate_y(const Angle& angle)
     return Transformation(tm, itm);
 }
 
-Transformation math::transformations::rotate_z(const Angle& angle)
+Transformation math::transformations::rotate_z(Angle angle)
 {
     Matrix4D tm = transformation_matrices::rotation_around_z(angle);
     Matrix4D itm = transformation_matrices::rotation_around_z(-angle);
