@@ -1,4 +1,5 @@
 #include "math/transformation.h"
+#include "math/transformation-matrices.h"
 
 using namespace math;
 
@@ -64,8 +65,8 @@ Transformation math::transformations::rotate_align_y(const Vector3D& y_axis)
     Matrix4D m = transformation_matrices::coordinate_system(Point3D(0, 0, 0), x_axis, y_axis, z_axis);
     Matrix4D inv_m = transpose(m);
 
-    assert(m * inv_m == approx(transformation_matrices::identity()));
-    assert(inv_m * m == approx(transformation_matrices::identity()));
+    assert(m * inv_m == approx(identity<4>()));
+    assert(inv_m * m == approx(identity<4>()));
 
     return Transformation(m, inv_m);
 }

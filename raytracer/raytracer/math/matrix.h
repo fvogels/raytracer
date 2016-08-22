@@ -2,7 +2,6 @@
 
 #include "math/vector.h"
 #include "math/point.h"
-#include "math/angle.h"
 #include "math/approx.h"
 #include <iostream>
 #include <memory>
@@ -63,6 +62,19 @@ namespace math
     }
 
     template<unsigned N>
+    Matrix<N> identity()
+    {
+        auto result = zero_matrix<N>();
+
+        for (unsigned i = 0; i != N; ++i)
+        {
+            result.at(i, i) = 1.0;
+        }
+
+        return result;
+    }
+
+    template<unsigned N>
     Matrix<N> operator *(const Matrix<N>& a, const Matrix<N>& b)
     {
         auto result = zero_matrix<N>();
@@ -109,17 +121,6 @@ namespace math
     std::ostream& operator <<(std::ostream& out, const Matrix<N>&)
     {
         return out << "Matrix<" << N << ">";
-    }
-
-    namespace transformation_matrices
-    {
-        Matrix4D identity();
-        Matrix4D coordinate_system(const Point3D&, const Vector3D&, const Vector3D&, const Vector3D&);
-        Matrix4D translation(const Vector3D&);
-        Matrix4D scaling(double sx, double sy, double sz);
-        Matrix4D rotation_around_x(const Angle&);
-        Matrix4D rotation_around_y(const Angle&);
-        Matrix4D rotation_around_z(const Angle&);
     }
 
     template<unsigned N>

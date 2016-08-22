@@ -2,55 +2,56 @@
 
 #include "Catch.h"
 #include "math/matrix.h"
+#include "math/transformation-matrices.h"
 
 using namespace math;
 using namespace math::transformation_matrices;
 
 
-TEST_CASE("[Matrix] Matrix transformation identity() equals identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix transformation identity<4>() equals identity<4>()", "[Matrix]")
 {
-    auto a = identity();
-    auto b = identity();
+    auto a = identity<4>();
+    auto b = identity<4>();
 
     REQUIRE( a == approx(b) );
 }
 
-TEST_CASE("[Matrix] Matrix transformation translation(Vector3D(0,0,0)) equals identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix transformation translation(Vector3D(0,0,0)) equals identity<4>()", "[Matrix]")
 {
     auto a = translation(Vector3D(0,0,0));
-    auto b = identity();
+    auto b = identity<4>();
 
     REQUIRE( a == approx(b) );
 }
 
-TEST_CASE("[Matrix] Matrix transformation scaling(1,1,1) equals identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix transformation scaling(1,1,1) equals identity<4>()", "[Matrix]")
 {
     auto a = scaling(1,1,1);
-    auto b = identity();
+    auto b = identity<4>();
 
     REQUIRE( a == approx(b) );
 }
 
-TEST_CASE("[Matrix] Matrix transformation rotation_around_x(0_degrees) equals identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix transformation rotation_around_x(0_degrees) equals identity<4>()", "[Matrix]")
 {
     auto a = rotation_around_x(0_degrees);
-    auto b = identity();
+    auto b = identity<4>();
 
     REQUIRE( a == approx(b) );
 }
 
-TEST_CASE("[Matrix] Matrix transformation rotation_around_y(0_degrees) equals identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix transformation rotation_around_y(0_degrees) equals identity<4>()", "[Matrix]")
 {
     auto a = rotation_around_y(0_degrees);
-    auto b = identity();
+    auto b = identity<4>();
 
     REQUIRE( a == approx(b) );
 }
 
-TEST_CASE("[Matrix] Matrix transformation rotation_around_z(0_degrees) equals identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix transformation rotation_around_z(0_degrees) equals identity<4>()", "[Matrix]")
 {
     auto a = rotation_around_z(0_degrees);
-    auto b = identity();
+    auto b = identity<4>();
 
     REQUIRE( a == approx(b) );
 }
@@ -103,19 +104,19 @@ TEST_CASE("[Matrix] Matrix transformation scaling(1,-1,-1) equals rotation_aroun
     REQUIRE( a == approx(b) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and identity()", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and identity<4>()", "[Matrix]")
 {
-    auto a = identity();
-    auto b = identity();
+    auto a = identity<4>();
+    auto b = identity<4>();
     auto actual = a * b;
-    auto expected = identity();
+    auto expected = identity<4>();
 
     REQUIRE( actual == approx(expected) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and scaling(2, 1, 1)", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and scaling(2, 1, 1)", "[Matrix]")
 {
-    auto a = identity();
+    auto a = identity<4>();
     auto b = scaling(2, 1, 1);
     auto actual = a * b;
     auto expected = scaling(2, 1, 1);
@@ -123,9 +124,9 @@ TEST_CASE("[Matrix] Matrix multiplication of identity() and scaling(2, 1, 1)", "
     REQUIRE( actual == approx(expected) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and scaling(1, 3, 1)", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and scaling(1, 3, 1)", "[Matrix]")
 {
-    auto a = identity();
+    auto a = identity<4>();
     auto b = scaling(1, 3, 1);
     auto actual = a * b;
     auto expected = scaling(1, 3, 1);
@@ -133,9 +134,9 @@ TEST_CASE("[Matrix] Matrix multiplication of identity() and scaling(1, 3, 1)", "
     REQUIRE( actual == approx(expected) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and scaling(1, 1, 4)", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and scaling(1, 1, 4)", "[Matrix]")
 {
-    auto a = identity();
+    auto a = identity<4>();
     auto b = scaling(1, 1, 4);
     auto actual = a * b;
     auto expected = scaling(1, 1, 4);
@@ -143,9 +144,9 @@ TEST_CASE("[Matrix] Matrix multiplication of identity() and scaling(1, 1, 4)", "
     REQUIRE( actual == approx(expected) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and rotation_around_x(40_degrees)", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and rotation_around_x(40_degrees)", "[Matrix]")
 {
-    auto a = identity();
+    auto a = identity<4>();
     auto b = rotation_around_x(40_degrees);
     auto actual = a * b;
     auto expected = rotation_around_x(40_degrees);
@@ -153,9 +154,9 @@ TEST_CASE("[Matrix] Matrix multiplication of identity() and rotation_around_x(40
     REQUIRE( actual == approx(expected) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and rotation_around_y(10_degrees)", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and rotation_around_y(10_degrees)", "[Matrix]")
 {
-    auto a = identity();
+    auto a = identity<4>();
     auto b = rotation_around_y(10_degrees);
     auto actual = a * b;
     auto expected = rotation_around_y(10_degrees);
@@ -163,9 +164,9 @@ TEST_CASE("[Matrix] Matrix multiplication of identity() and rotation_around_y(10
     REQUIRE( actual == approx(expected) );
 }
 
-TEST_CASE("[Matrix] Matrix multiplication of identity() and rotation_around_z(250_degrees)", "[Matrix]")
+TEST_CASE("[Matrix] Matrix multiplication of identity<4>() and rotation_around_z(250_degrees)", "[Matrix]")
 {
-    auto a = identity();
+    auto a = identity<4>();
     auto b = rotation_around_z(250_degrees);
     auto actual = a * b;
     auto expected = rotation_around_z(250_degrees);
@@ -238,7 +239,7 @@ TEST_CASE("[Matrix] Matrix multiplication of rotation_around_x(10_degrees) and r
     auto a = rotation_around_x(10_degrees);
     auto b = rotation_around_x(-10_degrees);
     auto actual = a * b;
-    auto expected = identity();
+    auto expected = identity<4>();
 
     REQUIRE( actual == approx(expected) );
 }
@@ -278,7 +279,7 @@ TEST_CASE("[Matrix] Matrix multiplication of translation(Vector3D(1,0,0)) and tr
     auto a = translation(Vector3D(1,0,0));
     auto b = translation(Vector3D(-1,0,0));
     auto actual = a * b;
-    auto expected = identity();
+    auto expected = identity<4>();
 
     REQUIRE( actual == approx(expected) );
 }
@@ -288,7 +289,7 @@ TEST_CASE("[Matrix] Matrix multiplication of translation(Vector3D(0,5,0)) and tr
     auto a = translation(Vector3D(0,5,0));
     auto b = translation(Vector3D(0,-5,0));
     auto actual = a * b;
-    auto expected = identity();
+    auto expected = identity<4>();
 
     REQUIRE( actual == approx(expected) );
 }
@@ -298,7 +299,7 @@ TEST_CASE("[Matrix] Matrix multiplication of translation(Vector3D(0,0,9)) and tr
     auto a = translation(Vector3D(0,0,9));
     auto b = translation(Vector3D(0,0,-9));
     auto actual = a * b;
-    auto expected = identity();
+    auto expected = identity<4>();
 
     REQUIRE( actual == approx(expected) );
 }

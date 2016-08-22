@@ -1,4 +1,5 @@
 #include "cameras/camera.h"
+#include "math/transformation-matrices.h"
 #include <assert.h>
 
 using namespace math;

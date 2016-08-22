@@ -510,6 +510,7 @@
     <ClCompile Include="math\functions\marble.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
     <ClCompile Include="math\quantize.cpp" />
+    <ClCompile Include="math\transformation-matrices.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
     <ClCompile Include="pipeline\bmp-consumer.cpp" />
     <ClCompile Include="pipeline\inverter-processor.cpp" />
@@ -521,7 +522,7 @@
     <ClCompile Include="primitive.cpp" />
     <ClCompile Include="primitives\bumpifier.cpp" />
     <ClCompile Include="primitives\group.cpp" />
-    <ClCompile Include="primitives\material-scaler.cpp" />
+    <ClCompile Include="primitives\material-transformer.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
@@ -700,6 +701,7 @@
     <ClInclude Include="math\functions\marble.h" />
     <ClInclude Include="math\functions\wood.h" />
     <ClInclude Include="math\quantize.h" />
+    <ClInclude Include="math\transformation-matrices.h" />
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="materials\wood-material.h" />
     <ClInclude Include="math\point.h" />
@@ -720,7 +722,7 @@
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="primitives\bumpifier.h" />
     <ClInclude Include="primitives\group.h" />
-    <ClInclude Include="primitives\material-scaler.h" />
+    <ClInclude Include="primitives\material-transformer.h" />
     <ClInclude Include="raytracing\trace-result.h" />
     <ClInclude Include="rendering\cartoon-renderer.h" />
     <ClInclude Include="raytracing\ray-tracer-v4.h" />

@@ -78,7 +78,14 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_AS(make_union, union);
     BIND_AS(make_accelerated_union, bbunion);
     BIND_NS(raytracer::primitives, decorate);
+    BIND_NS(raytracer::primitives, translate_material2d);
+    BIND_NS(raytracer::primitives, translate_material3d);
     BIND_NS(raytracer::primitives, scale_material2d);
+    BIND_NS(raytracer::primitives, scale_material3d);
+    BIND_NS(raytracer::primitives, rotate_material);
+    BIND_NS(raytracer::primitives, rotate_material_around_x);
+    BIND_NS(raytracer::primitives, rotate_material_around_y);
+    BIND_NS(raytracer::primitives, rotate_material_around_z);   
     BIND(mesh);
     BIND_NS(raytracer::primitives, center);
     BIND_NS(raytracer::primitives, group);

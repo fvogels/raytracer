@@ -2,9 +2,11 @@
 
 #include "Catch.h"
 #include "cameras/cameras.h"
+#include "math/transformation-matrices.h"
 
 using namespace math;
 using namespace raytracer::cameras::_private_;
+
 
 namespace
 {
@@ -32,7 +34,7 @@ TEST_CASE("[CameraTransformation] Eye = (0,0,0), Lookat = (0,0,1), Up = (0,1,0)"
     Vector3D up(0, 1, 0);
 
     auto matrix = create_transformation(eye, lookat, up);
-    auto expected = math::transformation_matrices::identity();
+    auto expected = math::identity<4>();
 
     CHECK(matrix == approx( expected ));
     assert_equals(eye, matrix * Point3D(0, 0, 0));

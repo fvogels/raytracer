@@ -378,9 +378,6 @@
     <ClCompile Include="command-line-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\material-scaler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\matrix-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -442,6 +439,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primitives\material-transformer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\transformation-matrices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1058,10 +1061,13 @@
     <ClInclude Include="command-line-processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\material-scaler.h">
+    <ClInclude Include="math\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\matrix.h">
+    <ClInclude Include="primitives\material-transformer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\transformation-matrices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
