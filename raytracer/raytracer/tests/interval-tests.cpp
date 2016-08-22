@@ -4,46 +4,486 @@
 #include "math/interval.h"
 #include "math/angle.h"
 #include "math/point.h"
-#include "animation/time-stamp.h"
+#include "math/approx.h"
 
 using namespace math;
-using namespace animation;
 
 
-TEST_CASE("[Interval] Interval<double>::from_relative", "[Interval]")
+TEST_CASE("[Interval] interval(0.0, 1.0).from_relative(0.0)", "[Interval]")
 {
-    auto i = interval(1.0, 5.0);
+    auto i = interval(0.0, 1.0);
+    auto t = 0.0;
+    auto actual = i.from_relative(t);
+    auto expected = 0.0;
 
-    CHECK(i.from_relative(0) == Approx(1));
-    CHECK(i.from_relative(0.5) == Approx(3));
-    CHECK(i.from_relative(1) == Approx(5));
+    REQUIRE(actual == approx(expected));
 }
 
-TEST_CASE("[Interval] Interval<Angle>::from_relative", "[Interval]")
+TEST_CASE("[Interval] interval(0.0, 1.0).to_relative(0.0)", "[Interval]")
 {
-    auto i = interval(60_degrees, 180_degrees);
+    auto i = interval(0.0, 1.0);
+    auto x = 0.0;
+    auto actual = i.to_relative(x);
+    auto expected = 0.0;
 
-    CHECK(i.from_relative(0) == approx(60_degrees));
-    CHECK(i.from_relative(0.5) == approx(120_degrees));
-    CHECK(i.from_relative(1) == approx(180_degrees));
+    REQUIRE(actual == approx(expected));
 }
 
-TEST_CASE("[Interval] Interval<Point3D>::from_relative", "[Interval]")
+TEST_CASE("[Interval] interval(0.0, 1.0).from_relative(1.0)", "[Interval]")
 {
-    auto i = interval(Point3D(1, 2, 3), Point3D(5, 8, 9));
+    auto i = interval(0.0, 1.0);
+    auto t = 1.0;
+    auto actual = i.from_relative(t);
+    auto expected = 1.0;
 
-    CHECK(i.from_relative(0) == approx(Point3D(1, 2, 3)));
-    CHECK(i.from_relative(0.5) == approx(Point3D(3, 5, 6)));
-    CHECK(i.from_relative(1) == approx(Point3D(5, 8, 9)));
+    REQUIRE(actual == approx(expected));
 }
 
-TEST_CASE("[Interval] Interval<TimeStamp>::from_relative", "[Interval]")
+TEST_CASE("[Interval] interval(0.0, 1.0).to_relative(1.0)", "[Interval]")
 {
-    auto i = interval(TimeStamp::from_epoch(1_s), TimeStamp::from_epoch(5_s));
+    auto i = interval(0.0, 1.0);
+    auto x = 1.0;
+    auto actual = i.to_relative(x);
+    auto expected = 1.0;
 
-    CHECK(i.from_relative(0) == approx(TimeStamp::from_epoch(1_s)));
-    CHECK(i.from_relative(0.5) == approx(TimeStamp::from_epoch(3_s)));
-    CHECK(i.from_relative(1) == approx(TimeStamp::from_epoch(5_s)));
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).from_relative(0.5)", "[Interval]")
+{
+    auto i = interval(0.0, 1.0);
+    auto t = 0.5;
+    auto actual = i.from_relative(t);
+    auto expected = 0.5;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).to_relative(0.5)", "[Interval]")
+{
+    auto i = interval(0.0, 1.0);
+    auto x = 0.5;
+    auto actual = i.to_relative(x);
+    auto expected = 0.5;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).from_relative(0.0)", "[Interval]")
+{
+    auto i = interval(0.0, 2.0);
+    auto t = 0.0;
+    auto actual = i.from_relative(t);
+    auto expected = 0.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).to_relative(0.0)", "[Interval]")
+{
+    auto i = interval(0.0, 2.0);
+    auto x = 0.0;
+    auto actual = i.to_relative(x);
+    auto expected = 0.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).from_relative(1.0)", "[Interval]")
+{
+    auto i = interval(0.0, 2.0);
+    auto t = 1.0;
+    auto actual = i.from_relative(t);
+    auto expected = 2.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).to_relative(2.0)", "[Interval]")
+{
+    auto i = interval(0.0, 2.0);
+    auto x = 2.0;
+    auto actual = i.to_relative(x);
+    auto expected = 1.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).from_relative(0.5)", "[Interval]")
+{
+    auto i = interval(0.0, 2.0);
+    auto t = 0.5;
+    auto actual = i.from_relative(t);
+    auto expected = 1.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).to_relative(1.0)", "[Interval]")
+{
+    auto i = interval(0.0, 2.0);
+    auto x = 1.0;
+    auto actual = i.to_relative(x);
+    auto expected = 0.5;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(1.0, 3.0).from_relative(0.0)", "[Interval]")
+{
+    auto i = interval(1.0, 3.0);
+    auto t = 0.0;
+    auto actual = i.from_relative(t);
+    auto expected = 1.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(1.0, 3.0).to_relative(1.0)", "[Interval]")
+{
+    auto i = interval(1.0, 3.0);
+    auto x = 1.0;
+    auto actual = i.to_relative(x);
+    auto expected = 0.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(1.0, 3.0).from_relative(1.0)", "[Interval]")
+{
+    auto i = interval(1.0, 3.0);
+    auto t = 1.0;
+    auto actual = i.from_relative(t);
+    auto expected = 3.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(1.0, 3.0).to_relative(3.0)", "[Interval]")
+{
+    auto i = interval(1.0, 3.0);
+    auto x = 3.0;
+    auto actual = i.to_relative(x);
+    auto expected = 1.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(1.0, 3.0).from_relative(0.5)", "[Interval]")
+{
+    auto i = interval(1.0, 3.0);
+    auto t = 0.5;
+    auto actual = i.from_relative(t);
+    auto expected = 2.0;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] interval(1.0, 3.0).to_relative(2.0)", "[Interval]")
+{
+    auto i = interval(1.0, 3.0);
+    auto x = 2.0;
+    auto actual = i.to_relative(x);
+    auto expected = 0.5;
+
+    REQUIRE(actual == approx(expected));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().intersect(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = Interval<double>::empty();
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().intersect(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = interval(0.0, 1.0);
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().intersect(interval(-1.0, 1.0))", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = interval(-1.0, 1.0);
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).intersect(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = Interval<double>::empty();
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 5.0).intersect(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = interval(0.0, 5.0);
+    auto i2 = Interval<double>::empty();
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::infinite().intersect(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = Interval<double>::infinite();
+    auto i2 = interval(0.0, 1.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::infinite().intersect(Interval<double>::infinite())", "[Interval]")
+{
+    auto i1 = Interval<double>::infinite();
+    auto i2 = Interval<double>::infinite();
+    auto expected = Interval<double>::infinite();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::infinite().intersect(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = Interval<double>::infinite();
+    auto i2 = Interval<double>::empty();
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().intersect(Interval<double>::infinite())", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = Interval<double>::infinite();
+    auto expected = Interval<double>::empty();
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).intersect(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = interval(0.0, 1.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).intersect(interval(0.0, 2.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = interval(0.0, 2.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).intersect(interval(-1.0, 2.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = interval(-1.0, 2.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(-1.0, 1.0).intersect(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = interval(-1.0, 1.0);
+    auto i2 = interval(0.0, 1.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).intersect(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 2.0);
+    auto i2 = interval(0.0, 1.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 2.0).intersect(interval(0.0, 3.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 2.0);
+    auto i2 = interval(0.0, 3.0);
+    auto expected = interval(0.0, 2.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(-1.0, 2.0).intersect(interval(0.0, 3.0))", "[Interval]")
+{
+    auto i1 = interval(-1.0, 2.0);
+    auto i2 = interval(0.0, 3.0);
+    auto expected = interval(0.0, 2.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(-1.0, 2.0).intersect(interval(-2.0, 1.0))", "[Interval]")
+{
+    auto i1 = interval(-1.0, 2.0);
+    auto i2 = interval(-2.0, 1.0);
+    auto expected = interval(-1.0, 1.0);
+    auto actual = i1.intersect(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).merge(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = interval(0.0, 1.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).merge(interval(1.0, 2.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = interval(1.0, 2.0);
+    auto expected = interval(0.0, 2.0);
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).merge(interval(2.0, 3.0))", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = interval(2.0, 3.0);
+    auto expected = interval(0.0, 3.0);
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().merge(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = Interval<double>::empty();
+    auto expected = Interval<double>::empty();
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().merge(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = interval(0.0, 1.0);
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).merge(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = Interval<double>::empty();
+    auto expected = interval(0.0, 1.0);
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::infinite().merge(interval(0.0, 1.0))", "[Interval]")
+{
+    auto i1 = Interval<double>::infinite();
+    auto i2 = interval(0.0, 1.0);
+    auto expected = Interval<double>::infinite();
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] interval(0.0, 1.0).merge(Interval<double>::infinite())", "[Interval]")
+{
+    auto i1 = interval(0.0, 1.0);
+    auto i2 = Interval<double>::infinite();
+    auto expected = Interval<double>::infinite();
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::infinite().merge(Interval<double>::empty())", "[Interval]")
+{
+    auto i1 = Interval<double>::infinite();
+    auto i2 = Interval<double>::empty();
+    auto expected = Interval<double>::infinite();
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
+}
+
+TEST_CASE("[Interval] Interval<double>::empty().merge(Interval<double>::infinite())", "[Interval]")
+{
+    auto i1 = Interval<double>::empty();
+    auto i2 = Interval<double>::infinite();
+    auto expected = Interval<double>::infinite();
+    auto actual = i1.merge(i2);
+
+    REQUIRE(actual.lower == approx(expected.lower));
+    REQUIRE(actual.upper == approx(expected.upper));
 }
 
 #endif
