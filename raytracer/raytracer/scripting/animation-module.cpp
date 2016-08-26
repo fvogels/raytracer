@@ -49,14 +49,14 @@ namespace
             return animation::animate(from, to, duration);
         }
 
-        Animation<Point3D> point_animation_seq(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration) const
+        Animation<Point3D> animation_seq(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration) const
         {
             if (boxed_checkpoints.size() < 2)
             {
                 LOG(ERROR) << "At least 2 checkpoints needed";
                 abort();
             }
-            else
+            else if ( *boxed_checkpoints.front().get_type_info().bare_type_info() == typeid(Point3D) )
             {
                 std::vector<Point3D> checkpoints(boxed_checkpoints.size());
 
@@ -74,6 +74,11 @@ namespace
                 }
 
                 return animation;
+            }
+            else
+            {
+                LOG(ERROR) << "Unsupported type for animation: " << boxed_checkpoints.front().get_type_info().name();
+                abort();
             }
         }
 
@@ -144,7 +149,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
-    BIND_AS(point_animation_seq, animate);
+    BIND_AS(animation_seq, animate);
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
 #undef BIND
