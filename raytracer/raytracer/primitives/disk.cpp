@@ -7,6 +7,7 @@ using namespace math;
 using namespace raytracer;
 using namespace raytracer::primitives;
 
+
 namespace
 {
     class Disk : public raytracer::primitives::_private_::PrimitiveImplementation
