@@ -12,10 +12,10 @@ namespace math
     struct approximately<double>
     {
         double value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(double value, double delta = 0.00001)
-            : value(value), delta(delta) { }
+        explicit approximately(double value, double epsilon = 0.00000001)
+            : value(value), epsilon(epsilon) { }
 
         bool close_enough(double other) const
         {
@@ -29,15 +29,15 @@ namespace math
             }
             else
             {
-                return  std::abs(other - value) < delta;
+                return  std::abs(other - value) < epsilon;
             }
         }
     };
 
     template<typename T>
-    approximately<T> approx(T x)
+    approximately<T> approx(T x, double epsilon = 0.00000001)
     {
-        return approximately<T>(x);
+        return approximately<T>(x, epsilon);
     }
 
     template<typename T>
