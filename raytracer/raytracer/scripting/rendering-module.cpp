@@ -88,14 +88,14 @@ namespace
             return cartoon2(width, height, sampler, ray_tracer, shade_count, edge_thickness, thread_count);
         }
 
-        Renderer split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, double split_depth, unsigned thread_count) const
+        Renderer split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at, unsigned thread_count) const
         {
-            return raytracer::renderers::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, util::loopers::looper(thread_count), split_thickness, split_depth);
+            return raytracer::renderers::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, util::loopers::looper(thread_count), split_thickness, eye, look_at);
         }
 
-        Renderer split_depth2(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, double split_depth) const
+        Renderer split_depth2(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at) const
         {
-            return this->split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, split_thickness, split_depth, 4);
+            return this->split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, split_thickness, eye, look_at, 4);
         }
 
         Renderer split_depth_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -106,11 +106,12 @@ namespace
             ARGUMENT(Sampler, sampler);
             ARGUMENT(RayTracer, ray_tracer);
             ARGUMENT(double, split_thickness);
-            ARGUMENT(double, split_depth);
+            ARGUMENT(math::Point3D, eye);
+            ARGUMENT(math::Point3D, look_at);
             OPTIONAL_ARGUMENT(unsigned, thread_count, 4);
             END_ARGUMENTS();
 
-            return this->split_depth(width, height, sampler, ray_tracer, split_thickness, split_depth, thread_count);
+            return this->split_depth(width, height, sampler, ray_tracer, split_thickness, eye, look_at, thread_count);
         }
     };
 }

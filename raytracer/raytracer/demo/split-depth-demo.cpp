@@ -70,7 +70,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::renderers::split_depth(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS), 0.02, 5);
+        auto renderer = raytracer::renderers::split_depth(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS), 0.02, Point3D(0, 0, 5), Point3D(0, 0, 0));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)
