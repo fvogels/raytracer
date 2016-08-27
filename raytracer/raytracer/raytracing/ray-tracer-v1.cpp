@@ -16,11 +16,11 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
         auto material_properties = hit.material->at(hit.local_position);
         auto c = compute_ambient(material_properties);
         
-        return TraceResult(c, hit.group_id, distance(ray.origin, hit.position));
+        return TraceResult(c, hit.group_id, ray, hit.t);
     }
     else
     {
-        return TraceResult::no_hit();
+        return TraceResult::no_hit(ray);
     }
 }
 

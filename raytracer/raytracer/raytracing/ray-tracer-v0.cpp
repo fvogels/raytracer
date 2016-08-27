@@ -11,11 +11,11 @@ TraceResult raytracer::raytracers::_private_::RayTracerV0::trace(const Scene& sc
 
     if (scene.root->find_first_positive_hit(ray, &hit))
     {
-        return TraceResult(colors::white(), hit.group_id, distance(ray.origin, hit.position));
+        return TraceResult(colors::white(), hit.group_id, ray, hit.t);
     }
     else
     {
-        return TraceResult::no_hit();
+        return TraceResult::no_hit(ray);
     }
 }
 

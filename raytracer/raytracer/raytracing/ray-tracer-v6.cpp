@@ -42,7 +42,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
     if (weight >= m_minimum_weight)
     {
         Hit hit;
-        
+
         if (scene.root->find_first_positive_hit(eye_ray, &hit))
         {
             assert(hit.material);
@@ -55,16 +55,16 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
             result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
             result += compute_refraction(scene, material_properties, hit, eye_ray, weight);
 
-            return TraceResult(result, hit.group_id, distance(eye_ray.origin, hit.position));
+            return TraceResult(result, hit.group_id, eye_ray, hit.t);
         }
         else
         {
-            return TraceResult::no_hit();
+            return TraceResult::no_hit(eye_ray);
         }
     }
     else
     {
-        return TraceResult::no_hit();
+        return TraceResult::no_hit(eye_ray);
     }
 }
 
@@ -78,7 +78,7 @@ Color raytracer::raytracers::_private_::RayTracerV6::compute_refraction(const Sc
         const double n2 = material_properties.refractive_index;
 
         Vector3D refracted_direction;
-        
+
         if (refract(v, n, n1, n2, &refracted_direction))
         {
             const Point3D refracted_origin = hit.position + 0.000001 * refracted_direction;
@@ -102,7 +102,7 @@ Color raytracer::raytracers::_private_::RayTracerV6::compute_refraction(const Sc
                 }
 
                 Vector3D refracted_direction;
-                
+
                 if (refract(v, n, n1, n2, &refracted_direction))
                 {
                     const Point3D refracted_origin = refracted_hit.position + 0.000001 * refracted_direction;

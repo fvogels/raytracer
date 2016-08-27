@@ -10,16 +10,22 @@ namespace raytracer
 {
     struct TraceResult
     {
-        static TraceResult no_hit()
-        {
-            return TraceResult(imaging::colors::black(), MISSING_ID, std::numeric_limits<double>::infinity());
-        }
+        TraceResult(imaging::Color color, unsigned group_id, const math::Ray& ray, double t)
+            : color(color), group_id(group_id), ray(ray), t(t) { }
 
-        TraceResult(imaging::Color color, unsigned group_id, double distance_to_hit)
-            : color(color), group_id(group_id), distance_to_hit(distance_to_hit) { }
+        static TraceResult no_hit(const math::Ray& ray)
+        {
+            return TraceResult(imaging::colors::black(), MISSING_ID, ray, std::numeric_limits<double>::infinity());
+        }
 
         imaging::Color color;
         unsigned group_id;
-        double distance_to_hit;
+        math::Ray ray;
+        double t;
+
+        math::Point3D hit_position() const
+        {
+            return ray.at(t);
+        }
     };
 }
