@@ -138,6 +138,8 @@ namespace
         module.add(fun([](double x) { return Angle::degrees(x); }), "degrees");
         module.add(fun([](double x) { return Angle::radians(x); }), "radians");
         module.add(fun([](Angle a, Angle b) { return a + b; }), "+");
+        module.add(fun([](Angle a, Angle b) { return a - b; }), "-");
+        module.add(fun([](Angle a) { return -a; }), "-");
         module.add(fun([](Angle a, double constant) { return a * constant; }), "*");
         module.add(fun([](double constant, Angle a) { return constant * a; }), "*");
         module.add(fun([](Angle a, double constant) { return a / constant; }), "/");
