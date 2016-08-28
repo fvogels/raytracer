@@ -25,7 +25,7 @@ namespace raytracer
         LightSource()
             : LightSource(nullptr) { }
 
-        LightSource(std::shared_ptr<lights::_private_::LightSourceImplementation> implementation)
+        explicit LightSource(std::shared_ptr<lights::_private_::LightSourceImplementation> implementation)
             : m_implementation(implementation) { }
 
         lights::_private_::LightSourceImplementation* operator ->() const
