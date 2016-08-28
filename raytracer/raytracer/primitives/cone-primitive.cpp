@@ -14,7 +14,7 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class ConeZ : public raytracer::primitives::_private_::PrimitiveImplementation
+    class ConeZImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
@@ -157,7 +157,7 @@ namespace
 
 Primitive raytracer::primitives::cone_along_z()
 {
-    return Primitive(std::make_shared<ConeZ>());
+    return Primitive(std::make_shared<ConeZImplementation>());
 }
 
 Primitive raytracer::primitives::cone_along_x()
