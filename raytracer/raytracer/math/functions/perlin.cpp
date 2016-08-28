@@ -19,14 +19,14 @@ namespace
         return (t + 1) / 2;
     }
 
-    Function<double(double)> scale1d(double factor)
-    {
-        std::function<double(double)> lambda = [factor](double x) -> double {
-            return x * factor;
-        };
+    // Function<double(double)> scale1d(double factor)
+    // {
+    //     std::function<double(double)> lambda = [factor](double x) -> double {
+    //         return x * factor;
+    //     };
 
-        return from_lambda(lambda);
-    }
+    //     return from_lambda(lambda);
+    // }
 
     Function<Point2D(const Point2D&)> scale2d(double factor)
     {
