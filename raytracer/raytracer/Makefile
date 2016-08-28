@@ -9,11 +9,11 @@ FILES=`find -type f -name "*.cpp"`
 all: debug_build release_build test_build
 
 debug_build:
-	g++ $(DEBUG_FLAGS) $(FILES) -ldl
+	$(CC) $(DEBUG_FLAGS) $(FILES) -ldl
 
 release_build:
-	g++ $(RELEASE_FLAGS) $(FILES) -ldl
+	$(CC) $(RELEASE_FLAGS) $(FILES) -ldl
 
 test_build:
-	g++ $(TEST_FLAGS) $(FILES) -ldl
+	$(CC) $(TEST_FLAGS) $(FILES) -ldl
 
