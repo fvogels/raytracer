@@ -4,7 +4,7 @@
 #include "pipeline/pipelines.h"
 #include "scripting/scripting-util.h"
 #include "imaging/bitmap.h"
-#include "rendering/renderers.h"
+#include "renderers/renderers.h"
 #include "sampling/samplers.h"
 #include "raytracers/ray-tracers.h"
 #include "util/looper.h"

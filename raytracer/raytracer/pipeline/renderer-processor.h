@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pipeline/processor.h"
-#include "rendering/renderer.h"
+#include "renderers/renderer.h"
 #include "imaging/bitmap.h"
 
 

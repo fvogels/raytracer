@@ -1,4 +1,4 @@
-#include "rendering/cartoon-renderer.h"
+#include "renderers/cartoon-renderer.h"
 #include "data-structures/grid.h"
 #include "easylogging++.h"
 #include <vector>

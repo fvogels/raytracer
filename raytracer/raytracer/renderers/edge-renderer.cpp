@@ -1,4 +1,4 @@
-#include "rendering/edge-renderer.h"
+#include "renderers/edge-renderer.h"
 #include "data-structures/grid.h"
 #include "easylogging++.h"
 #include <vector>

@@ -114,9 +114,6 @@
     <ClCompile Include="lights\light-ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cameras\displaceable-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -141,9 +138,6 @@
     <ClCompile Include="materials\material-properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\cartoon-renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="materials\wood-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -154,9 +148,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demo\fisheye-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering\edge-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\bmp-format.cpp">
@@ -180,9 +171,6 @@
     <ClCompile Include="util\looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\standard-renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pipeline\overprint-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -202,9 +190,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\bitmap-function.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering\split-depth-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demo\sphere-bumpifier-demo.cpp">
@@ -450,6 +435,21 @@
     <ClCompile Include="raytracers\ray-tracer-v6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderers\cartoon-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\edge-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\split-depth-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\standard-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -608,9 +608,6 @@
     <ClInclude Include="lights\light-ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cameras\displaceable-camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -635,16 +632,10 @@
     <ClInclude Include="imaging\ppm-format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\renderers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sampling\samplers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\demos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\cartoon-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data-structures\array.h">
@@ -669,9 +660,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\fisheye-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\edge-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data-structures\position.h">
@@ -713,9 +701,6 @@
     <ClInclude Include="util\looper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\standard-renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pipeline\overprint-processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -750,9 +735,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\bitmap-function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\split-depth-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\sphere-bumpifier-demo.h">
@@ -1074,6 +1056,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracers\trace-result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\cartoon-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\edge-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\renderers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\split-depth-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\standard-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "rendering/standard-renderer.h"
+#include "renderers/standard-renderer.h"
 #include "easylogging++.h"
 
 using namespace imaging;

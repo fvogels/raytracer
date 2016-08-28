@@ -1,4 +1,4 @@
-#include "rendering/split-depth-renderer.h"
+#include "renderers/split-depth-renderer.h"
 #include "easylogging++.h"
 #include <limits>
 #include <cmath>

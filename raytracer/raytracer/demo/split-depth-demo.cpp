@@ -3,7 +3,7 @@
 #include "cameras/cameras.h"
 #include "imaging/wif-format.h"
 #include "raytracers/ray-tracers.h"
-#include "rendering/renderers.h"
+#include "renderers/renderers.h"
 #include "sampling/samplers.h"
 #include "raytracers/scene.h"
 #include "math/function.h"
