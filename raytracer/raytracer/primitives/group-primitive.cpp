@@ -1,4 +1,4 @@
-#include "primitives/group.h"
+#include "primitives/group-primitive.h"
 
 using namespace raytracer;
 using namespace raytracer::primitives;

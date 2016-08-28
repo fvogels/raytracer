@@ -180,9 +180,6 @@
     <ClCompile Include="raytracing\ray-tracer-v6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\group.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="rendering\cartoon-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\fast-mesh-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\group-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -699,9 +699,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data-structures\grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\group.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\wood-material.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\fast-mesh-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\group-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
