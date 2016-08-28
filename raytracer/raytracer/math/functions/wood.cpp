@@ -13,7 +13,7 @@ Noise2D math::functions::wood2d(unsigned octaves, double turbulence)
 
     std::function<double(const Point2D&)> lambda = [noise, turbulence](const Point2D& p) -> double {
         double t = sqrt(p.x() * p.x() + p.y() * p.y());
-        return std::abs(sin(360_degrees * t + 360_degrees * turbulence * noise(p)));
+        return pow(std::abs(sin(360_degrees * t + 360_degrees * turbulence * noise(p))), 40.0 + noise(p) * 20);
     };
 
     return from_lambda<double, const Point2D&>(lambda);
