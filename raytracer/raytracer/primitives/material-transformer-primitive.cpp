@@ -9,10 +9,10 @@ using namespace math;
 
 namespace
 {
-    class MaterialTransformer : public raytracer::primitives::_private_::PrimitiveImplementation
+    class MaterialTransformerImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        MaterialTransformer(Primitive child)
+        MaterialTransformerImplementation(Primitive child)
             : m_child(child)
         {
             // NOP
@@ -55,11 +55,11 @@ namespace
         Primitive m_child;
     };
 
-    class MaterialTransformer2D : public MaterialTransformer
+    class MaterialTransformer2DImplementation : public MaterialTransformerImplementation
     {
     public:
-        MaterialTransformer2D(const Matrix3D& transformation_matrix, Primitive child)
-            : MaterialTransformer(child), m_transformation_matrix(transformation_matrix)
+        MaterialTransformer2DImplementation(const Matrix3D& transformation_matrix, Primitive child)
+            : MaterialTransformerImplementation(child), m_transformation_matrix(transformation_matrix)
         {
             // NOP
         }
@@ -74,11 +74,11 @@ namespace
         Primitive m_child;
     };
 
-    class MaterialTransformer3D : public MaterialTransformer
+    class MaterialTransformer3DImplementation : public MaterialTransformerImplementation
     {
     public:
-        MaterialTransformer3D(const Matrix4D& transformation_matrix, Primitive child)
-            : MaterialTransformer(child), m_transformation_matrix(transformation_matrix)
+        MaterialTransformer3DImplementation(const Matrix4D& transformation_matrix, Primitive child)
+            : MaterialTransformerImplementation(child), m_transformation_matrix(transformation_matrix)
         {
             // NOP
         }
@@ -96,12 +96,12 @@ namespace
 
 Primitive raytracer::primitives::transform_material2d(const Matrix3D& transformation_matrix, Primitive child)
 {
-    return Primitive(std::make_shared<MaterialTransformer2D>(transformation_matrix, child));
+    return Primitive(std::make_shared<MaterialTransformer2DImplementation>(transformation_matrix, child));
 }
 
 Primitive raytracer::primitives::transform_material3d(const Matrix4D& transformation_matrix, Primitive child)
 {
-    return Primitive(std::make_shared<MaterialTransformer3D>(transformation_matrix, child));
+    return Primitive(std::make_shared<MaterialTransformer3DImplementation>(transformation_matrix, child));
 }
 
 Primitive raytracer::primitives::translate_material2d(const Vector2D& translation_vector, Primitive child)
