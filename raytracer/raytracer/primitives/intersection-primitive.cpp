@@ -1,4 +1,4 @@
-#include "primitives/intersection.h"
+#include "primitives/intersection-primitive.h"
 
 using namespace raytracer;
 using namespace raytracer::primitives;

@@ -10,7 +10,7 @@
 #include "primitives/group-primitive.h"
 #include "primitives/union.h"
 #include "primitives/decorator-primitive.h"
-#include "primitives/intersection.h"
+#include "primitives/intersection-primitive.h"
 #include "primitives/transformer.h"
 #include "primitives/triangle.h"
 #include "primitives/bounding-box-accelerator.h"
