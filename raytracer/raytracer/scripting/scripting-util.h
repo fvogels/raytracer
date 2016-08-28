@@ -179,7 +179,7 @@ namespace raytracer
             template<typename T>
             void register_to_string(chaiscript::Module& module)
             {
-                module.add(fun([](const T& value) -> std::string {
+                module.add(chaiscript::fun([](const T& value) -> std::string {
                     std::ostringstream ss;
                     ss << value;
                     return ss.str();
