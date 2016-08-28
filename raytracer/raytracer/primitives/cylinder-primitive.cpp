@@ -24,60 +24,6 @@ namespace
         return Point2D(u, v);
     }
 
-    void initialize_hit_x_cylinder(Hit* hit, const Ray& ray, double t)
-    {
-        assert(hit);
-
-        Point3D position = ray.at(t);
-        Point2D position_on_circle(position.y(), position.z());
-        double height = position.x();
-        Vector3D normal(0.0, position.y(), position.z());
-
-        hit->t = t;
-        hit->position = position;
-        hit->local_position.xyz = position;
-        hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
-
-        assert(hit->normal.is_unit());
-    }
-
-    void initialize_hit_y_cylinder(Hit* hit, const Ray& ray, double t)
-    {
-        assert(hit);
-
-        Point3D position = ray.at(t);
-        Point2D position_on_circle(position.x(), position.z());
-        double height = position.y();
-        Vector3D normal(position.x(), 0.0, position.z());
-
-        hit->t = t;
-        hit->position = position;
-        hit->local_position.xyz = position;
-        hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
-
-        assert(hit->normal.is_unit());
-    }
-
-    void initialize_hit_z_cylinder(Hit* hit, const Ray& ray, double t)
-    {
-        assert(hit);
-
-        Point3D position = ray.at(t);
-        Point2D position_on_circle(position.x(), position.y());
-        double height = position.z();
-        Vector3D normal(position.x(), position.y(), 0);
-
-        hit->t = t;
-        hit->position = position;
-        hit->local_position.xyz = position;
-        hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
-
-        assert(hit->normal.is_unit());
-    }
-
     bool find_intersections(const Point2D& O, const Vector2D& D, double* t1, double* t2)
     {
         double a = D.dot(D);
@@ -99,7 +45,7 @@ namespace
         }
     }
 
-    class CylinderX : public raytracer::primitives::_private_::PrimitiveImplementation
+    class CylinderXImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -121,7 +67,7 @@ namespace
 
                 if (t < hit->t)
                 {
-                    initialize_hit_x_cylinder(hit, ray, t);
+                    initialize_hit(hit, ray, t);
 
                     return true;
                 }
@@ -151,8 +97,8 @@ namespace
                 auto hit1 = std::make_shared<Hit>();
                 auto hit2 = std::make_shared<Hit>();
 
-                initialize_hit_x_cylinder(hit1.get(), ray, t1);
-                initialize_hit_x_cylinder(hit2.get(), ray, t2);
+                initialize_hit(hit1.get(), ray, t1);
+                initialize_hit(hit2.get(), ray, t2);
 
                 hits.push_back(hit1);
                 hits.push_back(hit2);
@@ -169,9 +115,28 @@ namespace
         {
             return Box(Interval<double>::infinite(), interval(-1.0, 1.0), interval(-1.0, 1.0));
         }
+
+    private:
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const
+        {
+            assert(hit);
+
+            Point3D position = ray.at(t);
+            Point2D position_on_circle(position.y(), position.z());
+            double height = position.x();
+            Vector3D normal(0.0, position.y(), position.z());
+
+            hit->t = t;
+            hit->position = position;
+            hit->local_position.xyz = position;
+            hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
+            hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
+
+            assert(hit->normal.is_unit());
+        }
     };
 
-    class CylinderY : public raytracer::primitives::_private_::PrimitiveImplementation
+    class CylinderYImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -193,7 +158,7 @@ namespace
 
                 if (t < hit->t)
                 {
-                    initialize_hit_y_cylinder(hit, ray, t);
+                    initialize_hit(hit, ray, t);
 
                     return true;
                 }
@@ -223,8 +188,8 @@ namespace
                 auto hit1 = std::make_shared<Hit>();
                 auto hit2 = std::make_shared<Hit>();
 
-                initialize_hit_y_cylinder(hit1.get(), ray, t1);
-                initialize_hit_y_cylinder(hit2.get(), ray, t2);
+                initialize_hit(hit1.get(), ray, t1);
+                initialize_hit(hit2.get(), ray, t2);
 
                 hits.push_back(hit1);
                 hits.push_back(hit2);
@@ -241,9 +206,28 @@ namespace
         {
             return Box(interval(-1.0, 1.0), Interval<double>::infinite(), interval(-1.0, 1.0));
         }
+
+    private:
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const
+        {
+            assert(hit);
+
+            Point3D position = ray.at(t);
+            Point2D position_on_circle(position.x(), position.z());
+            double height = position.y();
+            Vector3D normal(position.x(), 0.0, position.z());
+
+            hit->t = t;
+            hit->position = position;
+            hit->local_position.xyz = position;
+            hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
+            hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
+
+            assert(hit->normal.is_unit());
+        }
     };
 
-    class CylinderZ : public raytracer::primitives::_private_::PrimitiveImplementation
+    class CylinderZImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -265,7 +249,7 @@ namespace
 
                 if (t < hit->t)
                 {
-                    initialize_hit_z_cylinder(hit, ray, t);
+                    initialize_hit(hit, ray, t);
 
                     return true;
                 }
@@ -295,8 +279,8 @@ namespace
                 auto hit1 = std::make_shared<Hit>();
                 auto hit2 = std::make_shared<Hit>();
 
-                initialize_hit_z_cylinder(hit1.get(), ray, t1);
-                initialize_hit_z_cylinder(hit2.get(), ray, t2);
+                initialize_hit(hit1.get(), ray, t1);
+                initialize_hit(hit2.get(), ray, t2);
 
                 hits.push_back(hit1);
                 hits.push_back(hit2);
@@ -313,20 +297,39 @@ namespace
         {
             return Box(interval(-1.0, 1.0), interval(-1.0, 1.0), Interval<double>::infinite());
         }
+
+    private:
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const
+        {
+            assert(hit);
+
+            Point3D position = ray.at(t);
+            Point2D position_on_circle(position.x(), position.y());
+            double height = position.z();
+            Vector3D normal(position.x(), position.y(), 0);
+
+            hit->t = t;
+            hit->position = position;
+            hit->local_position.xyz = position;
+            hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
+            hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
+
+            assert(hit->normal.is_unit());
+        }
     };
 }
 
 Primitive raytracer::primitives::cylinder_along_x()
 {
-    return Primitive(std::make_shared<CylinderX>());
+    return Primitive(std::make_shared<CylinderXImplementation>());
 }
 
 Primitive raytracer::primitives::cylinder_along_y()
 {
-    return Primitive(std::make_shared<CylinderY>());
+    return Primitive(std::make_shared<CylinderYImplementation>());
 }
 
 Primitive raytracer::primitives::cylinder_along_z()
 {
-    return Primitive(std::make_shared<CylinderZ>());
+    return Primitive(std::make_shared<CylinderZImplementation>());
 }
