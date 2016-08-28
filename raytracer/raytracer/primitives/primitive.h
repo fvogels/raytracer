@@ -46,7 +46,7 @@ namespace raytracer
     class Primitive
     {
     public:
-        Primitive(std::shared_ptr<primitives::_private_::PrimitiveImplementation> impl = nullptr)
+        explicit Primitive(std::shared_ptr<primitives::_private_::PrimitiveImplementation> impl = nullptr)
             : m_impl(impl) { }
 
         primitives::_private_::PrimitiveImplementation* operator ->()
