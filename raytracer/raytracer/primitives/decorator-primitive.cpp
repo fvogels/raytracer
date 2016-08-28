@@ -1,4 +1,4 @@
-#include "primitives/decorator.h"
+#include "primitives/decorator-primitive.h"
 #include <assert.h>
 
 using namespace raytracer;

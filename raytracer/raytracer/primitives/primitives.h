@@ -9,7 +9,7 @@
 #include "primitives/cone-primitive.h"
 #include "primitives/group.h"
 #include "primitives/union.h"
-#include "primitives/decorator.h"
+#include "primitives/decorator-primitive.h"
 #include "primitives/intersection.h"
 #include "primitives/transformer.h"
 #include "primitives/triangle.h"

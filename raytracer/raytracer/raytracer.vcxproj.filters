@@ -54,9 +54,6 @@
     <ClCompile Include="materials\uniform-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\decorator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\rasterizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\cylinder-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\decorator-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -498,9 +498,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\uniform-material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\decorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\angle.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\cylinder-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\decorator-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
