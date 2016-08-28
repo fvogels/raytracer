@@ -396,9 +396,6 @@
     <ClCompile Include="math\transformation-matrices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\math-plane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\bumpifier-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -448,6 +445,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\bounding-box-accelerator-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1022,9 +1022,6 @@
     <ClInclude Include="math\transformation-matrices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\math-plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\bumpifier-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\bounding-box-accelerator-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

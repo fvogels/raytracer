@@ -509,7 +509,7 @@
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
-    <ClCompile Include="math\math-plane.cpp" />
+    <ClCompile Include="math\plane.cpp" />
     <ClCompile Include="math\quantize.cpp" />
     <ClCompile Include="math\transformation-matrices.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
@@ -701,7 +701,7 @@
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\functions\marble.h" />
     <ClInclude Include="math\functions\wood.h" />
-    <ClInclude Include="math\math-plane.h" />
+    <ClInclude Include="math\plane.h" />
     <ClInclude Include="math\quantize.h" />
     <ClInclude Include="math\transformation-matrices.h" />
     <ClInclude Include="math\vector.h" />

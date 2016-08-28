@@ -1,7 +1,7 @@
 #pragma once
 
 #include "rendering/renderer.h"
-#include "math/math-plane.h"
+#include "math/plane.h"
 
 
 namespace raytracer

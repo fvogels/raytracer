@@ -1,4 +1,4 @@
-#include "math/math-plane.h"
+#include "math/plane.h"
 #include <assert.h>
 
 using namespace math;
