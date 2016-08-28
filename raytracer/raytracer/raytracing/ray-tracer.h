@@ -24,10 +24,7 @@ namespace raytracer
     class RayTracer
     {
     public:
-        RayTracer()
-            : RayTracer(nullptr) { }
-
-        explicit RayTracer(std::shared_ptr<raytracers::_private_::RayTracerImplementation> implementation)
+        explicit RayTracer(std::shared_ptr<raytracers::_private_::RayTracerImplementation> implementation = nullptr)
             : m_implementation(implementation) { }
 
         const raytracers::_private_::RayTracerImplementation* operator ->() const
