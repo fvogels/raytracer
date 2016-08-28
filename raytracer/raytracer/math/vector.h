@@ -423,4 +423,10 @@ namespace math
 
         return result;
     }
+
+    template<unsigned N>
+    double cos_of_angle_between(const Vector<N>& u, const Vector<N>& v)
+    {
+        return u.dot(v) / (u.norm() * v.norm());
+    }
 }
