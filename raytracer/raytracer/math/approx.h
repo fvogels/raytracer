@@ -2,6 +2,8 @@
 
 #include <math.h>
 #include <iostream>
+#include <limits>
+
 
 namespace math
 {
