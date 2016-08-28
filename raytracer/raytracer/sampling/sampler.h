@@ -22,9 +22,7 @@ namespace raytracer
     class Sampler
     {
     public:
-        Sampler() : m_implementation(nullptr) { }
-
-        Sampler(std::shared_ptr<samplers::_private_::SamplerImplementation> implementation)
+        explicit Sampler(std::shared_ptr<samplers::_private_::SamplerImplementation> implementation = nullptr)
             : m_implementation(implementation) { }
 
         samplers::_private_::SamplerImplementation* operator ->() const
