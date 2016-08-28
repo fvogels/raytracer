@@ -11,7 +11,7 @@
 #include "primitives/union.h"
 #include "primitives/decorator-primitive.h"
 #include "primitives/intersection-primitive.h"
-#include "primitives/transformer.h"
+#include "primitives/transformer-primitive.h"
 #include "primitives/triangle.h"
 #include "primitives/bounding-box-accelerator.h"
 #include "primitives/mesh-primitive.h"

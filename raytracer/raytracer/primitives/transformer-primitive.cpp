@@ -1,4 +1,4 @@
-#include "primitives/transformer.h"
+#include "primitives/transformer-primitive.h"
 #include "math/misc.h"
 #include <algorithm>
 #include <assert.h>

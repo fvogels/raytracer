@@ -566,7 +566,7 @@
     <ClCompile Include="primitives\decorator-primitive.cpp" />
     <ClCompile Include="primitives\sphere-primitive.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
-    <ClCompile Include="primitives\transformer.cpp" />
+    <ClCompile Include="primitives\transformer-primitive.cpp" />
     <ClCompile Include="primitives\triangle.cpp" />
     <ClCompile Include="primitives\union.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v0.cpp" />
@@ -785,7 +785,7 @@
     <ClInclude Include="primitives\hit.h" />
     <ClInclude Include="primitives\primitive.h" />
     <ClInclude Include="primitives\sphere-primitive.h" />
-    <ClInclude Include="primitives\transformer.h" />
+    <ClInclude Include="primitives\transformer-primitive.h" />
     <ClInclude Include="primitives\triangle.h" />
     <ClInclude Include="primitives\union.h" />
     <ClInclude Include="raytracing\ray-tracer-v0.h" />
