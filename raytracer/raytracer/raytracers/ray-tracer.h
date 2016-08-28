@@ -2,8 +2,8 @@
 
 #include "imaging/color.h"
 #include "math/ray.h"
-#include "raytracing/scene.h"
-#include "raytracing/trace-result.h"
+#include "raytracers/scene.h"
+#include "raytracers/trace-result.h"
 #include <limits>
 
 

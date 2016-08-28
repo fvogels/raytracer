@@ -1,9 +1,9 @@
 #pragma once
 
 #include "imaging/bitmap.h"
-#include "raytracing/scene.h"
+#include "raytracers/scene.h"
 #include "sampling/sampler.h"
-#include "raytracing/ray-tracer.h"
+#include "raytracers/ray-tracer.h"
 #include "math/rasterizer.h"
 #include "math/point.h"
 #include "util/looper.h"

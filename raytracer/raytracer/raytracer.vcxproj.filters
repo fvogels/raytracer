@@ -138,25 +138,7 @@
     <ClCompile Include="imaging\ppm-format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="materials\material-properties.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rendering\cartoon-renderer.cpp">
@@ -324,9 +306,6 @@
     <ClCompile Include="primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raytracing\ray-tracer-v0.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="command-line-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +429,27 @@
     <ClCompile Include="math\plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v6.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -563,12 +563,6 @@
     <ClInclude Include="lights\lights.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracing\scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -629,9 +623,6 @@
     <ClInclude Include="lights\area-light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracing\ray-tracers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\functions\easing-functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -650,25 +641,7 @@
     <ClInclude Include="sampling\samplers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="demo\demos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v6.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\cartoon-renderer.h">
@@ -780,9 +753,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\split-depth-renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="raytracing\trace-result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demo\sphere-bumpifier-demo.h">
@@ -1010,9 +980,6 @@
     <ClInclude Include="animation\animation-sequence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracing\ray-tracer-v0.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="command-line-processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1074,6 +1041,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\trace-result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

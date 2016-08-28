@@ -1,4 +1,4 @@
-#include "raytracing/ray-tracer-v6.h"
+#include "raytracers/ray-tracer-v6.h"
 
 using namespace imaging;
 using namespace math;

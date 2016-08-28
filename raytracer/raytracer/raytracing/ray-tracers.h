@@ -1,7 +1,0 @@
-#include "raytracing/ray-tracer-v0.h"
-#include "raytracing/ray-tracer-v1.h"
-#include "raytracing/ray-tracer-v2.h"
-#include "raytracing/ray-tracer-v3.h"
-#include "raytracing/ray-tracer-v4.h"
-#include "raytracing/ray-tracer-v5.h"
-#include "raytracing/ray-tracer-v6.h"

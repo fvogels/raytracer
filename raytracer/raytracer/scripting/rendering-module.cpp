@@ -3,7 +3,7 @@
 #include "scripting/rendering-module.h"
 #include "scripting/scripting-util.h"
 #include "rendering/renderers.h"
-#include "raytracing/ray-tracer.h"
+#include "raytracers/ray-tracer.h"
 #include "sampling/samplers.h"
 #include "imaging/wif-format.h"
 #include "util/looper.h"

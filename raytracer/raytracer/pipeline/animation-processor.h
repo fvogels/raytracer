@@ -2,7 +2,7 @@
 
 #include "pipeline/processor.h"
 #include "animation/animation.h"
-#include "raytracing/scene.h"
+#include "raytracers/scene.h"
 
 
 namespace raytracer

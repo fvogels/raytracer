@@ -1,7 +1,7 @@
 #ifndef EXCLUDE_SCRIPTING
 
 #include "scripting/raytracing-module.h"
-#include "raytracing/ray-tracers.h"
+#include "raytracers/ray-tracers.h"
 #include "scripting/scripting-util.h"
 
 

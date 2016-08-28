@@ -2,7 +2,7 @@
 
 #include "scripting/animation-module.h"
 #include "scripting/scripting-util.h"
-#include "raytracing/scene.h"
+#include "raytracers/scene.h"
 #include "animation/animations.h"
 #include "animation/redimensioner.h"
 #include "math/angle.h"

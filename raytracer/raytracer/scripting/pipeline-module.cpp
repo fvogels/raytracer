@@ -6,7 +6,7 @@
 #include "imaging/bitmap.h"
 #include "rendering/renderers.h"
 #include "sampling/samplers.h"
-#include "raytracing/ray-tracers.h"
+#include "raytracers/ray-tracers.h"
 #include "util/looper.h"
 #include "animation/animation.h"
 #include "easylogging++.h"

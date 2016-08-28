@@ -1,6 +1,6 @@
 #pragma once
 
-#include "raytracing/ray-tracer-v2.h"
+#include "raytracers/ray-tracer-v3.h"
 #include <memory>
 
 
@@ -10,15 +10,13 @@ namespace raytracer
     {
         namespace _private_
         {
-            class RayTracerV3 : public RayTracerV2
+            class RayTracerV4 : public RayTracerV3
             {
             protected:
                 imaging::Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const override;
-
-                imaging::Color compute_specular(const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const;
             };
         }
 
-        RayTracer v3();
+        RayTracer v4();
     }
 }

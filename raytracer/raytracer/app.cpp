@@ -12,7 +12,7 @@
 #include "sampling/samplers.h"
 #include "materials/materials.h"
 #include "lights/lights.h"
-#include "raytracing/ray-tracers.h"
+#include "raytracers/ray-tracers.h"
 #include "rendering/renderers.h"
 #include "rendering/cartoon-renderer.h"
 #include "animation/animations.h"
