@@ -9,7 +9,7 @@ using namespace math;
 Material raytracer::materials::wood2d(unsigned octaves, double turbulence)
 {
     std::function<MaterialProperties(double)> converter = [](double t) -> MaterialProperties {
-        MaterialProperties properties(colors::black(), t * colors::red() * t / 2, colors::black(), 0.0, 0.0, 0.0, 0.0);
+        MaterialProperties properties(colors::black(), colors::red() * 0.5 * (1 - t), colors::black(), 0.0, 0.0, 0.0, 0.0);
 
         return properties;
     };
