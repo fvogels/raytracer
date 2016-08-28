@@ -9,17 +9,17 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class Cropper : public raytracer::primitives::_private_::PrimitiveImplementation
+    class CropperImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate, const math::Box& bounding_box)
+        CropperImplementation(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate, const math::Box& bounding_box)
             : m_cropped(cropped), m_predicate(predicate), m_bounding_box(bounding_box)
         {
             assert(cropped);
             assert(predicate);
         }
 
-        Cropper(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate)
+        CropperImplementation(Primitive cropped, const math::Function<bool(const math::Point3D&)> predicate)
             : m_cropped(cropped), m_predicate(predicate), m_bounding_box(cropped->bounding_box())
         {
             // NOP
@@ -53,12 +53,12 @@ namespace
 
 Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool(const Point3D&)> predicate, const Box& box)
 {
-    return Primitive(std::make_shared<Cropper>(cropped, predicate, box));
+    return Primitive(std::make_shared<CropperImplementation>(cropped, predicate, box));
 }
 
 Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool(const Point3D&)> predicate)
 {
-    return Primitive(std::make_shared<Cropper>(cropped, predicate));
+    return Primitive(std::make_shared<CropperImplementation>(cropped, predicate));
 }
 
 Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<double>& x_interval)
