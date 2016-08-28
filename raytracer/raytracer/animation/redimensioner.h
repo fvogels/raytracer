@@ -13,9 +13,9 @@ namespace animation
 
         std::function<result_type(TimeStamp)> lambda = [function](TimeStamp now) -> result_type
         {
-            std::function<T(const Point2D&)> lambda2 = [now, function](const Point2D& p) -> T
+            std::function<T(const math::Point2D&)> lambda2 = [now, function](const math::Point2D& p) -> T
             {
-                return function(Point3D(p.x(), p.y(), now.seconds()));
+                return function(math::Point3D(p.x(), p.y(), now.seconds()));
             };
 
             result_type function = from_lambda(lambda2);
@@ -33,9 +33,9 @@ namespace animation
 
         std::function<result_type(TimeStamp)> lambda = [function](TimeStamp now) -> result_type
         {
-            std::function<T(const Point2D&)> lambda2 = [now, function](const Point2D& p) -> T
+            std::function<T(const math::Point2D&)> lambda2 = [now, function](const math::Point2D& p) -> T
             {
-                return function(Point3D(now.seconds(), p.x(), p.y()));
+                return function(math::Point3D(now.seconds(), p.x(), p.y()));
             };
 
             result_type function = from_lambda(lambda2);
@@ -53,9 +53,9 @@ namespace animation
 
         std::function<result_type(TimeStamp)> lambda = [function](TimeStamp now) -> result_type
         {
-            std::function<T(const Point2D&)> lambda2 = [now, function](const Point2D& p) -> T
+            std::function<T(const math::Point2D&)> lambda2 = [now, function](const math::Point2D& p) -> T
             {
-                return function(Point3D(p.x(), now.seconds(), p.y()));
+                return function(math::Point3D(p.x(), now.seconds(), p.y()));
             };
 
             result_type function = from_lambda(lambda2);
