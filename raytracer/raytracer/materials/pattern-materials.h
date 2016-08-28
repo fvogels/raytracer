@@ -11,7 +11,6 @@ namespace raytracer
 {
     namespace materials
     {
-        
         Material pattern2d(math::Function<bool(const math::Point2D&)>, Material, Material);
         Material horizontal_lines(double, Material, Material);
         Material vertical_lines(double, Material, Material);

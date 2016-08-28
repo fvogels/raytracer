@@ -45,7 +45,7 @@ namespace raytracer
     class Material
     {
     public:
-        Material(std::shared_ptr<materials::_private_::MaterialImplementation> impl = nullptr)
+        explicit Material(std::shared_ptr<materials::_private_::MaterialImplementation> impl = nullptr)
             : m_impl(impl) { }
 
         operator bool() const
