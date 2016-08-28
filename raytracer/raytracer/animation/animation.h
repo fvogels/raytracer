@@ -22,7 +22,7 @@ namespace animation
 
         static Animation<T> empty()
         {
-            std::function<T(TimeStamp)> lambda = [](TimeStamp ts) -> T {
+            std::function<T(TimeStamp)> lambda = [](TimeStamp) -> T {
                 LOG(ERROR) << "Cannot run empty animation";
 
                 abort();
