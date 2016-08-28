@@ -11,7 +11,7 @@ using namespace math;
 
 namespace
 {
-    class Sphere : public raytracer::primitives::_private_::PrimitiveImplementation
+    class SphereImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -158,5 +158,5 @@ namespace
 
 Primitive raytracer::primitives::sphere()
 {
-    return Primitive(std::make_shared<Sphere>());
+    return Primitive(std::make_shared<SphereImplementation>());
 }

@@ -10,7 +10,7 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class Disk : public raytracer::primitives::_private_::PrimitiveImplementation
+    class DiskImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
@@ -67,5 +67,5 @@ namespace
 
 Primitive raytracer::primitives::disk()
 {
-    return Primitive(std::make_shared<Disk>());
+    return Primitive(std::make_shared<DiskImplementation>());
 }

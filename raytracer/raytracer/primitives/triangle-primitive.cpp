@@ -11,10 +11,10 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class Triangle : public raytracer::primitives::_private_::PrimitiveImplementation
+    class TriangleImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Triangle(const Point3D& a, const Point3D& b, const Point3D& c)
+        TriangleImplementation(const Point3D& a, const Point3D& b, const Point3D& c)
             : m_a(a), m_b(b), m_c(c)
         {
             m_normal = (b - a).cross(c - a).normalized();
@@ -116,5 +116,5 @@ namespace
 
 Primitive raytracer::primitives::triangle(const math::Point3D& a, const math::Point3D& b, const math::Point3D& c)
 {
-    return Primitive(std::make_shared<Triangle>(a, b, c));
+    return Primitive(std::make_shared<TriangleImplementation>(a, b, c));
 }

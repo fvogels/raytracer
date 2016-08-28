@@ -7,7 +7,7 @@ using namespace math;
 
 namespace
 {
-    class CoordinatePlane : public raytracer::primitives::_private_::PrimitiveImplementation
+    class CoordinatePlaneImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
@@ -25,7 +25,7 @@ namespace
         }
     };
 
-    class PlaneXY : public CoordinatePlane
+    class PlaneXYImplementation : public CoordinatePlaneImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -67,7 +67,7 @@ namespace
         }
     };
 
-    class PlaneXZ : public CoordinatePlane
+    class PlaneXZImplementation : public CoordinatePlaneImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -109,7 +109,7 @@ namespace
         }
     };
 
-    class PlaneYZ : public CoordinatePlane
+    class PlaneYZImplementation : public CoordinatePlaneImplementation
     {
     public:
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -154,15 +154,15 @@ namespace
 
 Primitive raytracer::primitives::xy_plane()
 {
-    return Primitive(std::make_shared<PlaneXY>());
+    return Primitive(std::make_shared<PlaneXYImplementation>());
 }
 
 Primitive raytracer::primitives::xz_plane()
 {
-    return Primitive(std::make_shared<PlaneXZ>());
+    return Primitive(std::make_shared<PlaneXZImplementation>());
 }
 
 Primitive raytracer::primitives::yz_plane()
 {
-    return Primitive(std::make_shared<PlaneYZ>());
+    return Primitive(std::make_shared<PlaneYZImplementation>());
 }

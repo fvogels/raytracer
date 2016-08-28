@@ -5,10 +5,10 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class Group : public raytracer::primitives::_private_::PrimitiveImplementation
+    class GroupImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Group(unsigned id, Primitive child)
+        GroupImplementation(unsigned id, Primitive child)
             : m_child(child), m_id(id)
         {
             // NOP
@@ -56,5 +56,5 @@ namespace
 
 Primitive raytracer::primitives::group(unsigned id, Primitive child)
 {
-    return Primitive(std::make_shared<Group>(id, child));
+    return Primitive(std::make_shared<GroupImplementation>(id, child));
 }

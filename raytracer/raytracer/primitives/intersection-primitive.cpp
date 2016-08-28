@@ -6,10 +6,10 @@ using namespace math;
 
 namespace
 {
-    class Intersection : public raytracer::primitives::_private_::PrimitiveImplementation
+    class IntersectionImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Intersection(Primitive first, Primitive second)
+        IntersectionImplementation(Primitive first, Primitive second)
             : m_first(first), m_second(second)
         {
             assert(first);
@@ -124,5 +124,5 @@ namespace
 
 Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
 {
-    return Primitive(std::make_shared<Intersection>(first, second));
+    return Primitive(std::make_shared<IntersectionImplementation>(first, second));
 }

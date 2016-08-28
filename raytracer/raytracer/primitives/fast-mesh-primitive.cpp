@@ -37,10 +37,10 @@ namespace
 
 #pragma pack(pop)
 
-    class FastMesh : public raytracer::primitives::_private_::PrimitiveImplementation
+    class FastMeshImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        FastMesh(std::unique_ptr<XYZ[]> vertices, std::unique_ptr<TRIANGLE[]> triangles, std::unique_ptr<BOX[]> boxes, unsigned vertex_count, unsigned triangle_count, unsigned box_count)
+        FastMeshImplementation(std::unique_ptr<XYZ[]> vertices, std::unique_ptr<TRIANGLE[]> triangles, std::unique_ptr<BOX[]> boxes, unsigned vertex_count, unsigned triangle_count, unsigned box_count)
             : m_vertices(std::move(vertices)), m_triangles(std::move(triangles)), m_boxes(std::move(boxes)), m_vertex_count(vertex_count), m_triangle_count(triangle_count), m_box_count(box_count) { }
 
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
@@ -366,7 +366,7 @@ namespace
             bs[i] = boxes[i];
         }
 
-        return Primitive(std::make_shared<FastMesh>(std::move(vertices), std::move(ts), std::move(bs), unsigned(n_vertices), unsigned(triangles.size()), unsigned(boxes.size())));
+        return Primitive(std::make_shared<FastMeshImplementation>(std::move(vertices), std::move(ts), std::move(bs), unsigned(n_vertices), unsigned(triangles.size()), unsigned(boxes.size())));
     }
 
     template<typename T>
@@ -513,7 +513,7 @@ namespace
             bs[i] = boxes[i];
         }
 
-        return Primitive(std::make_shared<FastMesh>(std::move(vertices), std::move(ts), std::move(bs), unsigned(n_vertices), unsigned(triangles.size()), unsigned(boxes.size())));
+        return Primitive(std::make_shared<FastMeshImplementation>(std::move(vertices), std::move(ts), std::move(bs), unsigned(n_vertices), unsigned(triangles.size()), unsigned(boxes.size())));
     }
 }
 

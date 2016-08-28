@@ -10,10 +10,10 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class Transformer : public raytracer::primitives::_private_::PrimitiveImplementation
+    class TransformerImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Transformer(const math::Transformation& transformer, Primitive transformee)
+        TransformerImplementation(const math::Transformation& transformer, Primitive transformee)
             : transformer(transformer), transformee(transformee) { }
 
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -88,7 +88,7 @@ namespace
 
 Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
 {
-    return Primitive(std::make_shared<Transformer>(transformation, transformee));
+    return Primitive(std::make_shared<TransformerImplementation>(transformation, transformee));
 }
 
 Primitive raytracer::primitives::translate(const math::Vector3D& v, Primitive transformee)
@@ -129,5 +129,5 @@ Primitive raytracer::primitives::align_y_to(const math::Vector3D y_axis, Primiti
 
     auto transformation = math::transformations::rotate_align_y(y_axis);
 
-    return Primitive(std::make_shared<Transformer>(transformation, primitive));
+    return Primitive(std::make_shared<TransformerImplementation>(transformation, primitive));
 }

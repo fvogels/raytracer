@@ -7,10 +7,10 @@ using namespace math;
 
 namespace
 {
-    class Union : public raytracer::primitives::_private_::PrimitiveImplementation
+    class UnionImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Union(std::vector<Primitive>& children)
+        UnionImplementation(std::vector<Primitive>& children)
             : children(children)
         {
             // NOP
@@ -68,5 +68,5 @@ namespace
 
 Primitive raytracer::primitives::make_union(std::vector<Primitive>& children)
 {
-    return Primitive(std::make_shared<Union>(children));
+    return Primitive(std::make_shared<UnionImplementation>(children));
 }
