@@ -1,4 +1,4 @@
-#include "primitives/bounding-box-accelerator.h"
+#include "primitives/bounding-box-accelerator-primitive.h"
 #include "primitives/union-primitive.h"
 #include <algorithm>
 

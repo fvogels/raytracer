@@ -554,7 +554,7 @@
     <ClCompile Include="math\rectangle3d.cpp" />
     <ClCompile Include="math\transformation.cpp" />
     <ClCompile Include="math\ray.cpp" />
-    <ClCompile Include="primitives\bounding-box-accelerator.cpp" />
+    <ClCompile Include="primitives\bounding-box-accelerator-primitive.cpp" />
     <ClCompile Include="primitives\cone-primitive.cpp" />
     <ClCompile Include="primitives\cropper-primitive.cpp" />
     <ClCompile Include="primitives\disk-primitive.cpp" />
@@ -770,7 +770,7 @@
     <ClInclude Include="math\rectangle3d.h" />
     <ClInclude Include="math\transformation.h" />
     <ClInclude Include="logging.h" />
-    <ClInclude Include="primitives\bounding-box-accelerator.h" />
+    <ClInclude Include="primitives\bounding-box-accelerator-primitive.h" />
     <ClInclude Include="primitives\cone-primitive.h" />
     <ClInclude Include="primitives\cropper-primitive.h" />
     <ClInclude Include="primitives\cylinder-primitive.h" />

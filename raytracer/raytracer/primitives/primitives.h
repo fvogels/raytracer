@@ -13,7 +13,7 @@
 #include "primitives/intersection-primitive.h"
 #include "primitives/transformer-primitive.h"
 #include "primitives/triangle-primitive.h"
-#include "primitives/bounding-box-accelerator.h"
+#include "primitives/bounding-box-accelerator-primitive.h"
 #include "primitives/mesh-primitive.h"
 #include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
