@@ -172,7 +172,7 @@ namespace raytracer
             {
                 chaiscript::utility::add_class<T>(module,
                     name,
-                    { constructor<T(const T&)>() },
+                  { chaiscript::constructor<T(const T&)>() },
                     {});
             }
 
