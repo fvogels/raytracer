@@ -562,7 +562,7 @@
     <ClCompile Include="primitives\intersection.cpp" />
     <ClCompile Include="primitives\mesh.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
-    <ClCompile Include="primitives\cylinder.cpp" />
+    <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\decorator.cpp" />
     <ClCompile Include="primitives\sphere.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
@@ -773,7 +773,7 @@
     <ClInclude Include="primitives\bounding-box-accelerator.h" />
     <ClInclude Include="primitives\cone-primitive.h" />
     <ClInclude Include="primitives\cropper-primitive.h" />
-    <ClInclude Include="primitives\cylinder.h" />
+    <ClInclude Include="primitives\cylinder-primitive.h" />
     <ClInclude Include="primitives\disk.h" />
     <ClInclude Include="primitives\fast-mesh.h" />
     <ClInclude Include="primitives\hit-position.h" />

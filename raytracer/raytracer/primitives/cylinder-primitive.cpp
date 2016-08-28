@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#include "primitives/cylinder.h"
+#include "primitives/cylinder-primitive.h"
 #include "materials/material.h"
 #include "util/misc.h"
 #include "math/quadratic_equation.h"
