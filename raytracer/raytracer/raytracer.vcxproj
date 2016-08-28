@@ -560,7 +560,7 @@
     <ClCompile Include="primitives\disk.cpp" />
     <ClCompile Include="primitives\fast-mesh.cpp" />
     <ClCompile Include="primitives\intersection.cpp" />
-    <ClCompile Include="primitives\mesh.cpp" />
+    <ClCompile Include="primitives\mesh-primitive.cpp" />
     <ClCompile Include="primitives\plane.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\decorator-primitive.cpp" />
@@ -778,7 +778,7 @@
     <ClInclude Include="primitives\fast-mesh.h" />
     <ClInclude Include="primitives\hit-position.h" />
     <ClInclude Include="primitives\intersection.h" />
-    <ClInclude Include="primitives\mesh.h" />
+    <ClInclude Include="primitives\mesh-primitive.h" />
     <ClInclude Include="primitives\plane.h" />
     <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator-primitive.h" />

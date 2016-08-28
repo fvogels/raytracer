@@ -1,4 +1,4 @@
-#include "primitives/mesh.h"
+#include "primitives/mesh-primitive.h"
 #include "primitives/triangle.h"
 #include "primitives/bounding-box-accelerator.h"
 #include "primitives/union.h"
