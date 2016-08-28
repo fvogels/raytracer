@@ -20,7 +20,6 @@ namespace
             unsigned frame_count = unsigned(animation.duration().seconds() * m_fps);
             LOG(INFO) << m_fps << " frames per second, " << frame_duration << " per frame, " << frame_count << " frames";
             TimeStamp now = TimeStamp::zero();
-            TimeStamp end = TimeStamp::from_epoch(animation.duration());
 
             for ( unsigned i = 0; i != frame_count; ++i )
             {
