@@ -147,9 +147,6 @@
     <ClCompile Include="primitives\fast-mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\cone.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sampling\single-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\bumpifier-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\cone-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -642,9 +642,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\fast-mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\cone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sampling\sampler.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\bumpifier-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\cone-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "primitives/cone.h"
+#include "primitives/cone-primitive.h"
 #include "primitives/transformer.h"
 #include "math/misc.h"
 #include "math/quadratic_equation.h"

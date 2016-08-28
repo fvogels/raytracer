@@ -6,7 +6,7 @@
 #include "primitives/cylinder.h"
 #include "primitives/disk.h"
 #include "primitives/cropper.h"
-#include "primitives/cone.h"
+#include "primitives/cone-primitive.h"
 #include "primitives/group.h"
 #include "primitives/union.h"
 #include "primitives/decorator.h"
