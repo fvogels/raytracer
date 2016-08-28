@@ -33,9 +33,6 @@
     <ClCompile Include="math\rectangle2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\union.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\transformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\triangle-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\union-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -480,9 +480,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\rectangle2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\union.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\transformation.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\triangle-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\union-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

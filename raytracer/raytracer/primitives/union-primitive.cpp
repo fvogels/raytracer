@@ -1,4 +1,4 @@
-#include "primitives/union.h"
+#include "primitives/union-primitive.h"
 #include <algorithm>
 
 using namespace raytracer;

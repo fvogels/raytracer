@@ -568,7 +568,7 @@
     <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="primitives\transformer-primitive.cpp" />
     <ClCompile Include="primitives\triangle-primitive.cpp" />
-    <ClCompile Include="primitives\union.cpp" />
+    <ClCompile Include="primitives\union-primitive.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v0.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v1.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v2.cpp" />
@@ -787,7 +787,7 @@
     <ClInclude Include="primitives\sphere-primitive.h" />
     <ClInclude Include="primitives\transformer-primitive.h" />
     <ClInclude Include="primitives\triangle-primitive.h" />
-    <ClInclude Include="primitives\union.h" />
+    <ClInclude Include="primitives\union-primitive.h" />
     <ClInclude Include="raytracing\ray-tracer-v0.h" />
     <ClInclude Include="raytracing\ray-tracer-v1.h" />
     <ClInclude Include="raytracing\ray-tracer-v2.h" />

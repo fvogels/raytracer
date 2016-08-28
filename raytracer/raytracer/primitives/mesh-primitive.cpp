@@ -1,7 +1,7 @@
 #include "primitives/mesh-primitive.h"
-#include "primitives/triangle.h"
+#include "primitives/triangle-primitive.h"
 #include "primitives/bounding-box-accelerator.h"
-#include "primitives/union.h"
+#include "primitives/union-primitive.h"
 #include "easylogging++.h"
 #include <vector>
 

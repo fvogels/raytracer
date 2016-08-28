@@ -1,5 +1,5 @@
 #include "primitives/cone-primitive.h"
-#include "primitives/transformer.h"
+#include "primitives/transformer-primitive.h"
 #include "math/misc.h"
 #include "math/quadratic_equation.h"
 #include "util/misc.h"
