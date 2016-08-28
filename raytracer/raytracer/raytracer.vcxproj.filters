@@ -90,9 +90,6 @@
     <ClCompile Include="cameras\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\disk.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\quadratic_equation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\mesh-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\disk-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -582,9 +582,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracing\ray-tracer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\disk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\misc.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\mesh-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\disk-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

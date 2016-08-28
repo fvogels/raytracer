@@ -1,4 +1,4 @@
-#include "primitives/disk.h"
+#include "primitives/disk-primitive.h"
 #include "math/misc.h"
 #include <assert.h>
 #include <algorithm>
