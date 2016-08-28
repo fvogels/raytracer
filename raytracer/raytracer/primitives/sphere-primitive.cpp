@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#include "primitives/sphere.h"
+#include "primitives/sphere-primitive.h"
 #include "materials/material.h"
 #include "util/misc.h"
 #include <assert.h>

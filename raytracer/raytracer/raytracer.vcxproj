@@ -564,7 +564,7 @@
     <ClCompile Include="primitives\plane-primitive.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\decorator-primitive.cpp" />
-    <ClCompile Include="primitives\sphere.cpp" />
+    <ClCompile Include="primitives\sphere-primitive.cpp" />
     <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="primitives\transformer.cpp" />
     <ClCompile Include="primitives\triangle.cpp" />
@@ -784,7 +784,7 @@
     <ClInclude Include="primitives\decorator-primitive.h" />
     <ClInclude Include="primitives\hit.h" />
     <ClInclude Include="primitives\primitive.h" />
-    <ClInclude Include="primitives\sphere.h" />
+    <ClInclude Include="primitives\sphere-primitive.h" />
     <ClInclude Include="primitives\transformer.h" />
     <ClInclude Include="primitives\triangle.h" />
     <ClInclude Include="primitives\union.h" />

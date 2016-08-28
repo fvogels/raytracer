@@ -2,7 +2,7 @@
 
 #include "primitives/primitive.h"
 #include "primitives/plane-primitive.h"
-#include "primitives/sphere.h"
+#include "primitives/sphere-primitive.h"
 #include "primitives/cylinder-primitive.h"
 #include "primitives/disk-primitive.h"
 #include "primitives/cropper-primitive.h"
