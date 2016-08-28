@@ -1,7 +1,7 @@
 #ifndef EXCLUDE_SCRIPTING
 
 #include "scripting/samplers-module.h"
-#include "sampling/samplers.h"
+#include "samplers/samplers.h"
 #include "scripting/scripting-util.h"
 
 using namespace chaiscript;

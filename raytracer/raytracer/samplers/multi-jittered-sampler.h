@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sampling/sampler.h"
+#include "samplers/sampler.h"
 
 
 namespace raytracer

@@ -1,4 +1,4 @@
-#include "sampling/stratified-fixed-sampler.h"
+#include "samplers/stratified-fixed-sampler.h"
 #include "math/rasterizer.h"
 
 using namespace math;

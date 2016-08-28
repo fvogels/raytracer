@@ -1,4 +1,4 @@
-#include "sampling/random-sampler.h"
+#include "samplers/random-sampler.h"
 #include "math/rasterizer.h"
 #include <random>
 

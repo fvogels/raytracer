@@ -1,7 +1,0 @@
-#include "sampling/single-sampler.h"
-#include "sampling/random-sampler.h"
-#include "sampling/stratified-fixed-sampler.h"
-#include "sampling/stratified-jittered-sampler.h"
-#include "sampling/stratified-half-jittered-sampler.h"
-#include "sampling/nrooks-sampler.h"
-#include "sampling/multi-jittered-sampler.h"

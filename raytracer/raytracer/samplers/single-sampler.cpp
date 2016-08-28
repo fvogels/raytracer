@@ -1,4 +1,4 @@
-#include "sampling/single-sampler.h"
+#include "samplers/single-sampler.h"
 
 using namespace math;
 using namespace raytracer;

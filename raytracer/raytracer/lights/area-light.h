@@ -2,7 +2,7 @@
 
 #include "lights/point-light.h"
 #include "math/rectangle3d.h"
-#include "sampling/sampler.h"
+#include "samplers/sampler.h"
 #include <memory>
 
 

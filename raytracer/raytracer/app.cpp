@@ -9,7 +9,7 @@
 #include "math/rasterizer.h"
 #include "math/functions.h"
 #include "math/functions/noise.h"
-#include "sampling/samplers.h"
+#include "samplers/samplers.h"
 #include "materials/materials.h"
 #include "lights/lights.h"
 #include "raytracers/ray-tracers.h"

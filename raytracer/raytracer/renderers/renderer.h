@@ -2,7 +2,7 @@
 
 #include "imaging/bitmap.h"
 #include "raytracers/scene.h"
-#include "sampling/sampler.h"
+#include "samplers/sampler.h"
 #include "raytracers/ray-tracer.h"
 #include "math/rasterizer.h"
 #include "math/point.h"

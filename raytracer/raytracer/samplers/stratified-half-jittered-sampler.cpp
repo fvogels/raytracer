@@ -1,4 +1,4 @@
-#include "sampling/stratified-jittered-sampler.h"
+#include "samplers/stratified-half-jittered-sampler.h"
 #include "math/rasterizer.h"
 #include <random>
 
@@ -8,17 +8,17 @@ using namespace raytracer;
 
 namespace
 {
-    class StratiefiedJitteredSampler : public raytracer::samplers::_private_::SamplerImplementation
+    class StratiefiedHalfJitteredSampler : public raytracer::samplers::_private_::SamplerImplementation
     {
     public:
-        StratiefiedJitteredSampler(unsigned rows, unsigned columns)
+        StratiefiedHalfJitteredSampler(unsigned rows, unsigned columns)
             : m_rows(rows), m_columns(columns) { }
 
         void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override
         {
             Rasterizer raster(rectangle, this->m_columns, this->m_rows);
             std::default_random_engine generator;
-            std::uniform_real_distribution<double> distribution(0, 1);
+            std::uniform_real_distribution<double> distribution(0.25, 0.75);
 
             for (unsigned y = 0; y != this->m_rows; ++y)
             {
@@ -39,7 +39,7 @@ namespace
     };
 }
 
-Sampler raytracer::samplers::stratified_jittered(unsigned rows, unsigned columns)
+Sampler raytracer::samplers::stratified_half_jittered(unsigned rows, unsigned columns)
 {
-    return Sampler(std::make_shared<StratiefiedJitteredSampler>(rows, columns));
+    return Sampler(std::make_shared<StratiefiedHalfJitteredSampler>(rows, columns));
 }

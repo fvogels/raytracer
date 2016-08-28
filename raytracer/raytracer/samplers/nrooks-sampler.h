@@ -1,12 +1,12 @@
 #pragma once
 
-#include "sampling/sampler.h"
+#include "samplers/sampler.h"
 
 
 namespace raytracer
 {
     namespace samplers
     {
-        Sampler random(unsigned);
+        Sampler nrooks(unsigned);
     }
 }

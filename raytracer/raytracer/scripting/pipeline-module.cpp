@@ -5,7 +5,7 @@
 #include "scripting/scripting-util.h"
 #include "imaging/bitmap.h"
 #include "renderers/renderers.h"
-#include "sampling/samplers.h"
+#include "samplers/samplers.h"
 #include "raytracers/ray-tracers.h"
 #include "util/looper.h"
 #include "animation/animation.h"

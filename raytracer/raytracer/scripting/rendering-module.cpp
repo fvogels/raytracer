@@ -4,7 +4,7 @@
 #include "scripting/scripting-util.h"
 #include "renderers/renderers.h"
 #include "raytracers/ray-tracer.h"
-#include "sampling/samplers.h"
+#include "samplers/samplers.h"
 #include "imaging/wif-format.h"
 #include "util/looper.h"
 

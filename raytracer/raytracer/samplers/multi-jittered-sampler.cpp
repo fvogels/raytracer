@@ -1,4 +1,4 @@
-#include "sampling/multi-jittered-sampler.h"
+#include "samplers/multi-jittered-sampler.h"
 #include "math/rasterizer.h"
 #include <random>
 #include <algorithm>

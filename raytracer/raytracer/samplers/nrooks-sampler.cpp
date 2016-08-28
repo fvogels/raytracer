@@ -1,4 +1,4 @@
-#include "sampling/nrooks-sampler.h"
+#include "samplers/nrooks-sampler.h"
 #include "math/rasterizer.h"
 #include <random>
 #include <algorithm>
