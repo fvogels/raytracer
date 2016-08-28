@@ -521,7 +521,7 @@
     <ClCompile Include="pipeline\renderer-processor.cpp" />
     <ClCompile Include="pipeline\wif-consumer.cpp" />
     <ClCompile Include="primitive.cpp" />
-    <ClCompile Include="primitives\bumpifier.cpp" />
+    <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group.cpp" />
     <ClCompile Include="primitives\material-transformer.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
@@ -722,7 +722,7 @@
     <ClInclude Include="pipeline\producer.h" />
     <ClInclude Include="pipeline\renderer-processor.h" />
     <ClInclude Include="pipeline\wif-consumer.h" />
-    <ClInclude Include="primitives\bumpifier.h" />
+    <ClInclude Include="primitives\bumpifier-primitive.h" />
     <ClInclude Include="primitives\group.h" />
     <ClInclude Include="primitives\material-transformer.h" />
     <ClInclude Include="raytracing\trace-result.h" />

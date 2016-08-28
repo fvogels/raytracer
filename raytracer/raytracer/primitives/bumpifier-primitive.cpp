@@ -1,4 +1,4 @@
-#include "primitives/bumpifier.h"
+#include "primitives/bumpifier-primitive.h"
 #include <algorithm>
 
 using namespace math;
