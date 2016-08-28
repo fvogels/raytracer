@@ -8,10 +8,10 @@ using namespace math;
 
 namespace
 {
-    class Decorator : public raytracer::primitives::_private_::PrimitiveImplementation
+    class DecoratorImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Decorator(Material material, Primitive child)
+        DecoratorImplementation(Material material, Primitive child)
             : m_material(material), m_child(child)
         {
             assert(material);
@@ -70,5 +70,5 @@ namespace
 
 Primitive raytracer::primitives::decorate(Material material, Primitive child)
 {
-    return Primitive(std::make_shared<Decorator>(material, child));
+    return Primitive(std::make_shared<DecoratorImplementation>(material, child));
 }
