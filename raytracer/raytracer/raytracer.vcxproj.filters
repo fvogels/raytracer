@@ -84,9 +84,6 @@
     <ClCompile Include="lights\directional-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\transformer-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\triangle-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -579,9 +579,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lights\directional-light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\box.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\transformer-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\triangle-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

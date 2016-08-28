@@ -1,4 +1,4 @@
-#include "primitives/triangle.h"
+#include "primitives/triangle-primitive.h"
 #include "math/misc.h"
 #include "easylogging++.h"
 #include <assert.h>
