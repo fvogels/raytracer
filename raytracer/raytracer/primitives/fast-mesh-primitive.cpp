@@ -1,4 +1,4 @@
-#include "primitives/fast-mesh.h"
+#include "primitives/fast-mesh-primitive.h"
 #include "primitives/triangle.h"
 #include "math/point.h"
 #include "math/box.h"

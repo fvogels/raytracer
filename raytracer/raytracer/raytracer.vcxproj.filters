@@ -129,9 +129,6 @@
     <ClCompile Include="materials\worley-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\fast-mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sampling\single-sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\disk-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\fast-mesh-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -624,9 +624,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\worley-material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\fast-mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sampling\sampler.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\disk-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\fast-mesh-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

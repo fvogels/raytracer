@@ -15,6 +15,6 @@
 #include "primitives/triangle.h"
 #include "primitives/bounding-box-accelerator.h"
 #include "primitives/mesh-primitive.h"
-#include "primitives/fast-mesh.h"
+#include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
 #include "primitives/material-transformer.h"
