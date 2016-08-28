@@ -1,7 +1,7 @@
 #pragma once
 
 #include "primitives/primitive.h"
-#include "primitives/plane.h"
+#include "primitives/plane-primitive.h"
 #include "primitives/sphere.h"
 #include "primitives/cylinder-primitive.h"
 #include "primitives/disk-primitive.h"

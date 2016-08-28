@@ -1,4 +1,4 @@
-#include "primitives/plane.h"
+#include "primitives/plane-primitive.h"
 
 using namespace raytracer;
 using namespace raytracer::primitives;

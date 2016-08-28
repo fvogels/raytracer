@@ -69,9 +69,6 @@
     <ClCompile Include="materials\material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\plane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cameras\orthographic-camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -450,6 +447,9 @@
     <ClCompile Include="primitives\intersection-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\plane-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -546,9 +546,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\hit-position.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="primitives\plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cameras\orthographic-camera.h">
@@ -1074,6 +1071,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\intersection-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\plane-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
