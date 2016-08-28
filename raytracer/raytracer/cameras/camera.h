@@ -29,9 +29,7 @@ namespace raytracer
     class Camera
     {
     public:
-        Camera() : m_implementation(nullptr) { }
-
-        explicit Camera(std::shared_ptr<cameras::_private_::CameraImplementation> implementation)
+        explicit Camera(std::shared_ptr<cameras::_private_::CameraImplementation> implementation = nullptr)
             : m_implementation(implementation) { }
 
         cameras::_private_::CameraImplementation* operator ->() const
