@@ -523,7 +523,7 @@
     <ClCompile Include="primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
-    <ClCompile Include="primitives\material-transformer.cpp" />
+    <ClCompile Include="primitives\material-transformer-primitive.cpp" />
     <ClCompile Include="raytracing\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
@@ -724,7 +724,7 @@
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="primitives\bumpifier-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
-    <ClInclude Include="primitives\material-transformer.h" />
+    <ClInclude Include="primitives\material-transformer-primitive.h" />
     <ClInclude Include="raytracing\trace-result.h" />
     <ClInclude Include="rendering\cartoon-renderer.h" />
     <ClInclude Include="raytracing\ray-tracer-v4.h" />

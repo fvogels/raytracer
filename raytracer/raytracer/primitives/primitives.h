@@ -17,4 +17,4 @@
 #include "primitives/mesh-primitive.h"
 #include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
-#include "primitives/material-transformer.h"
+#include "primitives/material-transformer-primitive.h"

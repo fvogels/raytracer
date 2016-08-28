@@ -1,4 +1,4 @@
-#include "primitives/material-transformer.h"
+#include "primitives/material-transformer-primitive.h"
 #include "math/transformation-matrices.h"
 #include <assert.h>
 
