@@ -44,9 +44,24 @@ namespace
             return raytracer::materials::texture(path);
         }
 
+        Material lines(double thickness, Material m1, Material m2) const
+        {
+            return raytracer::materials::horizontal_lines(thickness, m1, m2);
+        }
+
+        Material grid(double thickness, Material m1, Material m2) const
+        {
+            return raytracer::materials::grid(thickness, m1, m2);
+        }
+
         Material checkered(Material x, Material y) const
         {
             return raytracer::materials::checkered(x, y);
+        }
+
+        Material polka(double radius, Material x, Material y) const
+        {
+            return raytracer::materials::polka(radius, x, y);
         }
 
         Material marble2d(unsigned octaves, double turbulence) const
@@ -57,6 +72,11 @@ namespace
         Material marble3d(unsigned octaves, double turbulence) const
         {
             return raytracer::materials::marble3d(octaves, turbulence);
+        }
+
+        Material wood2d(unsigned octaves, double turbulence) const
+        {
+            return raytracer::materials::wood2d(octaves, turbulence);
         }
     };
 }
@@ -75,9 +95,13 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
+    BIND(lines);
+    BIND(grid);
     BIND(checkered);
+    BIND(polka);
     BIND(marble2d);
     BIND(marble3d);
+    BIND(wood2d);
 #undef BIND
 #undef BIND_AS
 

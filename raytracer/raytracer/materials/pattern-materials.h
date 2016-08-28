@@ -16,5 +16,6 @@ namespace raytracer
         Material vertical_lines(double, Material, Material);
         Material grid(double, Material, Material);
         Material checkered(Material, Material);
+        Material polka(double, Material, Material);
     }
 }

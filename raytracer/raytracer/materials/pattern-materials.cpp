@@ -59,3 +59,8 @@ Material raytracer::materials::grid(double thickness, Material m1, Material m2)
 {
     return pattern2d(math::functions::grid(thickness), m1, m2);
 }
+
+Material raytracer::materials::polka(double radius, Material m1, Material m2)
+{
+    return pattern2d(math::functions::polka(radius), m1, m2);
+}
