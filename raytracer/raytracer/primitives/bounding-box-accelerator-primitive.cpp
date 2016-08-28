@@ -68,10 +68,10 @@ namespace
         return bounding_box_accelerator(make_union(all_primitives));
     }
 
-    class BoundingBoxAccelerator : public raytracer::primitives::_private_::PrimitiveImplementation
+    class BoundingBoxAcceleratorImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        BoundingBoxAccelerator(Primitive child)
+        BoundingBoxAcceleratorImplementation(Primitive child)
             : m_child(child), m_bounding_box(child->bounding_box())
         {
             // NOP
@@ -116,7 +116,7 @@ namespace
 
 Primitive raytracer::primitives::bounding_box_accelerator(Primitive primitive)
 {
-    return Primitive(std::make_shared<BoundingBoxAccelerator>(primitive));
+    return Primitive(std::make_shared<BoundingBoxAcceleratorImplementation>(primitive));
 }
 
 Primitive raytracer::primitives::accelerated_union(std::vector<Primitive>& primitives)
