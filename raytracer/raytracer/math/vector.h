@@ -185,6 +185,18 @@ namespace math
             return m_coords[2];
         }
 
+        double& w()
+        {
+            static_assert(N >= 4, "W-coordinate requires at least four dimensions");
+            return m_coords[3];
+        }
+
+        double w() const
+        {
+            static_assert(N >= 4, "W-coordinate requires at least four dimensions");
+            return m_coords[3];
+        }
+
         Vector<N> operator +(const Vector<N>& p) const
         {
             std::array<double, N> result;
