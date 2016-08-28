@@ -8,10 +8,10 @@ using namespace raytracer::primitives;
 
 namespace
 {
-    class Bumpifier2D : public raytracer::primitives::_private_::PrimitiveImplementation
+    class Bumpifier2DImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Bumpifier2D(math::Function<math::Vector3D(const math::Point2D&)> normal_perturbator, Primitive perturbee)
+        Bumpifier2DImplementation(math::Function<math::Vector3D(const math::Point2D&)> normal_perturbator, Primitive perturbee)
             : m_normal_perturbator(normal_perturbator), m_perturbee(perturbee) { }
 
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -55,10 +55,10 @@ namespace
         Primitive m_perturbee;
     };
 
-    class Bumpifier3D : public raytracer::primitives::_private_::PrimitiveImplementation
+    class Bumpifier3DImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        Bumpifier3D(math::Function<math::Vector3D(const math::Point3D&)> normal_perturbator, Primitive perturbee)
+        Bumpifier3DImplementation(math::Function<math::Vector3D(const math::Point3D&)> normal_perturbator, Primitive perturbee)
             : m_normal_perturbator(normal_perturbator), m_perturbee(perturbee) { }
 
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -105,10 +105,10 @@ namespace
 
 Primitive raytracer::primitives::bumpify(math::Function<math::Vector3D(const math::Point2D&)> function, Primitive primitive)
 {
-    return Primitive(std::make_shared<Bumpifier2D>(function, primitive));
+    return Primitive(std::make_shared<Bumpifier2DImplementation>(function, primitive));
 }
 
 Primitive raytracer::primitives::bumpify(math::Function<math::Vector3D(const math::Point3D&)> function, Primitive primitive)
 {
-    return Primitive(std::make_shared<Bumpifier3D>(function, primitive));
+    return Primitive(std::make_shared<Bumpifier3DImplementation>(function, primitive));
 }
