@@ -5,7 +5,7 @@
 #include "primitives/sphere.h"
 #include "primitives/cylinder.h"
 #include "primitives/disk.h"
-#include "primitives/cropper.h"
+#include "primitives/cropper-primitive.h"
 #include "primitives/cone-primitive.h"
 #include "primitives/group.h"
 #include "primitives/union.h"

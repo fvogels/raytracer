@@ -1,4 +1,4 @@
-#include "primitives/cropper.h"
+#include "primitives/cropper-primitive.h"
 #include <assert.h>
 #include <algorithm>
 
