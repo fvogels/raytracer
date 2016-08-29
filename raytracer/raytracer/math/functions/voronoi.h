@@ -42,6 +42,6 @@ namespace math
         unsigned m_density;
     };
 
-    std::shared_ptr<Voronoi2D> voronoi2d(unsigned density, unsigned seed = 56373);
-    std::shared_ptr<Voronoi3D> voronoi3d(unsigned density, unsigned seed = 56373);
+    Voronoi2D voronoi2d(unsigned density, unsigned seed = 56373);
+    Voronoi3D voronoi3d(unsigned density, unsigned seed = 56373);
 }

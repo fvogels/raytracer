@@ -205,12 +205,12 @@ Point3D math::Voronoi3D::find_second_closest(const Point3D& p) const
     return second_closest;
 }
 
-std::shared_ptr<Voronoi2D> math::voronoi2d(unsigned density, unsigned seed)
+Voronoi2D math::voronoi2d(unsigned density, unsigned seed)
 {
-    return std::make_shared<Voronoi2D>(random_function(seed), density);
+    return Voronoi2D(random_function(seed), density);
 }
 
-std::shared_ptr<Voronoi3D> math::voronoi3d(unsigned density, unsigned seed)
+Voronoi3D math::voronoi3d(unsigned density, unsigned seed)
 {
-    return std::make_shared<Voronoi3D>(random_function(seed), density);
+    return Voronoi3D(random_function(seed), density);
 }
