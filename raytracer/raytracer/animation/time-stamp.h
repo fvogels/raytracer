@@ -12,6 +12,7 @@ namespace animation
 
         static TimeStamp zero() { return TimeStamp(); }
         static TimeStamp from_epoch(const Duration& duration) { return TimeStamp(duration); }
+        static TimeStamp from_seconds_since_epoch(double duration) { return TimeStamp(Duration::from_seconds(duration)); }
 
         double seconds() const;
 
@@ -24,7 +25,7 @@ namespace animation
         bool operator !=(const TimeStamp&) const;
 
     private:
-        TimeStamp(const Duration&);
+        explicit TimeStamp(const Duration&);
 
         Duration m_since_epoch;
     };
