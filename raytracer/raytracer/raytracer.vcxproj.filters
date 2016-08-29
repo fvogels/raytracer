@@ -33,9 +33,6 @@
     <ClCompile Include="math\rectangle2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\transformation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -468,6 +465,9 @@
     <ClCompile Include="math\functions\dalmatian-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\transformation3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -498,9 +498,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\rectangle2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math\transformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
@@ -1119,6 +1116,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\animation-looper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\transformation3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

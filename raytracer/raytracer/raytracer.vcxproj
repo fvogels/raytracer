@@ -558,7 +558,7 @@
     <ClCompile Include="math\functions\random-function.cpp" />
     <ClCompile Include="math\rasterizer.cpp" />
     <ClCompile Include="math\rectangle3d.cpp" />
-    <ClCompile Include="math\transformation.cpp" />
+    <ClCompile Include="math\transformation3d.cpp" />
     <ClCompile Include="math\ray.cpp" />
     <ClCompile Include="primitives\bounding-box-accelerator-primitive.cpp" />
     <ClCompile Include="primitives\cone-primitive.cpp" />
@@ -783,7 +783,7 @@
     <ClInclude Include="math\rasterizer.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="math\rectangle3d.h" />
-    <ClInclude Include="math\transformation.h" />
+    <ClInclude Include="math\transformation3d.h" />
     <ClInclude Include="logging.h" />
     <ClInclude Include="primitives\bounding-box-accelerator-primitive.h" />
     <ClInclude Include="primitives\cone-primitive.h" />
