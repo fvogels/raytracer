@@ -506,6 +506,7 @@
     <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
+    <ClCompile Include="math\functions\checkered.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
     <ClCompile Include="math\functions\voronoi.cpp" />
@@ -697,6 +698,7 @@
     <ClInclude Include="materials\pattern-materials.h" />
     <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />
+    <ClInclude Include="math\functions\checkered.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\identity.h" />
