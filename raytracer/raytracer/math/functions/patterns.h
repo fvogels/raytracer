@@ -2,7 +2,7 @@
 
 #include "math/function.h"
 #include "math/point.h"
-#include "math/functions/checkered.h"
+#include "math/functions/checkered-pattern.h"
 #include "math/functions/horizontal-lines.h"
 #include "math/functions/vertical-lines.h"
 #include "math/functions/grid-pattern.h"
