@@ -82,7 +82,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    primitives.push_back(decorate(worley3d(5, 1.0), scale_material3d(2, 2, 2, sphere())));
+    primitives.push_back(decorate(worley3d(5, 1.0, 1.0), scale_material3d(2, 2, 2, sphere())));
 
     return make_union(primitives);
 }
