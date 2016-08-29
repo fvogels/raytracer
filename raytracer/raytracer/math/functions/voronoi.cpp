@@ -96,19 +96,15 @@ namespace
         }
 
         Point2D closest_to(const math::Point2D& p) const override
-        {
-            Point2D closest, second_closest;
-
-            find_closest(p, &closest, &second_closest);
+        {            
+            auto closest = find_closest(p);
 
             return closest;
         }
 
         Point2D second_closest_to(const math::Point2D& p) const override
         {
-            Point2D closest, second_closest;
-
-            find_closest(p, &closest, &second_closest);
+            Point2D second_closest = find_second_closest(p);
 
             return second_closest;
         }
@@ -142,8 +138,29 @@ namespace
             }
         }
 
-        void find_closest(const Point2D& p, Point2D* closest, Point2D* second_closest) const
+        Point2D find_closest(const Point2D& p) const
         {
+            Point2D closest;
+            double closest_distance = std::numeric_limits<double>::infinity();
+
+            enumerate_points_around(p, [&](const Point2D& q)
+            {
+                double dist = distance(p, q);
+
+                if (dist < closest_distance)
+                {
+                    closest = q;
+                    closest_distance = dist;
+                }
+            });
+
+            return closest;
+        }
+
+        Point2D find_second_closest(const Point2D& p) const
+        {
+            Point2D closest;
+            Point2D second_closest;
             double closest_distance = std::numeric_limits<double>::infinity();
             double second_closest_distance = std::numeric_limits<double>::infinity();
 
@@ -153,18 +170,20 @@ namespace
 
                 if (dist < closest_distance)
                 {
-                    *second_closest = *closest;
+                    second_closest = closest;
                     second_closest_distance = closest_distance;
 
-                    *closest = q;
+                    closest = q;
                     closest_distance = dist;
                 }
                 else if (dist < second_closest_distance)
                 {
-                    *second_closest = q;
+                    second_closest = q;
                     second_closest_distance = dist;
                 }
             });
+
+            return second_closest;
         }
 
         Function<unsigned(unsigned)> m_rng;
