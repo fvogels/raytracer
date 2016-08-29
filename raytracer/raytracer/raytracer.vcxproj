@@ -628,6 +628,7 @@
     <ClCompile Include="tests\triangle-tests.cpp" />
     <ClCompile Include="tests\xy-plane-tests.cpp" />
     <ClCompile Include="tests\xz-plane-tests.cpp" />
+    <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\looper.cpp" />
     <ClCompile Include="util\misc.cpp" />
@@ -842,6 +843,7 @@
     <ClInclude Include="scripting\scripting-util.h" />
     <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="animation\lissajous.h" />
+    <ClInclude Include="math\transformation2d.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\looper.h" />
