@@ -8,7 +8,7 @@ namespace raytracer
 {
     namespace materials
     {
-        Material worley2d(unsigned density, double power);
-        Material worley3d(unsigned density, double power);
+        Material worley2d(unsigned density, double factor, double power);
+        Material worley3d(unsigned density, double factor, double power);
     }
 }

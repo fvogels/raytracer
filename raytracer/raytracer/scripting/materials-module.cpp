@@ -79,14 +79,14 @@ namespace
             return raytracer::materials::wood2d(octaves, turbulence);
         }
 
-        Material worley2d(unsigned density, double power) const
+        Material worley2d(unsigned density, double factor, double power) const
         {
-            return raytracer::materials::worley2d(density, power);
+            return raytracer::materials::worley2d(density, factor, power);
         }
 
-        Material worley3d(unsigned density, double power) const
+        Material worley3d(unsigned density, double factor, double power) const
         {
-            return raytracer::materials::worley3d(density, power);
+            return raytracer::materials::worley3d(density, factor, power);
         }
     };
 }
