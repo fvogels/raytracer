@@ -64,3 +64,8 @@ Material raytracer::materials::polka(double radius, Material m1, Material m2)
 {
     return pattern2d(math::functions::polka(radius), m1, m2);
 }
+
+Material raytracer::materials::polka2(unsigned density, Material m1, Material m2)
+{
+    return pattern2d(math::functions::polka2(density), m1, m2);
+}

@@ -17,5 +17,6 @@ namespace raytracer
         Material grid(double, Material, Material);
         Material checkered(Material, Material);
         Material polka(double, Material, Material);
+        Material polka2(unsigned, Material, Material);
     }
 }

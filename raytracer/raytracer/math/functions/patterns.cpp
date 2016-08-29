@@ -1,4 +1,5 @@
 #include "math/functions/patterns.h"
+#include "math/functions.h"
 #include <cmath>
 
 using namespace math;
@@ -67,6 +68,22 @@ Function<bool(const Point2D&)> math::functions::polka(double radius)
         Point2D fp(fx, fy);
 
         return distance(fp, Point2D(0.5, 0.5)) < radius;
+    };
+
+    return from_lambda<bool, const Point2D&>(function);
+}
+
+Function<bool(const Point2D&)> math::functions::polka2(unsigned density, unsigned seed)
+{
+    auto voronoi = math::voronoi2d(density);
+
+    std::function<bool(const Point2D&)> function = [voronoi](const Point2D& p)
+    {
+        auto closest = voronoi->closest_to(p);
+        auto closest_to_closest = voronoi->second_closest_to(closest);
+        auto radius = distance(closest, closest_to_closest) * 0.45;
+
+        return distance(p, closest) < radius;
     };
 
     return from_lambda<bool, const Point2D&>(function);

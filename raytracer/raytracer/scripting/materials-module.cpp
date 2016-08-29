@@ -64,6 +64,11 @@ namespace
             return raytracer::materials::polka(radius, x, y);
         }
 
+        Material polka2(unsigned density, Material x, Material y) const
+        {
+            return raytracer::materials::polka2(density, x, y);
+        }
+
         Material marble2d(unsigned octaves, double turbulence) const
         {
             return raytracer::materials::marble2d(octaves, turbulence);
@@ -109,6 +114,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(grid);
     BIND(checkered);
     BIND(polka);
+    BIND(polka2);
     BIND(marble2d);
     BIND(marble3d);
     BIND(wood2d);

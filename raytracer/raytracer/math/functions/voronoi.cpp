@@ -10,76 +10,10 @@ using namespace math::functions;
 
 namespace
 {
-    class Voronoi2D : public FunctionBody<Point2D, const Point2D&>
+    class Voronoi3DFunctionBody : public FunctionBody<Point3D, const Point3D&>
     {
     public:
-        Voronoi2D(Function<unsigned(unsigned)> rng, unsigned density)
-            : m_rng(rng), m_density(density)
-        {
-            // NOP
-        }
-
-        Point2D evaluate(const math::Point2D& p) const override
-        {
-            return find_closest(p);
-        }
-
-    private:
-        void enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
-        {
-            for (int i = 0; i != m_density; ++i)
-            {
-                unsigned k = x * 71767 + y * 19178 + i * 57465;
-
-                double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
-                double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
-                Point2D p(x + fx, y + fy);
-
-                callback(p);
-            }
-        }
-
-        void enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
-        {
-            int x = int(floor(p.x()));
-            int y = int(floor(p.y()));
-
-            for (int dx = -1; dx <= 1; ++dx)
-            {
-                for (int dy = -1; dy <= 1; ++dy)
-                {
-                    enumerate_points_in_cell(x + dx, y + dy, callback);
-                }
-            }
-        }
-
-        Point2D find_closest(const Point2D& p) const
-        {
-            Point2D closest;
-            double closest_distance = std::numeric_limits<double>::infinity();
-
-            enumerate_points_around(p, [&closest, &closest_distance, &p](const Point2D& q)
-            {
-                double dist = distance(p, q);
-
-                if (dist < closest_distance)
-                {
-                    closest = q;
-                    closest_distance = dist;
-                }
-            });
-
-            return closest;
-        }
-
-        Function<unsigned(unsigned)> m_rng;
-        unsigned m_density;
-    };
-
-    class Voronoi3D : public FunctionBody<Point3D, const Point3D&>
-    {
-    public:
-        Voronoi3D(Function<unsigned(unsigned)> rng, unsigned density)
+        Voronoi3DFunctionBody(Function<unsigned(unsigned)> rng, unsigned density)
             : m_rng(rng), m_density(density)
         {
             // NOP
@@ -146,14 +80,109 @@ namespace
         Function<unsigned(unsigned)> m_rng;
         unsigned m_density;
     };
+
+    class Voronoi2DImplementation : public Voronoi2D, public FunctionBody<Point2D, const Point2D&>
+    {
+    public:
+        Voronoi2DImplementation(Function<unsigned(unsigned)> rng, unsigned density)
+            : m_rng(rng), m_density(density)
+        {
+            // NOP
+        }
+
+        Point2D evaluate(const math::Point2D& p) const override
+        {
+            return closest_to(p);
+        }
+
+        Point2D closest_to(const math::Point2D& p) const override
+        {
+            Point2D closest, second_closest;
+
+            find_closest(p, &closest, &second_closest);
+
+            return closest;
+        }
+
+        Point2D second_closest_to(const math::Point2D& p) const override
+        {
+            Point2D closest, second_closest;
+
+            find_closest(p, &closest, &second_closest);
+
+            return second_closest;
+        }
+
+    private:
+        void enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
+        {
+            for (int i = 0; i != m_density; ++i)
+            {
+                unsigned k = x * 71767 + y * 19178 + i * 57465;
+
+                double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
+                double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
+                Point2D p(x + fx, y + fy);
+
+                callback(p);
+            }
+        }
+
+        void enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
+        {
+            int x = int(floor(p.x()));
+            int y = int(floor(p.y()));
+
+            for (int dx = -1; dx <= 1; ++dx)
+            {
+                for (int dy = -1; dy <= 1; ++dy)
+                {
+                    enumerate_points_in_cell(x + dx, y + dy, callback);
+                }
+            }
+        }
+
+        void find_closest(const Point2D& p, Point2D* closest, Point2D* second_closest) const
+        {
+            double closest_distance = std::numeric_limits<double>::infinity();
+            double second_closest_distance = std::numeric_limits<double>::infinity();
+
+            enumerate_points_around(p, [&](const Point2D& q)
+            {
+                double dist = distance(p, q);
+
+                if (dist < closest_distance)
+                {
+                    *second_closest = *closest;
+                    second_closest_distance = closest_distance;
+
+                    *closest = q;
+                    closest_distance = dist;
+                }
+                else if (dist < second_closest_distance)
+                {
+                    *second_closest = q;
+                    second_closest_distance = dist;
+                }
+            });
+        }
+
+        Function<unsigned(unsigned)> m_rng;
+        unsigned m_density;
+    };
 }
 
 math::Function<math::Point2D(const math::Point2D&)> math::functions::voronoi2d(unsigned density, unsigned seed)
 {
-    return math::Function<math::Point2D(const math::Point2D&)>(std::make_shared<Voronoi2D>(random_function(seed), density));
+    return math::Function<math::Point2D(const math::Point2D&)>(std::make_shared<Voronoi2DImplementation>(random_function(seed), density));
 }
 
 math::Function<math::Point3D(const math::Point3D&)> math::functions::voronoi3d(unsigned density, unsigned seed)
 {
-    return math::Function<math::Point3D(const math::Point3D&)>(std::make_shared<Voronoi3D>(random_function(seed), density));
+    return math::Function<math::Point3D(const math::Point3D&)>(std::make_shared<Voronoi3DFunctionBody>(random_function(seed), density));
+}
+
+std::shared_ptr<Voronoi2D> math::voronoi2d(unsigned density, unsigned seed)
+{
+    return std::make_shared<Voronoi2DImplementation>(random_function(seed), density);
 }
