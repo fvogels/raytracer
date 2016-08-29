@@ -13,8 +13,8 @@ namespace
     class Voronoi2D : public FunctionBody<Point2D, const Point2D&>
     {
     public:
-        Voronoi2D(Function<unsigned(unsigned)> rng)
-            : m_rng(rng)
+        Voronoi2D(Function<unsigned(unsigned)> rng, unsigned density)
+            : m_rng(rng), m_density(density)
         {
             // NOP
         }
@@ -27,7 +27,7 @@ namespace
     private:
         void enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
         {
-            for (int i = 0; i != 10; ++i)
+            for (int i = 0; i != m_density; ++i)
             {
                 unsigned k = x * 71767 + y * 19178 + i * 57465;
 
@@ -62,7 +62,7 @@ namespace
             {
                 double dist = distance(p, q);
 
-                if (dist< closest_distance)
+                if (dist < closest_distance)
                 {
                     closest = p;
                     closest_distance = dist;
@@ -73,10 +73,11 @@ namespace
         }
 
         Function<unsigned(unsigned)> m_rng;
-    };    
+        unsigned m_density;
+    };
 }
 
-math::Function<math::Point2D(const math::Point2D&)> math::functions::voronoi2d(unsigned seed)
+math::Function<math::Point2D(const math::Point2D&)> math::functions::voronoi2d(unsigned seed, unsigned density)
 {
-    return math::Function<math::Point2D(const math::Point2D&)>(std::make_shared<Voronoi2D>(random_function(seed)));
+    return math::Function<math::Point2D(const math::Point2D&)>(std::make_shared<Voronoi2D>(random_function(seed), density));
 }
