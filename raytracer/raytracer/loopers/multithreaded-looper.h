@@ -6,5 +6,5 @@
 
 namespace loopers
 {
-    std::shared_ptr<Looper> single_threaded();
+    std::shared_ptr<Looper> multithreaded(unsigned);
 }

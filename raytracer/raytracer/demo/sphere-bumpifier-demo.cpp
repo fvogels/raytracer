@@ -9,6 +9,7 @@
 #include "math/function.h"
 #include "animation/animations.h"
 #include "pipeline/pipelines.h"
+#include "loopers/loopers.h"
 
 using namespace raytracer;
 using namespace animation;
@@ -80,7 +81,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, util::loopers::looper(N_THREADS));
+        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, loopers::smart_looper(N_THREADS));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)

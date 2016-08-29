@@ -471,10 +471,13 @@
     <ClCompile Include="primitives\primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="loopers\looper.cpp">
+    <ClCompile Include="loopers\single-threaded-looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="loopers\single-threaded-looper.cpp">
+    <ClCompile Include="loopers\multithreaded-looper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loopers\smart-looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1137,6 +1140,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="loopers\single-threaded-looper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loopers\multithreaded-looper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loopers\loopers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loopers\smart-looper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

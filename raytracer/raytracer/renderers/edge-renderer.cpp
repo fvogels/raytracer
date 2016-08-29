@@ -19,7 +19,7 @@ namespace
             unsigned vertical_resolution,
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
-            std::shared_ptr<util::Looper> looper,
+            std::shared_ptr<loopers::Looper> looper,
             double stroke_thickness)
             : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
             , m_stroke_thickness(stroke_thickness)
@@ -114,7 +114,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, double stroke_thickness)
+Renderer raytracer::renderers::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double stroke_thickness)
 {
     return Renderer(std::make_shared<EdgeRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, stroke_thickness));
 }

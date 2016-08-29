@@ -19,7 +19,7 @@ namespace
             unsigned vertical_resolution,
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
-            std::shared_ptr<util::Looper> looper,
+            std::shared_ptr<loopers::Looper> looper,
             unsigned shade_count,
             double stroke_thickness)
             : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
@@ -126,7 +126,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper, unsigned shade_count, double stroke_thickness)
+Renderer raytracer::renderers::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, unsigned shade_count, double stroke_thickness)
 {
     return Renderer(std::make_shared<CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, shade_count, stroke_thickness));
 }

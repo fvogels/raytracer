@@ -12,7 +12,7 @@ namespace
     class StandardRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
-        StandardRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
+        StandardRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
             : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
         {
             // NOP
@@ -58,7 +58,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<util::Looper> looper)
+Renderer raytracer::renderers::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
 {
     return Renderer(std::make_shared<StandardRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
 }

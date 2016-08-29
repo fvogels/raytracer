@@ -1,9 +1,6 @@
 #include "loopers/single-threaded-looper.h"
-#include <thread>
-#include <atomic>
-#include <vector>
 
-using namespace util;
+using namespace loopers;
 
 
 namespace
@@ -21,7 +18,7 @@ namespace
     };
 }
 
-std::shared_ptr<Looper> util::loopers::single_threaded()
+std::shared_ptr<Looper> loopers::single_threaded()
 {
     return std::make_shared<SingleThreadedLooper>();
 }

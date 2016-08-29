@@ -9,6 +9,8 @@
 #include "math/function.h"
 #include "animation/animations.h"
 #include "pipeline/pipelines.h"
+#include "loopers/loopers.h"
+#include "loopers/loopers.h"
 #include "easylogging++.h"
 
 using namespace raytracer;
@@ -90,7 +92,7 @@ namespace
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
         auto sampler = raytracer::samplers::multi_jittered(ANTIALIASING);
-        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, sampler, ray_tracer, util::loopers::looper(N_THREADS));
+        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, sampler, ray_tracer, loopers::smart_looper(N_THREADS));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(30)

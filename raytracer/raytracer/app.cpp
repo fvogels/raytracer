@@ -24,7 +24,7 @@
 #include "imaging/bitmap-function.h"
 #include "pipeline/pipelines.h"
 #include "util/misc.h"
-#include "loopers/looper.h"
+#include "loopers/loopers.h"
 #include "util/beep.h"
 #include "scripting/scripting.h"
 #include "easylogging++.h"
@@ -49,7 +49,6 @@ using namespace math;
 using namespace raytracer;
 using namespace imaging;
 using namespace animation;
-using namespace util;
 
 
 Primitive load_mesh(const std::string& path)

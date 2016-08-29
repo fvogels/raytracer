@@ -17,7 +17,7 @@ namespace raytracer
             class RendererImplementation
             {
             public:
-                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<util::Looper>);
+                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<loopers::Looper>);
 
                 virtual std::shared_ptr<imaging::Bitmap> render(const Scene&) const = 0;
 
@@ -29,7 +29,7 @@ namespace raytracer
                 void for_each_pixel(std::function<void(Position)>) const;
 
             private:
-                std::shared_ptr<util::Looper> m_looper;
+                std::shared_ptr<loopers::Looper> m_looper;
             };
         }
     }

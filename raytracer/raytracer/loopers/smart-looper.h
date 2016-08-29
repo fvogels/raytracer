@@ -1,10 +1,9 @@
 #pragma once
 
 #include "loopers/looper.h"
-#include <memory>
 
 
 namespace loopers
 {
-    std::shared_ptr<Looper> single_threaded();
+    std::shared_ptr<Looper> smart_looper(unsigned thread_count);
 }

@@ -480,6 +480,8 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="loopers\multithreaded-looper.cpp" />
+    <ClCompile Include="loopers\smart-looper.cpp" />
     <ClCompile Include="math\angle.cpp" />
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\circular-animation.cpp" />
@@ -632,7 +634,6 @@
     <ClCompile Include="tests\xz-plane-tests.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="util\beep.cpp" />
-    <ClCompile Include="loopers\looper.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -684,6 +685,9 @@
     <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-processor.h" />
+    <ClInclude Include="loopers\loopers.h" />
+    <ClInclude Include="loopers\multithreaded-looper.h" />
+    <ClInclude Include="loopers\smart-looper.h" />
     <ClInclude Include="materials\composition-material.h" />
     <ClInclude Include="demo\plane-bumpifier-demo.h" />
     <ClInclude Include="demo\sampler-demo.h" />

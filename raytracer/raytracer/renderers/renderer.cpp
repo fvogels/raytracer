@@ -1,8 +1,7 @@
 #include "renderers/renderer.h"
 
 using namespace math;
-using namespace util;
-
+using namespace loopers;
 
 raytracer::renderers::_private_::RendererImplementation::RendererImplementation(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<Looper> looper)
     : m_horizontal_resolution(horizontal_resolution), m_vertical_resolution(vertical_resolution), m_sampler(sampler), m_ray_tracer(ray_tracer), m_looper(looper)
