@@ -14,7 +14,7 @@ namespace
     class WorleyNoise2D : public FunctionBody<double, const Point2D&>
     {
     public:
-        WorleyNoise2D(Function<Point2D(const Point2D&)> voronoi)
+        WorleyNoise2D(std::shared_ptr<Voronoi2D> voronoi)
             : m_voronoi(voronoi)
         {
             // NOP
@@ -28,19 +28,19 @@ namespace
     private:
         double find_smallest_distance(const Point2D& p) const
         {
-            auto closest_point = m_voronoi(p);
+            auto closest_point = m_voronoi->closest_to(p);
             auto dist = distance(p, closest_point);
 
             return dist;
         }
 
-        Function<Point2D(const Point2D&)> m_voronoi;
+        std::shared_ptr<Voronoi2D> m_voronoi;
     };
 
     class WorleyNoise3D : public FunctionBody<double, const Point3D&>
     {
     public:
-        WorleyNoise3D(Function<Point3D(const Point3D&)> voronoi)
+        WorleyNoise3D(std::shared_ptr<Voronoi3D> voronoi)
             : m_voronoi(voronoi)
         {
             // NOP
@@ -54,10 +54,10 @@ namespace
     private:
         double find_smallest_distance(const Point3D& p) const
         {
-            return distance(p, m_voronoi(p));
+            return distance(p, m_voronoi->closest_to(p));
         }
 
-        Function<Point3D(const Point3D&)> m_voronoi;
+        std::shared_ptr<Voronoi3D> m_voronoi;
     };
 }
 

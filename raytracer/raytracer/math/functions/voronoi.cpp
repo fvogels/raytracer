@@ -10,18 +10,13 @@ using namespace math::functions;
 
 namespace
 {
-    class Voronoi2DImplementation : public Voronoi2D, public FunctionBody<Point2D, const Point2D&>
+    class Voronoi2DImplementation : public Voronoi2D
     {
     public:
         Voronoi2DImplementation(Function<unsigned(unsigned)> rng, unsigned density)
             : m_rng(rng), m_density(density)
         {
             // NOP
-        }
-
-        Point2D evaluate(const math::Point2D& p) const override
-        {
-            return closest_to(p);
         }
 
         Point2D closest_to(const math::Point2D& p) const override
@@ -119,18 +114,13 @@ namespace
         unsigned m_density;
     };
 
-    class Voronoi3DImplementation : public Voronoi3D, public FunctionBody<Point3D, const Point3D&>
+    class Voronoi3DImplementation : public Voronoi3D
     {
     public:
         Voronoi3DImplementation(Function<unsigned(unsigned)> rng, unsigned density)
             : m_rng(rng), m_density(density)
         {
             // NOP
-        }
-
-        Point3D evaluate(const math::Point3D& p) const override
-        {
-            return find_closest(p);
         }
 
         Point3D closest_to(const math::Point3D& p) const override
@@ -232,16 +222,6 @@ namespace
         Function<unsigned(unsigned)> m_rng;
         unsigned m_density;
     };
-}
-
-math::Function<math::Point2D(const math::Point2D&)> math::functions::voronoi2d(unsigned density, unsigned seed)
-{
-    return math::Function<math::Point2D(const math::Point2D&)>(std::make_shared<Voronoi2DImplementation>(random_function(seed), density));
-}
-
-math::Function<math::Point3D(const math::Point3D&)> math::functions::voronoi3d(unsigned density, unsigned seed)
-{
-    return math::Function<math::Point3D(const math::Point3D&)>(std::make_shared<Voronoi3DImplementation>(random_function(seed), density));
 }
 
 std::shared_ptr<Voronoi2D> math::voronoi2d(unsigned density, unsigned seed)
