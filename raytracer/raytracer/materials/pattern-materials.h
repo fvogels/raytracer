@@ -18,6 +18,6 @@ namespace raytracer
         Material checkered(Material, Material);
         Material polka(double, Material, Material);
         Material polka(double, double, Material, Material);
-        Material chaotic_polka(unsigned, Material, Material);
+        Material dalmatian(unsigned, Material, Material);
     }
 }

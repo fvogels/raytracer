@@ -7,4 +7,4 @@
 #include "math/functions/vertical-lines-pattern.h"
 #include "math/functions/grid-pattern.h"
 #include "math/functions/polka-dots-pattern.h"
-#include "math/functions/chaotic-polka-dot-pattern.h"
+#include "math/functions/dalmatian-pattern.h"

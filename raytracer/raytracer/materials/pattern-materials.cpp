@@ -70,7 +70,7 @@ Material raytracer::materials::polka(double radius1, double radius2, Material m1
     return pattern2d(math::functions::polka(radius1, radius2), m1, m2);
 }
 
-Material raytracer::materials::chaotic_polka(unsigned density, Material m1, Material m2)
+Material raytracer::materials::dalmatian(unsigned density, Material m1, Material m2)
 {
-    return pattern2d(math::functions::chaotic_polka(density, 5461), m1, m2);
+    return pattern2d(math::functions::dalmatian(density, 5461), m1, m2);
 }

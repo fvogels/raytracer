@@ -462,10 +462,10 @@
     <ClCompile Include="math\functions\horizontal-lines-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\chaotic-polka-dot-pattern.cpp">
+    <ClCompile Include="math\functions\polka-dots-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\polka-dots-pattern.cpp">
+    <ClCompile Include="math\functions\dalmatian-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1109,10 +1109,10 @@
     <ClInclude Include="math\functions\horizontal-lines-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\chaotic-polka-dot-pattern.h">
+    <ClInclude Include="math\functions\polka-dots-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\polka-dots-pattern.h">
+    <ClInclude Include="math\functions\dalmatian-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

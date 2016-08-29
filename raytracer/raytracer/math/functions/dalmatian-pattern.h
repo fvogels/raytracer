@@ -8,6 +8,6 @@ namespace math
 {
     namespace functions
     {
-        math::Function<bool(const Point2D&)> chaotic_polka(unsigned density, unsigned seed);
+        math::Function<bool(const Point2D&)> dalmatian(unsigned density, unsigned seed);
     }
 }

@@ -1,11 +1,11 @@
-#include "math/functions/chaotic-polka-dot-pattern.h"
+#include "math/functions/dalmatian-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
 using namespace math;
 
 
-Function<bool(const Point2D&)> math::functions::chaotic_polka(unsigned density, unsigned seed)
+Function<bool(const Point2D&)> math::functions::dalmatian(unsigned density, unsigned seed)
 {
     auto voronoi = math::voronoi2d(density);
 
