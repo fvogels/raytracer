@@ -1,6 +1,7 @@
 #pragma once
 
 #include "animation/animation.h"
+#include <cmath>
 
 
 namespace animation
@@ -12,8 +13,8 @@ namespace animation
         {
             double now_in_seconds = now.seconds();
             double duration_in_seconds = a.duration().seconds();
-            double remainder = now_in_seconds % duration_in_seconds;
-            double looped_now = TimeStamp::from_epoch(Duration::from_seconds(looped_now));
+            double remainder = fmod(now_in_seconds, duration_in_seconds);
+            TimeStamp looped_now = TimeStamp::from_seconds_since_epoch(remainder);
 
             return a(looped_now);
         };

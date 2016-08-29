@@ -1118,5 +1118,8 @@
     <ClInclude Include="animation\animation-inverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="animation\animation-looper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

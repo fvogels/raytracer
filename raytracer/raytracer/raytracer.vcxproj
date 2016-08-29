@@ -634,6 +634,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation\animation-inverter.h" />
+    <ClInclude Include="animation\animation-looper.h" />
     <ClInclude Include="animation\animation-sequence.h" />
     <ClInclude Include="animation\animation.h" />
     <ClInclude Include="animation\animations.h" />
