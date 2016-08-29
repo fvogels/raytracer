@@ -8,3 +8,4 @@
 #include "math/functions/worley.h"
 #include "math/functions/patterns.h"
 #include "math/functions/random-function.h"
+#include "math/functions/voronoi.h"

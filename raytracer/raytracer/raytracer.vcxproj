@@ -508,6 +508,7 @@
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
+    <ClCompile Include="math\functions\voronoi.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
     <ClCompile Include="math\plane.cpp" />
     <ClCompile Include="math\quantize.cpp" />
@@ -700,6 +701,7 @@
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\functions\marble.h" />
+    <ClInclude Include="math\functions\voronoi.h" />
     <ClInclude Include="math\functions\wood.h" />
     <ClInclude Include="math\plane.h" />
     <ClInclude Include="math\quantize.h" />
