@@ -18,7 +18,7 @@ namespace animation
         double seconds() const;
 
     private:
-        Duration(double);
+        explicit Duration(double);
 
         double m_milliseconds;
     };
