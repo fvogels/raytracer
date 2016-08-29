@@ -64,7 +64,7 @@ namespace
 
                 if (dist < closest_distance)
                 {
-                    closest = p;
+                    closest = q;
                     closest_distance = dist;
                 }
             });
@@ -135,7 +135,7 @@ namespace
 
                 if (dist < closest_distance)
                 {
-                    closest = p;
+                    closest = q;
                     closest_distance = dist;
                 }
             });
