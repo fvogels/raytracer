@@ -12,6 +12,6 @@ namespace math
 {
     namespace functions
     {
-        math::Function<bool(const Point2D&)> ordered_polka(double radius = 0.25);
+        math::Function<bool(const Point2D&)> polka(double radius = 0.25);
     }
 }

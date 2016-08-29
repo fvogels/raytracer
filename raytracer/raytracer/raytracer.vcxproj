@@ -512,7 +512,7 @@
     <ClCompile Include="math\functions\grid-pattern.cpp" />
     <ClCompile Include="math\functions\horizontal-lines-pattern.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
-    <ClCompile Include="math\functions\ordered-polka-dots-pattern.cpp" />
+    <ClCompile Include="math\functions\polka-dots-pattern.cpp" />
     <ClCompile Include="math\functions\vertical-lines-pattern.cpp" />
     <ClCompile Include="math\functions\voronoi.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
@@ -710,7 +710,7 @@
     <ClInclude Include="math\functions\horizontal-lines-pattern.h" />
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\functions\marble.h" />
-    <ClInclude Include="math\functions\ordered-polka-dots-pattern.h" />
+    <ClInclude Include="math\functions\polka-dots-pattern.h" />
     <ClInclude Include="math\functions\vertical-lines-pattern.h" />
     <ClInclude Include="math\functions\voronoi.h" />
     <ClInclude Include="math\functions\wood.h" />

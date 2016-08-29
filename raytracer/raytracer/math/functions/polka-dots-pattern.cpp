@@ -1,11 +1,11 @@
-#include "math/functions/ordered-polka-dots-pattern.h"
+#include "math/functions/polka-dots-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
 using namespace math;
 
 
-Function<bool(const Point2D&)> math::functions::ordered_polka(double radius)
+Function<bool(const Point2D&)> math::functions::polka(double radius)
 {
     std::function<bool(const Point2D&)> function = [radius](const Point2D& p)
     {
