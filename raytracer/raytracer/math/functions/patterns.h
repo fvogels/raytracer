@@ -6,13 +6,5 @@
 #include "math/functions/horizontal-lines-pattern.h"
 #include "math/functions/vertical-lines-pattern.h"
 #include "math/functions/grid-pattern.h"
-
-
-namespace math
-{
-    namespace functions
-    {
-        math::Function<bool(const Point2D&)> polka(double radius = 0.25);
-        math::Function<bool(const Point2D&)> polka2(unsigned density, unsigned seed = 46776);
-    }
-}
+#include "math/functions/ordered-polka-dots-pattern.h"
+#include "math/functions/chaotic-polka-dot-pattern.h"
