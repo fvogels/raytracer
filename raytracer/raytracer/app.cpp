@@ -78,17 +78,13 @@ raytracer::Primitive create_root(TimeStamp now)
     COULD_BE_UNUSED(now);
 
     using namespace raytracer::primitives;
-    using namespace raytracer::materials;
-
-    auto white = uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0));
+    using namespace raytracer::materials;    
 
     std::vector<Primitive> primitives;
 
-    primitives.push_back(translate(Vector3D(0, 5, 0), sphere()));
-    primitives.push_back(cylinder_along_x());
+    primitives.push_back(decorate(worley3d(5, 1.0), scale_material3d(2, 2, 2, sphere())));
 
-
-    return decorate(white, make_union(primitives));
+    return make_union(primitives);
 }
 
 std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
@@ -127,7 +123,7 @@ raytracer::Camera create_camera(TimeStamp now)
 
     using namespace math::functions::easing;
 
-    Point3D camera_position = Point3D(20, 20, 20);
+    Point3D camera_position = Point3D(0, 0, 5);
     auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
 
     return camera;
