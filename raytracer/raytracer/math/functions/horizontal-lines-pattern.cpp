@@ -1,4 +1,4 @@
-#include "math/functions/horizontal-lines.h"
+#include "math/functions/horizontal-lines-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
