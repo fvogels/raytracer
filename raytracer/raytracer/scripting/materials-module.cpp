@@ -3,6 +3,7 @@
 #include "scripting/materials-module.h"
 #include "scripting/scripting-util.h"
 #include "materials/materials.h"
+#include "materials/material-transformer.h"
 #include "imaging/color.h"
 
 using namespace chaiscript;
@@ -98,6 +99,46 @@ namespace
         {
             return raytracer::materials::worley3d(density, factor, power);
         }
+
+        Material scale2d(double sx, double sy, Material material) const
+        {
+            return raytracer::materials::scale(sx, sy, material);
+        }
+
+        Material scale3d(double sx, double sy, double sz, Material material) const
+        {
+            return raytracer::materials::scale(sx, sy, sz, material);
+        }
+
+        Material translate2d(const Vector2D& v, Material material) const
+        {
+            return raytracer::materials::translate(v, material);
+        }
+
+        Material translate3d(const Vector3D& v, Material material) const
+        {
+            return raytracer::materials::translate(v, material);
+        }
+
+        Material rotate(Angle angle, Material material) const
+        {
+            return raytracer::materials::rotate(angle, material);
+        }
+
+        Material rotate_around_x(Angle angle, Material material) const
+        {
+            return raytracer::materials::rotate_around_x(angle, material);
+        }
+
+        Material rotate_around_y(Angle angle, Material material) const
+        {
+            return raytracer::materials::rotate_around_y(angle, material);
+        }
+
+        Material rotate_around_z(Angle angle, Material material) const
+        {
+            return raytracer::materials::rotate_around_z(angle, material);
+        }
     };
 }
 
@@ -126,6 +167,14 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(wood2d);
     BIND(worley2d);
     BIND(worley3d);
+    BIND_AS(scale2d, scale);
+    BIND_AS(scale3d, scale);
+    BIND_AS(translate2d, translate);
+    BIND_AS(translate3d, translate);
+    BIND(rotate);
+    BIND(rotate_around_x);
+    BIND(rotate_around_y);
+    BIND(rotate_around_z);
 #undef BIND
 #undef BIND_AS
 
