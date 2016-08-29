@@ -258,12 +258,6 @@
     <ClCompile Include="animation\lissajous.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="angle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="primitive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="command-line-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -472,6 +466,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="materials\composition-material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\angle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primitives\primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

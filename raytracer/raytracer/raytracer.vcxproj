@@ -480,7 +480,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="angle.cpp" />
+    <ClCompile Include="math\angle.cpp" />
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\circular-animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />
@@ -529,7 +529,7 @@
     <ClCompile Include="pipeline\ppm-consumer.cpp" />
     <ClCompile Include="pipeline\renderer-processor.cpp" />
     <ClCompile Include="pipeline\wif-consumer.cpp" />
-    <ClCompile Include="primitive.cpp" />
+    <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v4.cpp" />
