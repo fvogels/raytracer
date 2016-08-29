@@ -1,6 +1,6 @@
 #include "materials/material.h"
-#include "materials/materials.h"
 #include "materials/composition-material.h"
+#include "materials/pattern-materials.h"
 #include "math/function.h"
 #include "math/functions.h"
 #include "math/functions/patterns.h"
