@@ -61,9 +61,9 @@ Material raytracer::materials::transform(const math::Transformation3D& transform
     return Material(std::make_shared<Material3DTransformer>(transformation, material));
 }
 
-Material raytracer::materials::scale(double x, double y, Material material)
+Material raytracer::materials::scale(double sx, double sy, Material material)
 {
-    return transform(math::transformations::scale(x, y), material);
+    return transform(math::transformations::scale(sx, sy), material);
 }
 
 Material raytracer::materials::translate(const math::Vector2D& v, Material material)
@@ -76,9 +76,9 @@ Material raytracer::materials::rotate(math::Angle angle, Material material)
     return transform(math::transformations::rotate(angle), material);
 }
 
-Material raytracer::materials::scale(double x, double y, double z, Material material)
+Material raytracer::materials::scale(double sx, double sy, double sz, Material material)
 {
-    return transform(math::transformations::scale(x, y, z), material);
+    return transform(math::transformations::scale(sx, sy, sz), material);
 }
 
 Material raytracer::materials::translate(const math::Vector3D& v, Material material)
