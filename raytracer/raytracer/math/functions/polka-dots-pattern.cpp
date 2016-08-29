@@ -5,9 +5,9 @@
 using namespace math;
 
 
-Function<bool(const Point2D&)> math::functions::polka(double radius)
+Function<bool(const Point2D&)> math::functions::polka(double radius1, double radius2)
 {
-    std::function<bool(const Point2D&)> function = [radius](const Point2D& p)
+    std::function<bool(const Point2D&)> function = [=](const Point2D& p)
     {
         auto x = p.x();
         auto y = p.y();
@@ -17,8 +17,15 @@ Function<bool(const Point2D&)> math::functions::polka(double radius)
 
         Point2D fp(fx, fy);
 
-        return distance(fp, Point2D(0.5, 0.5)) < radius;
+#       define CHECK(X, Y, R)   distance(fp, Point2D(X, Y)) < R
+        return CHECK(0.5, 0.5, radius1) || CHECK(0, 0, radius2) || CHECK(1, 0, radius2) || CHECK(0, 1, radius2) || CHECK(1, 1, radius2);
+#       undef CHECK
     };
 
     return from_lambda<bool, const Point2D&>(function);
+}
+
+Function<bool(const Point2D&)> math::functions::polka(double radius)
+{
+    return polka(radius, radius);
 }

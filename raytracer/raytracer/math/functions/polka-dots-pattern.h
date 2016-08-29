@@ -12,6 +12,7 @@ namespace math
 {
     namespace functions
     {
-        math::Function<bool(const Point2D&)> polka(double radius = 0.25);
+        math::Function<bool(const Point2D&)> polka(double radius);
+        math::Function<bool(const Point2D&)> polka(double radius1, double radius2);
     }
 }
