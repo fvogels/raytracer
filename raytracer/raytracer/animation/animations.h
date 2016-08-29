@@ -4,3 +4,4 @@
 #include "animation/lissajous.h"
 #include "animation/animation-sequence.h"
 #include "animation/animation-inverter.h"
+#include "animation/animation-looper.h"
