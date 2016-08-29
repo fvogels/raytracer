@@ -9,8 +9,19 @@ namespace math
     class Voronoi2D
     {
     public:
-        virtual Point2D closest_to(const Point2D&) const = 0;
-        virtual Point2D second_closest_to(const Point2D&) const = 0;
+        Voronoi2D::Voronoi2D(Function<unsigned(unsigned)> rng, unsigned density);
+
+        Point2D closest_to(const Point2D&) const;
+        Point2D second_closest_to(const Point2D&) const;
+
+    private:
+        void enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const;
+        void enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const;
+        Point2D find_closest(const Point2D& p) const;
+        Point2D find_second_closest(const Point2D& p) const;
+
+        Function<unsigned(unsigned)> m_rng;
+        unsigned m_density;
     };
 
     class Voronoi3D

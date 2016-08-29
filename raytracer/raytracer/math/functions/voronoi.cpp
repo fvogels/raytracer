@@ -10,110 +10,6 @@ using namespace math::functions;
 
 namespace
 {
-    class Voronoi2DImplementation : public Voronoi2D
-    {
-    public:
-        Voronoi2DImplementation(Function<unsigned(unsigned)> rng, unsigned density)
-            : m_rng(rng), m_density(density)
-        {
-            // NOP
-        }
-
-        Point2D closest_to(const math::Point2D& p) const override
-        {            
-            auto closest = find_closest(p);
-
-            return closest;
-        }
-
-        Point2D second_closest_to(const math::Point2D& p) const override
-        {
-            auto second_closest = find_second_closest(p);
-
-            return second_closest;
-        }
-
-    private:
-        void enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
-        {
-            for (int i = 0; i != m_density; ++i)
-            {
-                unsigned k = x * 71767 + y * 19178 + i * 57465;
-
-                double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
-                double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
-                Point2D p(x + fx, y + fy);
-
-                callback(p);
-            }
-        }
-
-        void enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
-        {
-            int x = int(floor(p.x()));
-            int y = int(floor(p.y()));
-
-            for (int dx = -1; dx <= 1; ++dx)
-            {
-                for (int dy = -1; dy <= 1; ++dy)
-                {
-                    enumerate_points_in_cell(x + dx, y + dy, callback);
-                }
-            }
-        }
-
-        Point2D find_closest(const Point2D& p) const
-        {
-            Point2D closest;
-            double closest_distance = std::numeric_limits<double>::infinity();
-
-            enumerate_points_around(p, [&](const Point2D& q)
-            {
-                double dist = distance(p, q);
-
-                if (dist < closest_distance)
-                {
-                    closest = q;
-                    closest_distance = dist;
-                }
-            });
-
-            return closest;
-        }
-
-        Point2D find_second_closest(const Point2D& p) const
-        {
-            Point2D closest;
-            Point2D second_closest;
-            double closest_distance = std::numeric_limits<double>::infinity();
-            double second_closest_distance = std::numeric_limits<double>::infinity();
-
-            enumerate_points_around(p, [&](const Point2D& q)
-            {
-                double dist = distance(p, q);
-
-                if (dist < closest_distance)
-                {
-                    second_closest = closest;
-                    second_closest_distance = closest_distance;
-
-                    closest = q;
-                    closest_distance = dist;
-                }
-                else if (dist < second_closest_distance)
-                {
-                    second_closest = q;
-                    second_closest_distance = dist;
-                }
-            });
-
-            return second_closest;
-        }
-
-        Function<unsigned(unsigned)> m_rng;
-        unsigned m_density;
-    };
-
     class Voronoi3DImplementation : public Voronoi3D
     {
     public:
@@ -224,9 +120,105 @@ namespace
     };
 }
 
+math::Voronoi2D::Voronoi2D(Function<unsigned(unsigned)> rng, unsigned density)
+    : m_rng(rng), m_density(density)
+{
+    // NOP
+}
+
+Point2D math::Voronoi2D::closest_to(const math::Point2D& p) const
+{
+    auto closest = find_closest(p);
+
+    return closest;
+}
+
+Point2D math::Voronoi2D::second_closest_to(const math::Point2D& p) const
+{
+    auto second_closest = find_second_closest(p);
+
+    return second_closest;
+}
+
+void math::Voronoi2D::enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
+{
+    for (int i = 0; i != m_density; ++i)
+    {
+        unsigned k = x * 71767 + y * 19178 + i * 57465;
+
+        double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
+        double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
+        Point2D p(x + fx, y + fy);
+
+        callback(p);
+    }
+}
+
+void math::Voronoi2D::enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
+{
+    int x = int(floor(p.x()));
+    int y = int(floor(p.y()));
+
+    for (int dx = -1; dx <= 1; ++dx)
+    {
+        for (int dy = -1; dy <= 1; ++dy)
+        {
+            enumerate_points_in_cell(x + dx, y + dy, callback);
+        }
+    }
+}
+
+Point2D math::Voronoi2D::find_closest(const Point2D& p) const
+{
+    Point2D closest;
+    double closest_distance = std::numeric_limits<double>::infinity();
+
+    enumerate_points_around(p, [&](const Point2D& q)
+    {
+        double dist = distance(p, q);
+
+        if (dist < closest_distance)
+        {
+            closest = q;
+            closest_distance = dist;
+        }
+    });
+
+    return closest;
+}
+
+Point2D math::Voronoi2D::find_second_closest(const Point2D& p) const
+{
+    Point2D closest;
+    Point2D second_closest;
+    double closest_distance = std::numeric_limits<double>::infinity();
+    double second_closest_distance = std::numeric_limits<double>::infinity();
+
+    enumerate_points_around(p, [&](const Point2D& q)
+    {
+        double dist = distance(p, q);
+
+        if (dist < closest_distance)
+        {
+            second_closest = closest;
+            second_closest_distance = closest_distance;
+
+            closest = q;
+            closest_distance = dist;
+        }
+        else if (dist < second_closest_distance)
+        {
+            second_closest = q;
+            second_closest_distance = dist;
+        }
+    });
+
+    return second_closest;
+}
+
 std::shared_ptr<Voronoi2D> math::voronoi2d(unsigned density, unsigned seed)
 {
-    return std::make_shared<Voronoi2DImplementation>(random_function(seed), density);
+    return std::make_shared<Voronoi2D>(random_function(seed), density);
 }
 
 std::shared_ptr<Voronoi3D> math::voronoi3d(unsigned density, unsigned seed)
