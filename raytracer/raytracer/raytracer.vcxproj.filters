@@ -1115,5 +1115,8 @@
     <ClInclude Include="math\functions\dalmatian-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="animation\animation-inverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
