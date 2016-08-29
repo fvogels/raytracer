@@ -11,6 +11,7 @@
 #include "math/functions/noise.h"
 #include "samplers/samplers.h"
 #include "materials/materials.h"
+#include "materials/material-transformer.h"
 #include "lights/lights.h"
 #include "raytracers/ray-tracers.h"
 #include "renderers/renderers.h"
@@ -82,7 +83,7 @@ raytracer::Primitive create_root(TimeStamp now)
 
     std::vector<Primitive> primitives;
 
-    primitives.push_back(decorate(worley3d(5, 1.0, 1.0), scale_material3d(2, 2, 2, sphere())));
+    primitives.push_back(decorate(scale(2, 2, 2, worley3d(5, 1.0, 1.0)), sphere()));
 
     return make_union(primitives);
 }

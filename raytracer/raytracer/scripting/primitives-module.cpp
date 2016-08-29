@@ -77,15 +77,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(scale);
     BIND_HELPER_FUNCTION_AS(make_union, union);
     BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
-    BIND_DIRECTLY(decorate);
-    BIND_DIRECTLY(translate_material2d);
-    BIND_DIRECTLY(translate_material3d);
-    BIND_DIRECTLY(scale_material2d);
-    BIND_DIRECTLY(scale_material3d);
-    BIND_DIRECTLY(rotate_material);
-    BIND_DIRECTLY(rotate_material_around_x);
-    BIND_DIRECTLY(rotate_material_around_y);
-    BIND_DIRECTLY(rotate_material_around_z);   
+    BIND_DIRECTLY(decorate);   
     BIND_HELPER_FUNCTION(mesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
