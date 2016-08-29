@@ -35,10 +35,7 @@ namespace math
     class Function<R(Ts...)>
     {
     public:
-        Function()
-            : m_body(nullptr) { }
-
-        Function(std::shared_ptr<FunctionBody<R, Ts...>> body)
+        Function(std::shared_ptr<FunctionBody<R, Ts...>> body = nullptr)
             : m_body(std::move(body)) { }
 
         Function(const Function<R(Ts...)>&) = default;
