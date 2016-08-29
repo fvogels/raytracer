@@ -608,6 +608,7 @@
     <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="animation\lissajous.cpp" />
+    <ClCompile Include="loopers\single-threaded-looper.cpp" />
     <ClCompile Include="tests\animation-tests.cpp" />
     <ClCompile Include="tests\camera-transformation-tests.cpp" />
     <ClCompile Include="tests\cone-tests.cpp" />
@@ -631,7 +632,7 @@
     <ClCompile Include="tests\xz-plane-tests.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="util\beep.cpp" />
-    <ClCompile Include="util\looper.cpp" />
+    <ClCompile Include="loopers\looper.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -846,9 +847,10 @@
     <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="animation\lissajous.h" />
     <ClInclude Include="math\transformation2d.h" />
+    <ClInclude Include="loopers\single-threaded-looper.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
-    <ClInclude Include="util\looper.h" />
+    <ClInclude Include="loopers\looper.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />

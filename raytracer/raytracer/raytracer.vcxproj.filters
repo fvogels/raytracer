@@ -159,9 +159,6 @@
     <ClCompile Include="imaging\wif-format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="util\looper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pipeline\overprint-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -474,6 +471,12 @@
     <ClCompile Include="primitives\primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loopers\looper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loopers\single-threaded-looper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -708,9 +711,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\pipeline-builder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="util\looper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\overprint-processor.h">
@@ -1131,6 +1131,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="materials\composition-material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loopers\looper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loopers\single-threaded-looper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

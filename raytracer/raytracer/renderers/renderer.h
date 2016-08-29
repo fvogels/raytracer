@@ -6,7 +6,7 @@
 #include "raytracers/ray-tracer.h"
 #include "math/rasterizer.h"
 #include "math/point.h"
-#include "util/looper.h"
+#include "loopers/looper.h"
 
 namespace raytracer
 {

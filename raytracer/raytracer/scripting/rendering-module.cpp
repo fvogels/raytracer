@@ -6,7 +6,7 @@
 #include "raytracers/ray-tracer.h"
 #include "samplers/samplers.h"
 #include "imaging/wif-format.h"
-#include "util/looper.h"
+#include "loopers/looper.h"
 
 using namespace chaiscript;
 using namespace raytracer;

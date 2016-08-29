@@ -24,7 +24,7 @@
 #include "imaging/bitmap-function.h"
 #include "pipeline/pipelines.h"
 #include "util/misc.h"
-#include "util/looper.h"
+#include "loopers/looper.h"
 #include "util/beep.h"
 #include "scripting/scripting.h"
 #include "easylogging++.h"
