@@ -79,8 +79,8 @@ Function<bool(const Point2D&)> math::functions::polka2(unsigned density, unsigne
 
     std::function<bool(const Point2D&)> function = [voronoi](const Point2D& p)
     {
-        auto closest = voronoi->closest_to(p);
-        auto closest_to_closest = voronoi->second_closest_to(closest);
+        auto closest = voronoi.closest_to(p);
+        auto closest_to_closest = voronoi.second_closest_to(closest);
         auto radius = distance(closest, closest_to_closest) * 0.45;
 
         return distance(p, closest) < radius;
