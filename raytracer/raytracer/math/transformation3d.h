@@ -5,10 +5,10 @@
 
 namespace math
 {
-    class Transformation
+    class Transformation3D
     {
     public:
-        Transformation(const Matrix4D& transformation_matrix, const Matrix4D& inverse_transformation_matrix)
+        Transformation3D(const Matrix4D& transformation_matrix, const Matrix4D& inverse_transformation_matrix)
             : transformation_matrix(transformation_matrix), inverse_transformation_matrix(inverse_transformation_matrix)  { }
     
         Matrix4D transformation_matrix;
@@ -17,11 +17,11 @@ namespace math
 
     namespace transformations
     {
-        Transformation translation(const Vector3D&);
-        Transformation scale(double, double, double);
-        Transformation rotate_x(Angle);
-        Transformation rotate_y(Angle);
-        Transformation rotate_z(Angle);
-        Transformation rotate_align_y(const Vector3D&);
+        Transformation3D translation(const Vector3D&);
+        Transformation3D scale(double, double, double);
+        Transformation3D rotate_x(Angle);
+        Transformation3D rotate_y(Angle);
+        Transformation3D rotate_z(Angle);
+        Transformation3D rotate_align_y(const Vector3D&);
     }
 }

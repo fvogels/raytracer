@@ -13,7 +13,7 @@ namespace
     class TransformerImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
-        TransformerImplementation(const math::Transformation& transformer, Primitive transformee)
+        TransformerImplementation(const math::Transformation3D& transformer, Primitive transformee)
             : transformer(transformer), transformee(transformee) { }
 
         bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
@@ -81,12 +81,12 @@ namespace
         }
 
     private:
-        math::Transformation transformer;
+        math::Transformation3D transformer;
         Primitive transformee;
     };
 }
 
-Primitive raytracer::primitives::transform(const math::Transformation& transformation, Primitive transformee)
+Primitive raytracer::primitives::transform(const math::Transformation3D& transformation, Primitive transformee)
 {
     return Primitive(std::make_shared<TransformerImplementation>(transformation, transformee));
 }
