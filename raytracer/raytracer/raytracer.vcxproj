@@ -502,6 +502,7 @@
     <ClCompile Include="demo\depth-of-field-demo.cpp" />
     <ClCompile Include="demo\fisheye-demo.cpp" />
     <ClCompile Include="demo\marble-animation-demo.cpp" />
+    <ClCompile Include="materials\composition-material.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\material-transformer.cpp" />
     <ClCompile Include="materials\pattern-materials.cpp" />
@@ -682,6 +683,7 @@
     <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-processor.h" />
+    <ClInclude Include="materials\composition-material.h" />
     <ClInclude Include="demo\plane-bumpifier-demo.h" />
     <ClInclude Include="demo\sampler-demo.h" />
     <ClInclude Include="demo\sphere-bumpifier-demo.h" />

@@ -39,7 +39,6 @@ Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pa
     return Material(std::make_shared<MultiMaterial>(pattern >> bool_mapper));
 }
 
-
 Material raytracer::materials::checkered(Material m1, Material m2)
 {
     return pattern2d(math::functions::checkered(), m1, m2);
