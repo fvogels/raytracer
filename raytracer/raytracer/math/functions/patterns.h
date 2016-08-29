@@ -3,6 +3,7 @@
 #include "math/function.h"
 #include "math/point.h"
 #include "math/functions/checkered.h"
+#include "math/functions/horizontal-lines.h"
 
 
 namespace math
