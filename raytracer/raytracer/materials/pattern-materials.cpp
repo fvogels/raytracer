@@ -1,6 +1,6 @@
 #include "materials/material.h"
 #include "materials/materials.h"
-#include "materials/uniform-material.h"
+#include "materials/composition-material.h"
 #include "math/function.h"
 #include "math/functions.h"
 #include "math/functions/patterns.h"
@@ -14,29 +14,11 @@ using namespace raytracer::materials;
 using namespace imaging;
 
 
-namespace
-{
-    class MultiMaterial : public materials::_private_::MaterialImplementation
-    {
-    public:
-        MultiMaterial(math::Function<Material(const Point2D&)> function)
-            : m_function(function) { }
-
-        MaterialProperties at(const HitPosition& hp) const override
-        {
-            return m_function(hp.uv)->at(hp);
-        }
-
-    private:
-        math::Function<Material(const Point2D&)> m_function;
-    };
-}
-
 Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pattern, Material m1, Material m2)
 {
     auto bool_mapper = math::functions::bool_mapper(m1, m2);
 
-    return Material(std::make_shared<MultiMaterial>(pattern >> bool_mapper));
+    return composite(pattern >> bool_mapper);
 }
 
 Material raytracer::materials::checkered(Material m1, Material m2)
