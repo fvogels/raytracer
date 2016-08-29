@@ -1,4 +1,4 @@
-#include "math/functions/vertical-lines.h"
+#include "math/functions/vertical-lines-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
