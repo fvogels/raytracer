@@ -8,6 +8,6 @@ namespace raytracer
 {
     namespace materials
     {
-        Material worley(double power);
+        Material worley3d(double power);
     }
 }

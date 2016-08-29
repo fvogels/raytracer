@@ -33,7 +33,7 @@ namespace
     };
 }
 
-Material raytracer::materials::worley(double power)
+Material raytracer::materials::worley3d(double power)
 {
     return Material(std::make_shared<WorleyMaterial3D>(power));
 }

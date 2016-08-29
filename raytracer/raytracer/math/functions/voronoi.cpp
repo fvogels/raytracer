@@ -77,7 +77,7 @@ namespace
     };
 }
 
-math::Function<math::Point2D(const math::Point2D&)> math::functions::voronoi2d(unsigned seed, unsigned density)
+math::Function<math::Point2D(const math::Point2D&)> math::functions::voronoi2d(unsigned density, unsigned seed)
 {
     return math::Function<math::Point2D(const math::Point2D&)>(std::make_shared<Voronoi2D>(random_function(seed), density));
 }

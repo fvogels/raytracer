@@ -79,9 +79,9 @@ namespace
             return raytracer::materials::wood2d(octaves, turbulence);
         }
 
-        Material worley2d(double power) const
+        Material worley3d(double power) const
         {
-            return raytracer::materials::worley(power);
+            return raytracer::materials::worley3d(power);
         }
     };
 }
@@ -107,7 +107,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(marble2d);
     BIND(marble3d);
     BIND(wood2d);
-    BIND(worley2d);
+    BIND(worley3d);
 #undef BIND
 #undef BIND_AS
 
