@@ -119,7 +119,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(grid);
     BIND(checkered);
     BIND(polka);
-    BIND(polka2);
+    BIND_AS(polka2, polka);
     BIND(chaotic_polka);
     BIND(marble2d);
     BIND(marble3d);
