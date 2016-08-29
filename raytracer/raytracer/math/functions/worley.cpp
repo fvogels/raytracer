@@ -1,5 +1,6 @@
 #include "math/functions/worley.h"
 #include "math/functions/random-function.h"
+#include "math/functions/voronoi.h"
 #include <assert.h>
 #include <algorithm>
 #include <limits>
@@ -13,8 +14,8 @@ namespace
     class WorleyNoise2D : public FunctionBody<double, const Point2D&>
     {
     public:
-        WorleyNoise2D(Function<unsigned(unsigned)> rng)
-            : m_rng(rng)
+        WorleyNoise2D(Function<Point2D(const Point2D&)> voronoi)
+            : m_voronoi(voronoi)
         {
             // NOP
         }
@@ -25,54 +26,12 @@ namespace
         }
 
     private:
-        void enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
-        {
-            for (int i = 0; i != 10; ++i)
-            {
-                unsigned k = x * 71767 + y * 19178 + i * 57465;
-
-                double fx = double(m_rng(k)) / std::numeric_limits<unsigned>::max();
-                double fy = double(m_rng(k + 1)) / std::numeric_limits<unsigned>::max();
-                Point2D p(x + fx, y + fy);
-
-                callback(p);
-            }
-        }
-
-        void enumerate_points_around(const Point2D& p, std::function<void(const Point2D&)> callback) const
-        {
-            int x = int(floor(p.x()));
-            int y = int(floor(p.y()));
-
-            for (int dx = -1; dx <= 1; ++dx)
-            {
-                for (int dy = -1; dy <= 1; ++dy)
-                {
-                    enumerate_points_in_cell(x + dx, y + dy, callback);
-                }
-            }
-        }
-
         double find_smallest_distance(const Point2D& p) const
         {
-            double closest = sqrt(2);
-
-            enumerate_points_around(p, [&closest, &p](const Point2D& q)
-            {
-                closest = std::min(closest, distance(p, q));
-            });
-
-            double result = closest;
-
-            result = std::min(result, 1.0);
-
-            assert(0 <= result);
-            assert(result <= 1);
-
-            return result;
+            return distance(p, m_voronoi(p));
         }
 
-        Function<unsigned(unsigned)> m_rng;
+        Function<Point2D(const Point2D&)> m_voronoi;
     };
 
     class WorleyNoise3D : public FunctionBody<double, const Point3D&>
@@ -146,9 +105,9 @@ namespace
     };
 }
 
-Noise2D math::functions::worley2d(unsigned seed)
+Noise2D math::functions::worley2d(unsigned density, unsigned seed)
 {
-    return Noise2D(std::make_shared<WorleyNoise2D>(random_function(seed)));
+    return Noise2D(std::make_shared<WorleyNoise2D>(voronoi2d(seed, density)));
 }
 
 Noise3D math::functions::worley3d(unsigned seed)
