@@ -64,7 +64,7 @@ namespace
             return raytracer::materials::ordered_polka(radius, x, y);
         }
 
-        Material polka2(unsigned density, Material x, Material y) const
+        Material chaotic_polka(unsigned density, Material x, Material y) const
         {
             return raytracer::materials::chaotic_polka(density, x, y);
         }
@@ -114,7 +114,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(grid);
     BIND(checkered);
     BIND(ordered_polka);
-    BIND(polka2);
+    BIND(chaotic_polka);
     BIND(marble2d);
     BIND(marble3d);
     BIND(wood2d);
