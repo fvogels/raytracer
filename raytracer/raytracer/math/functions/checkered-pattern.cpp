@@ -1,4 +1,4 @@
-#include "math/functions/checkered.h"
+#include "math/functions/checkered-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
