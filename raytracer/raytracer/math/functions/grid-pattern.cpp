@@ -1,4 +1,4 @@
-#include "math/functions/patterns.h"
+#include "math/functions/grid-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
