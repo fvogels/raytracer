@@ -503,6 +503,7 @@
     <ClCompile Include="demo\fisheye-demo.cpp" />
     <ClCompile Include="demo\marble-animation-demo.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
+    <ClCompile Include="materials\material-transformer.cpp" />
     <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
@@ -702,6 +703,7 @@
     <ClInclude Include="demo\fisheye-demo.h" />
     <ClInclude Include="demo\marble-animation-demo.h" />
     <ClInclude Include="imaging\bmp-format.h" />
+    <ClInclude Include="materials\material-transformer.h" />
     <ClInclude Include="materials\pattern-materials.h" />
     <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />

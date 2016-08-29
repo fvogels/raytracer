@@ -471,6 +471,9 @@
     <ClCompile Include="math\transformation2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="materials\material-transformer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1125,6 +1128,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\transformation2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\material-transformer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
