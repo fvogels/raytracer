@@ -1,3 +1,7 @@
+require 'fileutils'
+require 'pathname'
+
+
 class Store
   def initialize
     @members = {}
@@ -97,14 +101,32 @@ class TestFileContext
 end
 
 
-def test_file(filename, &block)
+def test_file(test_path, &block)
+  puts
+  puts "Generating tests #{test_path}"
+  
   context = TestFileContext.new
   context.instance_eval(&block)
-  path = "../tests/#{filename}.cpp"
+  tests_source = context.generate_source
 
-  puts "Writing #{path}"
-  
-  File.open(path, 'w') do |out|
-    out.puts( context.generate_source )
+  path = Pathname.new("../tests/#{test_path}.cpp").expand_path
+
+
+  if path.file? then
+    puts "#{path} already exists; comparing contents..."
+    old_tests_source = path.read
+
+    if old_tests_source == tests_source
+    then
+      puts "Contents are the same"
+      puts "SKIPPED #{path}"
+      return
+    else
+      puts "Contents are different"
+    end
   end
+  
+  puts "Writing #{path}"
+  path.write tests_source
+  puts "WROTE #{path}"
 end
