@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'interval' do
+test_file 'math/interval' do
   template do
     <<-'END'
       #ifdef TEST_BUILD

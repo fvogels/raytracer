@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'orthographic-camera' do
+test_file 'cameras/orthographic-camera' do
   template do
     <<-'END'
       #ifdef TEST_BUILD

@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'intersection' do
+test_file 'primitives/intersection' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
