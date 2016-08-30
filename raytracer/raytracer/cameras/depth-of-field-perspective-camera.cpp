@@ -9,7 +9,7 @@ using namespace raytracer::samplers;
 using namespace math;
 
 
-raytracer::cameras::_private_::DepthOfFieldPerspectiveCamera::DepthOfFieldPerspectiveCamera(const math::Matrix4D transformation, const std::vector<Camera>& cameras)
+raytracer::cameras::_private_::DepthOfFieldPerspectiveCamera::DepthOfFieldPerspectiveCamera(const math::Matrix4x4 transformation, const std::vector<Camera>& cameras)
     : DisplaceableCamera(transformation), m_cameras(cameras)
 {
     // NOP
@@ -37,7 +37,7 @@ Camera raytracer::cameras::depth_of_field_perspective(
 {
     assert(up.is_unit());
 
-    Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
+    Matrix4x4 transformation = _private_::create_transformation(eye, look_at, up);
     Point3D relative_look_at = Point3D(0, 0, math::distance(eye, look_at));
 
     std::vector<Camera> cameras;

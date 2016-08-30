@@ -17,7 +17,7 @@ namespace raytracer
             class FisheyeCamera : public DisplaceableCamera
             {
             public:
-                FisheyeCamera(const math::Matrix4D&, math::Angle, math::Angle);
+                FisheyeCamera(const math::Matrix4x4&, math::Angle, math::Angle);
 
             protected:
                 void enumerate_untransformed_rays(const math::Point2D& point, std::function<void(const math::Ray&)>) const override;

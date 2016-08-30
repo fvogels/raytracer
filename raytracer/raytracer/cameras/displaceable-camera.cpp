@@ -4,7 +4,7 @@
 using namespace math;
 
 
-raytracer::cameras::_private_::DisplaceableCamera::DisplaceableCamera(const Matrix4D& transformation)
+raytracer::cameras::_private_::DisplaceableCamera::DisplaceableCamera(const Matrix4x4& transformation)
     : m_transformation(transformation)
 {
     // NOP

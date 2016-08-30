@@ -8,11 +8,11 @@ namespace math
     class Transformation2D
     {
     public:
-        Transformation2D(const Matrix3D& transformation_matrix, const Matrix3D& inverse_transformation_matrix)
+        Transformation2D(const Matrix3x3& transformation_matrix, const Matrix3x3& inverse_transformation_matrix)
             : transformation_matrix(transformation_matrix), inverse_transformation_matrix(inverse_transformation_matrix) { }
 
-        Matrix3D transformation_matrix;
-        Matrix3D inverse_transformation_matrix;
+        Matrix3x3 transformation_matrix;
+        Matrix3x3 inverse_transformation_matrix;
     };
 
     namespace transformations

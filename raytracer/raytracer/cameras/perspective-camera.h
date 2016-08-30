@@ -17,7 +17,7 @@ namespace raytracer
             class PerspectiveCamera : public DisplaceableCamera
             {
             public:
-                PerspectiveCamera(const math::Matrix4D transformation, const math::Rectangle3D&);
+                PerspectiveCamera(const math::Matrix4x4 transformation, const math::Rectangle3D&);
 
             protected:
                 void enumerate_untransformed_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const;

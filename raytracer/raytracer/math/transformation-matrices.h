@@ -8,14 +8,14 @@ namespace math
 {
     namespace transformation_matrices
     {
-        Matrix4D coordinate_system(const Point3D&, const Vector3D&, const Vector3D&, const Vector3D&);
-        Matrix3D translation(const Vector2D&);
-        Matrix4D translation(const Vector3D&);
-        Matrix3D scaling(double sx, double sy);
-        Matrix4D scaling(double sx, double sy, double sz);
-        Matrix3D rotation(Angle);
-        Matrix4D rotation_around_x(Angle);
-        Matrix4D rotation_around_y(Angle);
-        Matrix4D rotation_around_z(Angle);
+        Matrix4x4 coordinate_system(const Point3D&, const Vector3D&, const Vector3D&, const Vector3D&);
+        Matrix3x3 translation(const Vector2D&);
+        Matrix4x4 translation(const Vector3D&);
+        Matrix3x3 scaling(double sx, double sy);
+        Matrix4x4 scaling(double sx, double sy, double sz);
+        Matrix3x3 rotation(Angle);
+        Matrix4x4 rotation_around_x(Angle);
+        Matrix4x4 rotation_around_y(Angle);
+        Matrix4x4 rotation_around_z(Angle);
     }
 }

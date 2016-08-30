@@ -36,7 +36,7 @@ namespace math
         /// <summary>
         /// Returns a new ray equal to the transformation matrix <paramref name="m"> applied to this ray.
         /// </summary>
-        Ray transform(const Matrix4D& m) const;
+        Ray transform(const Matrix4x4& m) const;
     };
 
     std::ostream& operator <<(std::ostream& out, const Ray&);

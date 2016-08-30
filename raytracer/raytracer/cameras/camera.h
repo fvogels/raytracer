@@ -15,7 +15,7 @@ namespace raytracer
     {
         namespace _private_
         {
-            math::Matrix4D create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
+            math::Matrix4x4 create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
 
             class CameraImplementation
             {

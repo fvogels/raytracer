@@ -7,7 +7,7 @@ using namespace raytracer::cameras;
 using namespace math;
 
 
-raytracer::cameras::_private_::OrthographicCamera::OrthographicCamera(const math::Matrix4D& transformation, double window_width, double window_height)
+raytracer::cameras::_private_::OrthographicCamera::OrthographicCamera(const math::Matrix4x4& transformation, double window_width, double window_height)
     : DisplaceableCamera(transformation), m_eye_window(Point3D(window_width / 2, -window_height / 2, 0), Vector3D(-window_width, 0, 0), Vector3D(0, window_height, 0))
 {
     // NOP
@@ -33,7 +33,7 @@ Camera raytracer::cameras::orthographic(
     assert(up.is_unit());
 
     double window_height = window_width / aspect_ratio;
-    Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
+    Matrix4x4 transformation = _private_::create_transformation(eye, look_at, up);
 
     return Camera(std::make_shared<_private_::OrthographicCamera>(transformation, window_width, window_height));
 }

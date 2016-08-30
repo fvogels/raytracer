@@ -10,7 +10,7 @@ using namespace raytracer::cameras;
 using namespace math;
 
 
-raytracer::cameras::_private_::FisheyeCamera::FisheyeCamera(const math::Matrix4D& transformation, math::Angle horizontal_view_angle, math::Angle vertical_view_angle)
+raytracer::cameras::_private_::FisheyeCamera::FisheyeCamera(const math::Matrix4x4& transformation, math::Angle horizontal_view_angle, math::Angle vertical_view_angle)
     : DisplaceableCamera(transformation), m_horizontal_view_angle(horizontal_view_angle), m_vertical_view_angle(vertical_view_angle)
 {
     // NOP
@@ -47,7 +47,7 @@ Camera raytracer::cameras::fisheye(
 {
     assert(up.is_unit());
 
-    Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
+    Matrix4x4 transformation = _private_::create_transformation(eye, look_at, up);
 
     return Camera(std::make_shared<_private_::FisheyeCamera>(transformation, horizontal_angle, vertical_angle));
 }

@@ -14,7 +14,7 @@ math::Ray::Ray(const Point3D& origin, const Point3D& through)
     // NOP
 }
 
-Ray math::Ray::transform(const Matrix4D& m) const
+Ray math::Ray::transform(const Matrix4x4& m) const
 {
     auto transformed_origin = m * origin;
     auto transformed_direction = m * direction;

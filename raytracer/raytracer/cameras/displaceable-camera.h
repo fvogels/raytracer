@@ -22,12 +22,12 @@ namespace raytracer
                 void enumerate_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const;
 
             protected:
-                DisplaceableCamera(const math::Matrix4D&);
+                DisplaceableCamera(const math::Matrix4x4&);
 
                 virtual void enumerate_untransformed_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const = 0;
 
             private:
-                math::Matrix4D m_transformation;
+                math::Matrix4x4 m_transformation;
             };
         }
     }

@@ -4,7 +4,7 @@
 using namespace math;
 
 
-Vector2D math::operator *(const Matrix3D& a, const Vector2D& v)
+Vector2D math::operator *(const Matrix3x3& a, const Vector2D& v)
 {
 #   define AUX(row) a.at(row, 0) * v.x() + a.at(row, 1) * v.y()
 
@@ -16,7 +16,7 @@ Vector2D math::operator *(const Matrix3D& a, const Vector2D& v)
 #   undef AUX
 }
 
-Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
+Vector3D math::operator *(const Matrix4x4& a, const Vector3D& v)
 {
 #   define AUX(row) a.at(row, 0) * v.x() + a.at(row, 1) * v.y() + a.at(row, 2) * v.z()
 
@@ -29,7 +29,7 @@ Vector3D math::operator *(const Matrix4D& a, const Vector3D& v)
 #   undef AUX
 }
 
-Point2D math::operator *(const Matrix3D& a, const Point2D& p)
+Point2D math::operator *(const Matrix3x3& a, const Point2D& p)
 {
 #   define AUX(row) a.at(row, 0) * p.x() + a.at(row, 1) * p.y() + a.at(row, 2)
 
@@ -41,7 +41,7 @@ Point2D math::operator *(const Matrix3D& a, const Point2D& p)
 #   undef AUX
 }
 
-Point3D math::operator *(const Matrix4D& a, const Point3D& p)
+Point3D math::operator *(const Matrix4x4& a, const Point3D& p)
 {
 #   define AUX(row) a.at(row, 0) * p.x() + a.at(row, 1) * p.y() + a.at(row, 2) * p.z() + a.at(row, 3)
 

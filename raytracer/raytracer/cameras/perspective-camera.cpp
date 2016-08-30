@@ -7,7 +7,7 @@ using namespace raytracer::cameras;
 using namespace math;
 
 
-raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::Matrix4D transformation, const Rectangle3D& view_window)
+raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::Matrix4x4 transformation, const Rectangle3D& view_window)
     : DisplaceableCamera(transformation), m_view_window(view_window)
 {
     // NOP
@@ -38,7 +38,7 @@ Camera raytracer::cameras::perspective(
     Vector3D view_window_right = Vector3D(-view_window_width, 0, 0);
     Vector3D view_window_up = Vector3D(0, view_window_height, 0);
     Rectangle3D view_window(view_window_origin, view_window_right, view_window_up);
-    Matrix4D transformation = _private_::create_transformation(eye, look_at, up);
+    Matrix4x4 transformation = _private_::create_transformation(eye, look_at, up);
 
     return Camera(std::make_shared<_private_::PerspectiveCamera>(transformation, view_window));
 }

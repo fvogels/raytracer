@@ -45,8 +45,8 @@ namespace math
         std::unique_ptr<std::array<double, N * N>> m_elements;
     };
 
-    using Matrix3D = Matrix<3>;
-    using Matrix4D = Matrix<4>;
+    using Matrix3x3 = Matrix<3>;
+    using Matrix4x4 = Matrix<4>;
 
     template<unsigned N>
     Matrix<N> zero_matrix()
@@ -86,7 +86,7 @@ namespace math
                 double& target = result.at(row, col);
                 target = 0;
 
-                for (unsigned i = 0; i != 4; ++i)
+                for (unsigned i = 0; i != N; ++i)
                 {
                     target += a.at(row, i) * b.at(i, col);
                 }
@@ -96,10 +96,10 @@ namespace math
         return result;
     }
 
-    Vector2D operator *(const Matrix3D& a, const Vector2D& v);
-    Vector3D operator *(const Matrix4D& a, const Vector3D& v);
-    Point2D operator *(const Matrix3D& a, const Point2D& p);
-    Point3D operator *(const Matrix4D& a, const Point3D& p);
+    Vector2D operator *(const Matrix3x3& a, const Vector2D& v);
+    Vector3D operator *(const Matrix4x4& a, const Vector3D& v);
+    Point2D operator *(const Matrix3x3& a, const Point2D& p);
+    Point3D operator *(const Matrix4x4& a, const Point3D& p);
 
     template<unsigned N>
     Matrix<N> transpose(const Matrix<N>& m)
