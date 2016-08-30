@@ -1,23 +1,27 @@
 require './shared.rb'
 
 
-test_file 'matrix-tests' do
+file_template = <<'END'
+  #ifdef TEST_BUILD
+
+  #include "Catch.h"
+  #include "math/matrix.h"
+  #include "math/transformation-matrices.h"
+
+  using namespace math;
+  using namespace math::transformation_matrices;
+
+
+  <<<TESTS>>>
+
+  #endif
+END
+
+
+
+test_file 'matrix' do
   template do
-    <<-'END'
-      #ifdef TEST_BUILD
-
-      #include "Catch.h"
-      #include "math/matrix.h"
-      #include "math/transformation-matrices.h"
-
-      using namespace math;
-      using namespace math::transformation_matrices;
-
-
-      <<<TESTS>>>
-
-      #endif
-    END
+    file_template
   end
 
   test_suite do

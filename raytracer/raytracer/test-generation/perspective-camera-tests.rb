@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'perspective-camera-tests' do
+test_file 'perspective-camera' do
   template do
     <<-'END'
       #ifdef TEST_BUILD

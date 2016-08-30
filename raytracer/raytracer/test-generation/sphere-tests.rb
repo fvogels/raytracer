@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'sphere-tests' do
+test_file 'sphere' do
   template do
     <<-'END'
       #ifdef TEST_BUILD

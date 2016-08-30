@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'cone-tests' do
+test_file 'cone' do
   template do
     <<-'END'
       #ifdef TEST_BUILD

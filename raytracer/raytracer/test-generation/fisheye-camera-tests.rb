@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'fisheye-camera-tests' do
+test_file 'fisheye-camera' do
   template do
     <<-'END'
       #ifdef TEST_BUILD

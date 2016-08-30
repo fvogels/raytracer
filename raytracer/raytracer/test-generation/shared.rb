@@ -109,7 +109,7 @@ def test_file(test_path, &block)
   context.instance_eval(&block)
   tests_source = context.generate_source
 
-  path = Pathname.new("../tests/#{test_path}.cpp").expand_path
+  path = Pathname.new("../tests/#{test_path}-tests.cpp").expand_path
 
 
   if path.file? then
