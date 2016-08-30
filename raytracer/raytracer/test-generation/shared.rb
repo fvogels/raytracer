@@ -125,7 +125,8 @@ def test_file(test_path, &block)
       puts "Contents are different"
     end
   end
-  
+
+  FileUtils.mkdir_p path.parent.expand_path.to_s
   puts "Writing #{path}"
   path.write tests_source
   puts "WROTE #{path}"

@@ -312,12 +312,6 @@
     <ClCompile Include="tests\triangle-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\xy-plane-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\xz-plane-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -480,7 +474,13 @@
     <ClCompile Include="loopers\smart-looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\yz-plane-tests.cpp">
+    <ClCompile Include="tests\primitives\plane\xy-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\primitives\plane\xz-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\primitives\plane\yz-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
