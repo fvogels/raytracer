@@ -628,6 +628,7 @@
     <ClCompile Include="tests\math\matrix\translation2d-tests.cpp" />
     <ClCompile Include="tests\math\matrix\translation3d-tests.cpp" />
     <ClCompile Include="tests\primitives\cone-tests.cpp" />
+    <ClCompile Include="tests\primitives\cylinder-along-x-tests.cpp" />
     <ClCompile Include="tests\primitives\intersection-tests.cpp" />
     <ClCompile Include="tests\primitives\plane\xy-tests.cpp" />
     <ClCompile Include="tests\primitives\plane\xz-tests.cpp" />
