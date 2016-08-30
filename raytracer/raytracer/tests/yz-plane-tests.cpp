@@ -1737,4 +1737,1948 @@ TEST_CASE("[Plane] Hit between YZ plane and (10,2,2) + (-1,0,1) * t", "[Plane]")
     CHECK(hit.normal == approx(Vector3D(1,0,0).normalized()));
 }
 
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,-2,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,-2,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,-2,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,-2,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,-2,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,-2,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,-2,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,-2,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,-2,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,-2,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,-2,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,-2,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,0,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,0,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,0,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,0,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,0,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,0,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,0,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,0,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,0,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,0,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,0,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,0,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,-2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,-2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,-2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,-2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,-2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,-2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,-2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,-2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,-2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,-2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,-2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,-2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,0) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,0);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,0) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,0);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,0) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,0);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,0) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,0);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,0) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,0);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,0) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,0);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (1,2,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(1,2,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-1,2,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-1,2,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (5,2,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(5,2,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-5,2,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-5,2,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,2) + (0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,2);
+    Vector3D ray_direction(0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,2) + (-0,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,2);
+    Vector3D ray_direction(-0,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,2) + (1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,2);
+    Vector3D ray_direction(1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,2) + (-1,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,2);
+    Vector3D ray_direction(-1,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (10,2,2) + (10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(10,2,2);
+    Vector3D ray_direction(10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
+TEST_CASE("[Plane] No hit between YZ plane and (-10,2,2) + (-10,0,0) * t", "[Plane]")
+{
+    Point3D ray_origin(-10,2,2);
+    Vector3D ray_direction(-10,0,0);
+
+    auto primitive = raytracer::primitives::yz_plane();
+    Ray ray(ray_origin, ray_direction);
+
+    Hit hit;
+    REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+}
+
 #endif

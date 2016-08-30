@@ -106,17 +106,11 @@ test_file 'xy-plane-tests' do
             test_case do |data|
               data.ray_origin = "(#{x},#{y},#{z})"
               data.ray_direction = "(0,0,#{dz})"
-              data.expected_t = z
-              data.expected_hit_position = "(#{x},#{y},0)"
-              data.expected_normal_position = "(0,0,1)"
             end
 
             test_case do |data|
               data.ray_origin = "(#{x},#{y},-#{z})"
               data.ray_direction = "(0,0,-#{dz})"
-              data.expected_t = z
-              data.expected_hit_position = "(#{x},#{y},0)"
-              data.expected_normal_position = "(0,0,1)"
             end
           end
         end
@@ -204,6 +198,42 @@ test_file 'xz-plane-tests' do
       end
     end
   end
+
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Plane] No hit between XZ plane and #{ray_origin} + #{ray_direction} * t", "[Plane]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Vector3D ray_direction#{ray_direction};
+
+            auto primitive = raytracer::primitives::xz_plane();
+            Ray ray(ray_origin, ray_direction);
+
+            Hit hit;
+            REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+        }
+      END
+    end
+
+    [-2,0,2].each do |x|
+      [-2,0,2].each do |z|
+        [1,5,10].each do |y|
+          [0,1,10].each do |dy|
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(0,#{dy},0)"
+            end
+
+            test_case do |data|
+              data.ray_origin = "(#{x},-#{y},#{z})"
+              data.ray_direction = "(0,-#{dy},0)"
+            end
+          end
+        end
+      end
+    end
+  end
 end
 
 test_file 'yz-plane-tests' do
@@ -280,6 +310,42 @@ test_file 'yz-plane-tests' do
             data.expected_t = x
             data.expected_hit_position = "(0,#{y},#{z+x})"
             data.expected_normal_position = "(1,0,0)"
+          end
+        end
+      end
+    end
+  end
+  
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Plane] No hit between YZ plane and #{ray_origin} + #{ray_direction} * t", "[Plane]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Vector3D ray_direction#{ray_direction};
+
+            auto primitive = raytracer::primitives::yz_plane();
+            Ray ray(ray_origin, ray_direction);
+
+            Hit hit;
+            REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
+        }
+      END
+    end
+
+    [-2,0,2].each do |y|
+      [-2,0,2].each do |z|
+        [1,5,10].each do |x|
+          [0,1,10].each do |dx|
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(#{dx},0,0)"
+            end
+
+            test_case do |data|
+              data.ray_origin = "(-#{x},#{y},#{z})"
+              data.ray_direction = "(-#{dx},0,0)"
+            end
           end
         end
       end
