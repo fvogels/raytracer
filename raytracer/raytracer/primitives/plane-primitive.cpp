@@ -1,4 +1,5 @@
 #include "primitives/plane-primitive.h"
+#include "math/interval.h"
 
 using namespace raytracer;
 using namespace raytracer::primitives;
@@ -9,7 +10,46 @@ namespace
 {
     class CoordinatePlaneImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
+    protected:
+        const Vector3D m_normal;
+
+        CoordinatePlaneImplementation(const Vector3D& normal)
+            : m_normal(normal)
+        {
+            // NOP
+        }
+
+        virtual void initialize_hit(Hit* hit, const Ray& ray, double t) const = 0;
+
     public:
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
+        {
+            assert(hit != nullptr);
+
+            double denom = ray.direction.dot(m_normal);
+
+            if (denom == approx(0.0))
+            {
+                return false;
+            }
+            else
+            {
+                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
+                double t = numer / denom;
+
+                if (interval(0.0, hit->t).contains(t))
+                {
+                    initialize_hit(hit, ray, t);
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
             auto hit = std::make_shared<Hit>();
@@ -28,126 +68,75 @@ namespace
     class PlaneXYImplementation : public CoordinatePlaneImplementation
     {
     public:
-        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
+        PlaneXYImplementation()
+            : CoordinatePlaneImplementation(Vector3D(0, 0, 1))
         {
-            assert(hit != nullptr);
-
-            const Vector3D normal = Vector3D(0, 0, 1);
-            double denom = ray.direction.dot(normal);
-
-            if (denom == approx(0.0))
-            {
-                return false;
-            }
-            else
-            {
-                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(normal));
-                double t = numer / denom;
-
-                if (0 < t && t < hit->t)
-                {
-                    hit->t = t;
-                    hit->position = ray.at(hit->t);
-                    hit->local_position.xyz = hit->position;
-                    hit->local_position.uv = Point2D(hit->position.x(), hit->position.y());
-                    hit->normal = ray.origin.z() > 0 ? normal : -normal;
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            // NOP
         }
 
         math::Box bounding_box() const override
         {
             return Box(Interval<double>::infinite(), Interval<double>::infinite(), interval(-0.01, 0.01));
         }
+
+    protected:
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const override
+        {
+            hit->t = t;
+            hit->position = ray.at(hit->t);
+            hit->local_position.xyz = hit->position;
+            hit->local_position.uv = Point2D(hit->position.x(), hit->position.y());
+            hit->normal = ray.origin.z() > 0 ? m_normal : -m_normal;
+        }
     };
 
     class PlaneXZImplementation : public CoordinatePlaneImplementation
     {
     public:
-        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
+        PlaneXZImplementation()
+            : CoordinatePlaneImplementation(Vector3D(0, 1, 0))
         {
-            assert(hit != nullptr);
-
-            const Vector3D normal = Vector3D(0, 1, 0);
-            double denom = ray.direction.dot(normal);
-
-            if (denom == approx(0.0))
-            {
-                return false;
-            }
-            else
-            {
-                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(normal));
-                double t = numer / denom;
-
-                if (0 < t && t < hit->t)
-                {
-                    hit->t = t;
-                    hit->position = ray.at(hit->t);
-                    hit->local_position.xyz = hit->position;
-                    hit->local_position.uv = Point2D(hit->position.x(), hit->position.z());
-                    hit->normal = ray.origin.y() > 0 ? normal : -normal;
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            // NOP
         }
 
         math::Box bounding_box() const override
         {
             return Box(Interval<double>::infinite(), interval(-0.01, 0.01), Interval<double>::infinite());
         }
+
+    protected:
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const override
+        {
+            hit->t = t;
+            hit->position = ray.at(hit->t);
+            hit->local_position.xyz = hit->position;
+            hit->local_position.uv = Point2D(hit->position.x(), hit->position.z());
+            hit->normal = ray.origin.y() > 0 ? m_normal : -m_normal;
+        }
     };
 
     class PlaneYZImplementation : public CoordinatePlaneImplementation
     {
     public:
-        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
+        PlaneYZImplementation()
+            : CoordinatePlaneImplementation(Vector3D(1, 0, 0))
         {
-            assert(hit != nullptr);
-
-            const Vector3D normal = Vector3D(1, 0, 0);
-            double denom = ray.direction.dot(normal);
-
-            if (denom == approx(0.0))
-            {
-                return false;
-            }
-            else
-            {
-                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(normal));
-                double t = numer / denom;
-
-                if (0 < t && t < hit->t)
-                {
-                    hit->t = t;
-                    hit->position = ray.at(hit->t);
-                    hit->local_position.xyz = hit->position;
-                    hit->local_position.uv = Point2D(hit->position.y(), hit->position.z());
-                    hit->normal = ray.origin.x() > 0 ? normal : -normal;
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            // NOP
         }
 
         math::Box bounding_box() const override
         {
             return Box(interval(-0.01, 0.01), Interval<double>::infinite(), Interval<double>::infinite());
+        }
+
+    protected:
+        void initialize_hit(Hit* hit, const Ray& ray, double t) const override
+        {
+            hit->t = t;
+            hit->position = ray.at(hit->t);
+            hit->local_position.xyz = hit->position;
+            hit->local_position.uv = Point2D(hit->position.y(), hit->position.z());
+            hit->normal = ray.origin.x() > 0 ? m_normal : -m_normal;
         }
     };
 }
