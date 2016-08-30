@@ -258,9 +258,6 @@
     <ClCompile Include="command-line-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\matrix-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\animation-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -481,6 +478,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\primitives\plane\yz-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\mixed-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\rotation2d-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\rotation3d-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\scaling2d-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\scaling3d-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\translation2d-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\math\matrix\translation3d-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

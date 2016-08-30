@@ -621,7 +621,13 @@
     <ClCompile Include="tests\intersection-tests.cpp" />
     <ClCompile Include="tests\interval-tests.cpp" />
     <ClCompile Include="tests\main.cpp" />
-    <ClCompile Include="tests\matrix-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\mixed-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\rotation2d-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\rotation3d-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\scaling2d-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\scaling3d-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\translation2d-tests.cpp" />
+    <ClCompile Include="tests\math\matrix\translation3d-tests.cpp" />
     <ClCompile Include="tests\orthographic-camera-tests.cpp" />
     <ClCompile Include="tests\perspective-camera-tests.cpp" />
     <ClCompile Include="tests\primitives\plane\xy-tests.cpp" />

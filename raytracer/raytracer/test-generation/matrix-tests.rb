@@ -48,7 +48,6 @@ def transformation_template
   end
 end
 
-
 test_file 'math/matrix/translation2d' do
   template do
     file_template
@@ -120,7 +119,6 @@ test_file 'math/matrix/translation2d' do
   end
 end
 
-
 test_file 'math/matrix/translation3d' do
   template do
     file_template
@@ -142,69 +140,51 @@ test_file 'math/matrix/translation3d' do
       instance_eval(&transformation_template)
     end
 
-    test_case do |data|
-      data.first = 'translation(Vector3D(1,0,0))'
-      data.second = 'translation(Vector3D(-1,0,0))'
-      data.expected = 'identity<4>()'
+    [1, 4].each do |delta|
+      test_case do |data|
+        data.first = "translation(Vector3D(#{delta},0,0))"
+        data.second = "translation(Vector3D(#{-delta},0,0))"
+        data.expected = "identity<4>()"
+      end
+
+      test_case do |data|
+        data.first = "translation(Vector3D(0,#{delta},0))"
+        data.second = "translation(Vector3D(0,#{-delta},0))"
+        data.expected = "identity<4>()"
+      end
+
+      test_case do |data|
+        data.first = "translation(Vector3D(0,0,#{delta}))"
+        data.second = "translation(Vector3D(0,0,#{-delta}))"
+        data.expected = "identity<4>()"
+      end
     end
 
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,5,0))'
-      data.second = 'translation(Vector3D(0,-5,0))'
-      data.expected = 'identity<4>()'
-    end
+    [-1,0,3].each do |a|
+      [-2,0,5].each do |b|
+        [-8,0,3].each do |c|
+          test_case do |data|
+            data.first = "translation(Vector3D(#{a},#{b},#{c}))"
+            data.second = "translation(Vector3D(#{b},#{c},#{a}))"
+            data.expected = "translation(Vector3D(#{a+b},#{b+c},#{c+a}))"
+          end
 
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,0,9))'
-      data.second = 'translation(Vector3D(0,0,-9))'
-      data.expected = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(1,0,0))'
-      data.second = 'translation(Vector3D(0,0,2))'
-      data.expected = 'translation(Vector3D(1,0,2))'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(1,0,0))'
-      data.second = 'Vector3D(0,0,0)'
-      data.expected = 'Vector3D(0,0,0)'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,1,0))'
-      data.second = 'Vector3D(0,0,0)'
-      data.expected = 'Vector3D(0,0,0)'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,0,1))'
-      data.second = 'Vector3D(0,0,0)'
-      data.expected = 'Vector3D(0,0,0)'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(1,0,0))'
-      data.second = 'Point3D(0,0,0)'
-      data.expected = 'Point3D(1,0,0)'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,1,0))'
-      data.second = 'Point3D(0,0,0)'
-      data.expected = 'Point3D(0,1,0)'
-    end
-
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,0,1))'
-      data.second = 'Point3D(0,0,0)'
-      data.expected = 'Point3D(0,0,1)'
+          test_case do |data|
+            data.first = "translation(Vector3D(#{a},#{b},#{c}))"
+            data.second = "Vector3D(#{c},#{a},#{b})"
+            data.expected = "Vector3D(#{c},#{a},#{b})"
+          end
+          
+          test_case do |data|
+            data.first = "translation(Vector3D(#{a},#{b},#{c}))"
+            data.second = "Point3D(#{c},#{a},#{b})"
+            data.expected = "Point3D(#{a+c},#{b+a},#{c+b})"
+          end
+        end
+      end
     end
   end
 end
-
-
 
 test_file 'math/matrix/scaling2d' do
   template do
@@ -273,7 +253,6 @@ test_file 'math/matrix/scaling2d' do
   end
 end
 
-
 test_file 'math/matrix/scaling3d' do
   template do
     file_template
@@ -331,28 +310,22 @@ test_file 'math/matrix/scaling3d' do
       end
     end
 
-    test_case do |data|
-      data.first = 'scaling(2,1,1)'
-      data.second = 'Point3D(0,0,0)'
-      data.expected = 'Point3D(0,0,0)'
-    end
+    [-1,0,3].each do |a|
+      [-2,0,5].each do |b|
+        [-8,0,3].each do |c|
+          test_case do |data|
+            data.first = "scaling(#{a}, #{b}, #{c})"
+            data.second = "Point3D(#{b}, #{c}, #{a})"
+            data.expected = "Point3D(#{a*b}, #{b*c}, #{a*c})"
+          end
 
-    test_case do |data|
-      data.first = 'scaling(2,1,1)'
-      data.second = 'Point3D(1,0,0)'
-      data.expected = 'Point3D(2,0,0)'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(2,3,4)'
-      data.second = 'Point3D(1,1,1)'
-      data.expected = 'Point3D(2,3,4)'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(2,3,4)'
-      data.second = 'Point3D(2,2,2)'
-      data.expected = 'Point3D(4,6,8)'
+          test_case do |data|
+            data.first = "scaling(#{a}, #{b}, #{c})"
+            data.second = "Vector3D(#{b}, #{c}, #{a})"
+            data.expected = "Vector3D(#{a*b}, #{b*c}, #{a*c})"
+          end
+        end
+      end
     end
   end
 end
