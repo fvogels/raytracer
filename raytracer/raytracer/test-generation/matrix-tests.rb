@@ -7,7 +7,8 @@ test_file 'matrix-tests' do
       #ifdef TEST_BUILD
 
       #include "Catch.h"
-      #include "math/matrix4d.h"
+      #include "math/matrix.h"
+      #include "math/transformation-matrices.h"
 
       using namespace math;
       using namespace math::transformation_matrices;
@@ -33,34 +34,34 @@ test_file 'matrix-tests' do
     end
 
     test_case do |data|
-      data.first = 'identity()'
-      data.second = 'identity()'
+      data.first = 'identity<4>()'
+      data.second = 'identity<4>()'
     end
 
     test_case do |data|
       data.first = 'translation(Vector3D(0,0,0))'
-      data.second = 'identity()'
+      data.second = 'identity<4>()'
     end
 
 
     test_case do |data|
       data.first = 'scaling(1,1,1)'
-      data.second = 'identity()'
+      data.second = 'identity<4>()'
     end
 
     test_case do |data|
       data.first = 'rotation_around_x(0_degrees)'
-      data.second = 'identity()'
+      data.second = 'identity<4>()'
     end
 
     test_case do |data|
       data.first = 'rotation_around_y(0_degrees)'
-      data.second = 'identity()'
+      data.second = 'identity<4>()'
     end
 
     test_case do |data|
       data.first = 'rotation_around_z(0_degrees)'
-      data.second = 'identity()'
+      data.second = 'identity<4>()'
     end
 
     test_case do |data|
@@ -111,43 +112,43 @@ test_file 'matrix-tests' do
     end
 
     test_case do |data|
-      data.first = 'identity()'
-      data.second = 'identity()'
-      data.expected = 'identity()'
+      data.first = 'identity<4>()'
+      data.second = 'identity<4>()'
+      data.expected = 'identity<4>()'
     end
 
     test_case do |data|
-      data.first = 'identity()'
+      data.first = 'identity<4>()'
       data.second = 'scaling(2, 1, 1)'
       data.expected = 'scaling(2, 1, 1)'
     end
 
     test_case do |data|
-      data.first = 'identity()'
+      data.first = 'identity<4>()'
       data.second = 'scaling(1, 3, 1)'
       data.expected = 'scaling(1, 3, 1)'
     end
 
     test_case do |data|
-      data.first = 'identity()'
+      data.first = 'identity<4>()'
       data.second = 'scaling(1, 1, 4)'
       data.expected = 'scaling(1, 1, 4)'
     end
 
     test_case do |data|
-      data.first = 'identity()'
+      data.first = 'identity<4>()'
       data.second = 'rotation_around_x(40_degrees)'
       data.expected = 'rotation_around_x(40_degrees)'
     end
 
     test_case do |data|
-      data.first = 'identity()'
+      data.first = 'identity<4>()'
       data.second = 'rotation_around_y(10_degrees)'
       data.expected = 'rotation_around_y(10_degrees)'
     end
 
     test_case do |data|
-      data.first = 'identity()'
+      data.first = 'identity<4>()'
       data.second = 'rotation_around_z(250_degrees)'
       data.expected = 'rotation_around_z(250_degrees)'
     end
@@ -191,7 +192,7 @@ test_file 'matrix-tests' do
     test_case do |data|
       data.first = 'rotation_around_x(10_degrees)'
       data.second = 'rotation_around_x(-10_degrees)'
-      data.expected = 'identity()'
+      data.expected = 'identity<4>()'
     end
 
     test_case do |data|
@@ -215,19 +216,19 @@ test_file 'matrix-tests' do
     test_case do |data|
       data.first = 'translation(Vector3D(1,0,0))'
       data.second = 'translation(Vector3D(-1,0,0))'
-      data.expected = 'identity()'
+      data.expected = 'identity<4>()'
     end
 
     test_case do |data|
       data.first = 'translation(Vector3D(0,5,0))'
       data.second = 'translation(Vector3D(0,-5,0))'
-      data.expected = 'identity()'
+      data.expected = 'identity<4>()'
     end
 
     test_case do |data|
       data.first = 'translation(Vector3D(0,0,9))'
       data.second = 'translation(Vector3D(0,0,-9))'
-      data.expected = 'identity()'
+      data.expected = 'identity<4>()'
     end
 
     test_case do |data|
