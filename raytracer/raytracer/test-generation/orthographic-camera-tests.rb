@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'perspective-camera-tests' do
+test_file 'orthographic-camera-tests' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
@@ -56,9 +56,9 @@ test_file 'perspective-camera-tests' do
             Vector3D up(#{up});
             double window_width = #{window_width};
             double aspect_ratio = #{aspect_ratio};
-            Point2D position#{position};
-            Point3D expected_origin#{expected_origin};
-            Vector3D expected_direction#{expected_direction};
+            Point2D position(#{position});
+            Point3D expected_origin(#{expected_origin});
+            Vector3D expected_direction(#{expected_direction});
 
             auto camera = raytracer::cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
             auto rays = camera->create_rays(position);
