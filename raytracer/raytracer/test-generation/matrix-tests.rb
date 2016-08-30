@@ -18,34 +18,30 @@ file_template = <<'END'
 END
 
 
-def equal_transformation_template
-  proc do
-    <<-END
-      TEST_CASE("[Matrix] Matrix transformation #{first} equals #{second}", "[Matrix]")
-      {
-          auto a = #{first};
-          auto b = #{second};
+equal_transformation_template = proc do
+  <<-END
+    TEST_CASE("[Matrix] Matrix transformation #{first} equals #{second}", "[Matrix]")
+    {
+        auto a = #{first};
+        auto b = #{second};
 
-          REQUIRE( a == approx(b) );
-      }
-    END
-  end
+        REQUIRE( a == approx(b) );
+    }
+  END
 end
 
-def transformation_template
-  proc do
-    <<-END
-      TEST_CASE("[Matrix] Matrix multiplication of #{first} and #{second} should give #{expected}", "[Matrix]")
-      {
-          auto a = #{first};
-          auto b = #{second};
-          auto actual = a * b;
-          auto expected = #{expected};
+transformation_template = proc do
+  <<-END
+    TEST_CASE("[Matrix] Matrix multiplication of #{first} and #{second} should give #{expected}", "[Matrix]")
+    {
+        auto a = #{first};
+        auto b = #{second};
+        auto actual = a * b;
+        auto expected = #{expected};
 
-          REQUIRE( actual == approx(expected) );
-      }
-    END
-  end
+        REQUIRE( actual == approx(expected) );
+    }
+  END
 end
 
 test_file 'math/matrix/translation2d' do
@@ -330,8 +326,6 @@ test_file 'math/matrix/scaling3d' do
   end
 end
 
-
-
 test_file 'math/matrix/rotation2d' do
   template do
     file_template
@@ -361,7 +355,6 @@ test_file 'math/matrix/rotation2d' do
       data.first = 'rotation(-180_degrees)'
       data.second = 'rotation(180_degrees)'
     end
-
   end
 
   test_suite do
@@ -386,7 +379,6 @@ test_file 'math/matrix/rotation2d' do
         end
       end
     end
-
 
     [-2,0,4].each do |x|
       [-3,0,7].each do |y|
@@ -429,9 +421,6 @@ test_file 'math/matrix/rotation2d' do
     end
   end
 end
-
-
-
 
 test_file 'math/matrix/rotation3d' do
   template do
