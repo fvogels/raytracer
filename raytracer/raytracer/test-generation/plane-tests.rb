@@ -45,38 +45,39 @@ test_file 'xy-plane-tests' do
     [-2,0,2].each do |x|
       [-2,0,2].each do |y|
         [1,5,10].each do |z|
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(0,0,-1)"
-            data.expected_t = z
-            data.expected_hit_position = "(#{x},#{y},0)"
-            data.expected_normal_position = "(0,0,1)"
-          end
+          [1.0,2.0].each do |dz|
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(0,0,-#{dz})"
+              data.expected_t = z / dz
+              data.expected_hit_position = "(#{x},#{y},0)"
+              data.expected_normal_position = "(0,0,1)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},-#{z})"
-            data.ray_direction = "(0,0,1)"
-            data.expected_t = z
-            data.expected_hit_position = "(#{x},#{y},0)"
-            data.expected_normal_position = "(0,0,-1)"
-          end
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},-#{z})"
+              data.ray_direction = "(0,0,#{dz})"
+              data.expected_t = z / dz
+              data.expected_hit_position = "(#{x},#{y},0)"
+              data.expected_normal_position = "(0,0,-1)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(1,0,-1)"
-            data.expected_t = z
-            data.expected_hit_position = "(#{x+z},#{y},0)"
-            data.expected_normal_position = "(0,0,1)"
-          end
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(#{dz},0,-#{dz})"
+              data.expected_t = z / dz
+              data.expected_hit_position = "(#{x+z},#{y},0)"
+              data.expected_normal_position = "(0,0,1)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(0,1,-1)"
-            data.expected_t = z
-            data.expected_hit_position = "(#{x},#{y+z},0)"
-            data.expected_normal_position = "(0,0,1)"
-          end
-          
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(0,#{dz},-#{dz})"
+              data.expected_t = z / dz
+              data.expected_hit_position = "(#{x},#{y+z},0)"
+              data.expected_normal_position = "(0,0,1)"
+            end
+          end         
         end
       end
     end
@@ -163,36 +164,38 @@ test_file 'xz-plane-tests' do
     [-2,0,2].each do |x|
       [-2,0,2].each do |z|
         [1,5,10].each do |y|
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(0,-1,0)"
-            data.expected_t = y
-            data.expected_hit_position = "(#{x},0,#{z})"
-            data.expected_normal_position = "(0,1,0)"
-          end
+          [1.0, 2.0].each do |dy|
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(0,-#{dy},0)"
+              data.expected_t = y / dy
+              data.expected_hit_position = "(#{x},0,#{z})"
+              data.expected_normal_position = "(0,1,0)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},-#{y},#{z})"
-            data.ray_direction = "(0,1,0)"
-            data.expected_t = y
-            data.expected_hit_position = "(#{x},0,#{z})"
-            data.expected_normal_position = "(0,-1,0)"
-          end
+            test_case do |data|
+              data.ray_origin = "(#{x},-#{y},#{z})"
+              data.ray_direction = "(0,#{dy},0)"
+              data.expected_t = y / dy
+              data.expected_hit_position = "(#{x},0,#{z})"
+              data.expected_normal_position = "(0,-1,0)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(1,-1,0)"
-            data.expected_t = y
-            data.expected_hit_position = "(#{x+y},0,#{z})"
-            data.expected_normal_position = "(0,1,0)"
-          end
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(#{dy},-#{dy},0)"
+              data.expected_t = y / dy
+              data.expected_hit_position = "(#{x+y},0,#{z})"
+              data.expected_normal_position = "(0,1,0)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(0,-1,1)"
-            data.expected_t = y
-            data.expected_hit_position = "(#{x},0,#{z+y})"
-            data.expected_normal_position = "(0,1,0)"
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(0,-#{dy},#{dy})"
+              data.expected_t = y / dy
+              data.expected_hit_position = "(#{x},0,#{z+y})"
+              data.expected_normal_position = "(0,1,0)"
+            end
           end
         end
       end
@@ -280,36 +283,38 @@ test_file 'yz-plane-tests' do
     [-2,0,2].each do |y|
       [-2,0,2].each do |z|
         [1,5,10].each do |x|
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(-1,0,0)"
-            data.expected_t = x
-            data.expected_hit_position = "(0,#{y},#{z})"
-            data.expected_normal_position = "(1,0,0)"
-          end
+          [1.0, 2.0].each do |dx|
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(-#{dx},0,0)"
+              data.expected_t = x / dx
+              data.expected_hit_position = "(0,#{y},#{z})"
+              data.expected_normal_position = "(1,0,0)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(-#{x},#{y},#{z})"
-            data.ray_direction = "(1,0,0)"
-            data.expected_t = x
-            data.expected_hit_position = "(0,#{y},#{z})"
-            data.expected_normal_position = "(-1,0,0)"
-          end
+            test_case do |data|
+              data.ray_origin = "(-#{x},#{y},#{z})"
+              data.ray_direction = "(#{dx},0,0)"
+              data.expected_t = x / dx
+              data.expected_hit_position = "(0,#{y},#{z})"
+              data.expected_normal_position = "(-1,0,0)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(-1,1,0)"
-            data.expected_t = x
-            data.expected_hit_position = "(0,#{x+y},#{z})"
-            data.expected_normal_position = "(1,0,0)"
-          end
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(-#{dx},#{dx},0)"
+              data.expected_t = x / dx
+              data.expected_hit_position = "(0,#{x+y},#{z})"
+              data.expected_normal_position = "(1,0,0)"
+            end
 
-          test_case do |data|
-            data.ray_origin = "(#{x},#{y},#{z})"
-            data.ray_direction = "(-1,0,1)"
-            data.expected_t = x
-            data.expected_hit_position = "(0,#{y},#{z+x})"
-            data.expected_normal_position = "(1,0,0)"
+            test_case do |data|
+              data.ray_origin = "(#{x},#{y},#{z})"
+              data.ray_direction = "(-#{dx},0,#{dx})"
+              data.expected_t = x / dx
+              data.expected_hit_position = "(0,#{y},#{z+x})"
+              data.expected_normal_position = "(1,0,0)"
+            end
           end
         end
       end
