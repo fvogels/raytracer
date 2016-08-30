@@ -18,183 +18,56 @@ file_template = <<'END'
 END
 
 
+def equal_transformation_template
+  proc do
+    <<-END
+      TEST_CASE("[Matrix] Matrix transformation #{first} equals #{second}", "[Matrix]")
+      {
+          auto a = #{first};
+          auto b = #{second};
 
-test_file 'matrix' do
+          REQUIRE( a == approx(b) );
+      }
+    END
+  end
+end
+
+def transformation_template
+  proc do
+    <<-END
+      TEST_CASE("[Matrix] Matrix multiplication of #{first} and #{second} should give #{expected}", "[Matrix]")
+      {
+          auto a = #{first};
+          auto b = #{second};
+          auto actual = a * b;
+          auto expected = #{expected};
+
+          REQUIRE( actual == approx(expected) );
+      }
+    END
+  end
+end
+
+
+test_file 'math/matrix/translation2d' do
   template do
     file_template
   end
 
   test_suite do
     template do
-      <<-END
-        TEST_CASE("[Matrix] Matrix transformation #{first} equals #{second}", "[Matrix]")
-        {
-            auto a = #{first};
-            auto b = #{second};
-
-            REQUIRE( a == approx(b) );
-        }
-      END
-    end
-
-    test_case do |data|
-      data.first = 'identity<3>()'
-      data.second = 'identity<3>()'
+      instance_eval(&equal_transformation_template)
     end
 
     test_case do |data|
       data.first = 'translation(Vector2D(0,0))'
       data.second = 'identity<3>()'
     end
-
-    test_case do |data|
-      data.first = 'scaling(1,1)'
-      data.second = 'identity<3>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation(0_degrees)'
-      data.second = 'identity<3>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation(0_degrees)'
-      data.second = 'rotation(360_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation(-90_degrees)'
-      data.second = 'rotation(270_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation(-180_degrees)'
-      data.second = 'rotation(180_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(-1,-1)'
-      data.second = 'rotation(180_degrees)'
-    end
-    
-    test_case do |data|
-      data.first = 'translation(Vector3D(0,0,0))'
-      data.second = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(1,1,1)'
-      data.second = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(0_degrees)'
-      data.second = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_y(0_degrees)'
-      data.second = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_z(0_degrees)'
-      data.second = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(0_degrees)'
-      data.second = 'rotation_around_x(360_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(-90_degrees)'
-      data.second = 'rotation_around_x(270_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(-180_degrees)'
-      data.second = 'rotation_around_x(180_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(-1,1,-1)'
-      data.second = 'rotation_around_y(180_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(-1,-1,1)'
-      data.second = 'rotation_around_z(180_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'scaling(1,-1,-1)'
-      data.second = 'rotation_around_x(180_degrees)'
-    end
   end
-
 
   test_suite do
     template do
-      <<-END
-        TEST_CASE("[Matrix] Matrix multiplication of #{first} and #{second} should give #{expected}", "[Matrix]")
-        {
-            auto a = #{first};
-            auto b = #{second};
-            auto actual = a * b;
-            auto expected = #{expected};
-
-            REQUIRE( actual == approx(expected) );
-        }
-      END
-    end
-
-    test_case do |data|
-      data.first = 'identity<3>()'
-      data.second = 'identity<3>()'
-      data.expected = 'identity<3>()'
-    end
-
-    [-1, 1, 2].each do |sx|
-      [-1, 1, 2].each do |sy|
-        test_case do |data|
-          data.first = "identity<3>()"
-          data.second = "scaling(#{sx}, #{sy})"
-          data.expected = "scaling(#{sx}, #{sy})"
-        end
-      end
-    end
-
-    [0, 10, 90, 180, 270].each do |angle|
-      test_case do |data|
-        data.first = "identity<3>()"
-        data.second = "rotation(#{angle}_degrees)"
-        data.expected = "rotation(#{angle}_degrees)"
-      end
-    end
-
-    [-1, 0.5, 1, 2].each do |sx1|
-      [-1, 0.5, 1, 2].each do |sy1|
-        [-1, 0.5, 1, 2].each do |sx2|
-          [-1, 0.5, 1, 2].each do |sy2|
-            test_case do |data|
-              data.first = "scaling(#{sx1}, #{sy1})"
-              data.second = "scaling(#{sx2}, #{sy2})"
-              data.expected = "scaling(#{sx1 * sx2}, #{sy1 * sy2})"
-            end
-          end
-        end
-      end
-    end
-
-    [0, -10, 50, 90, 180, 270, 360, 720].each do |angle1|
-      [0, -10, 50, 90, 180, 270, 360, 720].each do |angle2|
-        test_case do |data|
-          data.first = "rotation(#{angle1}_degrees)"
-          data.second = "rotation(#{angle2}_degrees)"
-          data.expected = "rotation(#{angle1 + angle2}_degrees)"
-        end
-      end
+      instance_eval(&transformation_template)
     end
 
     [1, 5].each do |delta|
@@ -244,158 +117,29 @@ test_file 'matrix' do
         end
       end
     end
+  end
+end
 
-    [-2,0,5].each do |x|
-      [-1,0,7].each do |y|
-        [-8,0,1].each do |sx|
-          [-5,0,4].each do |sy|
-            test_case do |data|
-              data.first = "scaling(#{sx}, #{sy})"
-              data.second = "Vector2D(#{x}, #{y})"
-              data.expected = "Vector2D(#{sx * x}, #{sy * y})"
-            end
 
-            test_case do |data|
-              data.first = "scaling(#{sx}, #{sy})"
-              data.second = "Point2D(#{x}, #{y})"
-              data.expected = "Point2D(#{sx * x}, #{sy * y})"
-            end
-          end
-        end
-      end
+test_file 'math/matrix/translation3d' do
+  template do
+    file_template
+  end
+
+  test_suite do
+    template do
+      instance_eval(&equal_transformation_template)
     end
 
-    [-2,0,4].each do |x|
-      [-3,0,7].each do |y|
-        test_case do |data|
-          data.first = "rotation(180_degrees)"
-          data.second = "Point2D(#{x}, #{y})"
-          data.expected = "Point2D(#{-x}, #{-y})"
-        end
-
-        test_case do |data|
-          data.first = "rotation(180_degrees)"
-          data.second = "Vector2D(#{x}, #{y})"
-          data.expected = "Vector2D(#{-x}, #{-y})"
-        end
-
-        test_case do |data|
-          data.first = "rotation(90_degrees)"
-          data.second = "Point2D(#{x}, #{y})"
-          data.expected = "Point2D(#{-y}, #{x})"
-        end
-
-        test_case do |data|
-          data.first = "rotation(90_degrees)"
-          data.second = "Vector2D(#{x}, #{y})"
-          data.expected = "Vector2D(#{-y}, #{x})"
-        end
-
-        test_case do |data|
-          data.first = "rotation(-90_degrees)"
-          data.second = "Point2D(#{x}, #{y})"
-          data.expected = "Point2D(#{y}, #{-x})"
-        end
-
-        test_case do |data|
-          data.first = "rotation(-90_degrees)"
-          data.second = "Vector2D(#{x}, #{y})"
-          data.expected = "Vector2D(#{y}, #{-x})"
-        end
-      end
-    end
-
-
-
-    
     test_case do |data|
-      data.first = 'identity<4>()'
+      data.first = 'translation(Vector3D(0,0,0))'
       data.second = 'identity<4>()'
-      data.expected = 'identity<4>()'
     end
+  end
 
-    test_case do |data|
-      data.first = 'identity<4>()'
-      data.second = 'scaling(2, 1, 1)'
-      data.expected = 'scaling(2, 1, 1)'
-    end
-
-    test_case do |data|
-      data.first = 'identity<4>()'
-      data.second = 'scaling(1, 3, 1)'
-      data.expected = 'scaling(1, 3, 1)'
-    end
-
-    test_case do |data|
-      data.first = 'identity<4>()'
-      data.second = 'scaling(1, 1, 4)'
-      data.expected = 'scaling(1, 1, 4)'
-    end
-
-    test_case do |data|
-      data.first = 'identity<4>()'
-      data.second = 'rotation_around_x(40_degrees)'
-      data.expected = 'rotation_around_x(40_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'identity<4>()'
-      data.second = 'rotation_around_y(10_degrees)'
-      data.expected = 'rotation_around_y(10_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'identity<4>()'
-      data.second = 'rotation_around_z(250_degrees)'
-      data.expected = 'rotation_around_z(250_degrees)'
-    end
-
-    [-1, 0.5, 1, 2].each do |sx1|
-      [-1, 0.5, 1, 2].each do |sy1|
-        [-1, 0.5, 1, 2].each do |sz1|
-          [-1, 0.5, 1, 2].each do |sx2|
-            [-1, 0.5, 1, 2].each do |sy2|
-              [-1, 0.5, 1, 2].each do |sz2|
-                test_case do |data|
-                  data.first = "scaling(#{sx1}, #{sy1}, #{sz1})"
-                  data.second = "scaling(#{sx2}, #{sy2}, #{sz2})"
-                  data.expected = "scaling(#{sx1 * sx2}, #{sy1 * sy2}, #{sz1 * sz2})"
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(10_degrees)'
-      data.second = 'rotation_around_x(10_degrees)'
-      data.expected = 'rotation_around_x(20_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(10_degrees)'
-      data.second = 'rotation_around_x(-10_degrees)'
-      data.expected = 'identity<4>()'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_x(10_degrees)'
-      data.second = 'rotation_around_x(20_degrees)'
-      data.expected = 'rotation_around_x(30_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_y(10_degrees)'
-      data.second = 'rotation_around_y(20_degrees)'
-      data.expected = 'rotation_around_y(30_degrees)'
-    end
-
-    test_case do |data|
-      data.first = 'rotation_around_z(10_degrees)'
-      data.second = 'rotation_around_z(20_degrees)'
-      data.expected = 'rotation_around_z(30_degrees)'
+  test_suite do
+    template do
+      instance_eval(&transformation_template)
     end
 
     test_case do |data|
@@ -457,6 +201,135 @@ test_file 'matrix' do
       data.second = 'Point3D(0,0,0)'
       data.expected = 'Point3D(0,0,1)'
     end
+  end
+end
+
+
+
+test_file 'math/matrix/scaling2d' do
+  template do
+    file_template
+  end
+
+  test_suite do
+    template do
+      instance_eval(&equal_transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'scaling(1,1)'
+      data.second = 'identity<3>()'
+    end
+  end
+
+  test_suite do
+    template do
+      instance_eval(&transformation_template)
+    end
+
+    [-1, 0.5, 1, 2].each do |sx1|
+      [-1, 0.5, 1, 2].each do |sy1|
+        [-1, 0.5, 1, 2].each do |sx2|
+          [-1, 0.5, 1, 2].each do |sy2|
+            test_case do |data|
+              data.first = "scaling(#{sx1}, #{sy1})"
+              data.second = "scaling(#{sx2}, #{sy2})"
+              data.expected = "scaling(#{sx1 * sx2}, #{sy1 * sy2})"
+            end
+          end
+        end
+      end
+    end
+
+    [-1, 1, 2].each do |sx|
+      [-1, 1, 2].each do |sy|
+        test_case do |data|
+          data.first = "identity<3>()"
+          data.second = "scaling(#{sx}, #{sy})"
+          data.expected = "scaling(#{sx}, #{sy})"
+        end
+      end
+    end
+
+    [-2,0,5].each do |x|
+      [-1,0,7].each do |y|
+        [-8,0,1].each do |sx|
+          [-5,0,4].each do |sy|
+            test_case do |data|
+              data.first = "scaling(#{sx}, #{sy})"
+              data.second = "Vector2D(#{x}, #{y})"
+              data.expected = "Vector2D(#{sx * x}, #{sy * y})"
+            end
+
+            test_case do |data|
+              data.first = "scaling(#{sx}, #{sy})"
+              data.second = "Point2D(#{x}, #{y})"
+              data.expected = "Point2D(#{sx * x}, #{sy * y})"
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+
+test_file 'math/matrix/scaling3d' do
+  template do
+    file_template
+  end
+
+  test_suite do
+    template do
+      instance_eval(&equal_transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'scaling(1,1,1)'
+      data.second = 'identity<4>()'
+    end
+  end
+
+  test_suite do
+    template do
+      instance_eval(&transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'scaling(2, 1, 1)'
+      data.expected = 'scaling(2, 1, 1)'
+    end
+
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'scaling(1, 3, 1)'
+      data.expected = 'scaling(1, 3, 1)'
+    end
+
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'scaling(1, 1, 4)'
+      data.expected = 'scaling(1, 1, 4)'
+    end
+
+    [-1, 0.5, 1, 2].each do |sx1|
+      [-1, 0.5, 1, 2].each do |sy1|
+        [-1, 0.5, 1, 2].each do |sz1|
+          [-1, 0.5, 1, 2].each do |sx2|
+            [-1, 0.5, 1, 2].each do |sy2|
+              [-1, 0.5, 1, 2].each do |sz2|
+                test_case do |data|
+                  data.first = "scaling(#{sx1}, #{sy1}, #{sz1})"
+                  data.second = "scaling(#{sx2}, #{sy2}, #{sz2})"
+                  data.expected = "scaling(#{sx1 * sx2}, #{sy1 * sy2}, #{sz1 * sz2})"
+                end
+              end
+            end
+          end
+        end
+      end
+    end
 
     test_case do |data|
       data.first = 'scaling(2,1,1)'
@@ -480,6 +353,205 @@ test_file 'matrix' do
       data.first = 'scaling(2,3,4)'
       data.second = 'Point3D(2,2,2)'
       data.expected = 'Point3D(4,6,8)'
+    end
+  end
+end
+
+
+
+test_file 'math/matrix/rotation2d' do
+  template do
+    file_template
+  end
+
+  test_suite do
+    template do
+      instance_eval(&equal_transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'rotation(0_degrees)'
+      data.second = 'identity<3>()'
+    end
+
+    test_case do |data|
+      data.first = 'rotation(0_degrees)'
+      data.second = 'rotation(360_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation(-90_degrees)'
+      data.second = 'rotation(270_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation(-180_degrees)'
+      data.second = 'rotation(180_degrees)'
+    end
+
+  end
+
+  test_suite do
+    template do
+      instance_eval(&transformation_template)
+    end
+
+    [0, 10, 90, 180, 270].each do |angle|
+      test_case do |data|
+        data.first = "identity<3>()"
+        data.second = "rotation(#{angle}_degrees)"
+        data.expected = "rotation(#{angle}_degrees)"
+      end
+    end
+
+    [0, -10, 50, 90, 180, 270, 360, 720].each do |angle1|
+      [0, -10, 50, 90, 180, 270, 360, 720].each do |angle2|
+        test_case do |data|
+          data.first = "rotation(#{angle1}_degrees)"
+          data.second = "rotation(#{angle2}_degrees)"
+          data.expected = "rotation(#{angle1 + angle2}_degrees)"
+        end
+      end
+    end
+
+
+    [-2,0,4].each do |x|
+      [-3,0,7].each do |y|
+        test_case do |data|
+          data.first = "rotation(180_degrees)"
+          data.second = "Point2D(#{x}, #{y})"
+          data.expected = "Point2D(#{-x}, #{-y})"
+        end
+
+        test_case do |data|
+          data.first = "rotation(180_degrees)"
+          data.second = "Vector2D(#{x}, #{y})"
+          data.expected = "Vector2D(#{-x}, #{-y})"
+        end
+
+        test_case do |data|
+          data.first = "rotation(90_degrees)"
+          data.second = "Point2D(#{x}, #{y})"
+          data.expected = "Point2D(#{-y}, #{x})"
+        end
+
+        test_case do |data|
+          data.first = "rotation(90_degrees)"
+          data.second = "Vector2D(#{x}, #{y})"
+          data.expected = "Vector2D(#{-y}, #{x})"
+        end
+
+        test_case do |data|
+          data.first = "rotation(-90_degrees)"
+          data.second = "Point2D(#{x}, #{y})"
+          data.expected = "Point2D(#{y}, #{-x})"
+        end
+
+        test_case do |data|
+          data.first = "rotation(-90_degrees)"
+          data.second = "Vector2D(#{x}, #{y})"
+          data.expected = "Vector2D(#{y}, #{-x})"
+        end
+      end
+    end
+  end
+end
+
+
+
+
+test_file 'math/matrix/rotation3d' do
+  template do
+    file_template
+  end
+
+  test_suite do
+    template do
+      instance_eval(&equal_transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(0_degrees)'
+      data.second = 'identity<4>()'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(0_degrees)'
+      data.second = 'identity<4>()'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(0_degrees)'
+      data.second = 'identity<4>()'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(0_degrees)'
+      data.second = 'rotation_around_x(360_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(-90_degrees)'
+      data.second = 'rotation_around_x(270_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(-180_degrees)'
+      data.second = 'rotation_around_x(180_degrees)'
+    end
+  end
+
+  test_suite do
+    template do
+      instance_eval(&transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'rotation_around_x(40_degrees)'
+      data.expected = 'rotation_around_x(40_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'rotation_around_y(10_degrees)'
+      data.expected = 'rotation_around_y(10_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'rotation_around_z(250_degrees)'
+      data.expected = 'rotation_around_z(250_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(10_degrees)'
+      data.second = 'rotation_around_x(10_degrees)'
+      data.expected = 'rotation_around_x(20_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(10_degrees)'
+      data.second = 'rotation_around_x(-10_degrees)'
+      data.expected = 'identity<4>()'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_x(10_degrees)'
+      data.second = 'rotation_around_x(20_degrees)'
+      data.expected = 'rotation_around_x(30_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_y(10_degrees)'
+      data.second = 'rotation_around_y(20_degrees)'
+      data.expected = 'rotation_around_y(30_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'rotation_around_z(10_degrees)'
+      data.second = 'rotation_around_z(20_degrees)'
+      data.expected = 'rotation_around_z(30_degrees)'
     end
 
     test_case do |data|
@@ -594,6 +666,61 @@ test_file 'matrix' do
       data.first = 'rotation_around_z(90_degrees)'
       data.second = 'Point3D(0,1,0)'
       data.expected = 'Point3D(-1,0,0)'
+    end
+  end
+end
+
+test_file 'math/matrix/mixed' do
+  template do
+    file_template
+  end
+
+  test_suite do
+    template do
+      instance_eval(&equal_transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'identity<3>()'
+      data.second = 'identity<3>()'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(-1,-1)'
+      data.second = 'rotation(180_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(-1,1,-1)'
+      data.second = 'rotation_around_y(180_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(-1,-1,1)'
+      data.second = 'rotation_around_z(180_degrees)'
+    end
+
+    test_case do |data|
+      data.first = 'scaling(1,-1,-1)'
+      data.second = 'rotation_around_x(180_degrees)'
+    end
+  end
+
+  test_suite do
+    template do
+      instance_eval(&transformation_template)
+    end
+
+    test_case do |data|
+      data.first = 'identity<3>()'
+      data.second = 'identity<3>()'
+      data.expected = 'identity<3>()'
+    end
+    
+    test_case do |data|
+      data.first = 'identity<4>()'
+      data.second = 'identity<4>()'
+      data.expected = 'identity<4>()'
     end
   end
 end
