@@ -633,6 +633,7 @@
     <ClCompile Include="tests\xy-plane-tests.cpp" />
     <ClCompile Include="tests\xz-plane-tests.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
+    <ClCompile Include="tests\yz-plane-tests.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>

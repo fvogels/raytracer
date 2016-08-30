@@ -205,3 +205,84 @@ test_file 'xz-plane-tests' do
     end
   end
 end
+
+test_file 'yz-plane-tests' do
+  template do
+    <<-'END'
+      #ifdef TEST_BUILD
+
+      #include "Catch.h"
+      #include "primitives/primitives.h"
+      #include "math/approx.h"
+
+      using namespace math;
+      using namespace raytracer;
+      using namespace raytracer::primitives;
+
+
+      <<<TESTS>>>
+
+      #endif
+    END
+  end
+
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Plane] Hit between YZ plane and #{ray_origin} + #{ray_direction} * t", "[Plane]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Vector3D ray_direction#{ray_direction};
+
+            auto primitive = raytracer::primitives::yz_plane();
+            Ray ray(ray_origin, ray_direction);
+
+            Hit hit;
+
+            REQUIRE(primitive->find_first_positive_hit(ray, &hit));
+            CHECK(hit.t == Approx(#{expected_t}));
+            CHECK(hit.position == approx(Point3D#{expected_hit_position}));
+            CHECK(hit.normal == approx(Vector3D#{expected_normal_position}.normalized()));
+        }
+      END
+    end
+
+    [-2,0,2].each do |y|
+      [-2,0,2].each do |z|
+        [1,5,10].each do |x|
+          test_case do |data|
+            data.ray_origin = "(#{x},#{y},#{z})"
+            data.ray_direction = "(-1,0,0)"
+            data.expected_t = x
+            data.expected_hit_position = "(0,#{y},#{z})"
+            data.expected_normal_position = "(1,0,0)"
+          end
+
+          test_case do |data|
+            data.ray_origin = "(-#{x},#{y},#{z})"
+            data.ray_direction = "(1,0,0)"
+            data.expected_t = x
+            data.expected_hit_position = "(0,#{y},#{z})"
+            data.expected_normal_position = "(-1,0,0)"
+          end
+
+          test_case do |data|
+            data.ray_origin = "(#{x},#{y},#{z})"
+            data.ray_direction = "(-1,1,0)"
+            data.expected_t = x
+            data.expected_hit_position = "(0,#{x+y},#{z})"
+            data.expected_normal_position = "(1,0,0)"
+          end
+
+          test_case do |data|
+            data.ray_origin = "(#{x},#{y},#{z})"
+            data.ray_direction = "(-1,0,1)"
+            data.expected_t = x
+            data.expected_hit_position = "(0,#{y},#{z+x})"
+            data.expected_normal_position = "(1,0,0)"
+          end
+        end
+      end
+    end
+  end
+end
