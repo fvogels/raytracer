@@ -627,19 +627,22 @@
     <ClCompile Include="tests\math\matrix\scaling3d-tests.cpp" />
     <ClCompile Include="tests\math\matrix\translation2d-tests.cpp" />
     <ClCompile Include="tests\math\matrix\translation3d-tests.cpp" />
+    <ClCompile Include="tests\math\quaternion-tests.cpp" />
+    <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tests\primitives\cone-tests.cpp" />
     <ClCompile Include="tests\primitives\cylinder-along-x-tests.cpp" />
     <ClCompile Include="tests\primitives\intersection-tests.cpp" />
     <ClCompile Include="tests\primitives\plane\xy-tests.cpp" />
     <ClCompile Include="tests\primitives\plane\xz-tests.cpp" />
     <ClCompile Include="tests\primitives\plane\yz-tests.cpp" />
-    <ClCompile Include="tests\primitives\sphere-tests.cpp" />
-    <ClCompile Include="tests\quaternion-tests.cpp" />
+    <ClCompile Include="tests\primitives\sphere\sphere-all-hits-tests.cpp" />
+    <ClCompile Include="tests\primitives\sphere\sphere-full-hit-checks-tests.cpp" />
+    <ClCompile Include="tests\primitives\sphere\sphere-hits-tests.cpp" />
+    <ClCompile Include="tests\primitives\sphere\sphere-no-hits-tests.cpp" />
     <ClCompile Include="tests\rasteriser-tests.cpp" />
     <ClCompile Include="tests\scripting-tests.cpp" />
     <ClCompile Include="tests\transformation-tests.cpp" />
     <ClCompile Include="tests\triangle-tests.cpp" />
-    <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
