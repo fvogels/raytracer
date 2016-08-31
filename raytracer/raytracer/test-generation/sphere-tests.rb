@@ -136,6 +136,82 @@ test_file 'primitives/sphere/sphere-no-hits' do
   end
 end
 
+test_file 'primitives/sphere/sphere-hits' do
+  template do
+    instance_eval(&file_template)
+  end
+
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Sphere] No hit with ray #{ray_origin} + #{ray_direction} * t", "[Sphere]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Vector3D ray_direction#{ray_direction};
+
+            auto sphere = raytracer::primitives::sphere();
+            Ray ray(ray_origin, ray_direction);
+
+            Hit hit;
+            hit.t = #{t};
+
+            REQUIRE(sphere->find_first_positive_hit(ray, &hit));
+        }
+      END
+    end
+
+    (-5..5).each do |a|
+      (-5..5).each do |b|
+        (1..5).each do |c|
+          [-1,-2].each do |delta|
+
+            u = a / 5.1
+            v = b / 5.1
+
+            if u * u + v * v <= 1 then
+              test_case do |data|
+                data.ray_origin = "(#{u}, #{v}, #{c})"
+                data.ray_direction = "(0, 0, #{delta})"
+                data.t = 10000
+              end
+
+              test_case do |data|
+                data.ray_origin = "(#{u}, #{v}, #{-c})"
+                data.ray_direction = "(0, 0, #{-delta})"
+                data.t = 10000
+              end
+
+              test_case do |data|
+                data.ray_origin = "(#{u}, #{c}, #{v})"
+                data.ray_direction = "(0, #{delta}, 0)"
+                data.t = 10000
+              end
+
+              test_case do |data|
+                data.ray_origin = "(#{u}, #{-c}, #{v})"
+                data.ray_direction = "(0, #{-delta}, 0)"
+                data.t = 10000
+              end
+
+              test_case do |data|
+                data.ray_origin = "(#{c}, #{u}, #{v})"
+                data.ray_direction = "(#{delta}, 0, 0)"
+                data.t = 10000
+              end
+
+              test_case do |data|
+                data.ray_origin = "(#{-c}, #{u}, #{v})"
+                data.ray_direction = "(#{-delta}, 0, 0)"
+                data.t = 10000
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
 test_file 'primitives/sphere/sphere-full-hit-checks' do
   template do
     instance_eval(&file_template)
