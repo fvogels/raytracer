@@ -4,7 +4,7 @@
 #include "util/misc.h"
 #include "math/coordinate-systems.h"
 #include <assert.h>
-#include <math.h>
+#include <cmath>
 
 using namespace raytracer;
 using namespace raytracer::primitives;
@@ -122,7 +122,7 @@ namespace
             Cartesian3D cartesian{ p.x(), p.y(), p.z() };
             Spherical spherical = convert_coordinates<Spherical>(cartesian);
 
-            double u = Interval<Angle>(-180_degrees, 180_degrees).to_relative(spherical.azimuth);
+            double u = fmod(Interval<Angle>(-180_degrees, 180_degrees).to_relative(spherical.azimuth) + 0.5, 1.0);
             double v = Interval<Angle>(90_degrees, -90_degrees).to_relative(spherical.elevation);
 
             assert(0 <= u);
