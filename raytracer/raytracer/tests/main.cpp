@@ -8,7 +8,12 @@ int main(int argc, char* const argv[])
 {
     logging::configure();
 
-    return Catch::Session().run(argc, argv);
+    Catch::ConfigData data;
+    data.abortAfter = 5;  // Makes the tests stop running after 5 failures
+    
+    Catch::Session session;
+    session.useConfigData(data);
+    return session.run(argc, argv);
 }
 
 #endif
