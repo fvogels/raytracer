@@ -59,6 +59,7 @@ namespace math
     Angle operator *(const Angle& angle, double factor);
     Angle operator *(double factor, const Angle& angle);
     Angle operator /(const Angle& angle, double factor);
+    double operator /(const Angle& angle1, const Angle& angle2);
 
     Angle& operator +=(Angle& x, const Angle& y);
     Angle& operator -=(Angle& x, const Angle& y);

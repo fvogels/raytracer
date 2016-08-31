@@ -65,6 +65,11 @@ Angle math::operator /(const Angle& angle, double factor)
     return Angle::radians(angle.radians() / factor);
 }
 
+double math::operator /(const Angle& a, const Angle& b)
+{
+    return a.radians() / b.radians();
+}
+
 Angle& math::operator +=(Angle& x, const Angle& y)
 {
     return (x = x + y);
