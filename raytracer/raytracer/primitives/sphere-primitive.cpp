@@ -2,6 +2,7 @@
 #include "primitives/sphere-primitive.h"
 #include "materials/material.h"
 #include "util/misc.h"
+#include "math/coordinate-systems.h"
 #include <assert.h>
 #include <math.h>
 
@@ -118,8 +119,11 @@ namespace
     private:
         Point2D compute_uv_from_xyz(const Point3D& p) const
         {
-            double u = 0.5 + atan2(p.z(), p.x()) / (2 * M_PI);
-            double v = 0.5 - asin(p.y()) / M_PI;
+            Cartesian3D cartesian{ p.x(), p.y(), p.z() };
+            Spherical spherical = convert_coordinates<Spherical>(cartesian);
+
+            double u = Interval<Angle>(-180_degrees, 180_degrees).to_relative(spherical.azimuth);
+            double v = Interval<Angle>(90_degrees, -90_degrees).to_relative(spherical.elevation);
 
             assert(0 <= u);
             assert(u <= 1);
@@ -136,7 +140,6 @@ namespace
             hit->local_position.xyz = hit->position;
             hit->local_position.uv = compute_uv_from_xyz(hit->position);
             hit->normal = compute_normal_at(ray, hit->position);
-            
 
             assert(is_on_sphere(hit->position));
         }
