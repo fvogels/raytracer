@@ -16,13 +16,19 @@ namespace raytracer
     {
         namespace _private_
         {
+            /// <summary>
+            /// Behind-the-scenes class that represents materials. Meant for internal use only.
+            /// </summary>
             class MaterialImplementation
             {
             public:
+                /// <summary>
+                /// Returns the material properties at the given point.
+                /// </summary>
                 virtual MaterialProperties at(const HitPosition&) const = 0;
             };
 
-            class Material2D : public MaterialImplementation
+            class Material2DImplementation : public MaterialImplementation
             {
             public:
                 MaterialProperties at(const HitPosition&) const override;
@@ -31,7 +37,7 @@ namespace raytracer
                 virtual MaterialProperties at(const math::Point2D&) const = 0;
             };
 
-            class Material3D : public MaterialImplementation
+            class Material3DImplementation : public MaterialImplementation
             {
             public:
                 MaterialProperties at(const HitPosition&) const override;
@@ -42,6 +48,10 @@ namespace raytracer
         }
     }
 
+    /// <summary>
+    /// Material wrapper. You can access a material's "true members" using the -&gt; operator.
+    /// See MaterialImplementation.
+    /// </summary>
     class Material
     {
     public:

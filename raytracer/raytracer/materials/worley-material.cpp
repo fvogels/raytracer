@@ -10,7 +10,7 @@ using namespace imaging;
 
 namespace
 {
-    class WorleyMaterial2D : public raytracer::materials::_private_::MaterialImplementation
+    class WorleyMaterial2D : public raytracer::materials::_private_::Material2DImplementation
     {
     public:
         WorleyMaterial2D(unsigned density, double factor, double power)
@@ -19,9 +19,9 @@ namespace
             // NOP
         }
 
-        MaterialProperties at(const HitPosition& hp) const override
+    protected:
+        MaterialProperties at(const Point2D& p) const override
         {
-            Point2D p = hp.uv;
             double brightness = m_factor * pow(this->m_noise_function(p), m_power);
             MaterialProperties properties(colors::black(), brightness * colors::white(), colors::black(), 0.0, 0.0, 0.0, 0.0);
 
@@ -34,7 +34,7 @@ namespace
         double m_power;
     };
 
-    class WorleyMaterial3D : public raytracer::materials::_private_::MaterialImplementation
+    class WorleyMaterial3D : public raytracer::materials::_private_::Material3DImplementation
     {
     public:
         WorleyMaterial3D(unsigned density, double factor, double power)
@@ -43,9 +43,9 @@ namespace
             // NOP
         }
 
-        MaterialProperties at(const HitPosition& hp) const override
+    protected:
+        MaterialProperties at(const Point3D& p) const override
         {
-            Point3D p = hp.xyz;
             double brightness = m_factor * pow(this->m_noise_function(p), m_power);
             MaterialProperties properties(colors::black(), brightness * colors::white(), colors::black(), 0.0, 0.0, 0.0, 0.0);
 

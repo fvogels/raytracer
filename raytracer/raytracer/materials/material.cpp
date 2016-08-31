@@ -7,7 +7,7 @@ using namespace raytracer::materials;
 
 namespace
 {
-    class FunctionMaterial2D : public materials::_private_::Material2D
+    class FunctionMaterial2D : public materials::_private_::Material2DImplementation
     {
     public:
         FunctionMaterial2D(math::Function<MaterialProperties(const Point2D&)> function)
@@ -26,7 +26,7 @@ namespace
         math::Function<MaterialProperties(const Point2D&)> m_function;
     };
 
-    class FunctionMaterial3D : public materials::_private_::Material3D
+    class FunctionMaterial3D : public materials::_private_::Material3DImplementation
     {
     public:
         FunctionMaterial3D(math::Function<MaterialProperties(const Point3D&)> function)
@@ -46,12 +46,12 @@ namespace
     };
 }
 
-MaterialProperties raytracer::materials::_private_::Material2D::at(const HitPosition& hp) const
+MaterialProperties raytracer::materials::_private_::Material2DImplementation::at(const HitPosition& hp) const
 {
     return at(hp.uv);
 }
 
-MaterialProperties raytracer::materials::_private_::Material3D::at(const HitPosition& hp) const
+MaterialProperties raytracer::materials::_private_::Material3DImplementation::at(const HitPosition& hp) const
 {
     return at(hp.xyz);
 }
