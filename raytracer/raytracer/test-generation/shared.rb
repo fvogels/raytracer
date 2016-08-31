@@ -102,9 +102,6 @@ end
 
 
 def test_file(test_path, &block)
-  puts
-  puts "Generating tests #{test_path}"
-  
   context = TestFileContext.new
   context.instance_eval(&block)
   tests_source = context.generate_source
@@ -113,21 +110,16 @@ def test_file(test_path, &block)
 
 
   if path.file? then
-    puts "#{path} already exists; comparing contents..."
     old_tests_source = path.read
 
     if old_tests_source == tests_source
     then
-      puts "Contents are the same"
       puts "SKIPPED #{path}"
       return
-    else
-      puts "Contents are different"
     end
   end
 
   FileUtils.mkdir_p path.parent.expand_path.to_s
-  puts "Writing #{path}"
   path.write tests_source
   puts "WROTE #{path}"
 end
