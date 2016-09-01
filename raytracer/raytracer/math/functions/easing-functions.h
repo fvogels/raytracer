@@ -4,6 +4,7 @@
 #include "math/interval.h"
 #include "math/functions/easing/linear-easing-function.h"
 #include "math/functions/easing/quadratic-easing-function.h"
+#include "math/functions/easing/cubic-easing-function.h"
 
 namespace math
 {
@@ -13,9 +14,6 @@ namespace math
 
         namespace easing
         {
-            math::functions::EasingFunction cubic_in();
-            math::functions::EasingFunction cubic_out();
-            math::functions::EasingFunction cubic_inout();
             math::functions::EasingFunction quintic_in();
             math::functions::EasingFunction quintic_out();
             math::functions::EasingFunction quintic_inout();

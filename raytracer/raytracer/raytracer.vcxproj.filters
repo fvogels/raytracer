@@ -426,6 +426,9 @@
     <ClCompile Include="math\functions\easing\quadatric-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\functions\easing\cubic-easing-function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1104,6 +1107,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\easing\quadratic-easing-function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\easing\cubic-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
