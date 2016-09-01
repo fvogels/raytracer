@@ -1,9 +1,8 @@
 #pragma once
 
-#include "math/function.h"
-#include "math/functions.h"
+#include "math/functions/easing-function.h"
 #include "math/interval.h"
-
+#include "math/functions/easing/linear.h"
 
 namespace math
 {
@@ -13,7 +12,6 @@ namespace math
 
         namespace easing
         {
-            math::functions::EasingFunction linear();
             math::functions::EasingFunction quadratic_in();
             math::functions::EasingFunction quadratic_out();
             math::functions::EasingFunction quadratic_inout();
