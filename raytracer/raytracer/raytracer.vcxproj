@@ -514,7 +514,7 @@
     <ClCompile Include="math\functions\checkered-pattern.cpp" />
     <ClCompile Include="math\functions\easing\cubic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
-    <ClCompile Include="math\functions\easing\quadatric-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\quadratic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quintic-easing-function.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\grid-pattern.cpp" />
