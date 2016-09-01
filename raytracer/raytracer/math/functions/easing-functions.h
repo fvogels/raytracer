@@ -23,7 +23,8 @@ namespace math
             math::functions::EasingFunction quintic_in();
             math::functions::EasingFunction quintic_out();
             math::functions::EasingFunction quintic_inout();
-            math::functions::EasingFunction bounce(unsigned bounce_count, double bounce_absorption);
+            math::functions::EasingFunction bounce(unsigned count, double absorption);
+            math::functions::EasingFunction elastic(unsigned count, double absorption);
 
             math::functions::EasingFunction stretch_in_time(EasingFunction function, const math::Interval<double>& x_range);
             math::functions::EasingFunction stretch_in_space(EasingFunction function, const math::Interval<double>& y_range);

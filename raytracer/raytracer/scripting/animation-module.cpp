@@ -126,11 +126,21 @@ namespace
         }
 
         template<typename T>
-        Animation<T> bounce(Animation<T> animation, unsigned bounce_count, double bounce_absorption) const
+        Animation<T> bounce(Animation<T> animation, unsigned count, double absorption) const
         {
             using namespace math::functions::easing;
 
-            auto easing_function = math::functions::easing::bounce(bounce_count, bounce_absorption);
+            auto easing_function = math::functions::easing::bounce(count, absorption);
+
+            return ease(animation, easing_function);
+        }
+
+        template<typename T>
+        Animation<T> elastic(Animation<T> animation, unsigned count, double absorption) const
+        {
+            using namespace math::functions::easing;
+
+            auto easing_function = math::functions::easing::bounce(count, absorption);
 
             return ease(animation, easing_function);
         }
