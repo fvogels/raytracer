@@ -72,7 +72,7 @@ namespace
             double y = InterpolationHelper<K - 1, N>::interpolate(cube.b, coordinates);
             double t = coordinates[K - 1];
 
-            auto f = stretch_vertically(math::functions::easing::quadratic_inout(), interval(x, y));
+            auto f = stretch_in_space(math::functions::easing::quadratic_inout(), interval(x, y));
             auto result = f(t);
 
             return result;

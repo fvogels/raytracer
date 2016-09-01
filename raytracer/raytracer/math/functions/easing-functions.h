@@ -25,8 +25,8 @@ namespace math
             math::functions::EasingFunction quintic_inout();
             math::functions::EasingFunction bounce(unsigned bounce_count, double bounce_absorption);
 
-            math::functions::EasingFunction stretch_horizontally(EasingFunction function, const math::Interval<double>& x_range);
-            math::functions::EasingFunction stretch_vertically(EasingFunction function, const math::Interval<double>& y_range);
+            math::functions::EasingFunction stretch_in_time(EasingFunction function, const math::Interval<double>& x_range);
+            math::functions::EasingFunction stretch_in_space(EasingFunction function, const math::Interval<double>& y_range);
             math::functions::EasingFunction stretch(EasingFunction function, const math::Interval<double>& x_range, const math::Interval<double>& y_range);
         }
     }

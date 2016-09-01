@@ -159,17 +159,17 @@ EasingFunction math::functions::easing::bounce(unsigned bounce_count, double bou
     }
 }
 
-EasingFunction math::functions::easing::stretch_horizontally(EasingFunction function, const Interval<double>& x_range)
+EasingFunction math::functions::easing::stretch_in_time(EasingFunction function, const Interval<double>& x_range)
 {
     return (identity<double>() - x_range.lower) >> (identity<double>() / x_range.size()) >> function;
 }
 
-EasingFunction math::functions::easing::stretch_vertically(EasingFunction function, const Interval<double>& y_range)
+EasingFunction math::functions::easing::stretch_in_space(EasingFunction function, const Interval<double>& y_range)
 {
     return function * y_range.size() + y_range.lower;
 }
 
 EasingFunction math::functions::easing::stretch(EasingFunction function, const Interval<double>& x_range, const Interval<double>& y_range)
 {
-    return stretch_horizontally(stretch_vertically(function, y_range), x_range);
+    return stretch_in_time(stretch_in_space(function, y_range), x_range);
 }

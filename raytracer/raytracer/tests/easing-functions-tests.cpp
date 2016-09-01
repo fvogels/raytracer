@@ -33,7 +33,7 @@ TEST_CASE("[EasingFunctions] Linear)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] Linear with dy=5)", "[EasingFunctions]")
 {
-    auto f = stretch_vertically(math::functions::easing::linear(), interval(0.0, 5.0));
+    auto f = stretch_in_space(math::functions::easing::linear(), interval(0.0, 5.0));
 
     CHECK(f(0) == Approx(0));
     CHECK(f(1) == Approx(5));
@@ -43,7 +43,7 @@ TEST_CASE("[EasingFunctions] Linear with dy=5)", "[EasingFunctions]")
 
 TEST_CASE("[EasingFunctions] Linear with y=1..7)", "[EasingFunctions]")
 {
-    auto f = stretch_vertically(math::functions::easing::linear(), interval(1.0, 7.0));
+    auto f = stretch_in_space(math::functions::easing::linear(), interval(1.0, 7.0));
 
     CHECK(f(0) == Approx(1));
     CHECK(f(1) == Approx(7));
@@ -108,6 +108,14 @@ TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunct
     CHECK(f(3) == Approx(7));
     CHECK(lderivative(f, 2) == Approx(0).epsilon(0.000001));
     CHECK(rderivative(f, 3) == Approx(0).epsilon(0.000001));
+}
+
+TEST_CASE("[EasingFunctions] Bounce with x=0..3)", "[EasingFunctions]")
+{
+    auto f = stretch_in_time(math::functions::easing::bounce(3, 3), interval(0.0, 3.0));
+
+    CHECK(f(0) == Approx(0));
+    CHECK(f(3) == Approx(1));
 }
 
 #endif
