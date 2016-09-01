@@ -140,7 +140,7 @@ namespace
         {
             using namespace math::functions::easing;
 
-            auto easing_function = math::functions::easing::bounce(count, absorption);
+            auto easing_function = math::functions::easing::elastic(count, absorption);
 
             return ease(animation, easing_function);
         }
@@ -186,6 +186,9 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(bounce<double>, bounce);
     BIND_AS(bounce<Point3D>, bounce);
     BIND_AS(bounce<Angle>, bounce);
+    BIND_AS(elastic<double>, elastic);
+    BIND_AS(elastic<Point3D>, elastic);
+    BIND_AS(elastic<Angle>, elastic);
 #undef BIND
 #undef BIND_AS
 
