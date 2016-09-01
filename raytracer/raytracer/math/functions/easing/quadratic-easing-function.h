@@ -2,6 +2,7 @@
 
 #include "math/functions/easing-function.h"
 
+
 namespace math
 {
     namespace functions
