@@ -21,7 +21,7 @@ namespace
 }
 
 
-TEST_CASE("[EasingFunctions] Linear)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] Linear", "[EasingFunctions]")
 {
     auto f = math::functions::easing::linear();
 
@@ -31,7 +31,7 @@ TEST_CASE("[EasingFunctions] Linear)", "[EasingFunctions]")
     CHECK(rderivative(f, 1) == Approx(1));
 }
 
-TEST_CASE("[EasingFunctions] Linear with dy=5)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] Linear with dy=5", "[EasingFunctions]")
 {
     auto f = stretch_in_space(math::functions::easing::linear(), interval(0.0, 5.0));
 
@@ -41,7 +41,7 @@ TEST_CASE("[EasingFunctions] Linear with dy=5)", "[EasingFunctions]")
     CHECK(rderivative(f, 1) == Approx(5));
 }
 
-TEST_CASE("[EasingFunctions] Linear with y=1..7)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] Linear with y=1..7", "[EasingFunctions]")
 {
     auto f = stretch_in_space(math::functions::easing::linear(), interval(1.0, 7.0));
 
@@ -51,7 +51,7 @@ TEST_CASE("[EasingFunctions] Linear with y=1..7)", "[EasingFunctions]")
     CHECK(rderivative(f, 1) == Approx(6));
 }
 
-TEST_CASE("[EasingFunctions] Linear with dx=3, y=1..7)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] Linear with dx=3, y=1..7", "[EasingFunctions]")
 {
     auto f = stretch(math::functions::easing::linear(), interval(0.0, 3.0), interval(1.0, 7.0));
 
@@ -61,7 +61,7 @@ TEST_CASE("[EasingFunctions] Linear with dx=3, y=1..7)", "[EasingFunctions]")
     CHECK(rderivative(f, 3) == Approx(2));
 }
 
-TEST_CASE("[EasingFunctions] Linear with x=1..3, y=1..7)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] Linear with x=1..3, y=1..7", "[EasingFunctions]")
 {
     auto f = stretch(math::functions::easing::linear(), interval(1.0, 3.0), interval(1.0, 7.0));
 
@@ -71,7 +71,7 @@ TEST_CASE("[EasingFunctions] Linear with x=1..3, y=1..7)", "[EasingFunctions]")
     CHECK(rderivative(f, 3) == Approx(3));
 }
 
-TEST_CASE("[EasingFunctions] QuadraticIn with x=2..3, y=3..7)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] QuadraticIn with x=2..3, y=3..7", "[EasingFunctions]")
 {
     auto f = stretch(math::functions::easing::quadratic_in(), interval(2.0, 3.0), interval(3.0, 7.0));
 
@@ -81,7 +81,7 @@ TEST_CASE("[EasingFunctions] QuadraticIn with x=2..3, y=3..7)", "[EasingFunction
     CHECK(lderivative(f, 2) == Approx(0));
 }
 
-TEST_CASE("[EasingFunctions] QuadraticOut with x=2..3, y=3..7)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] QuadraticOut with x=2..3, y=3..7", "[EasingFunctions]")
 {
     auto f = stretch(math::functions::easing::quadratic_out(), interval(2.0, 3.0), interval(3.0, 7.0));
 
@@ -90,7 +90,7 @@ TEST_CASE("[EasingFunctions] QuadraticOut with x=2..3, y=3..7)", "[EasingFunctio
     CHECK(rderivative(f, 3) == Approx(0));
 }
 
-TEST_CASE("[EasingFunctions] QuadraticInOut with x=0..1, y=0..1)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] QuadraticInOut with x=0..1, y=0..1", "[EasingFunctions]")
 {
     auto f = math::functions::easing::quadratic_inout();
 
@@ -100,7 +100,7 @@ TEST_CASE("[EasingFunctions] QuadraticInOut with x=0..1, y=0..1)", "[EasingFunct
     CHECK(rderivative(f, 1) == Approx(0).epsilon(0.000001));
 }
 
-TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7", "[EasingFunctions]")
 {
     auto f = stretch(math::functions::easing::quadratic_inout(), interval(2.0, 3.0), interval(3.0, 7.0));
 
@@ -110,7 +110,7 @@ TEST_CASE("[EasingFunctions] QuadraticInOut with x=2..3, y=3..7)", "[EasingFunct
     CHECK(rderivative(f, 3) == Approx(0).epsilon(0.000001));
 }
 
-TEST_CASE("[EasingFunctions] Bounce with x=0..3)", "[EasingFunctions]")
+TEST_CASE("[EasingFunctions] Bounce with x=0..3", "[EasingFunctions]")
 {
     auto f = stretch_in_time(math::functions::easing::bounce(3, 3), interval(0.0, 3.0));
 
