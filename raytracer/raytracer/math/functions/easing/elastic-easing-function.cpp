@@ -1,4 +1,3 @@
-#define _USE_MATH_DEFINES
 #include "math/functions/easing/elastic-easing-function.h"
 #include "math/angle.h"
 #include "easylogging++.h"

@@ -1,4 +1,4 @@
-#include "math/functions/easing-functions.h"
+#include "math/functions/easing/cubic-easing-function.h"
 #include <cmath>
 #include <assert.h>
 

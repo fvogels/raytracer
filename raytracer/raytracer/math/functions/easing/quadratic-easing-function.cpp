@@ -1,5 +1,4 @@
 #include "math/functions/easing/quadratic-easing-function.h"
-#include "easylogging++.h"
 #include <assert.h>
 
 using namespace math;

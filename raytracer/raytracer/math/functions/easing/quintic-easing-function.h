@@ -1,7 +1,7 @@
 #pragma once
 
 #include "math/functions/easing-function.h"
-#include "math/interval.h"
+
 
 namespace math
 {

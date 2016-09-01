@@ -1,5 +1,5 @@
-#include "math/functions.h"
 #include "math/functions/easing/stretch-easing-function.h"
+#include "math/functions.h"
 
 using namespace math;
 using namespace math::functions;
