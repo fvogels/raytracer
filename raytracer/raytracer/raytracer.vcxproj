@@ -855,6 +855,9 @@
     <ClInclude Include="animation\redimensioner.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="debugger-visualizations.natvis" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
