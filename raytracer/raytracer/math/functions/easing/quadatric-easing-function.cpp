@@ -1,4 +1,4 @@
-#include "math/functions/easing-functions.h"
+#include "math/functions/easing/quadratic-easing-function.h"
 #include "easylogging++.h"
 
 using namespace math;

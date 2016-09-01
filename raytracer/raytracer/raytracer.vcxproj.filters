@@ -420,10 +420,10 @@
     <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\easing\quadatric.cpp">
+    <ClCompile Include="math\functions\easing\linear-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\easing\linear-easing-function.cpp">
+    <ClCompile Include="math\functions\easing\quadatric-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1100,10 +1100,10 @@
     <ClInclude Include="math\functions\easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\easing\quadratic.h">
+    <ClInclude Include="math\functions\easing\linear-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\easing\linear-easing-function.h">
+    <ClInclude Include="math\functions\easing\quadratic-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
