@@ -3,6 +3,7 @@
 #include "math/functions/easing-function.h"
 #include "math/interval.h"
 #include "math/functions/easing/linear.h"
+#include "math/functions/easing/quadratic.h"
 
 namespace math
 {
@@ -12,9 +13,6 @@ namespace math
 
         namespace easing
         {
-            math::functions::EasingFunction quadratic_in();
-            math::functions::EasingFunction quadratic_out();
-            math::functions::EasingFunction quadratic_inout();
             math::functions::EasingFunction cubic_in();
             math::functions::EasingFunction cubic_out();
             math::functions::EasingFunction cubic_inout();
