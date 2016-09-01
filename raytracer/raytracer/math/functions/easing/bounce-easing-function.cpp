@@ -1,5 +1,6 @@
 #include "math/functions/easing/bounce-easing-function.h"
 #include "math/angle.h"
+#include "math/interval.h"
 #include "easylogging++.h"
 #include <assert.h>
 #include <cmath>

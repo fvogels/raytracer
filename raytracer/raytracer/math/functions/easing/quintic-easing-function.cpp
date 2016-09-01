@@ -1,4 +1,5 @@
 #include "math/functions/easing/quintic-easing-function.h"
+#include "math/interval.h"
 #include <cmath>
 #include <assert.h>
 

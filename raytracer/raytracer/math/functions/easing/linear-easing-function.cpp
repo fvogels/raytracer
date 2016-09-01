@@ -1,4 +1,5 @@
 #include "math/functions/easing/linear-easing-function.h"
+#include "math/interval.h"
 #include <assert.h>
 
 using namespace math;

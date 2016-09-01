@@ -1,4 +1,5 @@
 #include "math/functions/easing/quadratic-easing-function.h"
+#include "math/interval.h"
 #include <assert.h>
 
 using namespace math;
