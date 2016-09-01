@@ -1,5 +1,6 @@
 #include "math/functions/easing-functions.h"
 #include <cmath>
+#include <assert.h>
 
 using namespace math;
 using namespace math::functions;
