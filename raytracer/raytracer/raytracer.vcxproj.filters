@@ -435,6 +435,9 @@
     <ClCompile Include="math\functions\easing\bounce-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\functions\easing\elastic-easing-function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1122,6 +1125,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\easing\bounce-easing-function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\easing\elastic-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

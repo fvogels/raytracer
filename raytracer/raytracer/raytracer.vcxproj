@@ -514,6 +514,7 @@
     <ClCompile Include="math\functions\checkered-pattern.cpp" />
     <ClCompile Include="math\functions\easing\bounce-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\cubic-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\elastic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quadratic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quintic-easing-function.cpp" />
@@ -704,6 +705,7 @@
     <ClInclude Include="math\functions\easing-function.h" />
     <ClInclude Include="math\functions\easing\bounce-easing-function.h" />
     <ClInclude Include="math\functions\easing\cubic-easing-function.h" />
+    <ClInclude Include="math\functions\easing\elastic-easing-function.h" />
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-easing-function.h" />
     <ClInclude Include="math\functions\easing\quintic-easing-function.h" />
