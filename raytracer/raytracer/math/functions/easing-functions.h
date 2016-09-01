@@ -6,6 +6,8 @@
 #include "math/functions/easing/quadratic-easing-function.h"
 #include "math/functions/easing/cubic-easing-function.h"
 #include "math/functions/easing/quintic-easing-function.h"
+#include "math/functions/easing/bounce-easing-function.h"
+
 
 namespace math
 {
@@ -15,10 +17,6 @@ namespace math
 
         namespace easing
         {
-            math::functions::EasingFunction quintic_in();
-            math::functions::EasingFunction quintic_out();
-            math::functions::EasingFunction quintic_inout();
-            math::functions::EasingFunction bounce(unsigned count, double absorption);
             math::functions::EasingFunction elastic(unsigned count, double absorption);
 
             math::functions::EasingFunction stretch_in_time(EasingFunction function, const math::Interval<double>& x_range);
