@@ -6,8 +6,6 @@ namespace math
 {
     namespace functions
     {
-        typedef math::Function<double(double)> EasingFunction;
-
         namespace easing
         {
             math::functions::EasingFunction quadratic_in();
