@@ -6,6 +6,7 @@
 #include "animation/animations.h"
 #include "animation/redimensioner.h"
 #include "math/angle.h"
+#include "math/functions.h"
 
 
 using namespace chaiscript;
@@ -56,7 +57,7 @@ namespace
                 LOG(ERROR) << "At least 2 checkpoints needed";
                 abort();
             }
-            else if ( *boxed_checkpoints.front().get_type_info().bare_type_info() == typeid(Point3D) )
+            else if (*boxed_checkpoints.front().get_type_info().bare_type_info() == typeid(Point3D))
             {
                 std::vector<Point3D> checkpoints(boxed_checkpoints.size());
 
@@ -70,7 +71,7 @@ namespace
                 {
                     auto anim = animation::animate(checkpoints[i], checkpoints[i + 1], duration / double(checkpoints.size() - 1));
 
-                    animation = sequence(animation, ease(anim, math::functions::easing::easing_function<math::functions::easing::quadratic, math::functions::easing::inout>()));
+                    animation = sequence(animation, ease(anim, math::functions::easing::quadratic_inout()));
                 }
 
                 return animation;
@@ -123,6 +124,16 @@ namespace
 
             return loop(forward_backward);
         }
+
+        template<typename T>
+        Animation<T> bounce(Animation<T> animation, unsigned bounce_count, double bounce_absorption) const
+        {
+            using namespace math::functions::easing;
+
+            auto easing_function = stretch_horizontally(math::functions::easing::bounce(bounce_count, bounce_absorption), interval(0.0, animation.duration().seconds()));
+
+            return ease(animation, easing_function);
+        }
     };
 
     Duration seconds(double s)
@@ -152,8 +163,8 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     auto animation_library = std::make_shared<AnimationLibrary>();
     module->add_global_const(chaiscript::const_var(animation_library), "Animations");
 
-#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
-#define BIND(NAME)                      BIND_AS(NAME, NAME)
+#define BIND_AS(INTERNAL, EXTERNAL)                 module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
+#define BIND(NAME)                                  BIND_AS(NAME, NAME)
     BIND(circular);
     BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
@@ -162,6 +173,9 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
     BIND_AS(cyclic_double, cyclic);
+    BIND_AS(bounce<double>, bounce);
+    BIND_AS(bounce<Point3D>, bounce);
+    BIND_AS(bounce<Angle>, bounce);
 #undef BIND
 #undef BIND_AS
 
