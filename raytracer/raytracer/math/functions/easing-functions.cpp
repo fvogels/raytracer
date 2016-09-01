@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "math/functions/easing-functions.h"
+#include "easylogging++.h"
 #include <assert.h>
 #include <math.h>
 #include <cmath>
@@ -8,7 +9,7 @@ using namespace math;
 using namespace math::functions;
 
 
-EasingFunction math::functions::easing::_private_::linear()
+EasingFunction math::functions::easing::linear()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -19,7 +20,7 @@ EasingFunction math::functions::easing::_private_::linear()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::quadratic_in()
+EasingFunction math::functions::easing::quadratic_in()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -30,7 +31,7 @@ EasingFunction math::functions::easing::_private_::quadratic_in()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::quadratic_out()
+EasingFunction math::functions::easing::quadratic_out()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -41,7 +42,7 @@ EasingFunction math::functions::easing::_private_::quadratic_out()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::quadratic_inout()
+EasingFunction math::functions::easing::quadratic_inout()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -59,7 +60,7 @@ EasingFunction math::functions::easing::_private_::quadratic_inout()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::cubic_in()
+EasingFunction math::functions::easing::cubic_in()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -70,7 +71,7 @@ EasingFunction math::functions::easing::_private_::cubic_in()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::cubic_out()
+EasingFunction math::functions::easing::cubic_out()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -81,7 +82,7 @@ EasingFunction math::functions::easing::_private_::cubic_out()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::cubic_inout()
+EasingFunction math::functions::easing::cubic_inout()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -99,7 +100,7 @@ EasingFunction math::functions::easing::_private_::cubic_inout()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::quintic_in()
+EasingFunction math::functions::easing::quintic_in()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -110,7 +111,7 @@ EasingFunction math::functions::easing::_private_::quintic_in()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::quintic_out()
+EasingFunction math::functions::easing::quintic_out()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -121,7 +122,7 @@ EasingFunction math::functions::easing::_private_::quintic_out()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::quintic_inout()
+EasingFunction math::functions::easing::quintic_inout()
 {
     std::function<double(double)> lambda = [](double t) {
         assert(interval(0.0, 1.0).contains(t));
@@ -139,13 +140,36 @@ EasingFunction math::functions::easing::_private_::quintic_inout()
     return from_lambda(lambda);
 }
 
-EasingFunction math::functions::easing::_private_::bounce()
+EasingFunction math::functions::easing::bounce(unsigned bounce_count, double bounce_absorption)
 {
-    std::function<double(double)> lambda = [](double t) {
-        assert(interval(0.0, 1.0).contains(t));
+    if (bounce_count == 0)
+    {
+        LOG(ERROR) << "Bounce count must be at least 1";
+        abort();
+    }
+    else
+    {
+        std::function<double(double)> lambda = [bounce_count, bounce_absorption](double t) {
+            assert(interval(0.0, 1.0).contains(t));
 
-        return 1 - std::abs(cos(5.5 * 180_degrees * t)) * exp(-3 * t);
-    };
+            return 1 - std::abs(cos((bounce_count - 0.5) * 180_degrees * t)) * exp(-bounce_absorption * t);
+        };
 
-    return from_lambda(lambda);
+        return from_lambda(lambda);
+    }
+}
+
+EasingFunction math::functions::easing::stretch_horizontally(EasingFunction function, const Interval<double>& x_range)
+{
+    return (identity<double>() - x_range.lower) >> (identity<double>() / x_range.size()) >> function;
+}
+
+EasingFunction math::functions::easing::stretch_vertically(EasingFunction function, const Interval<double>& y_range)
+{
+    return function * y_range.size() + y_range.lower;
+}
+
+EasingFunction math::functions::easing::stretch(EasingFunction function, const Interval<double>& x_range, const Interval<double>& y_range)
+{
+    return stretch_horizontally(stretch_vertically(function, y_range), x_range);
 }
