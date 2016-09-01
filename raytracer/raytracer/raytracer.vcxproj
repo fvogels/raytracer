@@ -515,6 +515,7 @@
     <ClCompile Include="math\functions\easing\cubic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quadatric-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\quintic-easing-function.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\grid-pattern.cpp" />
     <ClCompile Include="math\functions\horizontal-lines-pattern.cpp" />
@@ -703,6 +704,7 @@
     <ClInclude Include="math\functions\easing\cubic-easing-function.h" />
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-easing-function.h" />
+    <ClInclude Include="math\functions\easing\quintic-easing-function.h" />
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\grid-pattern.h" />
     <ClInclude Include="math\functions\horizontal-lines-pattern.h" />

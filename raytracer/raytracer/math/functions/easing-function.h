@@ -1,8 +1,6 @@
 #pragma once
 
 #include "math/function.h"
-#include "math/functions.h"
-#include "math/interval.h"
 
 
 namespace math

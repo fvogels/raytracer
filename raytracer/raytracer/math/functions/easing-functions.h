@@ -5,6 +5,7 @@
 #include "math/functions/easing/linear-easing-function.h"
 #include "math/functions/easing/quadratic-easing-function.h"
 #include "math/functions/easing/cubic-easing-function.h"
+#include "math/functions/easing/quintic-easing-function.h"
 
 namespace math
 {
