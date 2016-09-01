@@ -1,4 +1,4 @@
-#include "math/functions/easing/linear.h"
+#include "math/functions/easing/linear-easing-function.h"
 #include <assert.h>
 #include <math.h>
 

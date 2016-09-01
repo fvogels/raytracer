@@ -512,7 +512,7 @@
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="math\functions\dalmatian-pattern.cpp" />
     <ClCompile Include="math\functions\checkered-pattern.cpp" />
-    <ClCompile Include="math\functions\easing\linear.cpp" />
+    <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quadatric.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\grid-pattern.cpp" />
@@ -699,7 +699,7 @@
     <ClInclude Include="math\functions\checkered-pattern.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\easing-function.h" />
-    <ClInclude Include="math\functions\easing\linear.h" />
+    <ClInclude Include="math\functions\easing\linear-easing-function.h" />
     <ClInclude Include="math\functions\easing\quadratic.h" />
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\grid-pattern.h" />
