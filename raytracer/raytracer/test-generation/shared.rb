@@ -101,10 +101,26 @@ class TestFileContext
 end
 
 
+$preamble = <<-END
+//////////////////////////////////////////
+//   !!! DO NOT MODIFY THIS FILE !!!    //
+//////////////////////////////////////////
+//                                      //
+//    THE CONTENTS OF THIS FILE ARE     //
+//    GENERATED AND YOUR CHANGES        //
+//    WILL BE OVERWRITTEN               //
+//                                      //
+//////////////////////////////////////////
+
+
+END
+
+
 def test_file(test_path, &block)
   context = TestFileContext.new
   context.instance_eval(&block)
   tests_source = context.generate_source
+  tests_source = $preamble + tests_source
 
   path = Pathname.new("../tests/#{test_path}-tests.cpp").expand_path
 
