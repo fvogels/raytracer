@@ -33,15 +33,7 @@ namespace animation
 
         T operator ()(TimeStamp t) const
         {
-            if (t >= TimeStamp::from_epoch(m_duration))
-            {
-                LOG(ERROR) << "Animation out of bounds: cannot ask " << t.seconds() << " of animation with duration " << m_duration;
-                abort();
-            }
-            else
-            {
-                return m_function(t);
-            }
+            return m_function(t);
         }
 
         math::Function<T(TimeStamp)> function() const
