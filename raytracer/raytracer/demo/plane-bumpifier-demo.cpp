@@ -6,7 +6,7 @@
 #include "renderers/renderers.h"
 #include "samplers/samplers.h"
 #include "raytracers/scene.h"
-#include "math/function.h"
+#include "math/functions.h"
 #include "animation/animations.h"
 #include "animation/redimensioner.h"
 #include "pipeline/pipelines.h"
