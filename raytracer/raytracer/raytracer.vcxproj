@@ -518,6 +518,7 @@
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quadratic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\quintic-easing-function.cpp" />
+    <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\grid-pattern.cpp" />
     <ClCompile Include="math\functions\horizontal-lines-pattern.cpp" />
@@ -558,7 +559,6 @@
     <ClCompile Include="materials\uniform-material.cpp" />
     <ClCompile Include="materials\worley-material.cpp" />
     <ClCompile Include="math\box.cpp" />
-    <ClCompile Include="math\functions\easing-functions.cpp" />
     <ClCompile Include="math\functions\perlin.cpp" />
     <ClCompile Include="math\functions\worley.cpp" />
     <ClCompile Include="math\matrix.cpp" />
@@ -709,6 +709,7 @@
     <ClInclude Include="math\functions\easing\linear-easing-function.h" />
     <ClInclude Include="math\functions\easing\quadratic-easing-function.h" />
     <ClInclude Include="math\functions\easing\quintic-easing-function.h" />
+    <ClInclude Include="math\functions\easing\stretch-easing-function.h" />
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\grid-pattern.h" />
     <ClInclude Include="math\functions\horizontal-lines-pattern.h" />

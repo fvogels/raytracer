@@ -1,10 +1,5 @@
-#define _USE_MATH_DEFINES
 #include "math/functions.h"
-#include "math/functions/easing-functions.h"
-#include "math/angle.h"
-#include "easylogging++.h"
-#include <assert.h>
-#include <cmath>
+#include "math/functions/easing/stretch-easing-function.h"
 
 using namespace math;
 using namespace math::functions;

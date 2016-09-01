@@ -111,9 +111,6 @@
     <ClCompile Include="lights\area-light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\easing-functions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\functions\perlin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -436,6 +433,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\functions\easing\elastic-easing-function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\easing\stretch-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1128,6 +1128,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\easing\elastic-easing-function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\easing\stretch-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
