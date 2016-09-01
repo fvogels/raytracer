@@ -152,7 +152,11 @@ EasingFunction math::functions::easing::bounce(unsigned bounce_count, double bou
         std::function<double(double)> lambda = [bounce_count, bounce_absorption](double t) {
             assert(interval(0.0, 1.0).contains(t));
 
-            return 1 - std::abs(cos((bounce_count - 0.5) * 180_degrees * t)) * exp(-bounce_absorption * t);
+            double result = 1 - std::abs(cos((bounce_count - 0.5) * 180_degrees * t)) * exp(-bounce_absorption * t);
+
+            assert(interval(0.0, 1.0).contains(result));
+            
+            return result;
         };
 
         return from_lambda(lambda);
