@@ -130,7 +130,7 @@ namespace
         {
             using namespace math::functions::easing;
 
-            auto easing_function = stretch_in_time(math::functions::easing::bounce(bounce_count, bounce_absorption), interval(0.0, animation.duration().seconds()));
+            auto easing_function = math::functions::easing::bounce(bounce_count, bounce_absorption);
 
             return ease(animation, easing_function);
         }
