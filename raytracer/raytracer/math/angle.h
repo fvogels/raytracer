@@ -51,6 +51,10 @@ namespace math
         explicit Angle(double);
         
         double m_radians;
+
+#       ifndef NDEBUG
+        double m_degrees;
+#       endif
     };
 
     Angle operator+(const Angle& x, const Angle& y);

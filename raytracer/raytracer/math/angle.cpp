@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "math/angle.h"
-#include <math.h>
+#include <cmath>
 
 
 using namespace math;
@@ -11,8 +11,11 @@ math::Angle::Angle()
 
 math::Angle::Angle(double x)
     : m_radians(x) 
-{ 
-    // NOP
+{
+#   ifndef NDEBUG
+    // m_degrees member variable only available in debug mode
+    m_degrees = m_radians * 180 / M_PI;
+#   endif // NDEBUG
 }
 
 double math::Angle::radians() const 
