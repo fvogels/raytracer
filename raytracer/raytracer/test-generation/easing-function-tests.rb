@@ -474,7 +474,7 @@ test_file 'math/functions/easing/stretch/stretch-in-time' do
         TEST_CASE("[Stretch] Stretch in time to [#{a}, #{b}]", "[Stretch]")
         {
           auto range = interval<double>(#{a}, #{b});
-          auto f = stretch_in_time( math::functions::easing::linear(), interval<double>(#{a}, #{b}) );
+          auto f = stretch_in_time( math::functions::easing::linear(), range );
 
           for ( int i = 0; i <= 20; ++i )
           {
@@ -509,7 +509,7 @@ test_file 'math/functions/easing/stretch/stretch-in-space' do
         TEST_CASE("[Stretch] Stretch in space to [#{a}, #{b}]", "[Stretch]")
         {
           auto range = interval<double>(#{a}, #{b});
-          auto f = stretch_in_space( math::functions::easing::linear(), interval<double>(#{a}, #{b}) );
+          auto f = stretch_in_space( math::functions::easing::linear(), range );
 
           for ( int i = 0; i <= 20; ++i )
           {
@@ -527,6 +527,52 @@ test_file 'math/functions/easing/stretch/stretch-in-space' do
         test_case do |data|
           data.a = a
           data.b = a + delta
+        end
+      end
+    end
+  end
+end
+
+test_file 'math/functions/easing/stretch/stretch' do
+  template do
+    instance_eval(&file_template)
+  end
+  
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Stretch] Stretch in time [#{a}, #{b}] and space [#{c}, #{d}]", "[Stretch]")
+        {
+          auto time_range = interval<double>(#{a}, #{b});
+          auto space_range = interval<double>(#{c}, #{d});
+          auto f = stretch( math::functions::easing::linear(), time_range, space_range );
+
+          for ( int i = 0; i <= 20; ++i )
+          {
+              double x = i / 20.0;
+
+              double time = time_range.from_relative(x);
+              double space = space_range.from_relative(x);
+
+              INFO( "x = " << x << ", time = " << time << ", space = " << space );
+
+              CHECK(f(time) == Approx(space));
+          }
+        }
+      END
+    end
+    
+    (-2..2).each do |a|
+      (1..4).each do |delta_ab|
+        (-2..2).each do |c|
+          (1..4).each do |delta_cd|
+            test_case do |data|
+              data.a = a
+              data.b = a + delta_ab
+              data.c = c
+              data.d = c + delta_cd
+            end
+          end
         end
       end
     end
