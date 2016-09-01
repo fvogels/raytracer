@@ -191,7 +191,7 @@ namespace math
             EasingFunction easing_function()
             {
                 return _private_::EasingFunctionBuilder<SHAPE, SIDES>::function();
-            }
+            }            
 
             template<typename SHAPE, typename SIDES = void>
             EasingFunction easing_function(_private_::DeltaY dy)
@@ -215,6 +215,12 @@ namespace math
             EasingFunction easing_function(_private_::XInterval x, _private_::YInterval y)
             {
                 return (identity<double>() - x.interval.lower) >> easing_function<SHAPE, SIDES>(dx(x.interval.size()), y);
+            }
+
+            template<typename SHAPE, typename SIDES = void>
+            EasingFunction easing_function(_private_::DeltaX dx)
+            {
+                return easing_function<SHAPE, SIDES>(dx, y_range(0, 1));
             }
         }
     }
