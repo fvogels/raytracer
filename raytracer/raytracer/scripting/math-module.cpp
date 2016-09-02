@@ -6,6 +6,7 @@
 #include "math/vector.h"
 #include "math/rectangle3d.h"
 #include "math/functions.h"
+#include "math/functions/easing-functions.h"
 
 
 using namespace chaiscript;
@@ -67,6 +68,34 @@ namespace
         Function<Vector3D(const Point3D&)> vector3d(unsigned octaves) const
         {
             return math::functions::perlin<Vector3D, Point3D>(octaves, 98101);
+        }
+    };
+
+    struct EasingLibrary
+    {
+#       define IMPORT(NAME)     EasingFunction NAME() const \
+                                { \
+                                    return math::functions::easing::NAME(); \
+                                }
+        IMPORT(quadratic_in)
+        IMPORT(quadratic_out)
+        IMPORT(quadratic_inout)
+        IMPORT(cubic_in)
+        IMPORT(cubic_out)
+        IMPORT(cubic_inout)
+        IMPORT(quintic_in)
+        IMPORT(quintic_out)
+        IMPORT(quintic_inout)
+#       undef IMPORT
+
+        EasingFunction bounce(unsigned count, double absorption)
+        {
+            return math::functions::easing::bounce(count, absorption);
+        }
+
+        EasingFunction elastic(unsigned count, double absorption)
+        {
+            return math::functions::easing::elastic(count, absorption);
         }
     };
 
@@ -182,6 +211,12 @@ namespace
     {
         module.add(fun(&create_rectangle3d), "rect3d");
     }
+
+    void add_easing(Module& module)
+    {
+        auto easing_library = std::make_shared<EasingFunction>();
+        module.add_global_const(chaiscript::const_var(easing_library), "Easing");
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_math_module()
@@ -193,6 +228,7 @@ ModulePtr raytracer::scripting::_private_::create_math_module()
     add_angle(*module);
     add_perlin(*module);
     add_interval(*module);
+    add_easing(*module);
 
     return module;
 }

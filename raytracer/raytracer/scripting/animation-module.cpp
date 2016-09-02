@@ -126,6 +126,14 @@ namespace
         }
 
         template<typename T>
+        Animation<T> ease_animation(Animation<T> animation, math::functions::EasingFunction easing_function) const
+        {
+            using namespace math::functions::easing;
+
+            return ease(animation, easing_function);
+        }
+
+        template<typename T>
         Animation<T> bounce(Animation<T> animation, unsigned count, double absorption) const
         {
             using namespace math::functions::easing;
@@ -183,6 +191,9 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
     BIND_AS(cyclic_double, cyclic);
+    BIND_AS(ease_animation<double>, ease);
+    BIND_AS(ease_animation<Point3D>, ease);
+    BIND_AS(ease_animation<Angle>, ease);
     BIND_AS(bounce<double>, bounce);
     BIND_AS(bounce<Point3D>, bounce);
     BIND_AS(bounce<Angle>, bounce);
