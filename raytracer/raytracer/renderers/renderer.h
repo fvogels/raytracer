@@ -14,15 +14,22 @@ namespace raytracer
     {
         namespace _private_
         {
+            /// <summary>
+            /// Actual Renderer implementation.
+            /// </summary>
             class RendererImplementation
             {
             public:
-                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<loopers::Looper>);
-
-                virtual std::shared_ptr<imaging::Bitmap> render(const Scene&) const = 0;
+                /// <summary>
+                /// Renders the given <paramref name="scene" /> and returns
+                /// the resulting picture as a bitmap.
+                /// </summary>
+                virtual std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const = 0;
 
             protected:
-                unsigned m_horizontal_resolution, m_vertical_resolution;
+                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<loopers::Looper>);
+
+                unsigned m_horizontal_size, m_vertical_size;
                 raytracer::Sampler m_sampler;
                 RayTracer m_ray_tracer;
                 
@@ -34,6 +41,10 @@ namespace raytracer
         }
     }
 
+    /// <summary>
+    /// Wrapper for renderers. Members are to be accessed using the -&gt; operator.
+    /// Actual members are defined in RenderImplementation.
+    /// </summary>
     class Renderer
     {
     public:

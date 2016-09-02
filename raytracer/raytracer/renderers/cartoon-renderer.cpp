@@ -15,14 +15,14 @@ namespace
     {
     public:
         CartoonRenderer(
-            unsigned horizontal_resolution,
-            unsigned vertical_resolution,
+            unsigned horizontal_size,
+            unsigned vertical_size,
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
             std::shared_ptr<loopers::Looper> looper,
             unsigned shade_count,
             double stroke_thickness)
-            : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper)
             , m_shade_count(shade_count)
             , m_stroke_thickness(stroke_thickness)
         {
@@ -33,11 +33,11 @@ namespace
         {
             TIMED_FUNC(timer);
 
-            auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
+            auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
             Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
-            data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
+            data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_size, m_vertical_size);
 
             {
                 TIMED_SCOPE(timer, "Render phase");
@@ -77,7 +77,7 @@ namespace
                         Point2D current_xy = pair.second;
                         bool is_border = false;
 
-                        group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_position) {
+                        group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position& neighbor_pixel_position) {
                             for (auto& pair : group_grid[neighbor_pixel_position])
                             {
                                 unsigned neighbor_id = pair.first;
@@ -126,7 +126,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::cartoon(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, unsigned shade_count, double stroke_thickness)
+Renderer raytracer::renderers::cartoon(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, unsigned shade_count, double stroke_thickness)
 {
-    return Renderer(std::make_shared<CartoonRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, shade_count, stroke_thickness));
+    return Renderer(std::make_shared<CartoonRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper, shade_count, stroke_thickness));
 }

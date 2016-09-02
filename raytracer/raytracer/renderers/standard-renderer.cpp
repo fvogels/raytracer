@@ -12,8 +12,8 @@ namespace
     class StandardRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
-        StandardRenderer(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
-            : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
+        StandardRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper)
         {
             // NOP
         }
@@ -23,8 +23,8 @@ namespace
             TIMED_FUNC(timer);
 
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-            Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
-            auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
+            Rasterizer window_rasterizer(window, m_horizontal_size, m_vertical_size);
+            auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
 
             for_each_pixel([&](Position pixel_coordinates) {
@@ -58,7 +58,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::standard(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
+Renderer raytracer::renderers::standard(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
 {
-    return Renderer(std::make_shared<StandardRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper));
+    return Renderer(std::make_shared<StandardRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper));
 }

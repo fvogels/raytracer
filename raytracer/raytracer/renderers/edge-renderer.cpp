@@ -15,13 +15,13 @@ namespace
     {
     public:
         EdgeRenderer(
-            unsigned horizontal_resolution,
-            unsigned vertical_resolution,
+            unsigned horizontal_size,
+            unsigned vertical_size,
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
             std::shared_ptr<loopers::Looper> looper,
             double stroke_thickness)
-            : RendererImplementation(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper)
             , m_stroke_thickness(stroke_thickness)
         {
             // NOP
@@ -30,12 +30,12 @@ namespace
         std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const
         {
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
-            Rasterizer window_rasterizer(window, m_horizontal_resolution, m_vertical_resolution);
-            data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_resolution, m_vertical_resolution);
+            Rasterizer window_rasterizer(window, m_horizontal_size, m_vertical_size);
+            data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_size, m_vertical_size);
 
             for_each_pixel([&](Position pixel_coordinates) {
-                assert(pixel_coordinates.x < m_horizontal_resolution);
-                assert(pixel_coordinates.y < m_vertical_resolution);
+                assert(pixel_coordinates.x < m_horizontal_size);
+                assert(pixel_coordinates.y < m_vertical_size);
 
                 math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
                 std::vector<std::pair<unsigned, Point2D>> data;
@@ -51,7 +51,7 @@ namespace
                 group_grid[pixel_coordinates] = data;
             });
 
-            auto result = std::make_shared<Bitmap>(m_horizontal_resolution, m_vertical_resolution);
+            auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
             bitmap.clear(colors::white());
 
@@ -67,7 +67,7 @@ namespace
                     Point2D current_xy = pair.second;
                     bool is_border = false;
 
-                    group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_resolution, m_vertical_resolution))), [&](const Position& neighbor_pixel_coordinates) {
+                    group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position& neighbor_pixel_coordinates) {
                         for (auto& pair : group_grid[neighbor_pixel_coordinates])
                         {
                             unsigned neighbor_id = pair.first;
@@ -114,7 +114,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::edge(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double stroke_thickness)
+Renderer raytracer::renderers::edge(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double stroke_thickness)
 {
-    return Renderer(std::make_shared<EdgeRenderer>(horizontal_resolution, vertical_resolution, sampler, ray_tracer, looper, stroke_thickness));
+    return Renderer(std::make_shared<EdgeRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper, stroke_thickness));
 }
