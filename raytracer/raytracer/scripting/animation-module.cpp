@@ -132,26 +132,6 @@ namespace
 
             return ease(animation, easing_function);
         }
-
-        template<typename T>
-        Animation<T> bounce(Animation<T> animation, unsigned count, double absorption) const
-        {
-            using namespace math::functions::easing;
-
-            auto easing_function = math::functions::easing::bounce(count, absorption);
-
-            return ease(animation, easing_function);
-        }
-
-        template<typename T>
-        Animation<T> elastic(Animation<T> animation, unsigned count, double absorption) const
-        {
-            using namespace math::functions::easing;
-
-            auto easing_function = math::functions::easing::elastic(count, absorption);
-
-            return ease(animation, easing_function);
-        }
     };
 
     Duration seconds(double s)
@@ -181,8 +161,8 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     auto animation_library = std::make_shared<AnimationLibrary>();
     module->add_global_const(chaiscript::const_var(animation_library), "Animations");
 
-#define BIND_AS(INTERNAL, EXTERNAL)                 module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
-#define BIND(NAME)                                  BIND_AS(NAME, NAME)
+#   define BIND_AS(INTERNAL, EXTERNAL)                 module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
+#   define BIND(NAME)                                  BIND_AS(NAME, NAME)
     BIND(circular);
     BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
@@ -194,14 +174,8 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(ease_animation<double>, ease);
     BIND_AS(ease_animation<Point3D>, ease);
     BIND_AS(ease_animation<Angle>, ease);
-    BIND_AS(bounce<double>, bounce);
-    BIND_AS(bounce<Point3D>, bounce);
-    BIND_AS(bounce<Angle>, bounce);
-    BIND_AS(elastic<double>, elastic);
-    BIND_AS(elastic<Point3D>, elastic);
-    BIND_AS(elastic<Angle>, elastic);
-#undef BIND
-#undef BIND_AS
+#   undef BIND
+#   undef BIND_AS
 
     module->add(fun(&redim_xyz_to_xyt<Vector3D>), "xyz_to_xyt");
     module->add(fun(&seconds), "seconds");

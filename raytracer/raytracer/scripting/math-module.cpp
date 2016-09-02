@@ -42,63 +42,6 @@ namespace
         return interval(lower, upper);
     }
 
-    struct Perlin1DLibrary
-    {
-        Noise1D scalar(unsigned octaves) const
-        {
-            return math::functions::perlin<double, double>(octaves, 45623);
-        }
-    };
-
-    struct Perlin2DLibrary
-    {
-        Noise2D scalar(unsigned octaves) const
-        {
-            return math::functions::perlin<double, Point2D>(octaves, 78465);
-        }
-    };
-
-    struct Perlin3DLibrary
-    {
-        Noise3D scalar(unsigned octaves) const
-        {
-            return math::functions::perlin<double, Point3D>(octaves, 12319);
-        }
-
-        Function<Vector3D(const Point3D&)> vector3d(unsigned octaves) const
-        {
-            return math::functions::perlin<Vector3D, Point3D>(octaves, 98101);
-        }
-    };
-
-    struct EasingLibrary
-    {
-#       define IMPORT(NAME)     EasingFunction NAME() const \
-                                { \
-                                    return math::functions::easing::NAME(); \
-                                }
-        IMPORT(quadratic_in)
-        IMPORT(quadratic_out)
-        IMPORT(quadratic_inout)
-        IMPORT(cubic_in)
-        IMPORT(cubic_out)
-        IMPORT(cubic_inout)
-        IMPORT(quintic_in)
-        IMPORT(quintic_out)
-        IMPORT(quintic_inout)
-#       undef IMPORT
-
-        EasingFunction bounce(unsigned count, double absorption)
-        {
-            return math::functions::easing::bounce(count, absorption);
-        }
-
-        EasingFunction elastic(unsigned count, double absorption)
-        {
-            return math::functions::easing::elastic(count, absorption);
-        }
-    };
-
     struct PointFactories
     {
         Point2D cartesian2d(double x, double y) const { return Point2D::cartesian(x, y); }
@@ -148,7 +91,7 @@ namespace
         auto vector_factories = std::make_shared<VectorFactories>();
         module.add_global_const(chaiscript::const_var(vector_factories), "Vec");
 
-#define BIND(NAME)                  module.add(fun(&PointFactories::NAME), #NAME); module.add(fun(&VectorFactories::NAME), #NAME)
+#       define BIND(NAME)    module.add(fun(&PointFactories::NAME), #NAME); module.add(fun(&VectorFactories::NAME), #NAME)
         BIND(cartesian2d);
         BIND(polar);
         BIND(cartesian3d);
@@ -156,7 +99,7 @@ namespace
         BIND(cylindrical_x);
         BIND(cylindrical_y);
         BIND(cylindrical_z);
-#undef BIND
+#       undef BIND
     }
 
     void add_angle(Module& module)
@@ -177,27 +120,6 @@ namespace
         module.add(fun([](Angle a) { return cos(a); }), "cos");
     }
 
-    void add_perlin(Module& module)
-    {
-        auto perlin1d_library = std::make_shared<Perlin1DLibrary>();
-        module.add_global_const(chaiscript::const_var(perlin1d_library), "Perlin1D");
-
-        auto perlin2d_library = std::make_shared<Perlin2DLibrary>();
-        module.add_global_const(chaiscript::const_var(perlin2d_library), "Perlin2D");
-
-        auto perlin3d_library = std::make_shared<Perlin3DLibrary>();
-        module.add_global_const(chaiscript::const_var(perlin3d_library), "Perlin3D");
-
-#define BIND(N, NAME)                 BIND_AS(N, NAME, NAME)
-#define BIND_AS(N, FACTORY, NAME)     module.add(fun(&Perlin ## N ## Library::FACTORY), #NAME)
-        BIND(1D, scalar);
-        BIND(2D, scalar);
-        BIND(3D, scalar);
-        BIND(3D, vector3d);
-#undef BIND_AS
-#undef BIND
-    }
-
     void add_interval(Module& module)
     {
         raytracer::scripting::util::register_type<math::Interval<Angle>>(module, "Angle");
@@ -212,10 +134,105 @@ namespace
         module.add(fun(&create_rectangle3d), "rect3d");
     }
 
+    struct Perlin1DLibrary
+    {
+        Noise1D scalar(unsigned octaves) const
+        {
+            return math::functions::perlin<double, double>(octaves, 45623);
+        }
+    };
+
+    struct Perlin2DLibrary
+    {
+        Noise2D scalar(unsigned octaves) const
+        {
+            return math::functions::perlin<double, Point2D>(octaves, 78465);
+        }
+    };
+
+    struct Perlin3DLibrary
+    {
+        Noise3D scalar(unsigned octaves) const
+        {
+            return math::functions::perlin<double, Point3D>(octaves, 12319);
+        }
+
+        Function<Vector3D(const Point3D&)> vector3d(unsigned octaves) const
+        {
+            return math::functions::perlin<Vector3D, Point3D>(octaves, 98101);
+        }
+    };
+
+    void add_perlin(Module& module)
+    {
+        auto perlin1d_library = std::make_shared<Perlin1DLibrary>();
+        module.add_global_const(chaiscript::const_var(perlin1d_library), "Perlin1D");
+
+        auto perlin2d_library = std::make_shared<Perlin2DLibrary>();
+        module.add_global_const(chaiscript::const_var(perlin2d_library), "Perlin2D");
+
+        auto perlin3d_library = std::make_shared<Perlin3DLibrary>();
+        module.add_global_const(chaiscript::const_var(perlin3d_library), "Perlin3D");
+
+#       define BIND(N, NAME)                 BIND_AS(N, NAME, NAME)
+#       define BIND_AS(N, FACTORY, NAME)     module.add(fun(&Perlin ## N ## Library::FACTORY), #NAME)
+        BIND(1D, scalar);
+        BIND(2D, scalar);
+        BIND(3D, scalar);
+        BIND(3D, vector3d);
+#       undef BIND_AS
+#       undef BIND
+    }
+
+    struct EasingLibrary
+    {
+#       define IMPORT(NAME)     EasingFunction NAME() const \
+                                { \
+                                    return math::functions::easing::NAME(); \
+                                }
+        IMPORT(quadratic_in)
+        IMPORT(quadratic_out)
+        IMPORT(quadratic_inout)
+        IMPORT(cubic_in)
+        IMPORT(cubic_out)
+        IMPORT(cubic_inout)
+        IMPORT(quintic_in)
+        IMPORT(quintic_out)
+        IMPORT(quintic_inout)
+#       undef IMPORT
+
+        EasingFunction bounce(unsigned count, double absorption) const
+        {
+            return math::functions::easing::bounce(count, absorption);
+        }
+
+        EasingFunction elastic(unsigned count, double absorption) const
+        {
+            return math::functions::easing::elastic(count, absorption);
+        }
+    };
+
     void add_easing(Module& module)
     {
-        auto easing_library = std::make_shared<EasingFunction>();
+        auto easing_library = std::make_shared<EasingLibrary>();
         module.add_global_const(chaiscript::const_var(easing_library), "Easing");
+
+#       define BIND(NAME)    module.add(fun(&EasingLibrary::NAME), #NAME);
+        BIND(quadratic_in);
+        BIND(quadratic_out);
+        BIND(quadratic_inout);
+
+        BIND(cubic_in);
+        BIND(cubic_out);
+        BIND(cubic_inout);
+
+        BIND(quintic_in);
+        BIND(quintic_out);
+        BIND(quintic_inout);
+
+        BIND(bounce);
+        BIND(elastic);
+#       undef BIND
     }
 }
 
