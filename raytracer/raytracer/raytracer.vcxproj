@@ -619,6 +619,7 @@
     <ClCompile Include="loopers\single-threaded-looper.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="tests\primitives\disk\disk-tests.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
