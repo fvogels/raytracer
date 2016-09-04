@@ -116,14 +116,21 @@ $preamble = <<-END
 END
 
 
+def build_tests_file_path(test_path)
+  components = test_path.split(%r{/})
+
+  components[-1] = "generated-#{components[-1]}-tests.cpp"
+
+  Pathname.new("../tests/" + components.join('/')).expand_path
+end
+
+
 def test_file(test_path, &block)
   context = TestFileContext.new
   context.instance_eval(&block)
   tests_source = context.generate_source
   tests_source = $preamble + tests_source
-
-  path = Pathname.new("../tests/#{test_path}-tests.cpp").expand_path
-
+  path = build_tests_file_path(test_path)
 
   if path.file? then
     old_tests_source = path.read
