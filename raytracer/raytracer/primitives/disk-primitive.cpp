@@ -1,5 +1,6 @@
 #include "primitives/disk-primitive.h"
 #include "math/misc.h"
+#include "math/interval.h"
 #include <assert.h>
 #include <algorithm>
 
@@ -27,13 +28,16 @@ namespace
                 Point3D p = ray.at(t);
                 double r = distance(Point3D(0, 0, 0), p);
 
-                if (t < hit->t && t < 1)
+                if (r < 1 && interval(0.0, hit->t).contains(t))
                 {
                     hit->t = t;
                     hit->normal = Vector3D(0, sign(ray.origin.y()), 0);
                     hit->position = p;
                     hit->local_position.xyz = p;
-                    hit->local_position.uv = Point2D(r, atan2(p.z(), p.x()));
+
+                    Cartesian2D cartesian_coordinates{ p.x(), p.z() };
+                    Polar polar_coordinates = convert_coordinates<Polar>(cartesian_coordinates);
+                    hit->local_position.uv = Point2D(polar_coordinates.radius, polar_coordinates.theta.degrees() / 360.0);
 
                     return true;
                 }
