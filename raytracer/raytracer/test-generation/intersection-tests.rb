@@ -110,8 +110,5 @@ test_file 'primitives/intersection' do
       data.ray_origin = '(10,0,0)'
       data.ray_direction = '(-1,0,0)'
     end
-    
   end
-  
-  
 end
