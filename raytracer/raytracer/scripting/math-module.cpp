@@ -44,24 +44,24 @@ namespace
 
     struct PointFactories
     {
-        Point2D cartesian2d(double x, double y) const { return Point2D::cartesian(x, y); }
-        Point2D polar(double radius, Angle theta) const { return Point2D::polar(radius, theta); }
-        Point3D cartesian3d(double x, double y, double z) const { return Point3D::cartesian(x, y, z); }
-        Point3D spherical(double radius, Angle azimuth, Angle elevation) const { return Point3D::spherical(radius, azimuth, elevation); }
-        Point3D cylindrical_x(double radius, Angle azimuth, double x) const { return Point3D::cylindrical_x(radius, azimuth, x); }
-        Point3D cylindrical_y(double radius, Angle azimuth, double y) const { return Point3D::cylindrical_y(radius, azimuth, y); }
-        Point3D cylindrical_z(double radius, Angle azimuth, double z) const { return Point3D::cylindrical_z(radius, azimuth, z); }
+        Point2D cartesian2d(double x, double y) const                           { return Point2D::cartesian(x, y); }
+        Point2D polar(double radius, Angle theta) const                         { return Point2D::polar(radius, theta); }
+        Point3D cartesian3d(double x, double y, double z) const                 { return Point3D::cartesian(x, y, z); }
+        Point3D spherical(double radius, Angle azimuth, Angle elevation) const  { return Point3D::spherical(radius, azimuth, elevation); }
+        Point3D cylindrical_x(double radius, Angle azimuth, double x) const     { return Point3D::cylindrical_x(radius, azimuth, x); }
+        Point3D cylindrical_y(double radius, Angle azimuth, double y) const     { return Point3D::cylindrical_y(radius, azimuth, y); }
+        Point3D cylindrical_z(double radius, Angle azimuth, double z) const     { return Point3D::cylindrical_z(radius, azimuth, z); }
     };
 
     struct VectorFactories
     {
-        Vector2D cartesian2d(double x, double y) const { return Vector2D::cartesian(x, y); }
-        Vector2D polar(double radius, Angle theta) const { return Vector2D::polar(radius, theta); }
-        Vector3D cartesian3d(double x, double y, double z) const { return Vector3D::cartesian(x, y, z); }
+        Vector2D cartesian2d(double x, double y) const                          { return Vector2D::cartesian(x, y); }
+        Vector2D polar(double radius, Angle theta) const                        { return Vector2D::polar(radius, theta); }
+        Vector3D cartesian3d(double x, double y, double z) const                { return Vector3D::cartesian(x, y, z); }
         Vector3D spherical(double radius, Angle azimuth, Angle elevation) const { return Vector3D::spherical(radius, azimuth, elevation); }
-        Vector3D cylindrical_x(double radius, Angle azimuth, double x) const { return Vector3D::cylindrical_x(radius, azimuth, x); }
-        Vector3D cylindrical_y(double radius, Angle azimuth, double y) const { return Vector3D::cylindrical_y(radius, azimuth, y); }
-        Vector3D cylindrical_z(double radius, Angle azimuth, double z) const { return Vector3D::cylindrical_z(radius, azimuth, z); }
+        Vector3D cylindrical_x(double radius, Angle azimuth, double x) const    { return Vector3D::cylindrical_x(radius, azimuth, x); }
+        Vector3D cylindrical_y(double radius, Angle azimuth, double y) const    { return Vector3D::cylindrical_y(radius, azimuth, y); }
+        Vector3D cylindrical_z(double radius, Angle azimuth, double z) const    { return Vector3D::cylindrical_z(radius, azimuth, z); }
     };
 
     void add_points_and_vectors(Module& module)
@@ -190,6 +190,7 @@ namespace
                                 { \
                                     return math::functions::easing::NAME(); \
                                 }
+        IMPORT(linear)
         IMPORT(quadratic_in)
         IMPORT(quadratic_out)
         IMPORT(quadratic_inout)
@@ -218,6 +219,7 @@ namespace
         module.add_global_const(chaiscript::const_var(easing_library), "Easing");
 
 #       define BIND(NAME)    module.add(fun(&EasingLibrary::NAME), #NAME);
+        BIND(linear);
         BIND(quadratic_in);
         BIND(quadratic_out);
         BIND(quadratic_inout);
