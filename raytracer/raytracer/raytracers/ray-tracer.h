@@ -13,14 +13,24 @@ namespace raytracer
     {
         namespace _private_
         {
+            /// <summary>
+            /// Actual ray tracer implementation.
+            /// </summary>
             class RayTracerImplementation
             {
             public:
-                virtual TraceResult trace(const Scene&, const math::Ray&) const = 0;
+                /// <summary>
+                /// Give a scene and a ray, follows the ray's journey through the scene and determines which color the ray has.
+                /// </summary>
+                virtual TraceResult trace(const Scene& scene, const math::Ray& ray) const = 0;
             };
         }
     }
 
+    /// <summary>
+    /// Wrapper class for ray tracers. Actual members are accessed through -&gt;
+    /// See RayTracerImplementation for a listing of members.
+    /// </summary>
     class RayTracer
     {
     public:
