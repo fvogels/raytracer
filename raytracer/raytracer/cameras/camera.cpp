@@ -1,5 +1,6 @@
 #include "cameras/camera.h"
 #include "math/transformation-matrices.h"
+#include "easylogging++.h"
 #include <assert.h>
 
 using namespace math;
@@ -7,6 +8,12 @@ using namespace math;
 
 Matrix4x4 raytracer::cameras::_private_::create_transformation(const Point3D& eye, const Point3D& look_at, const Vector3D& up)
 {
+    if (!up.is_unit())
+    {
+        LOG(ERROR) << "Camera's up vector should have length 1";
+        abort();
+    }
+
     Vector3D look_direction = (look_at - eye).normalized();
     Vector3D right = look_direction.cross(up).normalized();
     Vector3D fixed_up = right.cross(look_direction);
