@@ -11,7 +11,7 @@ using namespace math;
 
 Primitive raytracer::primitives::cube()
 {
-    auto bottom = square();
+    auto bottom = xz_square();
     auto top = translate(Vector3D(0, 1, 0), bottom);
     auto front = rotate_around_x(-90_degrees, bottom);
     auto back = translate(Vector3D(0, 0, 1), front);
