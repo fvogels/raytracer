@@ -20,5 +20,5 @@ Primitive raytracer::primitives::cube()
 
     std::vector<Primitive> sides = { bottom, top, front, back, left, right };
 
-    return make_union(sides);
+    return mesh(sides);
 }
