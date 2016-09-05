@@ -55,9 +55,9 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 
     util::register_type<Primitive>(*module, "Primitive");
 
-#define BIND_HELPER_FUNCTION(NAME)                  BIND_HELPER_FUNCTION_AS(NAME, NAME)
-#define BIND_DIRECTLY(NAME)                         BIND_HELPER_FUNCTION_AS(raytracer::primitives::NAME, NAME)
-#define BIND_HELPER_FUNCTION_AS(FACTORY, NAME)      module->add(fun(&FACTORY), #NAME)
+#   define BIND_HELPER_FUNCTION(NAME)                  BIND_HELPER_FUNCTION_AS(NAME, NAME)
+#   define BIND_DIRECTLY(NAME)                         BIND_HELPER_FUNCTION_AS(raytracer::primitives::NAME, NAME)
+#   define BIND_HELPER_FUNCTION_AS(FACTORY, NAME)      module->add(fun(&FACTORY), #NAME)
     BIND_DIRECTLY(sphere);
     BIND_DIRECTLY(xy_plane);
     BIND_DIRECTLY(xz_plane);
@@ -70,7 +70,9 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(cone_along_z);
     BIND_DIRECTLY(triangle);
     BIND_DIRECTLY(disk);
+    BIND_DIRECTLY(xy_square);
     BIND_DIRECTLY(xz_square);
+    BIND_DIRECTLY(yz_square);
     BIND_DIRECTLY(cube);
     BIND_DIRECTLY(translate);
     BIND_DIRECTLY(rotate_around_x);
@@ -91,9 +93,9 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(crop_along_z);
     BIND_DIRECTLY(crop_spherical);
     BIND_HELPER_FUNCTION_AS(bumpify2d_timed, bumpify);
-#undef BIND_HELPER_FUNCTION_AS
-#undef BIND_DIRECTLY
-#undef BIND_HELPER_FUNCTION
+#   undef BIND_HELPER_FUNCTION_AS
+#   undef BIND_DIRECTLY
+#   undef BIND_HELPER_FUNCTION
 
     return module;
 }
