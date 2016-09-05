@@ -129,7 +129,7 @@ def test_file(test_path, &block)
   context = TestFileContext.new
   context.instance_eval(&block)
   tests_source = context.generate_source
-  tests_source = $preamble + tests_source
+  tests_source = $preamble + tests_source + "\n"
   path = build_tests_file_path(test_path)
 
   if path.file? then
