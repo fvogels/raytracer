@@ -11,12 +11,12 @@ using namespace math;
 
 Primitive raytracer::primitives::cube()
 {
-    auto bottom = xz_square();
-    auto top = translate(Vector3D(0, 1, 0), bottom);
-    auto front = rotate_around_x(-90_degrees, bottom);
-    auto back = translate(Vector3D(0, 0, 1), front);
-    auto left = rotate_around_z(90_degrees, bottom);
-    auto right = translate(Vector3D(1, 0, 0), left);
+    auto bottom = translate(Vector3D(0, -1, 0), xz_square());
+    auto top = translate(Vector3D(0, 1, 0), xz_square());
+    auto front = translate(Vector3D(0, 0, 1), xy_square());
+    auto back = translate(Vector3D(0, 0, -1), xy_square());
+    auto left = translate(Vector3D(-1, 0, 0), yz_square());
+    auto right = translate(Vector3D(1, 0, 0), yz_square());
 
     std::vector<Primitive> sides = { bottom, top, front, back, left, right };
 
