@@ -622,7 +622,7 @@
     <ClCompile Include="loopers\single-threaded-looper.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tests\main.cpp" />
-    <ClCompile Include="tests\primitives\difference\generated-difference-tests.cpp" />
+    <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>

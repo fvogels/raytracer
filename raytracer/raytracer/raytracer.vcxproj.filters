@@ -414,9 +414,6 @@
     <ClCompile Include="loopers\smart-looper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\functions\easing\linear-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -441,13 +438,16 @@
     <ClCompile Include="primitives\difference-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\primitives\difference\generated-difference-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\square-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\cube-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
