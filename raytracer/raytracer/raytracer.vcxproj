@@ -542,6 +542,7 @@
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
+    <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
@@ -745,6 +746,7 @@
     <ClInclude Include="primitives\bumpifier-primitive.h" />
     <ClInclude Include="primitives\difference-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
+    <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="raytracers\trace-result.h" />
     <ClInclude Include="renderers\cartoon-renderer.h" />
     <ClInclude Include="raytracers\ray-tracer-v4.h" />
