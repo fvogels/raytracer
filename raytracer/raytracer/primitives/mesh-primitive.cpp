@@ -12,14 +12,78 @@ using namespace raytracer::primitives;
 
 namespace
 {
+    class MeshImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
+    {
+    public:
+        MeshImplementation(const std::vector<Primitive>& children)
+            : m_children(children)
+        {
+            // NOP
+        }
+
+        MeshImplementation(std::vector<Primitive>&& children)
+            : m_children(children)
+        {
+            // NOP
+        }
+
+        bool find_first_positive_hit(const Ray& ray, Hit* hit) const override
+        {
+            bool found_hit = false;
+
+            for (const auto& child : this->m_children)
+            {
+                found_hit = child->find_first_positive_hit(ray, hit) || found_hit;
+            }
+
+            return found_hit;
+        }
+
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
+        {
+            std::vector<std::shared_ptr<Hit>> hits;
+
+            for (const auto& child : this->m_children)
+            {
+                for (auto hit : child->find_all_hits(ray))
+                {
+                    hits.push_back(hit);
+                }
+            }
+
+            std::sort(hits.begin(), hits.end(), [](const std::shared_ptr<Hit>& h1, const std::shared_ptr<Hit>& h2)
+            {
+                return h1->t < h2->t;
+            });
+
+            return hits;
+        }
+
+        math::Box bounding_box() const override
+        {
+            Box result = Box::empty();
+
+            for (auto child : this->m_children)
+            {
+                Box child_box = child->bounding_box();
+                result = result.merge(child_box);
+            }
+
+            return result;
+        }
+
+    private:
+        std::vector<Primitive> m_children;
+    };
+
     Primitive load_mesh_raw(std::istream& in)
     {
         TIMED_FUNC(timerObj);
-        CLOG(INFO, "mesh") << "Loading mesh...";
+        LOG(INFO) << "Loading mesh...";
 
         unsigned n_vertices;
         in >> n_vertices;
-        CLOG(INFO, "mesh") << "Reading " << n_vertices << " vertices";
+        LOG(INFO) << "Reading " << n_vertices << " vertices";
 
         std::vector<Point3D> vertices;
 
@@ -35,7 +99,7 @@ namespace
         unsigned n_triangles;
         in >> n_triangles;
 
-        CLOG(INFO, "mesh") << "Reading " << n_triangles << " triangles";
+        LOG(INFO) << "Reading " << n_triangles << " triangles";
 
         std::vector<Primitive> triangles;
 
@@ -58,18 +122,18 @@ namespace
             triangles.push_back(primitive);
         }
 
-        CLOG(INFO, "mesh") << "Building optimized hierarchy...";
+        LOG(INFO) << "Building optimized hierarchy...";
         return accelerated_union(triangles);
     }
 
     Primitive load_mesh_bbh(std::istream& in)
     {
         TIMED_FUNC(timerObj);
-        CLOG(INFO, "mesh") << "Loading mesh...";
+        LOG(INFO) << "Loading mesh...";
 
         unsigned n_vertices;
         in >> n_vertices;
-        CLOG(INFO, "mesh") << "Reading " << n_vertices << " vertices";
+        LOG(INFO) << "Reading " << n_vertices << " vertices";
 
         std::vector<Point3D> vertices;
 
@@ -82,7 +146,7 @@ namespace
             vertices.push_back(Point3D(x, y, z));
         }
 
-        CLOG(INFO, "mesh") << "Reading hierarchy";
+        LOG(INFO) << "Reading hierarchy";
 
         std::vector<Primitive> primitives;
 
@@ -147,4 +211,14 @@ Primitive raytracer::primitives::load_mesh(std::istream& in)
         LOG(ERROR) << "Unrecognized mesh tag " << tag << std::endl;
         abort();
     }
+}
+
+Primitive raytracer::primitives::mesh(const std::vector<Primitive>& children)
+{
+    return Primitive(std::make_shared<MeshImplementation>(children));
+}
+
+Primitive raytracer::primitives::mesh(std::vector<Primitive>&& children)
+{
+    return Primitive(std::make_shared<MeshImplementation>(children));
 }
