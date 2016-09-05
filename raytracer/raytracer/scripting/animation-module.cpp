@@ -116,9 +116,10 @@ namespace
                 LissajousParameters{ z_amplitude, z_frequency, z_phase }, duration);
         }
 
-        Animation<double> cyclic_double(double from, double to, Duration duration) const
+        template<typename T>
+        Animation<T> cyclic(Animation<T> animation) const
         {
-            auto forward = animation::animate(from, to, duration / 2);
+            auto forward = animation;
             auto backward = invert(forward);
             auto forward_backward = sequence(forward, backward);
 
@@ -170,7 +171,9 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(animation_seq, animate);
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
-    BIND_AS(cyclic_double, cyclic);
+    BIND_AS(cyclic<double>, cyclic);
+    BIND_AS(cyclic<Point3D>, cyclic);
+    BIND_AS(cyclic<Angle>, cyclic);
     BIND_AS(ease_animation<double>, ease);
     BIND_AS(ease_animation<Point3D>, ease);
     BIND_AS(ease_animation<Angle>, ease);
