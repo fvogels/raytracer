@@ -438,7 +438,10 @@
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\primitives\disk\disk-tests.cpp">
+    <ClCompile Include="primitives\difference-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\primitives\difference\generated-difference-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1134,6 +1137,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\easing\stretch-easing-function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\difference-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
