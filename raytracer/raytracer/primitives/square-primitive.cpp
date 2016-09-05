@@ -26,7 +26,7 @@ namespace
                 {
                     Point3D p = ray.at(t);
 
-                    if (interval(0.0, 1.0).contains(p.x()) && interval(0.0, 1.0).contains(p.y()))
+                    if (interval(-1.0, 1.0).contains(p.x()) && interval(-1.0, 1.0).contains(p.y()))
                     {
                         hit->t = t;
                         hit->normal = Vector3D(0, 0, sign(ray.origin.z()));
@@ -59,7 +59,7 @@ namespace
                 double t = -ray.origin.z() / ray.direction.z();
                 Point3D p = ray.at(t);
 
-                if (interval(0.0, 1.0).contains(p.x()) && interval(0.0, 1.0).contains(p.y()))
+                if (interval(-1.0, 1.0).contains(p.x()) && interval(-1.0, 1.0).contains(p.y()))
                 {
                     auto hit = std::make_shared<Hit>();
 
@@ -81,7 +81,7 @@ namespace
 
         math::Box bounding_box() const override
         {
-            return Box(interval(0.0, 1.0), interval(0.0, 1.0), interval(-0.001, 0.001));
+            return Box(interval(-1.0, 1.0), interval(-1.0, 1.0), interval(-0.001, 0.001));
         }
     };
 
@@ -102,7 +102,7 @@ namespace
                 {
                     Point3D p = ray.at(t);
 
-                    if (interval(0.0, 1.0).contains(p.x()) && interval(0.0, 1.0).contains(p.z()))
+                    if (interval(-1.0, 1.0).contains(p.x()) && interval(-1.0, 1.0).contains(p.z()))
                     {
                         hit->t = t;
                         hit->normal = Vector3D(0, sign(ray.origin.y()), 0);
@@ -135,7 +135,7 @@ namespace
                 double t = -ray.origin.y() / ray.direction.y();
                 Point3D p = ray.at(t);
                 
-                if (interval(0.0, 1.0).contains(p.x()) && interval(0.0, 1.0).contains(p.z()))
+                if (interval(-1.0, 1.0).contains(p.x()) && interval(-1.0, 1.0).contains(p.z()))
                 {
                     auto hit = std::make_shared<Hit>();
 
@@ -157,7 +157,7 @@ namespace
 
         math::Box bounding_box() const override
         {
-            return Box(interval(0.0, 1.0), interval(-0.001, 0.001), interval(0.0, 1.0));
+            return Box(interval(-1.0, 1.0), interval(-0.001, 0.001), interval(-1.0, 1.0));
         }
     };    
 
@@ -178,7 +178,7 @@ namespace
                 {
                     Point3D p = ray.at(t);
 
-                    if (interval(0.0, 1.0).contains(p.y()) && interval(0.0, 1.0).contains(p.z()))
+                    if (interval(-1.0, 1.0).contains(p.y()) && interval(-1.0, 1.0).contains(p.z()))
                     {
                         hit->t = t;
                         hit->normal = Vector3D(sign(ray.origin.x()), 0, 0);
@@ -211,7 +211,7 @@ namespace
                 double t = -ray.origin.x() / ray.direction.x();
                 Point3D p = ray.at(t);
 
-                if (interval(0.0, 1.0).contains(p.y()) && interval(0.0, 1.0).contains(p.z()))
+                if (interval(-1.0, 1.0).contains(p.y()) && interval(-1.0, 1.0).contains(p.z()))
                 {
                     auto hit = std::make_shared<Hit>();
 
@@ -233,7 +233,7 @@ namespace
 
         math::Box bounding_box() const override
         {
-            return Box(interval(-0.001, 0.001), interval(0.0, 1.0), interval(0.0, 1.0));
+            return Box(interval(-0.001, 0.001), interval(-1.0, 1.0), interval(-1.0, 1.0));
         }
     };
 }
