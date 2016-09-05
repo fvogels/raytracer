@@ -4,6 +4,7 @@
 #include "primitives/cylinder-primitive.h"
 #include "primitives/disk-primitive.h"
 #include "primitives/square-primitive.h"
+#include "primitives/cube-primitive.h"
 #include "primitives/cropper-primitive.h"
 #include "primitives/cone-primitive.h"
 #include "primitives/group-primitive.h"

@@ -71,6 +71,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(triangle);
     BIND_DIRECTLY(disk);
     BIND_DIRECTLY(square);
+    BIND_DIRECTLY(cube);
     BIND_DIRECTLY(translate);
     BIND_DIRECTLY(rotate_around_x);
     BIND_DIRECTLY(rotate_around_y);

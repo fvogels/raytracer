@@ -538,6 +538,7 @@
     <ClCompile Include="pipeline\ppm-consumer.cpp" />
     <ClCompile Include="pipeline\renderer-processor.cpp" />
     <ClCompile Include="pipeline\wif-consumer.cpp" />
+    <ClCompile Include="primitives\cube-primitive.cpp" />
     <ClCompile Include="primitives\difference-primitive.cpp" />
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
@@ -744,6 +745,7 @@
     <ClInclude Include="pipeline\renderer-processor.h" />
     <ClInclude Include="pipeline\wif-consumer.h" />
     <ClInclude Include="primitives\bumpifier-primitive.h" />
+    <ClInclude Include="primitives\cube-primitive.h" />
     <ClInclude Include="primitives\difference-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
