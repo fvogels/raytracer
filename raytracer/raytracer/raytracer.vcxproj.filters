@@ -450,6 +450,9 @@
     <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="demo\design-example.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1152,6 +1155,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\cube-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demo\design-example.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -229,7 +229,7 @@ int main(int argc, char** argv)
 
     process_command_line_arguments(argc, argv);
 
-    // demos::bumpify_plane(pipeline::wif("e:/temp/output/test.wif"));
+    // demos::design_example(pipeline::wif("e:/temp/output/test.wif"));
 
     // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
