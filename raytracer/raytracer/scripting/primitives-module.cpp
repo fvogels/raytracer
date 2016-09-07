@@ -52,12 +52,22 @@ namespace
         return primitives::fast_mesh(path);
     }
 
+    Primitive coarse(Primitive primitive, double coarseness)
+    {
+        auto noise = math::functions::perlin<Vector3D, Point3D>(1, 1);
+        std::function<Vector3D(const Point3D& p)> lambda = [noise, coarseness](const Point3D& p) {
+            return noise(Point3D(p.x() * 50, p.y() * 50, p.z() * 50)) * coarseness;
+        };
+
+        return primitives::bumpify(from_lambda(lambda), primitive);
+    }
+
     Primitive bumpify2d_timed(Function<Vector3D(const Point3D&)> noise, Primitive primitive, animation::TimeStamp now)
     {
         auto perlin = animation::xyz_to_xyt(noise);
 
         return primitives::bumpify(perlin(now), primitive);
-    }    
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
@@ -93,7 +103,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(scale);
     BIND_HELPER_FUNCTION_AS(make_union, union);
     BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
-    BIND_DIRECTLY(decorate);   
+    BIND_DIRECTLY(decorate);
     BIND_HELPER_FUNCTION(mesh);
     BIND_HELPER_FUNCTION_AS(load_mesh, mesh);
     BIND_DIRECTLY(center);
@@ -104,6 +114,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(crop_along_y);
     BIND_DIRECTLY(crop_along_z);
     BIND_DIRECTLY(crop_spherical);
+    BIND_HELPER_FUNCTION(coarse);
     BIND_HELPER_FUNCTION_AS(bumpify2d_timed, bumpify);
 #   undef BIND_HELPER_FUNCTION_AS
 #   undef BIND_DIRECTLY
