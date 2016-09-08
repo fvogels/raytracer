@@ -31,8 +31,13 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        auto perlin = math::functions::perlin<Vector3D, Point3D>(4, 4546);
-        auto bumpificator = animation::xyz_to_xyt<Vector3D>(perlin)(now);
+        auto perlin = math::functions::perlin<Vector3D, Point3D>(5, 4546);
+
+        std::function<Vector3D(const Point2D& p)> lambda = [now, perlin](const Point2D& p) -> Vector3D {
+            return perlin(Point3D(0.2 * p.x(), 0.2 * p.y(), now.seconds())) * 0.1;
+        };
+        auto bumpificator = from_lambda(lambda);
+        // auto bumpificator = animation::xyz_to_xyt<Vector3D>(perlin)(now);
 
         return bumpify(bumpificator, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 0)), xz_plane()));
     }
@@ -49,7 +54,7 @@ namespace
 
     raytracer::Camera create_camera(TimeStamp)
     {
-        return raytracer::cameras::perspective(Point3D(0, 2, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        return raytracer::cameras::perspective(Point3D(0, 5, 5), Point3D(0, 0, -100), Vector3D(0, 1, 0), 1, 1);
     }
 
     Animation<std::shared_ptr<Scene>> create_scene_animation()

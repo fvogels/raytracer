@@ -20,7 +20,7 @@ using namespace imaging;
 namespace
 {
     constexpr unsigned ANTIALIASING = 2;
-    constexpr unsigned FPS = 30;
+    constexpr unsigned FPS = 10;
     constexpr unsigned HPIXELS = 500;
     constexpr unsigned VPIXELS = 500;
     constexpr unsigned N_THREADS = 4;
@@ -30,20 +30,17 @@ namespace
         using namespace raytracer::primitives;
         using namespace raytracer::materials;
 
-        auto perlin = math::functions::perlin<double, Point3D>(4, 78);
+        auto perlin = math::functions::perlin<Vector3D, Point3D>(1, 79516);
         std::function<Vector3D(const Point3D&)> bumpificator = [perlin, now](const Point3D& p) -> Vector3D {
-            Point3D q(p.x() * 10, p.y() * 10, p.z() * 10);
-            double x = perlin(q);
-            double y = perlin(q + Vector3D(100, 100, 100));
-            double z = perlin(q - Vector3D(100, 100, 100));
+            Point3D q(p.x() * 50, p.y() * 50, p.z() * 50);
 
-            return Vector3D(x, y, z) * 0.1;
+            return perlin(q) * now.seconds() / 10.0;
         };
 
-        auto angle_animation = animation::animate(0_degrees, 90_degrees, 1_s);
+        // auto angle_animation = animation::animate(0_degrees, 90_degrees, 1_s);
+        auto material = uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5));
 
-        return bumpify(from_lambda(bumpificator), decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 1.5)),
-            rotate_around_y(angle_animation(now), sphere())));
+        return bumpify(from_lambda(bumpificator), decorate(material, sphere()));
     }
 
     std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
@@ -81,7 +78,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, loopers::smart_looper(N_THREADS));
+        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, raytracer::samplers::multi_jittered(ANTIALIASING), ray_tracer, loopers::smart_looper(N_THREADS));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(FPS)
