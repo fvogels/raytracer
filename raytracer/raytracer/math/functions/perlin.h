@@ -13,7 +13,7 @@ namespace math
             Noise2D perlin2d(unsigned, unsigned = 1);
             Noise3D perlin3d(unsigned, unsigned = 1);
 
-            Function<Vector3D(const Point3D&)> perlin_vector3d(unsigned, unsigned = 1);
+            Function<Vector3D(const Point3D&)> perlin_vector3d(unsigned seed, unsigned octaves = 1);
         }
 
         template<typename R, typename T>
@@ -22,19 +22,19 @@ namespace math
         template<>
         inline math::Function<double(const double&)> perlin<double, double>(unsigned octaves, unsigned seed)
         {
-            return _private_::perlin1d(octaves, seed);
+            return _private_::perlin1d(seed, octaves);
         }
 
         template<>
         inline math::Function<double(const Point2D&)> perlin<double, Point2D>(unsigned octaves, unsigned seed)
         {
-            return _private_::perlin2d(octaves, seed);
+            return _private_::perlin2d(seed, octaves);
         }
 
         template<>
         inline math::Function<double(const Point3D&)> perlin<double, Point3D>(unsigned octaves, unsigned seed)
         {
-            return _private_::perlin3d(octaves, seed);
+            return _private_::perlin3d(seed, octaves);
         }
 
         template<>

@@ -1,8 +1,10 @@
 #define _USE_MATH_DEFINES
 #include "math/functions/perlin.h"
 #include "math/vector.h"
-#include "math/functions/random-function.h"
-#include "math/functions/easing-functions.h"
+#include "math/functions.h"
+#include "math/coordinate-systems.h"
+#include "data-structures/position.h"
+#include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
 #include <limits>
@@ -14,6 +16,9 @@ using namespace math;
 
 namespace
 {
+    /// <summary>
+    /// Converts [-1, 1] to [0, 1].
+    /// </summary>
     constexpr double normalize(double t)
     {
         return (t + 1) / 2;
@@ -116,8 +121,8 @@ namespace
     class PerlinNoise2D : public FunctionBody<double, const Point2D&>
     {
     public:
-        PerlinNoise2D(Function<unsigned(unsigned)> rng)
-            : m_rng(rng)
+        PerlinNoise2D(Function<Vector2D(const Position&)> random)
+            : m_random(random)
         {
             // NOP
         }
@@ -127,8 +132,17 @@ namespace
             double fx = floor(p.x());
             double fy = floor(p.y());
 
-            std::array<double, 2> coordinates = { p.x() - fx, p.y() - fy };
+            //double rx = p.x() - fx;
+            //double ry = p.y() - fy;
 
+            //double z00 = z<0, 0>(p);
+            //double z01 = z<0, 1>(p);
+            //double z10 = z<1, 0>(p);
+            //double z11 = z<1, 1>(p);
+
+            //return normalize((z00 + z01 + z10 + z11) / 4);
+
+            std::array<double, 2> coordinates = { p.x() - fx, p.y() - fy };
             HyperCube<2> hc2{
                 HyperCube<1> { Node{ z<0,0>(p) }, Node{ z<1,0>(p) } },
                 HyperCube<1> { Node{ z<0,1>(p) }, Node{ z<1,1>(p) } },
@@ -138,13 +152,6 @@ namespace
         }
 
     private:
-        Vector2D gradient_at(unsigned x, unsigned y) const
-        {
-            auto t = double(uint16_t(m_rng(x * 31 + 97 * y))) / std::numeric_limits<uint16_t>::max();
-
-            return Vector2D::polar(1.0, t * 360_degrees);
-        }
-
         template<unsigned X, unsigned Y>
         double z(Point2D p) const
         {
@@ -155,19 +162,19 @@ namespace
             unsigned kx = unsigned(fx);
             unsigned ky = unsigned(fy);
 
-            Vector2D v = gradient_at(kx, ky);
+            Vector2D v = m_random(Position(kx, ky));
 
             return (p - fp).dot(v);
         }
 
-        Function<unsigned(unsigned)> m_rng;
+        Function<Vector2D(const Position&)> m_random;
     };
 
     class PerlinNoise3D : public FunctionBody<double, const Point3D&>
     {
     public:
-        PerlinNoise3D(Function<unsigned(unsigned)> rng)
-            : m_rng(rng)
+        PerlinNoise3D(Function<Vector3D(const Position3D&)> random)
+            : m_random(random)
         {
             // NOP
         }
@@ -192,19 +199,14 @@ namespace
                 }
             };
 
-            return normalize(interpolate(hc, coordinates));
+            double result = normalize(interpolate(hc, coordinates));
+
+            assert(interval(0.0, 1.0).contains(result));
+
+            return result;
         }
 
     private:
-        Vector3D gradient_at(unsigned x, unsigned y, unsigned z) const
-        {
-            unsigned i = x * 31 + 97 * y + 113 * z;
-            auto t1 = double(uint16_t(m_rng(i))) / std::numeric_limits<uint16_t>::max();
-            auto t2 = double(uint16_t(m_rng(i + 1))) / std::numeric_limits<uint16_t>::max();
-
-            return Vector3D::spherical(1, t1 * 360_degrees, t2 * 180_degrees);
-        }
-
         template<unsigned X, unsigned Y, unsigned Z>
         Node z(Point3D p) const
         {
@@ -217,12 +219,12 @@ namespace
             unsigned ky = unsigned(fy);
             unsigned kz = unsigned(fz);
 
-            Vector3D v = gradient_at(kx, ky, kz);
+            Vector3D v = m_random(Position3D(kx, ky, kz));
 
             return Node{ (p - fp).dot(v) };
         }
 
-        Function<unsigned(unsigned)> m_rng;
+        Function<Vector3D(const Position3D&)> m_random;
     };
 
     //class PerlinNoise4D : public FunctionBody<double, const Point3D&>
@@ -295,7 +297,7 @@ Noise1D math::functions::_private_::perlin1d(unsigned seed, unsigned octaves)
 {
     auto noise2d = perlin2d(seed, octaves);
 
-    std::function<double(const double&)> lambda = [=](const double& t) {
+    std::function<double(const double&)> lambda = [noise2d](const double& t) {
         return noise2d(Point2D(t, 0));
     };
 
@@ -304,28 +306,44 @@ Noise1D math::functions::_private_::perlin1d(unsigned seed, unsigned octaves)
 
 Noise2D math::functions::_private_::perlin2d(unsigned seed, unsigned octaves)
 {
-    auto perlin = Noise2D(std::make_shared<PerlinNoise2D>(random_function(seed)));
-    auto total = perlin;
-
-    for (unsigned i = 2; i <= octaves; ++i)
+    if (octaves == 0)
     {
-        total = total + (scale2d(i) >> perlin) / double(i);
+        LOG(ERROR) << "At least one octave is required";
+        abort();
     }
+    else
+    {
+        auto perlin = Noise2D(std::make_shared<PerlinNoise2D>(math::functions::random::position_to_vector2d(seed)));
+        Noise2D total = constant<double, const Point2D&>(0);
+        double sum_weights = 0;
 
-    return total;
+        for (unsigned i = 0; i < octaves; ++i)
+        {
+            double weight = pow(2, -double(i));
+
+            total = total + (scale2d(i + 1) >> perlin) * weight;
+            sum_weights += weight;
+        }
+
+        return total / sum_weights;
+    }
 }
 
 Noise3D math::functions::_private_::perlin3d(unsigned seed, unsigned octaves)
 {
-    auto perlin = Noise3D(std::make_shared<PerlinNoise3D>(random_function(seed)));
-    auto total = perlin;
+    auto perlin = Noise3D(std::make_shared<PerlinNoise3D>(math::functions::random::position3d_to_vector3d(seed)));
+    Noise3D total = constant<double, const Point3D&>(0);
+    double sum_weights = 0;
 
-    for (unsigned i = 2; i <= octaves; ++i)
+    for (unsigned i = 0; i < octaves; ++i)
     {
-        total = total + (scale3d(i) >> perlin) / double(i);
+        double weight = pow(2, -double(i));
+
+        total = total + (scale3d(i + 1) >> perlin) * weight;
+        sum_weights += weight;
     }
 
-    return total;
+    return total / sum_weights;
 }
 
 Function<Vector3D(const Point3D&)> math::functions::_private_::perlin_vector3d(unsigned seed, unsigned octaves)
@@ -333,11 +351,10 @@ Function<Vector3D(const Point3D&)> math::functions::_private_::perlin_vector3d(u
     auto perlin = math::functions::_private_::perlin3d(seed, octaves);
 
     std::function<Vector3D(const Point3D&)> lambda = [perlin](const Point3D& p) -> Vector3D {
-        double x = perlin(p);
-        double y = perlin(p + Vector3D(1000, 1000, 1000));
-        double z = perlin(p - Vector3D(1000, 1000, 1000));
+        auto azimuth = Angle::degrees(perlin(p) * 360 * 5);
+        auto elevation = Angle::degrees(perlin(p + Vector3D(543, 3294589, 489)) * 180 - 90);
 
-        return Vector3D(x, y, z) * 0.1;
+        return Vector3D::spherical(1, azimuth, elevation);
     };
 
     return from_lambda(lambda);
