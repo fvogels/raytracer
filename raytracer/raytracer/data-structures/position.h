@@ -24,6 +24,14 @@ struct Position final
     }
 };
 
+struct Position3D final
+{
+    unsigned x, y, z;
+
+    Position3D(unsigned x, unsigned y, unsigned z)
+        : x(x), y(y), z(z) { }
+};
+
 inline std::ostream& operator <<(std::ostream& out, const Position& p)
 {
     return out << "(" << p.x << "," << p.y << ")";
