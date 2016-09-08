@@ -55,6 +55,7 @@ namespace
     Primitive coarse(Primitive primitive, double coarseness)
     {
         auto noise = math::functions::perlin<Vector3D, Point3D>(1, 1);
+
         std::function<Vector3D(const Point3D& p)> lambda = [noise, coarseness](const Point3D& p) {
             return noise(Point3D(p.x() * 50, p.y() * 50, p.z() * 50)) * coarseness;
         };
