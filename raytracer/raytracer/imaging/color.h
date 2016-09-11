@@ -5,22 +5,69 @@
 
 namespace imaging
 {
+    /// <summary>
+    /// Color type.
+    /// </summary>
     struct Color final
     {
-        double r, g, b;
+        /// <summary>
+        /// Red component.
+        /// </summary>
+        double r;
+        
+        /// <summary>
+        /// Green component.
+        /// </summary>
+        double g;
+            
+        /// <summary>
+        /// Blue component.
+        /// </summary>
+        double b;
 
+        /// <summary>
+        /// Default constructor. Initialized the color to black.
+        /// </summary>
         constexpr Color() : Color(0, 0, 0) { }
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         constexpr Color(double r, double g, double b)
             : r(r), g(g), b(b) { }
 
+        /// <summary>
+        /// Ensures all color components (r, g, b) are within the [0, 1] interval.
+        /// If a color component is less than zero, it is set to zero.
+        /// If a color component is greater than one, it is set to one.
+        /// </summary>
         void clamp();
+
+        /// <summary>
+        /// Returns a new color which is equal to this color, except that
+        /// all color components moved to the [0, 1] interval. See clamp.
+        /// </summary>
         Color clamped() const;
 
-        void quantize(unsigned);
-        Color quantized(unsigned) const;
+        /// <summary>
+        /// Pretends there are only <paramref name="n" /> shades
+        /// and overwrites this color with the closest shade.
+        /// </summary>
+        void quantize(unsigned n);
 
+        /// <summary>
+        /// Same as quantize, but instead of overwriting this color, returns the result as a new color.
+        /// </summary>
+        Color quantized(unsigned n) const;
+
+        /// <summary>
+        /// Inverts this color.
+        /// </summary>
         void invert();
+
+        /// <summary>
+        /// Returns the inversion of this color.
+        /// </summary>
         Color inverted() const;
     };
 
