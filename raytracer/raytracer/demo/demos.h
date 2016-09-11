@@ -6,3 +6,4 @@
 #include "demo/split-depth-demo.h"
 #include "demo/sampler-demo.h"
 #include "demo/design-example.h"
+#include "demo/terrain-demo.h"
