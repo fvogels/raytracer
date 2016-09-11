@@ -51,111 +51,6 @@ using namespace imaging;
 using namespace animation;
 
 
-Primitive load_mesh(const std::string& path)
-{
-    std::ifstream in(path);
-    return raytracer::primitives::fast_mesh_bin(in);
-}
-
-Lazy<raytracer::Primitive> bunny([]() {
-    return load_mesh("e:/temp/bunny.bmesh");
-});
-Lazy<raytracer::Primitive> buddha([]() {
-    return load_mesh("e:/temp/buddha.bmesh");
-});
-Lazy<raytracer::Primitive> dragon([]() {
-    return load_mesh("e:/temp/dragon.bmesh");
-});
-Lazy<raytracer::Primitive> statuette([]() {
-    return load_mesh("e:/temp/statuette.bmesh");
-});
-Lazy<raytracer::Primitive> lucy([]() {
-    return load_mesh("e:/temp/lucy.bmesh");
-});
-
-raytracer::Primitive create_root(TimeStamp now)
-{
-    COULD_BE_UNUSED(now);
-
-    using namespace raytracer::primitives;
-    using namespace raytracer::materials;    
-
-    std::vector<Primitive> primitives;
-
-    primitives.push_back(decorate(scale(2, 2, 2, worley3d(5, 1.0, 1.0)), sphere()));
-
-    return make_union(primitives);
-}
-
-std::vector<raytracer::LightSource> create_light_sources(TimeStamp now)
-{
-    COULD_BE_UNUSED(now);
-
-    using namespace raytracer::lights;
-
-    std::vector<LightSource> light_sources;
-
-    Point3D light_position(0, 5, 5);
-    light_sources.push_back(omnidirectional(light_position, colors::white()));
-
-    /* std::function<Color(Angle, Angle)> lambda = [=](Angle x, Angle y) -> Color {
-         double a = x.degrees() / 12;
-         double b = y.degrees() / 12;
-
-         if (a - round(a) < 0.1 || b - round(b) < 0.1)
-         {
-             return colors::black();
-         }
-         else
-         {
-             return colors::white();
-         }
-     };
-
-     light_sources.push_back(anisotropic(light_position, Point3D(0, 0, 0), Vector3D(1, 1, 1).normalized(), from_lambda(lambda)));
- */
-    return light_sources;
-}
-
-raytracer::Camera create_camera(TimeStamp now)
-{
-    COULD_BE_UNUSED(now);
-
-    using namespace math::functions::easing;
-
-    Point3D camera_position = Point3D(0, 0, 5);
-    auto camera = raytracer::cameras::perspective(camera_position, Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-
-    return camera;
-}
-
-Animation<std::shared_ptr<Scene>> create_scene_animation()
-{
-    std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [](TimeStamp now) -> std::shared_ptr<Scene> {
-        auto camera = create_camera(now);
-        auto root = create_root(now);
-        auto light_sources = create_light_sources(now);
-        auto scene = std::make_shared<Scene>(camera, root, light_sources);
-
-        return scene;
-    };
-
-    return make_animation<std::shared_ptr<Scene>>(from_lambda<std::shared_ptr<Scene>, TimeStamp>(lambda), Duration::from_seconds(1));
-}
-
-void render()
-{
-    using namespace raytracer;
-
-    // render_animation(create_scene_animation(), 1);
-    const std::string path = "e:/temp/output/test.wif";
-
-    pipeline::start(create_scene_animation()) >>
-        pipeline::animation(1) >>
-        pipeline::renderer(renderers::standard(BITMAP_SIZE, BITMAP_SIZE, samplers::stratified_fixed(SAMPLES, SAMPLES), raytracers::v6(), loopers::multithreaded(4))) >>
-        pipeline::wif(path);
-}
-
 namespace
 {
     // Note: these are not used anywhere for now
@@ -225,13 +120,17 @@ void process_command_line_arguments(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
+    const std::string path = "e:/temp/output/test2.wif";
     logging::configure();
 
-    process_command_line_arguments(argc, argv);
+    // process_command_line_arguments(argc, argv);
 
-    // demos::design_example(pipeline::wif("e:/temp/output/test.wif"));
+    // demos::bumpify_sphere(pipeline::wif(path)); beep();
+    // demos::bumpify_plane(pipeline::wif(path)); beep();
+    // demos::marble(pipeline::wif(path)); beep();
+    // demos::terrain(pipeline::wif(path)); beep();
+    demos::mesh(pipeline::wif(path)); beep();
 
-    // render();
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 }
 
