@@ -18,3 +18,4 @@
 #include "primitives/mesh-primitive.h"
 #include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
+#include "primitives/terrain-primitive.h"
