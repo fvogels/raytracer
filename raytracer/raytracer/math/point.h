@@ -131,6 +131,18 @@ namespace math
             return Vector<N>(std::move(result));
         }
 
+        Point<N> operator *(double constant) const
+        {
+            std::array<double, N> result;
+
+            for (unsigned i = 0; i != N; ++i)
+            {
+                result[i] = m_coords[i] * constant;
+            }
+
+            return Point<N>(std::move(result));
+        }
+
         Point<N>& operator +=(const Vector<N>& p)
         {
             return *this = *this + p;
@@ -166,6 +178,12 @@ namespace math
     Point<N> operator +(const Vector<N>& v, const Point<N> p)
     {
         return p + v;
+    }
+
+    template<unsigned N>
+    Point<N> operator *(double constant, const Point<N>& p)
+    {
+        return p * constant;
     }
 
     namespace _private_
