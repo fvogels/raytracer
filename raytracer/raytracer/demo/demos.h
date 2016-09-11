@@ -7,3 +7,4 @@
 #include "demo/sampler-demo.h"
 #include "demo/design-example.h"
 #include "demo/terrain-demo.h"
+#include "demo/mesh-demo.h"

@@ -483,6 +483,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="demo\design-example.cpp" />
+    <ClCompile Include="demo\mesh-demo.cpp" />
     <ClCompile Include="demo\terrain-demo.cpp" />
     <ClCompile Include="loopers\multithreaded-looper.cpp" />
     <ClCompile Include="loopers\smart-looper.cpp" />
@@ -681,6 +682,7 @@
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-processor.h" />
     <ClInclude Include="demo\design-example.h" />
+    <ClInclude Include="demo\mesh-demo.h" />
     <ClInclude Include="demo\terrain-demo.h" />
     <ClInclude Include="loopers\loopers.h" />
     <ClInclude Include="loopers\multithreaded-looper.h" />
