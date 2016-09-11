@@ -1,12 +1,13 @@
 #pragma once
 
 #include "animation/animation.h"
+#include "math/interval.h"
 
 
 namespace animation
 {
     template<typename T>
-    Animation<T> animate(const math::Interval<T> animation_interval, animation::Duration duration)
+    Animation<T> animate(const math::Interval<T>& animation_interval, animation::Duration duration)
     {
         auto double_animation = basic(0, 1, duration);
 
