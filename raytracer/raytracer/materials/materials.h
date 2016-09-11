@@ -4,3 +4,4 @@
 #include "materials/texture-material.h"
 #include "materials/wood-material.h"
 #include "materials/worley-material.h"
+#include "materials/material-transformer.h"
