@@ -14,6 +14,7 @@
 #include "primitives/difference-primitive.h"
 #include "primitives/transformer-primitive.h"
 #include "primitives/triangle-primitive.h"
+#include "primitives/smooth-triangle-primitive.h"
 #include "primitives/bounding-box-accelerator-primitive.h"
 #include "primitives/mesh-primitive.h"
 #include "primitives/fast-mesh-primitive.h"
