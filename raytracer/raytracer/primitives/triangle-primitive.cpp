@@ -69,8 +69,8 @@ namespace
                         bool p_is_left_of_ca = CAxCP.dot(normal) > 0;
 
                         double gamma = area_ABP / area_ABC;
-                        double beta = area_BCP / area_ABC;
-                        double alpha = 1 - beta - gamma;
+                        double alpha = area_BCP / area_ABC;
+                        double beta = 1 - alpha - gamma;
 
                         if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
                         {
