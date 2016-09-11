@@ -22,73 +22,80 @@ namespace
 
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
-            Vector3D normal = ray.direction.dot(m_normal) > 0 ? -m_normal : m_normal;
-            double denom = m_normal.dot(ray.direction);
-
-            if (denom == approx(0.0))
+            if (ray.direction.dot(m_normal) > 0)
             {
                 return false;
             }
             else
             {
-                double numer = -(ray.origin - m_a).dot(normal);
-                double t = numer / denom;
+                const Vector3D& normal = m_normal;
+                double denom = normal.dot(ray.direction);
 
-                if (0 < t && t < hit->t)
+                if (denom == approx(0.0))
                 {
-                    const Point3D& A = m_a;
-                    const Point3D& B = m_b;
-                    const Point3D& C = m_c;
-                    Point3D P = ray.at(t);
+                    return false;
+                }
+                else
+                {
+                    double numer = (m_a - ray.origin).dot(normal);
+                    double t = numer / denom;
 
-                    Vector3D AB = B - A;
-                    Vector3D AC = C - A;
-                    Vector3D AP = P - A;
-                    Vector3D BC = C - B;
-                    Vector3D BP = P - B;
-                    Vector3D CA = A - C;
-                    Vector3D CP = P - C;
-
-                    Vector3D ABxAC = AB.cross(AC);
-                    Vector3D ABxAP = AB.cross(AP);
-                    Vector3D CAxCP = CA.cross(CP);
-                    Vector3D BCxBP = BC.cross(BP);
-
-                    double area_ABC = ABxAC.norm() / 2;
-                    double area_ABP = ABxAP.norm() / 2;
-                    double area_BCP = BCxBP.norm() / 2;
-
-                    bool p_is_left_of_ab = ABxAP.dot(normal) > 0;
-                    bool p_is_left_of_bc = BCxBP.dot(normal) > 0;
-                    bool p_is_left_of_ca = CAxCP.dot(normal) > 0;
-
-                    double gamma = area_ABP / area_ABC;
-                    double beta = area_BCP / area_ABC;
-                    double alpha = 1 - beta - gamma;
-
-                    if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
+                    if (0 < t && t < hit->t)
                     {
-                        assert(alpha + beta + gamma == approx(1.0));
-                        assert(0 <= alpha);
-                        assert(0 <= beta);
-                        assert(0 <= gamma);
+                        const Point3D& A = m_a;
+                        const Point3D& B = m_b;
+                        const Point3D& C = m_c;
+                        Point3D P = ray.at(t);
 
-                        hit->t = t;
-                        hit->position = P;
-                        hit->local_position.xyz = P;
-                        hit->local_position.uv = Point2D(alpha, beta);
-                        hit->normal = normal;
+                        Vector3D AB = B - A;
+                        Vector3D AC = C - A;
+                        Vector3D AP = P - A;
+                        Vector3D BC = C - B;
+                        Vector3D BP = P - B;
+                        Vector3D CA = A - C;
+                        Vector3D CP = P - C;
 
-                        return true;
+                        Vector3D ABxAC = AB.cross(AC);
+                        Vector3D ABxAP = AB.cross(AP);
+                        Vector3D CAxCP = CA.cross(CP);
+                        Vector3D BCxBP = BC.cross(BP);
+
+                        double area_ABC = ABxAC.norm() / 2;
+                        double area_ABP = ABxAP.norm() / 2;
+                        double area_BCP = BCxBP.norm() / 2;
+
+                        bool p_is_left_of_ab = ABxAP.dot(normal) > 0;
+                        bool p_is_left_of_bc = BCxBP.dot(normal) > 0;
+                        bool p_is_left_of_ca = CAxCP.dot(normal) > 0;
+
+                        double gamma = area_ABP / area_ABC;
+                        double beta = area_BCP / area_ABC;
+                        double alpha = 1 - beta - gamma;
+
+                        if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
+                        {
+                            assert(alpha + beta + gamma == approx(1.0));
+                            assert(0 <= alpha);
+                            assert(0 <= beta);
+                            assert(0 <= gamma);
+
+                            hit->t = t;
+                            hit->position = P;
+                            hit->local_position.xyz = P;
+                            hit->local_position.uv = Point2D(alpha, beta);
+                            hit->normal = normal;
+
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         return false;
                     }
-                }
-                else
-                {
-                    return false;
                 }
             }
         }
