@@ -3,6 +3,7 @@
 #include "math/rectangle2d.h"
 #include <functional>
 #include <memory>
+#include <vector>
 
 
 namespace raytracer
@@ -14,11 +15,16 @@ namespace raytracer
             class SamplerImplementation
             {
             public:
+                std::vector<math::Point2D> sample(const math::Rectangle2D&);
+
                 virtual void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const = 0;
             };
         }        
     }
     
+    /// <summary>
+    /// Wrapper class for samplers. Access sampler members using -&gt;.
+    /// </summary>
     class Sampler
     {
     public:

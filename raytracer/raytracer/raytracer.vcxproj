@@ -606,6 +606,7 @@
     <ClCompile Include="renderers\renderer.cpp" />
     <ClCompile Include="renderers\split-depth-renderer.cpp" />
     <ClCompile Include="renderers\standard-renderer.cpp" />
+    <ClCompile Include="samplers\sampler.cpp" />
     <ClCompile Include="samplers\multi-jittered-sampler.cpp" />
     <ClCompile Include="samplers\nrooks-sampler.cpp" />
     <ClCompile Include="samplers\stratified-fixed-sampler.cpp" />
