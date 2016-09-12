@@ -22,7 +22,7 @@ namespace
         }
 
     protected:
-        raytracer::Primitive create_root(TimeStamp now)
+        raytracer::Primitive create_root(TimeStamp now) override
         {
             using namespace raytracer::primitives;
             using namespace raytracer::materials;
@@ -33,7 +33,7 @@ namespace
             return decorate(material, rotate_around_y(angle_animation(now), rotate_around_x(-90_degrees, center(Point3D(0, 0, 0), m_mesh))));
         }
 
-        std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
+        std::vector<raytracer::LightSource> create_light_sources(TimeStamp) override
         {
             using namespace raytracer::lights;
 
@@ -43,7 +43,7 @@ namespace
             return light_sources;
         }
 
-        raytracer::Camera create_camera(TimeStamp)
+        raytracer::Camera create_camera(TimeStamp) override
         {
             return raytracer::cameras::perspective(Point3D(0, 0, 3), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         }
