@@ -102,9 +102,15 @@ Primitive raytracer::primitives::terrain()
     TIMED_FUNC(timerObj);
     LOG(INFO) << "Building terrain...";
 
-    auto perlin = math::functions::perlin<double, Point2D>(5, 46873);
+    auto noise1 = math::functions::perlin<double, Point2D>(1, 46874);
+    auto noise2 = math::functions::perlin<double, Point2D>(1, 761211);
+    auto noise3 = math::functions::perlin<double, Point2D>(1, 67542);
 
-    PerlinTerrainGenerator generator(perlin, 100, 100, 0.12, 0.12);
+    std::function<double(const Point2D&)> lambda = [=](const Point2D& p) -> double {
+        return noise1(p * 0.25) * 5 + noise2(p) * 0.5 + noise3(p * 3.1) * 0.05;
+    };
+
+    PerlinTerrainGenerator generator(from_lambda(lambda), 500, 500, 0.05, 0.05);
 
     return generator.result();
 }
