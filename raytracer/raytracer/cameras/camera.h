@@ -26,13 +26,15 @@ namespace raytracer
                 /// <summary>
                 /// Does exactly the same as enumerate_rays, but returns the produces rays in the form of a vector.
                 /// It is slightly less efficient, as memory needs to be allocated and freed.
+                /// You should only override one of both overloads of this method.
                 /// </summary>
-                virtual std::vector<math::Ray> create_rays(const math::Point2D& p) const;
+                virtual std::vector<math::Ray> enumerate_rays(const math::Point2D& p) const;
 
                 /// <summary>
                 /// Enumerates all rays to be cast from position <paramref name="p" />.
                 /// Enumeration happens using a callback: the given function <paramref name="callback" /> gets
                 /// called for each ray. This removes the need for heap allocation and should be more efficient.
+                /// You should only override one of both overloads of this method.
                 /// </summary>
                 /// <param name="p">
                 /// Point in [0,1]x[0,1] subspace.
@@ -40,7 +42,7 @@ namespace raytracer
                 /// <param name="callback">
                 /// Function that will get called for each ray.
                 /// </param>
-                virtual void enumerate_rays(const math::Point2D& p, std::function<void(const math::Ray&)> callback) const = 0;
+                virtual void enumerate_rays(const math::Point2D& p, std::function<void(const math::Ray&)> callback) const;
             };
         }        
     }

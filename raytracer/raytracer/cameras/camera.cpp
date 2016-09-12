@@ -43,14 +43,30 @@ Matrix4x4 raytracer::cameras::_private_::create_transformation(const Point3D& ey
     return transformation;
 }
 
-std::vector<Ray> raytracer::cameras::_private_::CameraImplementation::create_rays(const math::Point2D& p) const
+std::vector<Ray> raytracer::cameras::_private_::CameraImplementation::enumerate_rays(const math::Point2D& p) const
 {
     std::vector<Ray> rays;
 
+    // Call other overload. The given function is called once for each ray.
     this->enumerate_rays(p, [&rays](const Ray& ray)
     {
+        // Add each ray to vector
         rays.push_back(ray);
     });
 
+    // Return all rays
     return rays;
+}
+
+void raytracer::cameras::_private_::CameraImplementation::enumerate_rays(const math::Point2D& p, std::function<void(const math::Ray&)> callback) const
+{
+    // Call other overload
+    auto rays = enumerate_rays(p);
+
+    // Iterate over rays
+    for (auto& ray : rays)
+    {
+        // Pass each ray to callback
+        callback(ray);
+    }
 }
