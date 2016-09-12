@@ -1,5 +1,5 @@
-#include "demo/fisheye-demo.h"
-#include "demo/demo.h"
+#include "demos/fisheye-demo.h"
+#include "demos/demo.h"
 #include "loopers/loopers.h"
 #include "easylogging++.h"
 

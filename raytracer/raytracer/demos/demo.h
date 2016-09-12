@@ -1,6 +1,6 @@
 #pragma once
 
-#include "demo/fisheye-demo.h"
+#include "demos/fisheye-demo.h"
 #include "materials/materials.h"
 #include "cameras/cameras.h"
 #include "raytracers/ray-tracers.h"

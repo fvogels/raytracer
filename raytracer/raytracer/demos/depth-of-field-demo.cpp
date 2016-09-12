@@ -1,5 +1,5 @@
-#include "demo/depth-of-field-demo.h"
-#include "demo/demo.h"
+#include "demos/depth-of-field-demo.h"
+#include "demos/demo.h"
 #include "loopers/loopers.h"
 #include "easylogging++.h"
 

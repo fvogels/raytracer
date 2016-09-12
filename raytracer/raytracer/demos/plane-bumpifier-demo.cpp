@@ -1,6 +1,6 @@
-#include "demo/plane-bumpifier-demo.h"
+#include "demos/plane-bumpifier-demo.h"
 #include "math/functions.h"
-#include "demo/demo.h"
+#include "demos/demo.h"
 
 using namespace raytracer;
 using namespace animation;

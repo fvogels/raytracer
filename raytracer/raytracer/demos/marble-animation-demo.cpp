@@ -1,5 +1,5 @@
-#include "demo/marble-animation-demo.h"
-#include "demo/demo.h"
+#include "demos/marble-animation-demo.h"
+#include "demos/demo.h"
 #include "easylogging++.h"
 
 using namespace raytracer;

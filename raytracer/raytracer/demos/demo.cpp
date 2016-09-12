@@ -1,4 +1,4 @@
-#include "demo/demo.h"
+#include "demos/demo.h"
 #include "loopers/loopers.h"
 
 using namespace raytracer;

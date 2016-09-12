@@ -1,5 +1,5 @@
-#include "demo/mesh-demo.h"
-#include "demo/demo.h"
+#include "demos/mesh-demo.h"
+#include "demos/demo.h"
 #include "util/lazy.h"
 #include "easylogging++.h"
 

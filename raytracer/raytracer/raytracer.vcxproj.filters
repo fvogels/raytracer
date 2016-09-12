@@ -126,15 +126,6 @@
     <ClCompile Include="materials\wood-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo\marble-animation-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\depth-of-field-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\fisheye-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imaging\bmp-format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -172,18 +163,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\bitmap-function.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\sphere-bumpifier-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\plane-bumpifier-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\split-depth-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\sampler-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="materials\pattern-materials.cpp">
@@ -450,22 +429,46 @@
     <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo\design-example.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\terrain-primitive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\terrain-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo\mesh-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\smooth-triangle-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo\demo.cpp">
+    <ClCompile Include="demos\demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\depth-of-field-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\design-example.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\fisheye-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\marble-animation-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\mesh-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\plane-bumpifier-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\sampler-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\sphere-bumpifier-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\split-depth-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demos\terrain-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="instrumentation\counters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -641,9 +644,6 @@
     <ClInclude Include="imaging\ppm-format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demo\demos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="data-structures\array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -657,15 +657,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\marble-animation-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\depth-of-field-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\fisheye-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data-structures\position.h">
@@ -738,18 +729,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\bitmap-function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\sphere-bumpifier-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\plane-bumpifier-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\split-depth-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\sampler-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chaiscript\dispatchkit\any.hpp">
@@ -1172,22 +1151,49 @@
     <ClInclude Include="primitives\cube-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demo\design-example.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\terrain-primitive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\terrain-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demo\mesh-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\smooth-triangle-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demo\demo.h">
+    <ClInclude Include="demos\demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\demos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\depth-of-field-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\design-example.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\fisheye-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\marble-animation-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\mesh-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\plane-bumpifier-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\sampler-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\sphere-bumpifier-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\split-depth-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\terrain-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instrumentation\counters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
-#include "demo/split-depth-demo.h"
-#include "demo/demo.h"
+#include "demos/split-depth-demo.h"
+#include "demos/demo.h"
 #include "loopers/loopers.h"
 
 using namespace raytracer;

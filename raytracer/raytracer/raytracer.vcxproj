@@ -482,10 +482,11 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="demo\demo.cpp" />
-    <ClCompile Include="demo\design-example.cpp" />
-    <ClCompile Include="demo\mesh-demo.cpp" />
-    <ClCompile Include="demo\terrain-demo.cpp" />
+    <ClCompile Include="demos\demo.cpp" />
+    <ClCompile Include="demos\design-example.cpp" />
+    <ClCompile Include="demos\mesh-demo.cpp" />
+    <ClCompile Include="demos\terrain-demo.cpp" />
+    <ClCompile Include="instrumentation\counters.cpp" />
     <ClCompile Include="loopers\multithreaded-looper.cpp" />
     <ClCompile Include="loopers\smart-looper.cpp" />
     <ClCompile Include="math\angle.cpp" />
@@ -494,10 +495,10 @@
     <ClCompile Include="animation\duration.cpp" />
     <ClCompile Include="animation\time-stamp.cpp" />
     <ClCompile Include="command-line-processor.cpp" />
-    <ClCompile Include="demo\plane-bumpifier-demo.cpp" />
-    <ClCompile Include="demo\sampler-demo.cpp" />
-    <ClCompile Include="demo\sphere-bumpifier-demo.cpp" />
-    <ClCompile Include="demo\split-depth-demo.cpp" />
+    <ClCompile Include="demos\plane-bumpifier-demo.cpp" />
+    <ClCompile Include="demos\sampler-demo.cpp" />
+    <ClCompile Include="demos\sphere-bumpifier-demo.cpp" />
+    <ClCompile Include="demos\split-depth-demo.cpp" />
     <ClCompile Include="imaging\bitmap-function.cpp" />
     <ClCompile Include="lights\anisotropic-light.cpp" />
     <ClCompile Include="app.cpp" />
@@ -507,9 +508,9 @@
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
-    <ClCompile Include="demo\depth-of-field-demo.cpp" />
-    <ClCompile Include="demo\fisheye-demo.cpp" />
-    <ClCompile Include="demo\marble-animation-demo.cpp" />
+    <ClCompile Include="demos\depth-of-field-demo.cpp" />
+    <ClCompile Include="demos\fisheye-demo.cpp" />
+    <ClCompile Include="demos\marble-animation-demo.cpp" />
     <ClCompile Include="materials\composition-material.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\material-transformer.cpp" />
@@ -683,18 +684,19 @@
     <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-processor.h" />
-    <ClInclude Include="demo\demo.h" />
-    <ClInclude Include="demo\design-example.h" />
-    <ClInclude Include="demo\mesh-demo.h" />
-    <ClInclude Include="demo\terrain-demo.h" />
+    <ClInclude Include="demos\demo.h" />
+    <ClInclude Include="demos\design-example.h" />
+    <ClInclude Include="demos\mesh-demo.h" />
+    <ClInclude Include="demos\terrain-demo.h" />
+    <ClInclude Include="instrumentation\counters.h" />
     <ClInclude Include="loopers\loopers.h" />
     <ClInclude Include="loopers\multithreaded-looper.h" />
     <ClInclude Include="loopers\smart-looper.h" />
     <ClInclude Include="materials\composition-material.h" />
-    <ClInclude Include="demo\plane-bumpifier-demo.h" />
-    <ClInclude Include="demo\sampler-demo.h" />
-    <ClInclude Include="demo\sphere-bumpifier-demo.h" />
-    <ClInclude Include="demo\split-depth-demo.h" />
+    <ClInclude Include="demos\plane-bumpifier-demo.h" />
+    <ClInclude Include="demos\sampler-demo.h" />
+    <ClInclude Include="demos\sphere-bumpifier-demo.h" />
+    <ClInclude Include="demos\split-depth-demo.h" />
     <ClInclude Include="imaging\bitmap-function.h" />
     <ClInclude Include="lights\anisotropic-light.h" />
     <ClInclude Include="cameras\camera.h" />
@@ -706,10 +708,10 @@
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="data-structures\grid.h" />
-    <ClInclude Include="demo\demos.h" />
-    <ClInclude Include="demo\depth-of-field-demo.h" />
-    <ClInclude Include="demo\fisheye-demo.h" />
-    <ClInclude Include="demo\marble-animation-demo.h" />
+    <ClInclude Include="demos\demos.h" />
+    <ClInclude Include="demos\depth-of-field-demo.h" />
+    <ClInclude Include="demos\fisheye-demo.h" />
+    <ClInclude Include="demos\marble-animation-demo.h" />
     <ClInclude Include="imaging\bmp-format.h" />
     <ClInclude Include="materials\material-transformer.h" />
     <ClInclude Include="materials\pattern-materials.h" />

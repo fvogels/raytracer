@@ -1,5 +1,5 @@
-#include "demo/terrain-demo.h"
-#include "demo/demo.h"
+#include "demos/terrain-demo.h"
+#include "demos/demo.h"
 
 using namespace raytracer;
 using namespace animation;
