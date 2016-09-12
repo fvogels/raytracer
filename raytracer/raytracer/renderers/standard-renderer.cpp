@@ -51,6 +51,15 @@ namespace
                 });
             });
 
+            //for (auto& p : m_sampler->sample(pixel_rectangle))
+            //{
+            //    for (auto& ray : scene.camera->create_rays(p))
+            //    {
+            //        c += m_ray_tracer->trace(scene, ray).color;
+            //        ++sample_count;
+            //    }
+            //}
+
             return c / sample_count;
         }
 
