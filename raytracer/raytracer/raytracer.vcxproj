@@ -482,6 +482,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="demo\demo.cpp" />
     <ClCompile Include="demo\design-example.cpp" />
     <ClCompile Include="demo\mesh-demo.cpp" />
     <ClCompile Include="demo\terrain-demo.cpp" />
@@ -682,6 +683,7 @@
     <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-processor.h" />
+    <ClInclude Include="demo\demo.h" />
     <ClInclude Include="demo\design-example.h" />
     <ClInclude Include="demo\mesh-demo.h" />
     <ClInclude Include="demo\terrain-demo.h" />
