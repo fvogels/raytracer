@@ -562,11 +562,23 @@ Primitive raytracer::primitives::fast_mesh(const std::string& path)
     {
         std::ifstream in(path, std::ios::binary);
 
+        if (!in)
+        {
+            LOG(ERROR) << "Failed to open " << path;
+            abort();
+        }
+
         return fast_mesh_bin(in);
     }
     else
     {
         std::ifstream in(path);
+
+        if (!in)
+        {
+            LOG(ERROR) << "Failed to open " << path;
+            abort();
+        }
 
         return fast_mesh(in);
     }
