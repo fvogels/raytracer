@@ -36,14 +36,8 @@ namespace
         auto water_material = uniform(water_material_properties);
         auto landscape = decorate(terrain_material, terrain());
 
-        auto water_perlin = math::functions::perlin<Vector3D, Point3D>(1, 38931);
-        std::function<Vector3D(const Point3D&)> lambda = [water_perlin](const Point3D& p) -> Vector3D {
-            return water_perlin(p * 10) * 0.01;
-        };
-        math::Function<Vector3D(const Point3D&)> water_bumps = from_lambda(lambda);
-
         auto sea_level = landscape->bounding_box().y().from_relative(0.40);
-        auto water = decorate(water_material, crop_by_box(translate(Vector3D(0, sea_level, 0), bumpify(water_bumps, xz_plane())), landscape->bounding_box()));
+        auto water = decorate(water_material, crop_by_box(translate(Vector3D(0, sea_level, 0), xz_plane()), landscape->bounding_box()));
 
         std::vector<Primitive> primitives = { landscape, water };
 
