@@ -63,8 +63,7 @@ Primitive raytracer::primitives::crop(Primitive cropped, math::Function<bool(con
 
 Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<double>& x_interval)
 {
-    std::function<bool(const Point3D&)> predicate = [x_interval](const Point3D& p)
-    {
+    std::function<bool(const Point3D&)> predicate = [x_interval](const Point3D& p) {
         return x_interval.contains(p.x());
     };
 
@@ -76,8 +75,7 @@ Primitive raytracer::primitives::crop_along_x(Primitive cropped, const Interval<
 
 Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<double>& y_interval)
 {
-    std::function<bool(const Point3D&)> predicate = [y_interval](const Point3D& p)
-    {
+    std::function<bool(const Point3D&)> predicate = [y_interval](const Point3D& p) {
         return y_interval.contains(p.y());
     };
 
@@ -89,13 +87,21 @@ Primitive raytracer::primitives::crop_along_y(Primitive cropped, const Interval<
 
 Primitive raytracer::primitives::crop_along_z(Primitive cropped, const Interval<double>& z_interval)
 {
-    std::function<bool(const Point3D&)> predicate = [z_interval](const Point3D& p)
-    {
+    std::function<bool(const Point3D&)> predicate = [z_interval](const Point3D& p) {
         return z_interval.contains(p.z());
     };
 
     Box original_box = cropped->bounding_box();
     Box box(original_box.x(), original_box.y(), z_interval);
+
+    return crop(cropped, from_lambda<bool, const Point3D&>(predicate), box);
+}
+
+Primitive raytracer::primitives::crop_by_box(Primitive cropped, const Box& box)
+{
+    std::function<bool(const Point3D&)> predicate = [box](const Point3D& p) {
+        return box.contains(p);
+    };
 
     return crop(cropped, from_lambda<bool, const Point3D&>(predicate), box);
 }
