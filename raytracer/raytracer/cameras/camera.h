@@ -18,7 +18,9 @@ namespace raytracer
             math::Matrix4x4 create_transformation(const math::Point3D&, const math::Point3D&, const math::Vector3D&);
 
             /// <summary>
-            /// Actual implementation of cameras.
+            /// Actual implementation of cameras. A camera must, given a point in the unit rectangle,
+            /// produce rays going through this point. A camera is free to choose how many rays are produced.
+            /// When subclassing, only overload one of both enumerate_rays member functions.
             /// </summary>
             class CameraImplementation
             {
@@ -26,7 +28,6 @@ namespace raytracer
                 /// <summary>
                 /// Does exactly the same as enumerate_rays, but returns the produces rays in the form of a vector.
                 /// It is slightly less efficient, as memory needs to be allocated and freed.
-                /// You should only override one of both overloads of this method.
                 /// </summary>
                 virtual std::vector<math::Ray> enumerate_rays(const math::Point2D& p) const;
 
@@ -34,7 +35,6 @@ namespace raytracer
                 /// Enumerates all rays to be cast from position <paramref name="p" />.
                 /// Enumeration happens using a callback: the given function <paramref name="callback" /> gets
                 /// called for each ray. This removes the need for heap allocation and should be more efficient.
-                /// You should only override one of both overloads of this method.
                 /// </summary>
                 /// <param name="p">
                 /// Point in [0,1]x[0,1] subspace.
