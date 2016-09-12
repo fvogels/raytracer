@@ -12,12 +12,27 @@ namespace raytracer
     {
         namespace _private_
         {
+            /// <summary>
+            /// Sampler implementation. Its purpose is, given a 2D rectangle, to produce
+            /// points within this rectangle. Each subclass is free to choose how many points
+            /// and which points it produces.
+            /// When subclassing, override only one of both sample methods.
+            /// </summary>
             class SamplerImplementation
             {
             public:
-                std::vector<math::Point2D> sample(const math::Rectangle2D&);
+                /// <summary>
+                /// Returns a number of points in <paramref name="rectangle" />.
+                /// How many and which points depends on the type of sampler.
+                /// </summary>
+                std::vector<math::Point2D> sample(const math::Rectangle2D& rectangle) const;
 
-                virtual void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const = 0;
+                /// <summary>
+                /// Same as other sample member function, but instead of putting all points in a vector,
+                /// it calls the given <paramref name="callback" /> with each point. This
+                /// overload should be slightly more efficient since no heap allocation is necessary for a vector.
+                /// </summary>
+                virtual void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> callback) const;
             };
         }        
     }
