@@ -16,7 +16,7 @@ namespace
     public:
         using Demo::Demo;
 
-
+    protected:
         raytracer::Primitive create_root(TimeStamp now) override
         {
             using namespace raytracer::primitives;

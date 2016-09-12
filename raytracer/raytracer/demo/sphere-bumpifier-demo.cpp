@@ -11,12 +11,6 @@ using namespace demos;
 
 namespace
 {
-    constexpr unsigned ANTIALIASING = 2;
-    constexpr unsigned FPS = 10;
-    constexpr unsigned HPIXELS = 500;
-    constexpr unsigned VPIXELS = 500;
-    constexpr unsigned N_THREADS = 4;
-
     class SphereBumpifierDemo : public Demo
     {
     public:

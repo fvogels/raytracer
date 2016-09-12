@@ -1,54 +1,15 @@
 #ifndef TEST_BUILD
 
-#define COULD_BE_UNUSED(X) (void)(X)
-
-#include "imaging/bitmap.h"
-#include "imaging/wif-format.h"
-#include "primitives/primitives.h"
-#include "cameras/cameras.h"
-#include "math/rasterizer.h"
-#include "math/functions.h"
-#include "math/functions/noise.h"
-#include "samplers/samplers.h"
-#include "materials/materials.h"
-#include "materials/material-transformer.h"
-#include "lights/lights.h"
-#include "raytracers/ray-tracers.h"
-#include "renderers/renderers.h"
-#include "renderers/cartoon-renderer.h"
-#include "animation/animations.h"
-#include "demo/demos.h"
-#include "logging.h"
-#include "util/lazy.h"
-#include "math/point.h"
-#include "imaging/bitmap-function.h"
-#include "pipeline/pipelines.h"
-#include "util/misc.h"
-#include "loopers/loopers.h"
-#include "util/beep.h"
-#include "scripting/scripting.h"
 #include "easylogging++.h"
 #include "version.h"
 #include "command-line-processor.h"
+#include "logging.h"
+#include "demo/demos.h"
+#include "pipeline/pipelines.h"
+#include "util/beep.h"
 #include <assert.h>
-#include <type_traits>
-#include <list>
 
-#ifdef NDEBUG
-const int BITMAP_SIZE = 500;
-const int SAMPLES = 2;
-const int N_THREADS = 4;
-#else
-const int BITMAP_SIZE = 100;
-const int SAMPLES = 1;
-const int N_THREADS = 1;
-#endif
-
-
-using namespace math;
 using namespace raytracer;
-using namespace imaging;
-using namespace animation;
 
 
 namespace
@@ -125,11 +86,15 @@ int main(int argc, char** argv)
 
     // process_command_line_arguments(argc, argv);
 
+    // demos::fisheye(pipeline::wif(path)); beep();
     // demos::bumpify_sphere(pipeline::wif(path)); beep();
     // demos::bumpify_plane(pipeline::wif(path)); beep();
     // demos::marble(pipeline::wif(path)); beep();
     // demos::mesh(pipeline::wif(path)); beep();
     demos::terrain(pipeline::wif(path)); beep();
+    // demos::samplers(pipeline::wif(path)); beep();
+    // demos::depth_of_field(pipeline::wif(path)); beep();
+    // demos::split_depth(pipeline::wif(path)); beep();
 
     // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
 }
