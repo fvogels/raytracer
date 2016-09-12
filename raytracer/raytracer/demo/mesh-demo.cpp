@@ -55,5 +55,5 @@ namespace
 
 void demos::mesh(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-    MeshDemo(500, 1_s, 30, 2);
+    MeshDemo(500, 1_s, 30, 2).render(output);
 }
