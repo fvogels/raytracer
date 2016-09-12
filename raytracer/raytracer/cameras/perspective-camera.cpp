@@ -15,8 +15,8 @@ raytracer::cameras::_private_::PerspectiveCamera::PerspectiveCamera(const math::
 
 void raytracer::cameras::_private_::PerspectiveCamera::enumerate_untransformed_rays(const Point2D& point, std::function<void(const math::Ray&)> callback) const
 {
-    assert(0 <= point.x() && point.x() <= 1);
-    assert(0 <= point.y() && point.y() <= 1);
+    assert(interval(0.0, 1.0).contains(point.x()));
+    assert(interval(0.0, 1.0).contains(point.y()));
 
     Point3D p = m_view_window.project(point);
 
