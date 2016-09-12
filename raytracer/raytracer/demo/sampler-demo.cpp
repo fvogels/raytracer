@@ -1,94 +1,51 @@
 #include "demo/sampler-demo.h"
-#include "materials/materials.h"
-#include "cameras/cameras.h"
-#include "imaging/wif-format.h"
-#include "raytracers/ray-tracers.h"
-#include "renderers/renderers.h"
-#include "samplers/samplers.h"
-#include "raytracers/scene.h"
-#include "math/function.h"
-#include "animation/animation.h"
-#include "pipeline/pipelines.h"
-#include "loopers/loopers.h"
+#include "demo/demo.h"
 
 using namespace raytracer;
 using namespace animation;
 using namespace math;
 using namespace imaging;
+using namespace demos;
 
 
 namespace
 {
-    constexpr unsigned ANTIALIASING = 2;
-    constexpr unsigned FPS = 30;
-    constexpr unsigned HPIXELS = 1000;
-    constexpr unsigned VPIXELS = 1000;
-    constexpr unsigned N_THREADS = 4;
-
-    raytracer::Primitive create_root(TimeStamp)
+    class SamplerDemo : public Demo
     {
-        using namespace raytracer::primitives;
-        using namespace raytracer::materials;
+    public:
+        using Demo::Demo;
 
-        MaterialProperties white(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0);
-        MaterialProperties black(colors::black() * 0.1, colors::black() * 0.8, colors::black(), 0, 0, 0, 0);
-        auto material = checkered(uniform(white), uniform(black));
+    protected:
+        raytracer::Primitive create_root(TimeStamp) override
+        {
+            using namespace raytracer::primitives;
+            using namespace raytracer::materials;
 
-        return decorate(material, xz_plane());
-    }
+            MaterialProperties white(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0);
+            MaterialProperties black(colors::black() * 0.1, colors::black() * 0.8, colors::black(), 0, 0, 0, 0);
+            auto material = checkered(uniform(white), uniform(black));
 
-    std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
-    {
-        using namespace raytracer::lights;
+            return decorate(material, xz_plane());
+        }
 
-        std::vector<LightSource> light_sources;
-        light_sources.push_back(lights::directional(Vector3D(0, -1, 0), colors::white()));
+        std::vector<raytracer::LightSource> create_light_sources(TimeStamp) override
+        {
+            using namespace raytracer::lights;
 
-        return light_sources;
-    }
+            std::vector<LightSource> light_sources;
+            light_sources.push_back(lights::directional(Vector3D(0, -1, 0), colors::white()));
 
-    raytracer::Camera create_camera(TimeStamp)
-    {
-        return raytracer::cameras::perspective(Point3D(5, 1, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-    }
+            return light_sources;
+        }
 
-    Animation<std::shared_ptr<Scene>> create_scene_animation()
-    {
-        std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [](TimeStamp now) {
-            auto camera = create_camera(now);
-            auto root = create_root(now);
-            auto light_sources = create_light_sources(now);
-            auto scene = std::make_shared<Scene>(camera, root, light_sources);
-
-            return scene;
-        };
-
-        auto function = from_lambda(lambda);
-
-        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
-    }
-
-    void render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
-    {
-        auto scene_animation = create_scene_animation();
-        auto ray_tracer = raytracer::raytracers::v6();
-        // auto sampler = raytracer::samplers::single();
-        // auto sampler = raytracer::samplers::random(4);
-        // auto sampler = raytracer::samplers::stratified_fixed(2, 2);
-        // auto sampler = raytracer::samplers::stratified_jittered(2, 2);
-        // auto sampler = raytracer::samplers::stratified_half_jittered(2, 2);
-        // auto sampler = raytracer::samplers::nrooks(4);
-        auto sampler = raytracer::samplers::multi_jittered(2);
-        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, sampler, ray_tracer, loopers::smart_looper(N_THREADS));
-
-        pipeline::start(create_scene_animation())
-            >> pipeline::animation(1)
-            >> pipeline::renderer(renderer)
-            >> output;
-    }
+        raytracer::Camera create_camera(TimeStamp) override
+        {
+            return raytracer::cameras::perspective(Point3D(5, 1, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
+        }
+    };
 }
 
 void demos::samplers(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-    render(output);
+    SamplerDemo(500, 1_s, 30, 2).render(output);
 }
