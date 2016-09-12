@@ -57,26 +57,10 @@ namespace
 
             return raytracer::cameras::fisheye(Point3D(0, 0, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 90_degrees + 180_degrees * now.seconds(), 180_degrees);
         }
-
-        Animation<std::shared_ptr<Scene>> create_scene_animation() override
-        {
-            std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [this](TimeStamp now) {
-                auto camera = create_camera(now);
-                auto root = create_root(now);
-                auto light_sources = create_light_sources(now);
-                auto scene = std::make_shared<Scene>(camera, root, light_sources);
-
-                return scene;
-            };
-
-            auto function = from_lambda(lambda);
-
-            return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
-        }
     };
 }
 
 void demos::fisheye(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-    FishEyeDemo(2, 30, 500).render(output);
+    FishEyeDemo(500, 1_s, 30, 2).render(output);
 }
