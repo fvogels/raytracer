@@ -42,10 +42,15 @@ namespace
         {
             return raytracer::cameras::perspective(Point3D(5, 1, 5), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
         }
+
+        Sampler create_sampler() override
+        {
+            return samplers::multi_jittered(m_antialias);
+        }
     };
 }
 
 void demos::samplers(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-    SamplerDemo(500, 1_s, 30, 2).render(output);
+    SamplerDemo(500, 1_s, 1, 3).render(output);
 }
