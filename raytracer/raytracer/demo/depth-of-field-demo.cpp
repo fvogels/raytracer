@@ -12,12 +12,6 @@ using namespace demos;
 
 namespace
 {
-    constexpr unsigned ANTIALIASING = 1;
-    constexpr unsigned FPS = 1;
-    constexpr unsigned HPIXELS = 100;
-    constexpr unsigned VPIXELS = 100;
-    constexpr unsigned N_THREADS = 4;
-
     class DepthOfFieldDemo : public Demo
     {
     public:
@@ -89,8 +83,8 @@ namespace
         {
             auto scene_animation = create_scene_animation();
             auto ray_tracer = raytracer::raytracers::v6();
-            auto sampler = raytracer::samplers::multi_jittered(ANTIALIASING);
-            auto renderer = raytracer::renderers::standard(m_bitmap_size, m_bitmap_size, sampler, ray_tracer, loopers::smart_looper(N_THREADS));
+            auto sampler = raytracer::samplers::multi_jittered(m_antialias);
+            auto renderer = raytracer::renderers::standard(m_bitmap_size, m_bitmap_size, sampler, ray_tracer, loopers::smart_looper(4));
 
             pipeline::start(create_scene_animation())
                 >> pipeline::animation(m_fps)
