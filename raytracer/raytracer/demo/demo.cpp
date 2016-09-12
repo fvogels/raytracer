@@ -7,8 +7,8 @@ using namespace math;
 using namespace imaging;
 
 
-demos::Demo::Demo(unsigned antialias, unsigned fps, unsigned bitmap_size)
-    : m_antialias(antialias), m_fps(fps), m_bitmap_size(bitmap_size)
+demos::Demo::Demo(unsigned antialias, Duration duration, unsigned fps, unsigned bitmap_size)
+    : m_antialias(antialias), m_duration(duration), m_fps(fps), m_bitmap_size(bitmap_size)
 {
     // NOP
 }
@@ -42,4 +42,20 @@ Sampler demos::Demo::create_sampler()
 std::shared_ptr<loopers::Looper> demos::Demo::create_looper()
 {
     return loopers::smart_looper(4);
+}
+
+Animation<std::shared_ptr<Scene>> demos::Demo::create_scene_animation()
+{
+    std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [this](TimeStamp now) {
+        auto camera = create_camera(now);
+        auto root = create_root(now);
+        auto light_sources = create_light_sources(now);
+        auto scene = std::make_shared<Scene>(camera, root, light_sources);
+
+        return scene;
+    };
+
+    auto function = from_lambda(lambda);
+
+    return make_animation<std::shared_ptr<Scene>>(function, m_duration);
 }
