@@ -40,6 +40,8 @@ namespace math
 
         Point3D center() const;
 
+        bool contains(const Point3D&) const;
+
     private:
         bool hits_xy_face(const Ray&, double, bool) const;
         bool hits_xz_face(const Ray&, double, bool) const;

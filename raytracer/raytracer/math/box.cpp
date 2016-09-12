@@ -145,3 +145,8 @@ bool math::Box::is_infinite() const
 {
     return m_x_interval.is_infinite() || m_y_interval.is_infinite() || m_z_interval.is_infinite();
 }
+
+bool math::Box::contains(const Point3D& p) const
+{
+    return m_x_interval.contains(p.x()) && m_y_interval.contains(p.y()) && m_z_interval.contains(p.z());
+}
