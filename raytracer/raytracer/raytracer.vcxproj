@@ -486,7 +486,6 @@
     <ClCompile Include="demos\design-example.cpp" />
     <ClCompile Include="demos\mesh-demo.cpp" />
     <ClCompile Include="demos\terrain-demo.cpp" />
-    <ClCompile Include="instrumentation\counters.cpp" />
     <ClCompile Include="loopers\multithreaded-looper.cpp" />
     <ClCompile Include="loopers\smart-looper.cpp" />
     <ClCompile Include="math\angle.cpp" />
@@ -688,7 +687,6 @@
     <ClInclude Include="demos\design-example.h" />
     <ClInclude Include="demos\mesh-demo.h" />
     <ClInclude Include="demos\terrain-demo.h" />
-    <ClInclude Include="instrumentation\counters.h" />
     <ClInclude Include="loopers\loopers.h" />
     <ClInclude Include="loopers\multithreaded-looper.h" />
     <ClInclude Include="loopers\smart-looper.h" />

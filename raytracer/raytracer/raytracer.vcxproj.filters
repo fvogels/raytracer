@@ -468,9 +468,6 @@
     <ClCompile Include="demos\terrain-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="instrumentation\counters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1191,9 +1188,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demos\terrain-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instrumentation\counters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
