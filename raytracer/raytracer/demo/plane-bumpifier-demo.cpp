@@ -1,92 +1,56 @@
 #include "demo/plane-bumpifier-demo.h"
-#include "materials/materials.h"
-#include "cameras/cameras.h"
-#include "imaging/wif-format.h"
-#include "raytracers/ray-tracers.h"
-#include "renderers/renderers.h"
-#include "samplers/samplers.h"
-#include "raytracers/scene.h"
 #include "math/functions.h"
-#include "animation/animations.h"
-#include "animation/redimensioner.h"
-#include "pipeline/pipelines.h"
-#include "loopers/loopers.h"
+#include "demo/demo.h"
 
 using namespace raytracer;
 using namespace animation;
 using namespace math;
 using namespace imaging;
+using namespace demos;
 
 
 namespace
 {
-    constexpr unsigned ANTIALIASING = 1;
-    constexpr unsigned FPS = 30;
-    constexpr unsigned HPIXELS = 500;
-    constexpr unsigned VPIXELS = 500;
-    constexpr unsigned N_THREADS = 4;
-
-    raytracer::Primitive create_root(TimeStamp now)
+    class PlaneBumpifierDemo : public Demo
     {
-        using namespace raytracer::primitives;
-        using namespace raytracer::materials;
+    public:
+        using Demo::Demo;
 
-        auto perlin = math::functions::perlin<Vector3D, Point3D>(5, 4546);
 
-        std::function<Vector3D(const Point2D& p)> lambda = [now, perlin](const Point2D& p) -> Vector3D {
-            return perlin(Point3D(0.2 * p.x(), 0.2 * p.y(), now.seconds())) * 0.1;
-        };
-        auto bumpificator = from_lambda(lambda);
-        // auto bumpificator = animation::xyz_to_xyt<Vector3D>(perlin)(now);
+        raytracer::Primitive create_root(TimeStamp now) override
+        {
+            using namespace raytracer::primitives;
+            using namespace raytracer::materials;
 
-        return bumpify(bumpificator, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 0)), xz_plane()));
-    }
+            auto perlin = math::functions::perlin<Vector3D, Point3D>(5, 4546);
 
-    std::vector<raytracer::LightSource> create_light_sources(TimeStamp)
-    {
-        using namespace raytracer::lights;
+            std::function<Vector3D(const Point2D& p)> lambda = [now, perlin](const Point2D& p) -> Vector3D {
+                return perlin(Point3D(0.2 * p.x(), 0.2 * p.y(), now.seconds())) * 0.1;
+            };
+            auto bumpificator = from_lambda(lambda);
+            // auto bumpificator = animation::xyz_to_xyt<Vector3D>(perlin)(now);
 
-        std::vector<LightSource> light_sources;
-        light_sources.push_back(directional(Vector3D(0, -0.1, 1).normalized(), colors::white()));
+            return bumpify(bumpificator, decorate(uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 100, 0.5, 0, 0)), xz_plane()));
+        }
 
-        return light_sources;
-    }
+        std::vector<raytracer::LightSource> create_light_sources(TimeStamp) override
+        {
+            using namespace raytracer::lights;
 
-    raytracer::Camera create_camera(TimeStamp)
-    {
-        return raytracer::cameras::perspective(Point3D(0, 5, 5), Point3D(0, 0, -100), Vector3D(0, 1, 0), 1, 1);
-    }
+            std::vector<LightSource> light_sources;
+            light_sources.push_back(directional(Vector3D(0, -0.1, 1).normalized(), colors::white()));
 
-    Animation<std::shared_ptr<Scene>> create_scene_animation()
-    {
-        std::function<std::shared_ptr<Scene>(TimeStamp)> lambda = [](TimeStamp now) {
-            auto camera = create_camera(now);
-            auto root = create_root(now);
-            auto light_sources = create_light_sources(now);
-            auto scene = std::make_shared<Scene>(camera, root, light_sources);
+            return light_sources;
+        }
 
-            return scene;
-        };
-
-        auto function = from_lambda(lambda);
-
-        return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(1));
-    }
-
-    void render(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
-    {
-        auto scene_animation = create_scene_animation();
-        auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::renderers::standard(HPIXELS, VPIXELS, raytracer::samplers::stratified_fixed(ANTIALIASING, ANTIALIASING), ray_tracer, loopers::smart_looper(N_THREADS));
-
-        pipeline::start(create_scene_animation())
-            >> pipeline::animation(FPS)
-            >> pipeline::renderer(renderer)
-            >> output;
-    }
+        raytracer::Camera create_camera(TimeStamp) override
+        {
+            return raytracer::cameras::perspective(Point3D(0, 5, 5), Point3D(0, 0, -100), Vector3D(0, 1, 0), 1, 1);
+        }
+    };
 }
 
 void demos::bumpify_plane(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)
 {
-    render(output);
+    PlaneBumpifierDemo(500, 1_s, 30, 2).render(output);
 }
