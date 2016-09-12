@@ -7,7 +7,7 @@ using namespace math;
 using namespace imaging;
 
 
-demos::Demo::Demo(unsigned antialias, Duration duration, unsigned fps, unsigned bitmap_size)
+demos::Demo::Demo(unsigned bitmap_size, Duration duration, unsigned fps, unsigned antialias )
     : m_antialias(antialias), m_duration(duration), m_fps(fps), m_bitmap_size(bitmap_size)
 {
     // NOP

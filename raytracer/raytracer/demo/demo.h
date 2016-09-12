@@ -34,7 +34,7 @@ namespace demos
     public:
         virtual void render(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>>);
 
-    private:
+    protected:
         unsigned m_bitmap_size;
         animation::Duration m_duration;
         unsigned m_fps;
