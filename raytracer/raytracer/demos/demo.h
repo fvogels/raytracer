@@ -10,7 +10,6 @@
 #include "math/function.h"
 #include "animation/animations.h"
 #include "pipeline/pipelines.h"
-#include "loopers/looper.h"
 #include <memory>
 
 
@@ -29,7 +28,7 @@ namespace demos
         virtual raytracer::RayTracer create_ray_tracer();
         virtual raytracer::Renderer create_renderer();
         virtual raytracer::Sampler create_sampler();
-        virtual std::shared_ptr<loopers::Looper> create_looper();
+        virtual tasks::TaskScheduler create_scheduler();
 
     public:
         virtual void render(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>>);

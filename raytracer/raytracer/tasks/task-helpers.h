@@ -14,8 +14,9 @@ namespace tasks
         for (auto i = from; i < to; ++i)
         {
             std::function<void()> specialized_lambda = std::bind(lambda, i);
+            auto task = tasks::from_lambda(specialized_lambda);
 
-            tasks.push_back(specialized_lambda);
+            tasks.push_back(task);
         }
 
         return tasks;

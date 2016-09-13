@@ -77,20 +77,6 @@ namespace
 
             return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(3));
         }
-
-    public:
-        void render(std::shared_ptr<raytracer::pipeline::Consumer<std::shared_ptr<imaging::Bitmap>>> output) override
-        {
-            auto scene_animation = create_scene_animation();
-            auto ray_tracer = raytracer::raytracers::v6();
-            auto sampler = raytracer::samplers::multi_jittered(m_antialias);
-            auto renderer = raytracer::renderers::standard(m_bitmap_size, m_bitmap_size, sampler, ray_tracer, loopers::smart_looper(4));
-
-            pipeline::start(create_scene_animation())
-                >> pipeline::animation(m_fps)
-                >> pipeline::renderer(renderer)
-                >> output;
-        }
     };
 }
 

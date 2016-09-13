@@ -45,11 +45,9 @@ namespace
 
         raytracer::Renderer create_renderer() override
         {
-            return raytracer::renderers::split_depth(m_bitmap_size, m_bitmap_size, raytracer::samplers::multi_jittered(m_antialias), create_ray_tracer(), loopers::smart_looper(4), 0.02, Point3D(0, 0, 5), Point3D(0, 0, 0));
+            return raytracer::renderers::split_depth(m_bitmap_size, m_bitmap_size, raytracer::samplers::multi_jittered(m_antialias), create_ray_tracer(), create_scheduler(), 0.02, Point3D(0, 0, 5), Point3D(0, 0, 0));
         }
     };
-
-    
 }
 
 void demos::split_depth(std::shared_ptr<pipeline::Consumer<std::shared_ptr<Bitmap>>> output)

@@ -14,8 +14,8 @@ namespace
     class SplitDepthRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
-        SplitDepthRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double split_thickness, const math::Plane& split_plane)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper), m_split_thickness_in_pixels(int(split_thickness * horizontal_size)), m_split_plane(split_plane)
+        SplitDepthRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double split_thickness, const math::Plane& split_plane)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler), m_split_thickness_in_pixels(int(split_thickness * horizontal_size)), m_split_plane(split_plane)
         {
             // NOP
         }
@@ -79,14 +79,14 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::split_depth(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double split_thickness, const math::Plane& split_plane)
+Renderer raytracer::renderers::split_depth(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double split_thickness, const math::Plane& split_plane)
 {
-    return Renderer(std::make_shared<SplitDepthRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper, split_thickness, split_plane));
+    return Renderer(std::make_shared<SplitDepthRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, split_thickness, split_plane));
 }
 
-Renderer raytracer::renderers::split_depth(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double split_thickness, const Point3D& eye, const Point3D& look_at)
+Renderer raytracer::renderers::split_depth(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double split_thickness, const Point3D& eye, const Point3D& look_at)
 {
     auto split_plane = math::Plane::from_point_and_normal(look_at, (eye - look_at).normalized());
 
-    return split_depth(horizontal_size, vertical_size, sampler, ray_tracer, looper, split_thickness, split_plane);
+    return split_depth(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, split_thickness, split_plane);
 }

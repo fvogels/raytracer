@@ -6,7 +6,7 @@
 #include "raytracers/ray-tracer.h"
 #include "math/rasterizer.h"
 #include "math/point.h"
-#include "loopers/looper.h"
+#include "tasks/task-scheduler.h"
 
 namespace raytracer
 {
@@ -27,7 +27,7 @@ namespace raytracer
                 virtual std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const = 0;
 
             protected:
-                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<loopers::Looper>);
+                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, tasks::TaskScheduler);
 
                 unsigned m_horizontal_size, m_vertical_size;
                 raytracer::Sampler m_sampler;
@@ -36,7 +36,7 @@ namespace raytracer
                 void for_each_pixel(std::function<void(Position)>) const;
 
             private:
-                std::shared_ptr<loopers::Looper> m_looper;
+                tasks::TaskScheduler m_scheduler;
             };
         }
     }

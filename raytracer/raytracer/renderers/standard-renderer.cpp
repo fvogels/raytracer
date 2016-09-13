@@ -12,8 +12,8 @@ namespace
     class StandardRenderer : public raytracer::renderers::_private_::RendererImplementation
     {
     public:
-        StandardRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper)
+        StandardRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
         {
             // NOP
         }
@@ -58,7 +58,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::standard(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper)
+Renderer raytracer::renderers::standard(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
 {
-    return Renderer(std::make_shared<StandardRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper));
+    return Renderer(std::make_shared<StandardRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler));
 }

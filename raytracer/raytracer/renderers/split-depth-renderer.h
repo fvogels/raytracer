@@ -8,7 +8,7 @@ namespace raytracer
 {
     namespace renderers
     {
-        Renderer split_depth(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<loopers::Looper>, double, const math::Plane&);
-        Renderer split_depth(unsigned, unsigned, raytracer::Sampler, RayTracer, std::shared_ptr<loopers::Looper>, double, const math::Point3D& eye, const math::Point3D& look_at);
+        Renderer split_depth(unsigned, unsigned, raytracer::Sampler, RayTracer, tasks::TaskScheduler, double, const math::Plane&);
+        Renderer split_depth(unsigned, unsigned, raytracer::Sampler, RayTracer, tasks::TaskScheduler, double, const math::Point3D& eye, const math::Point3D& look_at);
     }
 }

@@ -19,9 +19,9 @@ namespace
             unsigned vertical_size,
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
-            std::shared_ptr<loopers::Looper> looper,
+            tasks::TaskScheduler scheduler,
             double stroke_thickness)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
             , m_stroke_thickness(stroke_thickness)
         {
             // NOP
@@ -114,7 +114,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::edge(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, double stroke_thickness)
+Renderer raytracer::renderers::edge(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double stroke_thickness)
 {
-    return Renderer(std::make_shared<EdgeRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper, stroke_thickness));
+    return Renderer(std::make_shared<EdgeRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, stroke_thickness));
 }

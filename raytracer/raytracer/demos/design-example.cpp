@@ -9,7 +9,7 @@
 #include "math/function.h"
 #include "animation/animations.h"
 #include "pipeline/pipelines.h"
-#include "loopers/loopers.h"
+#include "tasks/task-schedulers.h"
 #include "easylogging++.h"
 
 using namespace raytracer;
@@ -105,7 +105,7 @@ namespace
     {
         auto scene_animation = create_scene_animation();
         auto ray_tracer = raytracer::raytracers::v6();
-        auto renderer = raytracer::renderers::standard(500, 500, raytracer::samplers::multi_jittered(2), ray_tracer, loopers::smart_looper(4));
+        auto renderer = raytracer::renderers::standard(500, 500, raytracer::samplers::multi_jittered(2), ray_tracer, tasks::schedulers::parallel(4));
 
         pipeline::start(create_scene_animation())
             >> pipeline::animation(30)

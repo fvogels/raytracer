@@ -24,9 +24,9 @@ namespace raytracer
         /// <param name="ray_tracer">
         /// Ray tracer to be used for tracing rays.
         /// </param>
-        /// <param name="looper">
-        /// Looper to be used for iteration.
+        /// <param name="scheduler">
+        /// Task scheduler.
         /// </param>
-        Renderer standard(unsigned width, unsigned height, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper);
+        Renderer standard(unsigned width, unsigned height, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler);
     }
 }

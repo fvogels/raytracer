@@ -1,5 +1,5 @@
 #include "demos/demo.h"
-#include "loopers/loopers.h"
+#include "tasks/task-schedulers.h"
 
 using namespace raytracer;
 using namespace animation;
@@ -31,7 +31,7 @@ RayTracer demos::Demo::create_ray_tracer()
 
 Renderer demos::Demo::create_renderer()
 {
-    return raytracer::renderers::standard(m_bitmap_size, m_bitmap_size, create_sampler(), create_ray_tracer(), create_looper());
+    return raytracer::renderers::standard(m_bitmap_size, m_bitmap_size, create_sampler(), create_ray_tracer(), create_scheduler());
 }
 
 Sampler demos::Demo::create_sampler()
@@ -39,9 +39,9 @@ Sampler demos::Demo::create_sampler()
     return raytracer::samplers::multi_jittered(m_antialias);
 }
 
-std::shared_ptr<loopers::Looper> demos::Demo::create_looper()
+tasks::TaskScheduler demos::Demo::create_scheduler()
 {
-    return loopers::smart_looper(4);
+    return tasks::schedulers::parallel(4);
 }
 
 Animation<std::shared_ptr<Scene>> demos::Demo::create_scene_animation()

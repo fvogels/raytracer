@@ -19,10 +19,10 @@ namespace
             unsigned vertical_size,
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
-            std::shared_ptr<loopers::Looper> looper,
+            tasks::TaskScheduler scheduler,
             unsigned shade_count,
             double stroke_thickness)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, looper)
+            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
             , m_shade_count(shade_count)
             , m_stroke_thickness(stroke_thickness)
         {
@@ -126,7 +126,7 @@ namespace
     };
 }
 
-Renderer raytracer::renderers::cartoon(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, std::shared_ptr<loopers::Looper> looper, unsigned shade_count, double stroke_thickness)
+Renderer raytracer::renderers::cartoon(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, unsigned shade_count, double stroke_thickness)
 {
-    return Renderer(std::make_shared<CartoonRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, looper, shade_count, stroke_thickness));
+    return Renderer(std::make_shared<CartoonRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, shade_count, stroke_thickness));
 }
