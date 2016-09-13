@@ -11,7 +11,7 @@ namespace
 {
     struct ColorLibrary
     {
-#define COLOR(NAME) Color NAME() const { return colors::NAME(); }
+#       define COLOR(NAME) Color NAME() const { return colors::NAME(); }
         COLOR(black)
         COLOR(white)
         COLOR(red)
@@ -20,7 +20,7 @@ namespace
         COLOR(yellow)
         COLOR(magenta)
         COLOR(cyan)
-#undef COLOR
+#       undef COLOR
     };
 
     Color rgb(double r, double g, double b)
@@ -36,7 +36,7 @@ ModulePtr raytracer::scripting::_private_::create_imaging_module()
     auto color_library = std::make_shared<ColorLibrary>();
     module->add_global_const(chaiscript::const_var(color_library), "Colors");
 
-#define BIND(NAME) module->add(fun(&ColorLibrary::NAME), #NAME)
+#   define BIND(NAME) module->add(fun(&ColorLibrary::NAME), #NAME)
     BIND(black);
     BIND(white);
     BIND(red);
@@ -45,7 +45,7 @@ ModulePtr raytracer::scripting::_private_::create_imaging_module()
     BIND(yellow);
     BIND(magenta);
     BIND(cyan);
-#undef BIND
+#   undef BIND
 
     module->add(fun([](const Color& c1, const Color& c2) {
         return c1 + c2;

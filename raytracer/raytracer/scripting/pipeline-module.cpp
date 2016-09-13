@@ -210,8 +210,8 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
     auto pipeline_library = std::make_shared<PipelineLibrary>();
     module->add_global_const(chaiscript::const_var(pipeline_library), "Pipeline");
 
-#define BIND(NAME)                      BIND_AS(NAME, NAME)
-#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
+#   define BIND(NAME)                      BIND_AS(NAME, NAME)
+#   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
     BIND(wif);
     BIND(ppm);
     BIND(bmp);
@@ -222,8 +222,8 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
     BIND_AS(motion_blur_zerolew, motion_blur);
     BIND(overprint);
     BIND(null_bitmap_consumer);
-#undef BIND_AS
-#undef BIND
+#   undef BIND_AS
+#   undef BIND
 
     module->add(fun(&pipeline_builder), "pipeline");
 

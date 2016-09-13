@@ -125,7 +125,7 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     auto renderer_library = std::make_shared<RendererLibrary>();
     module->add_global_const(chaiscript::const_var(renderer_library), "Renderers");
 
-#define BIND(INTERNAL, EXTERNAL) module->add(fun(&RendererLibrary::INTERNAL), #EXTERNAL)
+#   define BIND(INTERNAL, EXTERNAL) module->add(fun(&RendererLibrary::INTERNAL), #EXTERNAL)
     BIND(standard, standard);
     BIND(standard2, standard);
     BIND(standard_by_map, standard);
@@ -138,7 +138,7 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     BIND(split_depth, split_depth);
     BIND(split_depth2, split_depth);
     BIND(split_depth_by_map, split_depth);
-#undef BIND
+#   undef BIND
 
     return module;
 }

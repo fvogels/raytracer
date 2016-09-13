@@ -59,7 +59,7 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
     auto sampler_library = std::make_shared<SamplerLibrary>();
     module->add_global_const(chaiscript::const_var(sampler_library), "Samplers");
 
-#define BIND(NAME)  module->add(fun(&SamplerLibrary::NAME), #NAME)
+#   define BIND(NAME)  module->add(fun(&SamplerLibrary::NAME), #NAME)
     BIND(single);
     BIND(random);
     BIND(stratified);
@@ -67,7 +67,7 @@ ModulePtr raytracer::scripting::_private_::create_samplers_module()
     BIND(halfjittered);
     BIND(nrooks);
     BIND(multijittered);
-#undef BIND
+#   undef BIND
 
     return module;
 }

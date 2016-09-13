@@ -151,8 +151,8 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     auto material_library = std::make_shared<MaterialLibrary>();
     module->add_global_const(chaiscript::const_var(material_library), "Materials");
 
-#define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&MaterialLibrary::INTERNAL), #EXTERNAL)
-#define BIND(NAME)                      BIND_AS(NAME, NAME)
+#   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&MaterialLibrary::INTERNAL), #EXTERNAL)
+#   define BIND(NAME)                      BIND_AS(NAME, NAME)
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
@@ -175,8 +175,8 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(rotate_around_x);
     BIND(rotate_around_y);
     BIND(rotate_around_z);
-#undef BIND
-#undef BIND_AS
+#   undef BIND
+#   undef BIND_AS
 
     return module;
 }
