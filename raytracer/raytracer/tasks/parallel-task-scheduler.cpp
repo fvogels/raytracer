@@ -1,4 +1,5 @@
 #include "tasks/parallel-task-scheduler.h"
+#include "tasks/serial-task-scheduler.h"
 #include <thread>
 #include <atomic>
 
@@ -49,5 +50,12 @@ namespace
 
 TaskScheduler tasks::schedulers::parallel(unsigned thread_count)
 {
-    return TaskScheduler(std::make_shared<ParallelTaskScheduler>(thread_count));
+    if (thread_count > 1)
+    {
+        return TaskScheduler(std::make_shared<ParallelTaskScheduler>(thread_count));
+    }
+    else
+    {
+        return tasks::schedulers::serial();
+    }
 }
