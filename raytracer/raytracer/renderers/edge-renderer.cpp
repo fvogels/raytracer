@@ -33,7 +33,7 @@ namespace
             Rasterizer window_rasterizer(window, m_horizontal_size, m_vertical_size);
             data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_size, m_vertical_size);
 
-            for_each_pixel([&](Position pixel_coordinates) {
+            for_each_pixel([&](Position2D pixel_coordinates) {
                 assert(pixel_coordinates.x < m_horizontal_size);
                 assert(pixel_coordinates.y < m_vertical_size);
 
@@ -57,8 +57,8 @@ namespace
 
             LOG(DEBUG) << "Finding edges";
 
-            for_each_pixel([&](Position pixel_coordinates) {
-                Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+            for_each_pixel([&](Position2D pixel_coordinates) {
+                Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
                 unsigned border_count = 0;
 
                 for (auto& pair : group_grid[pixel_coordinates])
@@ -67,7 +67,7 @@ namespace
                     Point2D current_xy = pair.second;
                     bool is_border = false;
 
-                    group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position& neighbor_pixel_coordinates) {
+                    group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position2D& neighbor_pixel_coordinates) {
                         for (auto& pair : group_grid[neighbor_pixel_coordinates])
                         {
                             unsigned neighbor_id = pair.first;

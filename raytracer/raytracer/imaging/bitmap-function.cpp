@@ -12,7 +12,7 @@ Function<Color(const Point2D&)> imaging::bitmap_function(std::shared_ptr<Bitmap>
 
         if (x < bitmap->width() && y < bitmap->height())
         {
-            return (*bitmap)[Position(x, y)];
+            return (*bitmap)[Position2D(x, y)];
         }
         else
         {

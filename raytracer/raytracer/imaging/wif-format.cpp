@@ -48,7 +48,7 @@ void imaging::WIF::write_frame(const Bitmap& bitmap)
     {
         for (unsigned i = 0; i != bitmap.width(); ++i)
         {
-            RGBColor RGBColor(bitmap[Position(i, j)]);
+            RGBColor RGBColor(bitmap[Position2D(i, j)]);
 
             out.write(reinterpret_cast<char*>(&RGBColor), sizeof(RGBColor));
         }

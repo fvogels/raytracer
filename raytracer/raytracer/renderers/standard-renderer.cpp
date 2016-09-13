@@ -27,8 +27,8 @@ namespace
             auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
 
-            for_each_pixel([&](Position pixel_coordinates) {
-                Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+            for_each_pixel([&](Position2D pixel_coordinates) {
+                Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
                 Color c = render_pixel(window_rasterizer, pixel_coordinates, scene);
 
                 bitmap[bitmap_coordinates] = c;
@@ -38,7 +38,7 @@ namespace
         }
 
     private:
-        Color render_pixel(const math::Rasterizer& window_rasterizer, const Position& position, const Scene& scene) const
+        Color render_pixel(const math::Rasterizer& window_rasterizer, const Position2D& position, const Scene& scene) const
         {
             math::Rectangle2D pixel_rectangle = window_rasterizer[position];
             imaging::Color c = imaging::colors::black();

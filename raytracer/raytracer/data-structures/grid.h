@@ -11,14 +11,14 @@ namespace data
     class Grid
     {
     public:
-        Grid(unsigned width, unsigned height, std::function<T(const Position&)> initializer)
+        Grid(unsigned width, unsigned height, std::function<T(const Position2D&)> initializer)
             : Grid(width, height)
         {
             for (unsigned y = 0; y != height; ++y)
             {
                 for (unsigned x = 0; x != width; ++x)
                 {
-                    Position p(x, y);
+                    Position2D p(x, y);
 
                     (*this)[p] = initializer(p);
                 }
@@ -26,7 +26,7 @@ namespace data
         }
 
         Grid(unsigned width, unsigned height, T initial_value)
-            : Grid(width, height, [&initial_value](const Position&) { return initial_value; })
+            : Grid(width, height, [&initial_value](const Position2D&) { return initial_value; })
         {
             // NOP
         }
@@ -38,17 +38,17 @@ namespace data
         }
 
         Grid(const Grid<T>& grid)
-            : Grid(grid.width(), grid.height(), [&grid](const Position& p) { return grid[p]; })
+            : Grid(grid.width(), grid.height(), [&grid](const Position2D& p) { return grid[p]; })
         {
             // NOP
         }
 
-        T& operator [](const Position& p)
+        T& operator [](const Position2D& p)
         {
             return m_elts[p.x + p.y * m_width];
         }
 
-        const T& operator [](const Position& p) const
+        const T& operator [](const Position2D& p) const
         {
             return m_elts[p.x + p.y * m_width];
         }
@@ -63,12 +63,12 @@ namespace data
             return m_height;
         }
 
-        bool is_inside(const Position& p) const
+        bool is_inside(const Position2D& p) const
         {
             return p.x < m_width && p.y < m_height;
         }
 
-        void around(const Position& p, unsigned distance, std::function<void(const Position&)> callback) const
+        void around(const Position2D& p, unsigned distance, std::function<void(const Position2D&)> callback) const
         {
             int dist = int(distance);
 
@@ -76,7 +76,7 @@ namespace data
             {
                 for (int dy = -dist; dy <= dist; ++dy)
                 {
-                    Position q(p.x + dx, p.y + dy);
+                    Position2D q(p.x + dx, p.y + dy);
 
                     if (is_inside(q))
                     {
@@ -86,13 +86,13 @@ namespace data
             }
         }
 
-        void for_each_position(std::function<void(const Position&)> callback) const
+        void for_each_position(std::function<void(const Position2D&)> callback) const
         {
             for (unsigned y = 0; y != m_height; ++y)
             {
                 for (unsigned x = 0; x != m_width; ++x)
                 {
-                    callback(Position(x, y));
+                    callback(Position2D(x, y));
                 }
             }
         }

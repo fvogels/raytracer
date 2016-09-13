@@ -22,6 +22,6 @@ namespace math
         unsigned horizontal_subdivisions() const { return m_horizontal_subdivisions; }
         unsigned vertical_subdivisions() const { return m_vertical_subdivisions; }
 
-        Rectangle2D operator [](const Position&) const;
+        Rectangle2D operator [](const Position2D&) const;
     };
 }

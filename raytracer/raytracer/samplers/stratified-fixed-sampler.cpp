@@ -21,7 +21,7 @@ namespace
             {
                 for (unsigned x = 0; x != this->m_columns; ++x)
                 {
-                    auto subrectangle = raster[Position(x, y)];
+                    auto subrectangle = raster[Position2D(x, y)];
 
                     function(subrectangle.center());
                 }

@@ -36,7 +36,7 @@ namespace raytracer
                 /// <summary>
                 /// Calls given function <paramref name="callback" /> for each pixel.
                 /// </summary>
-                void for_each_pixel(std::function<void(Position)> callback) const;
+                void for_each_pixel(std::function<void(Position2D)> callback) const;
 
             private:
                 tasks::TaskScheduler m_scheduler;

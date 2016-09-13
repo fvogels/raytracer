@@ -33,7 +33,7 @@ namespace
             {
                 unsigned x = columns[y];
                 
-                auto subrectangle = raster[Position(x, y)];
+                auto subrectangle = raster[Position2D(x, y)];
                 double rx = distribution(generator);
                 double ry = distribution(generator);
                 Point2D p = subrectangle.from_relative(Point2D(rx, ry));

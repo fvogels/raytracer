@@ -3,11 +3,11 @@
 #include <iostream>
 
 
-struct Position final
+struct Position2D final
 {
     unsigned x, y;
 
-    Position(unsigned x, unsigned y)
+    Position2D(unsigned x, unsigned y)
         : x(x), y(y) { }
 
     void move(int dx, int dy)
@@ -16,9 +16,9 @@ struct Position final
         y += dy;
     }
 
-    Position moved(int dx, int dy) const
+    Position2D moved(int dx, int dy) const
     {
-        Position copy = *this;
+        Position2D copy = *this;
         copy.move(dx, dy);
         return copy;
     }
@@ -32,7 +32,7 @@ struct Position3D final
         : x(x), y(y), z(z) { }
 };
 
-inline std::ostream& operator <<(std::ostream& out, const Position& p)
+inline std::ostream& operator <<(std::ostream& out, const Position2D& p)
 {
     return out << "(" << p.x << "," << p.y << ")";
 }

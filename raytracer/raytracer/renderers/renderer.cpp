@@ -10,12 +10,12 @@ raytracer::renderers::_private_::RendererImplementation::RendererImplementation(
     // NOP
 }
 
-void raytracer::renderers::_private_::RendererImplementation::for_each_pixel(std::function<void(Position)> callback) const
+void raytracer::renderers::_private_::RendererImplementation::for_each_pixel(std::function<void(Position2D)> callback) const
 {
     auto tasks = tasks::range<unsigned>(0, m_vertical_size, [this, callback](unsigned y) {
         for (unsigned x = 0; x != m_horizontal_size; ++x)
         {
-            callback(Position(x, y));
+            callback(Position2D(x, y));
         }
     });
 

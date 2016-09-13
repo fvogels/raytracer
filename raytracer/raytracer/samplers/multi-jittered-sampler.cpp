@@ -38,7 +38,7 @@ namespace
                     unsigned sy = index / m_sqrt_sample_count;
                     unsigned cx = x * m_sqrt_sample_count + sx;
                     unsigned cy = y * m_sqrt_sample_count + sy;
-                    auto subrectangle = raster[Position(cx, cy)];
+                    auto subrectangle = raster[Position2D(cx, cy)];
 
                     double rx = distribution(generator);
                     double ry = distribution(generator);

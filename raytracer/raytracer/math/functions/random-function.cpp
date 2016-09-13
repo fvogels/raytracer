@@ -67,11 +67,11 @@ math::Function<double(unsigned)> math::functions::random::unsigned_to_double(uns
     return from_lambda(lambda);
 }
 
-math::Function<Vector2D(const Position&)> math::functions::random::position_to_vector2d(unsigned seed)
+math::Function<Vector2D(const Position2D&)> math::functions::random::position_to_vector2d(unsigned seed)
 {
     auto helper = unsigned_to_double(seed);
 
-    std::function<Vector2D(const Position&)> lambda = [helper](const Position& p) -> Vector2D {
+    std::function<Vector2D(const Position2D&)> lambda = [helper](const Position2D& p) -> Vector2D {
         auto theta = helper(p.x * 73246 + p.y * 46976) * 360;
 
         return Vector2D::polar(1, Angle::degrees(theta));

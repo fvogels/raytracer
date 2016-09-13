@@ -42,8 +42,8 @@ namespace
             {
                 TIMED_SCOPE(timer, "Render phase");
 
-                for_each_pixel([&](Position pixel_coordinates) {
-                    Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+                for_each_pixel([&](Position2D pixel_coordinates) {
+                    Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
                     math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
                     imaging::Color c = imaging::colors::black();
                     unsigned sample_count = 0;
@@ -66,9 +66,9 @@ namespace
             {
                 TIMED_SCOPE(timer, "Edge detected phase");
 
-                for_each_pixel([&](Position pixel_coordinates)
+                for_each_pixel([&](Position2D pixel_coordinates)
                 {
-                    Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+                    Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
                     unsigned border_count = 0;
 
                     for (auto& pair : group_grid[pixel_coordinates])
@@ -77,7 +77,7 @@ namespace
                         Point2D current_xy = pair.second;
                         bool is_border = false;
 
-                        group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position& neighbor_pixel_position) {
+                        group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position2D& neighbor_pixel_position) {
                             for (auto& pair : group_grid[neighbor_pixel_position])
                             {
                                 unsigned neighbor_id = pair.first;

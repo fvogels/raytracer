@@ -22,7 +22,7 @@ void imaging::write_text_ppm(const Bitmap& bitmap, std::ostream& out)
     {
         for (unsigned x = 0; x != bitmap.width(); ++x)
         {
-            Color c = bitmap[Position(x, y)].clamped();
+            Color c = bitmap[Position2D(x, y)].clamped();
 
             assert(interval(0.0, 1.0).contains(c.r));
             assert(interval(0.0, 1.0).contains(c.g));
@@ -52,7 +52,7 @@ void imaging::write_binary_ppm(const Bitmap& bitmap, std::ostream& out)
     {
         for (unsigned x = 0; x != bitmap.width(); ++x)
         {
-            Color c = bitmap[Position(x, y)].clamped();
+            Color c = bitmap[Position2D(x, y)].clamped();
 
             assert(interval(0.0, 1.0).contains(c.r));
             assert(interval(0.0, 1.0).contains(c.g));

@@ -121,7 +121,7 @@ namespace
     class PerlinNoise2D : public FunctionBody<double, const Point2D&>
     {
     public:
-        PerlinNoise2D(Function<Vector2D(const Position&)> random)
+        PerlinNoise2D(Function<Vector2D(const Position2D&)> random)
             : m_random(random)
         {
             // NOP
@@ -162,12 +162,12 @@ namespace
             unsigned kx = unsigned(fx);
             unsigned ky = unsigned(fy);
 
-            Vector2D v = m_random(Position(kx, ky));
+            Vector2D v = m_random(Position2D(kx, ky));
 
             return (p - fp).dot(v);
         }
 
-        Function<Vector2D(const Position&)> m_random;
+        Function<Vector2D(const Position2D&)> m_random;
     };
 
     class PerlinNoise3D : public FunctionBody<double, const Point3D&>

@@ -265,7 +265,7 @@ namespace
 
             for (unsigned x = 0; x != bmp.width(); ++x)
             {
-                Position p{ x, bmp.height() - y - 1 };
+                Position2D p{ x, bmp.height() - y - 1 };
                 array<uint8_t> pixelBytes = scanline.slice(x * sizeof(RGB));
                 RGB* pixel = reinterpret<RGB>(pixelBytes);
 
@@ -282,7 +282,7 @@ namespace
 
             for (unsigned x = 0; x != bmp.width(); ++x)
             {
-                Position p{ x, bmp.height() - y - 1 };
+                Position2D p{ x, bmp.height() - y - 1 };
                 array<uint8_t> pixelBytes = scanline.slice(x * sizeof(ARGB));
                 ARGB* pixel = reinterpret<ARGB>(pixelBytes);
 
@@ -362,7 +362,7 @@ void imaging::save_bitmap(const std::string& path, const Bitmap& bitmap)
     {
         for (unsigned x = 0; x < bitmap.width(); ++x)
         {
-            Position pos(x, y);
+            Position2D pos(x, y);
 
             scanline[x] = to_argb(bitmap[pos]);
         }

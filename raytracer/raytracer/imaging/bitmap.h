@@ -34,17 +34,17 @@ namespace imaging
         /// <summary>
         /// Checks if the given <paramref name="position" /> is inside the bitmap.
         /// </summary>
-        bool is_inside(const Position& position) const;
+        bool is_inside(const Position2D& position) const;
 
         /// <summary>
         /// Gives access to the pixel at the given <paramref name="position" />.
         /// </summary>
-        Color& operator [](const Position& position);
+        Color& operator [](const Position2D& position);
 
         /// <summary>
         /// Gives readonly access to the pixel at the given <paramref name="position" />.
         /// </summary>
-        const Color& operator [](const Position&) const;
+        const Color& operator [](const Position2D&) const;
 
         /// <summary>
         /// Returns the width of the bitmap.
@@ -81,7 +81,7 @@ namespace imaging
         /// This is basically a loop that iterates over the entire bitmap.
         /// No specific order is guaranteed.
         /// </summary>
-        void for_each_position(std::function<void(const Position&)> function) const;
+        void for_each_position(std::function<void(const Position2D&)> function) const;
 
         /// <summary>
         /// Overwrites all pixels with the given <paramref name="color" />.

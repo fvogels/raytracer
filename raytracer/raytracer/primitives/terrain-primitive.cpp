@@ -73,20 +73,20 @@ namespace
                     const double dydz = (noise(p + Vector2D(0, dz)) - noise(p - Vector2D(0, dz))) / (2 * dz);
                     const Vector3D n = Vector3D(-dydx, 1, -dydz).normalized();
 
-                    m_height_map[Position(x, z)] = y;
-                    m_normal_map[Position(x, z)] = n;
+                    m_height_map[Position2D(x, z)] = y;
+                    m_normal_map[Position2D(x, z)] = n;
                 }
             }
         }
 
         Point3D vertex_at(unsigned x, unsigned z)
         {
-            return Point3D(x * m_square_x_size, m_height_map[Position(x, z)], z * m_square_z_size);
+            return Point3D(x * m_square_x_size, m_height_map[Position2D(x, z)], z * m_square_z_size);
         }
 
         Vector3D normal_at(unsigned x, unsigned z)
         {
-            return m_normal_map[Position(x, z)];
+            return m_normal_map[Position2D(x, z)];
         }
 
         data::Grid<double> m_height_map;

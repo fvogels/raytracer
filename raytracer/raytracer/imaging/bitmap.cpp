@@ -21,19 +21,19 @@ unsigned imaging::Bitmap::height() const
     return m_pixels.height();
 }
 
-bool imaging::Bitmap::is_inside(const Position& p) const
+bool imaging::Bitmap::is_inside(const Position2D& p) const
 {
     return p.x < width() && p.y < height();
 }
 
-Color& imaging::Bitmap::operator[](const Position& p)
+Color& imaging::Bitmap::operator[](const Position2D& p)
 {
     assert(is_inside(p));
 
     return m_pixels[p];
 }
 
-const Color& imaging::Bitmap::operator[](const Position& p) const
+const Color& imaging::Bitmap::operator[](const Position2D& p) const
 {
     assert(is_inside(p));
 
@@ -42,12 +42,12 @@ const Color& imaging::Bitmap::operator[](const Position& p) const
 
 void imaging::Bitmap::clear(const Color& Color)
 {
-    for_each_position([this, &Color](const Position& p) {
+    for_each_position([this, &Color](const Position2D& p) {
         m_pixels[p] = Color;
     });
 }
 
-void imaging::Bitmap::for_each_position(std::function<void(const Position&)> callback) const
+void imaging::Bitmap::for_each_position(std::function<void(const Position2D&)> callback) const
 {
     m_pixels.for_each_position(callback);
 }
@@ -57,7 +57,7 @@ Bitmap& imaging::Bitmap::operator +=(const Bitmap& bitmap)
     assert(width() == bitmap.width());
     assert(height() == bitmap.height());
 
-    for_each_position([this, &bitmap](const Position& p) {
+    for_each_position([this, &bitmap](const Position2D& p) {
         (*this)[p] += bitmap[p];
     });
 
@@ -69,7 +69,7 @@ Bitmap& imaging::Bitmap::operator -=(const Bitmap& bitmap)
     assert(width() == bitmap.width());
     assert(height() == bitmap.height());
 
-    for_each_position([this, &bitmap](const Position& p) {
+    for_each_position([this, &bitmap](const Position2D& p) {
         (*this)[p] -= bitmap[p];
     });
 
@@ -78,7 +78,7 @@ Bitmap& imaging::Bitmap::operator -=(const Bitmap& bitmap)
 
 Bitmap& imaging::Bitmap::operator *=(double constant)
 {
-    for_each_position([this, constant](const Position& p) {
+    for_each_position([this, constant](const Position2D& p) {
         (*this)[p] *= constant;
     });
 
@@ -92,7 +92,7 @@ Bitmap& imaging::Bitmap::operator /=(double constant)
 
 void imaging::Bitmap::invert()
 {
-    for_each_position([this](const Position& position) {
+    for_each_position([this](const Position2D& position) {
         (*this)[position].invert();
     });
 }

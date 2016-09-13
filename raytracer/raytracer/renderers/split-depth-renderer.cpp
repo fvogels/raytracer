@@ -29,8 +29,8 @@ namespace
             auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
 
-            for_each_pixel([&](Position pixel_coordinates) {
-                Position bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+            for_each_pixel([&](Position2D pixel_coordinates) {
+                Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
                 bool on_split = is_on_split(pixel_coordinates);
 
                 math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
@@ -63,7 +63,7 @@ namespace
         }
 
     private:
-        bool is_on_split(const Position& pixel_coordinates) const
+        bool is_on_split(const Position2D& pixel_coordinates) const
         {
             return abs(int(pixel_coordinates.x) - int(m_horizontal_size / 3)) < m_split_thickness_in_pixels / 2 ||
                 abs(int(pixel_coordinates.x) - int(2 * m_horizontal_size / 3)) < m_split_thickness_in_pixels / 2;

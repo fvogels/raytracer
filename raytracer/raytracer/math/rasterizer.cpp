@@ -3,7 +3,7 @@
 using namespace math;
 
 
-Rectangle2D math::Rasterizer::operator [](const Position& pos) const
+Rectangle2D math::Rasterizer::operator [](const Position2D& pos) const
 {
     Vector2D x_axis = this->rect.x_axis / this->m_horizontal_subdivisions;
     Vector2D y_axis = this->rect.y_axis / this->m_vertical_subdivisions;

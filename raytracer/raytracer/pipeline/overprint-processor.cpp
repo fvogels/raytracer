@@ -19,7 +19,7 @@ namespace
             }
             else
             {
-                m_result->for_each_position([this, bitmap](const Position& position) {
+                m_result->for_each_position([this, bitmap](const Position2D& position) {
                     (*m_result)[position] += (*bitmap)[position];
                 });
             }
