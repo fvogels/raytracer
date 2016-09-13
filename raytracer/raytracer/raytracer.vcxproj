@@ -630,6 +630,7 @@
     <ClCompile Include="animation\lissajous.cpp" />
     <ClCompile Include="loopers\single-threaded-looper.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
+    <ClCompile Include="tasks\lambda-task.cpp" />
     <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\main.cpp" />
@@ -870,6 +871,7 @@
     <ClInclude Include="animation\lissajous.h" />
     <ClInclude Include="math\transformation2d.h" />
     <ClInclude Include="loopers\single-threaded-looper.h" />
+    <ClInclude Include="tasks\lambda-task.h" />
     <ClInclude Include="tasks\parallel-task-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
     <ClInclude Include="tasks\task-scheduler.h" />
