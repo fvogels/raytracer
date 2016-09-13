@@ -874,8 +874,11 @@
     <ClInclude Include="tasks\lambda-task.h" />
     <ClInclude Include="tasks\parallel-task-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
+    <ClInclude Include="tasks\task-helpers.h" />
     <ClInclude Include="tasks\task-scheduler.h" />
+    <ClInclude Include="tasks\task-schedulers.h" />
     <ClInclude Include="tasks\task.h" />
+    <ClInclude Include="tasks\tasks.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="loopers\looper.h" />
