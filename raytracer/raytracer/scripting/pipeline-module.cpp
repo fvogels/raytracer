@@ -7,7 +7,6 @@
 #include "renderers/renderers.h"
 #include "samplers/samplers.h"
 #include "raytracers/ray-tracers.h"
-#include "loopers/looper.h"
 #include "animation/animation.h"
 #include "easylogging++.h"
 #include <typeinfo>

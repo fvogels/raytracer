@@ -7,6 +7,7 @@
 #include "demos/demos.h"
 #include "pipeline/pipelines.h"
 #include "util/beep.h"
+#include "scripting/scripting.h"
 #include <assert.h>
 
 using namespace raytracer;

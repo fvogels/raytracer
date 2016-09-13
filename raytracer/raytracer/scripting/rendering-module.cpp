@@ -6,7 +6,7 @@
 #include "raytracers/ray-tracer.h"
 #include "samplers/samplers.h"
 #include "imaging/wif-format.h"
-#include "loopers/loopers.h"
+#include "tasks/task-schedulers.h"
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -18,12 +18,12 @@ namespace
     {
         Renderer standard(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer) const
         {
-            return raytracer::renderers::standard(width, height, sampler, ray_tracer, loopers::smart_looper(4));
+            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(4));
         }
 
         Renderer standard2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned thread_count) const
         {
-            return raytracer::renderers::standard(width, height, sampler, ray_tracer, loopers::smart_looper(thread_count));
+            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count));
         }
 
         Renderer standard_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -41,12 +41,12 @@ namespace
 
         Renderer edge(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness) const
         {
-            return raytracer::renderers::edge(width, height, sampler, ray_tracer, loopers::smart_looper(4), edge_thickness);
+            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(4), edge_thickness);
         }
 
         Renderer edge2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness, unsigned thread_count) const
         {
-            return raytracer::renderers::edge(width, height, sampler, ray_tracer, loopers::smart_looper(thread_count), edge_thickness);
+            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count), edge_thickness);
         }
 
         Renderer edge_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -65,12 +65,12 @@ namespace
 
         Renderer cartoon(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness) const
         {
-            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, loopers::smart_looper(4), shade_count, edge_thickness);
+            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(4), shade_count, edge_thickness);
         }
 
         Renderer cartoon2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness, unsigned thread_count) const
         {
-            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, loopers::smart_looper(thread_count), shade_count, edge_thickness);
+            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count), shade_count, edge_thickness);
         }
 
         Renderer cartoon_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -90,7 +90,7 @@ namespace
 
         Renderer split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at, unsigned thread_count) const
         {
-            return raytracer::renderers::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, loopers::smart_looper(thread_count), split_thickness, eye, look_at);
+            return raytracer::renderers::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, tasks::schedulers::parallel(thread_count), split_thickness, eye, look_at);
         }
 
         Renderer split_depth2(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at) const
