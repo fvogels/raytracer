@@ -79,16 +79,12 @@ namespace
             // Let sampler determine how many samples we take in pixel_rectangle
             auto samples = m_sampler->sample(pixel_rectangle);
 
-            for ( auto& sample_position : samples )
-            {
-                // Ask the camera which rays pass through p
-                auto rays = scene.camera->enumerate_rays(sample_position);
-
-                for (auto& ray : rays) {
+            m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const Point2D& sample_position) {
+                scene.camera->enumerate_rays(sample_position, [this, &c, &sample_count, &scene](const Ray& ray) {
                     c += m_ray_tracer->trace(scene, ray).color;
                     ++sample_count;
-                }
-            }
+                });
+            });
 
             return c / sample_count;
         }
