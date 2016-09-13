@@ -37,7 +37,7 @@ namespace raytracer
                 /// called for each ray. This removes the need for heap allocation and should be more efficient.
                 /// </summary>
                 /// <param name="p">
-                /// Point in [0,1]x[0,1] subspace.
+                /// Point in the [0,1]x[0,1] rectangle.
                 /// </param>
                 /// <param name="callback">
                 /// Function that will get called for each ray.

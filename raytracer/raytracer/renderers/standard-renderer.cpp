@@ -22,15 +22,27 @@ namespace
         {
             TIMED_FUNC(timer);
 
+            // Create a [0,1] x [0,1] window.
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+
+            // Divide this window is small rectangles (which represent pixels)
             Rasterizer window_rasterizer(window, m_horizontal_size, m_vertical_size);
+
+            // Create a bitmap of the same size
             auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
 
+            // Repeat for each pixel
             for_each_pixel([&](Position2D pixel_coordinates) {
+                // The pixel coordinates assume the origin is in the lower left corner,
+                // while the bitmap chooses the origin in the upper left corner,
+                // so we need to flip the y-coordinate
                 Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+
+                // Determine the color of the pixel
                 Color c = render_pixel(window_rasterizer, pixel_coordinates, scene);
 
+                // Assign color to bitmap
                 bitmap[bitmap_coordinates] = c;
             });
 
@@ -38,18 +50,45 @@ namespace
         }
 
     private:
+        /// <summary>
+        /// Renders a single pixel.
+        /// </summary>
+        /// <param name="window_rasterizer">
+        /// Rasterizer that splits the window into X by Y pixels.
+        /// </param>
+        /// <param name="position">
+        /// Pixel coordinates.
+        /// </param>
+        /// <param name="scene">
+        /// Scene.
+        /// </param>
+        /// <returns>
+        /// Color of the pixel.
+        /// <returns>
         Color render_pixel(const math::Rasterizer& window_rasterizer, const Position2D& position, const Scene& scene) const
         {
+            // Find which part of the [0, 1] x [0, 1] corresponds to the pixel at the given position
             math::Rectangle2D pixel_rectangle = window_rasterizer[position];
+
+            // Initialize color to black
             imaging::Color c = imaging::colors::black();
+
+            // Count number of samples taken
             int sample_count = 0;
 
-            m_sampler->sample(pixel_rectangle, [this, &c, &sample_count, &scene](const Point2D& p) {
-                scene.camera->enumerate_rays(p, [this, &c, &sample_count, &scene](const Ray& ray) {
+            // Let sampler determine how many samples we take in pixel_rectangle
+            auto samples = m_sampler->sample(pixel_rectangle);
+
+            for ( auto& sample_position : samples )
+            {
+                // Ask the camera which rays pass through p
+                auto rays = scene.camera->enumerate_rays(sample_position);
+
+                for (auto& ray : rays) {
                     c += m_ray_tracer->trace(scene, ray).color;
                     ++sample_count;
-                });
-            });
+                }
+            }
 
             return c / sample_count;
         }
