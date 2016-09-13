@@ -36,3 +36,8 @@ inline std::ostream& operator <<(std::ostream& out, const Position2D& p)
 {
     return out << "(" << p.x << "," << p.y << ")";
 }
+
+inline std::ostream& operator <<(std::ostream& out, const Position3D& p)
+{
+    return out << "(" << p.x << "," << p.y << "," << p.z << ")";
+}
