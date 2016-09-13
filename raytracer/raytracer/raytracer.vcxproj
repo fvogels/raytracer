@@ -486,8 +486,6 @@
     <ClCompile Include="demos\design-example.cpp" />
     <ClCompile Include="demos\mesh-demo.cpp" />
     <ClCompile Include="demos\terrain-demo.cpp" />
-    <ClCompile Include="loopers\multithreaded-looper.cpp" />
-    <ClCompile Include="loopers\smart-looper.cpp" />
     <ClCompile Include="math\angle.cpp" />
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\circular-animation.cpp" />
@@ -628,7 +626,6 @@
     <ClCompile Include="scripting\samplers-module.cpp" />
     <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="animation\lissajous.cpp" />
-    <ClCompile Include="loopers\single-threaded-looper.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tasks\lambda-task.cpp" />
     <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
@@ -691,9 +688,6 @@
     <ClInclude Include="demos\design-example.h" />
     <ClInclude Include="demos\mesh-demo.h" />
     <ClInclude Include="demos\terrain-demo.h" />
-    <ClInclude Include="loopers\loopers.h" />
-    <ClInclude Include="loopers\multithreaded-looper.h" />
-    <ClInclude Include="loopers\smart-looper.h" />
     <ClInclude Include="materials\composition-material.h" />
     <ClInclude Include="demos\plane-bumpifier-demo.h" />
     <ClInclude Include="demos\sampler-demo.h" />
@@ -870,7 +864,6 @@
     <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="animation\lissajous.h" />
     <ClInclude Include="math\transformation2d.h" />
-    <ClInclude Include="loopers\single-threaded-looper.h" />
     <ClInclude Include="tasks\lambda-task.h" />
     <ClInclude Include="tasks\parallel-task-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
@@ -881,7 +874,6 @@
     <ClInclude Include="tasks\tasks.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
-    <ClInclude Include="loopers\looper.h" />
     <ClInclude Include="util\misc.h" />
     <ClInclude Include="data-structures\position.h" />
     <ClInclude Include="math\rectangle2d.h" />

@@ -1,6 +1,5 @@
 #include "demos/depth-of-field-demo.h"
 #include "demos/demo.h"
-#include "loopers/loopers.h"
 #include "easylogging++.h"
 
 using namespace raytracer;
