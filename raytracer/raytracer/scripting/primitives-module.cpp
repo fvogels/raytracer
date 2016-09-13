@@ -77,9 +77,14 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
 
     util::register_type<Primitive>(*module, "Primitive");
 
+    // Binds helper function defined earlier in this file, exposing the function under the same name
 #   define BIND_HELPER_FUNCTION(NAME)                  BIND_HELPER_FUNCTION_AS(NAME, NAME)
-#   define BIND_DIRECTLY(NAME)                         BIND_HELPER_FUNCTION_AS(raytracer::primitives::NAME, NAME)
+
+    // Binds helper function defined earlier in this file, exposing the function under a different name
 #   define BIND_HELPER_FUNCTION_AS(FACTORY, NAME)      module->add(fun(&FACTORY), #NAME)
+
+    // Bypasses helper functions and directly binds to a function from raytracer::primitives
+#   define BIND_DIRECTLY(NAME)                         BIND_HELPER_FUNCTION_AS(raytracer::primitives::NAME, NAME)
     BIND_DIRECTLY(sphere);
     BIND_DIRECTLY(xy_plane);
     BIND_DIRECTLY(xz_plane);

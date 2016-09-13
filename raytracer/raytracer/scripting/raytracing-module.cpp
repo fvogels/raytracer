@@ -24,18 +24,22 @@ namespace
 
         RayTracer v(int version) const
         {
-#           define DISPATCH(N) if ( version == N ) return v ## N()
-            DISPATCH(0);
-            DISPATCH(1);
-            DISPATCH(2);
-            DISPATCH(3);
-            DISPATCH(4);
-            DISPATCH(5);
-            DISPATCH(6);
+            switch (version)
+            {
+#           define DISPATCH(N) case N: return v ## N()
+                DISPATCH(0);
+                DISPATCH(1);
+                DISPATCH(2);
+                DISPATCH(3);
+                DISPATCH(4);
+                DISPATCH(5);
+                DISPATCH(6);
 #           undef DISPATCH
 
-            LOG(ERROR) << "Unknown ray tracer version " << version;
-            abort();
+            default:
+                LOG(ERROR) << "Unknown ray tracer version " << version;
+                abort();
+            }
         }
     };
 
@@ -48,14 +52,20 @@ namespace
 
 ModulePtr raytracer::scripting::_private_::create_raytracing_module()
 {
+    // Create new chaiscript module
     auto module = std::make_shared<chaiscript::Module>();
 
+    // Tell chaiscript about the RayTracer type
     raytracer::scripting::util::register_type<raytracer::RayTracer>(*module, "RayTracer");
 
+    // Create library
     auto raytracer_library = std::make_shared<RaytracerLibrary>();
+
+    // Expose library under the given name (member functions need to be exposed separately)
     module->add_global_const(chaiscript::const_var(raytracer_library), "Raytracers");
 
-#   define BIND(NAME) module->add(fun(&RaytracerLibrary::NAME), #NAME)
+    // Expose each member of the library
+#   define BIND(NAME)   module->add(fun(&RaytracerLibrary::NAME), #NAME)
     BIND(v0);
     BIND(v1);
     BIND(v2);
@@ -66,6 +76,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     BIND(v);
 #   undef BIND
 
+    // Expose create_scene under the same name
     module->add(fun(&create_scene), "create_scene");
 
     return module;
