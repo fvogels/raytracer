@@ -125,20 +125,20 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     auto renderer_library = std::make_shared<RendererLibrary>();
     module->add_global_const(chaiscript::const_var(renderer_library), "Renderers");
 
-#   define BIND(INTERNAL, EXTERNAL) module->add(fun(&RendererLibrary::INTERNAL), #EXTERNAL)
-    BIND(standard, standard);
-    BIND(standard2, standard);
-    BIND(standard_by_map, standard);
-    BIND(edge, edge);
-    BIND(edge2, edge);
-    BIND(edge_by_map, edge);
-    BIND(cartoon, cartoon);
-    BIND(cartoon2, cartoon);
-    BIND(cartoon_by_map, cartoon);
-    BIND(split_depth, split_depth);
-    BIND(split_depth2, split_depth);
-    BIND(split_depth_by_map, split_depth);
-#   undef BIND
+#   define BIND_AS(INTERNAL, EXTERNAL) module->add(fun(&RendererLibrary::INTERNAL), #EXTERNAL)
+    BIND_AS(standard, standard);
+    BIND_AS(standard2, standard);
+    BIND_AS(standard_by_map, standard);
+    BIND_AS(edge, edge);
+    BIND_AS(edge2, edge);
+    BIND_AS(edge_by_map, edge);
+    BIND_AS(cartoon, cartoon);
+    BIND_AS(cartoon2, cartoon);
+    BIND_AS(cartoon_by_map, cartoon);
+    BIND_AS(split_depth, split_depth);
+    BIND_AS(split_depth2, split_depth);
+    BIND_AS(split_depth_by_map, split_depth);
+#   undef BIND_AS
 
     return module;
 }
