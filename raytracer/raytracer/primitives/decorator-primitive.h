@@ -8,6 +8,10 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive decorate(Material, Primitive);
+        /// <summary>
+        /// Decorates the given <paramref name="primitive" />
+        /// with the given <paramref name="material" />.
+        /// </summary>
+        Primitive decorate(Material material, Primitive primitive);
     }
 }

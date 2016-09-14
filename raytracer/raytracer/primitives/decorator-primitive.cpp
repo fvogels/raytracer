@@ -44,16 +44,21 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
+            // Ask child primitive for all of its hits
             auto hits = this->m_child->find_all_hits(ray);
 
+            // Go through the hit list
             for (auto hit : hits)
             {
+                // If the hit has no material yet (maybe there's another decorator deeper down the primitive tree)
                 if (!hit->material)
                 {
+                    // Update the material
                     hit->material = this->m_material;
                 }
             }
 
+            // Return the updated hit list
             return hits;
         }
 

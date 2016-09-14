@@ -60,17 +60,16 @@ void process_command_line_arguments(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    const std::string path = "e:/temp/output/test.wif";
     logging::configure();
+    process_command_line_arguments(argc, argv);
 
-    // process_command_line_arguments(argc, argv);
-
+    const std::string path = "e:/temp/output/test.wif";
     // demos::fisheye(pipeline::wif(path)); beep();
     // demos::bumpify_sphere(pipeline::wif(path)); beep();
     // demos::bumpify_plane(pipeline::wif(path)); beep();
     // demos::marble(pipeline::wif(path)); beep();
     // demos::mesh(pipeline::wif(path)); beep();
-    demos::terrain(pipeline::wif(path)); beep();
+    // demos::terrain(pipeline::wif(path)); beep();
     // demos::samplers(pipeline::wif(path)); beep();
     // demos::depth_of_field(pipeline::wif(path)); beep();
     // demos::split_depth(pipeline::wif(path)); beep();
