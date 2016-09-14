@@ -25,7 +25,7 @@ namespace
             // Create a [0,1] x [0,1] window.
             Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
 
-            // Divide this window is small rectangles (which represent pixels)
+            // Divide this window in small rectangles (which represent pixels)
             Rasterizer window_rasterizer(window, m_horizontal_size, m_vertical_size);
 
             // Create a bitmap of the same size
