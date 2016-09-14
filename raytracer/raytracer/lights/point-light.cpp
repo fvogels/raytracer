@@ -12,6 +12,7 @@ std::vector<LightRay> raytracer::lights::_private_::PointLightImplementation::li
 {
     auto result = this->cast_lightray_to(p);
 
+    // Only return non-black light rays
     if (result.color != colors::black())
     {
         return std::vector<LightRay> { result };
