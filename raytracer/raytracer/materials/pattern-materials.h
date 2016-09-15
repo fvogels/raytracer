@@ -13,8 +13,8 @@ namespace raytracer
         Material vertical_lines(double, Material, Material);
         Material grid(double, Material, Material);
         Material checkered(Material, Material);
-        Material polka(double, Material, Material);
-        Material polka(double, double, Material, Material);
-        Material dalmatian(unsigned, Material, Material);
+        Material polka(double radius, Material, Material);
+        Material polka(double radius1, double radius2, Material, Material);
+        Material dalmatian(unsigned density, Material, Material);
     }
 }
