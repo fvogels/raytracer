@@ -74,7 +74,7 @@ namespace
 
             auto function = from_lambda(lambda);
 
-            return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(3));
+            return make_animation<std::shared_ptr<Scene>>(function, m_duration);
         }
     };
 }
