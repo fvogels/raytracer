@@ -61,7 +61,7 @@ void process_command_line_arguments(int argc, char** argv)
 int main(int argc, char** argv)
 {
     logging::configure();
-    process_command_line_arguments(argc, argv);
+    // process_command_line_arguments(argc, argv);
 
     const std::string path = "e:/temp/output/test.wif";
     // demos::fisheye(pipeline::wif(path)); beep();
@@ -73,8 +73,7 @@ int main(int argc, char** argv)
     // demos::samplers(pipeline::wif(path)); beep();
     // demos::depth_of_field(pipeline::wif(path)); beep();
     // demos::split_depth(pipeline::wif(path)); beep();
-
-    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
+    demos::cartoon_renderer(pipeline::wif(path)); beep();
 }
 
 #endif

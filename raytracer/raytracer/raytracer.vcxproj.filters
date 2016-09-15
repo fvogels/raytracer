@@ -471,6 +471,9 @@
     <ClCompile Include="tasks\lambda-task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="demos\cartoon-renderer-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1200,6 +1203,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tasks\tasks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\cartoon-renderer-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

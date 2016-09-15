@@ -8,3 +8,4 @@
 #include "demos/design-example.h"
 #include "demos/terrain-demo.h"
 #include "demos/mesh-demo.h"
+#include "demos/cartoon-renderer-demo.h"
