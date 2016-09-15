@@ -1,6 +1,7 @@
 #include "math/functions/easing/quadratic-easing-function.h"
 #include "math/interval.h"
 #include <assert.h>
+#include <cmath>
 
 using namespace math;
 using namespace math::functions;
@@ -35,11 +36,11 @@ EasingFunction math::functions::easing::quadratic_inout()
 
         if (t < 0.5)
         {
-            return 2 * pow(t, 2);
+            return 2 * std::pow(t, 2);
         }
         else
         {
-            return -2 * pow(t, 2) + 4 * t - 1;
+            return -2 * std::pow(t, 2) + 4 * t - 1;
         }
     };
 
