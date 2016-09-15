@@ -7,7 +7,7 @@ using namespace math;
 
 Function<bool(const Point2D&)> math::functions::dalmatian(unsigned density, unsigned seed)
 {
-    auto voronoi = math::voronoi2d(density);
+    auto voronoi = math::voronoi2d(density, seed);
 
     std::function<bool(const Point2D&)> function = [voronoi](const Point2D& p)
     {

@@ -19,6 +19,6 @@ namespace animation
             return a(looped_now);
         };
 
-        return make_animation(from_lambda(lambda), Duration::infinite());
+        return make_animation(math::from_lambda(lambda), Duration::infinite());
     }
 }

@@ -16,6 +16,6 @@ namespace animation
             return a(inverted_now);
         };
 
-        return make_animation(from_lambda(lambda), a.duration());
+        return make_animation(math::from_lambda(lambda), a.duration());
     }
 }
