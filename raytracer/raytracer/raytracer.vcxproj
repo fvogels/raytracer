@@ -483,6 +483,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="demos\cartoon-renderer-demo.cpp" />
+    <ClCompile Include="demos\dalmatian-demo.cpp" />
     <ClCompile Include="demos\demo.cpp" />
     <ClCompile Include="demos\design-example.cpp" />
     <ClCompile Include="demos\mesh-demo.cpp" />
@@ -686,6 +687,7 @@
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-processor.h" />
     <ClInclude Include="demos\cartoon-renderer-demo.h" />
+    <ClInclude Include="demos\dalmatian-demo.h" />
     <ClInclude Include="demos\demo.h" />
     <ClInclude Include="demos\design-example.h" />
     <ClInclude Include="demos\mesh-demo.h" />

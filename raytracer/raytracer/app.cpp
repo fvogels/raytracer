@@ -73,7 +73,8 @@ int main(int argc, char** argv)
     // demos::samplers(pipeline::wif(path)); beep();
     // demos::depth_of_field(pipeline::wif(path)); beep();
     // demos::split_depth(pipeline::wif(path)); beep();
-    demos::cartoon_renderer(pipeline::wif(path)); beep();
+    // demos::cartoon_renderer(pipeline::wif(path)); beep();
+    demos::dalmatian(pipeline::wif(path)); beep();
 }
 
 #endif

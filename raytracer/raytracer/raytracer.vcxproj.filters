@@ -474,6 +474,9 @@
     <ClCompile Include="demos\cartoon-renderer-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="demos\dalmatian-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1206,6 +1209,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demos\cartoon-renderer-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\dalmatian-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
