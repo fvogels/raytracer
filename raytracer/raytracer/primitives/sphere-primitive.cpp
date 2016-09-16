@@ -1,14 +1,12 @@
-#define _USE_MATH_DEFINES
 #include "primitives/sphere-primitive.h"
-#include "materials/material.h"
 #include "util/misc.h"
 #include "math/coordinate-systems.h"
 #include <assert.h>
-#include <cmath>
 
 using namespace raytracer;
 using namespace raytracer::primitives;
 using namespace math;
+
 
 namespace
 {
