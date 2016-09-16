@@ -8,6 +8,7 @@
 #include "pipeline/pipelines.h"
 #include "util/beep.h"
 #include "scripting/scripting.h"
+#include "performance/performance.h"
 #include <assert.h>
 
 using namespace raytracer;
@@ -42,6 +43,11 @@ namespace
     {
         ::beep();
     }
+
+    void print_statistics(const std::string&)
+    {
+        performance::print_statistics(std::cerr);
+    }
 }
 
 void process_command_line_arguments(int argc, char** argv)
@@ -52,6 +58,7 @@ void process_command_line_arguments(int argc, char** argv)
     processor.register_processor("--quiet", quiet);
     processor.register_processor("--version", show_version);
     processor.register_processor("--beep", emit_beep);
+    processor.register_processor("--statistics", print_statistics);
 
     processor.process(argc, argv);
 
@@ -76,6 +83,10 @@ int main(int argc, char** argv)
     // demos::cartoon_renderer(pipeline::wif(path)); beep();
     // demos::dalmatian2d(pipeline::wif(path)); beep();
     demos::dalmatian3d(pipeline::wif(path)); beep();
+
+    // performance::print_statistics(std::cerr);
+
+    performance::cleanup();
 }
 
 #endif
