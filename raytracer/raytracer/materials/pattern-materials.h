@@ -15,6 +15,6 @@ namespace raytracer
         Material checkered(Material, Material);
         Material polka(double radius, Material, Material);
         Material polka(double radius1, double radius2, Material, Material);
-        Material dalmatian(unsigned density, Material, Material);
+        Material dalmatian2d(unsigned density, Material, Material);
     }
 }

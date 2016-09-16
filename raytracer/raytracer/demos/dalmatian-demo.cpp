@@ -31,7 +31,7 @@ namespace
             MaterialProperties white_material_properties(colors::white() * 0.1, colors::black(), colors::black(), 0);
             Material black_material = uniform(white_material_properties);
             Material white_material = uniform(black_material_properties);
-            Material material = scale(0.05, 0.1, dalmatian(10, black_material, white_material));
+            Material material = scale(0.05, 0.1, dalmatian2d(10, black_material, white_material));
 
             Primitive primitive = decorate(material, sphere());
 

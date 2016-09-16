@@ -75,7 +75,7 @@ namespace
 
         Material dalmatian(unsigned density, Material x, Material y) const
         {
-            return raytracer::materials::dalmatian(density, x, y);
+            return raytracer::materials::dalmatian2d(density, x, y);
         }
 
         Material marble2d(unsigned octaves, double turbulence) const
