@@ -2,6 +2,7 @@
 #include "util/misc.h"
 #include "math/coordinate-systems.h"
 #include "math/quadratic_equation.h"
+#include "performance/performance.h"
 #include <assert.h>
 
 using namespace raytracer;
@@ -40,22 +41,10 @@ namespace
 
                         return true;
                     }
-                    else
-                    {
-                        // Our best t is not better than the pre-existing t
-                        return false;
-                    }
-                }
-                else
-                {
-                    // Both t1 and t2 were negative
-                    return false;
                 }
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
