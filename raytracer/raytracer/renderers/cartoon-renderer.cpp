@@ -35,7 +35,7 @@ namespace
 
             auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
-            Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+            Rectangle2D window(Point2D(0, 1), Vector2D(1, 0), Vector2D(0, -1));
             Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
             data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_size, m_vertical_size);
 
@@ -43,7 +43,6 @@ namespace
                 TIMED_SCOPE(timer, "Render phase");
 
                 for_each_pixel([&](Position2D pixel_coordinates) {
-                    Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
                     math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
                     imaging::Color c = imaging::colors::black();
                     unsigned sample_count = 0;
@@ -59,7 +58,7 @@ namespace
 
                     c /= sample_count;
 
-                    bitmap[bitmap_coordinates] = c;
+                    bitmap[pixel_coordinates] = c;
                 });
             }
 
