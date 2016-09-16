@@ -30,7 +30,7 @@ Point2D math::Voronoi2D::second_closest_to(const math::Point2D& p) const
 
 void math::Voronoi2D::enumerate_points_in_cell(int x, int y, std::function<void(const Point2D&)> callback) const
 {
-    for (int i = 0; i != m_density; ++i)
+    for (unsigned i = 0; i != m_density; ++i)
     {
         unsigned k = x * 71767 + y * 19178 + i * 57465;
 
