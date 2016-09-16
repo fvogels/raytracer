@@ -21,6 +21,13 @@ Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pa
     return composite(pattern >> bool_mapper);
 }
 
+Material raytracer::materials::pattern3d(math::Function<bool(const Point3D&)> pattern, Material m1, Material m2)
+{
+    auto bool_mapper = math::functions::bool_mapper(m1, m2);
+
+    return composite(pattern >> bool_mapper);
+}
+
 Material raytracer::materials::checkered(Material m1, Material m2)
 {
     return pattern2d(math::functions::checkered(), m1, m2);
@@ -54,4 +61,9 @@ Material raytracer::materials::polka(double radius1, double radius2, Material m1
 Material raytracer::materials::dalmatian2d(unsigned density, Material m1, Material m2)
 {
     return pattern2d(math::functions::dalmatian2d(density, 5461), m1, m2);
+}
+
+Material raytracer::materials::dalmatian3d(unsigned density, Material m1, Material m2)
+{
+    return pattern3d(math::functions::dalmatian3d(density, 5461), m1, m2);
 }
