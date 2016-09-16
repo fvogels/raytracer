@@ -414,12 +414,6 @@
     <ClCompile Include="primitives\cube-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\terrain-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -475,6 +469,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demos\dalmatian-demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="performance\performance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1212,6 +1212,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demos\dalmatian-demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="performance\performance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

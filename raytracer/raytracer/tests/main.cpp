@@ -3,6 +3,8 @@
 #include "Catch.h"
 #include "easylogging++.h"
 #include "logging.h"
+#include "performance/performance.h"
+
 
 int main(int argc, char* const argv[])
 {
@@ -13,7 +15,11 @@ int main(int argc, char* const argv[])
     
     Catch::Session session;
     session.useConfigData(data);
-    return session.run(argc, argv);
+    auto result = session.run(argc, argv);
+
+    performance::print_statistics(std::cerr);
+
+    return result;
 }
 
 #endif
