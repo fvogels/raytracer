@@ -7,6 +7,7 @@ file_template = proc do
     #include "Catch.h"
     #include "primitives/primitives.h"
     #include "math/approx.h"
+    #include <algorithm>
 
     using namespace math;
     using namespace raytracer;
@@ -334,11 +335,9 @@ test_file 'primitives/sphere/sphere-all-hits' do
         {
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
-
-            auto sphere = raytracer::primitives::sphere();
             Ray ray(ray_origin, ray_direction);
 
-            Hit hit;
+            auto sphere = raytracer::primitives::sphere();
 
             auto hits = sphere->find_all_hits(ray);
             REQUIRE(hits.size() == 2);
@@ -418,6 +417,72 @@ test_file 'primitives/sphere/sphere-all-hits' do
       data.ray_origin = '(0,0,0)'
       data.ray_direction = '(1,0,0)'
       data.expected_ts = [ '-1', '1' ]
+    end
+  end
+end
+
+
+test_file 'primitives/sphere/consistency' do  
+  template do
+    instance_eval(&file_template)
+  end
+
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Sphere] find_all_hits consistent with find_first_positive_hit, ray #{ray_origin} + #{ray_direction} * t", "[Sphere]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Vector3D ray_direction#{ray_direction};
+            Ray ray(ray_origin, ray_direction);
+
+            Primitive primitive = sphere();
+
+            Hit hit1;
+            bool found_hit = primitive->find_first_positive_hit(ray, &hit1);
+
+            auto hits = primitive->find_all_hits(ray);
+
+            if ( found_hit )
+            {
+                REQUIRE( hits.size() > 0 );
+
+                auto first_positive_position = std::find_if(hits.begin(), hits.end(), [](std::shared_ptr<Hit> h) { return h->t > 0; });
+                REQUIRE( first_positive_position != hits.end() );
+                auto hit2 = *first_positive_position;
+
+                CHECK( hit1.t == approx(hit2->t) );
+                CHECK( hit1.position == approx(hit2->position) );
+                CHECK( hit1.local_position.uv == approx(hit2->local_position.uv) );
+                CHECK( hit1.local_position.xyz == approx(hit2->local_position.xyz) );
+                CHECK( hit1.normal == approx(hit2->normal) );
+            }
+            else
+            {
+                for ( auto h : hits )
+                {
+                    REQUIRE( h->t <= 0 );
+                }
+            }
+        }
+      END
+    end
+
+    [-10, 0, 8].each do |x|
+      [-2, 0, 3].each do |y|
+        [-7, 0, 2].each do |z|
+          [-2, 6].each do |dx|
+            [-1, 2].each do |dy|
+              [-7, -1].each do |dz|
+                test_case do |data|
+                  data.ray_origin = "(#{x}, #{y}, #{z})"
+                  data.ray_direction = "(#{dx}, #{dy}, #{dz})"
+                end
+              end
+            end
+          end
+        end
+      end
     end
   end
 end
