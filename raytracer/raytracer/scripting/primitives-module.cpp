@@ -69,6 +69,13 @@ namespace
 
         return primitives::bumpify(perlin(now), primitive);
     }
+
+    Primitive crop_box(Primitive primitive, Interval<double> x_range, Interval<double> y_range, Interval<double> z_range)
+    {
+        math::Box box(x_range, y_range, z_range);
+
+        return primitives::crop_by_box(primitive, box);
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
@@ -119,6 +126,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(crop_along_x);
     BIND_DIRECTLY(crop_along_y);
     BIND_DIRECTLY(crop_along_z);
+    BIND_HELPER_FUNCTION(crop_box);
     BIND_DIRECTLY(crop_spherical);
     BIND_HELPER_FUNCTION(coarse);
     BIND_HELPER_FUNCTION_AS(bumpify2d_timed, bumpify);
