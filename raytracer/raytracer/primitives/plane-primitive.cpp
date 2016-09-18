@@ -8,15 +8,24 @@ using namespace math;
 
 namespace
 {
+    /// <summary>
+    /// Superclass for planes. Contains common logic.
+    /// </summary>
     class CoordinatePlaneImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     protected:
         const Vector3D m_normal;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="normal">
+        /// Normal vector on plane. Needs to have unit length.
+        /// </param>
         CoordinatePlaneImplementation(const Vector3D& normal)
             : m_normal(normal)
         {
-            // NOP
+            assert(normal.is_unit());
         }
 
         virtual void initialize_hit(Hit* hit, const Ray& ray, double t) const = 0;
@@ -26,42 +35,60 @@ namespace
         {
             assert(hit != nullptr);
 
+            // Compute denominator
             double denom = ray.direction.dot(m_normal);
 
-            if (denom == approx(0.0))
+            // If denominator == 0, there is no intersection (ray runs parallel to plane)
+            if (denom != approx(0.0))
             {
-                return false;
-            }
-            else
-            {
+                // Compute numerator
                 double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
+
+                // Compute t
                 double t = numer / denom;
 
+                // hit->t already contains a t-value
+                // Check that intersection is in front of eye and is closer than pre-existing hit
                 if (interval(0.0, hit->t).contains(t))
                 {
+                    // Our hit is better
+                    // Update hit object
                     initialize_hit(hit, ray, t);
 
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
+
+            return false;
         }
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
-            auto hit = std::make_shared<Hit>();
+            std::vector<std::shared_ptr<Hit>> hits;
 
-            if (find_first_positive_hit(ray, hit.get()))
+            // Compute denominator
+            double denom = ray.direction.dot(m_normal);
+
+            // If denominator == 0, there is no intersection (ray runs parallel to plane)
+            if (denom != approx(0.0))
             {
-                return std::vector<std::shared_ptr<Hit>> { hit };
+                // Compute numerator
+                double numer = -((ray.origin - Point3D(0, 0, 0)).dot(m_normal));
+
+                // Compute t
+                double t = numer / denom;
+
+                // Create hit object
+                auto hit = std::make_shared<Hit>();
+
+                // shared_ptr<T>::get() returns the T* inside the shared pointer
+                initialize_hit(hit.get(), ray, t);
+
+                // Put hit in list
+                hits.push_back(hit);
             }
-            else
-            {
-                return std::vector<std::shared_ptr<Hit>>();
-            }
+
+            return hits;
         }
     };
 
