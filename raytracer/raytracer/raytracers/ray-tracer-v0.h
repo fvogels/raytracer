@@ -17,6 +17,9 @@ namespace raytracer
             };
         }
 
+        /// <summary>
+        /// Creates simplest ray tracer.
+        /// </summary>
         RayTracer v0();
     }
 }

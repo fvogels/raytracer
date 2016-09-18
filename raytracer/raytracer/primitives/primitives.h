@@ -1,3 +1,4 @@
+// Add an include for each primitive
 #include "primitives/primitive.h"
 #include "primitives/plane-primitive.h"
 #include "primitives/sphere-primitive.h"
