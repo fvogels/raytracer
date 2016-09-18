@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'primitives/plane/xy' do
+test_file 'primitives/plane/xy-plane' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
@@ -120,7 +120,7 @@ test_file 'primitives/plane/xy' do
   end
 end
 
-test_file 'primitives/plane/xz' do
+test_file 'primitives/plane/xz-plane' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
@@ -239,7 +239,7 @@ test_file 'primitives/plane/xz' do
   end
 end
 
-test_file 'primitives/plane/yz' do
+test_file 'primitives/plane/yz-plane' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
