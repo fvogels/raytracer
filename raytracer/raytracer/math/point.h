@@ -240,17 +240,17 @@ namespace math
     struct approximately<Point<N>>
     {
         Point<N> value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const Point<N>& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const Point<N>& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
         bool close_enough(const Point<N>& other) const
         {
-            return (value - other).norm() < delta;
+            return (value - other).norm() < epsilon;
         }
     };
 

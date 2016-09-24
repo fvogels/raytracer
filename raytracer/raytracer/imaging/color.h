@@ -108,10 +108,10 @@ namespace math
     struct approximately<imaging::Color>
     {
         imaging::Color value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const imaging::Color& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const imaging::Color& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
@@ -119,9 +119,9 @@ namespace math
         bool close_enough(const imaging::Color& other) const
         {
             return
-                value.r == approx(other.r) &&
-                value.g == approx(other.g) &&
-                value.b == approx(other.b);
+                value.r == approx(other.r, epsilon) &&
+                value.g == approx(other.g, epsilon) &&
+                value.b == approx(other.b, epsilon);
         }
     };
 }

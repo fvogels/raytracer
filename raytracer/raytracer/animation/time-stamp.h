@@ -66,17 +66,17 @@ namespace math
     struct approximately<animation::TimeStamp>
     {
         animation::TimeStamp value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const animation::TimeStamp& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const animation::TimeStamp& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
         bool close_enough(const animation::TimeStamp& other) const
         {
-            return (value.seconds() - other.seconds()) < delta;
+            return (value.seconds() - other.seconds()) < epsilon;
         }
     };
 }

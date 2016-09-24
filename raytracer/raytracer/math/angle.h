@@ -90,17 +90,17 @@ namespace math
     struct approximately<Angle>
     {
         Angle value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const Angle& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const Angle& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
         bool close_enough(const Angle& other) const
         {
-            return (value.radians() - other.radians()) < delta;
+            return (value.radians() - other.radians()) < epsilon;
         }
     };
 

@@ -50,17 +50,17 @@ namespace math
     struct approximately<Ray>
     {
         math::Ray value;
-        double delta;
+        double epsilon;
 
         explicit approximately(const math::Ray& value, double epsilon = 0.00001)
-            :value(value), delta(epsilon)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
         bool close_enough(const math::Ray& other) const
         {
-            return value.origin == approx(other.origin, delta) && value.direction == approx(other.direction, delta);
+            return value.origin == approx(other.origin, epsilon) && value.direction == approx(other.direction, epsilon);
         }
     };
 }

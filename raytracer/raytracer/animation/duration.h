@@ -68,17 +68,17 @@ namespace math
     struct approximately<animation::Duration>
     {
         animation::Duration value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const animation::Duration& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const animation::Duration& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
         bool close_enough(const animation::Duration& other) const
         {
-            return (value.seconds() - other.seconds()) < delta;
+            return (value.seconds() - other.seconds()) < epsilon;
         }
     };
 }
