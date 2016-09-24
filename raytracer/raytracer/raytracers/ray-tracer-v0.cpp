@@ -27,7 +27,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV0::trace(const Scene& sc
         double t = hit.t;
 
         // Group all this data into a TraceResult object.
-        return TraceResult(colors::white(), hit.group_id, ray, hit.t);
+        return TraceResult(hit_color, group_id, ray, t);
     }
     else
     {

@@ -1,6 +1,6 @@
 #include "math/quaternion.h"
 #include <assert.h>
-#include <math.h>
+#include <cmath>
 #include "math/approx.h"
 
 using namespace math;

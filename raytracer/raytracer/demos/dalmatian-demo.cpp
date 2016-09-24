@@ -22,7 +22,7 @@ namespace
         }
 
     protected:
-        raytracer::Primitive create_root(TimeStamp now) override
+        raytracer::Primitive create_root(TimeStamp) override
         {
             using namespace raytracer::primitives;
             using namespace raytracer::materials;
@@ -64,7 +64,7 @@ namespace
         }
 
     protected:
-        raytracer::Primitive create_root(TimeStamp now) override
+        raytracer::Primitive create_root(TimeStamp) override
         {
             using namespace raytracer::primitives;
             using namespace raytracer::materials;

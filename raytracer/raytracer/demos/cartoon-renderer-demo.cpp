@@ -56,7 +56,7 @@ namespace
             return light_sources;
         }
 
-        raytracer::Camera create_camera(TimeStamp now) override
+        raytracer::Camera create_camera(TimeStamp) override
         {
             auto sampler = samplers::multi_jittered(3);
 

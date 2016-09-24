@@ -1,5 +1,5 @@
 #include "math/quadratic_equation.h"
-#include <math.h>
+#include <cmath>
 #include <assert.h>
 
 

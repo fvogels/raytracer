@@ -4,7 +4,7 @@
 #include "util/misc.h"
 #include "math/quadratic_equation.h"
 #include <assert.h>
-#include <math.h>
+#include <cmath>
 
 using namespace raytracer;
 using namespace raytracer::primitives;
