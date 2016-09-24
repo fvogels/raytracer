@@ -39,5 +39,28 @@ namespace math
         Ray transform(const Matrix4x4& m) const;
     };
 
+    /// <summary>
+    /// Checks rays for equality.
+    /// </summary>
+    bool operator ==(const Ray&, const Ray&);
+
     std::ostream& operator <<(std::ostream& out, const Ray&);
+
+    template<>
+    struct approximately<Ray>
+    {
+        math::Ray value;
+        double delta;
+
+        explicit approximately(const math::Ray& value, double epsilon = 0.00001)
+            :value(value), delta(epsilon)
+        {
+            // NOP
+        }
+
+        bool close_enough(const math::Ray& other) const
+        {
+            return value.origin == approx(other.origin, delta) && value.direction == approx(other.direction, delta);
+        }
+    };
 }
