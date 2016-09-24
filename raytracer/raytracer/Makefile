@@ -19,13 +19,13 @@ test_build:
 	$(CC) $(TEST_FLAGS) $(FILES) -ldl
 
 debug_no_scripting_build:
-	$(CC) $(DEBUG_FLAGS) $(FILES) -ldl
+	$(CC) $(DEBUG_FLAGS) $(NO_SCRIPTING_FLAGS) $(FILES) -ldl
 
 release_no_scripting_build:
-	$(CC) $(RELEASE_FLAGS) $(FILES) -ldl
+	$(CC) $(RELEASE_FLAGS) $(NO_SCRIPTING_FLAGS) $(FILES) -ldl
 
 test_no_scripting_build:
-	$(CC) $(TEST_FLAGS) $(FILES) -ldl
+	$(CC) $(TEST_FLAGS) $(NO_SCRIPTING_FLAGS) $(FILES) -ldl
 
 d: debug_build
 r: release_build
