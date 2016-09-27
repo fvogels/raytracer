@@ -89,9 +89,8 @@
 #   define ELPP_OS_ANDROID 1
 #endif  // defined(__ANDROID__)
 // Evaluating Cygwin as *nix OS
-#if !ELPP_OS_UNIX && !ELPP_OS_WINDOWS && ELPP_CYGWIN
-#   undef ELPP_OS_UNIX
-#   undef ELPP_OS_LINUX
+#if ELPP_CYGWIN
+#   undef ELPP_OS_WINDOWS
 #   define ELPP_OS_UNIX 1
 #   define ELPP_OS_LINUX 1
 #endif //  !ELPP_OS_UNIX && !ELPP_OS_WINDOWS && ELPP_CYGWIN

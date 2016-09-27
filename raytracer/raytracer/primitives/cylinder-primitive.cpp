@@ -15,7 +15,7 @@ namespace
 {
     Point2D compute_uv_from_xyz(const Point2D& p, double height)
     {
-        double u = 0.5 + atan2(p.y(), p.x()) / (2 * M_PI);
+        double u = 0.5 + atan2(p.y(), p.x()) / (2 * 3.1415926535); // todo
         double v = height;
 
         assert(0 <= u);
