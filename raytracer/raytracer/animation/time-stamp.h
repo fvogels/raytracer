@@ -30,22 +30,22 @@ namespace animation
         Duration m_since_epoch;
     };
 
-    inline TimeStamp operator ""_S(long double x)
+    inline TimeStamp operator "" _S(long double x)
     {
         return TimeStamp::from_epoch(Duration::from_seconds(double(x)));
     }
 
-    inline TimeStamp operator ""_S(long long unsigned x)
+    inline TimeStamp operator "" _S(long long unsigned x)
     {
         return TimeStamp::from_epoch(Duration::from_seconds(double(x)));
     }
 
-    inline TimeStamp operator ""_MS(long double x)
+    inline TimeStamp operator "" _MS(long double x)
     {
         return TimeStamp::from_epoch(Duration::from_milliseconds(double(x)));
     }
 
-    inline TimeStamp operator ""_MS(long long unsigned x)
+    inline TimeStamp operator "" _MS(long long unsigned x)
     {
         return TimeStamp::from_epoch(Duration::from_milliseconds(double(x)));
     }
