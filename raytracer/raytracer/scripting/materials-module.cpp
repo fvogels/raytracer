@@ -147,6 +147,11 @@ namespace
         {
             return raytracer::materials::rotate_around_z(angle, material);
         }
+
+        Material slice(Material material, animation::TimeStamp ts) const
+        {
+            return raytracer::to_animated_2d_material(material)(ts);
+        }
     };
 }
 
@@ -192,6 +197,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(rotate_around_x);
     BIND(rotate_around_y);
     BIND(rotate_around_z);
+    BIND(slice);
 #   undef BIND
 #   undef BIND_AS
 
