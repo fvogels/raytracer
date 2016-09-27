@@ -93,22 +93,22 @@ Angle& math::operator /=(Angle& x, double f)
     return (x = x / f);
 }
 
-Angle math::operator""_rad(long double x)
+Angle math::operator ""_rad(long double x)
 {
     return Angle::radians(x);
 }
 
-Angle math::operator""_degrees(long double x)
+Angle math::operator ""_degrees(long double x)
 {
     return Angle::degrees(x);
 }
 
-Angle math::operator""_rad(long long unsigned x)
+Angle math::operator ""_rad(long long unsigned x)
 {
     return Angle::radians((long double)x);
 }
 
-Angle math::operator""_degrees(long long unsigned x)
+Angle math::operator ""_degrees(long long unsigned x)
 {
     return Angle::degrees((long double)x);
 }

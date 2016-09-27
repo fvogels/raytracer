@@ -70,10 +70,10 @@ namespace math
     Angle& operator *=(Angle& x, double f);
     Angle& operator /=(Angle& x, double f);
 
-    Angle operator""_rad(long double x);
-    Angle operator""_degrees(long double x);
-    Angle operator""_rad(long long unsigned x);
-    Angle operator""_degrees(long long unsigned x);
+    Angle operator ""_rad(long double x);
+    Angle operator ""_degrees(long double x);
+    Angle operator ""_rad(long long unsigned x);
+    Angle operator ""_degrees(long long unsigned x);
 
     bool operator <(const Angle& a, const Angle& b);
     bool operator >(const Angle& a, const Angle& b);
