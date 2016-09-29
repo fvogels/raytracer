@@ -44,6 +44,18 @@ namespace
             return chaiscript::boxed_cast<Primitive>(boxed);
         });
 
+        return primitives::mesh(children);
+    }
+
+    // Accelerated mesh
+    Primitive amesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    {
+        std::vector<Primitive> children(boxed_children.size());
+
+        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+            return chaiscript::boxed_cast<Primitive>(boxed);
+        });
+
         return primitives::accelerated_mesh(children);
     }
 
@@ -118,6 +130,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
     BIND_DIRECTLY(decorate);
     BIND_HELPER_FUNCTION(mesh);
+    BIND_HELPER_FUNCTION(amesh);
     BIND_HELPER_FUNCTION_AS(load_mesh, mesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
