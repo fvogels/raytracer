@@ -17,9 +17,19 @@ using namespace math::functions;
 
 namespace
 {
+    Point2D create_point2d(double x, double y)
+    {
+        return Point2D(x, y);
+    }
+
     Point3D create_point3d(double x, double y, double z)
     {
         return Point3D(x, y, z);
+    }
+
+    Vector2D create_vector2d(double x, double y)
+    {
+        return Vector2D(x, y);
     }
 
     Vector3D create_vector3d(double x, double y, double z)
@@ -73,7 +83,9 @@ namespace
         raytracer::scripting::util::register_to_string<math::Vector3D>(module);
 
         module.add(fun(create_point3d), "pos");
+        module.add(fun(create_point2d), "pos");
         module.add(fun(create_vector3d), "vec");
+        module.add(fun(create_vector2d), "vec");
         module.add(fun([](const Vector3D& u, const Vector3D& v) { return u + v; }), "+");
         module.add(fun([](const Point3D& p, const Vector3D& v) { return p + v; }), "+");
         module.add(fun([](const Vector3D& u, const Point3D& p) { return u + p; }), "+");
