@@ -95,6 +95,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     auto module = std::make_shared<chaiscript::Module>();
 
     util::register_type<Primitive>(*module, "Primitive");
+    util::register_assignment<Primitive>(*module);
 
     // Binds helper function defined earlier in this file, exposing the function under the same name
 #   define BIND_HELPER_FUNCTION(NAME)                  BIND_HELPER_FUNCTION_AS(NAME, NAME)
