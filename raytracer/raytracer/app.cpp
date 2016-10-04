@@ -67,6 +67,8 @@ void process_command_line_arguments(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
+    TIMED_FUNC(timer);
+
     logging::configure();
     process_command_line_arguments(argc, argv);
 
