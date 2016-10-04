@@ -11,6 +11,10 @@ Global
 		Debug - No Scripting|x86 = Debug - No Scripting|x86
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release - Fast Compile|x64 = Release - Fast Compile|x64
+		Release - Fast Compile|x86 = Release - Fast Compile|x86
+		Release - No Scripting - Fast Compile|x64 = Release - No Scripting - Fast Compile|x64
+		Release - No Scripting - Fast Compile|x86 = Release - No Scripting - Fast Compile|x86
 		Release - No Scripting|x64 = Release - No Scripting|x64
 		Release - No Scripting|x86 = Release - No Scripting|x86
 		Release|x64 = Release|x64
@@ -29,6 +33,14 @@ Global
 		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Debug|x64.Build.0 = Debug|x64
 		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Debug|x86.ActiveCfg = Debug|Win32
 		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Debug|x86.Build.0 = Debug|Win32
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - Fast Compile|x64.ActiveCfg = Release - Fast Compile|x64
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - Fast Compile|x64.Build.0 = Release - Fast Compile|x64
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - Fast Compile|x86.ActiveCfg = Release - Fast Compile|Win32
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - Fast Compile|x86.Build.0 = Release - Fast Compile|Win32
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting - Fast Compile|x64.ActiveCfg = Release - No Scripting - Fast Compile|x64
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting - Fast Compile|x64.Build.0 = Release - No Scripting - Fast Compile|x64
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting - Fast Compile|x86.ActiveCfg = Release - No Scripting - Fast Compile|Win32
+		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting - Fast Compile|x86.Build.0 = Release - No Scripting - Fast Compile|Win32
 		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting|x64.ActiveCfg = Release - No Scripting|x64
 		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting|x64.Build.0 = Release - No Scripting|x64
 		{91038B33-14FE-4EC4-A761-D26EBB65751D}.Release - No Scripting|x86.ActiveCfg = Release - No Scripting|Win32
