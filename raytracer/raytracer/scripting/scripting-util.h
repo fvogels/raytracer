@@ -60,7 +60,7 @@ namespace raytracer
             std::vector<T> cast_vector_elements(const std::vector<chaiscript::Boxed_Value>& boxed_values)
             {
                 std::vector<T> unboxed_values(boxed_values.size());
- 
+
                 std::transform(boxed_values.begin(), boxed_values.end(), unboxed_values.begin(), [](chaiscript::Boxed_Value boxed_value) {
                     return chaiscript::boxed_cast<T>(boxed_value);
                 });
@@ -77,7 +77,7 @@ namespace raytracer
                 bool optional;
 
                 virtual void parse(chaiscript::Boxed_Value) = 0;
-            };            
+            };
 
             template<typename T>
             struct SpecializedSingleArgumentParser : public SingleArgumentParser
@@ -98,7 +98,7 @@ namespace raytracer
                         abort();
                     }
                 }
-                
+
                 T* storage;
             };
 
@@ -172,7 +172,7 @@ namespace raytracer
             {
                 chaiscript::utility::add_class<T>(module,
                     name,
-                  { chaiscript::constructor<T(const T&)>() },
+                    { chaiscript::constructor<T(const T&)>() },
                     {});
             }
 
@@ -184,6 +184,12 @@ namespace raytracer
                     ss << value;
                     return ss.str();
                 }), "to_string");
+            }
+
+            template<typename T>
+            void register_assignment(chaiscript::Module& module)
+            {
+                module.add(chaiscript::fun([](T& x, const T& y) { return x = y; }), "=");
             }
         }
     }
