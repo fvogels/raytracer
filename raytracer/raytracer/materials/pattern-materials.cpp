@@ -28,9 +28,9 @@ Material raytracer::materials::pattern3d(math::Function<bool(const Point3D&)> pa
     return composite(pattern >> bool_mapper);
 }
 
-Material raytracer::materials::checkered(Material m1, Material m2)
+Material raytracer::materials::checkered2d(Material m1, Material m2)
 {
-    return pattern2d(math::functions::checkered(), m1, m2);
+    return pattern2d(math::functions::checkered2d(), m1, m2);
 }
 
 Material raytracer::materials::horizontal_lines(double thickness, Material m1, Material m2)

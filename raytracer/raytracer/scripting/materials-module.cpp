@@ -60,7 +60,7 @@ namespace
 
         Material checkered(Material x, Material y) const
         {
-            return raytracer::materials::checkered(x, y);
+            return raytracer::materials::checkered2d(x, y);
         }
 
         Material polka(double radius, Material x, Material y) const
