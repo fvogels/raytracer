@@ -11,7 +11,7 @@ namespace
     {
     public:
         SpotLight(const math::Point3D& position, const math::Vector3D& direction, math::Angle angle, const imaging::Color& color)
-            : PointLightImplementation(position), m_direction(direction), m_min_cos(cos(angle)), m_color(color)
+            : PointLightImplementation(position), m_direction(direction), m_min_cos(cos(angle / 2)), m_color(color)
         {
             assert(direction.is_unit());
         }
