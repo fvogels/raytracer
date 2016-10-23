@@ -6,3 +6,4 @@
 #include "materials/wood-material.h"
 #include "materials/worley-material.h"
 #include "materials/material-transformer.h"
+#include "materials/perlin-material.h"

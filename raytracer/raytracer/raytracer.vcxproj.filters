@@ -477,6 +477,9 @@
     <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="materials\perlin-material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1215,6 +1218,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="performance\performance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\perlin-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
