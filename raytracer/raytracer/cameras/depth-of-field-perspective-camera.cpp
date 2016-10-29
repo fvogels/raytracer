@@ -24,8 +24,8 @@ namespace
     protected:
         void enumerate_untransformed_rays(const Point2D& point, std::function<void(const math::Ray&)> callback) const
         {
-            assert(interval(0, 1).contains(point.x()));
-            assert(interval(0, 1).contains(point.y()));
+            assert(interval(0.0, 1.0).contains(point.x()));
+            assert(interval(0.0, 1.0).contains(point.y()));
 
             for (auto& camera : m_cameras)
             {
