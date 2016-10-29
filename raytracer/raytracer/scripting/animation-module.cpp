@@ -50,7 +50,12 @@ namespace
             return animation::animate(from, to, duration);
         }
 
-        Animation<Point3D> animation_seq(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration) const
+        Animation<Point3D> animation_seq_quadinout(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration) const
+        {
+            return animation_seq(boxed_checkpoints, duration, math::functions::easing::quadratic_inout());
+        }
+
+        Animation<Point3D> animation_seq(const std::vector<Boxed_Value>& boxed_checkpoints, Duration duration, math::functions::EasingFunction easing_function) const
         {
             if (boxed_checkpoints.size() < 2)
             {
@@ -71,7 +76,7 @@ namespace
                 {
                     auto anim = animation::animate(checkpoints[i], checkpoints[i + 1], duration / double(checkpoints.size() - 1));
 
-                    animation = sequence(animation, ease(anim, math::functions::easing::quadratic_inout()));
+                    animation = sequence(animation, ease(anim, easing_function));
                 }
 
                 return animation;
@@ -168,6 +173,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
+    BIND_AS(animation_seq_quadinout, animate);
     BIND_AS(animation_seq, animate);
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
@@ -182,6 +188,8 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 
     module->add(fun(&redim_xyz_to_xyt<Vector3D>), "xyz_to_xyt");
     module->add(fun(&seconds), "seconds");
+    module->add(fun([](TimeStamp t, Duration d) { return t + d; }), "+");
+    module->add(fun([](Duration d, TimeStamp t) { return t + d; }), "+");
     module->add(fun(&Animation<Point3D>::operator()), "[]");
     module->add(fun(&Animation<Angle>::operator()), "[]");
     module->add(fun(&Animation<double>::operator()), "[]");
