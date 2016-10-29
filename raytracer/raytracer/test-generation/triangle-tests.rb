@@ -83,33 +83,6 @@ test_file 'primitives/triangle/triangle-hits' do
       data.ray_direction = "(0, 0, 1)"
       data.t = "1"
     end
-
-    test_case do |data|
-      data.a = "(-1, -1, 0)"
-      data.b = "(-1, 1, 0)"
-      data.c = "(1, 0, 0)"
-      data.ray_origin = "(0, 0, 5)"
-      data.ray_direction = "(0, 0, -1)"
-      data.t = "std::numeric_limits<double>::infinity();"
-    end
-
-    test_case do |data|
-      data.a = "(-1, 0, -1)"
-      data.b = "(1, 0, -1)"
-      data.c = "(0, 0, 10)"
-      data.ray_origin = "(0, 5, 0)"
-      data.ray_direction = "(0, -5, 0)"
-      data.t = "std::numeric_limits<double>::infinity();"
-    end
-
-    test_case do |data|
-      data.a = "(-1, 0, 1)"
-      data.b = "(1, 0, 1)"
-      data.c = "(0, 0, -10)"
-      data.ray_origin = "(0, -5, 0)"
-      data.ray_direction = "(0, 5, 0)"
-      data.t = "std::numeric_limits<double>::infinity();"
-    end
   end
 
   test_suite do
@@ -167,6 +140,33 @@ test_file 'primitives/triangle/triangle-hits' do
       data.c = "(0, 0, -10)"
       data.ray_origin = "(0, 5, 0)"
       data.ray_direction = "(0, -5, 0)"
+      data.t = "std::numeric_limits<double>::infinity();"
+    end
+
+    test_case do |data|
+      data.a = "(-1, 0, -1)"
+      data.b = "(1, 0, -1)"
+      data.c = "(0, 0, 10)"
+      data.ray_origin = "(0, 5, 0)"
+      data.ray_direction = "(0, -5, 0)"
+      data.t = "std::numeric_limits<double>::infinity();"
+    end
+
+    test_case do |data|
+      data.a = "(-1, 0, 1)"
+      data.b = "(1, 0, 1)"
+      data.c = "(0, 0, -10)"
+      data.ray_origin = "(0, -5, 0)"
+      data.ray_direction = "(0, 5, 0)"
+      data.t = "std::numeric_limits<double>::infinity();"
+    end
+
+    test_case do |data|
+      data.a = "(-1, -1, 0)"
+      data.b = "(-1, 1, 0)"
+      data.c = "(1, 0, 0)"
+      data.ray_origin = "(0, 0, 5)"
+      data.ray_direction = "(0, 0, -1)"
       data.t = "std::numeric_limits<double>::infinity();"
     end
   end
