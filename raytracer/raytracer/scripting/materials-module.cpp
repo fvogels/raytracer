@@ -48,14 +48,19 @@ namespace
             return raytracer::materials::texture(path);
         }
 
-        Material lines(double thickness, Material m1, Material m2) const
+        Material horizontal_lines(double thickness, Material m1, Material m2) const
         {
             return raytracer::materials::horizontal_lines(thickness, m1, m2);
         }
 
-        Material grid(double thickness, Material m1, Material m2) const
+        Material vertical_lines(double thickness, Material m1, Material m2) const
         {
-            return raytracer::materials::grid(thickness, m1, m2);
+            return raytracer::materials::vertical_lines(thickness, m1, m2);
+        }
+
+        Material grid2d(double thickness, Material m1, Material m2) const
+        {
+            return raytracer::materials::grid2d(thickness, m1, m2);
         }
 
         Material checkered(Material x, Material y) const
@@ -177,8 +182,9 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
-    BIND(lines);
-    BIND(grid);
+    BIND(horizontal_lines);
+    BIND(vertical_lines);
+    BIND(grid2d);
     BIND(checkered);
     BIND(polka);
     BIND_AS(polka2, polka);
