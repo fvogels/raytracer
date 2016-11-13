@@ -12,7 +12,7 @@ namespace raytracer
         Material pattern3d(math::Function<bool(const math::Point3D&)>, Material, Material);
         Material horizontal_lines(double, Material, Material);
         Material vertical_lines(double, Material, Material);
-        Material grid(double, Material, Material);
+        Material grid2d(double, Material, Material);
         Material checkered2d(Material, Material);
         Material polka(double radius, Material, Material);
         Material polka(double radius1, double radius2, Material, Material);

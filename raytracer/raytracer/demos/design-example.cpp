@@ -47,7 +47,7 @@ namespace
         MaterialProperties white(colors::white() * 0.1, colors::white(), colors::white(), 10);
         MaterialProperties black(colors::black(), colors::black(), colors::white(), 10);
 
-        return grid(0.1, uniform(white), uniform(black));
+        return grid2d(0.1, uniform(white), uniform(black));
     }
 
     raytracer::Primitive create_floor()
