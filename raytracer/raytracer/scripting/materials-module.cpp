@@ -63,6 +63,11 @@ namespace
             return raytracer::materials::grid2d(thickness, m1, m2);
         }
 
+        Material grid3d(double thickness, Material m1, Material m2) const
+        {
+            return raytracer::materials::grid3d(thickness, m1, m2);
+        }
+
         Material checkered(Material x, Material y) const
         {
             return raytracer::materials::checkered2d(x, y);
@@ -185,6 +190,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(horizontal_lines);
     BIND(vertical_lines);
     BIND(grid2d);
+    BIND(grid3d);
     BIND(checkered);
     BIND(polka);
     BIND_AS(polka2, polka);
