@@ -18,15 +18,41 @@ namespace
 {
     void render_script(const std::string& filename)
     {
-        LOG(INFO) << "Rendering " << filename;
-        TIMED_SCOPE(timer, "Rendering " + filename);
+        TIMED_SCOPE(timer, "Rendering script");
 
-#       ifdef EXCLUDE_SCRIPTING
-        LOG(ERROR) << "Cannot run script - scripting was excluded";
-        abort();
-#       else
-        raytracer::scripting::run_script(filename);
-#       endif
+        if (filename != "-")
+        {
+            LOG(INFO) << "Rendering " << filename;
+
+#           ifdef EXCLUDE_SCRIPTING
+            LOG(ERROR) << "Cannot run script - scripting was excluded";
+            abort();
+#           else
+            raytracer::scripting::run_script(filename);
+#           endif
+        }
+        else
+        {
+            LOG(INFO) << "Rendering script from STDIN";
+
+#           ifdef EXCLUDE_SCRIPTING
+            LOG(ERROR) << "Cannot run script - scripting was excluded";
+            abort();
+#           else
+            std::string script;
+
+            while (!std::cin.eof())
+            {
+                std::string line;
+                std::getline(std::cin, line);
+                script += line + "\n";
+            }
+
+            LOG(INFO) << script;
+            raytracer::scripting::run(script);
+#           endif
+
+        }
     }
 
     void quiet(const std::string&)
