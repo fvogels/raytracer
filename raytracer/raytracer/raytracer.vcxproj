@@ -590,8 +590,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>ruby $(ProjectDir)post-release.rb "$(TargetPath)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>ruby $(ProjectDir)prebuild.rb</Command>

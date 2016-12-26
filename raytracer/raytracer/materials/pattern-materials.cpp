@@ -33,6 +33,11 @@ Material raytracer::materials::checkered2d(Material m1, Material m2)
     return pattern2d(math::functions::checkered2d(), m1, m2);
 }
 
+Material raytracer::materials::checkered3d(Material m1, Material m2)
+{
+    return pattern3d(math::functions::checkered3d(), m1, m2);
+}
+
 Material raytracer::materials::horizontal_lines(double thickness, Material m1, Material m2)
 {
     return pattern2d(math::functions::horizontal_lines(thickness), m1, m2);

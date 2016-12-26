@@ -15,6 +15,7 @@ namespace raytracer
         Material grid2d(double, Material, Material);
         Material grid3d(double, Material, Material);
         Material checkered2d(Material, Material);
+        Material checkered3d(Material, Material);
         Material polka(double radius, Material, Material);
         Material polka(double radius1, double radius2, Material, Material);
         Material dalmatian2d(unsigned density, Material, Material);
