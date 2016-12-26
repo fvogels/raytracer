@@ -134,8 +134,6 @@ namespace
         template<typename T>
         Animation<T> ease_animation(Animation<T> animation, math::functions::EasingFunction easing_function) const
         {
-            using namespace math::functions::easing;
-
             return ease(animation, easing_function);
         }
     };
