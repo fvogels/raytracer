@@ -4,6 +4,7 @@
 #include <string>
 #include <ostream>
 #include <fstream>
+#include <vector>
 
 namespace imaging
 {
@@ -33,4 +34,10 @@ namespace imaging
         std::ofstream out;
         unsigned m_frame_index;
     };
+
+    namespace wif
+    {
+        void convert_frame(std::vector<uint8_t>& buffer, const Bitmap& bitmap);
+        void mark_eof(std::vector<uint8_t>& buffer);
+    }
 }
