@@ -724,6 +724,7 @@
     <ClCompile Include="math\transformation-matrices.cpp" />
     <ClCompile Include="performance\performance.cpp" />
     <ClCompile Include="pipeline\animation-processor.cpp" />
+    <ClCompile Include="pipeline\base64-processor.cpp" />
     <ClCompile Include="pipeline\bmp-consumer.cpp" />
     <ClCompile Include="pipeline\inverter-processor.cpp" />
     <ClCompile Include="pipeline\motion-blur-processor.cpp" />
@@ -821,6 +822,7 @@
     <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="util\base64.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
   </ItemGroup>
@@ -933,6 +935,7 @@
     <ClInclude Include="math\point.h" />
     <ClInclude Include="performance\performance.h" />
     <ClInclude Include="pipeline\animation-processor.h" />
+    <ClInclude Include="pipeline\base64-processor.h" />
     <ClInclude Include="pipeline\bmp-consumer.h" />
     <ClInclude Include="pipeline\consumer.h" />
     <ClInclude Include="pipeline\inverter-processor.h" />
@@ -1066,6 +1069,7 @@
     <ClInclude Include="tasks\task-schedulers.h" />
     <ClInclude Include="tasks\task.h" />
     <ClInclude Include="tasks\tasks.h" />
+    <ClInclude Include="util\base64.h" />
     <ClInclude Include="util\beep.h" />
     <ClInclude Include="util\lazy.h" />
     <ClInclude Include="util\misc.h" />

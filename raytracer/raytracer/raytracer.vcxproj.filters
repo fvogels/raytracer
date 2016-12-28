@@ -483,6 +483,12 @@
     <ClCompile Include="pipeline\wif-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pipeline\base64-processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\base64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1227,6 +1233,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\wif-processor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipeline\base64-processor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\base64.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
