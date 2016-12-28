@@ -44,7 +44,7 @@ namespace
     };
 }
 
-std::shared_ptr<Processor<std::shared_ptr<std::vector<uint8_t>>, std::string>> base64()
+std::shared_ptr<Processor<std::shared_ptr<std::vector<uint8_t>>, std::string>> raytracer::pipeline::base64()
 {
     return std::make_shared<Base64Processor>();
 }

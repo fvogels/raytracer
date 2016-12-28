@@ -12,6 +12,10 @@
 #include <typeinfo>
 #include <algorithm>
 
+#ifdef stdout
+#undef stdout
+#endif
+
 using namespace chaiscript;
 using namespace raytracer;
 using namespace raytracer::pipeline;
@@ -124,7 +128,7 @@ namespace
 
     struct PipelineLibrary
     {
-        std::shared_ptr<Wrapper> wif(const std::string& path) const
+        std::shared_ptr<Wrapper> wif_to_file(const std::string& path) const
         {
             return wrap(raytracer::pipeline::wif(path));
         }
@@ -173,6 +177,21 @@ namespace
         {
             return wrap(pipeline::null<std::shared_ptr<Bitmap>>());
         }
+
+        std::shared_ptr<Wrapper> wif() const
+        {
+            return wrap(pipeline::wif());
+        }
+
+        std::shared_ptr<Wrapper> base64() const
+        {
+            return wrap(pipeline::base64());
+        }
+
+        std::shared_ptr<Wrapper> stdout() const
+        {
+            return wrap(pipeline::text_writer(std::cout));
+        }
     };
 
     void pipeline_builder(Boxed_Value initial, const std::vector<Boxed_Value>& pipeline_segments)
@@ -213,6 +232,7 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
     BIND(wif);
+    BIND_AS(wif_to_file, wif);
     BIND(ppm);
     BIND(bmp);
     BIND(animation);
@@ -222,6 +242,8 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
     BIND_AS(motion_blur_zerolew, motion_blur);
     BIND(overprint);
     BIND(null_bitmap_consumer);
+    BIND(base64);
+    BIND(stdout);
 #   undef BIND_AS
 #   undef BIND
 

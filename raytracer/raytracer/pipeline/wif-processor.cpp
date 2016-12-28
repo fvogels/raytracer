@@ -29,7 +29,7 @@ namespace
     };
 }
 
-std::shared_ptr<Processor<std::shared_ptr<imaging::Bitmap>, std::shared_ptr<std::vector<uint8_t>>>> wif()
+std::shared_ptr<Processor<std::shared_ptr<imaging::Bitmap>, std::shared_ptr<std::vector<uint8_t>>>> raytracer::pipeline::wif()
 {
     return std::make_shared<WifProcessor>();
 }
