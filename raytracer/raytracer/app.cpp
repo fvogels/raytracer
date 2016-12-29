@@ -20,25 +20,21 @@ namespace
     {
         TIMED_SCOPE(timer, "Rendering script");
 
+#       ifdef EXCLUDE_SCRIPTING
+        LOG(ERROR) << "Cannot run script - scripting was excluded";
+        abort();
+#       endif
+
         if (filename != "-")
         {
             LOG(INFO) << "Rendering " << filename;
 
-#           ifdef EXCLUDE_SCRIPTING
-            LOG(ERROR) << "Cannot run script - scripting was excluded";
-            abort();
-#           else
             raytracer::scripting::run_script(filename);
-#           endif
         }
         else
         {
             LOG(INFO) << "Rendering script from STDIN";
 
-#           ifdef EXCLUDE_SCRIPTING
-            LOG(ERROR) << "Cannot run script - scripting was excluded";
-            abort();
-#           else
             std::string script;
 
             while (!std::cin.eof())
@@ -48,10 +44,7 @@ namespace
                 script += line + "\n";
             }
 
-            LOG(INFO) << script;
             raytracer::scripting::run(script);
-#           endif
-
         }
     }
 
@@ -74,6 +67,13 @@ namespace
     {
         performance::print_statistics(std::cerr);
     }
+
+    void enable_3dstudio_output(const std::string&)
+    {
+        logging::enable("studio");
+
+        LOG(INFO) << "Activated 3d studio mode";
+    }
 }
 
 void process_command_line_arguments(int argc, char** argv)
@@ -85,6 +85,7 @@ void process_command_line_arguments(int argc, char** argv)
     processor.register_processor("--version", show_version);
     processor.register_processor("--beep", emit_beep);
     processor.register_processor("--statistics", print_statistics);
+    processor.register_processor("--studio", enable_3dstudio_output);
 
     processor.process(argc, argv);
 

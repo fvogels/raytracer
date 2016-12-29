@@ -16,6 +16,8 @@ namespace
     public:
         void consume(std::shared_ptr<std::vector<uint8_t>> buffer) override
         {
+            LOG(INFO) << "Received " << buffer->size() << " bytes to convert to base64";
+
             for (auto datum : *buffer)
             {
                 m_base64.feed(datum);

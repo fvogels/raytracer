@@ -36,7 +36,7 @@ imaging::WIF::~WIF()
 
 void imaging::WIF::write_frame(const Bitmap& bitmap)
 {
-    LOG(INFO) << "Writing WIF frame #" << m_frame_index;
+    LOG(INFO) << "Writing WIF frame #" << m_frame_index;        
 
     uint32_t width = bitmap.width();
     uint32_t height = bitmap.height();   
@@ -58,7 +58,7 @@ void imaging::WIF::write_frame(const Bitmap& bitmap)
 }
 
 template<typename T>
-void write_to_buffer(const T& value, std::vector<uint8_t> buffer)
+void write_to_buffer(const T& value, std::vector<uint8_t>& buffer)
 {
     auto bytes = reinterpret_cast<const uint8_t*>(&value);
 

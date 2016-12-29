@@ -32,6 +32,7 @@ namespace
 
         virtual void link_to(Wrapper*) = 0;
         virtual void consume(Boxed_Value) = 0;
+        virtual void end() = 0;
 
         std::shared_ptr<Pipeline> wrapped;
     };
@@ -57,6 +58,13 @@ namespace
             auto consumer = std::dynamic_pointer_cast<Consumer<T>>(this->wrapped);
 
             consumer->consume(unboxed);
+        }
+
+        void end() override
+        {
+            auto consumer = std::dynamic_pointer_cast<Consumer<T>>(this->wrapped);
+
+            consumer->end();
         }
     };
 
@@ -85,6 +93,12 @@ namespace
         void consume(Boxed_Value boxed) override
         {
             LOG(ERROR) << "Pipeline cannot start with nonconsumer";
+            abort();
+        }
+
+        void end() override
+        {
+            LOG(ERROR) << "Nonconsumer does not know what to do with end";
             abort();
         }
     };
@@ -117,6 +131,13 @@ namespace
             auto consumer = std::dynamic_pointer_cast<Consumer<T1>>(this->wrapped);
 
             consumer->consume(unboxed);
+        }
+
+        void end() override
+        {
+            auto consumer = std::dynamic_pointer_cast<Consumer<T1>>(this->wrapped);
+
+            consumer->end();
         }
     };
 
@@ -218,6 +239,7 @@ namespace
             }
 
             wrappers.front()->consume(initial);
+            wrappers.front()->end();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace
             for ( unsigned i = 0; i != frame_count; ++i )
             {
                 LOG(INFO) << "Producing frame " << i << " (" << now << ")";
+                CLOG(INFO, "studio") << "FRAME(" << i << "/" << frame_count << ")";
 
                 std::shared_ptr<Scene> current_frame_scene = animation(now);
                 produce(current_frame_scene);

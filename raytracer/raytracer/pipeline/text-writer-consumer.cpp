@@ -17,7 +17,7 @@ namespace
 
         void consume(std::string string) override
         {
-            m_out << string;            
+            m_out << string << std::endl;
         }
 
         void end() override
