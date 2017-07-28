@@ -679,7 +679,7 @@
     <ClCompile Include="animation\circular-animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />
     <ClCompile Include="animation\time-stamp.cpp" />
-    <ClCompile Include="command-line-processor.cpp" />
+    <ClCompile Include="command-line-parser.cpp" />
     <ClCompile Include="demos\plane-bumpifier-demo.cpp" />
     <ClCompile Include="demos\sampler-demo.cpp" />
     <ClCompile Include="demos\sphere-bumpifier-demo.cpp" />
@@ -875,7 +875,7 @@
     <ClInclude Include="chaiscript\utility\json.hpp" />
     <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="chaiscript\utility\utility.hpp" />
-    <ClInclude Include="command-line-processor.h" />
+    <ClInclude Include="command-line-parser.h" />
     <ClInclude Include="demos\cartoon-renderer-demo.h" />
     <ClInclude Include="demos\dalmatian-demo.h" />
     <ClInclude Include="demos\demo.h" />

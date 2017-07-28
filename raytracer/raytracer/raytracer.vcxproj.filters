@@ -228,9 +228,6 @@
     <ClCompile Include="animation\lissajous.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="command-line-processor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="math\matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -490,6 +487,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pipeline\text-writer-consumer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="command-line-parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -947,9 +947,6 @@
     <ClInclude Include="animation\animation-sequence.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="command-line-processor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1245,6 +1242,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\text-writer-consumer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="command-line-parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

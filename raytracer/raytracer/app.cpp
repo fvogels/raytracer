@@ -2,7 +2,7 @@
 
 #include "easylogging++.h"
 #include "version.h"
-#include "command-line-processor.h"
+#include "command-line-parser.h"
 #include "logging.h"
 #include "demos/demos.h"
 #include "pipeline/pipelines.h"
