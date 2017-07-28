@@ -48,27 +48,27 @@ namespace
         }
     }
 
-    void quiet(const std::string&)
+    void quiet()
     {
         logging::quiet();
     }
 
-    void show_version(const std::string&)
+    void show_version()
     {
         LOG(INFO) << "Build " << BUILD_NUMBER << std::endl;
     }
 
-    void emit_beep(const std::string&)
+    void emit_beep()
     {
         ::beep();
     }
 
-    void print_statistics(const std::string&)
+    void print_statistics()
     {
         performance::print_statistics(std::cerr);
     }
 
-    void enable_3dstudio_output(const std::string&)
+    void enable_3dstudio_output()
     {
         logging::enable("studio");
 
@@ -78,16 +78,16 @@ namespace
 
 void process_command_line_arguments(int argc, char** argv)
 {
-    CommandLineProcessor processor;
+    CommandLineParser parser;
 
-    processor.register_processor("-s", render_script);
-    processor.register_processor("--quiet", quiet);
-    processor.register_processor("--version", show_version);
-    processor.register_processor("--beep", emit_beep);
-    processor.register_processor("--statistics", print_statistics);
-    processor.register_processor("--studio", enable_3dstudio_output);
+    parser.register_processor("-s", render_script);
+    parser.register_processor("--quiet", quiet);
+    parser.register_processor("--version", show_version);
+    parser.register_processor("--beep", emit_beep);
+    parser.register_processor("--statistics", print_statistics);
+    parser.register_processor("--studio", enable_3dstudio_output);
 
-    processor.process(argc, argv);
+    parser.process(argc, argv);
 
     LOG(INFO) << "Terminated successfully";
 }

@@ -5,45 +5,80 @@
 #include <assert.h>
 
 
-void CommandLineProcessor::register_processor(const std::string& prefix, std::function<void(const std::string&)> processor)
+void CommandLineParser::register_processor(const std::string& prefix, std::function<void()> processor)
 {
-    assert(!is_prefix_in_use(prefix));
+    std::function<void(std::list<std::string>&)> wrapper = [processor](std::list<std::string>& arguments) -> void {
+        processor();
+    };
 
-    m_map[prefix] = processor;
+    register_processor(prefix, wrapper);
 }
 
-void CommandLineProcessor::process(const std::string& argument) const
+void CommandLineParser::register_processor(const std::string& prefix, std::function<void(const std::string&)> processor)
 {
-    for (auto it : m_map)
-    {
-        const auto& prefix = it.first;
-        const auto& processor = it.second;
-
-        if (starts_with(prefix, argument))
+    std::function<void(std::list<std::string>&)> wrapper = [prefix, processor](std::list<std::string>& arguments) -> void {
+        if (arguments.empty())
         {
-            std::string value = argument.substr(prefix.size());
+            LOG(ERROR) << "Command line argument " << prefix << " expects an argument";
+            abort();
+        }
+        auto head = arguments.front();
+        arguments.pop_front();
 
-            processor(value);
+        processor(head);
+    };
 
-            return;
+    register_processor(prefix, wrapper);
+}
+
+void CommandLineParser::register_processor(const std::string& prefix, std::function<void(std::list<std::string>&)> processor)
+{
+    if (is_prefix_in_use(prefix))
+    {
+        LOG(ERROR) << "Clashing prefixes";
+        abort();
+    }
+    else
+    {
+        m_map[prefix] = processor;
+    }
+}
+
+void CommandLineParser::process(int argc, char** argv) const
+{
+    std::list<std::string> arguments;
+
+    for (int i = 1; i < argc; ++i)
+    {
+        arguments.push_back(argv[i]);
+    }
+
+    process(arguments);
+}
+
+void CommandLineParser::process(std::list<std::string>& arguments) const
+{
+    while (!arguments.empty())
+    {
+        auto head = arguments.front();
+        arguments.pop_front();
+
+        auto it = m_map.find(head);
+
+        if (it == m_map.end())
+        {
+            LOG(ERROR) << "Unknown command " << head;
+            abort();
+        }
+        else
+        {
+            auto processor = *it;
+            processor.second(arguments);
         }
     }
-
-    LOG(ERROR) << "Unrecognized command line argument " << argument;
-    abort();
 }
 
-void CommandLineProcessor::process(int argc, char** argv)
-{
-    for (int i = 1; i != argc; ++i)
-    {
-        std::string argument = argv[i];
-
-        process(argument);
-    }
-}
-
-bool CommandLineProcessor::is_prefix_in_use(const std::string& prefix) const
+bool CommandLineParser::is_prefix_in_use(const std::string& prefix) const
 {
     return m_map.find(prefix) != m_map.end();
 }
