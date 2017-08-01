@@ -18,31 +18,33 @@ namespace
         {
             LOG(INFO) << "Received " << buffer->size() << " bytes to convert to base64";
 
+            Base64 base64;
+
+            produce("<<<");
             for (auto datum : *buffer)
             {
-                m_base64.feed(datum);
+                base64.feed(datum);
 
-                if (m_base64.chars_ready() > 80)
+                if (base64.chars_ready() > 10000)
                 {
-                    produce(m_base64.extract());
+                    produce(base64.extract());
                 }
             }
+
+            base64.close();
+
+            if (base64.chars_ready() > 0)
+            {
+                produce(base64.extract());
+            }
+            
+            produce(">>>");
         }
 
         void end() override
         {
-            m_base64.close();
-            
-            if (m_base64.chars_ready() > 0)
-            {
-                produce(m_base64.extract());
-            }
-
-            produce_end();
+            // NOP
         }
-
-    private:
-        Base64 m_base64;
     };
 }
 

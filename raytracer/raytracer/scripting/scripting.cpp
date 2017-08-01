@@ -58,6 +58,22 @@ namespace
 
         return chai;
     }
+
+    void report_error(const chaiscript::exception::eval_error& e)
+    {
+        LOG(ERROR) << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
+
+        if (!e.call_stack.empty())
+        {
+            auto location = e.call_stack[0]->location.start.line;
+
+            CLOG(ERROR, "studio") << "ERROR[line=<<<" << location << ">>> | reason=<<<" << e.reason << ">>>]";
+        }
+        else
+        {
+            CLOG(ERROR, "studio") << "ERROR[reason=<<<" << e.reason << ">>>]";
+        }
+    }
 }
 
 
@@ -71,7 +87,7 @@ void raytracer::scripting::run_script(const std::string& path)
     }
     catch (const chaiscript::exception::eval_error& e)
     {
-        LOG(ERROR) << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
+        report_error(e);
         abort();
     }
 }
@@ -86,7 +102,7 @@ void raytracer::scripting::run(const std::string& source)
     }
     catch (const chaiscript::exception::eval_error& e)
     {
-        LOG(ERROR) << "Error occurred while evaluating script" << std::endl << e.pretty_print() << std::endl;
+        report_error(e);
         abort();
     }
 }
