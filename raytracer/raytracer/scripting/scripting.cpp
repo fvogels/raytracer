@@ -67,11 +67,12 @@ namespace
         {
             auto location = e.call_stack[0]->location.start.line;
 
-            CLOG(ERROR, "studio") << "ERROR[line=<<<" << location << ">>> | reason=<<<" << e.reason << ">>>]";
+            CLOG(ERROR, "studio") << "Error on line " << location;
+            CLOG(ERROR, "studio") << e.reason;
         }
         else
         {
-            CLOG(ERROR, "studio") << "ERROR[reason=<<<" << e.reason << ">>>]";
+            CLOG(ERROR, "studio") << e.reason;
         }
     }
 }

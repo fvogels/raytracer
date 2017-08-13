@@ -36,6 +36,6 @@ void logging::enable(const std::string& channel)
     el::Configurations configuration;
     configuration.setToDefault();
     configuration.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
-    configuration.set(el::Level::Info, el::ConfigurationType::Format, "<STUDIO>%msg</STUDIO>");
+    configuration.set(el::Level::Info, el::ConfigurationType::Format, "%msg");
     el::Loggers::reconfigureLogger("studio", configuration);
 }
