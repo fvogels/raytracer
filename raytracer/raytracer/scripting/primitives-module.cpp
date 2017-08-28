@@ -44,6 +44,18 @@ namespace
             return chaiscript::boxed_cast<Primitive>(boxed);
         });
 
+        return primitives::mesh(children);
+    }
+
+    // Accelerated mesh
+    Primitive amesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    {
+        std::vector<Primitive> children(boxed_children.size());
+
+        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+            return chaiscript::boxed_cast<Primitive>(boxed);
+        });
+
         return primitives::accelerated_mesh(children);
     }
 
@@ -69,6 +81,13 @@ namespace
 
         return primitives::bumpify(perlin(now), primitive);
     }
+
+    Primitive crop_box(Primitive primitive, Interval<double> x_range, Interval<double> y_range, Interval<double> z_range)
+    {
+        math::Box box(x_range, y_range, z_range);
+
+        return primitives::crop_by_box(primitive, box);
+    }
 }
 
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
@@ -76,6 +95,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     auto module = std::make_shared<chaiscript::Module>();
 
     util::register_type<Primitive>(*module, "Primitive");
+    util::register_assignment<Primitive>(*module);
 
     // Binds helper function defined earlier in this file, exposing the function under the same name
 #   define BIND_HELPER_FUNCTION(NAME)                  BIND_HELPER_FUNCTION_AS(NAME, NAME)
@@ -111,6 +131,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
     BIND_DIRECTLY(decorate);
     BIND_HELPER_FUNCTION(mesh);
+    BIND_HELPER_FUNCTION(amesh);
     BIND_HELPER_FUNCTION_AS(load_mesh, mesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
@@ -119,6 +140,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(crop_along_x);
     BIND_DIRECTLY(crop_along_y);
     BIND_DIRECTLY(crop_along_z);
+    BIND_HELPER_FUNCTION(crop_box);
     BIND_DIRECTLY(crop_spherical);
     BIND_HELPER_FUNCTION(coarse);
     BIND_HELPER_FUNCTION_AS(bumpify2d_timed, bumpify);

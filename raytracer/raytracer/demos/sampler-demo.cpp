@@ -23,7 +23,7 @@ namespace
 
             MaterialProperties white(colors::white() * 0.1, colors::white() * 0.8, colors::black(), 0, 0, 0, 0);
             MaterialProperties black(colors::black() * 0.1, colors::black() * 0.8, colors::black(), 0, 0, 0, 0);
-            auto material = checkered(uniform(white), uniform(black));
+            auto material = checkered2d(uniform(white), uniform(black));
 
             return decorate(material, xz_plane());
         }

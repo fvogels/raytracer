@@ -2,12 +2,13 @@
 
 #include "easylogging++.h"
 #include "version.h"
-#include "command-line-processor.h"
+#include "command-line-parser.h"
 #include "logging.h"
 #include "demos/demos.h"
 #include "pipeline/pipelines.h"
 #include "util/beep.h"
 #include "scripting/scripting.h"
+#include "performance/performance.h"
 #include <assert.h>
 
 using namespace raytracer;
@@ -17,49 +18,84 @@ namespace
 {
     void render_script(const std::string& filename)
     {
-        LOG(INFO) << "Rendering " << filename;
-        TIMED_SCOPE(timer, "Rendering " + filename);
+        TIMED_SCOPE(timer, "Rendering script");
 
 #       ifdef EXCLUDE_SCRIPTING
         LOG(ERROR) << "Cannot run script - scripting was excluded";
         abort();
-#       else
-        raytracer::scripting::run_script(filename);
 #       endif
+
+        if (filename != "-")
+        {
+            LOG(INFO) << "Rendering " << filename;
+
+            raytracer::scripting::run_script(filename);
+        }
+        else
+        {
+            LOG(INFO) << "Rendering script from STDIN";
+
+            std::string script;
+
+            while (!std::cin.eof())
+            {
+                std::string line;
+                std::getline(std::cin, line);
+                script += line + "\n";
+            }
+
+            raytracer::scripting::run(script);
+        }
     }
 
-    void quiet(const std::string&)
+    void quiet()
     {
         logging::quiet();
     }
 
-    void show_version(const std::string&)
+    void show_version()
     {
         LOG(INFO) << "Build " << BUILD_NUMBER << std::endl;
     }
 
-    void emit_beep(const std::string&)
+    void emit_beep()
     {
         ::beep();
+    }
+
+    void print_statistics()
+    {
+        performance::print_statistics(std::cerr);
+    }
+
+    void enable_3dstudio_output()
+    {
+        logging::enable("studio");
+
+        LOG(INFO) << "Activated 3d studio mode";
     }
 }
 
 void process_command_line_arguments(int argc, char** argv)
 {
-    CommandLineProcessor processor;
+    CommandLineParser parser;
 
-    processor.register_processor("-s", render_script);
-    processor.register_processor("--quiet", quiet);
-    processor.register_processor("--version", show_version);
-    processor.register_processor("--beep", emit_beep);
+    parser.register_processor("-s", render_script);
+    parser.register_processor("--quiet", quiet);
+    parser.register_processor("--version", show_version);
+    parser.register_processor("--beep", emit_beep);
+    parser.register_processor("--statistics", print_statistics);
+    parser.register_processor("--studio", enable_3dstudio_output);
 
-    processor.process(argc, argv);
+    parser.process(argc, argv);
 
     LOG(INFO) << "Terminated successfully";
 }
 
 int main(int argc, char** argv)
 {
+    TIMED_FUNC(timer);
+
     logging::configure();
     process_command_line_arguments(argc, argv);
 
@@ -73,8 +109,13 @@ int main(int argc, char** argv)
     // demos::samplers(pipeline::wif(path)); beep();
     // demos::depth_of_field(pipeline::wif(path)); beep();
     // demos::split_depth(pipeline::wif(path)); beep();
+    // demos::cartoon_renderer(pipeline::wif(path)); beep();
+    // demos::dalmatian2d(pipeline::wif(path)); beep();
+    // demos::dalmatian3d(pipeline::wif(path)); beep();
 
-    // scripting::run_script("e:/repos/ucll/3dcg/raytracer2/scripts/test.chai");    
+    // performance::print_statistics(std::cerr);
+
+    performance::cleanup();
 }
 
 #endif

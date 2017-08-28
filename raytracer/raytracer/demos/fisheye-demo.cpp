@@ -35,7 +35,7 @@ namespace
 
             auto white = uniform(MaterialProperties(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 10, 0.5, 0, 0));
             auto black = uniform(MaterialProperties(colors::black() * 0.1, colors::black() * 0.8, colors::white(), 10, 0.5, 0, 0));
-            auto plane_material = checkered(white, black);
+            auto plane_material = checkered2d(white, black);
             auto plane = decorate(plane_material, translate(Vector3D(0, -1, 0), xz_plane()));
 
             std::vector<Primitive> primitives{ spheres, plane };

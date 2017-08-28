@@ -35,7 +35,7 @@ namespace
 
             MaterialProperties white(colors::white() * 0.1, colors::white() * 0.8, colors::white(), 20, 0.5, 0, 0);
             MaterialProperties black(colors::black() * 0.1, colors::black() * 0.8, colors::white(), 20, 0.5, 0, 0);
-            auto plane = decorate(checkered(uniform(white), uniform(black)),
+            auto plane = decorate(checkered2d(uniform(white), uniform(black)),
                 translate(Vector3D(0, -1, 0), xz_plane()));
 
             std::vector<Primitive> children = { plane, decorated_spheres };
@@ -74,7 +74,7 @@ namespace
 
             auto function = from_lambda(lambda);
 
-            return make_animation<std::shared_ptr<Scene>>(function, Duration::from_seconds(3));
+            return make_animation<std::shared_ptr<Scene>>(function, m_duration);
         }
     };
 }

@@ -8,7 +8,7 @@ using namespace imaging;
 
 
 demos::Demo::Demo(unsigned bitmap_size, Duration duration, unsigned fps, unsigned antialias )
-    : m_antialias(antialias), m_duration(duration), m_fps(fps), m_bitmap_size(bitmap_size)
+  : m_bitmap_size(bitmap_size), m_duration(duration), m_fps(fps), m_antialias(antialias)
 {
     // NOP
 }

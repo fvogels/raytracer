@@ -25,7 +25,7 @@ namespace raytracer
                 /// Returns a number of points in <paramref name="rectangle" />.
                 /// How many and which points depends on the type of sampler.
                 /// </summary>
-                std::vector<math::Point2D> sample(const math::Rectangle2D& rectangle) const;
+                virtual std::vector<math::Point2D> sample(const math::Rectangle2D& rectangle) const;
 
                 /// <summary>
                 /// Same as other sample member function, but instead of putting all points in a vector,

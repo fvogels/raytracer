@@ -32,12 +32,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV5::trace(const Scene& sc
             auto material_properties = hit.material->at(hit.local_position);
 
             result += compute_ambient(material_properties);
-
-            for (auto light_source : scene.light_sources)
-            {
-                result += process_light_source(scene, material_properties, hit, eye_ray, light_source);
-            }
-
+            result += this->process_lights(scene, material_properties, hit, eye_ray);
             result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
 
             return TraceResult(result, hit.group_id, eye_ray, hit.t);

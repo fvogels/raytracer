@@ -22,6 +22,6 @@ namespace animation
             }
         };
 
-        return make_animation(from_lambda(lambda), a.duration() + b.duration());
+        return make_animation(math::from_lambda(lambda), a.duration() + b.duration());
     }
 }

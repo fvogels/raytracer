@@ -9,7 +9,7 @@ namespace math
     class Voronoi2D
     {
     public:
-        Voronoi2D::Voronoi2D(Function<unsigned(unsigned)> rng, unsigned density);
+        Voronoi2D(Function<unsigned(unsigned)> rng, unsigned density);
 
         Point2D closest_to(const Point2D&) const;
         Point2D second_closest_to(const Point2D&) const;
@@ -27,7 +27,7 @@ namespace math
     class Voronoi3D
     {
     public:
-        Voronoi3D::Voronoi3D(Function<unsigned(unsigned)> rng, unsigned density);
+        Voronoi3D(Function<unsigned(unsigned)> rng, unsigned density);
 
         Point3D closest_to(const Point3D&) const;
         Point3D second_closest_to(const Point3D&) const;

@@ -3,8 +3,9 @@
 #include "materials/material.h"
 #include "util/misc.h"
 #include "math/quadratic_equation.h"
+#include "math/coordinate-systems.h"
 #include <assert.h>
-#include <math.h>
+#include <cmath>
 
 using namespace raytracer;
 using namespace raytracer::primitives;
@@ -15,8 +16,11 @@ namespace
 {
     Point2D compute_uv_from_xyz(const Point2D& p, double height)
     {
-        double u = 0.5 + atan2(p.y(), p.x()) / (2 * M_PI);
-        double v = height;
+        Cartesian3D cartesian{ p.x(), p.y(), height };
+        auto cylindrical = convert_coordinates<CylindricalZ>(cartesian);
+
+        double u = cylindrical.azimuth.degrees() / 360.0;
+        double v = cylindrical.z;
 
         assert(0 <= u);
         assert(u <= 1);

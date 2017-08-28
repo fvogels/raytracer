@@ -58,7 +58,7 @@ test_file 'cameras/fisheye-camera' do
             Vector3D expected_direction(#{expected_direction});
 
             auto camera = raytracer::cameras::fisheye(eye, look_at, up, hangle, vangle);
-            auto rays = camera->create_rays(position);
+            auto rays = camera->enumerate_rays(position);
 
             REQUIRE(rays.size() == 1);
             auto ray = rays.front();

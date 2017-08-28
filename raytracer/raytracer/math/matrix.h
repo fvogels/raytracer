@@ -127,10 +127,10 @@ namespace math
     struct approximately<Matrix<N>>
     {
         Matrix<N> value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const Matrix<N>& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const Matrix<N>& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
@@ -141,7 +141,7 @@ namespace math
             {
                 for (unsigned col = 0; col != N; ++col)
                 {
-                    if (value.at(row, col) != approx(other.at(row, col)))
+                    if (value.at(row, col) != approx(other.at(row, col), epsilon))
                     {
                         return false;
                     }

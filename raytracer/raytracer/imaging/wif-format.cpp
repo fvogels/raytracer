@@ -36,7 +36,7 @@ imaging::WIF::~WIF()
 
 void imaging::WIF::write_frame(const Bitmap& bitmap)
 {
-    LOG(INFO) << "Writing WIF frame #" << m_frame_index;
+    LOG(INFO) << "Writing WIF frame #" << m_frame_index;        
 
     uint32_t width = bitmap.width();
     uint32_t height = bitmap.height();   
@@ -55,4 +55,41 @@ void imaging::WIF::write_frame(const Bitmap& bitmap)
     }
 
     ++m_frame_index;
+}
+
+template<typename T>
+void write_to_buffer(const T& value, std::vector<uint8_t>& buffer)
+{
+    auto bytes = reinterpret_cast<const uint8_t*>(&value);
+
+    for (size_t i = 0; i != sizeof(T); ++i)
+    {
+        buffer.push_back(bytes[i]);
+    }
+}
+
+void imaging::wif::convert_frame(std::vector<uint8_t>& buffer, const Bitmap& bitmap)
+{
+    uint32_t width = bitmap.width();
+    uint32_t height = bitmap.height();
+
+    write_to_buffer(width, buffer);
+    write_to_buffer(height, buffer);
+
+    for (unsigned j = 0; j != bitmap.height(); ++j)
+    {
+        for (unsigned i = 0; i != bitmap.width(); ++i)
+        {
+            RGBColor color(bitmap[Position2D(i, j)]);
+
+            write_to_buffer(color, buffer);
+        }
+    }
+}
+
+void imaging::wif::mark_eof(std::vector<uint8_t>& buffer)
+{
+    uint32_t marker = 0;
+
+    write_to_buffer(marker, buffer);
 }

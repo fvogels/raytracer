@@ -23,8 +23,9 @@ namespace
             {
                 double x = distribution(generator);
                 double y = distribution(generator);
-                
-                function(rectangle.from_relative(Point2D(x, y)));
+                Point2D sample = rectangle.from_relative(Point2D(x, y));
+
+                function(sample);
             }
         }
 

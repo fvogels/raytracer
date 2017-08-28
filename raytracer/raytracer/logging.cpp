@@ -5,24 +5,37 @@ INITIALIZE_EASYLOGGINGPP
 
 void logging::configure()
 {
-    el::Configurations defaultConf;
+    el::Configurations configuration;
 
-    defaultConf.setToDefault();
-    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
-    el::Loggers::reconfigureLogger("performance", defaultConf);
+    configuration.setToDefault();
+    configuration.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+    el::Loggers::reconfigureLogger("performance", configuration);
 
-    defaultConf.setToDefault();
-    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
-    defaultConf.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
-    el::Loggers::reconfigureLogger("default", defaultConf);
+    configuration.setToDefault();
+    configuration.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+    configuration.set(el::Level::Debug, el::ConfigurationType::Format, "[%level] (%fbase:%line) %msg");
+    el::Loggers::reconfigureLogger("default", configuration);
+
+    configuration.setToDefault();
+    configuration.set(el::Level::Info, el::ConfigurationType::Enabled, "false");
+    el::Loggers::reconfigureLogger("studio", configuration);
 }
 
 void logging::quiet()
 {
     el::Loggers::reconfigureAllLoggers(el::ConfigurationType::Enabled, "false");
 
-    el::Configurations defaultConf;
-    defaultConf.setToDefault();
-    defaultConf.set(el::Level::Error, el::ConfigurationType::Enabled, "true");
-    el::Loggers::reconfigureLogger("default", defaultConf);
+    //el::Configurations configuration;
+    //configuration.setToDefault();
+    //configuration.set(el::Level::Error, el::ConfigurationType::Enabled, "true");
+    //el::Loggers::reconfigureLogger("default", configuration);
+}
+
+void logging::enable(const std::string& channel)
+{
+    el::Configurations configuration;
+    configuration.setToDefault();
+    configuration.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+    configuration.set(el::Level::Info, el::ConfigurationType::Format, "<STUDIO>%msg</STUDIO>");
+    el::Loggers::reconfigureLogger("studio", configuration);
 }

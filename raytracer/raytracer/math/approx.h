@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math.h>
+#include <cmath>
 #include <iostream>
 #include <limits>
 
@@ -61,7 +61,7 @@ namespace math
     }
 
     template<typename T>
-    bool operator !=(double x, const approximately<T>& y)
+    bool operator !=(T x, const approximately<T>& y)
     {
         return !(x == y);
     }

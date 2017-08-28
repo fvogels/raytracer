@@ -1,14 +1,14 @@
-#define _USE_MATH_DEFINES
 #include "primitives/sphere-primitive.h"
-#include "materials/material.h"
 #include "util/misc.h"
 #include "math/coordinate-systems.h"
+#include "math/quadratic_equation.h"
+#include "performance/performance.h"
 #include <assert.h>
-#include <cmath>
 
 using namespace raytracer;
 using namespace raytracer::primitives;
 using namespace math;
+
 
 namespace
 {
@@ -22,95 +22,81 @@ namespace
             double a = ray.direction.dot(ray.direction);
             double b = 2 * ray.direction.dot(ray.origin - Point3D(0, 0, 0));
             double c = (ray.origin - Point3D()).norm_sqr() - 1;
-            double d = b * b - 4 * a * c;
 
-            if (d >= 0)
+            QuadraticEquation qeq(a, b, c);
+
+            if (qeq.has_solutions())
             {
-                double sqrt_d = sqrt(d);
-
-                // Compute t's at which ray intersects sphere
-                double t1 = (-b - sqrt_d) / (2 * a);
-                double t2 = (-b + sqrt_d) / (2 * a);
-
-                // Find closest t > 0
+                double t1 = qeq.x1();
+                double t2 = qeq.x2();
                 double t;
 
-                if (t1 > t2)
+                // Find smallest positive t-value 
+                if (smallest_greater_than_zero(t1, t2, &t))
                 {
-                    swap(t1, t2);
-                }
+                    // Check that our new t is better than the pre-existing t
+                    if (t < hit->t)
+                    {
+                        initialize_hit(hit, ray, t);
 
-                if (t1 > 0)
-                {
-                    t = t1;
-                }
-                else if (t2 > 0)
-                {
-                    t = t2;
-                }
-                else
-                {
-                    // Both hits occur behind the eye
-                    return false;
-                }
-
-                if (t < hit->t)
-                {
-                    initialize_hit(hit, ray, t);
-
-                    return true;
-                }
-                else
-                {
-                    return false;
+                        return true;
+                    }
                 }
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
         {
+            // See sphere formulae
             double a = ray.direction.dot(ray.direction);
             double b = 2 * ray.direction.dot(ray.origin - Point3D());
             double c = (ray.origin - Point3D()).norm_sqr() - 1;
-            double d = b * b - 4 * a * c;
 
-            if (d >= 0)
+            QuadraticEquation qeq(a, b, c);
+
+            // If the ray hits the sphere, the quadratic equation will have solutions
+            if (qeq.has_solutions())
             {
-                double sqrt_d = sqrt(d);
+                // Quadratic equation has solutions: there are two intersections
+                double t1 = qeq.x1();
+                double t2 = qeq.x2();
 
-                double t1 = (-b - sqrt_d) / (2 * a);
-                double t2 = (-b + sqrt_d) / (2 * a);
+                // We want t1 &lt; t2, swap them if necessary
+                sort(t1, t2);
 
-                if (t1 > t2)
-                {
-                    swap(t1, t2);
-                }
+                // Sanity check (only performed in debug builds)
+                assert(t1 <= t2);
 
+                // Allocate vector on stack
                 std::vector<std::shared_ptr<Hit>> hits;
 
+                // Allocate two Hit objects on heap and store address in shared pointers
                 auto hit1 = std::make_shared<Hit>();
                 auto hit2 = std::make_shared<Hit>();
 
+                // Initialize both hits
                 initialize_hit(hit1.get(), ray, t1);
                 initialize_hit(hit2.get(), ray, t2);
 
+                // Put hits in vector
                 hits.push_back(hit1);
                 hits.push_back(hit2);
 
+                // Return hit list
                 return hits;
             }
             else
             {
+                // No intersections to be found
                 return std::vector<std::shared_ptr<Hit>>();
             }
         }
 
         math::Box bounding_box() const override
         {
+            // Create a [-1, 1] x [-1, 1] x [-1, 1] box.
             auto range = interval(-1.0, 1.0);
 
             return Box(range, range, range);
@@ -135,6 +121,7 @@ namespace
 
         void initialize_hit(Hit* hit, const Ray& ray, double t) const
         {
+            // Update Hit object
             hit->t = t;
             hit->position = ray.at(t);
             hit->local_position.xyz = hit->position;
@@ -148,8 +135,13 @@ namespace
         {
             assert(is_on_sphere(position));
 
+            // Compute normal on sphere at position. Always points outwards
             Vector3D outward_normal = position - Point3D();
-            return ray.direction.dot(outward_normal) < 0 ? outward_normal : -outward_normal;
+
+            // Make normal points towards the ray's origin
+            Vector3D normal = ray.direction.dot(outward_normal) < 0 ? outward_normal : -outward_normal;
+
+            return normal;
         }
 
         bool is_on_sphere(const Point3D& p) const

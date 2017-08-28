@@ -21,9 +21,21 @@ Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pa
     return composite(pattern >> bool_mapper);
 }
 
-Material raytracer::materials::checkered(Material m1, Material m2)
+Material raytracer::materials::pattern3d(math::Function<bool(const Point3D&)> pattern, Material m1, Material m2)
 {
-    return pattern2d(math::functions::checkered(), m1, m2);
+    auto bool_mapper = math::functions::bool_mapper(m1, m2);
+
+    return composite(pattern >> bool_mapper);
+}
+
+Material raytracer::materials::checkered2d(Material m1, Material m2)
+{
+    return pattern2d(math::functions::checkered2d(), m1, m2);
+}
+
+Material raytracer::materials::checkered3d(Material m1, Material m2)
+{
+    return pattern3d(math::functions::checkered3d(), m1, m2);
 }
 
 Material raytracer::materials::horizontal_lines(double thickness, Material m1, Material m2)
@@ -36,9 +48,14 @@ Material raytracer::materials::vertical_lines(double thickness, Material m1, Mat
     return pattern2d(math::functions::vertical_lines(thickness), m1, m2);
 }
 
-Material raytracer::materials::grid(double thickness, Material m1, Material m2)
+Material raytracer::materials::grid2d(double thickness, Material m1, Material m2)
 {
-    return pattern2d(math::functions::grid(thickness), m1, m2);
+    return pattern2d(math::functions::grid2d(thickness), m1, m2);
+}
+
+Material raytracer::materials::grid3d(double thickness, Material m1, Material m2)
+{
+    return pattern3d(math::functions::grid3d(thickness), m1, m2);
 }
 
 Material raytracer::materials::polka(double radius, Material m1, Material m2)
@@ -51,7 +68,12 @@ Material raytracer::materials::polka(double radius1, double radius2, Material m1
     return pattern2d(math::functions::polka(radius1, radius2), m1, m2);
 }
 
-Material raytracer::materials::dalmatian(unsigned density, Material m1, Material m2)
+Material raytracer::materials::dalmatian2d(unsigned density, Material m1, Material m2)
 {
-    return pattern2d(math::functions::dalmatian(density, 5461), m1, m2);
+    return pattern2d(math::functions::dalmatian2d(density, 5461), m1, m2);
+}
+
+Material raytracer::materials::dalmatian3d(unsigned density, Material m1, Material m2)
+{
+    return pattern3d(math::functions::dalmatian3d(density, 5461), m1, m2);
 }

@@ -5,6 +5,9 @@
 
 namespace math
 {
+    /// <summary>
+    /// Represents a transformation in 3D. Keeps both the transformation matrix and its inverse.
+    /// </summary>
     class Transformation3D
     {
     public:

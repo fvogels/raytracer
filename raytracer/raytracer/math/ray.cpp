@@ -31,3 +31,8 @@ std::ostream& math::operator <<(std::ostream& out, const Ray& ray)
 {
     return out << "RAY[" << ray.origin << " : " << ray.direction << "]";
 }
+
+bool math::operator ==(const Ray& r1, const Ray& r2)
+{
+    return r1.origin == r2.origin && r1.direction == r2.direction;
+}

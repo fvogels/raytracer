@@ -61,7 +61,7 @@ test_file 'cameras/orthographic-camera' do
             Vector3D expected_direction(#{expected_direction});
 
             auto camera = raytracer::cameras::orthographic(eye, look_at, up, window_width, aspect_ratio);
-            auto rays = camera->create_rays(position);
+            auto rays = camera->enumerate_rays(position);
 
             REQUIRE(rays.size() == 1);
             auto ray = rays.front();

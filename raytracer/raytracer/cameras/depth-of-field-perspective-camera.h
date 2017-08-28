@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cameras/displaceable-camera.h"
+#include "cameras/camera.h"
 #include "math/vector.h"
 #include "math/point.h"
 #include "math/point.h"
@@ -14,21 +14,6 @@ namespace raytracer
 {
     namespace cameras
     {
-        namespace _private_
-        {
-            class DepthOfFieldPerspectiveCamera : public DisplaceableCamera
-            {
-            public:
-                DepthOfFieldPerspectiveCamera(const math::Matrix4x4, const std::vector<Camera>&);
-
-            protected:
-                void enumerate_untransformed_rays(const math::Point2D&, std::function<void(const math::Ray&)>) const;
-
-            private:
-                std::vector<Camera> m_cameras;
-            };
-        }
-
         Camera depth_of_field_perspective(
             const math::Point3D& eye,
             const math::Point3D& look_at,

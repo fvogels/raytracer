@@ -1,9 +1,12 @@
-#define _USE_MATH_DEFINES
 #include "math/angle.h"
 #include <cmath>
 
-
 using namespace math;
+
+namespace
+{
+  const double PI = 3.141592653589793238;
+}
 
 
 math::Angle::Angle()
@@ -14,7 +17,7 @@ math::Angle::Angle(double x)
 {
 #   ifndef NDEBUG
     // m_degrees member variable only available in debug mode
-    m_degrees = m_radians * 180 / M_PI;
+    m_degrees = m_radians * 180 / PI;
 #   endif // NDEBUG
 }
 
@@ -25,12 +28,12 @@ double math::Angle::radians() const
 
 double math::Angle::degrees() const
 {
-    return m_radians * 180 / M_PI; 
+    return m_radians * 180 / PI; 
 }
 
 Angle math::Angle::degrees(long double x)
 {
-    return Angle(double(x) / 180 * M_PI); 
+    return Angle(double(x) / 180 * PI); 
 }
 
 Angle math::Angle::radians(long double x)
@@ -93,22 +96,22 @@ Angle& math::operator /=(Angle& x, double f)
     return (x = x / f);
 }
 
-Angle math::operator""_rad(long double x)
+Angle math::operator "" _rad(long double x)
 {
     return Angle::radians(x);
 }
 
-Angle math::operator""_degrees(long double x)
+Angle math::operator "" _degrees(long double x)
 {
     return Angle::degrees(x);
 }
 
-Angle math::operator""_rad(long long unsigned x)
+Angle math::operator "" _rad(long long unsigned x)
 {
     return Angle::radians((long double)x);
 }
 
-Angle math::operator""_degrees(long long unsigned x)
+Angle math::operator "" _degrees(long long unsigned x)
 {
     return Angle::degrees((long double)x);
 }

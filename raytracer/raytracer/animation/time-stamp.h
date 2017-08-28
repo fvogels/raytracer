@@ -30,26 +30,6 @@ namespace animation
         Duration m_since_epoch;
     };
 
-    inline TimeStamp operator""_S(long double x)
-    {
-        return TimeStamp::from_epoch(Duration::from_seconds(double(x)));
-    }
-
-    inline TimeStamp operator""_S(long long unsigned x)
-    {
-        return TimeStamp::from_epoch(Duration::from_seconds(double(x)));
-    }
-
-    inline TimeStamp operator""_MS(long double x)
-    {
-        return TimeStamp::from_epoch(Duration::from_milliseconds(double(x)));
-    }
-
-    inline TimeStamp operator""_MS(long long unsigned x)
-    {
-        return TimeStamp::from_epoch(Duration::from_milliseconds(double(x)));
-    }
-
     TimeStamp operator +(const TimeStamp&, const Duration&);
     TimeStamp operator +(const Duration&, const TimeStamp&);
     TimeStamp operator -(const TimeStamp&, const Duration&);
@@ -66,17 +46,17 @@ namespace math
     struct approximately<animation::TimeStamp>
     {
         animation::TimeStamp value;
-        double delta;
+        double epsilon;
 
-        explicit approximately(const animation::TimeStamp& value, double delta = 0.00001)
-            :value(value), delta(delta)
+        explicit approximately(const animation::TimeStamp& value, double epsilon = 0.00001)
+            :value(value), epsilon(epsilon)
         {
             // NOP
         }
 
         bool close_enough(const animation::TimeStamp& other) const
         {
-            return (value.seconds() - other.seconds()) < delta;
+            return (value.seconds() - other.seconds()) < epsilon;
         }
     };
 }

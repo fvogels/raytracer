@@ -23,9 +23,9 @@ namespace
             TIMED_FUNC(timer);
 
             // Create a [0,1] x [0,1] window.
-            Rectangle2D window(Point2D(0, 0), Vector2D(1, 0), Vector2D(0, 1));
+            Rectangle2D window(Point2D(0, 1), Vector2D(1, 0), Vector2D(0, -1));
 
-            // Divide this window is small rectangles (which represent pixels)
+            // Divide this window in small rectangles (which represent pixels)
             Rasterizer window_rasterizer(window, m_horizontal_size, m_vertical_size);
 
             // Create a bitmap of the same size
@@ -34,16 +34,11 @@ namespace
 
             // Repeat for each pixel
             for_each_pixel([&](Position2D pixel_coordinates) {
-                // The pixel coordinates assume the origin is in the lower left corner,
-                // while the bitmap chooses the origin in the upper left corner,
-                // so we need to flip the y-coordinate
-                Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
-
                 // Determine the color of the pixel
                 Color c = render_pixel(window_rasterizer, pixel_coordinates, scene);
 
                 // Assign color to bitmap
-                bitmap[bitmap_coordinates] = c;
+                bitmap[pixel_coordinates] = c;
             });
 
             return result;

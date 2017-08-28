@@ -7,6 +7,7 @@ file_template = proc do
     #include "Catch.h"
     #include "primitives/primitives.h"
     #include "math/approx.h"
+    #include <algorithm>
 
     using namespace math;
     using namespace raytracer;
@@ -334,11 +335,9 @@ test_file 'primitives/sphere/sphere-all-hits' do
         {
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
-
-            auto sphere = raytracer::primitives::sphere();
             Ray ray(ray_origin, ray_direction);
 
-            Hit hit;
+            auto sphere = raytracer::primitives::sphere();
 
             auto hits = sphere->find_all_hits(ray);
             REQUIRE(hits.size() == 2);
