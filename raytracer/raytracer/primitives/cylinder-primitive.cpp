@@ -19,7 +19,7 @@ namespace
         Cartesian3D cartesian{ p.x(), p.y(), height };
         auto cylindrical = convert_coordinates<CylindricalZ>(cartesian);
 
-        double u = cylindrical.azimuth.degrees() / 360.0;
+        double u = (cylindrical.azimuth.degrees() + 180.0) / 360.0;
         double v = cylindrical.z;
 
         assert(0 <= u);
