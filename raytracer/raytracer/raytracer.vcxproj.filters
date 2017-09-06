@@ -471,9 +471,6 @@
     <ClCompile Include="performance\performance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="materials\perlin-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -490,6 +487,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="command-line-parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pipeline\studio-export-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1245,6 +1248,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="command-line-parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pipeline\studio-export-consumer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
