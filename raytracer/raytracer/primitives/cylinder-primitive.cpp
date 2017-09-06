@@ -34,14 +34,21 @@ namespace
         double b = 2 * D.dot(O - Point2D(0, 0));
         double c = (O - Point2D(0, 0)).norm_sqr() - 1;
 
-        QuadraticEquation eq(a, b, c);
-
-        if (eq.has_solutions())
+        if (a != 0)
         {
-            *t1 = eq.x1();
-            *t2 = eq.x2();
+            QuadraticEquation eq(a, b, c);
 
-            return true;
+            if (eq.has_solutions())
+            {
+                *t1 = eq.x1();
+                *t2 = eq.x2();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
