@@ -133,8 +133,8 @@ test_file 'primitives/triangle/is-triangle-hit' do
             Vector3D ac = c - a;
             double u = #{u};
             double v = #{v};
-            Point3D center = a + ab * u + ac * v;
-            Vector3D ray_direction = center - ray_origin;
+            Point3D p = a + ab * u + ac * v;
+            Vector3D ray_direction = p - ray_origin;
 
             auto primitive = raytracer::primitives::triangle(a, b, c);
             Ray ray(ray_origin, ray_direction);
@@ -167,271 +167,56 @@ test_file 'primitives/triangle/is-triangle-hit' do
   end
 end
 
+test_file 'primitives/triangle/triangle-t' do
+  template(&file_template)
 
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Triangle] Expecting t=#{t} for for hit between Triangle #{a} #{b} #{c} and Ray O=#{ray_origin} through u=#{u} v=#{v}", "[Triangle]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Point3D a#{a};
+            Point3D b#{b};
+            Point3D c#{c};
+            Vector3D ab = b - a;
+            Vector3D ac = c - a;
+            double u = #{u};
+            double v = #{v};
+            Point3D p = a + ab * u + ac * v;
+            double t = #{t};
+            Vector3D ray_direction = (p - ray_origin) / t;
 
-# test_file 'primitives/triangle/triangle-hits' do
-#   template do
-#     instance_eval(&file_template)
-#   end
+            auto primitive = raytracer::primitives::triangle(a, b, c);
+            Ray ray(ray_origin, ray_direction);
 
-#   test_suite do
-#     template do
-#       <<-END
-#         TEST_CASE("[Triangle] No hit between Triangle[#{a}, #{b}, #{c}] and ray #{ray_origin} + #{ray_direction} * t", "[Triangle]")
-#         {
-#             Point3D a#{a};
-#             Point3D b#{b};
-#             Point3D c#{c};
-#             Point3D ray_origin#{ray_origin};
-#             Vector3D ray_direction#{ray_direction};
+            Hit hit;
+            bool is_hit = primitive->find_first_positive_hit(ray, &hit);
 
-#             auto triangle = raytracer::primitives::triangle(a, b, c);
-#             Ray ray(ray_origin, ray_direction);
+            REQUIRE(is_hit);
+            REQUIRE(hit.t == Approx(t));
+        }
+      END
+    end
 
-#             Hit hit;
-#             hit.t = #{t};
-
-#             REQUIRE(!triangle->find_first_positive_hit(ray, &hit));
-#         }
-#       END
-#     end
-
-#     test_case do |data|
-#       data.a = "(0, 0, 0)"
-#       data.b = "(1, 0, 0)"
-#       data.c = "(1, 0, 1)"
-#       data.ray_origin = "(0, 1, 0)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "std::numeric_limits<double>::infinity()"
-#     end
-
-#     test_case do |data|
-#       data.a = "(0, 0, 0)"
-#       data.b = "(1, 1, 0)"
-#       data.c = "(1, 0, 1)"
-#       data.ray_origin = "(0, 2, 0)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "std::numeric_limits<double>::infinity()"
-#     end
-
-#     test_case do |data|
-#       data.a = "(5, 5, 0)"
-#       data.b = "(5, 6, 0)"
-#       data.c = "(6, 6, 0)"
-#       data.ray_origin = "(0, 0, 0)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "std::numeric_limits<double>::infinity()"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-5, 5, 0)"
-#       data.b = "(5, 0, 0)"
-#       data.c = "(-5, -5, 0)"
-#       data.ray_origin = "(0, 0, 0)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "1"
-#     end
-#   end
-
-#   test_suite do
-#     template do
-#       <<-END
-#         TEST_CASE("[Triangle] Hit between Triangle[#{a}, #{b}, #{c}] and ray #{ray_origin} + #{ray_direction} * t", "[Triangle]")
-#         {
-#             Point3D a#{a};
-#             Point3D b#{b};
-#             Point3D c#{c};
-#             Point3D ray_origin#{ray_origin};
-#             Vector3D ray_direction#{ray_direction};
-
-#             auto triangle = raytracer::primitives::triangle(a, b, c);
-#             Ray ray(ray_origin, ray_direction);
-
-#             Hit hit;
-#             hit.t = #{t};
-
-#             REQUIRE(triangle->find_first_positive_hit(ray, &hit));
-#         }
-#       END
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(-1, 1, 0)"
-#       data.c = "(1, 0, 0)"
-#       data.ray_origin = "(0, 0, -5)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(1, 0, 0)"
-#       data.c = "(-1, 1, 0)"
-#       data.ray_origin = "(0, 0, 5)"
-#       data.ray_direction = "(0, 0, -1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(1, 0, 4)"
-#       data.c = "(-1, 1, 0)"
-#       data.ray_origin = "(0, 0, 5)"
-#       data.ray_direction = "(0, 0, -1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, 0, 1)"
-#       data.b = "(1, 0, 1)"
-#       data.c = "(0, 0, -10)"
-#       data.ray_origin = "(0, 5, 0)"
-#       data.ray_direction = "(0, -5, 0)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, 0, -1)"
-#       data.b = "(1, 0, -1)"
-#       data.c = "(0, 0, 10)"
-#       data.ray_origin = "(0, 5, 0)"
-#       data.ray_direction = "(0, -5, 0)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, 0, 1)"
-#       data.b = "(1, 0, 1)"
-#       data.c = "(0, 0, -10)"
-#       data.ray_origin = "(0, -5, 0)"
-#       data.ray_direction = "(0, 5, 0)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(-1, 1, 0)"
-#       data.c = "(1, 0, 0)"
-#       data.ray_origin = "(0, 0, 5)"
-#       data.ray_direction = "(0, 0, -1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-#     end
-#   end
-
-#   test_suite do
-#     template do
-#       <<-END
-#         TEST_CASE("[Triangle] Hit normal between Triangle[#{a}, #{b}, #{c}] and ray #{ray_origin} + #{ray_direction} * t", "[Triangle]")
-#         {
-#             Point3D a#{a};
-#             Point3D b#{b};
-#             Point3D c#{c};
-#             Point3D ray_origin#{ray_origin};
-#             Vector3D ray_direction#{ray_direction};
-#             Vector3D expected_normal#{expected_normal};
-
-#             auto triangle = raytracer::primitives::triangle(a, b, c);
-#             Ray ray(ray_origin, ray_direction);
-
-#             Hit hit;
-#             hit.t = #{t};
-
-#             REQUIRE(triangle->find_first_positive_hit(ray, &hit));
-#             REQUIRE(hit.normal == approx(expected_normal));
-#         }
-#       END
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(-1, 1, 0)"
-#       data.c = "(1, 0, 0)"
-#       data.ray_origin = "(0, 0, -5)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-      
-#       data.expected_normal = "(0, 0, -1)"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(-1, 1, 0)"
-#       data.c = "(1, 0, 0)"
-#       data.ray_origin = "(0, 0, 5)"
-#       data.ray_direction = "(0, 0, -1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-      
-#       data.expected_normal = "(0, 0, 1)"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-5, 0, -3)"
-#       data.b = "(-2, 0, 8)"
-#       data.c = "(10, 0, 0)"
-#       data.ray_origin = "(0, 5, 0)"
-#       data.ray_direction = "(0, -1, 0)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-      
-#       data.expected_normal = "(0, 1, 0)"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-5, 0, -3)"
-#       data.b = "(-2, 0, 8)"
-#       data.c = "(10, 0, 0)"
-#       data.ray_origin = "(0, -5, 0)"
-#       data.ray_direction = "(0, 1, 0)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-      
-#       data.expected_normal = "(0, -1, 0)"
-#     end
-#   end
-
-#   test_suite do
-#     template do
-#       <<-END
-#         TEST_CASE("[Triangle] Hit t between Triangle[#{a}, #{b}, #{c}] and ray #{ray_origin} + #{ray_direction} * t", "[Triangle]")
-#         {
-#             Point3D a#{a};
-#             Point3D b#{b};
-#             Point3D c#{c};
-#             Point3D ray_origin#{ray_origin};
-#             Vector3D ray_direction#{ray_direction};
-#             double expected_t = #{expected_t};
-
-#             auto triangle = raytracer::primitives::triangle(a, b, c);
-#             Ray ray(ray_origin, ray_direction);
-
-#             Hit hit;
-#             hit.t = #{t};
-
-#             REQUIRE(triangle->find_first_positive_hit(ray, &hit));
-#             REQUIRE(hit.t == approx(expected_t));
-#         }
-#       END
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(-1, 1, 0)"
-#       data.c = "(1, 0, 0)"
-#       data.ray_origin = "(0, 0, -5)"
-#       data.ray_direction = "(0, 0, 1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-      
-#       data.expected_t = "(0, 0, 5)"
-#     end
-
-#     test_case do |data|
-#       data.a = "(-1, -1, 0)"
-#       data.b = "(-1, 1, 0)"
-#       data.c = "(1, 0, 0)"
-#       data.ray_origin = "(0, 0, 10)"
-#       data.ray_direction = "(0, 0, -1)"
-#       data.t = "std::numeric_limits<double>::infinity();"
-      
-#       data.expected_t = "(0, 0, 10)"
-#     end
-#   end
-# end
+    [0.01, 0.1, 0.2, 0.3, 0.4, 0.49].each do |u|
+      [0.01, 0.1, 0.2, 0.3, 0.4, 0.49].each do |v|
+        [0.5, 1, 9].each do |x|
+          [0.2, 1, 6].each do |y|
+            [0.1, 1, 5].each do |t|
+              test_case do |data|
+                data.a = "(0, 0, 1)"
+                data.b = "(#{x}, 0, 2)"
+                data.c = "(0, #{y}, 3)"
+                data.ray_origin = "(#{x}, 1, 1)"
+                data.u = u
+                data.v = v
+                data.t = t
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
