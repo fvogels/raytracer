@@ -343,3 +343,68 @@ test_file 'primitives/triangle/triangle-normal' do
     end        
   end
 end
+
+test_file 'primitives/triangle/triangle-position' do
+  template(&file_template)
+
+  test_suite do
+    template do
+      <<-END
+        TEST_CASE("[Triangle] Checking position for for hit between Triangle #{a} #{b} #{c} and Ray O=#{ray_origin} through u=#{u} v=#{v}", "[Triangle]")
+        {
+            Point3D ray_origin#{ray_origin};
+            Point3D a#{a};
+            Point3D b#{b};
+            Point3D c#{c};
+            Vector3D ab = b - a;
+            Vector3D ac = c - a;
+            double u = #{u};
+            double v = #{v};
+            Point3D p = a + ab * u + ac * v;
+            Vector3D ray_direction = p - ray_origin;
+
+            auto primitive = raytracer::primitives::triangle(a, b, c);
+            Ray ray(ray_origin, ray_direction);
+
+            Hit hit;
+            bool is_hit = primitive->find_first_positive_hit(ray, &hit);
+
+            REQUIRE(is_hit);
+            REQUIRE(hit.position == approx(p));
+        }
+      END
+    end
+
+    [0.01, 0.3, 0.4, 0.6, 0.99].each do |u|
+      [0.01, 0.3, 0.4, 0.6, 0.99].each do |v|
+        [-75, -18, 14, 99].each do |ox|
+          [-7, 3].each do |ax|
+            [-5, 13].each do |by|
+              [-4, 64].each do |cz|
+                if u + v < 1
+                  test_case do |data|
+                    data.a = "(#{ax}, 0, 0)"
+                    data.b = "(1, #{by}, 0)"
+                    data.c = "(0, 1, #{cz})"
+                    data.ray_origin = "(#{ox}, 67, 13)"
+                    data.u = u
+                    data.v = v
+                  end
+
+                  test_case do |data|
+                    data.a = "(#{ax}, 7, 3)"
+                    data.b = "(10, #{by}, 1)"
+                    data.c = "(8, 4, #{cz})"
+                    data.ray_origin = "(#{ox}, 7, 13)"
+                    data.u = u
+                    data.v = v
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
