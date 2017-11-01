@@ -53,9 +53,9 @@ Color raytracer::raytracers::_private_::RayTracerV5::compute_reflection(const Sc
     if (material_properties.reflectivity > 0)
     {
         Vector3D reflected = eye_ray.direction.reflect_by(hit.normal);
-        Ray secundary_ray(hit.position + reflected * 0.00001, reflected);
+        Ray secondary_ray(hit.position + reflected * 0.00001, reflected);
 
-        return material_properties.reflectivity * trace(scene, secundary_ray, weight * material_properties.reflectivity).color;
+        return material_properties.reflectivity * trace(scene, secondary_ray, weight * material_properties.reflectivity).color;
     }
     else
     {
