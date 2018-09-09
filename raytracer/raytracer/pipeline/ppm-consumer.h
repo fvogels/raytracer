@@ -1,8 +1,9 @@
 #pragma once
 
 #include "pipeline/processor.h"
-#include "imaging/wif-format.h"
+#include "imaging/bitmap.h"
 #include <string>
+#include <memory>
 
 
 namespace raytracer
