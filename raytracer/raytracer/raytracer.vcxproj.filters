@@ -495,6 +495,9 @@
     <ClCompile Include="pipeline\studio-export-consumer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\primitives\plane\xz-plane-consistency-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">

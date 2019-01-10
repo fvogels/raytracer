@@ -499,6 +499,7 @@
     <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\main.cpp" />
+    <ClCompile Include="tests\primitives\plane\xz-plane-consistency-tests.cpp" />
     <ClCompile Include="util\base64.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
