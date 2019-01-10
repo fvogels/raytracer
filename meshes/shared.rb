@@ -65,7 +65,6 @@ end
 
 
 def load_raw(file)
-  raise "Expected 'raw' on first line" unless file.readline.strip == 'raw'
   n_vertices = file.readline.to_i
 
   vertices = []
@@ -103,7 +102,6 @@ end
 
 
 def write(vertices, triangles)
-  puts "raw"
   write_vertices(vertices)
   write_triangles(triangles)
 end

@@ -89,16 +89,20 @@ OptionParser.new do |opts|
   opts.on("--scale ARG", "Scale uniformly") do |arg|
     case arg.downcase
     when 'x'
-    then
       factor = 1 / (x_coords.max - x_coords.min)
+
     when 'y'
-    then
       factor = 1 / (y_coords.max - y_coords.min)
+
     when 'z'
-    then
       factor = 1 / (z_coords.max - z_coords.min)
+
+    when 'unit'
+      factor = [ 1 / (x_coords.max - x_coords.min),
+                 1 / (y_coords.max - y_coords.min),
+                 1 / (z_coords.max - z_coords.min) ].max
+
     when /^[0-9.]+$/
-    then
       factor = arg.to_f
     end
 
