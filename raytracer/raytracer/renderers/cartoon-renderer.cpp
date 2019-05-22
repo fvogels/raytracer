@@ -67,7 +67,7 @@ namespace
 
                 for_each_pixel([&](Position2D pixel_coordinates)
                 {
-                    Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
+                    Position2D bitmap_coordinates(pixel_coordinates.x, pixel_coordinates.y);
                     unsigned border_count = 0;
 
                     for (auto& pair : group_grid[pixel_coordinates])
