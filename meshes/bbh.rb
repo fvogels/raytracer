@@ -38,12 +38,12 @@ def build_hierarchy(nodes)
       abort "Expected Leaf" unless Leaf === node
 
       triangle = $triangles[node.triangle_index]
-      puts "t #{triangle.a} #{triangle.b} #{triangle.c}"      
+      puts "t #{triangle.a} #{triangle.b} #{triangle.c}"
     end
 
     puts "g" if nodes.size == 2
-    
-  else  
+
+  else
     min_xs = nodes.map { |node| node.bounding_box.x.min }.min
     max_xs = nodes.map { |node| node.bounding_box.x.max }.max
     min_ys = nodes.map { |node| node.bounding_box.y.min }.min
@@ -79,11 +79,14 @@ def build_hierarchy(nodes)
       end
     end
 
-    left_hierarchy = build_hierarchy(nodes[0...nodes.size / 2])
-    right_hierarchy = build_hierarchy(nodes[nodes.size / 2..-1])
+    left_nodes = nodes[0...nodes.size / 2]
+    right_nodes = nodes[nodes.size / 2..-1]
+    nodes = nil
+    left_hierarchy = build_hierarchy(left_nodes)
+    right_hierarchy = build_hierarchy(right_nodes)
 
     puts "g"
-  end  
+  end
 end
 
 
