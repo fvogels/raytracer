@@ -25,6 +25,17 @@ namespace
         return primitives::make_union(children);
     }
 
+    Primitive simple_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    {
+        std::vector<Primitive> children(boxed_children.size());
+
+        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+            return chaiscript::boxed_cast<Primitive>(boxed);
+        });
+
+        return primitives::simple_union(children);
+    }
+
     Primitive make_accelerated_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
     {
         std::vector<Primitive> children(boxed_children.size());
@@ -128,10 +139,9 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(align_y_to);
     BIND_DIRECTLY(scale);
     BIND_HELPER_FUNCTION_AS(make_union, union);
+    BIND_HELPER_FUNCTION_AS(simple_union, sunion);
     BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
     BIND_DIRECTLY(decorate);
-    BIND_HELPER_FUNCTION(mesh);
-    BIND_HELPER_FUNCTION(amesh);
     BIND_HELPER_FUNCTION_AS(load_mesh, mesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);

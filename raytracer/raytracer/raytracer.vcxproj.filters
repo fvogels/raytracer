@@ -498,6 +498,9 @@
     <ClCompile Include="tests\primitives\plane\xz-plane-consistency-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\simple-union.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1254,6 +1257,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\studio-export-consumer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\simple-union.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

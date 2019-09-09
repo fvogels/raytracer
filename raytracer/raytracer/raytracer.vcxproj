@@ -38,7 +38,7 @@
     <ProjectGuid>{91038B33-14FE-4EC4-A761-D26EBB65751D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>raytracer</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,7 +148,7 @@
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -415,6 +415,7 @@
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
+    <ClCompile Include="primitives\simple-union.cpp" />
     <ClCompile Include="primitives\smooth-triangle-primitive.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="primitives\terrain-primitive.cpp" />
@@ -635,6 +636,7 @@
     <ClInclude Include="primitives\cube-primitive.h" />
     <ClInclude Include="primitives\difference-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
+    <ClInclude Include="primitives\simple-union.h" />
     <ClInclude Include="primitives\smooth-triangle-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\terrain-primitive.h" />
