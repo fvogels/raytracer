@@ -178,7 +178,7 @@ command :stats do |c|
 end
 
 command :optimize do |c|
-    c.syntax = 'optimized IN OUT'
+    c.syntax = 'optimize IN OUT'
     c.description = 'optimizes mesh'
 
     c.action do |args, options|
