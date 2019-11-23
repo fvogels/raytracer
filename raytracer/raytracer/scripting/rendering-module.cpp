@@ -14,11 +14,13 @@ using namespace raytracer;
 
 namespace
 {
+    const int DEFAULT_THREAD_COUNT = 16;
+
     struct RendererLibrary
     {
         Renderer standard(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer) const
         {
-            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(4));
+            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT));
         }
 
         Renderer standard2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned thread_count) const
@@ -33,7 +35,7 @@ namespace
             ARGUMENT(unsigned, height);
             ARGUMENT(Sampler, sampler);
             ARGUMENT(RayTracer, ray_tracer);
-            OPTIONAL_ARGUMENT(unsigned, thread_count, 4);
+            OPTIONAL_ARGUMENT(unsigned, thread_count, DEFAULT_THREAD_COUNT);
             END_ARGUMENTS();
 
             return standard2(width, height, sampler, ray_tracer, thread_count);
@@ -41,7 +43,7 @@ namespace
 
         Renderer edge(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness) const
         {
-            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(4), edge_thickness);
+            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), edge_thickness);
         }
 
         Renderer edge2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness, unsigned thread_count) const
@@ -57,7 +59,7 @@ namespace
             ARGUMENT(Sampler, sampler);
             ARGUMENT(RayTracer, ray_tracer);
             ARGUMENT(double, edge_thickness);
-            OPTIONAL_ARGUMENT(unsigned, thread_count, 4);
+            OPTIONAL_ARGUMENT(unsigned, thread_count, DEFAULT_THREAD_COUNT);
             END_ARGUMENTS();
 
             return edge2(width, height, sampler, ray_tracer, edge_thickness, thread_count);
@@ -65,7 +67,7 @@ namespace
 
         Renderer cartoon(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness) const
         {
-            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(4), shade_count, edge_thickness);
+            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), shade_count, edge_thickness);
         }
 
         Renderer cartoon2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness, unsigned thread_count) const
@@ -82,7 +84,7 @@ namespace
             ARGUMENT(RayTracer, ray_tracer);
             ARGUMENT(unsigned, shade_count);
             ARGUMENT(double, edge_thickness);
-            OPTIONAL_ARGUMENT(unsigned, thread_count, 4);
+            OPTIONAL_ARGUMENT(unsigned, thread_count, DEFAULT_THREAD_COUNT);
             END_ARGUMENTS();
 
             return cartoon2(width, height, sampler, ray_tracer, shade_count, edge_thickness, thread_count);
@@ -95,7 +97,7 @@ namespace
 
         Renderer split_depth2(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at) const
         {
-            return this->split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, split_thickness, eye, look_at, 4);
+            return this->split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, split_thickness, eye, look_at, DEFAULT_THREAD_COUNT);
         }
 
         Renderer split_depth_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -108,7 +110,7 @@ namespace
             ARGUMENT(double, split_thickness);
             ARGUMENT(math::Point3D, eye);
             ARGUMENT(math::Point3D, look_at);
-            OPTIONAL_ARGUMENT(unsigned, thread_count, 4);
+            OPTIONAL_ARGUMENT(unsigned, thread_count, DEFAULT_THREAD_COUNT);
             END_ARGUMENTS();
 
             return this->split_depth(width, height, sampler, ray_tracer, split_thickness, eye, look_at, thread_count);
