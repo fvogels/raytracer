@@ -96,9 +96,12 @@ namespace
             vertices.push_back(Point3D(x, y, z));
         }
 
+        LOG(INFO) << "Read " << vertices.size() << " vertices";
         LOG(INFO) << "Reading hierarchy";
 
         std::vector<Primitive> primitives;
+        unsigned triangle_count = 0;
+        unsigned box_count = 0;
 
         while (true)
         {
@@ -111,6 +114,8 @@ namespace
 
                 in >> i >> j >> k;
                 primitives.push_back(triangle(vertices[i], vertices[j], vertices[k]));
+
+                triangle_count++;
             }
             else if (tag == "b")
             {
@@ -126,6 +131,8 @@ namespace
                 }
 
                 primitives.push_back(accelerated_union(children));
+
+                box_count++;
             }
             else if (tag == "end")
             {
@@ -133,12 +140,13 @@ namespace
             }
             else
             {
-                LOG(ERROR) << "Unrecognized tag " << tag << std::endl;
+                LOG(ERROR) << "Unrecognized tag \"" << tag << "\"" << std::endl;
                 abort();
             }
         }
 
         assert(primitives.size() == 1);
+        LOG(INFO) << "Mesh counted " << triangle_count << " triangles and " << box_count << " boxes";
 
         return primitives[0];
     }
