@@ -1,5 +1,6 @@
 #include "primitives/bounding-box-accelerator-primitive.h"
 #include "primitives/primitives.h"
+#include "performance/performance.h"
 #include <algorithm>
 
 using namespace math;
@@ -9,6 +10,9 @@ using namespace raytracer::primitives;
 
 namespace
 {
+    CREATE_PERFORMANCE_COUNTER(hit_count, "Bounding Box Hit Count");
+    CREATE_PERFORMANCE_COUNTER(miss_count, "Bounding Box Miss Count");
+
     Box box_around_all(const std::vector<Primitive>& primitives)
     {
         Box result = Box::empty();
@@ -128,12 +132,14 @@ namespace
         {
             if (m_bounding_box.is_hit_positively_by(ray))
             {
+                INCREMENT_PERFORMANCE_COUNTER(hit_count);
                 return m_child->find_first_positive_hit(ray, hit);
             }
             else
             {
                 assert(!m_child->find_first_positive_hit(ray, hit));
 
+                INCREMENT_PERFORMANCE_COUNTER(miss_count);
                 return false;
             }
         }
@@ -142,10 +148,12 @@ namespace
         {
             if (m_bounding_box.is_hit_by(ray))
             {
+                INCREMENT_PERFORMANCE_COUNTER(hit_count);
                 return m_child->find_all_hits(ray);
             }
             else
             {
+                INCREMENT_PERFORMANCE_COUNTER(miss_count);
                 return std::vector<std::shared_ptr<Hit>>();
             }
         }
