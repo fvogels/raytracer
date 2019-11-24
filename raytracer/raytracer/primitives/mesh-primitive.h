@@ -11,6 +11,6 @@ namespace raytracer
         Primitive mesh(const std::vector<Primitive>&);
         Primitive mesh(std::vector<Primitive>&&);
 
-        Primitive load_mesh(std::istream&);
+        Primitive load_mesh(const std::string& path);
     }
 }

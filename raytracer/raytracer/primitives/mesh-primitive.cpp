@@ -76,60 +76,10 @@ namespace
         std::vector<Primitive> m_children;
     };
 
-    Primitive load_mesh_raw(std::istream& in)
+    Primitive load_mesh_from_stream(std::istream& in)
     {
         TIMED_FUNC(timerObj);
-        LOG(INFO) << "Loading mesh...";
-
-        unsigned n_vertices;
-        in >> n_vertices;
-        LOG(INFO) << "Reading " << n_vertices << " vertices";
-
-        std::vector<Point3D> vertices;
-
-        for (unsigned i = 0; i != n_vertices; ++i)
-        {
-            double x, y, z;
-
-            in >> x >> y >> z;
-
-            vertices.push_back(Point3D(x, y, z));
-        }
-
-        unsigned n_triangles;
-        in >> n_triangles;
-
-        LOG(INFO) << "Reading " << n_triangles << " triangles";
-
-        std::vector<Primitive> triangles;
-
-        for (unsigned i = 0; i != n_triangles; ++i)
-        {
-            unsigned a, b, c;
-
-            in >> a >> b >> c;
-
-            assert(a < vertices.size());
-            assert(b < vertices.size());
-            assert(c < vertices.size());
-
-            Point3D p = vertices[a];
-            Point3D q = vertices[b];
-            Point3D r = vertices[c];
-
-            Primitive primitive = triangle(p, q, r);
-
-            triangles.push_back(primitive);
-        }
-
-        LOG(INFO) << "Building optimized hierarchy...";
-        return accelerated_union(triangles);
-    }
-
-    Primitive load_mesh_bbh(std::istream& in)
-    {
-        TIMED_FUNC(timerObj);
-        LOG(INFO) << "Loading mesh...";
+        LOG(INFO) << "Loading mesh (unoptimized version)...";
 
         unsigned n_vertices;
         in >> n_vertices;
@@ -162,9 +112,10 @@ namespace
                 in >> i >> j >> k;
                 primitives.push_back(triangle(vertices[i], vertices[j], vertices[k]));
             }
-            else if (tag == "g")
+            else if (tag == "b")
             {
-                unsigned n = 2;
+                unsigned n;
+                in >> n;
 
                 std::vector<Primitive> children;
 
@@ -193,26 +144,6 @@ namespace
     }
 }
 
-Primitive raytracer::primitives::load_mesh(std::istream& in)
-{
-    std::string tag;
-    in >> tag;
-
-    if (tag == "raw")
-    {
-        return load_mesh_raw(in);
-    }
-    else if (tag == "bbh")
-    {
-        return load_mesh_bbh(in);
-    }
-    else
-    {
-        LOG(ERROR) << "Unrecognized mesh tag " << tag << std::endl;
-        abort();
-    }
-}
-
 Primitive raytracer::primitives::mesh(const std::vector<Primitive>& children)
 {
     return Primitive(std::make_shared<MeshImplementation>(children));
@@ -221,4 +152,12 @@ Primitive raytracer::primitives::mesh(const std::vector<Primitive>& children)
 Primitive raytracer::primitives::mesh(std::vector<Primitive>&& children)
 {
     return Primitive(std::make_shared<MeshImplementation>(children));
+}
+
+Primitive raytracer::primitives::load_mesh(const std::string& path)
+{
+    std::ifstream in(path);
+    CHECK(in) << "Failed to open " << path;
+
+    return load_mesh_from_stream(in);
 }

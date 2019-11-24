@@ -72,6 +72,11 @@ namespace
 
     Primitive load_mesh(const std::string& path)
     {
+        return primitives::load_mesh(path);
+    }
+
+    Primitive load_mesh_fast(const std::string& path)
+    {
         return primitives::fast_mesh(path);
     }
 
@@ -143,6 +148,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
     BIND_DIRECTLY(decorate);
     BIND_HELPER_FUNCTION_AS(load_mesh, mesh);
+    BIND_HELPER_FUNCTION_AS(load_mesh_fast, fmesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
     BIND_DIRECTLY(intersection);
