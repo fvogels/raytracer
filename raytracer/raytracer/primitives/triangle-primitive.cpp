@@ -1,5 +1,6 @@
 #include "primitives/triangle-primitive.h"
 #include "math/misc.h"
+#include "performance/performance.h"
 #include "easylogging++.h"
 #include <assert.h>
 #include <algorithm>
@@ -11,6 +12,8 @@ using namespace raytracer::primitives;
 
 namespace
 {
+    CREATE_PERFORMANCE_COUNTER(hit_count, "Triangle Hit Count");
+
     class TriangleImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
@@ -74,6 +77,8 @@ namespace
                         hit->local_position.xyz = P;
                         hit->local_position.uv = Point2D(alpha, beta);
                         hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
+
+                        INCREMENT_PERFORMANCE_COUNTER(hit_count);
 
                         return true;
                     }
