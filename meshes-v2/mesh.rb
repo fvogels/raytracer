@@ -194,6 +194,7 @@ command :optimize do |c|
 
         File.open(out_path, 'w') do |out_stream|
             $extensions[out_path.extname].write_hierarchy out_stream, optimization_result
+            out_stream.puts 'end'
         end
     end
 end
