@@ -130,7 +130,8 @@ namespace
                     primitives.pop_back();
                 }
 
-                primitives.push_back(accelerated_union(children));
+                // primitives.push_back(accelerated_union(children));
+                primitives.push_back(bounding_box_accelerator(make_union(children)));
 
                 box_count++;
             }
