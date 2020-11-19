@@ -156,6 +156,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(crop_along_x);
     BIND_DIRECTLY(crop_along_y);
     BIND_DIRECTLY(crop_along_z);
+    BIND_DIRECTLY(bounding_box_accelerator);
     BIND_HELPER_FUNCTION(crop_box);
     BIND_DIRECTLY(crop_spherical);
     BIND_HELPER_FUNCTION(coarse);
