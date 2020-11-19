@@ -19,7 +19,7 @@ namespace
 
         std::vector<LightRay> lightrays_to(const math::Point3D& p) const override
         {
-            Ray ray(p - m_direction * 1000, m_direction * 1000);
+            Ray ray(p - m_direction * 1000, p);
             LightRay light_ray(ray, m_color);
 
             return std::vector<LightRay> { light_ray };
