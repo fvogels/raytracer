@@ -60,6 +60,8 @@ module Optimization
     def self.optimize(nodes)
         if nodes.size == 1
             nodes[0]
+        elsif nodes.size < 5
+            Box.new(*nodes)
         else
             x_size = nodes.map(&:max_x).max - nodes.map(&:min_x).min
             y_size = nodes.map(&:max_y).max - nodes.map(&:min_y).min
