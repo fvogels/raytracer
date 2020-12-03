@@ -237,6 +237,12 @@ namespace math
     }
 
     template<unsigned N>
+    double distance_sqr(const Point<N>& p, const Point<N>& q)
+    {
+        return (p - q).norm_sqr();
+    }
+
+    template<unsigned N>
     struct approximately<Point<N>>
     {
         Point<N> value;
