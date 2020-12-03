@@ -100,19 +100,11 @@ int main(int argc, char** argv)
     logging::configure();
     process_command_line_arguments(argc, argv);
 
-    const std::string path = "e:/temp/output/test.wif";
-    // demos::fisheye(pipeline::wif(path)); beep();
-    // demos::bumpify_sphere(pipeline::wif(path)); beep();
-    // demos::bumpify_plane(pipeline::wif(path)); beep();
-    // demos::marble(pipeline::wif(path)); beep();
-    // demos::mesh(pipeline::wif(path)); beep();
-    // demos::terrain(pipeline::wif(path)); beep();
-    // demos::samplers(pipeline::wif(path)); beep();
-    // demos::depth_of_field(pipeline::wif(path)); beep();
-    // demos::split_depth(pipeline::wif(path)); beep();
-    // demos::cartoon_renderer(pipeline::wif(path)); beep();
-    // demos::dalmatian2d(pipeline::wif(path)); beep();
-    // demos::dalmatian3d(pipeline::wif(path)); beep();
+#ifdef _DEBUG
+    const std::string path = "g:/temp/test.chai";
+    render_script(path);
+#endif
+
 
     performance::print_statistics(std::cerr);
     performance::cleanup();
