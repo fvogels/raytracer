@@ -5,8 +5,8 @@
 #include <atomic>
 
 
-#define CREATE_PERFORMANCE_COUNTER(VAR, NAME)    performance::Counter PERFORMACE_COUNTER_ ## VAR = performance::create_counter(NAME)
-#define INCREMENT_PERFORMANCE_COUNTER(VAR)       ++PERFORMACE_COUNTER_ ## VAR
+#define CREATE_PERFORMANCE_COUNTER(VAR, NAME)    performance::Counter PERFORMANCE_COUNTER_ ## VAR = performance::create_counter(NAME)
+#define INCREMENT_PERFORMANCE_COUNTER(VAR)       ++PERFORMANCE_COUNTER_ ## VAR
 
 
 namespace performance

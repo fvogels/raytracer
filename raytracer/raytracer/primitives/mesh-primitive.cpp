@@ -3,6 +3,7 @@
 #include "primitives/bounding-box-accelerator-primitive.h"
 #include "primitives/union-primitive.h"
 #include "easylogging++.h"
+#include "util/misc.h"
 #include <vector>
 
 using namespace math;
@@ -76,10 +77,10 @@ namespace
         std::vector<Primitive> m_children;
     };
 
-    Primitive load_mesh_raw(std::istream& in)
+    Primitive load_mesh_from_stream(std::istream& in)
     {
         TIMED_FUNC(timerObj);
-        LOG(INFO) << "Loading mesh...";
+        LOG(INFO) << "Loading mesh (unoptimized version)...";
 
         unsigned n_vertices;
         in >> n_vertices;
@@ -96,59 +97,12 @@ namespace
             vertices.push_back(Point3D(x, y, z));
         }
 
-        unsigned n_triangles;
-        in >> n_triangles;
-
-        LOG(INFO) << "Reading " << n_triangles << " triangles";
-
-        std::vector<Primitive> triangles;
-
-        for (unsigned i = 0; i != n_triangles; ++i)
-        {
-            unsigned a, b, c;
-
-            in >> a >> b >> c;
-
-            assert(a < vertices.size());
-            assert(b < vertices.size());
-            assert(c < vertices.size());
-
-            Point3D p = vertices[a];
-            Point3D q = vertices[b];
-            Point3D r = vertices[c];
-
-            Primitive primitive = triangle(p, q, r);
-
-            triangles.push_back(primitive);
-        }
-
-        LOG(INFO) << "Building optimized hierarchy...";
-        return accelerated_union(triangles);
-    }
-
-    Primitive load_mesh_bbh(std::istream& in)
-    {
-        TIMED_FUNC(timerObj);
-        LOG(INFO) << "Loading mesh...";
-
-        unsigned n_vertices;
-        in >> n_vertices;
-        LOG(INFO) << "Reading " << n_vertices << " vertices";
-
-        std::vector<Point3D> vertices;
-
-        for (unsigned i = 0; i != n_vertices; ++i)
-        {
-            double x, y, z;
-
-            in >> x >> y >> z;
-
-            vertices.push_back(Point3D(x, y, z));
-        }
-
+        LOG(INFO) << "Read " << vertices.size() << " vertices";
         LOG(INFO) << "Reading hierarchy";
 
         std::vector<Primitive> primitives;
+        unsigned triangle_count = 0;
+        unsigned box_count = 0;
 
         while (true)
         {
@@ -161,10 +115,13 @@ namespace
 
                 in >> i >> j >> k;
                 primitives.push_back(triangle(vertices[i], vertices[j], vertices[k]));
+
+                triangle_count++;
             }
-            else if (tag == "g")
+            else if (tag == "b")
             {
-                unsigned n = 2;
+                unsigned n;
+                in >> n;
 
                 std::vector<Primitive> children;
 
@@ -174,7 +131,10 @@ namespace
                     primitives.pop_back();
                 }
 
-                primitives.push_back(accelerated_union(children));
+                // primitives.push_back(accelerated_union(children));
+                primitives.push_back(bounding_box_accelerator(make_union(children)));
+
+                box_count++;
             }
             else if (tag == "end")
             {
@@ -182,34 +142,104 @@ namespace
             }
             else
             {
-                LOG(ERROR) << "Unrecognized tag " << tag << std::endl;
+                LOG(ERROR) << "Unrecognized tag \"" << tag << "\"" << std::endl;
                 abort();
             }
         }
 
         assert(primitives.size() == 1);
+        LOG(INFO) << "Mesh counted " << triangle_count << " triangles and " << box_count << " boxes";
 
         return primitives[0];
     }
-}
 
-Primitive raytracer::primitives::load_mesh(std::istream& in)
-{
-    std::string tag;
-    in >> tag;
+    Primitive load_abel_mesh_from_stream(std::istream& in)
+    {
+        TIMED_FUNC(timerObj);
+        LOG(INFO) << "Loading mesh (unoptimized version)...";
 
-    if (tag == "raw")
-    {
-        return load_mesh_raw(in);
-    }
-    else if (tag == "bbh")
-    {
-        return load_mesh_bbh(in);
-    }
-    else
-    {
-        LOG(ERROR) << "Unrecognized mesh tag " << tag << std::endl;
-        abort();
+        unsigned n_vertices;
+        in >> n_vertices;
+        LOG(INFO) << "Reading " << n_vertices << " vertices";
+
+        std::vector<Point3D> vertices;
+
+        for (unsigned i = 0; i != n_vertices; ++i)
+        {
+            double x, y, z;
+            in >> x >> y >> z;
+
+            vertices.push_back(Point3D(x, y, z));
+        }
+
+        LOG(INFO) << "Read " << vertices.size() << " vertices";
+
+        LOG(INFO) << "Reading triangles";
+        unsigned n_triangles;
+        in >> n_triangles;
+        LOG(INFO) << "Reading " << n_triangles << " triangles";
+
+        std::vector<Primitive> triangles;
+
+        for (unsigned it = 0; it != n_triangles; ++it)
+        {
+            unsigned i, j, k;
+            in >> i >> j >> k;
+
+            triangles.push_back(triangle(vertices[i], vertices[j], vertices[k]));
+        }
+
+        LOG(INFO) << "Read " << triangles.size() << " triangles";
+        LOG(INFO) << "Reading hierarchy";
+
+        std::vector<Primitive> primitives;
+        unsigned box_count = 0;
+
+        while (true)
+        {
+            std::string tag;
+            in >> tag;
+
+            if (tag == "t")
+            {
+                unsigned i;
+
+                in >> i;
+                primitives.push_back(triangles[i]);                
+            }
+            else if (tag == "b")
+            {
+                unsigned n;
+                in >> n;
+
+                std::vector<Primitive> children;
+
+                for (unsigned i = 0; i != n; ++i)
+                {
+                    children.push_back(primitives.back());
+                    primitives.pop_back();
+                }
+
+                // primitives.push_back(accelerated_union(children));
+                primitives.push_back(bounding_box_accelerator(make_union(children)));
+
+                box_count++;
+            }
+            else if (tag == "e")
+            {
+                break;
+            }
+            else
+            {
+                LOG(ERROR) << "Unrecognized tag \"" << tag << "\"" << std::endl;
+                abort();
+            }
+        }
+
+        assert(primitives.size() == 1);
+        LOG(INFO) << "Mesh counted " << n_triangles << " triangles and " << box_count << " boxes";
+
+        return primitives[0];
     }
 }
 
@@ -221,4 +251,19 @@ Primitive raytracer::primitives::mesh(const std::vector<Primitive>& children)
 Primitive raytracer::primitives::mesh(std::vector<Primitive>&& children)
 {
     return Primitive(std::make_shared<MeshImplementation>(children));
+}
+
+Primitive raytracer::primitives::load_mesh(const std::string& path)
+{
+    std::ifstream in(path);
+    CHECK(in) << "Failed to open " << path;
+
+    if (ends_with(path, "abelmesh"))
+    {
+        return load_abel_mesh_from_stream(in);
+    }
+    else
+    {
+        return load_mesh_from_stream(in);
+    }
 }

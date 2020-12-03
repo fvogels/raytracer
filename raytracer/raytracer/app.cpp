@@ -114,8 +114,7 @@ int main(int argc, char** argv)
     // demos::dalmatian2d(pipeline::wif(path)); beep();
     // demos::dalmatian3d(pipeline::wif(path)); beep();
 
-    // performance::print_statistics(std::cerr);
-
+    performance::print_statistics(std::cerr);
     performance::cleanup();
 }
 

@@ -14,7 +14,7 @@ using namespace raytracer;
 
 namespace
 {
-    const int DEFAULT_THREAD_COUNT = 16;
+    const int DEFAULT_THREAD_COUNT = 4;
 
     struct RendererLibrary
     {
