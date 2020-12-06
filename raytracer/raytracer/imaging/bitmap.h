@@ -22,6 +22,12 @@ namespace imaging
         Bitmap(unsigned width, unsigned height);
 
         /// <summary>
+        /// Creates a new bitmap width given <paramref name="width" /> and <paramref name="height" />.
+        /// Pixels are initialized using <paramref name="initializer" />.
+        /// </summary>
+        Bitmap(unsigned width, unsigned height, std::function<void(const Position2D&, Color*)> initializer);
+
+        /// <summary>
         /// Copy constructor.
         /// </summary>
         Bitmap(const Bitmap&) = default;

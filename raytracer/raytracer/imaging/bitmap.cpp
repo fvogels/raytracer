@@ -6,7 +6,13 @@ using namespace imaging;
 
 
 imaging::Bitmap::Bitmap(unsigned width, unsigned height)
-    : m_pixels(width, height, colors::black())
+    : Bitmap(width, height, [](const Position2D&, Color* pColor) { *pColor = colors::black();  })
+{
+    
+}
+
+imaging::Bitmap::Bitmap(unsigned width, unsigned height, std::function<void(const Position2D&, Color*)> initializer)
+    : m_pixels(width, height, initializer)
 {
     // NOP
 }
