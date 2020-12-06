@@ -348,6 +348,8 @@
     <ClCompile Include="demos\design-example.cpp" />
     <ClCompile Include="demos\mesh-demo.cpp" />
     <ClCompile Include="demos\terrain-demo.cpp" />
+    <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
+    <ClCompile Include="io\file-binary-reader.cpp" />
     <ClCompile Include="materials\perlin-material.cpp" />
     <ClCompile Include="math\angle.cpp" />
     <ClCompile Include="animation\animation.cpp" />
@@ -560,6 +562,11 @@
     <ClInclude Include="demos\design-example.h" />
     <ClInclude Include="demos\mesh-demo.h" />
     <ClInclude Include="demos\terrain-demo.h" />
+    <ClInclude Include="imaging\image-reader.h" />
+    <ClInclude Include="imaging\wif\rgb.h" />
+    <ClInclude Include="imaging\wif\wif-image-reader.h" />
+    <ClInclude Include="io\binary-reader.h" />
+    <ClInclude Include="io\file-binary-reader.h" />
     <ClInclude Include="materials\composition-material.h" />
     <ClInclude Include="demos\plane-bumpifier-demo.h" />
     <ClInclude Include="demos\sampler-demo.h" />

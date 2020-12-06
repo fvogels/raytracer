@@ -141,9 +141,6 @@
     <ClCompile Include="pipeline\motion-blur-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imaging\wif-format.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pipeline\overprint-processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -501,6 +498,15 @@
     <ClCompile Include="primitives\simple-union.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imaging\wif-format.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\file-binary-reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imaging\wif\wif-image-reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -717,9 +723,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\pipelines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imaging\wif-format.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\pipeline-builder.h">
@@ -1260,6 +1263,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\simple-union.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\wif-format.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\binary-reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\file-binary-reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\image-reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\wif\wif-image-reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imaging\wif\rgb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
