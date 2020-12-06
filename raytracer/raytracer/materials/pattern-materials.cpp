@@ -63,11 +63,6 @@ Material raytracer::materials::polka(double radius, Material m1, Material m2)
     return pattern2d(math::functions::polka(radius), m1, m2);
 }
 
-Material raytracer::materials::polka(double radius1, double radius2, Material m1, Material m2)
-{
-    return pattern2d(math::functions::polka(radius1, radius2), m1, m2);
-}
-
 Material raytracer::materials::dalmatian2d(unsigned density, Material m1, Material m2)
 {
     return pattern2d(math::functions::dalmatian2d(density, 5461), m1, m2);
