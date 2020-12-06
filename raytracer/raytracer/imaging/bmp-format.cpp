@@ -226,7 +226,7 @@ namespace
     {
         if (p->Size != sizeof(BITMAP_HEADER_V5))
         {
-            LOG(ERROR) << "Invalid size " << p->Size << ", only support " << sizeof(BITMAP_HEADER_V5) << std::endl;
+            LOG(ERROR) << "Invalid header size " << p->Size << ", only support " << sizeof(BITMAP_HEADER_V5) << std::endl;
             abort();
         }
 
