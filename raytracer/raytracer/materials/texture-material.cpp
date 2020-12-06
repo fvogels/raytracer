@@ -1,6 +1,6 @@
 #include "materials/texture-material.h"
 #include "imaging/bitmap-function.h"
-#include "imaging/bmp-format.h"
+#include "imaging/wif/wif-image-reader.h"
 
 using namespace raytracer;
 using namespace imaging;
@@ -25,5 +25,8 @@ Material raytracer::materials::texture(std::shared_ptr<imaging::Bitmap> bitmap)
 
 Material raytracer::materials::texture(const std::string& path)
 {
-    return raytracer::materials::texture(imaging::load_bitmap(path));
+    auto image = imaging::wif::load(path);
+    auto p = std::make_shared<imaging::Bitmap>(std::move(image));
+
+    return raytracer::materials::texture(p);
 }
