@@ -83,11 +83,6 @@ namespace
             return raytracer::materials::polka(radius, x, y);
         }
 
-        Material polka2(double radius1, double radius2, Material x, Material y) const
-        {
-            return raytracer::materials::polka(radius1, radius2, x, y);
-        }
-
         Material dalmatian2d(unsigned density, Material x, Material y) const
         {
             return raytracer::materials::dalmatian2d(density, x, y);
@@ -199,7 +194,6 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(checkered2d);
     BIND(checkered3d);
     BIND(polka);
-    BIND_AS(polka2, polka);
     BIND(dalmatian2d);
     BIND(dalmatian3d);
     BIND(marble2d);
