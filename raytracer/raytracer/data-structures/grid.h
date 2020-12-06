@@ -25,6 +25,20 @@ namespace data
             }
         }
 
+        Grid(unsigned width, unsigned height, std::function<void(const Position2D&, T*)> initializer)
+            : Grid(width, height)
+        {
+            for (unsigned y = 0; y != height; ++y)
+            {
+                for (unsigned x = 0; x != width; ++x)
+                {
+                    Position2D p(x, y);
+
+                    initializer(p, &(*this)[p]);
+                }
+            }
+        }
+
         Grid(unsigned width, unsigned height, T initial_value)
             : Grid(width, height, [&initial_value](const Position2D&) { return initial_value; })
         {
@@ -32,7 +46,7 @@ namespace data
         }
 
         Grid(unsigned width, unsigned height)
-            : m_elts(std::make_unique<T[]>(width * height)), m_width(width), m_height(height)
+            : m_elts(std::make_unique<T[]>(size_t(width) * size_t(height))), m_width(width), m_height(height)
         {
             // NOP
         }
@@ -45,12 +59,12 @@ namespace data
 
         T& operator [](const Position2D& p)
         {
-            return m_elts[p.x + p.y * m_width];
+            return m_elts[index_of(p)];
         }
 
         const T& operator [](const Position2D& p) const
         {
-            return m_elts[p.x + p.y * m_width];
+            return m_elts[index_of(p)];
         }
 
         unsigned width() const
@@ -98,6 +112,11 @@ namespace data
         }
 
     private:
+        size_t index_of(const Position2D& p) const
+        {
+            return p.x + p.y * m_width;
+        }
+
         std::unique_ptr<T[]> m_elts;
         unsigned m_width;
         unsigned m_height;
