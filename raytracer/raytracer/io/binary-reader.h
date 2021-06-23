@@ -13,7 +13,7 @@ namespace io
         template<typename T>
         void read(T* p, size_t n = 1)
         {
-            this->read(sizeof(T) * n, reinterpret_cast<uint8_t*>(p));
+            this->read(unsigned(sizeof(T) * n), reinterpret_cast<uint8_t*>(p));
         }
 
         template<typename T>
