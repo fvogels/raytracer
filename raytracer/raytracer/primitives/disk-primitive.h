@@ -6,6 +6,8 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive disk();
+        Primitive xy_disk();
+        Primitive yz_disk();
+        Primitive xz_disk();
     }
 }

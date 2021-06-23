@@ -1,4 +1,5 @@
 #include "primitives/disk-primitive.h"
+#include "primitives/transformer-primitive.h"
 #include "math/misc.h"
 #include "math/interval.h"
 #include <assert.h>
@@ -69,7 +70,17 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::disk()
+Primitive raytracer::primitives::xy_disk()
+{
+    return rotate_around_x(90_degrees, xz_disk());
+}
+
+Primitive raytracer::primitives::xz_disk()
 {
     return Primitive(std::make_shared<DiskImplementation>());
+}
+
+Primitive raytracer::primitives::yz_disk()
+{
+    return rotate_around_z(90_degrees, xz_disk());
 }

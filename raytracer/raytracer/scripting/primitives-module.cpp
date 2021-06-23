@@ -132,7 +132,9 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(cone_along_y);
     BIND_DIRECTLY(cone_along_z);
     BIND_DIRECTLY(triangle);
-    BIND_DIRECTLY(disk);
+    BIND_DIRECTLY(xy_disk);
+    BIND_DIRECTLY(xz_disk);
+    BIND_DIRECTLY(yz_disk);
     BIND_DIRECTLY(xy_square);
     BIND_DIRECTLY(xz_square);
     BIND_DIRECTLY(yz_square);
