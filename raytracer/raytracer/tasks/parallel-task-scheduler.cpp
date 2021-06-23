@@ -2,6 +2,7 @@
 #include "tasks/serial-task-scheduler.h"
 #include <thread>
 #include <atomic>
+#include "easylogging++.h"
 
 using namespace tasks;
 
@@ -50,6 +51,8 @@ namespace
 
 TaskScheduler tasks::schedulers::parallel(unsigned thread_count)
 {
+    LOG(INFO) << "Creating parallel scheduler with " << thread_count << " threads";
+
     if (thread_count > 1)
     {
         return TaskScheduler(std::make_shared<ParallelTaskScheduler>(thread_count));
