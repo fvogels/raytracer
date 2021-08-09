@@ -20,9 +20,13 @@ namespace
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
             tasks::TaskScheduler scheduler,
-            double stroke_thickness)
+            double stroke_thickness,
+            const Color& stroke_color,
+            const Color& background_color)
             : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
             , m_stroke_thickness(stroke_thickness)
+            , m_stroke_color(stroke_color)
+            , m_background_color(background_color)
         {
             // NOP
         }
@@ -53,7 +57,7 @@ namespace
 
             auto result = std::make_shared<Bitmap>(m_horizontal_size, m_vertical_size);
             Bitmap& bitmap = *result;
-            bitmap.clear(colors::white());
+            bitmap.clear(m_background_color);
 
             LOG(DEBUG) << "Finding edges";
 
@@ -97,11 +101,11 @@ namespace
                 {
                     if (border_percentage < 1)
                     {
-                        bitmap[bitmap_coordinates] = colors::white() * (1 - border_percentage);
+                        bitmap[bitmap_coordinates] = m_stroke_color * (1 - border_percentage);
                     }
                     else
                     {
-                        bitmap[bitmap_coordinates] = colors::black();
+                        bitmap[bitmap_coordinates] = m_stroke_color;
                     }
                 }
             });
@@ -111,10 +115,12 @@ namespace
 
     private:
         double m_stroke_thickness;
+        Color m_stroke_color;
+        Color m_background_color;
     };
 }
 
-Renderer raytracer::renderers::edge(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double stroke_thickness)
+Renderer raytracer::renderers::edge(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double stroke_thickness, const Color& stroke_color, const Color& background_color)
 {
-    return Renderer(std::make_shared<EdgeRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, stroke_thickness));
+    return Renderer(std::make_shared<EdgeRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, stroke_thickness, stroke_color, background_color));
 }

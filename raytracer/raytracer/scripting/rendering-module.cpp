@@ -6,10 +6,12 @@
 #include "raytracers/ray-tracer.h"
 #include "samplers/samplers.h"
 #include "imaging/wif-format.h"
+#include "imaging/color.h"
 #include "tasks/task-schedulers.h"
 
 using namespace chaiscript;
 using namespace raytracer;
+using namespace imaging;
 
 
 namespace
@@ -41,14 +43,9 @@ namespace
             return standard2(width, height, sampler, ray_tracer, thread_count);
         }
 
-        Renderer edge(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness) const
+        Renderer edge(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness, const Color& stroke_color, const Color& background_color) const
         {
-            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), edge_thickness);
-        }
-
-        Renderer edge2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness, unsigned thread_count) const
-        {
-            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count), edge_thickness);
+            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), edge_thickness, stroke_color, background_color);
         }
 
         Renderer edge_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -58,11 +55,12 @@ namespace
             ARGUMENT(unsigned, height);
             ARGUMENT(Sampler, sampler);
             ARGUMENT(RayTracer, ray_tracer);
-            ARGUMENT(double, edge_thickness);
-            OPTIONAL_ARGUMENT(unsigned, thread_count, DEFAULT_THREAD_COUNT);
+            ARGUMENT(double, stroke_thickness);
+            ARGUMENT(Color, stroke_color);
+            ARGUMENT(Color, background_color);
             END_ARGUMENTS();
 
-            return edge2(width, height, sampler, ray_tracer, edge_thickness, thread_count);
+            return edge(width, height, sampler, ray_tracer, stroke_thickness, stroke_color, background_color);
         }
 
         Renderer cartoon(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness) const
@@ -132,7 +130,6 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     BIND_AS(standard2, standard);
     BIND_AS(standard_by_map, standard);
     BIND_AS(edge, edge);
-    BIND_AS(edge2, edge);
     BIND_AS(edge_by_map, edge);
     BIND_AS(cartoon, cartoon);
     BIND_AS(cartoon2, cartoon);
