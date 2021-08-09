@@ -471,6 +471,7 @@
     <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
     <ClCompile Include="renderers\cartoon-renderer.cpp" />
+    <ClCompile Include="renderers\distance-renderer.cpp" />
     <ClCompile Include="renderers\edge-renderer.cpp" />
     <ClCompile Include="renderers\masking-renderer.cpp" />
     <ClCompile Include="renderers\renderer-base.cpp" />
@@ -720,6 +721,7 @@
     <ClInclude Include="raytracers\ray-tracer.h" />
     <ClInclude Include="raytracers\ray-tracers.h" />
     <ClInclude Include="raytracers\scene.h" />
+    <ClInclude Include="renderers\distance-renderer.h" />
     <ClInclude Include="renderers\masking-renderer.h" />
     <ClInclude Include="renderers\edge-renderer.h" />
     <ClInclude Include="renderers\renderer-base.h" />

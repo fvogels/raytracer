@@ -111,6 +111,26 @@ namespace
 
             return this->split_depth(width, height, sampler, ray_tracer, split_thickness, eye, look_at, thread_count);
         }
+
+        Renderer distance(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, const math::Point3D& eye, double factor, double exponent) const
+        {
+            return raytracer::renderers::distance(horizontal_resolution, vertical_resolution, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), eye, factor, exponent);
+        }
+
+        Renderer distance_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
+        {
+            START_ARGUMENTS(argument_map);
+            ARGUMENT(unsigned, width);
+            ARGUMENT(unsigned, height);
+            ARGUMENT(Sampler, sampler);
+            ARGUMENT(RayTracer, ray_tracer);
+            ARGUMENT(math::Point3D, eye);
+            ARGUMENT(double, factor);
+            ARGUMENT(double, exponent);
+            END_ARGUMENTS();
+
+            return this->distance(width, height, sampler, ray_tracer, eye, factor, exponent);
+        }
     };
 }
 
@@ -135,6 +155,8 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     BIND_AS(split_depth, split_depth);
     BIND_AS(split_depth2, split_depth);
     BIND_AS(split_depth_by_map, split_depth);
+    BIND_AS(distance, distance);
+    BIND_AS(distance_by_map, distance);
 #   undef BIND_AS
 
     return module;

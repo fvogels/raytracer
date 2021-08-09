@@ -510,6 +510,9 @@
     <ClCompile Include="renderers\renderer-base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderers\distance-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1290,6 +1293,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderers\renderer-base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\distance-renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
