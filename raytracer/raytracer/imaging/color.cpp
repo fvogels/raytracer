@@ -69,6 +69,11 @@ Color& imaging::operator -=(Color& c1, const Color& c2)
     return c1 = c1 - c2;
 }
 
+Color& imaging::operator *=(Color& c1, const Color& c2)
+{
+    return c1 = c1 * c2;
+}
+
 Color& imaging::operator *=(Color& c, double f)
 {
     return c = c * f;

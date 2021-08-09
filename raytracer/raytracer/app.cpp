@@ -105,7 +105,6 @@ int main(int argc, char** argv)
     render_script(path);
 #endif
 
-
     performance::print_statistics(std::cerr);
     performance::cleanup();
 }

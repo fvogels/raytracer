@@ -1,4 +1,5 @@
 #include "renderers/standard-renderer.h"
+#include "renderers/renderer-base.h"
 #include "easylogging++.h"
 
 using namespace imaging;
@@ -9,11 +10,11 @@ using namespace raytracer::renderers;
 
 namespace
 {
-    class StandardRenderer : public raytracer::renderers::_private_::RendererImplementation
+    class StandardRenderer : public raytracer::renderers::_private_::RendererBaseImplementation
     {
     public:
         StandardRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
+            : RendererBaseImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
         {
             // NOP
         }
@@ -83,8 +84,6 @@ namespace
 
             return c / sample_count;
         }
-
-        unsigned m_thread_count;
     };
 }
 

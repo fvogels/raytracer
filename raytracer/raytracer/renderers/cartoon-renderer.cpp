@@ -1,4 +1,5 @@
 #include "renderers/cartoon-renderer.h"
+#include "renderers/renderer-base.h"
 #include "data-structures/grid.h"
 #include "easylogging++.h"
 #include <vector>
@@ -11,7 +12,7 @@ using namespace raytracer::renderers;
 
 namespace
 {
-    class CartoonRenderer : public raytracer::renderers::_private_::RendererImplementation
+    class CartoonRenderer : public raytracer::renderers::_private_::RendererBaseImplementation
     {
     public:
         CartoonRenderer(
@@ -20,11 +21,9 @@ namespace
             raytracer::Sampler sampler,
             RayTracer ray_tracer,
             tasks::TaskScheduler scheduler,
-            unsigned shade_count,
-            double stroke_thickness)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
+            unsigned shade_count)
+            : RendererBaseImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
             , m_shade_count(shade_count)
-            , m_stroke_thickness(stroke_thickness)
         {
             // NOP
         }
@@ -39,93 +38,34 @@ namespace
             Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
             data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_size, m_vertical_size);
 
-            {
-                TIMED_SCOPE(timer, "Render phase");
+            for_each_pixel([&](Position2D pixel_coordinates) {
+                math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
+                imaging::Color c = imaging::colors::black();
+                unsigned sample_count = 0;
 
-                for_each_pixel([&](Position2D pixel_coordinates) {
-                    math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
-                    imaging::Color c = imaging::colors::black();
-                    unsigned sample_count = 0;
-
-                    m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
-                        scene.camera->enumerate_rays(p, [&](const Ray& ray) {
-                            TraceResult tr = m_ray_tracer->trace(scene, ray);
-                            group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
-                            c += tr.color.quantized(m_shade_count);
-                            ++sample_count;
-                        });
+                m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
+                    scene.camera->enumerate_rays(p, [&](const Ray& ray) {
+                        TraceResult tr = m_ray_tracer->trace(scene, ray);
+                        group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
+                        c += tr.color.quantized(m_shade_count);
+                        ++sample_count;
                     });
-
-                    c /= sample_count;
-
-                    bitmap[pixel_coordinates] = c;
                 });
-            }
 
-            {
-                TIMED_SCOPE(timer, "Edge detected phase");
+                c /= sample_count;
 
-                for_each_pixel([&](Position2D pixel_coordinates)
-                {
-                    Position2D bitmap_coordinates(pixel_coordinates.x, pixel_coordinates.y);
-                    unsigned border_count = 0;
-
-                    for (auto& pair : group_grid[pixel_coordinates])
-                    {
-                        unsigned current_id = pair.first;
-                        Point2D current_xy = pair.second;
-                        bool is_border = false;
-
-                        group_grid.around(pixel_coordinates, unsigned(ceil(m_stroke_thickness * std::max(m_horizontal_size, m_vertical_size))), [&](const Position2D& neighbor_pixel_position) {
-                            for (auto& pair : group_grid[neighbor_pixel_position])
-                            {
-                                unsigned neighbor_id = pair.first;
-                                Point2D neighbor_xy = pair.second;
-
-                                if (current_id != neighbor_id)
-                                {
-                                    double dist = distance(current_xy, neighbor_xy);
-
-                                    if (dist < m_stroke_thickness)
-                                    {
-                                        is_border = true;
-                                    }
-                                }
-                            }
-                        });
-
-                        if (is_border)
-                        {
-                            ++border_count;
-                        }
-                    }
-
-                    double border_percentage = double(border_count) / group_grid[pixel_coordinates].size();
-
-                    if (border_percentage > 0)
-                    {
-                        if (border_percentage < 1)
-                        {
-                            bitmap[bitmap_coordinates] *= (1 - border_percentage);
-                        }
-                        else
-                        {
-                            bitmap[bitmap_coordinates] = colors::black();
-                        }
-                    }
-                });
-            }
+                bitmap[pixel_coordinates] = c;
+            });
 
             return result;
         }
 
     private:
         unsigned m_shade_count;
-        double m_stroke_thickness;
     };
 }
 
-Renderer raytracer::renderers::cartoon(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, unsigned shade_count, double stroke_thickness)
+Renderer raytracer::renderers::cartoon(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, unsigned shade_count)
 {
-    return Renderer(std::make_shared<CartoonRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, shade_count, stroke_thickness));
+    return Renderer(std::make_shared<CartoonRenderer>(horizontal_size, vertical_size, sampler, ray_tracer, scheduler, shade_count));
 }

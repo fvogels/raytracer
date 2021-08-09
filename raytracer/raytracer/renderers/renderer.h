@@ -25,21 +25,6 @@ namespace raytracer
                 /// the resulting picture as a bitmap.
                 /// </summary>
                 virtual std::shared_ptr<imaging::Bitmap> render(const Scene& scene) const = 0;
-
-            protected:
-                RendererImplementation(unsigned, unsigned, raytracer::Sampler, RayTracer, tasks::TaskScheduler);
-
-                unsigned m_horizontal_size, m_vertical_size;
-                raytracer::Sampler m_sampler;
-                RayTracer m_ray_tracer;
-                
-                /// <summary>
-                /// Calls given function <paramref name="callback" /> for each pixel.
-                /// </summary>
-                void for_each_pixel(std::function<void(Position2D)> callback) const;
-
-            private:
-                tasks::TaskScheduler m_scheduler;
             };
         }
     }

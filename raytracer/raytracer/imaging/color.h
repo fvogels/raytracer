@@ -80,6 +80,7 @@ namespace imaging
 
     Color& operator +=(Color&, const Color&);
     Color& operator -=(Color&, const Color&);
+    Color& operator *=(Color&, const Color&);
     Color& operator *=(Color&, double);
     Color& operator /=(Color&, double);
 

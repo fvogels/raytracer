@@ -8,6 +8,6 @@ namespace raytracer
 {
     namespace renderers
     {
-        Renderer cartoon(unsigned, unsigned, raytracer::Sampler, RayTracer, tasks::TaskScheduler, unsigned);
+        Renderer masking(Renderer image_renderer, Renderer mask_renderer);
     }
 }

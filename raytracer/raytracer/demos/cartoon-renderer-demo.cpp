@@ -81,7 +81,7 @@ namespace
 
         Renderer create_renderer() override
         {
-            return raytracer::renderers::cartoon(m_bitmap_size, m_bitmap_size, create_sampler(), create_ray_tracer(), create_scheduler(), 4, 0.005);
+            return raytracer::renderers::cartoon(m_bitmap_size, m_bitmap_size, create_sampler(), create_ray_tracer(), create_scheduler(), 4);
         }
     };
 }

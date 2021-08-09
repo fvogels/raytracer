@@ -1,4 +1,5 @@
 #include "renderers/edge-renderer.h"
+#include "renderers/renderer-base.h"
 #include "data-structures/grid.h"
 #include "easylogging++.h"
 #include <vector>
@@ -11,7 +12,7 @@ using namespace raytracer::renderers;
 
 namespace
 {
-    class EdgeRenderer : public raytracer::renderers::_private_::RendererImplementation
+    class EdgeRenderer : public raytracer::renderers::_private_::RendererBaseImplementation
     {
     public:
         EdgeRenderer(
@@ -23,7 +24,7 @@ namespace
             double stroke_thickness,
             const Color& stroke_color,
             const Color& background_color)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
+            : RendererBaseImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler)
             , m_stroke_thickness(stroke_thickness)
             , m_stroke_color(stroke_color)
             , m_background_color(background_color)
@@ -97,11 +98,13 @@ namespace
 
                 double border_percentage = double(border_count) / group_grid[pixel_coordinates].size();
 
+                CHECK(0 <= border_percentage && border_percentage <= 1) << "border_count=" << border_count << ", max=" << group_grid[pixel_coordinates].size();
+
                 if (border_percentage > 0)
                 {
                     if (border_percentage < 1)
                     {
-                        bitmap[bitmap_coordinates] = m_stroke_color * (1 - border_percentage);
+                        bitmap[bitmap_coordinates] = (m_stroke_color * border_percentage) + (m_background_color * (1 - border_percentage));
                     }
                     else
                     {

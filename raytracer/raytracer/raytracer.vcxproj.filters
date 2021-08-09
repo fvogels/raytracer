@@ -309,9 +309,6 @@
     <ClCompile Include="renderers\edge-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="renderers\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="renderers\split-depth-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -505,6 +502,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\wif\wif-image-reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\masking-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\renderer-base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1281,6 +1284,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\wif\rgb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\masking-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderers\renderer-base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

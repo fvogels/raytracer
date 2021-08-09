@@ -1,4 +1,5 @@
 #include "renderers/split-depth-renderer.h"
+#include "renderers/renderer-base.h"
 #include "easylogging++.h"
 #include <limits>
 #include <cmath>
@@ -11,11 +12,11 @@ using namespace raytracer::renderers;
 
 namespace
 {
-    class SplitDepthRenderer : public raytracer::renderers::_private_::RendererImplementation
+    class SplitDepthRenderer : public raytracer::renderers::_private_::RendererBaseImplementation
     {
     public:
         SplitDepthRenderer(unsigned horizontal_size, unsigned vertical_size, raytracer::Sampler sampler, RayTracer ray_tracer, tasks::TaskScheduler scheduler, double split_thickness, const math::Plane& split_plane)
-            : RendererImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler), m_split_thickness_in_pixels(int(split_thickness * horizontal_size)), m_split_plane(split_plane)
+            : RendererBaseImplementation(horizontal_size, vertical_size, sampler, ray_tracer, scheduler), m_split_thickness_in_pixels(int(split_thickness * horizontal_size)), m_split_plane(split_plane)
         {
             // NOP
         }

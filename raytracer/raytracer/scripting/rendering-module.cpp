@@ -63,14 +63,9 @@ namespace
             return edge(width, height, sampler, ray_tracer, stroke_thickness, stroke_color, background_color);
         }
 
-        Renderer cartoon(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness) const
+        Renderer cartoon(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count) const
         {
-            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), shade_count, edge_thickness);
-        }
-
-        Renderer cartoon2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count, double edge_thickness, unsigned thread_count) const
-        {
-            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count), shade_count, edge_thickness);
+            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT), shade_count);
         }
 
         Renderer cartoon_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -81,11 +76,14 @@ namespace
             ARGUMENT(Sampler, sampler);
             ARGUMENT(RayTracer, ray_tracer);
             ARGUMENT(unsigned, shade_count);
-            ARGUMENT(double, edge_thickness);
-            OPTIONAL_ARGUMENT(unsigned, thread_count, DEFAULT_THREAD_COUNT);
             END_ARGUMENTS();
 
-            return cartoon2(width, height, sampler, ray_tracer, shade_count, edge_thickness, thread_count);
+            return cartoon(width, height, sampler, ray_tracer, shade_count);
+        }
+
+        Renderer masking(Renderer image_renderer, Renderer mask_renderer) const
+        {
+            return raytracer::renderers::masking(image_renderer, mask_renderer);
         }
 
         Renderer split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at, unsigned thread_count) const
@@ -132,8 +130,8 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     BIND_AS(edge, edge);
     BIND_AS(edge_by_map, edge);
     BIND_AS(cartoon, cartoon);
-    BIND_AS(cartoon2, cartoon);
     BIND_AS(cartoon_by_map, cartoon);
+    BIND_AS(masking, masking);
     BIND_AS(split_depth, split_depth);
     BIND_AS(split_depth2, split_depth);
     BIND_AS(split_depth_by_map, split_depth);
