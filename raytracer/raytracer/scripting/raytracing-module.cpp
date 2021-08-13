@@ -22,26 +22,6 @@ namespace
         RayTracer noisy_v4() const { return raytracer::raytracers::noisy_v4(); }
         RayTracer v5() const { return raytracer::raytracers::v5(); }
         RayTracer v6() const { return raytracer::raytracers::v6(); }
-
-        RayTracer v(int version) const
-        {
-            switch (version)
-            {
-#           define DISPATCH(N) case N: return v ## N()
-                DISPATCH(0);
-                DISPATCH(1);
-                DISPATCH(2);
-                DISPATCH(3);
-                DISPATCH(4);
-                DISPATCH(5);
-                DISPATCH(6);
-#           undef DISPATCH
-
-            default:
-                LOG(ERROR) << "Unknown ray tracer version " << version;
-                abort();
-            }
-        }
     };
 
     std::shared_ptr<Scene> create_scene(Camera camera, Primitive root, const std::vector<Boxed_Value>& boxed_lights)
@@ -66,7 +46,8 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     module->add_global_const(chaiscript::const_var(raytracer_library), "Raytracers");
 
     // Expose each member of the library
-#   define BIND(NAME)   module->add(fun(&RaytracerLibrary::NAME), #NAME)
+#   define BIND_AS(INTERNAL, EXTERNAL)  module->add(fun(&RaytracerLibrary::INTERNAL), #EXTERNAL)
+#   define BIND(NAME)                   BIND_AS(NAME, NAME)
     BIND(v0);
     BIND(v1);
     BIND(v2);
@@ -75,7 +56,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     BIND(noisy_v4);
     BIND(v5);
     BIND(v6);
-    BIND(v);
+    BIND_AS(v6, latest);
 #   undef BIND
 
     // Expose create_scene under the same name
