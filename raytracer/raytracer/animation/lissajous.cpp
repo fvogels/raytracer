@@ -15,7 +15,7 @@ namespace
         {
             auto angle = angle_animation(now);
 
-            return parameters.amplitude * sin(parameters.frequency * angle + parameters.phase);
+            return parameters.amplitude * sin(parameters.frequency * angle - parameters.phase);
         };
         
         return make_animation(from_lambda(lambda), duration);
