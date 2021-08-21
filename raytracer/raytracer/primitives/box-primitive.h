@@ -7,6 +7,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive cube(double size);
+        Primitive box(double x_size, double y_size, double z_size);
     }
 }

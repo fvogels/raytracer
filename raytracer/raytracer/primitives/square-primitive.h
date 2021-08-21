@@ -6,8 +6,8 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive xy_square();
-        Primitive xz_square();
-        Primitive yz_square();
+        Primitive xy_square(double size);
+        Primitive xz_square(double size);
+        Primitive yz_square(double size);
     }
 }
