@@ -103,14 +103,14 @@ namespace
             Duration duration = Duration::zero();
 
             START_ARGUMENTS(argument_map);
-            OPTIONAL_ARGUMENT(double, x_amplitude, 0);
-            OPTIONAL_ARGUMENT(double, x_frequency, 0);
+            OPTIONAL_ARGUMENT(double, x_amplitude, 1);
+            OPTIONAL_ARGUMENT(double, x_frequency, 1);
             OPTIONAL_ARGUMENT(Angle, x_phase, 0_degrees);
-            OPTIONAL_ARGUMENT(double, y_amplitude, 0);
-            OPTIONAL_ARGUMENT(double, y_frequency, 0);
+            OPTIONAL_ARGUMENT(double, y_amplitude, 1);
+            OPTIONAL_ARGUMENT(double, y_frequency, 1);
             OPTIONAL_ARGUMENT(Angle, y_phase, 0_degrees);
-            OPTIONAL_ARGUMENT(double, z_amplitude, 0);
-            OPTIONAL_ARGUMENT(double, z_frequency, 0);
+            OPTIONAL_ARGUMENT(double, z_amplitude, 1);
+            OPTIONAL_ARGUMENT(double, z_frequency, 1);
             OPTIONAL_ARGUMENT(Angle, z_phase, 0_degrees);
             BIND_ARGUMENT(duration);
             END_ARGUMENTS();
