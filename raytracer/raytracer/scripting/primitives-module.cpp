@@ -135,9 +135,13 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(xy_disk);
     BIND_DIRECTLY(xz_disk);
     BIND_DIRECTLY(yz_disk);
+    BIND_DIRECTLY(xy_rectangle);
+    BIND_DIRECTLY(xz_rectangle);
+    BIND_DIRECTLY(yz_rectangle);
     BIND_DIRECTLY(xy_square);
     BIND_DIRECTLY(xz_square);
     BIND_DIRECTLY(yz_square);
+    BIND_DIRECTLY(box);
     BIND_DIRECTLY(cube);
     BIND_DIRECTLY(translate);
     BIND_DIRECTLY(rotate_around_x);
