@@ -14,7 +14,16 @@ namespace
 {
     class DiskImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
+    private:
+        double m_radius;
+
     public:
+        DiskImplementation(double radius)
+            : m_radius(radius)
+        {
+            assert(radius >= 0);
+        }
+
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
             assert(hit);
@@ -70,17 +79,17 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::xy_disk()
+Primitive raytracer::primitives::xy_disk(double radius)
 {
-    return rotate_around_x(90_degrees, xz_disk());
+    return rotate_around_x(90_degrees, xz_disk(radius));
 }
 
-Primitive raytracer::primitives::xz_disk()
+Primitive raytracer::primitives::xz_disk(double radius)
 {
-    return Primitive(std::make_shared<DiskImplementation>());
+    return Primitive(std::make_shared<DiskImplementation>(radius));
 }
 
-Primitive raytracer::primitives::yz_disk()
+Primitive raytracer::primitives::yz_disk(double radius)
 {
-    return rotate_around_z(90_degrees, xz_disk());
+    return rotate_around_z(90_degrees, xz_disk(radius));
 }
