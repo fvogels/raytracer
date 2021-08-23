@@ -132,6 +132,12 @@ namespace
         }
 
         template<typename T>
+        Animation<T> limit(Animation<T> animation, Duration duration) const
+        {
+            return animation::limit(animation, duration);
+        }
+
+        template<typename T>
         Animation<T> ease_animation(Animation<T> animation, math::functions::EasingFunction easing_function) const
         {
             return ease(animation, easing_function);
@@ -168,6 +174,9 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 #   define BIND_AS(INTERNAL, EXTERNAL)                 module->add(fun(&AnimationLibrary::INTERNAL), #EXTERNAL)
 #   define BIND(NAME)                                  BIND_AS(NAME, NAME)
     BIND(circular);
+    BIND_AS(limit<double>, limit);
+    BIND_AS(limit<Point3D>, limit);
+    BIND_AS(limit<Angle>, limit);
     BIND_AS(circular_by_map, circular);
     BIND_AS(double_animation, animate);
     BIND_AS(point_animation, animate);
