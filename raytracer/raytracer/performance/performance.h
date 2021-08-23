@@ -29,7 +29,7 @@ namespace performance
     };
 
     Counter create_counter(const std::string& name);
-    void print_statistics(std::ostream&);
+    void print_statistics();
     void cleanup();
 
     class PerformanceCleanerUpper
@@ -42,7 +42,7 @@ namespace performance
         {
             if (m_statistics_on_destruction)
             {
-                print_statistics(std::cerr);
+                print_statistics();
             }
 
             cleanup();

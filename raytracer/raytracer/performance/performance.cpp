@@ -1,6 +1,7 @@
 #include "performance/performance.h"
 #include <atomic>
 #include <vector>
+#include "easylogging++.h"
 
 using namespace performance;
 
@@ -61,19 +62,19 @@ Counter performance::create_counter(const std::string& name)
     return Counter(p);
 }
 
-void performance::print_statistics(std::ostream& out)
+void performance::print_statistics()
 {
     if (counters.empty())
     {
-        out << "Performance statistics: no counters" << std::endl;    
+        LOG(INFO) << "Performance statistics: no counters";    
     }
     else
     {
-        out << "Performance statistics" << std::endl;
+        LOG(INFO) << "Performance statistics";
 
         for (auto p : counters)
         {
-            out << p->name() << " " << p->value() << std::endl;
+            LOG(INFO) << p->name() << " " << p->value();
         }
     }
 }
