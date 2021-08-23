@@ -65,7 +65,7 @@ namespace
 
     void print_statistics()
     {
-        performance::print_statistics(std::cerr);
+        performance::print_statistics();
     }
 
     void enable_3dstudio_output()
@@ -105,7 +105,7 @@ int main(int argc, char** argv)
     render_script(path);
 #endif
 
-    performance::print_statistics(std::cerr);
+    performance::print_statistics();
     performance::cleanup();
 }
 

@@ -513,6 +513,12 @@
     <ClCompile Include="renderers\distance-renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\rectangle-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primitives\box-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1296,6 +1302,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderers\distance-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\rectangle-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\box-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

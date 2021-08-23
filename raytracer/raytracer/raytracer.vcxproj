@@ -193,7 +193,7 @@
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerOutput>NoListing</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
@@ -217,7 +217,7 @@
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerOutput>NoListing</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
@@ -281,7 +281,7 @@
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerOutput>NoListing</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
@@ -316,7 +316,7 @@
       <SDLCheck>true</SDLCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerOutput>NoListing</AssemblerOutput>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
@@ -342,6 +342,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="primitives\box-primitive.cpp" />
     <ClCompile Include="demos\cartoon-renderer-demo.cpp" />
     <ClCompile Include="demos\dalmatian-demo.cpp" />
     <ClCompile Include="demos\demo.cpp" />
@@ -470,6 +471,7 @@
     <ClCompile Include="raytracers\ray-tracer-v3.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v5.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v6.cpp" />
+    <ClCompile Include="primitives\rectangle-primitive.cpp" />
     <ClCompile Include="renderers\cartoon-renderer.cpp" />
     <ClCompile Include="renderers\distance-renderer.cpp" />
     <ClCompile Include="renderers\edge-renderer.cpp" />
@@ -520,6 +522,7 @@
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="primitives\box-primitive.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />
     <ClInclude Include="chaiscript\chaiscript_defines.hpp" />
     <ClInclude Include="chaiscript\chaiscript_stdlib.hpp" />
@@ -650,6 +653,7 @@
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\terrain-primitive.h" />
     <ClInclude Include="raytracers\trace-result.h" />
+    <ClInclude Include="primitives\rectangle-primitive.h" />
     <ClInclude Include="renderers\cartoon-renderer.h" />
     <ClInclude Include="raytracers\ray-tracer-v4.h" />
     <ClInclude Include="easylogging++.h" />
