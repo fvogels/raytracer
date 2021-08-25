@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'commander/import'
 require 'pathname'
 
@@ -85,6 +87,35 @@ module Optimization
         end
     end
 
+    # def self.optimize(nodes, axis=:x)
+    #     if nodes.size == 1
+    #         nodes[0]
+    #     elsif nodes.size < 5
+    #         Box.new(*nodes)
+    #     else
+    #         case axis
+    #         when :x
+    #             nodes.sort! { |t1, t2| t1.min_x <=> t2.min_x }
+    #             next_axis = :y
+    #         when :y
+    #             nodes.sort! { |t1, t2| t1.min_y <=> t2.min_y }
+    #             next_axis = :z
+    #         else
+    #             nodes.sort! { |t1, t2| t1.min_z <=> t2.min_z }
+    #             next_axis = :x
+    #         end
+
+    #         left_nodes = nodes[0...nodes.size / 2]
+    #         right_nodes = nodes[nodes.size / 2..-1]
+
+    #         optimized_left = optimize(left_nodes, next_axis)
+    #         optimized_right = optimize(right_nodes, next_axis)
+
+    #         Box.new(optimized_left, optimized_right)
+    #     end
+    # end
+
+
     class HierarchyTextWriter
         def initialize(out)
             @out = out
@@ -126,14 +157,15 @@ module MeshExtension
     def self.stats(path)
         File.open(path, 'r') do |file|
             n_vertices = file.gets.to_i
-            puts "Number of vertices: #{n_vertices}"
-
-            n_vertices.times do
-                file.gets
-            end
-
+            vertices = (1..n_vertices).map { Optimization::Vertex.new(*file.gets.split.map(&:to_f)) }
             n_triangles = file.gets.to_i
+            triangles = (1..n_triangles).map { Optimization::Triangle.new(vertices, *file.gets.split.map(&:to_i)) }
+
+            puts "Number of vertices: #{n_vertices}"
             puts "Number of triangles: #{n_triangles}"
+            puts "X-Range: #{triangles.map(&:min_x).min} #{triangles.map(&:max_x).max}"
+            puts "Y-Range: #{triangles.map(&:min_y).min} #{triangles.map(&:max_y).max}"
+            puts "Z-Range: #{triangles.map(&:min_z).min} #{triangles.map(&:max_z).max}"
         end
     end
 
