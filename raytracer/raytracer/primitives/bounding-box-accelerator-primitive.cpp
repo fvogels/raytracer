@@ -72,53 +72,6 @@ namespace
         return bounding_box_accelerator(make_union(all_primitives));
     }
 
-    Primitive accelerated_mesh_along_x(std::vector<Primitive>& primitives)
-    {
-        std::sort(primitives.begin(), primitives.end(), [](Primitive p, Primitive q)
-        {
-            return p->bounding_box().x().upper < q->bounding_box().x().upper;
-        });
-
-        auto middle = primitives.begin() + primitives.size() / 2;
-
-        std::vector<Primitive> left_primitives(primitives.begin(), middle);
-        std::vector<Primitive> right_primitives(middle, primitives.end());
-        std::vector<Primitive> all_primitives = { accelerated_mesh(left_primitives), accelerated_mesh(right_primitives) };
-        return bounding_box_accelerator(mesh(all_primitives));
-    }
-
-    Primitive accelerated_mesh_along_y(std::vector<Primitive>& primitives)
-    {
-        std::sort(primitives.begin(), primitives.end(), [](Primitive p, Primitive q)
-        {
-            return p->bounding_box().y().upper < q->bounding_box().y().upper;
-        });
-
-        auto middle = primitives.begin() + primitives.size() / 2;
-
-        std::vector<Primitive> left_primitives(primitives.begin(), middle);
-        std::vector<Primitive> right_primitives(middle, primitives.end());
-        std::vector<Primitive> all_primitives = { accelerated_mesh(left_primitives), accelerated_mesh(right_primitives) };
-
-        return bounding_box_accelerator(mesh(all_primitives));
-    }
-
-    Primitive accelerated_mesh_along_z(std::vector<Primitive>& primitives)
-    {
-        std::sort(primitives.begin(), primitives.end(), [](Primitive p, Primitive q)
-        {
-            return p->bounding_box().z().upper < q->bounding_box().z().upper;
-        });
-
-        auto middle = primitives.begin() + primitives.size() / 2;
-
-        std::vector<Primitive> left_primitives(primitives.begin(), middle);
-        std::vector<Primitive> right_primitives(middle, primitives.end());
-        std::vector<Primitive> all_primitives = { accelerated_mesh(left_primitives), accelerated_mesh(right_primitives) };
-
-        return bounding_box_accelerator(mesh(all_primitives));
-    }
-
     class BoundingBoxAcceleratorImplementation : public raytracer::primitives::_private_::PrimitiveImplementation
     {
     public:
@@ -178,7 +131,7 @@ Primitive raytracer::primitives::accelerated_union(std::vector<Primitive>& primi
 {
     if (primitives.size() <= 3)
     {
-        return bounding_box_accelerator(make_union(primitives));
+        return bounding_box_accelerator(simple_union(primitives));
     }
     else
     {
@@ -202,38 +155,6 @@ Primitive raytracer::primitives::accelerated_union(std::vector<Primitive>& primi
         else
         {
             return accelerated_union_along_z(primitives);
-        }
-    }
-}
-
-Primitive raytracer::primitives::accelerated_mesh(std::vector<Primitive>& primitives)
-{
-    if (primitives.size() <= 3)
-    {
-        return bounding_box_accelerator(mesh(primitives));
-    }
-    else
-    {
-        Box box = box_around_all(primitives);
-
-        if (box.x().size() >= box.y().size())
-        {
-            if (box.x().size() >= box.z().size())
-            {
-                return accelerated_mesh_along_x(primitives);
-            }
-            else
-            {
-                return accelerated_mesh_along_z(primitives);
-            }
-        }
-        else if (box.y().size() > box.z().size())
-        {
-            return accelerated_mesh_along_y(primitives);
-        }
-        else
-        {
-            return accelerated_mesh_along_z(primitives);
         }
     }
 }

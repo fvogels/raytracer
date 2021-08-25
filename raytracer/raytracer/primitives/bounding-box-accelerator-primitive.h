@@ -11,6 +11,5 @@ namespace raytracer
     {
         Primitive bounding_box_accelerator(Primitive);
         Primitive accelerated_union(std::vector<Primitive>&);
-        Primitive accelerated_mesh(std::vector<Primitive>&);
     }
 }
