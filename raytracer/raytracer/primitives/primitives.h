@@ -13,6 +13,7 @@
 #include "primitives/group-primitive.h"
 #include "primitives/union-primitive.h"
 #include "primitives/decorator-primitive.h"
+#include "primitives/csg-union-primitive.h"
 #include "primitives/intersection-primitive.h"
 #include "primitives/difference-primitive.h"
 #include "primitives/transformer-primitive.h"
@@ -23,4 +24,3 @@
 #include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
 #include "primitives/terrain-primitive.h"
-#include "primitives/simple-union.h"

@@ -131,7 +131,7 @@ Primitive raytracer::primitives::accelerated_union(std::vector<Primitive>& primi
 {
     if (primitives.size() <= 3)
     {
-        return bounding_box_accelerator(simple_union(primitives));
+        return bounding_box_accelerator(make_union(primitives));
     }
     else
     {

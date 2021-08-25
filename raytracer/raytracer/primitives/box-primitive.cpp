@@ -1,7 +1,7 @@
 #include "primitives/box-primitive.h"
 #include "primitives/rectangle-primitive.h"
 #include "primitives/transformer-primitive.h"
-#include "primitives/simple-union.h"
+#include "primitives/union-primitive.h"
 #include <assert.h>
 #include <cmath>
 
@@ -21,5 +21,5 @@ Primitive raytracer::primitives::box(double x_size, double y_size, double z_size
 
     std::vector<Primitive> sides = { bottom, top, front, back, left, right };
 
-    return simple_union(sides);
+    return make_union(sides);
 }

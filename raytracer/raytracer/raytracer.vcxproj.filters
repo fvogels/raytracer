@@ -270,7 +270,7 @@
     <ClCompile Include="primitives\triangle-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\union-primitive.cpp">
+    <ClCompile Include="primitives\csg-union-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\bounding-box-accelerator-primitive.cpp">
@@ -450,7 +450,7 @@
     <ClCompile Include="tests\primitives\plane\xz-plane-consistency-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\simple-union.cpp">
+    <ClCompile Include="primitives\union-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imaging\wif-format.cpp">
@@ -980,7 +980,7 @@
     <ClInclude Include="primitives\triangle-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\union-primitive.h">
+    <ClInclude Include="primitives\csg-union-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\bounding-box-accelerator-primitive.h">
@@ -1193,7 +1193,7 @@
     <ClInclude Include="pipeline\studio-export-consumer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\simple-union.h">
+    <ClInclude Include="primitives\union-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imaging\wif-format.h">

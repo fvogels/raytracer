@@ -407,7 +407,7 @@
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
-    <ClCompile Include="primitives\simple-union.cpp" />
+    <ClCompile Include="primitives\union-primitive.cpp" />
     <ClCompile Include="primitives\smooth-triangle-primitive.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="primitives\terrain-primitive.cpp" />
@@ -452,7 +452,7 @@
     <ClCompile Include="math\rectangle2d.cpp" />
     <ClCompile Include="primitives\transformer-primitive.cpp" />
     <ClCompile Include="primitives\triangle-primitive.cpp" />
-    <ClCompile Include="primitives\union-primitive.cpp" />
+    <ClCompile Include="primitives\csg-union-primitive.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v0.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v1.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v2.cpp" />
@@ -625,7 +625,7 @@
     <ClInclude Include="primitives\group-primitive.h" />
     <ClInclude Include="primitives\mesh\mesh-primitive.h" />
     <ClInclude Include="primitives\mesh\mesh-text-reader.h" />
-    <ClInclude Include="primitives\simple-union.h" />
+    <ClInclude Include="primitives\union-primitive.h" />
     <ClInclude Include="primitives\smooth-triangle-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\terrain-primitive.h" />
@@ -691,7 +691,7 @@
     <ClInclude Include="primitives\sphere-primitive.h" />
     <ClInclude Include="primitives\transformer-primitive.h" />
     <ClInclude Include="primitives\triangle-primitive.h" />
-    <ClInclude Include="primitives\union-primitive.h" />
+    <ClInclude Include="primitives\csg-union-primitive.h" />
     <ClInclude Include="raytracers\ray-tracer-v0.h" />
     <ClInclude Include="raytracers\ray-tracer-v1.h" />
     <ClInclude Include="raytracers\ray-tracer-v2.h" />
