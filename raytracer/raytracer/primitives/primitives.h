@@ -19,7 +19,7 @@
 #include "primitives/triangle-primitive.h"
 #include "primitives/smooth-triangle-primitive.h"
 #include "primitives/bounding-box-accelerator-primitive.h"
-#include "primitives/mesh-primitive.h"
+#include "primitives/mesh/mesh-primitive.h"
 #include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
 #include "primitives/terrain-primitive.h"
