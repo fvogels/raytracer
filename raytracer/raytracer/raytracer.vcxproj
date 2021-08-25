@@ -343,12 +343,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="primitives\box-primitive.cpp" />
-    <ClCompile Include="demos\cartoon-renderer-demo.cpp" />
-    <ClCompile Include="demos\dalmatian-demo.cpp" />
-    <ClCompile Include="demos\demo.cpp" />
-    <ClCompile Include="demos\design-example.cpp" />
-    <ClCompile Include="demos\mesh-demo.cpp" />
-    <ClCompile Include="demos\terrain-demo.cpp" />
     <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
     <ClCompile Include="io\file-binary-reader.cpp" />
     <ClCompile Include="materials\perlin-material.cpp" />
@@ -358,10 +352,6 @@
     <ClCompile Include="animation\duration.cpp" />
     <ClCompile Include="animation\time-stamp.cpp" />
     <ClCompile Include="command-line-parser.cpp" />
-    <ClCompile Include="demos\plane-bumpifier-demo.cpp" />
-    <ClCompile Include="demos\sampler-demo.cpp" />
-    <ClCompile Include="demos\sphere-bumpifier-demo.cpp" />
-    <ClCompile Include="demos\split-depth-demo.cpp" />
     <ClCompile Include="imaging\bitmap-function.cpp" />
     <ClCompile Include="lights\anisotropic-light.cpp" />
     <ClCompile Include="app.cpp" />
@@ -371,9 +361,6 @@
     <ClCompile Include="cameras\fisheye-camera.cpp" />
     <ClCompile Include="cameras\orthographic-camera.cpp" />
     <ClCompile Include="cameras\perspective-camera.cpp" />
-    <ClCompile Include="demos\depth-of-field-demo.cpp" />
-    <ClCompile Include="demos\fisheye-demo.cpp" />
-    <ClCompile Include="demos\marble-animation-demo.cpp" />
     <ClCompile Include="materials\composition-material.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\material-transformer.cpp" />
@@ -415,6 +402,8 @@
     <ClCompile Include="pipeline\wif-processor.cpp" />
     <ClCompile Include="primitives\cube-primitive.cpp" />
     <ClCompile Include="primitives\difference-primitive.cpp" />
+    <ClCompile Include="primitives\mesh\mesh-primitive.cpp" />
+    <ClCompile Include="primitives\mesh\mesh-text-reader.cpp" />
     <ClCompile Include="primitives\primitive.cpp" />
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
@@ -456,7 +445,6 @@
     <ClCompile Include="primitives\disk-primitive.cpp" />
     <ClCompile Include="primitives\fast-mesh-primitive.cpp" />
     <ClCompile Include="primitives\intersection-primitive.cpp" />
-    <ClCompile Include="primitives\mesh-primitive.cpp" />
     <ClCompile Include="primitives\plane-primitive.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\decorator-primitive.cpp" />
@@ -562,22 +550,12 @@
     <ClInclude Include="chaiscript\utility\json_wrap.hpp" />
     <ClInclude Include="chaiscript\utility\utility.hpp" />
     <ClInclude Include="command-line-parser.h" />
-    <ClInclude Include="demos\cartoon-renderer-demo.h" />
-    <ClInclude Include="demos\dalmatian-demo.h" />
-    <ClInclude Include="demos\demo.h" />
-    <ClInclude Include="demos\design-example.h" />
-    <ClInclude Include="demos\mesh-demo.h" />
-    <ClInclude Include="demos\terrain-demo.h" />
     <ClInclude Include="imaging\image-reader.h" />
     <ClInclude Include="imaging\wif\rgb.h" />
     <ClInclude Include="imaging\wif\wif-image-reader.h" />
     <ClInclude Include="io\binary-reader.h" />
     <ClInclude Include="io\file-binary-reader.h" />
     <ClInclude Include="materials\composition-material.h" />
-    <ClInclude Include="demos\plane-bumpifier-demo.h" />
-    <ClInclude Include="demos\sampler-demo.h" />
-    <ClInclude Include="demos\sphere-bumpifier-demo.h" />
-    <ClInclude Include="demos\split-depth-demo.h" />
     <ClInclude Include="imaging\bitmap-function.h" />
     <ClInclude Include="lights\anisotropic-light.h" />
     <ClInclude Include="cameras\camera.h" />
@@ -589,10 +567,6 @@
     <ClInclude Include="cameras\perspective-camera.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="data-structures\grid.h" />
-    <ClInclude Include="demos\demos.h" />
-    <ClInclude Include="demos\depth-of-field-demo.h" />
-    <ClInclude Include="demos\fisheye-demo.h" />
-    <ClInclude Include="demos\marble-animation-demo.h" />
     <ClInclude Include="imaging\bmp-format.h" />
     <ClInclude Include="materials\material-transformer.h" />
     <ClInclude Include="materials\pattern-materials.h" />
@@ -649,6 +623,8 @@
     <ClInclude Include="primitives\cube-primitive.h" />
     <ClInclude Include="primitives\difference-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
+    <ClInclude Include="primitives\mesh\mesh-primitive.h" />
+    <ClInclude Include="primitives\mesh\mesh-text-reader.h" />
     <ClInclude Include="primitives\simple-union.h" />
     <ClInclude Include="primitives\smooth-triangle-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
@@ -707,7 +683,6 @@
     <ClInclude Include="primitives\fast-mesh-primitive.h" />
     <ClInclude Include="primitives\hit-position.h" />
     <ClInclude Include="primitives\intersection-primitive.h" />
-    <ClInclude Include="primitives\mesh-primitive.h" />
     <ClInclude Include="primitives\plane-primitive.h" />
     <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator-primitive.h" />

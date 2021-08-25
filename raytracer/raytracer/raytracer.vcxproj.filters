@@ -246,9 +246,6 @@
     <ClCompile Include="primitives\decorator-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\mesh-primitive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="primitives\disk-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -411,39 +408,6 @@
     <ClCompile Include="primitives\smooth-triangle-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demos\demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\depth-of-field-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\design-example.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\fisheye-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\marble-animation-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\mesh-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\plane-bumpifier-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\sampler-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\sphere-bumpifier-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\split-depth-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\terrain-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="samplers\sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -454,12 +418,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tasks\lambda-task.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\cartoon-renderer-demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demos\dalmatian-demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="performance\performance.cpp">
@@ -517,6 +475,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\box-primitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primitives\mesh\mesh-text-reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="primitives\mesh\mesh-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -992,9 +956,6 @@
     <ClInclude Include="primitives\decorator-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\mesh-primitive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="primitives\disk-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1184,42 +1145,6 @@
     <ClInclude Include="primitives\smooth-triangle-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demos\demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\demos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\depth-of-field-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\design-example.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\fisheye-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\marble-animation-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\mesh-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\plane-bumpifier-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\sampler-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\sphere-bumpifier-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\split-depth-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\terrain-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tasks\task.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1242,12 +1167,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tasks\tasks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\cartoon-renderer-demo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demos\dalmatian-demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="performance\performance.h">
@@ -1311,6 +1230,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\animation-limiter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\mesh\mesh-text-reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\mesh\mesh-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
