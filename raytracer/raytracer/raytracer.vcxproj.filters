@@ -255,7 +255,7 @@
     <ClCompile Include="primitives\group-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\intersection-primitive.cpp">
+    <ClCompile Include="primitives\csg-intersection-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\plane-primitive.cpp">
@@ -393,7 +393,7 @@
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="primitives\difference-primitive.cpp">
+    <ClCompile Include="primitives\csg-difference-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\square-primitive.cpp">
@@ -965,7 +965,7 @@
     <ClInclude Include="primitives\group-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\intersection-primitive.h">
+    <ClInclude Include="primitives\csg-intersection-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\plane-primitive.h">
@@ -1130,7 +1130,7 @@
     <ClInclude Include="math\functions\easing\stretch-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="primitives\difference-primitive.h">
+    <ClInclude Include="primitives\csg-difference-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\square-primitive.h">

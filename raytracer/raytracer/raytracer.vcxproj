@@ -401,7 +401,7 @@
     <ClCompile Include="pipeline\wif-consumer.cpp" />
     <ClCompile Include="pipeline\wif-processor.cpp" />
     <ClCompile Include="primitives\cube-primitive.cpp" />
-    <ClCompile Include="primitives\difference-primitive.cpp" />
+    <ClCompile Include="primitives\csg-difference-primitive.cpp" />
     <ClCompile Include="primitives\mesh\mesh-primitive.cpp" />
     <ClCompile Include="primitives\mesh\mesh-text-reader.cpp" />
     <ClCompile Include="primitives\primitive.cpp" />
@@ -444,7 +444,7 @@
     <ClCompile Include="primitives\cropper-primitive.cpp" />
     <ClCompile Include="primitives\disk-primitive.cpp" />
     <ClCompile Include="primitives\fast-mesh-primitive.cpp" />
-    <ClCompile Include="primitives\intersection-primitive.cpp" />
+    <ClCompile Include="primitives\csg-intersection-primitive.cpp" />
     <ClCompile Include="primitives\plane-primitive.cpp" />
     <ClCompile Include="primitives\cylinder-primitive.cpp" />
     <ClCompile Include="primitives\decorator-primitive.cpp" />
@@ -621,7 +621,7 @@
     <ClInclude Include="pipeline\wif-processor.h" />
     <ClInclude Include="primitives\bumpifier-primitive.h" />
     <ClInclude Include="primitives\cube-primitive.h" />
-    <ClInclude Include="primitives\difference-primitive.h" />
+    <ClInclude Include="primitives\csg-difference-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
     <ClInclude Include="primitives\mesh\mesh-primitive.h" />
     <ClInclude Include="primitives\mesh\mesh-text-reader.h" />
@@ -682,7 +682,7 @@
     <ClInclude Include="primitives\disk-primitive.h" />
     <ClInclude Include="primitives\fast-mesh-primitive.h" />
     <ClInclude Include="primitives\hit-position.h" />
-    <ClInclude Include="primitives\intersection-primitive.h" />
+    <ClInclude Include="primitives\csg-intersection-primitive.h" />
     <ClInclude Include="primitives\plane-primitive.h" />
     <ClInclude Include="primitives\primitives.h" />
     <ClInclude Include="primitives\decorator-primitive.h" />

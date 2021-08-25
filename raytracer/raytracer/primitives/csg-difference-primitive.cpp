@@ -1,4 +1,4 @@
-#include "primitives/difference-primitive.h"
+#include "primitives/csg-difference-primitive.h"
 
 using namespace raytracer;
 using namespace raytracer::primitives;
@@ -88,7 +88,7 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::difference(Primitive first, Primitive second)
+Primitive raytracer::primitives::csg_difference(Primitive first, Primitive second)
 {
     return Primitive(std::make_shared<DifferenceImplementation>(first, second));
 }

@@ -155,8 +155,8 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_HELPER_FUNCTION_AS(mesh, mesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
-    BIND_DIRECTLY(intersection);
-    BIND_DIRECTLY(difference);
+    BIND_DIRECTLY(csg_intersection);
+    BIND_DIRECTLY(csg_difference);
     BIND_DIRECTLY(crop_along_x);
     BIND_DIRECTLY(crop_along_y);
     BIND_DIRECTLY(crop_along_z);

@@ -7,6 +7,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive difference(Primitive, Primitive);
+        Primitive csg_difference(Primitive, Primitive);
     }
 }

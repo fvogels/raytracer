@@ -1,4 +1,4 @@
-#include "primitives/intersection-primitive.h"
+#include "primitives/csg-intersection-primitive.h"
 
 using namespace raytracer;
 using namespace raytracer::primitives;
@@ -122,7 +122,7 @@ namespace
     };
 }
 
-Primitive raytracer::primitives::intersection(Primitive first, Primitive second)
+Primitive raytracer::primitives::csg_intersection(Primitive first, Primitive second)
 {
     return Primitive(std::make_shared<IntersectionImplementation>(first, second));
 }

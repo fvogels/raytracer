@@ -7,6 +7,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        Primitive intersection(Primitive, Primitive);
+        Primitive csg_intersection(Primitive, Primitive);
     }
 }
