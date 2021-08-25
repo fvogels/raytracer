@@ -36,49 +36,49 @@ namespace
         return primitives::simple_union(children);
     }
 
-    Primitive make_accelerated_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    //Primitive make_accelerated_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    //{
+    //    std::vector<Primitive> children(boxed_children.size());
+
+    //    std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+    //        return chaiscript::boxed_cast<Primitive>(boxed);
+    //    });
+
+    //    return primitives::accelerated_union(children);
+    //}
+
+    //Primitive mesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    //{
+    //    std::vector<Primitive> children(boxed_children.size());
+
+    //    std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+    //        return chaiscript::boxed_cast<Primitive>(boxed);
+    //    });
+
+    //    return primitives::mesh(children);
+    //}
+
+    //// Accelerated mesh
+    //Primitive amesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
+    //{
+    //    std::vector<Primitive> children(boxed_children.size());
+
+    //    std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
+    //        return chaiscript::boxed_cast<Primitive>(boxed);
+    //    });
+
+    //    return primitives::accelerated_mesh(children);
+    //}
+
+    Primitive mesh(const std::string& path)
     {
-        std::vector<Primitive> children(boxed_children.size());
-
-        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
-            return chaiscript::boxed_cast<Primitive>(boxed);
-        });
-
-        return primitives::accelerated_union(children);
+        return primitives::mesh(path);
     }
 
-    Primitive mesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
-    {
-        std::vector<Primitive> children(boxed_children.size());
-
-        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
-            return chaiscript::boxed_cast<Primitive>(boxed);
-        });
-
-        return primitives::mesh(children);
-    }
-
-    // Accelerated mesh
-    Primitive amesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
-    {
-        std::vector<Primitive> children(boxed_children.size());
-
-        std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
-            return chaiscript::boxed_cast<Primitive>(boxed);
-        });
-
-        return primitives::accelerated_mesh(children);
-    }
-
-    Primitive load_mesh(const std::string& path)
-    {
-        return primitives::load_mesh(path);
-    }
-
-    Primitive load_mesh_fast(const std::string& path)
+    /*Primitive load_mesh_fast(const std::string& path)
     {
         return primitives::fast_mesh(path);
-    }
+    }*/
 
     Primitive coarse(Primitive primitive, double coarseness)
     {
@@ -151,10 +151,8 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(scale);
     BIND_HELPER_FUNCTION_AS(make_union, union);
     BIND_HELPER_FUNCTION_AS(simple_union, sunion);
-    BIND_HELPER_FUNCTION_AS(make_accelerated_union, bbunion);
     BIND_DIRECTLY(decorate);
-    BIND_HELPER_FUNCTION_AS(load_mesh, mesh);
-    BIND_HELPER_FUNCTION_AS(load_mesh_fast, fmesh);
+    BIND_HELPER_FUNCTION_AS(mesh, mesh);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
     BIND_DIRECTLY(intersection);
