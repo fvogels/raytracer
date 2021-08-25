@@ -55,7 +55,7 @@ namespace
                 }
             }
 
-            return simple_union(triangles);
+            return accelerated_union(triangles);
         }
 
         void compute_maps(Function<double(const Point2D&)> noise, unsigned squares_along_x, unsigned squares_along_z, double square_x_size, double square_z_size)
