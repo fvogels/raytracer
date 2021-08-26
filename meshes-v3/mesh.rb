@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# require 'commander/import'
+require 'commander/import'
 require 'pathname'
 
 
@@ -7,17 +7,24 @@ XYZ = Struct.new :x, :y, :z
 
 Mesh = Struct.new :vertices, :normals, :contents
 
-Triangle = Struct.new :mesh, :i, :j, :k do
-  def vertices
-    [i, j, k].map { |index| mesh.vertices[index] }
+class Triangle
+  def initialize(mesh, i, j, k)
+    @i = i
+    @j = j
+    @k = k
+    @vertices = [i, j, k].map { |index| mesh.vertices[index] }
+    @min = Hash[[:x, :y, :z].map { |coordinate| [coordinate, @vertices.map(&coordinate).min ] }]
+    @max = Hash[[:x, :y, :z].map { |coordinate| [coordinate, @vertices.map(&coordinate).max ] }]
   end
 
+  attr_reader :mesh, :i, :j, :k, :vertices
+
   def min(coordinate)
-    vertices.map(&coordinate).min
+    @min[coordinate]
   end
 
   def max(coordinate)
-    vertices.map(&coordinate).max
+    @max[coordinate]
   end
 end
 
@@ -46,33 +53,16 @@ def read_mesh(pathname)
 end
 
 def build_hierarchy(triangles)
+  return triangles[0] if triangles.size == 1
   return Box.new(triangles) if triangles.size < 5
 
-  min_x = triangles.map { |t| t.min(:x) }
-  min_y = triangles.map { |t| t.min(:y) }
-  min_z = triangles.map { |t| t.min(:z) }
-  max_x = triangles.map { |t| t.max(:x) }
-  max_y = triangles.map { |t| t.max(:y) }
-  max_z = triangles.map { |t| t.max(:z) }
-
-  dx = max_x - min_x
-  dy = max_y - min_y
-  dz = max_z - min_z
-
-  smallest = [dx, dy, dz].min
-
-  case
-  when dx == smallest
-    split_axis = :x
-
-  when dy == smallest
-    split_axis = :y
-
-  else
-    split_axis = :z
+  split_axis = [ :x, :y, :z ].max_by do |axis|
+    min = triangles.map { |t| t.min(axis) }.min
+    max = triangles.map { |t| t.max(axis) }.max
+    max - min
   end
 
-  triangles.sort_by { |t| t.min(split_axis) }
+  triangles.sort_by! { |t| t.min(split_axis) }
 
   left = triangles[0...triangles.size / 2]
   right = triangles[triangles.size / 2..-1]
@@ -113,36 +103,38 @@ def write_mesh(mesh, output_pathname)
     mesh.contents.each do |hierarchy|
       write_hierarchy(hierarchy, file)
     end
+    file.puts 'end'
   end
 end
 
 
 def optimize(input_pathname, output_pathname)
   mesh = read_mesh input_pathname
-  hierarchy = build_hierarchy(mesh.contents)
+  hierarchy = build_hierarchy(mesh.contents.dup)
   optimized_mesh = Mesh.new(mesh.vertices, mesh.normals, [hierarchy])
   write_mesh(optimized_mesh, output_pathname)
 end
 
 
-optimize(Pathname.new(ARGV[1]), Pathname.new(ARGV[2]))
 
 
-# program :name, 'Mesh'
-# program :version, '3.0.0'
-# program :description, 'Processes meshes'
+program :name, 'Mesh'
+program :version, '3.0.0'
+program :description, 'Processes meshes'
 
 
-# command :optimize do |c|
-#   c.syntax = 'optimize IN OUT'
-#   c.description = 'optimizes mesh'
+command :optimize do |c|
+  c.syntax = 'optimize IN OUT'
+  c.description = 'optimizes mesh'
 
-#   c.action do |args, options|
-#     abort 'Two arguments required' unless args.size == 2
+  c.action do |args, options|
+    abort 'Two arguments required' unless args.size == 2
 
-#     in_path = Pathname.new args[0]
-#     out_path = Pathname.new args[1]
+    in_path = Pathname.new args[0]
+    out_path = Pathname.new args[1]
 
-#     optimize(in_path, out_path)
-#   end
-# end
+    optimize(in_path, out_path)
+  end
+end
+
+# optimize(Pathname.new(ARGV[1]), Pathname.new(ARGV[2]))
