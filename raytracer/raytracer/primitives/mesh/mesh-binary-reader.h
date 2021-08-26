@@ -9,6 +9,6 @@ namespace raytracer
 {
     namespace primitives
     {
-        void read_text_mesh(std::istream& input_stream, MeshReceiver& receiver);
+        void read_binary_mesh(std::istream& input_stream, MeshReceiver& receiver);
     }
 }

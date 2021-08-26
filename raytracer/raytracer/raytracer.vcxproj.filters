@@ -483,6 +483,9 @@
     <ClCompile Include="primitives\mesh\mesh-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1236,6 +1239,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\mesh\mesh-primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\mesh\mesh-binary-reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\mesh\mesh-receiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

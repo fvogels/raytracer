@@ -342,6 +342,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp" />
     <ClCompile Include="primitives\box-primitive.cpp" />
     <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
     <ClCompile Include="io\file-binary-reader.cpp" />
@@ -511,6 +512,7 @@
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="primitives\mesh\mesh-binary-reader.h" />
     <ClInclude Include="primitives\box-primitive.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />
     <ClInclude Include="chaiscript\chaiscript_defines.hpp" />
@@ -624,6 +626,7 @@
     <ClInclude Include="primitives\csg-difference-primitive.h" />
     <ClInclude Include="primitives\group-primitive.h" />
     <ClInclude Include="primitives\mesh\mesh-primitive.h" />
+    <ClInclude Include="primitives\mesh\mesh-receiver.h" />
     <ClInclude Include="primitives\mesh\mesh-text-reader.h" />
     <ClInclude Include="primitives\union-primitive.h" />
     <ClInclude Include="primitives\smooth-triangle-primitive.h" />

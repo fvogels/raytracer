@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     process_command_line_arguments(argc, argv);
 
 #ifdef _DEBUG
-    const std::string path = "g:/temp/test.chai";
+    const std::string path = R"(G:\repos\ucll\3dcg\raytracer\meshes-v3\demo.chai)";
     render_script(path);
 #endif
 

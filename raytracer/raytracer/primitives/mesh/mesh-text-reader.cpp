@@ -8,11 +8,8 @@ using namespace raytracer;
 
 namespace
 {
-    void read_vertices(std::istream& input_stream, raytracer::primitives::MeshReceiver& receiver)
+    void read_vertices(std::istream& input_stream, raytracer::primitives::MeshReceiver& receiver, unsigned n_vertices)
     {
-        unsigned n_vertices;
-        input_stream >> n_vertices;
-
         LOG(INFO) << "Reading " << n_vertices << " vertices";
 
         for (unsigned i = 0; i != n_vertices; ++i)
@@ -24,11 +21,8 @@ namespace
         }
     }
 
-    void read_normals(std::istream& input_stream, raytracer::primitives::MeshReceiver& receiver)
+    void read_normals(std::istream& input_stream, raytracer::primitives::MeshReceiver& receiver, unsigned n_normals)
     {
-        unsigned n_normals;
-        input_stream >> n_normals;
-
         LOG(INFO) << "Reading " << n_normals << " normals";
 
         for (unsigned i = 0; i != n_normals; ++i)
@@ -81,7 +75,10 @@ void raytracer::primitives::read_text_mesh(std::istream& input_stream, raytracer
     TIMED_FUNC(timerObj);
     LOG(INFO) << "Loading text mesh...";
 
-    read_vertices(input_stream, receiver);
-    //read_normals(input_stream, receiver);
+    unsigned n_vertices, n_normals;
+    input_stream >> n_vertices >> n_normals;
+
+    read_vertices(input_stream, receiver, n_vertices);
+    read_normals(input_stream, receiver, n_normals);
     read_hierarchy(input_stream, receiver);
 }

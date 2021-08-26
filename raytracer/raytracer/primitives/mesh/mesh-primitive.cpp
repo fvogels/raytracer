@@ -1,6 +1,8 @@
 #include "primitives/mesh/mesh-primitive.h"
 #include "primitives/mesh/mesh-text-reader.h"
+#include "primitives/mesh/mesh-binary-reader.h"
 #include "primitives/primitives.h"
+#include "util/misc.h"
 #include <vector>
 #include <stack>
 #include "easylogging++.h"
@@ -72,11 +74,24 @@ namespace
 
 Primitive raytracer::primitives::mesh(const std::string& path)
 {
-    std::ifstream input_stream(path);
-    CHECK(input_stream) << "Could not open " << path;
-    Receiver receiver;
+    if (ends_with(path, ".bmesh"))
+    {
+        std::ifstream input_stream(path, std::ios::binary);
+        CHECK(input_stream) << "Could not open " << path;
+        Receiver receiver;
 
-    read_text_mesh(input_stream, receiver);
+        read_binary_mesh(input_stream, receiver);
 
-    return receiver.root();
+        return receiver.root();
+    }
+    else
+    {
+        std::ifstream input_stream(path);
+        CHECK(input_stream) << "Could not open " << path;
+        Receiver receiver;
+
+        read_text_mesh(input_stream, receiver);
+
+        return receiver.root();        
+    }
 }
