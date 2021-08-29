@@ -9,16 +9,17 @@ def material(c)
                        "refractive_index": 0 ] )
 }
 
-// global statuette = mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\bunny.mesh")
-//global statuette = mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\old-optimized-bunny.mesh")
-//global statuette = rotate_around_x(degrees(270), mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\optimized-lucy.bmesh"))
-global statuette = rotate_around_y(degrees(180), rotate_around_x(degrees(-90), resize_y_uniform(mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\optimized-nefertiti.bmesh"), 5)))
-//global statuette = mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\optimized-bunny.bmesh")
+// global statuette = mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\meshes\\bunny.mesh")
+//global statuette = mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\meshes\\old-optimized-bunny.mesh")
+//global statuette = rotate_around_x(degrees(270), mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\meshes\\optimized-lucy.bmesh"))
+// global statuette = rotate_around_y(degrees(180), rotate_around_x(degrees(-90), resize_y_uniform(mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\meshes\\optimized-nefertiti.bmesh"), 5)))
+global statuette = resize_y_uniform(mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\meshes\\optimized-ironman.bmesh"), 5)
+//global statuette = mesh("G:\\repos\\ucll\\3dcg\\raytracer\\meshes-v3\\meshes\\optimized-bunny.bmesh")
 
 def scene_at(now)
 {
-  var t = Animations.animate(-10, -20, seconds(5))
-  
+  var t = Animations.animate(6, 20, seconds(5))
+
   var camera = Cameras.perspective( [ "eye": pos(0,0,t[now]),
                                       "look_at": pos(0,0,0) ] )
 
@@ -26,7 +27,7 @@ def scene_at(now)
   var angle = Animations.animate(degrees(0), degrees(360), seconds(5))
   var root = decorate( material(Colors.white()), center( pos(0, 0, 0), statuette ) )
 
-  var lights = [ Lights.omnidirectional( pos(0, 0, -20), Colors.white() ) ]
+  var lights = [ Lights.omnidirectional( pos(0, 0, 20), Colors.white() ) ]
 
   create_scene(camera, root, lights)
 }

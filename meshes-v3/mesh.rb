@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'commander/import'
 require 'pathname'
+require_relative 'scripts/obj2mesh'
 
 
 XYZ = Struct.new :x, :y, :z do
@@ -176,69 +177,6 @@ def convert_to_binary(input_pathname, output_pathname)
 end
 
 
-# class TriangleVertex
-#   def initialize(v, vt=nil, vn=nil)
-#     @v = v
-#     @vt = vt
-#     @vn = vn
-#   end
-
-#   attr_reader :v, :vt, :vn
-# end
-
-def convert_obj_to_mesh(input_pathname, output_pathname)
-  vertices = []
-  normals = []
-  triangles = []
-
-  input_pathname.open do |input|
-    input.each_line do |line|
-      tag, *args = line.strip.split
-
-      case tag
-      when 'v'
-        vertices << args
-      when 'f'
-        case args.size
-        when 3
-          triangles_vertices = [ args ]
-        else
-          abort "face with #{args.size} vertices found!" if args.size != 3
-        end
-
-        triangles_vertices.each do |triangle_vertices|
-          abort "No support for v/vt/vn in faces" unless triangle_vertices.all? { |v| /^\d+$/ =~ v }
-
-          triangles << triangle_vertices
-        end
-      when 'vn'
-        normals << args
-      when 'vt'
-        # ignore
-      else
-        abort "Unsupported tag #{tag}"
-      end
-    end
-  end
-
-  # Remove this to add support for normals
-  normals = []
-
-  output_pathname.open('w') do |output|
-    output.puts("#{vertices.size} #{normals.size}")
-
-    vertices.each { |vertex| output.puts vertex.join(' ') }
-    normals.each { |normal| output.puts normal.join(' ') }
-
-    triangles.each do |triangle|
-      indices = triangle.map { |v| v.to_i - 1 }
-      output.puts "t #{indices.join(' ')}"
-    end
-
-    output.puts "b #{triangles.size}"
-    output.puts "end"
-  end
-end
 
 
 program :name, 'Mesh'
