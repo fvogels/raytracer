@@ -50,6 +50,7 @@ module Obj2Mesh
         @output.puts("t #{vertices_string}")
       end
 
+      @output.puts "b #{@triangles.size}"
       @output.puts "end"
     end
 
