@@ -149,6 +149,12 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(rotate_around_z);
     BIND_DIRECTLY(align_y_to);
     BIND_DIRECTLY(scale);
+    BIND_DIRECTLY(resize_x);
+    BIND_DIRECTLY(resize_y);
+    BIND_DIRECTLY(resize_z);
+    BIND_DIRECTLY(resize_x_uniform);
+    BIND_DIRECTLY(resize_y_uniform);
+    BIND_DIRECTLY(resize_z_uniform);
     BIND_HELPER_FUNCTION_AS(make_union, union);
     BIND_HELPER_FUNCTION_AS(csg_union, csg_union);
     BIND_DIRECTLY(decorate);

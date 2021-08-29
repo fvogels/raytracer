@@ -24,3 +24,4 @@
 #include "primitives/fast-mesh-primitive.h"
 #include "primitives/bumpifier-primitive.h"
 #include "primitives/terrain-primitive.h"
+#include "primitives/resizer-primitive.h"
