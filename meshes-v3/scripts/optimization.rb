@@ -74,14 +74,6 @@ module Optimization
     end
   end
 
-  def measure_box_around(triangles)
-    [ :x, :y, :z ].map do |axis|
-      min = triangles.map { |t| t.min(axis) }.min
-      max = triangles.map { |t| t.max(axis) }.max
-      max - min
-    end
-  end
-
   class BalancedNumberOptimizer
     def initialize(progress)
       @progress = progress
@@ -111,8 +103,64 @@ module Optimization
     end
   end
 
+  class SurfaceAreaOptimizer
+    def initialize(progress)
+      @progress = progress
+    end
+
+    def measure_box_around(triangles)
+      [ :x, :y, :z ].map do |axis|
+        min = triangles.map { |t| t.min(axis) }.min
+        max = triangles.map { |t| t.max(axis) }.max
+        max - min
+      end
+    end
+
+    def surface(box_dimensions)
+      width, height, depth = box_dimensions
+      width * height + width * depth + height * depth
+    end
+
+    def optimize(triangles)
+      if triangles.size < 5
+        @progress.step(triangles.size)
+        Box.new(triangles)
+      else
+        split_axis = [ :x, :y, :z ].max_by do |axis|
+          min = triangles.map { |t| t.min(axis) }.min
+          max = triangles.map { |t| t.max(axis) }.max
+          max - min
+        end
+
+        triangles.sort_by! { |t| t.min(split_axis) }
+
+        split_index = (1...triangles.size - 1).min_by do |index|
+          left = triangles[0...index]
+          right = triangles[index..-1]
+
+          left_box_dimensions = measure_box_around(left)
+          right_box_dimensions = measure_box_around(right)
+
+          left_box_surface = surface left_box_dimensions
+          right_box_surface = surface right_box_dimensions
+
+          left_box_surface / left.size + right_box_surface / right.size
+        end
+
+        left = triangles[0...split_index]
+        right = triangles[split_index..-1]
+
+        left_hierarchy = optimize(left)
+        right_hierarchy = optimize(right)
+
+        Box.new [left_hierarchy, right_hierarchy]
+      end
+    end
+  end
+
   def self.build_hierarchy(triangles, progress)
     BalancedNumberOptimizer.new(progress).optimize(triangles)
+    # SurfaceAreaOptimizer.new(progress).optimize(triangles)
   end
 
 
