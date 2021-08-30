@@ -97,37 +97,81 @@ module Optimization
     Box.new [left_hierarchy, right_hierarchy]
   end
 
-  def self.write_hierarchy(hierarchy, file)
-    case hierarchy
-    when Box
-      box = hierarchy
-      box.children.each do |child|
-        write_hierarchy(child, file)
+
+  class MeshWriter
+    def initialize(file, mesh)
+      @file = file
+      @mesh = mesh
+    end
+
+    def write
+      write_header
+      write_vertices
+      write_normals
+      write_contents
+      write_footer
+    end
+
+    def write_header
+      output "#{@mesh.vertices.size} #{@mesh.normals.size}"
+    end
+
+    def write_footer
+      output 'end'
+    end
+
+    def write_vertices
+      @mesh.vertices.each do |vertex|
+        output "#{vertex.x} #{vertex.y} #{vertex.z}"
       end
-      file.puts "b #{box.children.size}"
+    end
 
-    when Triangle
-      triangle = hierarchy
-      file.puts "t #{triangle.i} #{triangle.j} #{triangle.k}"
+    def write_normals
+      @mesh.normals.each do |normal|
+        output "#{normal.x} #{normal.y} #{normal.z}"
+      end
+    end
 
-    else
-      abort 'Eh?'
+    def write_contents
+      @mesh.contents.each do |hierarchy|
+        write_hierarchy(hierarchy)
+      end
+    end
+
+    def output(string)
+      @file.puts string
+    end
+
+    def write_hierarchy(hierarchy)
+      case hierarchy
+      when Box
+        write_box hierarchy
+
+      when Triangle
+        write_triangle hierarchy
+
+      else
+        abort 'Eh?'
+      end
+    end
+
+    def write_box(box)
+      box.children.each do |child|
+        write_hierarchy(child)
+      end
+
+      output "b #{box.children.size}"
+    end
+
+    def write_triangle(triangle)
+      output "t #{triangle.i} #{triangle.j} #{triangle.k}"
     end
   end
 
+
   def self.write_mesh(mesh, output_pathname)
     output_pathname.open('w') do |file|
-      file.puts "#{mesh.vertices.size} #{mesh.normals.size}"
-      mesh.vertices.each do |vertex|
-        file.puts "#{vertex.x} #{vertex.y} #{vertex.z}"
-      end
-      mesh.normals.each do |normal|
-        file.puts "#{normal.x} #{normal.y} #{normal.z}"
-      end
-      mesh.contents.each do |hierarchy|
-        write_hierarchy(hierarchy, file)
-      end
-      file.puts 'end'
+      MeshWriter.new(file, mesh).write
     end
   end
 end

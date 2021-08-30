@@ -2,7 +2,7 @@ class Progress
   def initialize(total)
     @total = total
     @done = 0
-    @last_percentage = -1
+    @last_percentage = 0
     @start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   end
 
