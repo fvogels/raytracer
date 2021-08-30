@@ -74,27 +74,45 @@ module Optimization
     end
   end
 
-  def self.build_hierarchy(triangles, progress)
-    if triangles.size < 5
-      progress.step(triangles.size)
-      return Box.new(triangles)
-    end
-
-    split_axis = [ :x, :y, :z ].max_by do |axis|
+  def measure_box_around(triangles)
+    [ :x, :y, :z ].map do |axis|
       min = triangles.map { |t| t.min(axis) }.min
       max = triangles.map { |t| t.max(axis) }.max
       max - min
     end
+  end
 
-    triangles.sort_by! { |t| t.min(split_axis) }
+  class BalancedNumberOptimizer
+    def initialize(progress)
+      @progress = progress
+    end
 
-    left = triangles[0...triangles.size / 2]
-    right = triangles[triangles.size / 2..-1]
+    def optimize(triangles)
+      if triangles.size < 5
+        @progress.step(triangles.size)
+        Box.new(triangles)
+      else
+        split_axis = [ :x, :y, :z ].max_by do |axis|
+          min = triangles.map { |t| t.min(axis) }.min
+          max = triangles.map { |t| t.max(axis) }.max
+          max - min
+        end
 
-    left_hierarchy = build_hierarchy(left, progress)
-    right_hierarchy = build_hierarchy(right, progress)
+        triangles.sort_by! { |t| t.min(split_axis) }
 
-    Box.new [left_hierarchy, right_hierarchy]
+        left = triangles[0...triangles.size / 2]
+        right = triangles[triangles.size / 2..-1]
+
+        left_hierarchy = optimize(left)
+        right_hierarchy = optimize(right)
+
+        Box.new [left_hierarchy, right_hierarchy]
+      end
+    end
+  end
+
+  def self.build_hierarchy(triangles, progress)
+    BalancedNumberOptimizer.new(progress).optimize(triangles)
   end
 
 
