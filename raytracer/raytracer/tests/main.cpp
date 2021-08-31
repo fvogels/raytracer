@@ -9,6 +9,7 @@
 int main(int argc, char* const argv[])
 {
     logging::configure();
+    LOG(INFO) << "Running test build";
 
     Catch::ConfigData data;
     // data.abortAfter = 5;  // Makes the tests stop running after 5 failures
@@ -17,7 +18,7 @@ int main(int argc, char* const argv[])
     session.useConfigData(data);
     auto result = session.run(argc, argv);
 
-    performance::print_statistics(std::cerr);
+    performance::print_statistics();
 
     return result;
 }
