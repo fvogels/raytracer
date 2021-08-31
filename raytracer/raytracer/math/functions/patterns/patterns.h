@@ -3,3 +3,4 @@
 #include "math/functions/patterns/pattern-tessellation.h"
 #include "math/functions/patterns/lines-pattern.h"
 #include "math/functions/patterns/grid-pattern.h"
+#include "math/functions/patterns/checkered-pattern.h"
