@@ -18,6 +18,12 @@ namespace math
             Pattern2D translate(math::Vector2D displacement, Pattern2D pattern);
             Pattern2D rotate(math::Angle angle, Pattern2D pattern);
             Pattern2D scale(double sx, double sy, Pattern2D pattern);
+
+            Pattern2D conjunction(Pattern2D pattern1, Pattern2D pattern2);
+            Pattern2D disjunction(Pattern2D pattern1, Pattern2D pattern2);
+            Pattern2D negation(Pattern2D pattern);
+
+            Pattern2D tessellate(Pattern2D pattern, double width, double height);
         }
     }
 }
