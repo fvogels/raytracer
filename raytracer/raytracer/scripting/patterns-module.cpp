@@ -52,7 +52,7 @@ namespace
             return math::functions::patterns::negation(pattern);
         }
 
-        math::functions::Pattern2D tessellate(math::functions::Pattern2D pattern, double width, double height) const
+        math::functions::Pattern2D tessellate2d(math::functions::Pattern2D pattern, double width, double height) const
         {
             return math::functions::patterns::tessellate(pattern, width, height);
         }
@@ -135,6 +135,11 @@ namespace
         {
             return math::functions::patterns::negation(pattern);
         }
+
+        math::functions::Pattern3D tessellate3d(math::functions::Pattern3D pattern, double x_size, double y_size, double z_size) const
+        {
+            return math::functions::patterns::tessellate(pattern, x_size, y_size, z_size);
+        }
     };
 }
 
@@ -163,7 +168,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND_2D_3D(exclusive_disjunction);
     BIND_2D_3D(negation);
 
-    BIND(tessellate);
+    BIND_2D_3D(tessellate);
     BIND(tessellate_x);
     BIND(tessellate_y);
 
