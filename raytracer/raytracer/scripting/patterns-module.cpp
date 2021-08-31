@@ -13,6 +13,10 @@ namespace
 {
     struct PatternLibrary
     {
+        /*
+        * 2D
+        */
+        
         math::functions::Pattern2D translate(const Vector2D& displacement, math::functions::Pattern2D pattern) const
         {
             return math::functions::patterns::translate(displacement, pattern);
@@ -28,22 +32,22 @@ namespace
             return math::functions::patterns::rotate(angle, pattern);
         }
 
-        math::functions::Pattern2D conjunction(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        math::functions::Pattern2D conjunction2d(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
         {
             return math::functions::patterns::conjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern2D disjunction(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        math::functions::Pattern2D disjunction2d(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
         {
             return math::functions::patterns::disjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern2D exclusive_disjunction(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        math::functions::Pattern2D exclusive_disjunction2d(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
         {
             return math::functions::patterns::exclusive_disjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern2D negation(math::functions::Pattern2D pattern) const
+        math::functions::Pattern2D negation2d(math::functions::Pattern2D pattern) const
         {
             return math::functions::patterns::negation(pattern);
         }
@@ -82,6 +86,30 @@ namespace
         {
             return math::functions::patterns::polka(radius, separation);
         }
+
+        /*
+        * 3D
+        */
+
+        math::functions::Pattern3D conjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
+        {
+            return math::functions::patterns::conjunction(pattern1, pattern2);
+        }
+
+        math::functions::Pattern3D disjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
+        {
+            return math::functions::patterns::disjunction(pattern1, pattern2);
+        }
+
+        math::functions::Pattern3D exclusive_disjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
+        {
+            return math::functions::patterns::exclusive_disjunction(pattern1, pattern2);
+        }
+
+        math::functions::Pattern3D negation3d(math::functions::Pattern3D pattern) const
+        {
+            return math::functions::patterns::negation(pattern);
+        }
     };
 }
 
@@ -95,16 +123,17 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     auto lights_library = std::make_shared<PatternLibrary>();
     module->add_global_const(chaiscript::const_var(lights_library), "Patterns");
 
+#   define BIND_2D_3D(NAME)                BIND_AS(NAME ## 2d, NAME); BIND_AS(NAME ## 3d, NAME)
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PatternLibrary::INTERNAL), #EXTERNAL)
     BIND(translate);
     BIND(scale);
     BIND(rotate);
 
-    BIND(conjunction);
-    BIND(disjunction);
-    BIND(exclusive_disjunction);
-    BIND(negation);
+    BIND_2D_3D(conjunction);
+    BIND_2D_3D(disjunction);
+    BIND_2D_3D(exclusive_disjunction);
+    BIND_2D_3D(negation);
 
     BIND(tessellate);
     BIND(tessellate_x);

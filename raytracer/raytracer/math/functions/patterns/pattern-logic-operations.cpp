@@ -42,3 +42,39 @@ Pattern2D math::functions::patterns::negation(Pattern2D pattern)
 
     return make_pattern(function);
 }
+
+Pattern3D math::functions::patterns::conjunction(Pattern3D pattern1, Pattern3D pattern2)
+{
+    std::function<bool(const Point3D&)> function = [=](const Point3D& point) -> bool {
+        return pattern1(point) && pattern2(point);
+    };
+
+    return make_pattern(function);
+}
+
+Pattern3D math::functions::patterns::disjunction(Pattern3D pattern1, Pattern3D pattern2)
+{
+    std::function<bool(const Point3D&)> function = [=](const Point3D& point) -> bool {
+        return pattern1(point) || pattern2(point);
+    };
+
+    return make_pattern(function);
+}
+
+Pattern3D math::functions::patterns::exclusive_disjunction(Pattern3D pattern1, Pattern3D pattern2)
+{
+    std::function<bool(const Point3D&)> function = [=](const Point3D& point) -> bool {
+        return pattern1(point) != pattern2(point);
+    };
+
+    return make_pattern(function);
+}
+
+Pattern3D math::functions::patterns::negation(Pattern3D pattern)
+{
+    std::function<bool(const Point3D&)> function = [=](const Point3D& point) -> bool {
+        return !pattern(point);
+    };
+
+    return make_pattern(function);
+}
