@@ -344,7 +344,9 @@
   <ItemGroup>
     <ClCompile Include="math\functions\patterns\grid-pattern.cpp" />
     <ClCompile Include="math\functions\patterns\lines-pattern.cpp" />
-    <ClCompile Include="math\functions\patterns\pattern-operations.cpp" />
+    <ClCompile Include="math\functions\patterns\pattern-logic-operations.cpp" />
+    <ClCompile Include="math\functions\patterns\pattern-tessellation.cpp" />
+    <ClCompile Include="math\functions\patterns\pattern-transformations.cpp" />
     <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp" />
     <ClCompile Include="primitives\box-primitive.cpp" />
     <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
@@ -517,8 +519,10 @@
     <ClInclude Include="math\functions\patterns\grid-pattern.h" />
     <ClInclude Include="math\functions\patterns\lambda-pattern.h" />
     <ClInclude Include="math\functions\patterns\lines-pattern.h" />
-    <ClInclude Include="math\functions\patterns\pattern-operations.h" />
+    <ClInclude Include="math\functions\patterns\pattern-logic-operations.h" />
     <ClInclude Include="math\functions\pattern.h" />
+    <ClInclude Include="math\functions\patterns\pattern-tessellation.h" />
+    <ClInclude Include="math\functions\patterns\pattern-transformations.h" />
     <ClInclude Include="math\functions\patterns\patterns.h" />
     <ClInclude Include="primitives\mesh\mesh-binary-reader.h" />
     <ClInclude Include="primitives\box-primitive.h" />

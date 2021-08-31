@@ -474,7 +474,7 @@
     <ClCompile Include="primitives\resizer-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\pattern-operations.cpp">
+    <ClCompile Include="math\functions\patterns\pattern-logic-operations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\functions\patterns\lines-pattern.cpp">
@@ -490,6 +490,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\functions\patterns\grid-pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\patterns\pattern-transformations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\patterns\pattern-tessellation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1253,7 +1259,7 @@
     <ClInclude Include="math\functions\patterns\lambda-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\pattern-operations.h">
+    <ClInclude Include="math\functions\patterns\pattern-logic-operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\patterns\lines-pattern.h">
@@ -1266,6 +1272,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\patterns\grid-pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\patterns\pattern-transformations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\patterns\pattern-tessellation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
