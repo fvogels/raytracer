@@ -5,6 +5,8 @@
 #include "materials/materials.h"
 #include "materials/material-transformer.h"
 #include "imaging/color.h"
+#include "math/functions/pattern.h"
+
 
 using namespace chaiscript;
 using namespace raytracer;
@@ -46,6 +48,11 @@ namespace
         Material texture(const std::string& path) const
         {
             return raytracer::materials::texture(path);
+        }
+
+        Material from_pattern(math::functions::Pattern2D pattern, Material m1, Material m2) const
+        {
+            return raytracer::materials::pattern2d(pattern, m1, m2);
         }
 
         Material horizontal_lines(double thickness, Material m1, Material m2) const
@@ -187,6 +194,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
+    BIND(from_pattern);
     BIND(horizontal_lines);
     BIND(vertical_lines);
     BIND(grid2d);
