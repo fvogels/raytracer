@@ -24,6 +24,8 @@ namespace math
             Pattern2D negation(Pattern2D pattern);
 
             Pattern2D tessellate(Pattern2D pattern, double width, double height);
+            Pattern2D tessellate_x(Pattern2D pattern, double width);
+            Pattern2D tessellate_y(Pattern2D pattern, double height);
         }
     }
 }
