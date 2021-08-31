@@ -3,7 +3,6 @@
 #include "materials/pattern-materials.h"
 #include "math/function.h"
 #include "math/functions.h"
-#include "math/functions/patterns.h"
 #include "math/functions/noise.h"
 #include "math/functions/bool-mapper.h"
 #include "imaging/color-mapper.h"
