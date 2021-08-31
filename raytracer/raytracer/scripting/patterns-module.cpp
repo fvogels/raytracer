@@ -68,7 +68,7 @@ namespace
             return math::functions::patterns::grid(xthickness, ythickness, xspacing, yspacing, angle);
         }
 
-        math::functions::Pattern2D checkered(double xthickness, double ythickness, math::Angle angle) const
+        math::functions::Pattern2D checkered(double xthickness, double ythickness) const
         {
             return math::functions::patterns::checkered(xthickness, ythickness);
         }
