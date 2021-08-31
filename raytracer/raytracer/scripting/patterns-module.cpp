@@ -67,6 +67,11 @@ namespace
         {
             return math::functions::patterns::grid(xthickness, ythickness, xspacing, yspacing, angle);
         }
+
+        math::functions::Pattern2D checkered(double xthickness, double ythickness, math::Angle angle) const
+        {
+            return math::functions::patterns::checkered(xthickness, ythickness);
+        }
     };
 }
 
@@ -96,6 +101,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 
     BIND(lines);
     BIND(grid);
+    BIND(checkered);
 #   undef BIND_AS
 #   undef BIND
 
