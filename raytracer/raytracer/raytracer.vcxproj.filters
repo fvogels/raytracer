@@ -575,9 +575,6 @@
     <ClInclude Include="math\functions\noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math\function.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -672,7 +672,6 @@
     <ClInclude Include="math\functions\bool-mapper.h" />
     <ClInclude Include="math\functions\easing-functions.h" />
     <ClInclude Include="math\functions.h" />
-    <ClInclude Include="math\functions\patterns.h" />
     <ClInclude Include="math\functions\perlin.h" />
     <ClInclude Include="math\functions\worley.h" />
     <ClInclude Include="math\interval.h" />
