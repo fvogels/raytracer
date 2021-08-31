@@ -15,6 +15,7 @@ namespace math
         {
             Pattern2D conjunction(Pattern2D pattern1, Pattern2D pattern2);
             Pattern2D disjunction(Pattern2D pattern1, Pattern2D pattern2);
+            Pattern2D exclusive_disjunction(Pattern2D pattern1, Pattern2D pattern2);
             Pattern2D negation(Pattern2D pattern);
         }
     }

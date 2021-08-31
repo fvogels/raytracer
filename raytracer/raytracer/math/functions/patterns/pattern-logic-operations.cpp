@@ -25,6 +25,15 @@ Pattern2D math::functions::patterns::disjunction(Pattern2D pattern1, Pattern2D p
     return make_pattern(function);
 }
 
+Pattern2D math::functions::patterns::exclusive_disjunction(Pattern2D pattern1, Pattern2D pattern2)
+{
+    std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
+        return pattern1(point) != pattern2(point);
+    };
+
+    return make_pattern(function);
+}
+
 Pattern2D math::functions::patterns::negation(Pattern2D pattern)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
