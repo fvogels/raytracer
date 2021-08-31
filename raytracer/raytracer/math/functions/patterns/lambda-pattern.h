@@ -53,6 +53,11 @@ namespace math
             {
                 return Pattern2D(std::make_shared<_private_::LambdaPattern2DImplementation>(function));
             }
+
+            inline Pattern3D make_pattern(std::function<bool(const Point3D&)> function)
+            {
+                return Pattern3D(std::make_shared<_private_::LambdaPattern3DImplementation>(function));
+            }
         }
     }
 }
