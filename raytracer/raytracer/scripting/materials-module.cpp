@@ -55,50 +55,20 @@ namespace
             return raytracer::materials::pattern2d(pattern, m1, m2);
         }
 
-        Material horizontal_lines(double thickness, Material m1, Material m2) const
-        {
-            return raytracer::materials::horizontal_lines(thickness, m1, m2);
-        }
+        //Material polka(double radius, Material x, Material y) const
+        //{
+        //    return raytracer::materials::polka(radius, x, y);
+        //}
 
-        Material vertical_lines(double thickness, Material m1, Material m2) const
-        {
-            return raytracer::materials::vertical_lines(thickness, m1, m2);
-        }
+        //Material dalmatian2d(unsigned density, Material x, Material y) const
+        //{
+        //    return raytracer::materials::dalmatian2d(density, x, y);
+        //}
 
-        Material grid2d(double thickness, Material m1, Material m2) const
-        {
-            return raytracer::materials::grid2d(thickness, m1, m2);
-        }
-
-        Material grid3d(double thickness, Material m1, Material m2) const
-        {
-            return raytracer::materials::grid3d(thickness, m1, m2);
-        }
-
-        Material checkered2d(Material x, Material y) const
-        {
-            return raytracer::materials::checkered2d(x, y);
-        }
-
-        Material checkered3d(Material x, Material y) const
-        {
-            return raytracer::materials::checkered3d(x, y);
-        }
-
-        Material polka(double radius, Material x, Material y) const
-        {
-            return raytracer::materials::polka(radius, x, y);
-        }
-
-        Material dalmatian2d(unsigned density, Material x, Material y) const
-        {
-            return raytracer::materials::dalmatian2d(density, x, y);
-        }
-
-        Material dalmatian3d(unsigned density, Material x, Material y) const
-        {
-            return raytracer::materials::dalmatian3d(density, x, y);
-        }
+        //Material dalmatian3d(unsigned density, Material x, Material y) const
+        //{
+        //    return raytracer::materials::dalmatian3d(density, x, y);
+        //}
 
         Material marble2d(unsigned octaves, double turbulence) const
         {
@@ -194,16 +164,7 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
-    BIND(from_pattern);
-    BIND(horizontal_lines);
-    BIND(vertical_lines);
-    BIND(grid2d);
-    BIND(grid3d);
-    BIND(checkered2d);
-    BIND(checkered3d);
-    BIND(polka);
-    BIND(dalmatian2d);
-    BIND(dalmatian3d);
+    BIND(from_pattern);    
     BIND(marble2d);
     BIND(marble3d);
     BIND(wood2d);
