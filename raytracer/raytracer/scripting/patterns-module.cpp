@@ -13,6 +13,21 @@ namespace
 {
     struct PatternLibrary
     {
+        math::functions::Pattern2D translate(const Vector2D& displacement, math::functions::Pattern2D pattern) const
+        {
+            return math::functions::patterns::translate(displacement, pattern);
+        }
+
+        math::functions::Pattern2D scale(double sx, double sy, math::functions::Pattern2D pattern) const
+        {
+            return math::functions::patterns::scale(sx, sy, pattern);
+        }
+
+        math::functions::Pattern2D rotate(Angle angle, math::functions::Pattern2D pattern) const
+        {
+            return math::functions::patterns::rotate(angle, pattern);
+        }
+
         math::functions::Pattern2D lines(double thickness, double separation, math::Angle angle) const
         {
             return math::functions::patterns::lines(thickness, separation, angle);
@@ -32,6 +47,9 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PatternLibrary::INTERNAL), #EXTERNAL)
+    BIND(translate);
+    BIND(scale);
+    BIND(rotate);
     BIND(lines);
 #   undef BIND_AS
 #   undef BIND
