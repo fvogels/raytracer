@@ -1,11 +1,13 @@
-#include "math/functions/dalmatian-pattern.h"
+#include "patterns/dalmatian-pattern.h"
+#include "patterns/lambda-pattern.h"
 #include "math/functions.h"
 #include <cmath>
 
 using namespace math;
+using namespace math::functions::patterns;
 
 
-Function<bool(const Point2D&)> math::functions::dalmatian2d(unsigned density, unsigned seed)
+math::functions::Pattern2D math::functions::dalmatian2d(unsigned density, unsigned seed)
 {
     auto voronoi = math::voronoi2d(density, seed);
 
@@ -18,10 +20,10 @@ Function<bool(const Point2D&)> math::functions::dalmatian2d(unsigned density, un
         return distance(p, closest) < radius;
     };
 
-    return from_lambda<bool, const Point2D&>(function);
+    return make_pattern(function);
 }
 
-Function<bool(const Point3D&)> math::functions::dalmatian3d(unsigned density, unsigned seed)
+math::functions::Pattern3D math::functions::dalmatian3d(unsigned density, unsigned seed)
 {
     auto voronoi = math::voronoi3d(density, seed);
 
@@ -34,5 +36,5 @@ Function<bool(const Point3D&)> math::functions::dalmatian3d(unsigned density, un
         return distance(p, closest) < radius;
     };
 
-    return from_lambda<bool, const Point3D&>(function);
+    return make_pattern(function);
 }

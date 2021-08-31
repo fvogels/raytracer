@@ -373,7 +373,7 @@
     <ClCompile Include="materials\pattern-materials.cpp" />
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
-    <ClCompile Include="math\functions\dalmatian-pattern.cpp" />
+    <ClCompile Include="patterns\dalmatian-pattern.cpp" />
     <ClCompile Include="patterns\checkered-pattern.cpp" />
     <ClCompile Include="math\functions\easing\bounce-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\cubic-easing-function.cpp" />
@@ -587,7 +587,7 @@
     <ClInclude Include="materials\perlin-material.h" />
     <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />
-    <ClInclude Include="math\functions\dalmatian-pattern.h" />
+    <ClInclude Include="patterns\dalmatian-pattern.h" />
     <ClInclude Include="patterns\checkered-pattern.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\easing-function.h" />

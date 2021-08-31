@@ -87,6 +87,11 @@ namespace
             return math::functions::patterns::polka(radius, separation);
         }
 
+        math::functions::Pattern2D dalmatian2d(unsigned density, unsigned seed) const
+        {
+            return math::functions::dalmatian2d(density, seed);
+        }
+
         /*
         * 3D
         */
@@ -140,6 +145,11 @@ namespace
         {
             return math::functions::patterns::tessellate(pattern, x_size, y_size, z_size);
         }
+
+        math::functions::Pattern3D dalmatian3d(unsigned density, unsigned seed) const
+        {
+            return math::functions::dalmatian3d(density, seed);
+        }
     };
 }
 
@@ -176,6 +186,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(grid);
     BIND(checkered);
     BIND(polka);
+    BIND_2D_3D(dalmatian);
 #   undef BIND_AS
 #   undef BIND
 

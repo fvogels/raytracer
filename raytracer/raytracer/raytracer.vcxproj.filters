@@ -342,7 +342,7 @@
     <ClCompile Include="patterns\polka-dots-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\dalmatian-pattern.cpp">
+    <ClCompile Include="patterns\dalmatian-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\transformation3d.cpp">
@@ -1088,7 +1088,7 @@
     <ClInclude Include="patterns\polka-dots-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\dalmatian-pattern.h">
+    <ClInclude Include="patterns\dalmatian-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="animation\animation-inverter.h">
