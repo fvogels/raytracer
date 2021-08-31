@@ -17,12 +17,12 @@ namespace
         * 2D
         */
         
-        math::functions::Pattern2D translate(const Vector2D& displacement, math::functions::Pattern2D pattern) const
+        math::functions::Pattern2D translate2d(const Vector2D& displacement, math::functions::Pattern2D pattern) const
         {
             return math::functions::patterns::translate(displacement, pattern);
         }
 
-        math::functions::Pattern2D scale(double sx, double sy, math::functions::Pattern2D pattern) const
+        math::functions::Pattern2D scale2d(double sx, double sy, math::functions::Pattern2D pattern) const
         {
             return math::functions::patterns::scale(sx, sy, pattern);
         }
@@ -91,6 +91,31 @@ namespace
         * 3D
         */
 
+        math::functions::Pattern3D translate3d(const Vector3D& displacement, math::functions::Pattern3D pattern) const
+        {
+            return math::functions::patterns::translate(displacement, pattern);
+        }
+
+        math::functions::Pattern3D scale3d(double sx, double sy, double sz, math::functions::Pattern3D pattern) const
+        {
+            return math::functions::patterns::scale(sx, sy, sz, pattern);
+        }
+
+        math::functions::Pattern3D rotate_x(Angle angle, math::functions::Pattern3D pattern) const
+        {
+            return math::functions::patterns::rotate_x(angle, pattern);
+        }
+
+        math::functions::Pattern3D rotate_y(Angle angle, math::functions::Pattern3D pattern) const
+        {
+            return math::functions::patterns::rotate_y(angle, pattern);
+        }
+
+        math::functions::Pattern3D rotate_z(Angle angle, math::functions::Pattern3D pattern) const
+        {
+            return math::functions::patterns::rotate_z(angle, pattern);
+        }
+
         math::functions::Pattern3D conjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
         {
             return math::functions::patterns::conjunction(pattern1, pattern2);
@@ -126,9 +151,12 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 #   define BIND_2D_3D(NAME)                BIND_AS(NAME ## 2d, NAME); BIND_AS(NAME ## 3d, NAME)
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PatternLibrary::INTERNAL), #EXTERNAL)
-    BIND(translate);
-    BIND(scale);
+    BIND_2D_3D(translate);
+    BIND_2D_3D(scale);
     BIND(rotate);
+    BIND(rotate_x);
+    BIND(rotate_y);
+    BIND(rotate_z);
 
     BIND_2D_3D(conjunction);
     BIND_2D_3D(disjunction);
