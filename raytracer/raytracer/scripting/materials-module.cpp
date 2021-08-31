@@ -55,21 +55,6 @@ namespace
             return raytracer::materials::pattern2d(pattern, m1, m2);
         }
 
-        //Material polka(double radius, Material x, Material y) const
-        //{
-        //    return raytracer::materials::polka(radius, x, y);
-        //}
-
-        //Material dalmatian2d(unsigned density, Material x, Material y) const
-        //{
-        //    return raytracer::materials::dalmatian2d(density, x, y);
-        //}
-
-        //Material dalmatian3d(unsigned density, Material x, Material y) const
-        //{
-        //    return raytracer::materials::dalmatian3d(density, x, y);
-        //}
-
         Material marble2d(unsigned octaves, double turbulence) const
         {
             return raytracer::materials::marble2d(octaves, turbulence);
