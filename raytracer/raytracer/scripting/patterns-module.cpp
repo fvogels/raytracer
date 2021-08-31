@@ -38,6 +38,11 @@ namespace
             return math::functions::patterns::disjunction(pattern1, pattern2);
         }
 
+        math::functions::Pattern2D exclusive_disjunction(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        {
+            return math::functions::patterns::exclusive_disjunction(pattern1, pattern2);
+        }
+
         math::functions::Pattern2D negation(math::functions::Pattern2D pattern) const
         {
             return math::functions::patterns::negation(pattern);
@@ -98,6 +103,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 
     BIND(conjunction);
     BIND(disjunction);
+    BIND(exclusive_disjunction);
     BIND(negation);
 
     BIND(tessellate);
