@@ -50,9 +50,14 @@ namespace
             return raytracer::materials::texture(path);
         }
 
-        Material from_pattern(patterns::Pattern2D pattern, Material m1, Material m2) const
+        Material from_pattern2d(patterns::Pattern2D pattern, Material m1, Material m2) const
         {
             return raytracer::materials::pattern2d(pattern, m1, m2);
+        }
+
+        Material from_pattern3d(patterns::Pattern3D pattern, Material m1, Material m2) const
+        {
+            return raytracer::materials::pattern3d(pattern, m1, m2);
         }
 
         Material marble2d(unsigned octaves, double turbulence) const
@@ -149,7 +154,8 @@ ModulePtr raytracer::scripting::_private_::create_materials_module()
     BIND(uniform);
     BIND_AS(uniform_by_map, uniform);
     BIND(texture);
-    BIND(from_pattern);    
+    BIND_AS(from_pattern2d, from_pattern);
+    BIND_AS(from_pattern3d, from_pattern);
     BIND(marble2d);
     BIND(marble3d);
     BIND(wood2d);

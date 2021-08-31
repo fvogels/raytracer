@@ -191,7 +191,8 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(lines);
     BIND(grid);
     BIND(checkered);
-    BIND_2D_3D(polka);
+    BIND(polka2d);
+    BIND(polka3d);
     BIND_2D_3D(dalmatian);
 #   undef BIND_AS
 #   undef BIND
