@@ -58,19 +58,24 @@ namespace
             return math::functions::patterns::tessellate_y(pattern, height);
         }
 
-        math::functions::Pattern2D lines(double thickness, double separation, math::Angle angle) const
+        math::functions::Pattern2D lines(double thickness, double separation) const
         {
-            return math::functions::patterns::lines(thickness, separation, angle);
+            return math::functions::patterns::lines(thickness, separation);
         }
 
-        math::functions::Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing, math::Angle angle) const
+        math::functions::Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing) const
         {
-            return math::functions::patterns::grid(xthickness, ythickness, xspacing, yspacing, angle);
+            return math::functions::patterns::grid(xthickness, ythickness, xspacing, yspacing);
         }
 
         math::functions::Pattern2D checkered(double xthickness, double ythickness) const
         {
             return math::functions::patterns::checkered(xthickness, ythickness);
+        }
+
+        math::functions::Pattern2D polka(double radius, double separation) const
+        {
+            return math::functions::patterns::polka(radius, separation);
         }
     };
 }
@@ -102,6 +107,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(lines);
     BIND(grid);
     BIND(checkered);
+    BIND(polka);
 #   undef BIND_AS
 #   undef BIND
 
