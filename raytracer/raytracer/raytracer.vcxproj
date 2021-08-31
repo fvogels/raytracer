@@ -342,6 +342,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="math\functions\patterns\grid-pattern.cpp" />
     <ClCompile Include="math\functions\patterns\lines-pattern.cpp" />
     <ClCompile Include="math\functions\patterns\pattern-operations.cpp" />
     <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp" />
@@ -380,11 +381,8 @@
     <ClCompile Include="math\functions\easing\quintic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
-    <ClCompile Include="math\functions\grid-pattern.cpp" />
-    <ClCompile Include="math\functions\horizontal-lines-pattern.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
     <ClCompile Include="math\functions\polka-dots-pattern.cpp" />
-    <ClCompile Include="math\functions\vertical-lines-pattern.cpp" />
     <ClCompile Include="math\functions\voronoi.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
     <ClCompile Include="math\plane.cpp" />
@@ -516,6 +514,7 @@
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="math\functions\patterns\grid-pattern.h" />
     <ClInclude Include="math\functions\patterns\lambda-pattern.h" />
     <ClInclude Include="math\functions\patterns\lines-pattern.h" />
     <ClInclude Include="math\functions\patterns\pattern-operations.h" />
@@ -596,12 +595,9 @@
     <ClInclude Include="math\functions\easing\quintic-easing-function.h" />
     <ClInclude Include="math\functions\easing\stretch-easing-function.h" />
     <ClInclude Include="math\functions\gauss.h" />
-    <ClInclude Include="math\functions\grid-pattern.h" />
-    <ClInclude Include="math\functions\horizontal-lines-pattern.h" />
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\functions\marble.h" />
     <ClInclude Include="math\functions\polka-dots-pattern.h" />
-    <ClInclude Include="math\functions\vertical-lines-pattern.h" />
     <ClInclude Include="math\functions\voronoi.h" />
     <ClInclude Include="math\functions\wood.h" />
     <ClInclude Include="math\plane.h" />
