@@ -9,11 +9,11 @@ namespace chaiscript
   {
     public:
 
-      static ModulePtr library(ModulePtr m = std::make_shared<Module>())
+      static Module& library(Module& m)
       {
 
-        m->add(chaiscript::fun([](const std::string &t_str) { return from_json(t_str); }), "from_json");
-        m->add(chaiscript::fun(&json_wrap::to_json), "to_json");
+        m.add(chaiscript::fun([](const std::string &t_str) { return from_json(t_str); }), "from_json");
+        m.add(chaiscript::fun(&json_wrap::to_json), "to_json");
 
         return m;
 
@@ -30,7 +30,7 @@ namespace chaiscript
             {
               std::map<std::string, Boxed_Value> m;
 
-              for (const auto &p : t_json.ObjectRange())
+              for (const auto &p : t_json.object_range())
               {
                 m.insert(std::make_pair(p.first, from_json(p.second)));
               }
@@ -41,7 +41,7 @@ namespace chaiscript
             {
               std::vector<Boxed_Value> vec;
 
-              for (const auto &p : t_json.ArrayRange()) 
+              for (const auto &p : t_json.array_range()) 
               {
                 vec.emplace_back(from_json(p));
               }
@@ -49,13 +49,13 @@ namespace chaiscript
               return Boxed_Value(vec);
             }
           case json::JSON::Class::String:
-            return Boxed_Value(t_json.ToString());
+            return Boxed_Value(t_json.to_string());
           case json::JSON::Class::Floating:
-            return Boxed_Value(t_json.ToFloat());
+            return Boxed_Value(t_json.to_float());
           case json::JSON::Class::Integral:
-            return Boxed_Value(t_json.ToInt());
+            return Boxed_Value(t_json.to_int());
           case json::JSON::Class::Boolean:
-            return Boxed_Value(t_json.ToBool());
+            return Boxed_Value(t_json.to_bool());
         }
 
         throw std::runtime_error("Unknown JSON type");
@@ -63,7 +63,11 @@ namespace chaiscript
 
       static Boxed_Value from_json(const std::string &t_json)
       {
-        return from_json( json::JSON::Load(t_json) );
+        try {
+          return from_json( json::JSON::Load(t_json) );
+        } catch (const std::out_of_range& ) {
+          throw std::runtime_error("Unparsed JSON input");
+        }
       }
 
       static std::string to_json(const Boxed_Value &t_bv)
@@ -76,7 +80,7 @@ namespace chaiscript
         try {
           const std::map<std::string, Boxed_Value> m = chaiscript::boxed_cast<const std::map<std::string, Boxed_Value> &>(t_bv);
 
-          json::JSON obj;
+          json::JSON obj(json::JSON::Class::Object);
           for (const auto &o : m)
           {
             obj[o.first] = to_json_object(o.second);
@@ -89,7 +93,7 @@ namespace chaiscript
         try {
           const std::vector<Boxed_Value> v = chaiscript::boxed_cast<const std::vector<Boxed_Value> &>(t_bv);
 
-          json::JSON obj;
+          json::JSON obj(json::JSON::Class::Array);
           for (size_t i = 0; i < v.size(); ++i)
           {
             obj[i] = to_json_object(v[i]);
@@ -102,32 +106,24 @@ namespace chaiscript
 
         try {
           Boxed_Number bn(t_bv);
-          json::JSON obj;
           if (Boxed_Number::is_floating_point(t_bv))
           {
-            obj = bn.get_as<double>();
+            return json::JSON(bn.get_as<double>());
           } else {
-            obj = bn.get_as<long>();
+            return json::JSON(bn.get_as<std::int64_t>());
           }
-          return obj;
         } catch (const chaiscript::detail::exception::bad_any_cast &) {
           // not a number
         }
 
         try {
-          bool b = boxed_cast<bool>(t_bv);
-          json::JSON obj;
-          obj = b;
-          return obj;
+          return json::JSON(boxed_cast<bool>(t_bv));
         } catch (const chaiscript::exception::bad_boxed_cast &) {
           // not a bool
         }
 
         try {
-          std::string s = boxed_cast<std::string>(t_bv);
-          json::JSON obj;
-          obj = s;
-          return obj;
+          return json::JSON(boxed_cast<std::string>(t_bv));
         } catch (const chaiscript::exception::bad_boxed_cast &) {
           // not a string
         }
@@ -136,7 +132,7 @@ namespace chaiscript
         try {
           const chaiscript::dispatch::Dynamic_Object &o = boxed_cast<const dispatch::Dynamic_Object &>(t_bv);
 
-          json::JSON obj;
+          json::JSON obj(json::JSON::Class::Object);
           for (const auto &attr : o.get_attrs())
           {
             obj[attr.first] = to_json_object(attr.second);
@@ -145,6 +141,8 @@ namespace chaiscript
         } catch (const chaiscript::exception::bad_boxed_cast &) {
           // not a dynamic object
         }
+
+        if (t_bv.is_null()) return json::JSON(); // a null value
 
         throw std::runtime_error("Unknown object type to convert to JSON");
       }

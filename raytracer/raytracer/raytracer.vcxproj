@@ -517,6 +517,16 @@
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="chaiscript\chaiscript_basic.hpp" />
+    <ClInclude Include="chaiscript\dispatchkit\short_alloc.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_optimizer.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_posix.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_prelude.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_tracer.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_unknown.hpp" />
+    <ClInclude Include="chaiscript\language\chaiscript_windows.hpp" />
+    <ClInclude Include="chaiscript\utility\fnv1a.hpp" />
+    <ClInclude Include="chaiscript\utility\static_string.hpp" />
     <ClInclude Include="patterns\grid-pattern.h" />
     <ClInclude Include="patterns\lambda-pattern.h" />
     <ClInclude Include="patterns\lines-pattern.h" />

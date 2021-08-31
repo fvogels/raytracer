@@ -1283,6 +1283,36 @@
     <ClInclude Include="primitives\unify.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="chaiscript\chaiscript_basic.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\dispatchkit\short_alloc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\language\chaiscript_optimizer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\language\chaiscript_posix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\language\chaiscript_prelude.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\language\chaiscript_tracer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\language\chaiscript_unknown.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\language\chaiscript_windows.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\utility\fnv1a.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chaiscript\utility\static_string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="debugger-visualizations.natvis" />

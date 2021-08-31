@@ -27,26 +27,22 @@ namespace raytracer
     namespace scripting
     {
         // Must be in raytracer::scripting for testing purposes
-        ModulePtr create_modules()
+        void create_modules(chaiscript::ChaiScript& chai)
         {
             using namespace raytracer::scripting::_private_;
 
-            auto module = std::make_shared<chaiscript::Module>();
-
-            module->add(create_imaging_module());
-            module->add(create_math_module());
-            module->add(create_primitives_module());
-            module->add(create_cameras_module());
-            module->add(create_lights_module());
-            module->add(create_raytracing_module());
-            module->add(create_materials_module());
-            module->add(create_rendering_module());
-            module->add(create_samplers_module());
-            module->add(create_pipeline_module());
-            module->add(create_animation_module());
-            module->add(create_pattern_module());
-
-            return module;
+            chai.add(create_imaging_module());
+            chai.add(create_math_module());
+            chai.add(create_primitives_module());
+            chai.add(create_cameras_module());
+            chai.add(create_lights_module());
+            chai.add(create_raytracing_module());
+            chai.add(create_materials_module());
+            chai.add(create_rendering_module());
+            chai.add(create_samplers_module());
+            chai.add(create_pipeline_module());
+            chai.add(create_animation_module());
+            chai.add(create_pattern_module());
         }
     }
 }
@@ -55,9 +51,9 @@ namespace
 {
     std::shared_ptr<ChaiScript> initialize_chai()
     {
-        auto chai = std::make_shared<ChaiScript>(Std_Lib::library());
+        auto chai = std::make_shared<ChaiScript>();
 
-        chai->add(create_modules());
+        create_modules(*chai);
 
         return chai;
     }
@@ -68,7 +64,7 @@ namespace
 
         if (!e.call_stack.empty())
         {
-            auto location = e.call_stack[0]->location.start.line;
+            auto location = e.call_stack[0].location.start.line;
 
             CLOG(ERROR, "studio") << "Error on line " << location;
             CLOG(ERROR, "studio") << e.reason;
