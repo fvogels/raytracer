@@ -17,3 +17,4 @@ Pattern2D math::functions::patterns::grid(double xthickness, double ythickness, 
 
     return disjunction(hline, vline);
 }
+
