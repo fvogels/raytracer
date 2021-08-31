@@ -4,13 +4,7 @@
 #include "math/point.h"
 
 
-namespace math
+namespace patterns
 {
-    namespace functions
-    {
-        namespace patterns
-        {
-            Pattern2D checkered(double xthickness, double ythickness);
-        }
-    }
+    Pattern2D checkered(double xthickness, double ythickness);
 }

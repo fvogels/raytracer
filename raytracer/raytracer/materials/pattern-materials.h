@@ -5,11 +5,12 @@
 #include "patterns/pattern.h"
 #include "math/point.h"
 
+
 namespace raytracer
 {
     namespace materials
     {
-        Material pattern2d(math::functions::Pattern2D, Material, Material);
-        Material pattern3d(math::functions::Pattern3D, Material, Material);        
+        Material pattern2d(patterns::Pattern2D, Material, Material);
+        Material pattern3d(patterns::Pattern3D, Material, Material);        
     }
 }

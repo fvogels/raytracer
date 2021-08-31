@@ -6,7 +6,7 @@
 using namespace math;
 
 
-math::functions::Pattern2D math::functions::patterns::checkered(double xthickness, double ythickness)
+patterns::Pattern2D patterns::checkered(double xthickness, double ythickness)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point)
     {

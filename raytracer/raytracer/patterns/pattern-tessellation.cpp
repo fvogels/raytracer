@@ -3,12 +3,11 @@
 #include <cmath>
 
 
-using namespace math::functions;
-using namespace math::functions::patterns;
+using namespace math;
+using namespace patterns;
 
 
-
-Pattern2D math::functions::patterns::tessellate(Pattern2D pattern, double width, double height)
+Pattern2D patterns::tessellate(Pattern2D pattern, double width, double height)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = fmod(fmod(point.x(), width) + width, width);
@@ -20,7 +19,7 @@ Pattern2D math::functions::patterns::tessellate(Pattern2D pattern, double width,
     return make_pattern(function);
 }
 
-Pattern2D math::functions::patterns::tessellate_x(Pattern2D pattern, double width)
+Pattern2D patterns::tessellate_x(Pattern2D pattern, double width)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = fmod(fmod(point.x(), width) + width, width);
@@ -32,7 +31,7 @@ Pattern2D math::functions::patterns::tessellate_x(Pattern2D pattern, double widt
     return make_pattern(function);
 }
 
-Pattern2D math::functions::patterns::tessellate_y(Pattern2D pattern, double height)
+Pattern2D patterns::tessellate_y(Pattern2D pattern, double height)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = point.x();
@@ -44,7 +43,7 @@ Pattern2D math::functions::patterns::tessellate_y(Pattern2D pattern, double heig
     return make_pattern(function);
 }
 
-Pattern3D math::functions::patterns::tessellate(Pattern3D pattern, double x_size, double y_size, double z_size)
+Pattern3D patterns::tessellate(Pattern3D pattern, double x_size, double y_size, double z_size)
 {
     std::function<bool(const Point3D&)> function = [=](const Point3D& point) -> bool {
         const auto x = fmod(fmod(point.x(), x_size) + x_size, x_size);

@@ -4,14 +4,8 @@
 #include "math/point.h"
 
 
-namespace math
+namespace patterns
 {
-    namespace functions
-    {
-        namespace patterns
-        {
-            Pattern2D polka(double radius, double separation);
-            // math::Function<bool(const Point2D&)> polka(double radius1, double radius2);
-        }
-    }
+    Pattern2D polka(double radius, double separation);
+    // math::Function<bool(const Point2D&)> polka(double radius1, double radius2);
 }

@@ -10,10 +10,9 @@
 using namespace math;
 using namespace raytracer;
 using namespace raytracer::materials;
-using namespace imaging;
 
 
-Material raytracer::materials::pattern2d(math::functions::Pattern2D pattern, Material m1, Material m2)
+Material raytracer::materials::pattern2d(patterns::Pattern2D pattern, Material m1, Material m2)
 {
     std::function<Material(const Point2D& point)> function = [=](const Point2D& point) -> Material {
         return pattern(point) ? m1 : m2;
@@ -22,7 +21,7 @@ Material raytracer::materials::pattern2d(math::functions::Pattern2D pattern, Mat
     return composite(from_lambda(function));
 }
 
-Material raytracer::materials::pattern3d(math::functions::Pattern3D pattern, Material m1, Material m2)
+Material raytracer::materials::pattern3d(patterns::Pattern3D pattern, Material m1, Material m2)
 {
     std::function<Material(const Point3D& point)> function = [=](const Point3D& point) -> Material {
         return pattern(point) ? m1 : m2;

@@ -5,13 +5,7 @@
 #include <functional>
 
 
-namespace math
+namespace patterns
 {
-    namespace functions
-    {
-        namespace patterns
-        {
-            Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing);
-        }
-    }
+    Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing);
 }

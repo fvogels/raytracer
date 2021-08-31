@@ -5,9 +5,10 @@
 #include <cmath>
 
 using namespace math;
+using namespace patterns;
 
 
-math::functions::Pattern2D math::functions::patterns::polka(double radius, double separation)
+Pattern2D patterns::polka(double radius, double separation)
 {
     auto radius_sqr = radius * radius;
     auto center = separation / 2;

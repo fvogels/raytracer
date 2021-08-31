@@ -2,13 +2,13 @@
 #include "patterns/lambda-pattern.h"
 #include "patterns/pattern-tessellation.h"
 #include "patterns/pattern-transformations.h"
-#include <cmath>
 
 
-using namespace math::functions;
+using namespace math;
+using namespace patterns;
 
 
-Pattern2D math::functions::patterns::lines(double thickness, double separation)
+Pattern2D patterns::lines(double thickness, double separation)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         return point.y() < thickness;

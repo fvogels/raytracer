@@ -7,6 +7,7 @@
 using namespace chaiscript;
 using namespace raytracer;
 using namespace math;
+using namespace patterns;
 
 
 namespace
@@ -17,138 +18,138 @@ namespace
         * 2D
         */
         
-        math::functions::Pattern2D translate2d(const Vector2D& displacement, math::functions::Pattern2D pattern) const
+        Pattern2D translate2d(const Vector2D& displacement, Pattern2D pattern) const
         {
-            return math::functions::patterns::translate(displacement, pattern);
+            return patterns::translate(displacement, pattern);
         }
 
-        math::functions::Pattern2D scale2d(double sx, double sy, math::functions::Pattern2D pattern) const
+        Pattern2D scale2d(double sx, double sy, Pattern2D pattern) const
         {
-            return math::functions::patterns::scale(sx, sy, pattern);
+            return patterns::scale(sx, sy, pattern);
         }
 
-        math::functions::Pattern2D rotate(Angle angle, math::functions::Pattern2D pattern) const
+        Pattern2D rotate(Angle angle, Pattern2D pattern) const
         {
-            return math::functions::patterns::rotate(angle, pattern);
+            return patterns::rotate(angle, pattern);
         }
 
-        math::functions::Pattern2D conjunction2d(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        Pattern2D conjunction2d(Pattern2D pattern1, Pattern2D pattern2) const
         {
-            return math::functions::patterns::conjunction(pattern1, pattern2);
+            return patterns::conjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern2D disjunction2d(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        Pattern2D disjunction2d(Pattern2D pattern1, Pattern2D pattern2) const
         {
-            return math::functions::patterns::disjunction(pattern1, pattern2);
+            return patterns::disjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern2D exclusive_disjunction2d(math::functions::Pattern2D pattern1, math::functions::Pattern2D pattern2) const
+        Pattern2D exclusive_disjunction2d(Pattern2D pattern1, Pattern2D pattern2) const
         {
-            return math::functions::patterns::exclusive_disjunction(pattern1, pattern2);
+            return patterns::exclusive_disjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern2D negation2d(math::functions::Pattern2D pattern) const
+        Pattern2D negation2d(Pattern2D pattern) const
         {
-            return math::functions::patterns::negation(pattern);
+            return patterns::negation(pattern);
         }
 
-        math::functions::Pattern2D tessellate2d(math::functions::Pattern2D pattern, double width, double height) const
+        Pattern2D tessellate2d(Pattern2D pattern, double width, double height) const
         {
-            return math::functions::patterns::tessellate(pattern, width, height);
+            return patterns::tessellate(pattern, width, height);
         }
 
-        math::functions::Pattern2D tessellate_x(math::functions::Pattern2D pattern, double width) const
+        Pattern2D tessellate_x(Pattern2D pattern, double width) const
         {
-            return math::functions::patterns::tessellate_x(pattern, width);
+            return patterns::tessellate_x(pattern, width);
         }
 
-        math::functions::Pattern2D tessellate_y(math::functions::Pattern2D pattern, double height) const
+        Pattern2D tessellate_y(Pattern2D pattern, double height) const
         {
-            return math::functions::patterns::tessellate_y(pattern, height);
+            return patterns::tessellate_y(pattern, height);
         }
 
-        math::functions::Pattern2D lines(double thickness, double separation) const
+        Pattern2D lines(double thickness, double separation) const
         {
-            return math::functions::patterns::lines(thickness, separation);
+            return patterns::lines(thickness, separation);
         }
 
-        math::functions::Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing) const
+        Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing) const
         {
-            return math::functions::patterns::grid(xthickness, ythickness, xspacing, yspacing);
+            return patterns::grid(xthickness, ythickness, xspacing, yspacing);
         }
 
-        math::functions::Pattern2D checkered(double xthickness, double ythickness) const
+        Pattern2D checkered(double xthickness, double ythickness) const
         {
-            return math::functions::patterns::checkered(xthickness, ythickness);
+            return patterns::checkered(xthickness, ythickness);
         }
 
-        math::functions::Pattern2D polka(double radius, double separation) const
+        Pattern2D polka(double radius, double separation) const
         {
-            return math::functions::patterns::polka(radius, separation);
+            return patterns::polka(radius, separation);
         }
 
-        math::functions::Pattern2D dalmatian2d(unsigned density, unsigned seed) const
+        Pattern2D dalmatian2d(unsigned density, unsigned seed) const
         {
-            return math::functions::dalmatian2d(density, seed);
+            return patterns::dalmatian2d(density, seed);
         }
 
         /*
         * 3D
         */
 
-        math::functions::Pattern3D translate3d(const Vector3D& displacement, math::functions::Pattern3D pattern) const
+        Pattern3D translate3d(const Vector3D& displacement, Pattern3D pattern) const
         {
-            return math::functions::patterns::translate(displacement, pattern);
+            return patterns::translate(displacement, pattern);
         }
 
-        math::functions::Pattern3D scale3d(double sx, double sy, double sz, math::functions::Pattern3D pattern) const
+        Pattern3D scale3d(double sx, double sy, double sz, Pattern3D pattern) const
         {
-            return math::functions::patterns::scale(sx, sy, sz, pattern);
+            return patterns::scale(sx, sy, sz, pattern);
         }
 
-        math::functions::Pattern3D rotate_x(Angle angle, math::functions::Pattern3D pattern) const
+        Pattern3D rotate_x(Angle angle, Pattern3D pattern) const
         {
-            return math::functions::patterns::rotate_x(angle, pattern);
+            return patterns::rotate_x(angle, pattern);
         }
 
-        math::functions::Pattern3D rotate_y(Angle angle, math::functions::Pattern3D pattern) const
+        Pattern3D rotate_y(Angle angle, Pattern3D pattern) const
         {
-            return math::functions::patterns::rotate_y(angle, pattern);
+            return patterns::rotate_y(angle, pattern);
         }
 
-        math::functions::Pattern3D rotate_z(Angle angle, math::functions::Pattern3D pattern) const
+        Pattern3D rotate_z(Angle angle, Pattern3D pattern) const
         {
-            return math::functions::patterns::rotate_z(angle, pattern);
+            return patterns::rotate_z(angle, pattern);
         }
 
-        math::functions::Pattern3D conjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
+        Pattern3D conjunction3d(Pattern3D pattern1, Pattern3D pattern2) const
         {
-            return math::functions::patterns::conjunction(pattern1, pattern2);
+            return patterns::conjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern3D disjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
+        Pattern3D disjunction3d(Pattern3D pattern1, Pattern3D pattern2) const
         {
-            return math::functions::patterns::disjunction(pattern1, pattern2);
+            return patterns::disjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern3D exclusive_disjunction3d(math::functions::Pattern3D pattern1, math::functions::Pattern3D pattern2) const
+        Pattern3D exclusive_disjunction3d(Pattern3D pattern1, Pattern3D pattern2) const
         {
-            return math::functions::patterns::exclusive_disjunction(pattern1, pattern2);
+            return patterns::exclusive_disjunction(pattern1, pattern2);
         }
 
-        math::functions::Pattern3D negation3d(math::functions::Pattern3D pattern) const
+        Pattern3D negation3d(Pattern3D pattern) const
         {
-            return math::functions::patterns::negation(pattern);
+            return patterns::negation(pattern);
         }
 
-        math::functions::Pattern3D tessellate3d(math::functions::Pattern3D pattern, double x_size, double y_size, double z_size) const
+        Pattern3D tessellate3d(Pattern3D pattern, double x_size, double y_size, double z_size) const
         {
-            return math::functions::patterns::tessellate(pattern, x_size, y_size, z_size);
+            return patterns::tessellate(pattern, x_size, y_size, z_size);
         }
 
-        math::functions::Pattern3D dalmatian3d(unsigned density, unsigned seed) const
+        Pattern3D dalmatian3d(unsigned density, unsigned seed) const
         {
-            return math::functions::dalmatian3d(density, seed);
+            return patterns::dalmatian3d(density, seed);
         }
     };
 }
@@ -157,11 +158,11 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 {
     auto module = std::make_shared<chaiscript::Module>();
 
-    util::register_type<math::functions::Pattern2D>(*module, "Pattern2D");
-    util::register_type<math::functions::Pattern3D>(*module, "Pattern3D");
+    util::register_type<Pattern2D>(*module, "Pattern2D");
+    util::register_type<Pattern3D>(*module, "Pattern3D");
 
-    auto lights_library = std::make_shared<PatternLibrary>();
-    module->add_global_const(chaiscript::const_var(lights_library), "Patterns");
+    auto pattern_library = std::make_shared<PatternLibrary>();
+    module->add_global_const(chaiscript::const_var(pattern_library), "Patterns");
 
 #   define BIND_2D_3D(NAME)                BIND_AS(NAME ## 2d, NAME); BIND_AS(NAME ## 3d, NAME)
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)

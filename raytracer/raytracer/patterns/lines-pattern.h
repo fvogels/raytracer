@@ -5,13 +5,7 @@
 #include <functional>
 
 
-namespace math
+namespace patterns
 {
-    namespace functions
-    {
-        namespace patterns
-        {
-            Pattern2D lines(double thickness, double separation);
-        }
-    }
+    Pattern2D lines(double thickness, double separation);
 }

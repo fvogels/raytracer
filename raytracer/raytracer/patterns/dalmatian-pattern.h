@@ -4,11 +4,8 @@
 #include "math/point.h"
 
 
-namespace math
+namespace patterns
 {
-    namespace functions
-    {
-        Pattern2D dalmatian2d(unsigned density, unsigned seed);
-        Pattern3D dalmatian3d(unsigned density, unsigned seed);
-    }
+    Pattern2D dalmatian2d(unsigned density, unsigned seed);
+    Pattern3D dalmatian3d(unsigned density, unsigned seed);
 }

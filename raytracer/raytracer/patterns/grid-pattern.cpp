@@ -6,15 +6,14 @@
 #include <cmath>
 
 
-using namespace math::functions;
-using namespace math::functions::patterns;
+using namespace math;
+using namespace patterns;
 
 
-Pattern2D math::functions::patterns::grid(double xthickness, double ythickness, double xspacing, double yspacing)
+Pattern2D patterns::grid(double xthickness, double ythickness, double xspacing, double yspacing)
 {
     auto hline = lines(xthickness, xspacing);
     auto vline = rotate(90_degrees, lines(ythickness, yspacing));
 
     return disjunction(hline, vline);
 }
-

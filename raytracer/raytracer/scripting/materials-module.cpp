@@ -50,7 +50,7 @@ namespace
             return raytracer::materials::texture(path);
         }
 
-        Material from_pattern(math::functions::Pattern2D pattern, Material m1, Material m2) const
+        Material from_pattern(patterns::Pattern2D pattern, Material m1, Material m2) const
         {
             return raytracer::materials::pattern2d(pattern, m1, m2);
         }
