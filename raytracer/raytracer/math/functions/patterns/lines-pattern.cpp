@@ -8,11 +8,11 @@
 using namespace math::functions;
 
 
-Pattern2D math::functions::patterns::lines(double thickness, double separation, math::Angle angle)
+Pattern2D math::functions::patterns::lines(double thickness, double separation)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         return point.y() < thickness;
     };
 
-    return rotate(angle, tessellate_y(make_pattern(function), thickness + separation));
+    return tessellate_y(make_pattern(function), thickness + separation);
 }

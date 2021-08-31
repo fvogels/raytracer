@@ -11,7 +11,7 @@ namespace math
     {
         namespace patterns
         {
-            Pattern2D lines(double thickness, double separation, math::Angle angle);
+            Pattern2D lines(double thickness, double separation);
         }
     }
 }

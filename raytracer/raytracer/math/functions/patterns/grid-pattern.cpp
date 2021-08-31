@@ -1,17 +1,19 @@
 #include "math/functions/patterns/grid-pattern.h"
 #include "math/functions/patterns/lines-pattern.h"
 #include "math/functions/patterns/lambda-pattern.h"
-#include "math/functions/patterns/pattern-operations.h"
+#include "math/functions/patterns/pattern-transformations.h"
+#include "math/functions/patterns/pattern-logic-operations.h"
 #include <cmath>
 
 
 using namespace math::functions;
+using namespace math::functions::patterns;
 
 
-Pattern2D math::functions::patterns::grid(double xthickness, double ythickness, double xspacing, double yspacing, math::Angle angle)
+Pattern2D math::functions::patterns::grid(double xthickness, double ythickness, double xspacing, double yspacing)
 {
-    auto hline = math::functions::patterns::lines(xthickness, xspacing, 0_degrees);
-    auto vline = math::functions::patterns::lines(ythickness, yspacing, 90_degrees);
+    auto hline = lines(xthickness, xspacing);
+    auto vline = rotate(90_degrees, lines(ythickness, yspacing));
 
-    return rotate(angle, disjunction(hline, vline));
+    return disjunction(hline, vline);
 }

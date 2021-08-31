@@ -11,7 +11,7 @@ namespace math
     {
         namespace patterns
         {
-            Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing, math::Angle angle);
+            Pattern2D grid(double xthickness, double ythickness, double xspacing, double yspacing);
         }
     }
 }
