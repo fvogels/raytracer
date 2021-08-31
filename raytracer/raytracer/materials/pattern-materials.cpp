@@ -14,6 +14,7 @@ using namespace raytracer::materials;
 using namespace imaging;
 
 
+// TODO Remove
 Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pattern, Material m1, Material m2)
 {
     auto bool_mapper = math::functions::bool_mapper(m1, m2);
@@ -21,6 +22,25 @@ Material raytracer::materials::pattern2d(math::Function<bool(const Point2D&)> pa
     return composite(pattern >> bool_mapper);
 }
 
+Material raytracer::materials::pattern2d(math::functions::Pattern2D pattern, Material m1, Material m2)
+{
+    std::function<Material(const Point2D& point)> function = [=](const Point2D& point) -> Material {
+        return pattern(point) ? m1 : m2;
+    };
+
+    return composite(from_lambda(function));
+}
+
+Material raytracer::materials::pattern3d(math::functions::Pattern3D pattern, Material m1, Material m2)
+{
+    std::function<Material(const Point3D& point)> function = [=](const Point3D& point) -> Material {
+        return pattern(point) ? m1 : m2;
+    };
+
+    return composite(from_lambda(function));
+}
+
+// TODO Remove
 Material raytracer::materials::pattern3d(math::Function<bool(const Point3D&)> pattern, Material m1, Material m2)
 {
     auto bool_mapper = math::functions::bool_mapper(m1, m2);
