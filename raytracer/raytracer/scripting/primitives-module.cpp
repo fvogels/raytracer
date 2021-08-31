@@ -171,6 +171,7 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(crop_spherical);
     BIND_HELPER_FUNCTION(coarse);
     BIND_HELPER_FUNCTION_AS(bumpify2d_timed, bumpify);
+    BIND_DIRECTLY(unify);
 #   undef BIND_HELPER_FUNCTION_AS
 #   undef BIND_DIRECTLY
 #   undef BIND_HELPER_FUNCTION

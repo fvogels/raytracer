@@ -25,3 +25,4 @@
 #include "primitives/bumpifier-primitive.h"
 #include "primitives/terrain-primitive.h"
 #include "primitives/resizer-primitive.h"
+#include "primitives/unify.h"

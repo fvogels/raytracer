@@ -498,6 +498,9 @@
     <ClCompile Include="patterns\pattern-tessellation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="primitives\unify.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1275,6 +1278,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="patterns\pattern-tessellation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\unify.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

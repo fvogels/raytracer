@@ -411,6 +411,7 @@
     <ClCompile Include="primitives\bumpifier-primitive.cpp" />
     <ClCompile Include="primitives\group-primitive.cpp" />
     <ClCompile Include="primitives\resizer-primitive.cpp" />
+    <ClCompile Include="primitives\unify.cpp" />
     <ClCompile Include="primitives\union-primitive.cpp" />
     <ClCompile Include="primitives\smooth-triangle-primitive.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
@@ -638,6 +639,7 @@
     <ClInclude Include="primitives\mesh\mesh-receiver.h" />
     <ClInclude Include="primitives\mesh\mesh-text-reader.h" />
     <ClInclude Include="primitives\resizer-primitive.h" />
+    <ClInclude Include="primitives\unify.h" />
     <ClInclude Include="primitives\union-primitive.h" />
     <ClInclude Include="primitives\smooth-triangle-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
