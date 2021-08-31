@@ -1,0 +1,35 @@
+#include "math/functions/patterns/pattern-logic-operations.h"
+#include "math/functions/patterns/lambda-pattern.h"
+#include <cmath>
+
+
+using namespace math::functions;
+using namespace math::functions::patterns;
+
+
+Pattern2D math::functions::patterns::conjunction(Pattern2D pattern1, Pattern2D pattern2)
+{
+    std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
+        return pattern1(point) && pattern2(point);
+    };
+
+    return make_pattern(function);
+}
+
+Pattern2D math::functions::patterns::disjunction(Pattern2D pattern1, Pattern2D pattern2)
+{
+    std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
+        return pattern1(point) || pattern2(point);
+    };
+
+    return make_pattern(function);
+}
+
+Pattern2D math::functions::patterns::negation(Pattern2D pattern)
+{
+    std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
+        return !pattern(point);
+    };
+
+    return make_pattern(function);
+}
