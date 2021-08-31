@@ -83,9 +83,9 @@ namespace
             return patterns::checkered(xthickness, ythickness);
         }
 
-        Pattern2D polka(double radius, double separation) const
+        Pattern2D polka2d(double radius, double separation) const
         {
-            return patterns::polka(radius, separation);
+            return patterns::polka2d(radius, separation);
         }
 
         Pattern2D dalmatian2d(unsigned density, unsigned seed) const
@@ -147,6 +147,11 @@ namespace
             return patterns::tessellate(pattern, x_size, y_size, z_size);
         }
 
+        Pattern3D polka3d(double radius, double separation) const
+        {
+            return patterns::polka3d(radius, separation);
+        }
+
         Pattern3D dalmatian3d(unsigned density, unsigned seed) const
         {
             return patterns::dalmatian3d(density, seed);
@@ -186,7 +191,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(lines);
     BIND(grid);
     BIND(checkered);
-    BIND(polka);
+    BIND_2D_3D(polka);
     BIND_2D_3D(dalmatian);
 #   undef BIND_AS
 #   undef BIND
