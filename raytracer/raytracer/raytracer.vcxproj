@@ -384,7 +384,7 @@
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
-    <ClCompile Include="math\functions\polka-dots-pattern.cpp" />
+    <ClCompile Include="math\functions\patterns\polka-dots-pattern.cpp" />
     <ClCompile Include="math\functions\voronoi.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
     <ClCompile Include="math\plane.cpp" />
@@ -601,7 +601,7 @@
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\functions\marble.h" />
-    <ClInclude Include="math\functions\polka-dots-pattern.h" />
+    <ClInclude Include="math\functions\patterns\polka-dots-pattern.h" />
     <ClInclude Include="math\functions\voronoi.h" />
     <ClInclude Include="math\functions\wood.h" />
     <ClInclude Include="math\plane.h" />
