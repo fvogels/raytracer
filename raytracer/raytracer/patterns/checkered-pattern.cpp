@@ -1,7 +1,6 @@
-#include "math/functions/patterns/checkered-pattern.h"
-#include "math/functions/patterns/pattern-tessellation.h"
-#include "math/functions/patterns/lambda-pattern.h"
-#include "math/functions.h"
+#include "patterns/checkered-pattern.h"
+#include "patterns/pattern-tessellation.h"
+#include "patterns/lambda-pattern.h"
 #include <cmath>
 
 using namespace math;

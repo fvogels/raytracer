@@ -1,7 +1,7 @@
-#include "math/functions/patterns/lines-pattern.h"
-#include "math/functions/patterns/lambda-pattern.h"
-#include "math/functions/patterns/pattern-tessellation.h"
-#include "math/functions/patterns/pattern-transformations.h"
+#include "patterns/lines-pattern.h"
+#include "patterns/lambda-pattern.h"
+#include "patterns/pattern-tessellation.h"
+#include "patterns/pattern-transformations.h"
 #include <cmath>
 
 

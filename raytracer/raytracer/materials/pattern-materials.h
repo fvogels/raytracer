@@ -2,7 +2,7 @@
 
 #include "materials/material.h"
 #include "math/function.h"
-#include "math/functions/pattern.h"
+#include "patterns/pattern.h"
 #include "math/point.h"
 
 namespace raytracer

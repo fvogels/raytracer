@@ -342,11 +342,11 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="math\functions\patterns\grid-pattern.cpp" />
-    <ClCompile Include="math\functions\patterns\lines-pattern.cpp" />
-    <ClCompile Include="math\functions\patterns\pattern-logic-operations.cpp" />
-    <ClCompile Include="math\functions\patterns\pattern-tessellation.cpp" />
-    <ClCompile Include="math\functions\patterns\pattern-transformations.cpp" />
+    <ClCompile Include="patterns\grid-pattern.cpp" />
+    <ClCompile Include="patterns\lines-pattern.cpp" />
+    <ClCompile Include="patterns\pattern-logic-operations.cpp" />
+    <ClCompile Include="patterns\pattern-tessellation.cpp" />
+    <ClCompile Include="patterns\pattern-transformations.cpp" />
     <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp" />
     <ClCompile Include="primitives\box-primitive.cpp" />
     <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
@@ -374,7 +374,7 @@
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="math\functions\dalmatian-pattern.cpp" />
-    <ClCompile Include="math\functions\patterns\checkered-pattern.cpp" />
+    <ClCompile Include="patterns\checkered-pattern.cpp" />
     <ClCompile Include="math\functions\easing\bounce-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\cubic-easing-function.cpp" />
     <ClCompile Include="math\functions\easing\elastic-easing-function.cpp" />
@@ -384,7 +384,7 @@
     <ClCompile Include="math\functions\easing\stretch-easing-function.cpp" />
     <ClCompile Include="math\functions\gauss.cpp" />
     <ClCompile Include="math\functions\marble.cpp" />
-    <ClCompile Include="math\functions\patterns\polka-dots-pattern.cpp" />
+    <ClCompile Include="patterns\polka-dots-pattern.cpp" />
     <ClCompile Include="math\functions\voronoi.cpp" />
     <ClCompile Include="math\functions\wood.cpp" />
     <ClCompile Include="math\plane.cpp" />
@@ -499,7 +499,7 @@
     <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\main.cpp" />
-    <ClCompile Include="tests\math\functions\patterns\lines-pattern-tests.cpp" />
+    <ClCompile Include="tests\patterns\lines-pattern-tests.cpp" />
     <ClCompile Include="util\base64.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />
@@ -516,14 +516,14 @@
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
-    <ClInclude Include="math\functions\patterns\grid-pattern.h" />
-    <ClInclude Include="math\functions\patterns\lambda-pattern.h" />
-    <ClInclude Include="math\functions\patterns\lines-pattern.h" />
-    <ClInclude Include="math\functions\patterns\pattern-logic-operations.h" />
-    <ClInclude Include="math\functions\pattern.h" />
-    <ClInclude Include="math\functions\patterns\pattern-tessellation.h" />
-    <ClInclude Include="math\functions\patterns\pattern-transformations.h" />
-    <ClInclude Include="math\functions\patterns\patterns.h" />
+    <ClInclude Include="patterns\grid-pattern.h" />
+    <ClInclude Include="patterns\lambda-pattern.h" />
+    <ClInclude Include="patterns\lines-pattern.h" />
+    <ClInclude Include="patterns\pattern-logic-operations.h" />
+    <ClInclude Include="patterns\pattern.h" />
+    <ClInclude Include="patterns\pattern-tessellation.h" />
+    <ClInclude Include="patterns\pattern-transformations.h" />
+    <ClInclude Include="patterns\patterns.h" />
     <ClInclude Include="primitives\mesh\mesh-binary-reader.h" />
     <ClInclude Include="primitives\box-primitive.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />
@@ -588,7 +588,7 @@
     <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />
     <ClInclude Include="math\functions\dalmatian-pattern.h" />
-    <ClInclude Include="math\functions\patterns\checkered-pattern.h" />
+    <ClInclude Include="patterns\checkered-pattern.h" />
     <ClInclude Include="math\functions\constant.h" />
     <ClInclude Include="math\functions\easing-function.h" />
     <ClInclude Include="math\functions\easing\bounce-easing-function.h" />
@@ -601,7 +601,7 @@
     <ClInclude Include="math\functions\gauss.h" />
     <ClInclude Include="math\functions\identity.h" />
     <ClInclude Include="math\functions\marble.h" />
-    <ClInclude Include="math\functions\patterns\polka-dots-pattern.h" />
+    <ClInclude Include="patterns\polka-dots-pattern.h" />
     <ClInclude Include="math\functions\voronoi.h" />
     <ClInclude Include="math\functions\wood.h" />
     <ClInclude Include="math\plane.h" />

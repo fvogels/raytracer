@@ -1,5 +1,5 @@
-#include "math/functions/patterns/pattern-transformations.h"
-#include "math/functions/patterns/lambda-pattern.h"
+#include "patterns/pattern-transformations.h"
+#include "patterns/lambda-pattern.h"
 #include <cmath>
 
 

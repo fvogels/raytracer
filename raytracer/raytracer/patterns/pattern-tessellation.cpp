@@ -1,5 +1,5 @@
-#include "math/functions/patterns/pattern-tessellation.h"
-#include "math/functions/patterns/lambda-pattern.h"
+#include "patterns/pattern-tessellation.h"
+#include "patterns/lambda-pattern.h"
 #include <cmath>
 
 

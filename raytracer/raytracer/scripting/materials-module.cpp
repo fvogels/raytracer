@@ -5,7 +5,7 @@
 #include "materials/materials.h"
 #include "materials/material-transformer.h"
 #include "imaging/color.h"
-#include "math/functions/pattern.h"
+#include "patterns/pattern.h"
 
 
 using namespace chaiscript;

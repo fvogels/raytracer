@@ -1,6 +1,6 @@
 #pragma once
 
-#include "math/functions/pattern.h"
+#include "patterns/pattern.h"
 #include <functional>
 
 

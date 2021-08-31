@@ -2,7 +2,7 @@
 
 #include "scripting/patterns-module.h"
 #include "scripting/scripting-util.h"
-#include "math/functions/patterns/patterns.h"
+#include "patterns/patterns.h"
 
 using namespace chaiscript;
 using namespace raytracer;

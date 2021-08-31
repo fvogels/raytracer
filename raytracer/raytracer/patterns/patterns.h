@@ -1,0 +1,7 @@
+#include "patterns/pattern-logic-operations.h"
+#include "patterns/pattern-transformations.h"
+#include "patterns/pattern-tessellation.h"
+#include "patterns/lines-pattern.h"
+#include "patterns/grid-pattern.h"
+#include "patterns/checkered-pattern.h"
+#include "patterns/polka-dots-pattern.h"

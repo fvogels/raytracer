@@ -336,10 +336,10 @@
     <ClCompile Include="math\functions\voronoi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\checkered-pattern.cpp">
+    <ClCompile Include="patterns\checkered-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\polka-dots-pattern.cpp">
+    <ClCompile Include="patterns\polka-dots-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="math\functions\dalmatian-pattern.cpp">
@@ -474,10 +474,10 @@
     <ClCompile Include="primitives\resizer-primitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\pattern-logic-operations.cpp">
+    <ClCompile Include="patterns\pattern-logic-operations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\lines-pattern.cpp">
+    <ClCompile Include="patterns\lines-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scripting\patterns-module.cpp">
@@ -486,16 +486,16 @@
     <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\math\functions\patterns\lines-pattern-tests.cpp">
+    <ClCompile Include="tests\patterns\lines-pattern-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\grid-pattern.cpp">
+    <ClCompile Include="patterns\grid-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\pattern-transformations.cpp">
+    <ClCompile Include="patterns\pattern-transformations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\functions\patterns\pattern-tessellation.cpp">
+    <ClCompile Include="patterns\pattern-tessellation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1082,10 +1082,10 @@
     <ClInclude Include="math\functions\voronoi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\checkered-pattern.h">
+    <ClInclude Include="patterns\checkered-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\polka-dots-pattern.h">
+    <ClInclude Include="patterns\polka-dots-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\functions\dalmatian-pattern.h">
@@ -1250,31 +1250,31 @@
     <ClInclude Include="primitives\resizer-primitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\pattern.h">
+    <ClInclude Include="patterns\pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\lambda-pattern.h">
+    <ClInclude Include="patterns\lambda-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\pattern-logic-operations.h">
+    <ClInclude Include="patterns\pattern-logic-operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\lines-pattern.h">
+    <ClInclude Include="patterns\lines-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scripting\patterns-module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\patterns.h">
+    <ClInclude Include="patterns\patterns.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\grid-pattern.h">
+    <ClInclude Include="patterns\grid-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\pattern-transformations.h">
+    <ClInclude Include="patterns\pattern-transformations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="math\functions\patterns\pattern-tessellation.h">
+    <ClInclude Include="patterns\pattern-tessellation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

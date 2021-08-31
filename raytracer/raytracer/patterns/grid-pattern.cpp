@@ -1,8 +1,8 @@
-#include "math/functions/patterns/grid-pattern.h"
-#include "math/functions/patterns/lines-pattern.h"
-#include "math/functions/patterns/lambda-pattern.h"
-#include "math/functions/patterns/pattern-transformations.h"
-#include "math/functions/patterns/pattern-logic-operations.h"
+#include "patterns/grid-pattern.h"
+#include "patterns/lines-pattern.h"
+#include "patterns/lambda-pattern.h"
+#include "patterns/pattern-transformations.h"
+#include "patterns/pattern-logic-operations.h"
 #include <cmath>
 
 

@@ -1,5 +1,5 @@
-#include "math/functions/patterns/pattern-logic-operations.h"
-#include "math/functions/patterns/lambda-pattern.h"
+#include "patterns/pattern-logic-operations.h"
+#include "patterns/lambda-pattern.h"
 #include <cmath>
 
 
