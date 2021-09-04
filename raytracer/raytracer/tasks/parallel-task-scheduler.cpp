@@ -51,10 +51,10 @@ namespace
 
 TaskScheduler tasks::schedulers::parallel(unsigned thread_count)
 {
-    LOG(INFO) << "Creating parallel scheduler with " << thread_count << " threads";
-
     if (thread_count > 1)
     {
+        LOG(INFO) << "Creating parallel scheduler with " << thread_count << " threads";
+
         return TaskScheduler(std::make_shared<ParallelTaskScheduler>(thread_count));
     }
     else
