@@ -50,9 +50,8 @@ TraceResult raytracer::raytracers::_private_::RayTracerV7::trace(const Scene& sc
             Color result = colors::black();
             auto material_properties = hit.material->at(hit.local_position);
 
-            result += compute_ambient(material_properties);
-            result += process_lights(scene, material_properties, hit, eye_ray);
-            result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
+            result += compute_own_color(scene, material_properties, hit, eye_ray, weight * material_properties.opacity);
+            result += compute_see_through_color(scene, material_properties, hit, eye_ray, weight * (1 - material_properties.opacity));
             result += compute_refraction(scene, material_properties, hit, eye_ray, weight);
 
             return TraceResult(result, hit.group_id, eye_ray, hit.t);
