@@ -16,17 +16,17 @@ using namespace imaging;
 
 namespace
 {
+#   ifdef NDEBUG
     const int DEFAULT_THREAD_COUNT = 4;
+#   else
+    const int DEFAULT_THREAD_COUNT = 1;
+#   endif
 
     struct RendererLibrary
     {
         Renderer standard(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer) const
         {
-#           ifdef NDEBUG
             auto thread_count = DEFAULT_THREAD_COUNT;
-#           else
-            auto thread_count = 1;
-#           endif
 
             return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count));
         }
