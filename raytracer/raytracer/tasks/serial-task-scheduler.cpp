@@ -1,4 +1,5 @@
 #include "tasks/serial-task-scheduler.h"
+#include "easylogging++.h"
 
 using namespace tasks;
 
@@ -23,5 +24,7 @@ namespace
 
 TaskScheduler tasks::schedulers::serial()
 {
+    LOG(INFO) << "Creating serial scheduler";
+
     return TaskScheduler(std::make_shared<SerialTaskScheduler>());
 }
