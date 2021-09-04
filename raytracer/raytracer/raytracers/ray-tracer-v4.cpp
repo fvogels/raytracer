@@ -27,7 +27,7 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV4::process_light_ray(
 
 raytracer::RayTracer raytracer::raytracers::v4()
 {
-    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV4>(false));
+    return raytracer::RayTracer(std::make_shared<raytracer::raytracers::_private_::RayTracerV4>());
 }
 
 raytracer::RayTracer raytracer::raytracers::noisy_v4()

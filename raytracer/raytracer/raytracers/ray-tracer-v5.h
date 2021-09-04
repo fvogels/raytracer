@@ -13,18 +13,13 @@ namespace raytracer
             class RayTracerV5 : public RayTracerV4
             {
             public:
-                RayTracerV5(double);
-
-                TraceResult trace(const Scene&, const math::Ray&) const override;
+                using RayTracerV4::RayTracerV4;
 
             protected:
-                virtual TraceResult trace(const Scene&, const math::Ray&, double) const;
-                imaging::Color compute_reflection(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
-
-                double m_minimum_weight;
+                imaging::Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const override;
             };
         }
 
-        RayTracer v5(double minimum_weight = 0.01);
+        RayTracer v5();
     }
 }

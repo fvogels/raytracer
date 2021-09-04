@@ -7,3 +7,4 @@
 #include "raytracers/ray-tracer-v5.h"
 #include "raytracers/ray-tracer-v6.h"
 #include "raytracers/ray-tracer-v7.h"
+#include "raytracers/ray-tracer-v8.h"
