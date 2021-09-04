@@ -91,7 +91,7 @@ raytracer::MaterialProperties raytracer::MaterialPropertiesBuilder::build() cons
         m_specular_exponent,
         m_reflectivity,
         m_opacity,
-        m_reflectivity,
+        m_transparency,
         m_refractive_index
     );
 }
