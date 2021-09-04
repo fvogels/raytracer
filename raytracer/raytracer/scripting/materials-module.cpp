@@ -21,12 +21,21 @@ namespace
     /// </summary>
     struct MaterialLibrary
     {
-        Material uniform(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double opacity, double transparency, double refractive_index) const
+        Material uniform(const Color& ambient,
+                         const Color& diffuse,
+                         const Color& specular,
+                         double specular_exponent,
+                         const Color& light_filtering,
+                         double reflectivity,
+                         double opacity,
+                         double transparency,
+                         double refractive_index) const
         {
             MaterialProperties properties = MaterialPropertiesBuilder()
                 .ambient(ambient)
                 .diffuse(diffuse)
                 .specular(specular, specular_exponent)
+                .light_filtering(light_filtering)
                 .reflectivity(reflectivity)
                 .opacity(opacity)
                 .transparency(transparency, refractive_index)
@@ -42,6 +51,7 @@ namespace
             OPTIONAL_ARGUMENT(Color, diffuse, colors::black());
             OPTIONAL_ARGUMENT(Color, specular, colors::black());
             OPTIONAL_ARGUMENT(double, specular_exponent, 10);
+            OPTIONAL_ARGUMENT(Color, light_filtering, colors::black());
             OPTIONAL_ARGUMENT(double, reflectivity, 0.0);
             OPTIONAL_ARGUMENT(double, opacity, 1.0);
             OPTIONAL_ARGUMENT(double, transparency, 0.0);
@@ -52,6 +62,7 @@ namespace
                 .ambient(ambient)
                 .diffuse(diffuse)
                 .specular(specular, specular_exponent)
+                .light_filtering(light_filtering)
                 .reflectivity(reflectivity)
                 .opacity(opacity)
                 .transparency(transparency, refractive_index)
