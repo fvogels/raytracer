@@ -37,6 +37,16 @@ namespace
     };
 }
 
+Material raytracer::materials::composite(std::function<Material(const math::Point2D&)> function)
+{
+    return Material(std::make_shared<CompositionMaterial2D>(function));
+}
+
+Material raytracer::materials::composite(std::function<Material(const math::Point3D&)> function)
+{
+    return Material(std::make_shared<CompositionMaterial3D>(function));
+}
+
 Material raytracer::materials::composite(math::Function<Material(const math::Point2D&)> function)
 {
     return Material(std::make_shared<CompositionMaterial2D>(function));
