@@ -417,6 +417,7 @@
     <ClCompile Include="primitives\smooth-triangle-primitive.cpp" />
     <ClCompile Include="primitives\square-primitive.cpp" />
     <ClCompile Include="primitives\terrain-primitive.cpp" />
+    <ClCompile Include="raytracers\ray-tracer-v7.cpp" />
     <ClCompile Include="raytracers\ray-tracer-v4.cpp" />
     <ClCompile Include="imaging\color-mapper.cpp" />
     <ClCompile Include="imaging\ppm-format.cpp" />
@@ -655,6 +656,7 @@
     <ClInclude Include="primitives\smooth-triangle-primitive.h" />
     <ClInclude Include="primitives\square-primitive.h" />
     <ClInclude Include="primitives\terrain-primitive.h" />
+    <ClInclude Include="raytracers\ray-tracer-v7.h" />
     <ClInclude Include="raytracers\trace-result.h" />
     <ClInclude Include="primitives\rectangle-primitive.h" />
     <ClInclude Include="renderers\cartoon-renderer.h" />
