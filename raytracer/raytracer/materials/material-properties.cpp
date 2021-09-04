@@ -1,10 +1,13 @@
 #include "materials/material-properties.h"
+#include "imaging/color.h"
 
+
+using namespace imaging;
 
 raytracer::MaterialProperties::MaterialProperties(
-    const imaging::Color& ambient,
-    const imaging::Color& diffuse,
-    const imaging::Color& specular,
+    const Color& ambient,
+    const Color& diffuse,
+    const Color& specular,
     double specular_exponent,
     double reflectivity,
     double opacity,
@@ -20,4 +23,61 @@ raytracer::MaterialProperties::MaterialProperties(
     , refractive_index(refractive_index)
 {
     // NOP
+}
+
+raytracer::MaterialPropertiesBuilder::MaterialPropertiesBuilder()
+    : m_ambient(colors::black())
+    , m_diffuse(colors::black())
+    , m_specular(colors::black())
+    , m_specular_exponent(0.0)
+    , m_reflectivity(0.0)
+    , m_opacity(1.0)
+    , m_transparency(0.0)
+    , m_refractive_index(1.0)
+{
+    // NOP
+}
+
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::ambient(const imaging::Color& color)
+{
+    m_ambient = color;
+
+    return *this;
+}
+
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::diffuse(const imaging::Color& color)
+{
+    m_diffuse = color;
+
+    return *this;
+}
+
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::specular(const imaging::Color& color, double exponent)
+{
+    m_specular = color;
+    m_specular_exponent = exponent;
+
+    return *this;
+}
+
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::reflectivity(double reflectivity)
+{
+    m_reflectivity = reflectivity;
+
+    return *this;
+}
+
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::opacity(double opacity)
+{
+    m_opacity = opacity;
+
+    return *this;
+}
+
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::transparency(double transparency, double refractive_index)
+{
+    m_transparency = transparency;
+    m_refractive_index = refractive_index;
+
+    return *this;
 }
