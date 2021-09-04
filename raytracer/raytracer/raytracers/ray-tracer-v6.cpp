@@ -18,7 +18,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
             assert(hit.material);
 
             auto material_properties = hit.material->at(hit.local_position);
-            Color own_result = compute_own_color(scene, material_properties, hit, eye_ray, weight * material_properties.opacity);
+            Color own_result = compute_own_color(scene, material_properties, hit, eye_ray, weight);
             Color see_through_result = compute_see_through_color(scene, material_properties, hit, eye_ray, weight * (1 - material_properties.opacity));
             Color result = own_result + see_through_result;
 
@@ -39,14 +39,11 @@ Color raytracer::raytracers::_private_::RayTracerV6::compute_own_color(const Sce
 {
     Color result = colors::black();
 
-    if (material_properties.opacity > 0)
-    {
-        result += compute_ambient(material_properties);
-        result += this->process_lights(scene, material_properties, hit, eye_ray);
-        result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
-    }
+    result += compute_ambient(material_properties);
+    result += this->process_lights(scene, material_properties, hit, eye_ray);
+    result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
 
-    return result * material_properties.opacity;
+    return result;
 }
 
 Color raytracer::raytracers::_private_::RayTracerV6::compute_see_through_color(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
