@@ -22,7 +22,13 @@ namespace
     {
         Renderer standard(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer) const
         {
-            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(DEFAULT_THREAD_COUNT));
+#           ifdef NDEBUG
+            auto thread_count = DEFAULT_THREAD_COUNT;
+#           else
+            auto thread_count = 1;
+#           endif
+
+            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::parallel(thread_count));
         }
 
         Renderer standard2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned thread_count) const
