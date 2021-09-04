@@ -162,7 +162,7 @@
     <ClCompile Include="imaging\bitmap-function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="materials\pattern-materials.cpp">
+    <ClCompile Include="materials\pattern-material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pipeline\ppm-consumer.cpp">
@@ -869,7 +869,7 @@
     <ClInclude Include="chaiscript\chaiscript_threading.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="materials\pattern-materials.h">
+    <ClInclude Include="materials\pattern-material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline\ppm-consumer.h">

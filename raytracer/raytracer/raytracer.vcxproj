@@ -371,7 +371,7 @@
     <ClCompile Include="materials\composition-material.cpp" />
     <ClCompile Include="materials\material-properties.cpp" />
     <ClCompile Include="materials\material-transformer.cpp" />
-    <ClCompile Include="materials\pattern-materials.cpp" />
+    <ClCompile Include="materials\pattern-material.cpp" />
     <ClCompile Include="materials\texture-material.cpp" />
     <ClCompile Include="materials\wood-material.cpp" />
     <ClCompile Include="patterns\dalmatian-pattern.cpp" />
@@ -595,7 +595,7 @@
     <ClInclude Include="data-structures\grid.h" />
     <ClInclude Include="imaging\bmp-format.h" />
     <ClInclude Include="materials\material-transformer.h" />
-    <ClInclude Include="materials\pattern-materials.h" />
+    <ClInclude Include="materials\pattern-material.h" />
     <ClInclude Include="materials\perlin-material.h" />
     <ClInclude Include="materials\texture-material.h" />
     <ClInclude Include="math\coordinate-systems.h" />
