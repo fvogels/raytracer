@@ -8,13 +8,22 @@ namespace raytracer
     struct MaterialProperties
     {
     private:
-        MaterialProperties(const imaging::Color& ambient, const imaging::Color& diffuse, const imaging::Color& specular, double specular_exponent, double reflectivity, double opacity, double transparency, double refractive_index);
+        MaterialProperties(const imaging::Color& ambient,
+                           const imaging::Color& diffuse,
+                           const imaging::Color& specular,
+                           double specular_exponent,
+                           const imaging::Color& light_filtering,
+                           double reflectivity,
+                           double opacity,
+                           double transparency,
+                           double refractive_index);
 
     public:
         const imaging::Color ambient;
         const imaging::Color diffuse;
         const imaging::Color specular;
         const double specular_exponent;
+        const imaging::Color light_filtering;
         const double reflectivity;
         const double opacity;
         const double transparency;
@@ -31,6 +40,7 @@ namespace raytracer
         MaterialPropertiesBuilder& ambient(const imaging::Color& color);
         MaterialPropertiesBuilder& diffuse(const imaging::Color& color);
         MaterialPropertiesBuilder& specular(const imaging::Color& color, double exponent);
+        MaterialPropertiesBuilder& light_filtering(const imaging::Color& color);
         MaterialPropertiesBuilder& reflectivity(double reflectivity);
         MaterialPropertiesBuilder& opacity(double opacity);
         MaterialPropertiesBuilder& transparency(double transparency, double refractive_index);
@@ -42,6 +52,7 @@ namespace raytracer
         imaging::Color m_diffuse;
         imaging::Color m_specular;
         double m_specular_exponent;
+        imaging::Color m_light_filtering;
         double m_reflectivity;
         double m_opacity;
         double m_transparency;
