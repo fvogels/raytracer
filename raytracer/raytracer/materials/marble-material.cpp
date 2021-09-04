@@ -9,7 +9,11 @@ using namespace math;
 Material raytracer::materials::marble2d(unsigned octaves, double turbulence)
 {
     std::function<MaterialProperties(double)> converter = [](double t) -> MaterialProperties {
-        MaterialProperties properties(colors::black(), t * colors::white(), colors::white() * 0.5, 10.0, 0.3, 0.0, 0.0, 0.0);
+        MaterialProperties properties = MaterialPropertiesBuilder()
+            .diffuse(t * colors::white())
+            .specular(colors::white() * 0.5, 10.0)
+            .reflectivity(0.3)
+            .build();
 
         return properties;
     };
@@ -20,7 +24,9 @@ Material raytracer::materials::marble2d(unsigned octaves, double turbulence)
 Material raytracer::materials::marble3d(unsigned octaves, double turbulence)
 {
     std::function<MaterialProperties(double)> converter = [](double t) -> MaterialProperties {
-        MaterialProperties properties(colors::black(), t * colors::white(), colors::black(), 0.0, 0.0, 0.0, 0.0, 0.0);
+        MaterialProperties properties = MaterialPropertiesBuilder()
+            .diffuse(t * colors::white())
+            .build();
 
         return properties;
     };

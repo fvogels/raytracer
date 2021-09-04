@@ -23,7 +23,14 @@ namespace
     {
         Material uniform(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double opacity, double transparency, double refractive_index) const
         {
-            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, opacity, transparency, refractive_index);
+            MaterialProperties properties = MaterialPropertiesBuilder()
+                .ambient(ambient)
+                .diffuse(diffuse)
+                .specular(specular, specular_exponent)
+                .reflectivity(reflectivity)
+                .opacity(opacity)
+                .transparency(transparency, refractive_index)
+                .build();
 
             return raytracer::materials::uniform(properties);
         }
@@ -41,7 +48,14 @@ namespace
             OPTIONAL_ARGUMENT(double, refractive_index, 1.0);
             END_ARGUMENTS();
 
-            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, opacity, transparency, refractive_index);
+            MaterialProperties properties = MaterialPropertiesBuilder()
+                .ambient(ambient)
+                .diffuse(diffuse)
+                .specular(specular, specular_exponent)
+                .reflectivity(reflectivity)
+                .opacity(opacity)
+                .transparency(transparency, refractive_index)
+                .build();
 
             return raytracer::materials::uniform(properties);
         }
