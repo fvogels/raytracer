@@ -31,6 +31,8 @@ namespace raytracer
         MaterialPropertiesBuilder& opacity(double opacity);
         MaterialPropertiesBuilder& transparency(double transparency, double refractive_index);
 
+        MaterialProperties build() const;
+
     private:
         imaging::Color m_ambient;
         imaging::Color m_diffuse;

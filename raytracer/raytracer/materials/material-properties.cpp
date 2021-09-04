@@ -81,3 +81,17 @@ raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::tran
 
     return *this;
 }
+
+raytracer::MaterialProperties raytracer::MaterialPropertiesBuilder::build() const
+{
+    return MaterialProperties(
+        m_ambient,
+        m_diffuse,
+        m_specular,
+        m_specular_exponent,
+        m_reflectivity,
+        m_opacity,
+        m_reflectivity,
+        m_refractive_index
+    );
+}
