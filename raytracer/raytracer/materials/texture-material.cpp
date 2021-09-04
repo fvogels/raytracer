@@ -10,7 +10,7 @@ using namespace math;
 Material raytracer::materials::texture(Function<Color(const Point2D&)> color_function)
 {
     std::function<MaterialProperties(const Point2D&)> converter = [color_function](const Point2D& p) -> MaterialProperties {
-        MaterialProperties properties(colors::black(), color_function(p), colors::black(), 0.0, 0.0, 0.0, 0.0);
+        MaterialProperties properties(colors::black(), color_function(p), colors::black(), 0.0, 0.0, 0.0, 0.0, 0.0);
 
         return properties;
     };

@@ -21,9 +21,9 @@ namespace
     /// </summary>
     struct MaterialLibrary
     {
-        Material uniform(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double transparency, double refractive_index) const
+        Material uniform(const Color& ambient, const Color& diffuse, const Color& specular, double specular_exponent, double reflectivity, double opacity, double transparency, double refractive_index) const
         {
-            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
+            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, opacity, transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
         }
@@ -36,11 +36,12 @@ namespace
             OPTIONAL_ARGUMENT(Color, specular, colors::black());
             OPTIONAL_ARGUMENT(double, specular_exponent, 10);
             OPTIONAL_ARGUMENT(double, reflectivity, 0.0);
+            OPTIONAL_ARGUMENT(double, opacity, 0.0);
             OPTIONAL_ARGUMENT(double, transparency, 0.0);
             OPTIONAL_ARGUMENT(double, refractive_index, 1.0);
             END_ARGUMENTS();
 
-            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, transparency, refractive_index);
+            MaterialProperties properties(ambient, diffuse, specular, specular_exponent, reflectivity, opacity, transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
         }
