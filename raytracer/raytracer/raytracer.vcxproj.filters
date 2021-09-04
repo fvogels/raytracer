@@ -291,13 +291,13 @@
     <ClCompile Include="raytracers\ray-tracer-v3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raytracers\ray-tracer-v4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="raytracers\ray-tracer-v5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="raytracers\ray-tracer-v6.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v7.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="renderers\cartoon-renderer.cpp">
@@ -504,7 +504,10 @@
     <ClCompile Include="easylogging++.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raytracers\ray-tracer-v7.cpp">
+    <ClCompile Include="raytracers\ray-tracer-v8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raytracers\ray-tracer-v4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1028,13 +1031,13 @@
     <ClInclude Include="raytracers\ray-tracer-v3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracers\ray-tracer-v4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="raytracers\ray-tracer-v5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracers\ray-tracer-v6.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v7.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raytracers\scene.h">
@@ -1319,7 +1322,10 @@
     <ClInclude Include="chaiscript\utility\static_string.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raytracers\ray-tracer-v7.h">
+    <ClInclude Include="raytracers\ray-tracer-v8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raytracers\ray-tracer-v4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

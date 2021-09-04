@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     process_command_line_arguments(argc, argv);
 
 #ifdef _DEBUG
-    const std::string path = R"(G:\repos\ucll\3dcg\course-material\docs\extensions\ray-tracers\v7\preview.chai)";
+    const std::string path = R"(G:\repos\ucll\3dcg\course-material\docs\extensions\ray-tracers\v6\boxes.chai)";
     render_script(path);
 #endif
 
