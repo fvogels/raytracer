@@ -14,6 +14,12 @@ namespace raytracer
             {
             public:
                 using RayTracerV5::RayTracerV5;
+
+            protected:
+                virtual TraceResult trace(const Scene&, const math::Ray&, double) const;
+                
+                imaging::Color compute_own_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
+                imaging::Color compute_see_through_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
             };
         }
 
