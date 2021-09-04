@@ -43,7 +43,7 @@ namespace
             OPTIONAL_ARGUMENT(Color, specular, colors::black());
             OPTIONAL_ARGUMENT(double, specular_exponent, 10);
             OPTIONAL_ARGUMENT(double, reflectivity, 0.0);
-            OPTIONAL_ARGUMENT(double, opacity, 0.0);
+            OPTIONAL_ARGUMENT(double, opacity, 1.0);
             OPTIONAL_ARGUMENT(double, transparency, 0.0);
             OPTIONAL_ARGUMENT(double, refractive_index, 1.0);
             END_ARGUMENTS();
