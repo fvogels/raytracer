@@ -14,9 +14,9 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
         assert(hit.material);
 
         auto material_properties = hit.material->at(hit.local_position);
-        auto c = determine_color(scene, material_properties, hit, eye_ray);
+        auto hit_color = determine_color(scene, material_properties, hit, eye_ray);
         
-        return TraceResult(c, hit.group_id, eye_ray, hit.t);
+        return TraceResult(hit_color, hit.group_id, eye_ray, hit.t);
     }
     else
     {
