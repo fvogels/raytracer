@@ -78,9 +78,14 @@ namespace
             return patterns::grid(xthickness, ythickness, xspacing, yspacing);
         }
 
-        Pattern2D checkered(double xthickness, double ythickness) const
+        Pattern2D checkered2d(double xthickness, double ythickness) const
         {
             return patterns::checkered(xthickness, ythickness);
+        }
+
+        Pattern2D checkered3d(double xthickness, double ythickness, double zthickness) const
+        {
+            return patterns::checkered(xthickness, ythickness, zthickness);
         }
 
         Pattern2D polka2d(double radius, double separation) const
@@ -190,7 +195,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 
     BIND(lines);
     BIND(grid);
-    BIND(checkered);
+    BIND_2D_3D(checkered);
     BIND(polka2d);
     BIND(polka3d);
     BIND_2D_3D(dalmatian);

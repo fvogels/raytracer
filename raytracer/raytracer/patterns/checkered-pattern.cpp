@@ -15,17 +15,14 @@ patterns::Pattern2D patterns::checkered(double xthickness, double ythickness)
 
     return tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness);
 }
-//
-//Function<bool(const Point3D&)> math::functions::checkered3d()
-//{
-//    std::function<bool(const Point3D&)> function = [](const Point3D& p)
-//    {
-//        double x = floor(p.x());
-//        double y = floor(p.y());
-//        double z = floor(p.z());
-//
-//        return std::abs(fmod(x + y + z, 2)) < 0.05;
-//    };
-//
-//    return from_lambda<bool, const Point3D&>(function);
-//}
+
+patterns::Pattern3D patterns::checkered(double xthickness, double ythickness, double zthickness)
+{
+    std::function<bool(const Point3D&)> function = [=](const Point3D& point)
+    {
+        return (point.x() < xthickness) != (point.y() < ythickness) != (point.z() < zthickness);
+    };
+
+    return tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness, 2 * zthickness);
+}
+
