@@ -34,37 +34,14 @@ namespace
     }
 }
 
-
-TraceResult raytracer::raytracers::_private_::RayTracerV8::trace(const Scene& scene, const Ray& eye_ray, double weight) const
+Color raytracer::raytracers::_private_::RayTracerV8::determine_color(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
 {
-    assert(weight >= 0);
+    Color result = colors::black();
 
-    if (weight >= m_minimum_weight)
-    {
-        Hit hit;
+    result += RayTracerV7::determine_color(scene, material_properties, hit, eye_ray, weight);
+    result += compute_refraction(scene, material_properties, hit, eye_ray, weight);
 
-        if (scene.root->find_first_positive_hit(eye_ray, &hit))
-        {
-            assert(hit.material);
-
-            Color result = colors::black();
-            auto material_properties = hit.material->at(hit.local_position);
-
-            result += compute_own_color(scene, material_properties, hit, eye_ray, weight * material_properties.opacity);
-            result += compute_see_through_color(scene, material_properties, hit, eye_ray, weight * (1 - material_properties.opacity));
-            result += compute_refraction(scene, material_properties, hit, eye_ray, weight);
-
-            return TraceResult(result, hit.group_id, eye_ray, hit.t);
-        }
-        else
-        {
-            return TraceResult::no_hit(eye_ray);
-        }
-    }
-    else
-    {
-        return TraceResult::no_hit(eye_ray);
-    }
+    return result;
 }
 
 Color raytracer::raytracers::_private_::RayTracerV8::compute_refraction(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const

@@ -16,8 +16,7 @@ namespace raytracer
                 using RayTracerV7::RayTracerV7;
 
             protected:
-                TraceResult trace(const Scene&, const math::Ray&, double) const override;
-
+                imaging::Color determine_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray& eye_ray, double weight) const override;
                 imaging::Color compute_refraction(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
             };
         }

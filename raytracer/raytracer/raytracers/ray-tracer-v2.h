@@ -12,10 +12,9 @@ namespace raytracer
         {
             class RayTracerV2 : public RayTracerV1
             {
-            public:
-                TraceResult trace(const Scene&, const math::Ray&) const override;
-
             protected:
+                imaging::Color determine_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray& eye_ray) const override;
+
                 virtual imaging::Color process_lights(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&) const;
                 virtual imaging::Color process_light_source(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, LightSource) const;
                 virtual imaging::Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const;

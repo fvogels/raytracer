@@ -5,43 +5,12 @@ using namespace math;
 using namespace raytracer;
 
 
-TraceResult raytracer::raytracers::_private_::RayTracerV7::trace(const Scene& scene, const Ray& eye_ray, double weight) const
-{
-    assert(weight >= 0);
-
-    if (weight >= m_minimum_weight)
-    {
-        Hit hit;
-
-        if (scene.root->find_first_positive_hit(eye_ray, &hit))
-        {
-            assert(hit.material);
-
-            auto material_properties = hit.material->at(hit.local_position);
-            Color own_result = compute_own_color(scene, material_properties, hit, eye_ray, weight);
-            Color see_through_result = compute_see_through_color(scene, material_properties, hit, eye_ray, weight * (1 - material_properties.opacity));
-            Color result = own_result + see_through_result;
-
-            return TraceResult(result, hit.group_id, eye_ray, hit.t);
-        }
-        else
-        {
-            return TraceResult::no_hit(eye_ray);
-        }
-    }
-    else
-    {
-        return TraceResult::no_hit(eye_ray);
-    }
-}
-
-Color raytracer::raytracers::_private_::RayTracerV7::compute_own_color(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
+Color raytracer::raytracers::_private_::RayTracerV7::determine_color(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
 {
     Color result = colors::black();
 
-    result += compute_ambient(material_properties);
-    result += this->process_lights(scene, material_properties, hit, eye_ray);
-    result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
+    result += RayTracerV6::determine_color(scene, material_properties, hit, eye_ray, weight);
+    result += compute_see_through_color(scene, material_properties, hit, eye_ray, weight);
 
     return result;
 }

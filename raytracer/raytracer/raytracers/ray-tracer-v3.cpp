@@ -12,8 +12,9 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV3::process_light_ray(
     const math::Ray& eye_ray,
     const LightRay& light_ray) const
 {
-    Color result = RayTracerV2::process_light_ray(scene, material_properties, hit, eye_ray, light_ray);
-
+    Color result = colors::black();
+        
+    result += RayTracerV2::process_light_ray(scene, material_properties, hit, eye_ray, light_ray);
     result += compute_specular(material_properties, hit, eye_ray, light_ray);
 
     return result;

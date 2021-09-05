@@ -16,9 +16,7 @@ namespace raytracer
                 using RayTracerV6::RayTracerV6;
 
             protected:
-                virtual TraceResult trace(const Scene&, const math::Ray&, double) const;
-
-                imaging::Color compute_own_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
+                imaging::Color determine_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray& eye_ray, double weight) const override;
                 imaging::Color compute_see_through_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
             };
         }

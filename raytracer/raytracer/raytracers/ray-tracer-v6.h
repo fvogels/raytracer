@@ -19,6 +19,9 @@ namespace raytracer
 
             protected:
                 virtual TraceResult trace(const Scene&, const math::Ray&, double) const;
+
+                virtual imaging::Color determine_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray& eye_ray, double weight) const;
+
                 imaging::Color compute_reflection(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
 
                 double m_minimum_weight;

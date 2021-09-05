@@ -28,12 +28,8 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
         {
             assert(hit.material);
 
-            Color result = colors::black();
             auto material_properties = hit.material->at(hit.local_position);
-
-            result += compute_ambient(material_properties);
-            result += this->process_lights(scene, material_properties, hit, eye_ray);
-            result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
+            Color result = determine_color(scene, material_properties, hit, eye_ray, weight);
 
             return TraceResult(result, hit.group_id, eye_ray, hit.t);
         }
@@ -46,6 +42,16 @@ TraceResult raytracer::raytracers::_private_::RayTracerV6::trace(const Scene& sc
     {
         return TraceResult::no_hit(eye_ray);
     }
+}
+
+Color raytracer::raytracers::_private_::RayTracerV6::determine_color(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
+{
+    Color result = colors::black();
+
+    result += RayTracerV5::determine_color(scene, material_properties, hit, eye_ray);
+    result += compute_reflection(scene, material_properties, hit, eye_ray, weight);
+
+    return result;
 }
 
 Color raytracer::raytracers::_private_::RayTracerV6::compute_reflection(const Scene& scene, const MaterialProperties& material_properties, const Hit& hit, const math::Ray& eye_ray, double weight) const
