@@ -22,7 +22,7 @@ namespace raytracer
                 /// <summary>
                 /// Give a scene and a ray, follows the ray's journey through the scene and determines which color the ray has.
                 /// </summary>
-                virtual TraceResult trace(const Scene& scene, const math::Ray& ray) const = 0;
+                virtual TraceResult trace(const Scene& scene, const math::Ray& eye_ray) const = 0;
             };
         }
     }
