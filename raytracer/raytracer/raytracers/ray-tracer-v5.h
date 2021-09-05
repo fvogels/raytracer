@@ -12,9 +12,6 @@ namespace raytracer
         {
             class RayTracerV5 : public RayTracerV4
             {
-            public:
-                using RayTracerV4::RayTracerV4;
-
             protected:
                 imaging::Color process_light_ray(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, const LightRay&) const override;
             };
