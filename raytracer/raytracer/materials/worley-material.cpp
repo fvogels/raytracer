@@ -23,7 +23,7 @@ namespace
         MaterialProperties at(const Point2D& p) const override
         {
             double brightness = m_factor * pow(this->m_noise_function(p), m_power);
-            MaterialProperties properties = MaterialPropertiesBuilder().diffuse(brightness * colors::white()).build();
+            MaterialProperties properties = create_material_properties_with().diffuse(brightness * colors::white());
 
             return properties;
         }
@@ -47,7 +47,7 @@ namespace
         MaterialProperties at(const Point3D& p) const override
         {
             double brightness = m_factor * pow(this->m_noise_function(p), m_power);
-            MaterialProperties properties = MaterialPropertiesBuilder().diffuse(brightness * colors::white()).build();
+            MaterialProperties properties = create_material_properties_with().diffuse(brightness * colors::white());
 
             return properties;
         }

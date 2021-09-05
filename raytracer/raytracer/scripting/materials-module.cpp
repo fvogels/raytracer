@@ -31,15 +31,14 @@ namespace
                          double transparency,
                          double refractive_index) const
         {
-            MaterialProperties properties = MaterialPropertiesBuilder()
+            MaterialProperties properties = create_material_properties_with()
                 .ambient(ambient)
                 .diffuse(diffuse)
                 .specular(specular, specular_exponent)
                 .light_filtering(light_filtering)
                 .reflectivity(reflectivity)
                 .opacity(opacity)
-                .transparency(transparency, refractive_index)
-                .build();
+                .transparency(transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
         }
@@ -58,15 +57,14 @@ namespace
             OPTIONAL_ARGUMENT(double, refractive_index, 1.0);
             END_ARGUMENTS();
 
-            MaterialProperties properties = MaterialPropertiesBuilder()
+            MaterialProperties properties = create_material_properties_with()
                 .ambient(ambient)
                 .diffuse(diffuse)
                 .specular(specular, specular_exponent)
                 .light_filtering(light_filtering)
                 .reflectivity(reflectivity)
                 .opacity(opacity)
-                .transparency(transparency, refractive_index)
-                .build();
+                .transparency(transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
         }

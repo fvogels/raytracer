@@ -45,7 +45,7 @@ namespace raytracer
         MaterialPropertiesBuilder& opacity(double opacity);
         MaterialPropertiesBuilder& transparency(double transparency, double refractive_index);
 
-        MaterialProperties build() const;
+        operator raytracer::MaterialProperties() const;
 
     private:
         imaging::Color m_ambient;
@@ -58,4 +58,9 @@ namespace raytracer
         double m_transparency;
         double m_refractive_index;
     };
+
+    inline MaterialPropertiesBuilder create_material_properties_with()
+    {
+        return MaterialPropertiesBuilder();
+    }
 }

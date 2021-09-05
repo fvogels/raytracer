@@ -91,7 +91,7 @@ raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::tran
     return *this;
 }
 
-raytracer::MaterialProperties raytracer::MaterialPropertiesBuilder::build() const
+raytracer::MaterialPropertiesBuilder::operator raytracer::MaterialProperties() const
 {
     return MaterialProperties(
         m_ambient,
