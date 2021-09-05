@@ -88,10 +88,18 @@ namespace
             return false;
         }
 
-        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
-            LOG(ERROR) << "Not yet implemented";
-            abort();
+            auto hit = std::make_shared<Hit>();
+
+            if (find_first_positive_hit(ray, &*hit))
+            {
+                return std::vector<std::shared_ptr<Hit>> { hit };
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
         }
 
         math::Box bounding_box() const override
