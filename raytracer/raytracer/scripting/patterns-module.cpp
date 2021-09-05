@@ -83,7 +83,7 @@ namespace
             return patterns::checkered(xthickness, ythickness);
         }
 
-        Pattern2D checkered3d(double xthickness, double ythickness, double zthickness) const
+        Pattern3D checkered3d(double xthickness, double ythickness, double zthickness) const
         {
             return patterns::checkered(xthickness, ythickness, zthickness);
         }
