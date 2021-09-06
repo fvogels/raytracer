@@ -36,49 +36,10 @@ namespace
         return primitives::csg_union(children);
     }
 
-    //Primitive make_accelerated_union(const std::vector<chaiscript::Boxed_Value>& boxed_children)
-    //{
-    //    std::vector<Primitive> children(boxed_children.size());
-
-    //    std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
-    //        return chaiscript::boxed_cast<Primitive>(boxed);
-    //    });
-
-    //    return primitives::accelerated_union(children);
-    //}
-
-    //Primitive mesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
-    //{
-    //    std::vector<Primitive> children(boxed_children.size());
-
-    //    std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
-    //        return chaiscript::boxed_cast<Primitive>(boxed);
-    //    });
-
-    //    return primitives::mesh(children);
-    //}
-
-    //// Accelerated mesh
-    //Primitive amesh(const std::vector<chaiscript::Boxed_Value>& boxed_children)
-    //{
-    //    std::vector<Primitive> children(boxed_children.size());
-
-    //    std::transform(boxed_children.begin(), boxed_children.end(), children.begin(), [](chaiscript::Boxed_Value boxed) {
-    //        return chaiscript::boxed_cast<Primitive>(boxed);
-    //    });
-
-    //    return primitives::accelerated_mesh(children);
-    //}
-
     Primitive mesh(const std::string& path)
     {
         return primitives::mesh(path);
     }
-
-    /*Primitive load_mesh_fast(const std::string& path)
-    {
-        return primitives::fast_mesh(path);
-    }*/
 
     Primitive coarse(Primitive primitive, double coarseness)
     {
