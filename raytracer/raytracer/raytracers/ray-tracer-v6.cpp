@@ -5,6 +5,12 @@ using namespace math;
 using namespace raytracer;
 
 
+raytracer::raytracers::_private_::RayTracerV6::RayTracerV6()
+    : RayTracerV6(default_minimum_weight)
+{
+    // NOP
+}
+
 raytracer::raytracers::_private_::RayTracerV6::RayTracerV6(double minimum_weight)
     : m_minimum_weight(minimum_weight)
 {

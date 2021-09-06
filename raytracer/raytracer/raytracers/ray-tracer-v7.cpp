@@ -21,7 +21,7 @@ Color raytracer::raytracers::_private_::RayTracerV7::compute_translucency(const 
     {
         Ray through_ray(hit.position + eye_ray.direction * 0.00001, eye_ray.direction);
 
-        return trace(scene, through_ray, weight).color * material_properties.translucency;
+        return trace(scene, through_ray, weight * material_properties.translucency).color * material_properties.translucency;
     }
     else
     {

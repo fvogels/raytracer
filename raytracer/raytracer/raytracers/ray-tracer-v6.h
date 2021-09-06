@@ -10,9 +10,12 @@ namespace raytracer
     {
         namespace _private_
         {
+            const double default_minimum_weight = 0.01;
+
             class RayTracerV6 : public RayTracerV5
             {
             public:
+                RayTracerV6();
                 RayTracerV6(double);
 
                 TraceResult trace(const Scene&, const math::Ray&) const override;
@@ -28,6 +31,6 @@ namespace raytracer
             };
         }
 
-        RayTracer v6(double minimum_weight = 0.01);
+        RayTracer v6(double minimum_weight = _private_::default_minimum_weight);
     }
 }
