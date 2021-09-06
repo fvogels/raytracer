@@ -14,7 +14,7 @@ namespace raytracer
                            double specular_exponent,
                            const imaging::Color& light_filtering,
                            double reflectivity,
-                           double opacity,
+                           double translucency,
                            double transparency,
                            double refractive_index);
 
@@ -25,7 +25,7 @@ namespace raytracer
         const double specular_exponent;
         const imaging::Color light_filtering;
         const double reflectivity;
-        const double opacity;
+        const double translucency;
         const double transparency;
         const double refractive_index;
 
@@ -42,7 +42,7 @@ namespace raytracer
         MaterialPropertiesBuilder& specular(const imaging::Color& color, double exponent);
         MaterialPropertiesBuilder& light_filtering(const imaging::Color& color);
         MaterialPropertiesBuilder& reflectivity(double reflectivity);
-        MaterialPropertiesBuilder& opacity(double opacity);
+        MaterialPropertiesBuilder& translucency(double translucency);
         MaterialPropertiesBuilder& transparency(double transparency, double refractive_index);
 
         operator raytracer::MaterialProperties() const;
@@ -54,7 +54,7 @@ namespace raytracer
         double m_specular_exponent;
         imaging::Color m_light_filtering;
         double m_reflectivity;
-        double m_opacity;
+        double m_translucency;
         double m_transparency;
         double m_refractive_index;
     };

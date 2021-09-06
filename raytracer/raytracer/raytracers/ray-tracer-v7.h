@@ -17,7 +17,7 @@ namespace raytracer
 
             protected:
                 imaging::Color determine_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray& eye_ray, double weight) const override;
-                imaging::Color compute_see_through_color(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
+                imaging::Color compute_translucency(const Scene&, const MaterialProperties&, const Hit&, const math::Ray&, double) const;
             };
         }
 

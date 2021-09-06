@@ -11,7 +11,7 @@ raytracer::MaterialProperties::MaterialProperties(
     double specular_exponent,
     const Color& light_filtering,
     double reflectivity,
-    double opacity,
+    double translucency,
     double transparency,
     double refractive_index)
     : ambient(ambient)
@@ -20,7 +20,7 @@ raytracer::MaterialProperties::MaterialProperties(
     , specular_exponent(specular_exponent)
     , light_filtering(light_filtering)
     , reflectivity(reflectivity)
-    , opacity(opacity)
+    , translucency(translucency)
     , transparency(transparency)
     , refractive_index(refractive_index)
 {
@@ -33,7 +33,7 @@ raytracer::MaterialPropertiesBuilder::MaterialPropertiesBuilder()
     , m_specular(colors::black())
     , m_specular_exponent(0.0)
     , m_reflectivity(0.0)
-    , m_opacity(1.0)
+    , m_translucency(0.0)
     , m_transparency(0.0)
     , m_refractive_index(1.0)
 {
@@ -76,9 +76,9 @@ raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::refl
     return *this;
 }
 
-raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::opacity(double opacity)
+raytracer::MaterialPropertiesBuilder& raytracer::MaterialPropertiesBuilder::translucency(double translucency)
 {
-    m_opacity = opacity;
+    m_translucency = translucency;
 
     return *this;
 }
@@ -100,7 +100,7 @@ raytracer::MaterialPropertiesBuilder::operator raytracer::MaterialProperties() c
         m_specular_exponent,
         m_light_filtering,
         m_reflectivity,
-        m_opacity,
+        m_translucency,
         m_transparency,
         m_refractive_index
     );

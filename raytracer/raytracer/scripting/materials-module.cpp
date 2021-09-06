@@ -27,7 +27,7 @@ namespace
                          double specular_exponent,
                          const Color& light_filtering,
                          double reflectivity,
-                         double opacity,
+                         double translucency,
                          double transparency,
                          double refractive_index) const
         {
@@ -37,7 +37,7 @@ namespace
                 .specular(specular, specular_exponent)
                 .light_filtering(light_filtering)
                 .reflectivity(reflectivity)
-                .opacity(opacity)
+                .translucency(translucency)
                 .transparency(transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
@@ -52,7 +52,7 @@ namespace
             OPTIONAL_ARGUMENT(double, specular_exponent, 10);
             OPTIONAL_ARGUMENT(Color, light_filtering, colors::black());
             OPTIONAL_ARGUMENT(double, reflectivity, 0.0);
-            OPTIONAL_ARGUMENT(double, opacity, 1.0);
+            OPTIONAL_ARGUMENT(double, translucency, 0.0);
             OPTIONAL_ARGUMENT(double, transparency, 0.0);
             OPTIONAL_ARGUMENT(double, refractive_index, 1.0);
             END_ARGUMENTS();
@@ -63,7 +63,7 @@ namespace
                 .specular(specular, specular_exponent)
                 .light_filtering(light_filtering)
                 .reflectivity(reflectivity)
-                .opacity(opacity)
+                .translucency(translucency)
                 .transparency(transparency, refractive_index);
 
             return raytracer::materials::uniform(properties);
