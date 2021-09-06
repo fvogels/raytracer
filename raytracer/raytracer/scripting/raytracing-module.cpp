@@ -24,6 +24,30 @@ namespace
         RayTracer v6() const { return raytracer::raytracers::v6(); }
         RayTracer v7() const { return raytracer::raytracers::v7(); }
         RayTracer v8() const { return raytracer::raytracers::v8(); }
+
+        RayTracer v(unsigned n) const
+        {
+#           define V(n) case n: return v##n()
+
+            switch (n)
+            {
+                V(0);
+                V(1);
+                V(2);
+                V(3);
+                V(4);
+                V(5);
+                V(6);
+                V(7);
+                V(8);
+
+            default:
+                LOG(FATAL) << "Unrecognized ray tracer version " << n;
+                abort();
+            }
+
+#           undef V
+        }
     };
 
     std::shared_ptr<Scene> create_scene(Camera camera, Primitive root, const std::vector<Boxed_Value>& boxed_lights)
@@ -61,6 +85,7 @@ ModulePtr raytracer::scripting::_private_::create_raytracing_module()
     BIND(v7);
     BIND(v8);
     BIND_AS(v8, latest);
+    BIND(v);
 #   undef BIND
 
     // Expose create_scene under the same name
