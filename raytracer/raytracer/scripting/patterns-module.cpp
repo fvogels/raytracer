@@ -58,6 +58,11 @@ namespace
             return patterns::tessellate(pattern, width, height);
         }
 
+        Pattern2D wrong_tessellate(Pattern2D pattern, double width, double height) const
+        {
+            return patterns::wrong_tessellate(pattern, width, height);
+        }
+
         Pattern2D tessellate_x(Pattern2D pattern, double width) const
         {
             return patterns::tessellate_x(pattern, width);
@@ -81,6 +86,11 @@ namespace
         Pattern2D checkered2d(double xthickness, double ythickness) const
         {
             return patterns::checkered(xthickness, ythickness);
+        }
+
+        Pattern2D wrong_checkered(double xthickness, double ythickness) const
+        {
+            return patterns::wrong_checkered(xthickness, ythickness);
         }
 
         Pattern3D checkered3d(double xthickness, double ythickness, double zthickness) const
@@ -190,11 +200,13 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND_2D_3D(negation);
 
     BIND_2D_3D(tessellate);
+    BIND(wrong_tessellate);
     BIND(tessellate_x);
     BIND(tessellate_y);
 
     BIND(lines);
     BIND(grid);
+    BIND(wrong_checkered);
     BIND_2D_3D(checkered);
     BIND(polka2d);
     BIND(polka3d);
