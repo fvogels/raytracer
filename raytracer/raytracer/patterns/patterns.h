@@ -6,3 +6,4 @@
 #include "patterns/checkered-pattern.h"
 #include "patterns/polka-dots-pattern.h"
 #include "patterns/dalmatian-pattern.h"
+#include "patterns/flower-pattern.h"
