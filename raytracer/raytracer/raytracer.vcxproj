@@ -343,12 +343,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cc" />
+    <ClCompile Include="patterns\flower-pattern.cpp" />
     <ClCompile Include="patterns\lambda-pattern.cpp" />
     <ClCompile Include="patterns\grid-pattern.cpp" />
     <ClCompile Include="patterns\lines-pattern.cpp" />
     <ClCompile Include="patterns\pattern-logic-operations.cpp" />
     <ClCompile Include="patterns\pattern-tessellation.cpp" />
     <ClCompile Include="patterns\pattern-transformations.cpp" />
+    <ClCompile Include="patterns\revolution-pattern.cpp" />
     <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp" />
     <ClCompile Include="primitives\box-primitive.cpp" />
     <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
@@ -531,6 +533,7 @@
     <ClInclude Include="chaiscript\language\chaiscript_windows.hpp" />
     <ClInclude Include="chaiscript\utility\fnv1a.hpp" />
     <ClInclude Include="chaiscript\utility\static_string.hpp" />
+    <ClInclude Include="patterns\flower-pattern.h" />
     <ClInclude Include="patterns\grid-pattern.h" />
     <ClInclude Include="patterns\lambda-pattern.h" />
     <ClInclude Include="patterns\lines-pattern.h" />
@@ -539,6 +542,7 @@
     <ClInclude Include="patterns\pattern-tessellation.h" />
     <ClInclude Include="patterns\pattern-transformations.h" />
     <ClInclude Include="patterns\patterns.h" />
+    <ClInclude Include="patterns\revolution-pattern.h" />
     <ClInclude Include="primitives\mesh\mesh-binary-reader.h" />
     <ClInclude Include="primitives\box-primitive.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />
