@@ -20,7 +20,7 @@ patterns::Pattern2D patterns::wrong_checkered(double xthickness, double ythickne
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point)
     {
-        return (point.x() < xthickness) != (point.y() < ythickness);
+        return (fabs(point.x()) < xthickness) != (fabs(point.y()) < ythickness);
     };
 
     return wrong_tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness);
@@ -35,4 +35,3 @@ patterns::Pattern3D patterns::checkered(double xthickness, double ythickness, do
 
     return tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness, 2 * zthickness);
 }
-
