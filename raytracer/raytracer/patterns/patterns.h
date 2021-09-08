@@ -7,3 +7,4 @@
 #include "patterns/polka-dots-pattern.h"
 #include "patterns/dalmatian-pattern.h"
 #include "patterns/flower-pattern.h"
+#include "patterns/split-pattern.h"

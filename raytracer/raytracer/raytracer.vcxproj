@@ -351,6 +351,7 @@
     <ClCompile Include="patterns\pattern-tessellation.cpp" />
     <ClCompile Include="patterns\pattern-transformations.cpp" />
     <ClCompile Include="patterns\revolution-pattern.cpp" />
+    <ClCompile Include="patterns\split-pattern.cpp" />
     <ClCompile Include="primitives\mesh\mesh-binary-reader.cpp" />
     <ClCompile Include="primitives\box-primitive.cpp" />
     <ClCompile Include="imaging\wif\wif-image-reader.cpp" />
@@ -543,6 +544,7 @@
     <ClInclude Include="patterns\pattern-transformations.h" />
     <ClInclude Include="patterns\patterns.h" />
     <ClInclude Include="patterns\revolution-pattern.h" />
+    <ClInclude Include="patterns\split-pattern.h" />
     <ClInclude Include="primitives\mesh\mesh-binary-reader.h" />
     <ClInclude Include="primitives\box-primitive.h" />
     <ClInclude Include="chaiscript\chaiscript.hpp" />

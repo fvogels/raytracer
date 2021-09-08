@@ -73,6 +73,16 @@ namespace
             return patterns::tessellate_y(pattern, height);
         }
 
+        Pattern2D xsplit(double boundary) const
+        {
+            return patterns::xsplit(boundary);
+        }
+
+        Pattern2D ysplit(double boundary) const
+        {
+            return patterns::ysplit(boundary);
+        }
+
         Pattern2D lines(double thickness, double separation) const
         {
             return patterns::lines(thickness, separation);
@@ -209,6 +219,8 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(tessellate_x);
     BIND(tessellate_y);
 
+    BIND(xsplit);
+    BIND(ysplit);
     BIND(lines);
     BIND(grid);
     BIND(wrong_checkered);
