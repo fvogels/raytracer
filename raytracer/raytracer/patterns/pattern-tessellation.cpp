@@ -19,6 +19,18 @@ Pattern2D patterns::tessellate(Pattern2D pattern, double width, double height)
     return make_pattern(function);
 }
 
+Pattern2D patterns::wrong_tessellate(Pattern2D pattern, double width, double height)
+{
+    std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
+        const auto x = fmod(point.x(), width);
+        const auto y = fmod(point.y(), height);
+
+        return pattern(Point2D(x, y));
+    };
+
+    return make_pattern(function);
+}
+
 Pattern2D patterns::tessellate_x(Pattern2D pattern, double width)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
