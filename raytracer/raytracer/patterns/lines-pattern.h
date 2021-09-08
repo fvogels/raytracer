@@ -1,7 +1,6 @@
 #pragma once
 
 #include "patterns/pattern.h"
-#include "math/angle.h"
 #include <functional>
 
 
