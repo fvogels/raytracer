@@ -343,6 +343,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cc" />
+    <ClCompile Include="patterns\lambda-pattern.cpp" />
     <ClCompile Include="patterns\grid-pattern.cpp" />
     <ClCompile Include="patterns\lines-pattern.cpp" />
     <ClCompile Include="patterns\pattern-logic-operations.cpp" />
