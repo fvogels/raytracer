@@ -522,6 +522,15 @@
     <ClCompile Include="patterns\split-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="patterns\mirror-pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\spiral-pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\polar-pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1350,6 +1359,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chaiscript\math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\mirror-pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\spiral-pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\polar-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
