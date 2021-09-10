@@ -128,6 +128,31 @@ namespace
             return patterns::flower(petals, true);
         }
 
+        Pattern2D mirror(Pattern2D pattern) const
+        {
+            return patterns::mirror(pattern);
+        }
+
+        Pattern2D mirror_x(Pattern2D pattern) const
+        {
+            return patterns::mirror_x(pattern);
+        }
+
+        Pattern2D mirror_y(Pattern2D pattern) const
+        {
+            return patterns::mirror_y(pattern);
+        }
+
+        Pattern2D spiral(double thickness) const
+        {
+            return patterns::spiral(thickness, 1, 1);
+        }
+
+        Pattern2D spiraln(double thickness, unsigned n, double spacing) const
+        {
+            return patterns::spiral(thickness, n, spacing);
+        }
+
         /*
         * 3D
         */
@@ -236,6 +261,13 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
 
     BIND(flower);
     BIND(thin_flower);
+
+    BIND(mirror);
+    BIND(mirror_x);
+    BIND(mirror_y);
+
+    BIND(spiral);
+    BIND_AS(spiraln, spiral);
 #   undef BIND_AS
 #   undef BIND
 
