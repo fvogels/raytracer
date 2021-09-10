@@ -143,14 +143,15 @@ namespace
             return patterns::mirror_y(pattern);
         }
 
-        Pattern2D spiral(double thickness) const
+        Pattern2D spiral(const std::map<std::string, Boxed_Value>& argument_map) const
         {
-            return patterns::spiral(thickness, 1, 1);
-        }
+            START_ARGUMENTS(argument_map);
+            ARGUMENT(double, thickness);
+            OPTIONAL_ARGUMENT(unsigned, arms, 1);
+            OPTIONAL_ARGUMENT(double, spacing, 1.0);
+            END_ARGUMENTS();
 
-        Pattern2D spiraln(double thickness, unsigned n, double spacing) const
-        {
-            return patterns::spiral(thickness, n, spacing);
+            return patterns::spiral(thickness, arms, spacing);
         }
 
         /*
@@ -267,7 +268,6 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(mirror_y);
 
     BIND(spiral);
-    BIND_AS(spiraln, spiral);
 #   undef BIND_AS
 #   undef BIND
 
