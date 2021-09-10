@@ -53,24 +53,24 @@ namespace
             return patterns::negation(pattern);
         }
 
-        Pattern2D tessellate2d(Pattern2D pattern, double width, double height) const
+        Pattern2D tiling2d(Pattern2D pattern, double width, double height) const
         {
-            return patterns::tessellate(pattern, width, height);
+            return patterns::tiling(pattern, width, height);
         }
 
-        Pattern2D wrong_tessellate(Pattern2D pattern, double width, double height) const
+        Pattern2D wrong_tiling(Pattern2D pattern, double width, double height) const
         {
-            return patterns::wrong_tessellate(pattern, width, height);
+            return patterns::wrong_tiling(pattern, width, height);
         }
 
-        Pattern2D tessellate_x(Pattern2D pattern, double width) const
+        Pattern2D tiling_x(Pattern2D pattern, double width) const
         {
-            return patterns::tessellate_x(pattern, width);
+            return patterns::tiling_x(pattern, width);
         }
 
-        Pattern2D tessellate_y(Pattern2D pattern, double height) const
+        Pattern2D tiling_y(Pattern2D pattern, double height) const
         {
-            return patterns::tessellate_y(pattern, height);
+            return patterns::tiling_y(pattern, height);
         }
 
         Pattern2D xsplit(double boundary) const
@@ -177,9 +177,9 @@ namespace
             return patterns::negation(pattern);
         }
 
-        Pattern3D tessellate3d(Pattern3D pattern, double x_size, double y_size, double z_size) const
+        Pattern3D tiling3d(Pattern3D pattern, double x_size, double y_size, double z_size) const
         {
-            return patterns::tessellate(pattern, x_size, y_size, z_size);
+            return patterns::tiling(pattern, x_size, y_size, z_size);
         }
 
         Pattern3D polka3d(double radius, double separation) const
@@ -219,10 +219,10 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND_2D_3D(exclusive_disjunction);
     BIND_2D_3D(negation);
 
-    BIND_2D_3D(tessellate);
-    BIND(wrong_tessellate);
-    BIND(tessellate_x);
-    BIND(tessellate_y);
+    BIND_2D_3D(tiling);
+    BIND(wrong_tiling);
+    BIND(tiling_x);
+    BIND(tiling_y);
 
     BIND(xsplit);
     BIND(ysplit);

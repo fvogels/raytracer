@@ -348,7 +348,7 @@
     <ClCompile Include="patterns\grid-pattern.cpp" />
     <ClCompile Include="patterns\lines-pattern.cpp" />
     <ClCompile Include="patterns\pattern-logic-operations.cpp" />
-    <ClCompile Include="patterns\pattern-tessellation.cpp" />
+    <ClCompile Include="patterns\pattern-tiling.cpp" />
     <ClCompile Include="patterns\pattern-transformations.cpp" />
     <ClCompile Include="patterns\revolution-pattern.cpp" />
     <ClCompile Include="patterns\split-pattern.cpp" />
@@ -541,7 +541,7 @@
     <ClInclude Include="patterns\lines-pattern.h" />
     <ClInclude Include="patterns\pattern-logic-operations.h" />
     <ClInclude Include="patterns\pattern.h" />
-    <ClInclude Include="patterns\pattern-tessellation.h" />
+    <ClInclude Include="patterns\pattern-tiling.h" />
     <ClInclude Include="patterns\pattern-transformations.h" />
     <ClInclude Include="patterns\patterns.h" />
     <ClInclude Include="patterns\revolution-pattern.h" />

@@ -495,7 +495,7 @@
     <ClCompile Include="patterns\pattern-transformations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="patterns\pattern-tessellation.cpp">
+    <ClCompile Include="patterns\pattern-tiling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="primitives\unify.cpp">
@@ -1298,7 +1298,7 @@
     <ClInclude Include="patterns\pattern-transformations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="patterns\pattern-tessellation.h">
+    <ClInclude Include="patterns\pattern-tiling.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="primitives\unify.h">

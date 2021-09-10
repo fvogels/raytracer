@@ -1,4 +1,4 @@
-#include "patterns/pattern-tessellation.h"
+#include "patterns/pattern-tiling.h"
 #include "patterns/lambda-pattern.h"
 #include <cmath>
 
@@ -7,7 +7,7 @@ using namespace math;
 using namespace patterns;
 
 
-Pattern2D patterns::tessellate(Pattern2D pattern, double width, double height)
+Pattern2D patterns::tiling(Pattern2D pattern, double width, double height)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = fmod(fmod(point.x(), width) + width, width);
@@ -19,7 +19,7 @@ Pattern2D patterns::tessellate(Pattern2D pattern, double width, double height)
     return make_pattern(function);
 }
 
-Pattern2D patterns::wrong_tessellate(Pattern2D pattern, double width, double height)
+Pattern2D patterns::wrong_tiling(Pattern2D pattern, double width, double height)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = fmod(point.x(), width);
@@ -31,7 +31,7 @@ Pattern2D patterns::wrong_tessellate(Pattern2D pattern, double width, double hei
     return make_pattern(function);
 }
 
-Pattern2D patterns::tessellate_x(Pattern2D pattern, double width)
+Pattern2D patterns::tiling_x(Pattern2D pattern, double width)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = fmod(fmod(point.x(), width) + width, width);
@@ -43,7 +43,7 @@ Pattern2D patterns::tessellate_x(Pattern2D pattern, double width)
     return make_pattern(function);
 }
 
-Pattern2D patterns::tessellate_y(Pattern2D pattern, double height)
+Pattern2D patterns::tiling_y(Pattern2D pattern, double height)
 {
     std::function<bool(const Point2D&)> function = [=](const Point2D& point) -> bool {
         const auto x = point.x();
@@ -55,7 +55,7 @@ Pattern2D patterns::tessellate_y(Pattern2D pattern, double height)
     return make_pattern(function);
 }
 
-Pattern3D patterns::tessellate(Pattern3D pattern, double x_size, double y_size, double z_size)
+Pattern3D patterns::tiling(Pattern3D pattern, double x_size, double y_size, double z_size)
 {
     std::function<bool(const Point3D&)> function = [=](const Point3D& point) -> bool {
         const auto x = fmod(fmod(point.x(), x_size) + x_size, x_size);

@@ -1,5 +1,5 @@
 #include "patterns/checkered-pattern.h"
-#include "patterns/pattern-tessellation.h"
+#include "patterns/pattern-tiling.h"
 #include "patterns/lambda-pattern.h"
 #include <cmath>
 
@@ -13,7 +13,7 @@ patterns::Pattern2D patterns::checkered(double xthickness, double ythickness)
         return (point.x() < xthickness) != (point.y() < ythickness);
     };
 
-    return tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness);
+    return tiling(make_pattern(function), 2 * xthickness, 2 * ythickness);
 }
 
 patterns::Pattern2D patterns::wrong_checkered(double xthickness, double ythickness)
@@ -23,7 +23,7 @@ patterns::Pattern2D patterns::wrong_checkered(double xthickness, double ythickne
         return (fabs(point.x()) < xthickness) != (fabs(point.y()) < ythickness);
     };
 
-    return wrong_tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness);
+    return wrong_tiling(make_pattern(function), 2 * xthickness, 2 * ythickness);
 }
 
 patterns::Pattern3D patterns::checkered(double xthickness, double ythickness, double zthickness)
@@ -33,5 +33,5 @@ patterns::Pattern3D patterns::checkered(double xthickness, double ythickness, do
         return (point.x() < xthickness) != (point.y() < ythickness) != (point.z() < zthickness);
     };
 
-    return tessellate(make_pattern(function), 2 * xthickness, 2 * ythickness, 2 * zthickness);
+    return tiling(make_pattern(function), 2 * xthickness, 2 * ythickness, 2 * zthickness);
 }
