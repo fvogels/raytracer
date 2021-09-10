@@ -118,9 +118,14 @@ namespace
             return patterns::dalmatian2d(density, seed);
         }
 
-        Pattern2D flower(double size, unsigned petals, bool thin) const
+        Pattern2D flower(unsigned petals) const
         {
-            return patterns::flower(size, petals, thin);
+            return patterns::flower(petals, false);
+        }
+
+        Pattern2D thin_flower(unsigned petals) const
+        {
+            return patterns::flower(petals, true);
         }
 
         /*
@@ -230,6 +235,7 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND_2D_3D(dalmatian);
 
     BIND(flower);
+    BIND(thin_flower);
 #   undef BIND_AS
 #   undef BIND
 
