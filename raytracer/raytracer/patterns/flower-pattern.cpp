@@ -6,18 +6,18 @@ using namespace patterns;
 using namespace math;
 
 
-Pattern2D patterns::flower(double size, unsigned petals, bool thin)
+Pattern2D patterns::flower(unsigned petals, bool thin)
 {
     if (thin)
     {
         return revolution([=](Angle angle) {
-            return size * sin(petals * angle);
+            return sin(petals * angle);
         });
     }
     else
     {
         return revolution([=](Angle angle) {
-            return size * fabs(sin(petals / 2.0 * angle));
+            return fabs(sin(petals / 2.0 * angle));
         });
     }
 }

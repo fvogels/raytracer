@@ -6,5 +6,5 @@
 
 namespace patterns
 {
-    Pattern2D flower(double size, unsigned petals, bool thin);
+    Pattern2D flower(unsigned petals, bool thin);
 }
