@@ -15,7 +15,7 @@
 #include "scripting/patterns-module.h"
 #include "easylogging++.h"
 #include "chaiscript/chaiscript.hpp"
-#include "chaiscript/chaiscript_stdlib.hpp"
+#include "chaiscript/math.hpp"
 #include <iostream>
 
 using namespace raytracer::scripting;
@@ -43,6 +43,7 @@ namespace raytracer
             chai.add(create_pipeline_module());
             chai.add(create_animation_module());
             chai.add(create_pattern_module());
+            chai.add(chaiscript::extras::math::bootstrap());
         }
     }
 }

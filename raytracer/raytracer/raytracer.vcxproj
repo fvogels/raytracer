@@ -532,6 +532,7 @@
     <ClInclude Include="chaiscript\language\chaiscript_tracer.hpp" />
     <ClInclude Include="chaiscript\language\chaiscript_unknown.hpp" />
     <ClInclude Include="chaiscript\language\chaiscript_windows.hpp" />
+    <ClInclude Include="chaiscript\math.hpp" />
     <ClInclude Include="chaiscript\utility\fnv1a.hpp" />
     <ClInclude Include="chaiscript\utility\static_string.hpp" />
     <ClInclude Include="patterns\flower-pattern.h" />

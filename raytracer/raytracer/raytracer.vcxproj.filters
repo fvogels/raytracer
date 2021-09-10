@@ -1349,6 +1349,9 @@
     <ClInclude Include="patterns\split-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="chaiscript\math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="debugger-visualizations.natvis" />
