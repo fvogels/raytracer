@@ -8,3 +8,5 @@
 #include "patterns/dalmatian-pattern.h"
 #include "patterns/flower-pattern.h"
 #include "patterns/split-pattern.h"
+#include "patterns/mirror-pattern.h"
+#include "patterns/spiral-pattern.h"
