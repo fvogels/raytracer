@@ -9,7 +9,7 @@ using namespace math;
 
 TEST_CASE("[Lines Pattern] 1/1")
 {
-    auto f = math::patterns::lines(1, 1);
+    auto f = patterns::lines(1, 1);
 
     for (double x = -5.2; x < 7.4; x += 0.478)
     {
@@ -30,7 +30,7 @@ TEST_CASE("[Lines Pattern] 1/1")
 
 TEST_CASE("[Lines Pattern] 2/2")
 {
-    auto f = math::patterns::lines(2, 2);
+    auto f = patterns::lines(2, 2);
 
     for (double x = -5.2; x < 7.4; x += 0.478)
     {
@@ -53,7 +53,7 @@ TEST_CASE("[Lines Pattern] 2/2")
 
 TEST_CASE("[Lines Pattern] 1/2")
 {
-    auto f = math::functions::patterns::lines(1, 2);
+    auto f = patterns::lines(1, 2);
 
     for (double x = -5.2; x < 7.4; x += 0.478)
     {
