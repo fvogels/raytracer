@@ -23,7 +23,7 @@ namespace math
         Matrix(const Matrix<N>& m)
             : m_elements(std::make_unique<std::array<double, N * N>>(*m.m_elements)) { }
 
-        Matrix(Matrix<N>&& m)
+        Matrix(Matrix<N>&& m) noexcept
             : m_elements(std::move(m.m_elements)) { }
 
         Matrix<N>& operator =(const Matrix<N>& m)
@@ -33,7 +33,7 @@ namespace math
 
         double& at(unsigned row, unsigned col)
         {
-            return (*m_elements)[row * N + col];
+            return (*m_elements)[size_t(row) * N + col];
         }
 
         double at(unsigned row, unsigned col) const
