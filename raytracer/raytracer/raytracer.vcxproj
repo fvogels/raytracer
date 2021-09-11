@@ -198,6 +198,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -221,6 +222,7 @@
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -289,6 +291,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -325,6 +328,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
