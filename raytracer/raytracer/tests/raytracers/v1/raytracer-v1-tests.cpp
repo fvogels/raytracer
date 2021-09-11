@@ -22,7 +22,7 @@ TEST_CASE("[RayTracerV1] Hit", "[RayTracerV1]")
         for (double z = 1.1; z < 100; z *= 1.4)
         {
             auto camera = cameras::perspective(Point3D(0, 0, z), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-            MaterialProperties properties(color, colors::black(), colors::black(), 0);
+            MaterialProperties properties = create_material_properties_with().ambient(color);
             auto material = materials::uniform(properties);
             auto root = decorate(material, sphere());
             Scene scene(camera, root);
@@ -47,7 +47,7 @@ TEST_CASE("[RayTracerV1] No hit", "[RayTracerV1]")
         for (double z = 1.1; z < 100; z *= 1.4)
         {
             auto camera = cameras::perspective(Point3D(0, 0, z), Point3D(0, 0, 0), Vector3D(0, 1, 0), 1, 1);
-            MaterialProperties properties(color, colors::black(), colors::black(), 0);
+            MaterialProperties properties = create_material_properties_with().ambient(color);
             auto material = materials::uniform(properties);
             auto root = decorate(material, sphere());
             Scene scene(camera, root);
