@@ -30,7 +30,7 @@ patterns::Pattern3D patterns::checkered(double xthickness, double ythickness, do
 {
     std::function<bool(const Point3D&)> function = [=](const Point3D& point)
     {
-        return (point.x() < xthickness) != (point.y() < ythickness) != (point.z() < zthickness);
+        return ((point.x() < xthickness) != (point.y() < ythickness)) != (point.z() < zthickness);
     };
 
     return tiling(make_pattern(function), 2 * xthickness, 2 * ythickness, 2 * zthickness);

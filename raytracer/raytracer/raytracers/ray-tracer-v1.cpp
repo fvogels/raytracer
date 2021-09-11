@@ -24,7 +24,7 @@ TraceResult raytracer::raytracers::_private_::RayTracerV1::trace(const Scene& sc
     }
 }
 
-Color raytracer::raytracers::_private_::RayTracerV1::determine_color(const Scene& scene, const MaterialProperties& properties, const Hit& hit, const math::Ray&) const
+Color raytracer::raytracers::_private_::RayTracerV1::determine_color(const Scene&, const MaterialProperties& properties, const Hit&, const math::Ray&) const
 {
     return compute_ambient(properties);
 }

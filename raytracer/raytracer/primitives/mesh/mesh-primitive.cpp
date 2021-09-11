@@ -28,7 +28,7 @@ namespace
             m_vertices.push_back(vertex);
         }
 
-        virtual void normal(double x, double y, double z)
+        virtual void normal(double, double, double)
         {
             LOG(ERROR) << "Normals not supported";
             abort();
