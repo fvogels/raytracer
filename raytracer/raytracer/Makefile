@@ -1,5 +1,5 @@
 CC=g++
-COMMONFLAGS=-I. -std=c++14 -pthread -DELPP_CUSTOM_OUT=std::cerr -DELPP_THREAD_SAFE
+COMMONFLAGS=-I. -std=c++14 -pthread -DELPP_CUSTOM_OUT=std::cerr -DELPP_THREAD_SAFE -DELPP_FEATURE_PERFORMANCE_TRACKING
 DEBUG_FLAGS=$(COMMONFLAGS) -g -ort-debug -Wall -Wextra
 
 UNAME := $(shell uname -o)
