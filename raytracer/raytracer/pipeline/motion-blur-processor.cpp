@@ -43,7 +43,7 @@ namespace
                 *result += *frame;
             }
 
-            *result /= (m_frame_count + m_last_extra_weight);
+            *result /= ((double) m_frame_count + m_last_extra_weight);
 
             return result;
         }

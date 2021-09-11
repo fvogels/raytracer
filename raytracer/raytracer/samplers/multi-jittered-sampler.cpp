@@ -21,7 +21,7 @@ namespace
             std::default_random_engine generator;
             std::uniform_real_distribution<double> distribution(0, 1);
 
-            std::vector<unsigned> indices(m_sqrt_sample_count * m_sqrt_sample_count);
+            std::vector<unsigned> indices(size_t(m_sqrt_sample_count) * m_sqrt_sample_count);
             for (unsigned i = 0; i != m_sqrt_sample_count * m_sqrt_sample_count; ++i)
             {
                 indices[i] = i;

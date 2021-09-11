@@ -36,9 +36,9 @@ namespace
 
         virtual void triangle(unsigned vertex1, unsigned vertex2, unsigned vertex3)
         {
-            auto v1 = m_vertices[vertex1];
-            auto v2 = m_vertices[vertex2];
-            auto v3 = m_vertices[vertex3];
+            const auto& v1 = m_vertices[vertex1];
+            const auto& v2 = m_vertices[vertex2];
+            const auto& v3 = m_vertices[vertex3];
             auto triangle = raytracer::primitives::triangle(v1, v2, v3);
 
             m_stack.push(triangle);
