@@ -57,5 +57,18 @@ bool smallest_greater_than_zero(T x, T y, T* result)
     }
 }
 
-bool starts_with(const std::string&, const std::string&);
-bool ends_with(const std::string&, const std::string&);
+/// <summary>
+/// Checks if a string starts with a certain prefix.
+/// </summary>
+/// <param name="prefix">Prefix.</param>
+/// <param name="string">String.</param>
+/// <returns>True if <paramref name="string" /> starts with <paramref name="prefix" />, false otherwise.</returns>
+bool starts_with(const std::string& prefix, const std::string& string);
+
+/// <summary>
+/// Checks if a string ends with a certain suffix.
+/// </summary>
+/// <param name="string">String.</param>
+/// <param name="suffix">Suffix.</param>
+/// <returns>True if <paramref name="string" /> ends with <paramref name="suffix" />, false otherwise.</returns>
+bool ends_with(const std::string& string, const std::string& suffix);
