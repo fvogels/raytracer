@@ -141,7 +141,7 @@ namespace
             hit->position = position;
             hit->local_position.xyz = position;
             hit->local_position.uv = compute_uv_from_xyz(position_on_circle, height);
-            hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
+            hit->normal = ray.origin.to(hit->position).opposite_to(normal) ? normal : -normal;
 
             assert(hit->normal.is_unit());
         }
