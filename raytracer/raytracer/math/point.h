@@ -170,6 +170,11 @@ namespace math
             return !(*this == p);
         }
 
+        Vector<N> to(const Point<N>& p) const
+        {
+            return p - *this;
+        }
+
     private:
         std::array<double, N> m_coords;
     };
