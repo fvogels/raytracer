@@ -44,10 +44,10 @@ test_file 'primitives/cylinder/cylinder-along-x/is-x-cylinder-hit' do
         test_case do |data|
           data.ray_origin = "(#{x}, #{y}, 5)"
           data.ray_direction = "(0, 0, -1)"
-          data.expected_is_hit = if -1 < y and y < 1 then 'true' else 'false' end                                   
+          data.expected_is_hit = if -1 < y and y < 1 then 'true' else 'false' end
         end
       end
-    end    
+    end
   end
 end
 
@@ -100,7 +100,7 @@ test_file 'primitives/cylinder/cylinder-along-x/x-cylinder-t' do
           data.expected_t2 = 1 - z
         end
       end
-    end    
+    end
 
     [-7, 0, 3].each do |x|
       [-7, -3, 0, 2].each do |y|
@@ -111,7 +111,7 @@ test_file 'primitives/cylinder/cylinder-along-x/x-cylinder-t' do
           data.expected_t2 = 1 - y
         end
       end
-    end    
+    end
   end
 end
 
@@ -164,7 +164,7 @@ test_file 'primitives/cylinder/cylinder-along-x/x-cylinder-n' do
           data.expected_n2 = "(0, 0, -1)"
         end
       end
-    end    
+    end
 
     [-11, -7, 0, 3, 8].each do |x|
       [-0.99, -0.4, 0, 0.5, 0.99].each do |z|
@@ -175,6 +175,6 @@ test_file 'primitives/cylinder/cylinder-along-x/x-cylinder-n' do
           data.expected_n2 = "(0, 0, -1)"
         end
       end
-    end    
+    end
   end
 end
