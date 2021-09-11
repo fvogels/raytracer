@@ -36,7 +36,7 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV2::process_light_sour
 {
     Color result = colors::black();
 
-    for (auto light_ray : light_source->lightrays_to(hit.position))
+    for (auto& light_ray : light_source->lightrays_to(hit.position))
     {
         result += process_light_ray(scene, material_properties, hit, eye_ray, light_ray);
     }
