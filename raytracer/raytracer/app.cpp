@@ -93,7 +93,12 @@ void process_command_line_arguments(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    LOG(INFO) << "Build " << BUILD_NUMBER;
+#   ifdef NDEBUG
+    LOG(INFO) << "Release build (#" << BUILD_NUMBER << ")";
+#   else
+    LOG(INFO) << "Debug build (#" << BUILD_NUMBER << ")";
+#   endif
+
     TIMED_FUNC(timer);
 
     logging::configure();
