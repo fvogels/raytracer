@@ -11,7 +11,7 @@ using namespace raytracer::primitives;
 
 TEST_CASE("[Disk] Vertical ray hits disk", "[Disk]")
 {
-    auto disk = raytracer::primitives::disk();
+    auto disk = raytracer::primitives::xz_disk(1);
 
     for (double radius = 0; radius < 1; radius += 0.11)
     {
@@ -66,7 +66,7 @@ TEST_CASE("[Disk] Vertical ray hits disk", "[Disk]")
 
 TEST_CASE("[Disk] Vertical ray misses disk because hit with XZ plane is too far from center", "[Disk]")
 {
-    auto disk = raytracer::primitives::disk();
+    auto disk = raytracer::primitives::xz_disk(1);
 
     for (double radius = 1.01; radius < 100; radius *= 1.5)
     {
@@ -113,7 +113,7 @@ TEST_CASE("[Disk] Vertical ray misses disk because hit with XZ plane is too far 
 
 TEST_CASE("[Disk] Vertical rays miss disk because they point in the wrong direction", "[Disk]")
 {
-    auto disk = raytracer::primitives::disk();
+    auto disk = raytracer::primitives::xz_disk(1);
 
     for (double radius = 1.01; radius < 100; radius *= 1.5)
     {
@@ -160,7 +160,7 @@ TEST_CASE("[Disk] Vertical rays miss disk because they point in the wrong direct
 
 TEST_CASE("[Disk] Horizontal rays miss disk", "[Disk]")
 {
-    auto disk = raytracer::primitives::disk();
+    auto disk = raytracer::primitives::xz_disk(1);
     
     for (double x = -5; x < 5; x += 3.8)
     {
