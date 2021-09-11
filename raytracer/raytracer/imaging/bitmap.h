@@ -35,7 +35,7 @@ namespace imaging
         /// <summary>
         /// Move constructor.
         /// </summary>
-        Bitmap(Bitmap&&) = default;
+        Bitmap(Bitmap&&) noexcept = default;
 
         /// <summary>
         /// Checks if the given <paramref name="position" /> is inside the bitmap.
