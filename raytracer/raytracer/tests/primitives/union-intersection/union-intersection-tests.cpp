@@ -20,7 +20,7 @@ TEST_CASE("[Union][Intersection]", "[Union][Intersection]")
 
     std::vector<Primitive> primitives = { left_sphere, right_sphere };
     auto left_and_right_spheres = make_union(primitives);
-    auto sphere_intersection = intersection(middle_sphere, left_and_right_spheres);
+    auto sphere_intersection = csg_intersection(middle_sphere, left_and_right_spheres);
     Ray ray(ray_origin, ray_direction);
 
     auto hits = sphere_intersection->find_all_hits(ray);
