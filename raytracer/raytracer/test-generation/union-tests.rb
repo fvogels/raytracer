@@ -17,7 +17,7 @@ file_template = proc do
 
     #endif
   END
-end  
+end
 
 
 test_file 'primitives/union/union-hit-count' do
@@ -36,7 +36,7 @@ test_file 'primitives/union/union-hit-count' do
             auto sphere1 = translate( Vector3D#{center1}, sphere() );
             auto sphere2 = translate( Vector3D#{center2}, sphere() );
             std::vector<Primitive> primitives = { sphere1, sphere2 };
-            auto primitive = make_union( primitives );
+            auto primitive = csg_union( primitives );
             Ray ray(ray_origin, ray_direction);
 
             auto hits = primitive->find_all_hits(ray);
@@ -64,7 +64,7 @@ test_file 'primitives/union/union-hit-count' do
           [2.1, 5, 10].each do |delta_c|
             test_case do |data|
               c2 = c1 + delta_c
-              
+
               data.ray_origin = "(-100, #{y}, #{z})"
               data.ray_direction = "(1, 0, 0)"
               data.center1 = "(#{c1}, 0, 0)"

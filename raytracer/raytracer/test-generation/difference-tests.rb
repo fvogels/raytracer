@@ -30,7 +30,7 @@ test_file 'primitives/difference/difference' do
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
             auto ray = Ray(ray_origin, ray_direction);
-            auto primitive = difference(s1, s2);
+            auto primitive = csg_difference(s1, s2);
             auto hits = primitive->find_all_hits(ray);
 
             REQUIRE(hits.size() == 2);
@@ -45,7 +45,7 @@ test_file 'primitives/difference/difference' do
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
             auto ray = Ray(ray_origin, ray_direction);
-            auto primitive = difference(s1, s2);
+            auto primitive = csg_difference(s1, s2);
 
             Hit hit;
             REQUIRE(primitive->find_first_positive_hit(ray, &hit));
@@ -85,7 +85,7 @@ test_file 'primitives/difference/difference' do
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
             auto ray = Ray(ray_origin, ray_direction);
-            auto i = difference(s1, s2);
+            auto i = csg_difference(s1, s2);
             auto hits = i->find_all_hits(ray);
 
             REQUIRE(hits.size() == 0);
@@ -98,7 +98,7 @@ test_file 'primitives/difference/difference' do
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
             auto ray = Ray(ray_origin, ray_direction);
-            auto primitive = difference(s1, s2);
+            auto primitive = csg_difference(s1, s2);
 
             Hit hit;
             REQUIRE(!primitive->find_first_positive_hit(ray, &hit));
@@ -106,7 +106,7 @@ test_file 'primitives/difference/difference' do
       END
     end
 
-    
+
     test_case do |data|
       data.sphere1_pos = '(0,0,0)'
       data.sphere2_pos = '(0,0,0)'
@@ -120,8 +120,8 @@ test_file 'primitives/difference/difference' do
       data.ray_origin = '(0,0,5)'
       data.ray_direction = '(0,0,-1)'
     end
-    
+
   end
-  
-  
+
+
 end

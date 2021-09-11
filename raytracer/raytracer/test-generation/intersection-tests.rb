@@ -1,7 +1,7 @@
 require './shared.rb'
 
 
-test_file 'primitives/intersection' do
+test_file 'primitives/intersection/intersection' do
   template do
     <<-'END'
       #ifdef TEST_BUILD
@@ -29,7 +29,7 @@ test_file 'primitives/intersection' do
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
             auto ray = Ray(ray_origin, ray_direction);
-            auto i = intersection(s1, s2);
+            auto i = csg_intersection(s1, s2);
             auto hits = i->find_all_hits(ray);
 
             REQUIRE(hits.size() == 2);
@@ -82,7 +82,7 @@ test_file 'primitives/intersection' do
             Point3D ray_origin#{ray_origin};
             Vector3D ray_direction#{ray_direction};
             auto ray = Ray(ray_origin, ray_direction);
-            auto i = intersection(s1, s2);
+            auto i = csg_intersection(s1, s2);
             auto hits = i->find_all_hits(ray);
 
             REQUIRE(hits.size() == 0);
