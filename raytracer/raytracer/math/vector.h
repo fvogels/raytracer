@@ -335,11 +335,17 @@ namespace math
             return dot(v) == approx(0.0);
         }
 
+
         Vector<N> reflect_by(const Vector<N>& n) const
         {
             auto& v = *this;
 
             return v - 2 * v.dot(n) * n;
+        }
+
+        bool opposite_to(const Vector<N>& n) const
+        {
+            return dot(n) < 0;
         }
 
     private:
