@@ -261,7 +261,7 @@ namespace
 
         for (unsigned y = 0; y < bmp.height(); ++y)
         {
-            array<uint8_t> scanline = pixels.slice(y * scanline_size);
+            array<uint8_t> scanline = pixels.slice(size_t(y) * scanline_size);
 
             for (unsigned x = 0; x != bmp.width(); ++x)
             {
@@ -278,7 +278,7 @@ namespace
     {
         for (unsigned y = 0; y < bmp.height(); ++y)
         {
-            array<uint8_t> scanline = pixels.slice(y * bmp.width() * sizeof(ARGB));
+            array<uint8_t> scanline = pixels.slice(size_t(y) * bmp.width() * sizeof(ARGB));
 
             for (unsigned x = 0; x != bmp.width(); ++x)
             {
