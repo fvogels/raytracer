@@ -11,6 +11,11 @@
 #ifndef TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
 #define TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4244)
+#endif
+
 #define TWOBLUECUBES_CATCH_HPP_INCLUDED
 
 #ifdef __clang__
@@ -9421,6 +9426,10 @@ using Catch::Detail::Approx;
 #    endif
 #elif defined __GNUC__
 #    pragma GCC diagnostic pop
+#endif
+
+#ifdef _MSC_VER
+#pragma warning(pop)
 #endif
 
 #endif // TWOBLUECUBES_SINGLE_INCLUDE_CATCH_HPP_INCLUDED
