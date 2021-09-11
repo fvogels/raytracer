@@ -16,6 +16,12 @@
 
 #ifndef EASYLOGGINGPP_H
 #define EASYLOGGINGPP_H
+
+#ifdef _MSC_VER
+#pragma warning(push, 1)
+#pragma warning(disable: 26110)
+#endif
+
 // Compilers and C++0x/C++11 Evaluation
 #if __cplusplus >= 201103L
 #  define ELPP_CXX11 1
@@ -4573,4 +4579,9 @@ el::base::debug::CrashHandler elCrashHandler(ELPP_USE_DEF_CRASH_HANDLER);\
 #else
 #  define START_EASYLOGGINGPP(argc, argv) el::Helpers::setArgs(argc, argv)
 #endif  // defined(ELPP_UNICODE)
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif // EASYLOGGINGPP_H

@@ -7,6 +7,11 @@
 #ifndef CHAISCRIPT_WINDOWS_HPP_
 #define CHAISCRIPT_WINDOWS_HPP_
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4244 26495)
+#endif
+
 #include <string>
 
 #ifdef CHAISCRIPT_WINDOWS
@@ -129,5 +134,9 @@ namespace chaiscript
     };
   }
 }
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
 #endif 
 
