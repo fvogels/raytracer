@@ -61,33 +61,15 @@ namespace
 
         std::vector<std::shared_ptr<Hit>> find_all_hits(const Ray& ray) const override
         {
-            if (ray.direction.z() == 0)
+            std::vector<std::shared_ptr<Hit>> hits;
+            auto hit = std::make_shared<Hit>();
+
+            if (this->find_first_positive_hit(ray, &*hit))
             {
-                return std::vector<std::shared_ptr<Hit>>();
+                hits.push_back(hit);
             }
-            else
-            {
-                double t = -ray.origin.z() / ray.direction.z();
-                Point3D p = ray.at(t);
 
-                if (interval(-m_x_size / 2, m_x_size / 2).contains(p.x()) && interval(-m_y_size, m_y_size).contains(p.y()))
-                {
-                    auto hit = std::make_shared<Hit>();
-
-                    hit->t = t;
-                    hit->normal = Vector3D(0, 0, sign(ray.origin.y()));
-                    hit->position = p;
-                    hit->local_position.xyz = p;
-                    hit->local_position.uv = Point2D(p.x(), p.y());
-
-                    std::vector<std::shared_ptr<Hit>> hits = { hit };
-                    return hits;
-                }
-                else
-                {
-                    return std::vector<std::shared_ptr<Hit>>();
-                }
-            }
+            return hits;
         }
 
         math::Box bounding_box() const override
