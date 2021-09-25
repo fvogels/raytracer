@@ -24,7 +24,7 @@ namespace
 
     tasks::TaskScheduler create_scheduler(unsigned thread_count)
     {
-        return tasks::schedulers::equal_load_parallel(thread_count);
+        return tasks::schedulers::auto_paralellization();
     }
 
     struct RendererLibrary
