@@ -12,10 +12,10 @@ namespace
     /// <summary>
     /// Performs tasks in parallel.
     /// </summary>
-    class ParallelTaskScheduler : public tasks::schedulers::_private_::TaskSchedulerImplementation
+    class LoadBalancingParallelTaskScheduler : public tasks::schedulers::_private_::TaskSchedulerImplementation
     {
     public:
-        ParallelTaskScheduler(unsigned thread_count)
+        LoadBalancingParallelTaskScheduler(unsigned thread_count)
             : m_thread_count(thread_count)
         {
             // NOP
@@ -49,13 +49,13 @@ namespace
     };
 }
 
-TaskScheduler tasks::schedulers::parallel(unsigned thread_count)
+TaskScheduler tasks::schedulers::load_balancing_parallel(unsigned thread_count)
 {
     if (thread_count > 1)
     {
         LOG(INFO) << "Creating parallel scheduler with " << thread_count << " threads";
 
-        return TaskScheduler(std::make_shared<ParallelTaskScheduler>(thread_count));
+        return TaskScheduler(std::make_shared<LoadBalancingParallelTaskScheduler>(thread_count));
     }
     else
     {

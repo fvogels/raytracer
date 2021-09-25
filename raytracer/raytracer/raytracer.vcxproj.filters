@@ -405,7 +405,7 @@
     <ClCompile Include="tasks\serial-task-scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tasks\parallel-task-scheduler.cpp">
+    <ClCompile Include="tasks\load-balancing-parallel-task-scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tasks\lambda-task.cpp">
@@ -1394,7 +1394,7 @@
     <ClInclude Include="tasks\serial-task-scheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tasks\parallel-task-scheduler.h">
+    <ClInclude Include="tasks\load-balancing-parallel-task-scheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tasks\lambda-task.h">
