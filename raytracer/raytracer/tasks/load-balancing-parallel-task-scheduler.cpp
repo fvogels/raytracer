@@ -1,4 +1,4 @@
-#include "tasks/parallel-task-scheduler.h"
+#include "tasks/load-balancing-parallel-task-scheduler.h"
 #include "tasks/serial-task-scheduler.h"
 #include <thread>
 #include <atomic>
