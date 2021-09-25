@@ -514,6 +514,7 @@
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tasks\lambda-task.cpp" />
     <ClCompile Include="tasks\load-balancing-parallel-task-scheduler.cpp" />
+    <ClCompile Include="tasks\naive-parallel-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\animation\animation-tests.cpp" />
     <ClCompile Include="tests\cameras\camera-transformation-tests.cpp" />
@@ -857,6 +858,7 @@
     <ClInclude Include="math\transformation2d.h" />
     <ClInclude Include="tasks\lambda-task.h" />
     <ClInclude Include="tasks\load-balancing-parallel-task-scheduler.h" />
+    <ClInclude Include="tasks\naive-parallel-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
     <ClInclude Include="tasks\task-helpers.h" />
     <ClInclude Include="tasks\task-scheduler.h" />

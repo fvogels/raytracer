@@ -741,6 +741,9 @@
     <ClCompile Include="tasks\auto-parallelization-scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tasks\naive-parallel-scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1584,6 +1587,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tasks\auto-parallelization-scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\naive-parallel-scheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

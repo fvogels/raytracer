@@ -17,14 +17,14 @@ using namespace imaging;
 namespace
 {
 #   ifdef NDEBUG
-    const int DEFAULT_THREAD_COUNT = 4;
+    const int DEFAULT_THREAD_COUNT = 8;
 #   else
     const int DEFAULT_THREAD_COUNT = 1;
 #   endif
 
     tasks::TaskScheduler create_scheduler(unsigned thread_count)
     {
-        return tasks::schedulers::auto_paralellization();
+        return tasks::schedulers::naive_parallel();
     }
 
     struct RendererLibrary

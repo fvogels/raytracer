@@ -7,6 +7,6 @@ namespace tasks
 {
     namespace schedulers
     {
-        TaskScheduler auto_paralellization();
+        TaskScheduler naive_parallel();
     }
 }
