@@ -735,6 +735,9 @@
     <ClCompile Include="tests\raytracers\v1\raytracer-v1-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tasks\equal-load-parallel-scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1572,6 +1575,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="patterns\polar-pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\equal-load-parallel-scheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

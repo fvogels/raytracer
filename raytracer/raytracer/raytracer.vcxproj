@@ -347,6 +347,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cc" />
+    <ClCompile Include="tasks\equal-load-parallel-scheduler.cpp" />
     <ClCompile Include="patterns\flower-pattern.cpp" />
     <ClCompile Include="patterns\lambda-pattern.cpp" />
     <ClCompile Include="patterns\grid-pattern.cpp" />
@@ -610,6 +611,7 @@
     <ClInclude Include="chaiscript\math.hpp" />
     <ClInclude Include="chaiscript\utility\fnv1a.hpp" />
     <ClInclude Include="chaiscript\utility\static_string.hpp" />
+    <ClInclude Include="tasks\equal-load-parallel-scheduler.h" />
     <ClInclude Include="patterns\flower-pattern.h" />
     <ClInclude Include="patterns\grid-pattern.h" />
     <ClInclude Include="patterns\lambda-pattern.h" />

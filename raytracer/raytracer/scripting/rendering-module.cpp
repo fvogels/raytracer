@@ -17,23 +17,26 @@ using namespace imaging;
 namespace
 {
 #   ifdef NDEBUG
-    const int DEFAULT_THREAD_COUNT = 2;
+    const int DEFAULT_THREAD_COUNT = 4;
 #   else
     const int DEFAULT_THREAD_COUNT = 1;
 #   endif
+
+    tasks::TaskScheduler create_scheduler(unsigned thread_count)
+    {
+        return tasks::schedulers::equal_load_parallel(thread_count);
+    }
 
     struct RendererLibrary
     {
         Renderer standard(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer) const
         {
-            auto thread_count = DEFAULT_THREAD_COUNT;
-
-            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::load_balancing_parallel(thread_count));
+            return raytracer::renderers::standard(width, height, sampler, ray_tracer, create_scheduler(DEFAULT_THREAD_COUNT));
         }
 
         Renderer standard2(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned thread_count) const
         {
-            return raytracer::renderers::standard(width, height, sampler, ray_tracer, tasks::schedulers::load_balancing_parallel(thread_count));
+            return raytracer::renderers::standard(width, height, sampler, ray_tracer, create_scheduler(thread_count));
         }
 
         Renderer standard_by_map(const std::map<std::string, Boxed_Value>& argument_map) const

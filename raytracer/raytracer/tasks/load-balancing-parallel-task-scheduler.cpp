@@ -53,7 +53,7 @@ TaskScheduler tasks::schedulers::load_balancing_parallel(unsigned thread_count)
 {
     if (thread_count > 1)
     {
-        LOG(INFO) << "Creating parallel scheduler with " << thread_count << " threads";
+        LOG(INFO) << "Creating load balancing parallel scheduler with " << thread_count << " threads";
 
         return TaskScheduler(std::make_shared<LoadBalancingParallelTaskScheduler>(thread_count));
     }
