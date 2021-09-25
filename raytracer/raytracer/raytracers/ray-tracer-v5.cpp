@@ -27,6 +27,9 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV5::process_light_ray(
         auto mp = hit->material->at(hit->local_position);
 
         filter *= mp.light_filtering;
+
+        if (filter == colors::black())
+            break;
     }
 
     if (filter != colors::black())
