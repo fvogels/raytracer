@@ -1,4 +1,4 @@
-#include "tasks/equal-load-parallel-scheduler.h"
+#include "tasks/unbalanced-parallel-task-scheduler.h"
 #include "tasks/serial-task-scheduler.h"
 #include <thread>
 #include <atomic>
@@ -57,7 +57,7 @@ namespace
     };
 }
 
-TaskScheduler tasks::schedulers::equal_load_parallel(unsigned thread_count)
+TaskScheduler tasks::schedulers::unbalanced_parallel(unsigned thread_count)
 {
     if (thread_count > 1)
     {

@@ -1,4 +1,4 @@
-#include "tasks/load-balancing-parallel-task-scheduler.h"
+#include "tasks/balanced-parallel-task-scheduler.h"
 #include "tasks/serial-task-scheduler.h"
 #include <thread>
 #include <atomic>
@@ -49,7 +49,7 @@ namespace
     };
 }
 
-TaskScheduler tasks::schedulers::load_balancing_parallel(unsigned thread_count)
+TaskScheduler tasks::schedulers::balanced_parallel(unsigned thread_count)
 {
     if (thread_count > 1)
     {

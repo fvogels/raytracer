@@ -11,6 +11,6 @@ namespace tasks
         /// Creates a scheduler that performs tasks in parallel, spread
         /// over <paramref name="thread_count" /> threads.
         /// </summary>
-        TaskScheduler load_balancing_parallel(unsigned thread_count);
+        TaskScheduler balanced_parallel(unsigned thread_count);
     }
 }

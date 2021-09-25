@@ -17,14 +17,14 @@ using namespace imaging;
 namespace
 {
 #   ifdef NDEBUG
-    const int DEFAULT_THREAD_COUNT = 8;
+    const int DEFAULT_THREAD_COUNT = 4;
 #   else
     const int DEFAULT_THREAD_COUNT = 1;
 #   endif
 
     tasks::TaskScheduler create_scheduler(unsigned thread_count)
     {
-        return tasks::schedulers::naive_parallel();
+        return tasks::schedulers::balanced_parallel(thread_count);
     }
 
     struct RendererLibrary
@@ -54,7 +54,7 @@ namespace
 
         Renderer edge(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, double edge_thickness, const Color& stroke_color, const Color& background_color) const
         {
-            return raytracer::renderers::edge(width, height, sampler, ray_tracer, tasks::schedulers::load_balancing_parallel(DEFAULT_THREAD_COUNT), edge_thickness, stroke_color, background_color);
+            return raytracer::renderers::edge(width, height, sampler, ray_tracer, create_scheduler(DEFAULT_THREAD_COUNT), edge_thickness, stroke_color, background_color);
         }
 
         Renderer edge_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -74,7 +74,7 @@ namespace
 
         Renderer cartoon(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, unsigned shade_count) const
         {
-            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, tasks::schedulers::load_balancing_parallel(DEFAULT_THREAD_COUNT), shade_count);
+            return raytracer::renderers::cartoon(width, height, sampler, ray_tracer, create_scheduler(DEFAULT_THREAD_COUNT), shade_count);
         }
 
         Renderer cartoon_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
@@ -97,7 +97,7 @@ namespace
 
         Renderer split_depth(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at, unsigned thread_count) const
         {
-            return raytracer::renderers::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, tasks::schedulers::load_balancing_parallel(thread_count), split_thickness, eye, look_at);
+            return raytracer::renderers::split_depth(horizontal_resolution, vertical_resolution, sampler, ray_tracer, create_scheduler(thread_count), split_thickness, eye, look_at);
         }
 
         Renderer split_depth2(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, double split_thickness, const math::Point3D& eye, const math::Point3D& look_at) const
@@ -123,7 +123,7 @@ namespace
 
         Renderer distance(unsigned horizontal_resolution, unsigned vertical_resolution, raytracer::Sampler sampler, RayTracer ray_tracer, const math::Point3D& eye, double factor, double exponent) const
         {
-            return raytracer::renderers::distance(horizontal_resolution, vertical_resolution, sampler, ray_tracer, tasks::schedulers::load_balancing_parallel(DEFAULT_THREAD_COUNT), eye, factor, exponent);
+            return raytracer::renderers::distance(horizontal_resolution, vertical_resolution, sampler, ray_tracer, create_scheduler(DEFAULT_THREAD_COUNT), eye, factor, exponent);
         }
 
         Renderer distance_by_map(const std::map<std::string, Boxed_Value>& argument_map) const

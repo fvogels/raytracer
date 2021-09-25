@@ -1,5 +1,5 @@
 #include "tasks/serial-task-scheduler.h"
-#include "tasks/load-balancing-parallel-task-scheduler.h"
-#include "tasks/equal-load-parallel-scheduler.h"
+#include "tasks/balanced-parallel-task-scheduler.h"
+#include "tasks/unbalanced-parallel-task-scheduler.h"
 #include "tasks/auto-parallelization-scheduler.h"
 #include "tasks/naive-parallel-scheduler.h"

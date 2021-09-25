@@ -7,6 +7,6 @@ namespace tasks
 {
     namespace schedulers
     {
-        TaskScheduler equal_load_parallel(unsigned thread_count);
+        TaskScheduler unbalanced_parallel(unsigned thread_count);
     }
 }

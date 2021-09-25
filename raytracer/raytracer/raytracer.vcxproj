@@ -348,7 +348,7 @@
   <ItemGroup>
     <ClCompile Include="tasks\auto-parallelization-scheduler.cpp" />
     <ClCompile Include="easylogging++.cc" />
-    <ClCompile Include="tasks\equal-load-parallel-scheduler.cpp" />
+    <ClCompile Include="tasks\unbalanced-parallel-task-scheduler.cpp" />
     <ClCompile Include="patterns\flower-pattern.cpp" />
     <ClCompile Include="patterns\lambda-pattern.cpp" />
     <ClCompile Include="patterns\grid-pattern.cpp" />
@@ -513,7 +513,7 @@
     <ClCompile Include="animation\lissajous.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tasks\lambda-task.cpp" />
-    <ClCompile Include="tasks\load-balancing-parallel-task-scheduler.cpp" />
+    <ClCompile Include="tasks\balanced-parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\naive-parallel-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\animation\animation-tests.cpp" />
@@ -614,7 +614,7 @@
     <ClInclude Include="chaiscript\math.hpp" />
     <ClInclude Include="chaiscript\utility\fnv1a.hpp" />
     <ClInclude Include="chaiscript\utility\static_string.hpp" />
-    <ClInclude Include="tasks\equal-load-parallel-scheduler.h" />
+    <ClInclude Include="tasks\unbalanced-parallel-task-scheduler.h" />
     <ClInclude Include="patterns\flower-pattern.h" />
     <ClInclude Include="patterns\grid-pattern.h" />
     <ClInclude Include="patterns\lambda-pattern.h" />
@@ -857,7 +857,7 @@
     <ClInclude Include="animation\lissajous.h" />
     <ClInclude Include="math\transformation2d.h" />
     <ClInclude Include="tasks\lambda-task.h" />
-    <ClInclude Include="tasks\load-balancing-parallel-task-scheduler.h" />
+    <ClInclude Include="tasks\balanced-parallel-task-scheduler.h" />
     <ClInclude Include="tasks\naive-parallel-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
     <ClInclude Include="tasks\task-helpers.h" />
