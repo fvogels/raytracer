@@ -258,7 +258,8 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND_2D_3D(checkered);
     BIND(polka2d);
     BIND(polka3d);
-    BIND_2D_3D(dalmatian);
+    BIND(dalmatian2d);
+    BIND(dalmatian3d);
 
     BIND(flower);
     BIND(thin_flower);
