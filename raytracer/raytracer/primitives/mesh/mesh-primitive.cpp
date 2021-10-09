@@ -20,8 +20,16 @@ namespace
     private:
         std::vector<Point3D> m_vertices;
         std::stack<Primitive> m_stack;
+        unsigned m_triangle_count;
+        unsigned m_box_count;
 
     public:
+        Receiver()
+            : m_triangle_count(0)
+        {
+            // NOP
+        }
+
         virtual void vertex(double x, double y, double z)
         {
             Point3D vertex(x, y, z);
@@ -42,6 +50,7 @@ namespace
             auto triangle = raytracer::primitives::triangle(v1, v2, v3);
 
             m_stack.push(triangle);
+            ++m_triangle_count;
         }
 
         virtual void box(unsigned n_children)
@@ -60,6 +69,7 @@ namespace
             auto box = raytracer::primitives::bounding_box_accelerator(children_union);
 
             m_stack.push(box);
+            m_box_count++;
         }
 
         Primitive root() const
@@ -67,6 +77,16 @@ namespace
             CHECK(m_stack.size() == 1) << "Multiple children in stack";
 
             return m_stack.top();
+        }
+
+        unsigned triangle_count() const
+        {
+            return m_triangle_count;
+        }
+
+        unsigned box_count() const
+        {
+            return m_box_count;
         }
     };
 }
@@ -82,6 +102,8 @@ Primitive raytracer::primitives::mesh(const std::string& path)
 
         read_binary_mesh(input_stream, receiver);
 
+        LOG(INFO) << "Mesh contained " << receiver.triangle_count() << " triangles and " << receiver.box_count() << " boxes";
+
         return receiver.root();
     }
     else
@@ -91,6 +113,8 @@ Primitive raytracer::primitives::mesh(const std::string& path)
         Receiver receiver;
 
         read_text_mesh(input_stream, receiver);
+
+        LOG(INFO) << "Mesh contained " << receiver.triangle_count() << " triangles and " << receiver.box_count() << " boxes";
 
         return receiver.root();        
     }
