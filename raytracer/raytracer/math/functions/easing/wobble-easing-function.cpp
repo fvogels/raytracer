@@ -2,6 +2,7 @@
 #include "math/interval.h"
 #include "math/angle.h"
 #include <assert.h>
+#include "easylogging++.h"
 
 using namespace math;
 using namespace math::functions;
@@ -12,7 +13,7 @@ EasingFunction math::functions::easing::wobble(unsigned nwobbles, double wobble_
     std::function<double(double)> lambda = [=](double t) {
         assert(interval(0.0, 1.0).contains(t));
 
-        return t + wobble_amplitude * sin(360_degrees * nwobbles);
+        return t + wobble_amplitude * sin(360_degrees * nwobbles * t);
     };
 
     return from_lambda(lambda);
