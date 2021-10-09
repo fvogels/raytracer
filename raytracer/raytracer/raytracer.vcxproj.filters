@@ -744,6 +744,9 @@
     <ClCompile Include="tasks\naive-parallel-scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\functions\easing\wobble-easing-function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1590,6 +1593,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tasks\naive-parallel-scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\functions\easing\wobble-easing-function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

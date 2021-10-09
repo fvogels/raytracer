@@ -251,6 +251,11 @@ namespace
         {
             return math::functions::easing::elastic(count, absorption);
         }
+
+        EasingFunction wobble(unsigned nwobbles, double wobble_amplitude) const
+        {
+            return math::functions::easing::wobble(nwobbles, wobble_amplitude);
+        }
     };
 
     void add_easing(Module& module)
@@ -274,6 +279,7 @@ namespace
 
         BIND(bounce);
         BIND(elastic);
+        BIND(wobble);
 #       undef BIND
     }
 }

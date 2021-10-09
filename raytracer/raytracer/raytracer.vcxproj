@@ -346,6 +346,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="math\functions\easing\wobble-easing-function.cpp" />
     <ClCompile Include="tasks\auto-parallelization-scheduler.cpp" />
     <ClCompile Include="easylogging++.cc" />
     <ClCompile Include="tasks\unbalanced-parallel-task-scheduler.cpp" />
@@ -602,6 +603,7 @@
     <ClInclude Include="animation\ease-animation.h" />
     <ClInclude Include="animation\interval-animation.h" />
     <ClInclude Include="animation\time-stamp.h" />
+    <ClInclude Include="math\functions\easing\wobble-easing-function.h" />
     <ClInclude Include="tasks\auto-parallelization-scheduler.h" />
     <ClInclude Include="chaiscript\chaiscript_basic.hpp" />
     <ClInclude Include="chaiscript\dispatchkit\short_alloc.hpp" />
