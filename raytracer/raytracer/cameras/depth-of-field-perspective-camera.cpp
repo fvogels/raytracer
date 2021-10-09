@@ -52,11 +52,13 @@ Camera raytracer::cameras::depth_of_field_perspective(
 
     Matrix4x4 transformation = _private_::create_transformation(eye, look_at, up);
     Point3D canonical_look_at = Point3D(0, 0, math::distance(eye, look_at));
+    Vector3D canonical_up(0.0, 1.0, 0.0);
 
     std::vector<Camera> cameras;
     Rectangle2D eye_area(Point2D(-eye_size / 2, -eye_size / 2), Vector2D(eye_size, 0), Vector2D(0, eye_size));
-    eye_sampler->sample(eye_area, [&cameras, &canonical_look_at, distance, aspect_ratio](Point2D eye) {
-        cameras.push_back(perspective(Point3D(eye.x(), eye.y(), 0), canonical_look_at, Vector3D(0, 1, 0), distance, aspect_ratio));
+    eye_sampler->sample(eye_area, [&cameras, &canonical_look_at, &canonical_up, distance, aspect_ratio](Point2D eye_in_xy_plane) {
+        Point3D canonical_eye(eye_in_xy_plane.x(), eye_in_xy_plane.y(), 0);
+        cameras.push_back(perspective(canonical_eye, canonical_look_at, canonical_up, distance, aspect_ratio));
     });
 
     return Camera(std::make_shared<DepthOfFieldPerspectiveCamera>(transformation, cameras));
