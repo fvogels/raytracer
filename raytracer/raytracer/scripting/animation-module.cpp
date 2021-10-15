@@ -149,6 +149,11 @@ namespace
         return Duration::from_seconds(s);
     }
 
+    TimeStamp epoch()
+    {
+        return TimeStamp::zero();
+    }
+
     Animation<std::shared_ptr<Scene>> make_scene_animation(std::function<std::shared_ptr<Scene>(TimeStamp)> function, Duration duration)
     {
         return Animation<std::shared_ptr<Scene>>(from_lambda(function), duration);
@@ -195,6 +200,7 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
 
     module->add(fun(&redim_xyz_to_xyt<Vector3D>), "xyz_to_xyt");
     module->add(fun(&seconds), "seconds");
+    module->add(fun(&epoch), "epoch");
     module->add(fun([](TimeStamp t, Duration d) { return t + d; }), "+");
     module->add(fun([](TimeStamp t, Duration d) { return t - d; }), "-");
     module->add(fun([](Duration d, TimeStamp t) { return t + d; }), "+");
