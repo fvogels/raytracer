@@ -41,6 +41,11 @@ namespace
         return primitives::mesh(path);
     }
 
+    Primitive mesh_unique_groups(const std::string& path)
+    {
+        return primitives::mesh_unique_groups(path);
+    }
+
     Primitive coarse(Primitive primitive, double coarseness)
     {
         auto noise = math::functions::perlin<Vector3D, Point3D>(1, 1);
@@ -119,7 +124,8 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_HELPER_FUNCTION_AS(make_union, union);
     BIND_HELPER_FUNCTION_AS(csg_union, csg_union);
     BIND_DIRECTLY(decorate);
-    BIND_HELPER_FUNCTION_AS(mesh, mesh);
+    BIND_HELPER_FUNCTION(mesh);
+    BIND_HELPER_FUNCTION(mesh_unique_groups);
     BIND_DIRECTLY(center);
     BIND_DIRECTLY(group);
     BIND_DIRECTLY(csg_intersection);
