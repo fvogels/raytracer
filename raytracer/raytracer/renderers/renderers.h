@@ -5,3 +5,4 @@
 #include "renderers/split-depth-renderer.h"
 #include "renderers/masking-renderer.h"
 #include "renderers/distance-renderer.h"
+#include "renderers/group-renderer.h"
