@@ -60,7 +60,7 @@ namespace
             Bitmap& bitmap = *result;
             bitmap.clear(m_background_color);
 
-            LOG(DEBUG) << "Finding edges";
+            LOG(INFO) << "Finding edges";
 
             for_each_pixel([&](Position2D pixel_coordinates) {
                 Position2D bitmap_coordinates(pixel_coordinates.x, bitmap.height() - pixel_coordinates.y - 1);
