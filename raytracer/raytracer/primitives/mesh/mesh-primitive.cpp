@@ -22,10 +22,11 @@ namespace
         std::stack<Primitive> m_stack;
         unsigned m_triangle_count;
         unsigned m_box_count;
+        bool m_create_groups;
 
     public:
-        Receiver()
-            : m_triangle_count(0)
+        Receiver(bool create_groups = false)
+            : m_triangle_count(0), m_create_groups(create_groups)
         {
             // NOP
         }
@@ -48,6 +49,11 @@ namespace
             const auto& v2 = m_vertices[vertex2];
             const auto& v3 = m_vertices[vertex3];
             auto triangle = raytracer::primitives::triangle(v1, v2, v3);
+
+            if (m_create_groups)
+            {
+                triangle = group(m_triangle_count, triangle);
+            }
 
             m_stack.push(triangle);
             ++m_triangle_count;
@@ -89,33 +95,43 @@ namespace
             return m_box_count;
         }
     };
+
+    Primitive create_mesh_primitive(const std::string& path, bool create_groups)
+    {
+        if (ends_with(path, ".bmesh"))
+        {
+            std::ifstream input_stream(path, std::ios::binary);
+            CHECK(input_stream) << "Could not open " << path;
+            Receiver receiver(create_groups);
+
+            read_binary_mesh(input_stream, receiver);
+
+            LOG(INFO) << "Mesh contained " << receiver.triangle_count() << " triangles and " << receiver.box_count() << " boxes";
+
+            return receiver.root();
+        }
+        else
+        {
+            std::ifstream input_stream(path);
+            CHECK(input_stream) << "Could not open " << path;
+            Receiver receiver(create_groups);
+
+            read_text_mesh(input_stream, receiver);
+
+            LOG(INFO) << "Mesh contained " << receiver.triangle_count() << " triangles and " << receiver.box_count() << " boxes";
+
+            return receiver.root();
+        }
+    }
 }
 
 
 Primitive raytracer::primitives::mesh(const std::string& path)
 {
-    if (ends_with(path, ".bmesh"))
-    {
-        std::ifstream input_stream(path, std::ios::binary);
-        CHECK(input_stream) << "Could not open " << path;
-        Receiver receiver;
+    return create_mesh_primitive(path, false);
+}
 
-        read_binary_mesh(input_stream, receiver);
-
-        LOG(INFO) << "Mesh contained " << receiver.triangle_count() << " triangles and " << receiver.box_count() << " boxes";
-
-        return receiver.root();
-    }
-    else
-    {
-        std::ifstream input_stream(path);
-        CHECK(input_stream) << "Could not open " << path;
-        Receiver receiver;
-
-        read_text_mesh(input_stream, receiver);
-
-        LOG(INFO) << "Mesh contained " << receiver.triangle_count() << " triangles and " << receiver.box_count() << " boxes";
-
-        return receiver.root();        
-    }
+Primitive raytracer::primitives::mesh_unique_groups(const std::string& path)
+{
+    return create_mesh_primitive(path, true);
 }
