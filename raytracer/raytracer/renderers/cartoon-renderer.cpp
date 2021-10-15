@@ -36,7 +36,6 @@ namespace
             Bitmap& bitmap = *result;
             Rectangle2D window(Point2D(0, 1), Vector2D(1, 0), Vector2D(0, -1));
             Rasterizer window_rasterizer(window, bitmap.width(), bitmap.height());
-            data::Grid<std::vector<std::pair<unsigned, Point2D>>> group_grid(m_horizontal_size, m_vertical_size);
 
             for_each_pixel([&](Position2D pixel_coordinates) {
                 math::Rectangle2D pixel_rectangle = window_rasterizer[pixel_coordinates];
@@ -46,15 +45,14 @@ namespace
                 m_sampler->sample(pixel_rectangle, [&](const Point2D& p) {
                     scene.camera->enumerate_rays(p, [&](const Ray& ray) {
                         TraceResult tr = m_ray_tracer->trace(scene, ray);
-                        group_grid[pixel_coordinates].push_back(std::make_pair(tr.group_id, p));
-                        c += tr.color.quantized(m_shade_count);
+                        c += tr.color;
                         ++sample_count;
                     });
                 });
 
                 c /= sample_count;
 
-                bitmap[pixel_coordinates] = c;
+                bitmap[pixel_coordinates] = c.quantized(m_shade_count);
             });
 
             return result;
