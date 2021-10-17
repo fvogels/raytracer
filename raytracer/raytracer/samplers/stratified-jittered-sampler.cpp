@@ -8,10 +8,10 @@ using namespace raytracer;
 
 namespace
 {
-    class StratiefiedJitteredSampler : public raytracer::samplers::_private_::SamplerImplementation
+    class StratifiedJitteredSampler : public raytracer::samplers::_private_::SamplerImplementation
     {
     public:
-        StratiefiedJitteredSampler(unsigned rows, unsigned columns)
+        StratifiedJitteredSampler(unsigned rows, unsigned columns)
             : m_rows(rows), m_columns(columns), m_distribution(0.25, 0.75)
         {
             // NOP
@@ -46,5 +46,5 @@ namespace
 
 Sampler raytracer::samplers::stratified_jittered(unsigned rows, unsigned columns)
 {
-    return Sampler(std::make_shared<StratiefiedJitteredSampler>(rows, columns));
+    return Sampler(std::make_shared<StratifiedJitteredSampler>(rows, columns));
 }
