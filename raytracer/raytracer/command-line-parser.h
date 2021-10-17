@@ -11,6 +11,9 @@ class CommandLineParser
 public:
     void register_processor(const std::string& prefix, std::function<void()> processor);
     void register_processor(const std::string& prefix, std::function<void(const std::string&)> processor);
+
+    // Not for students
+    void register_processor(const std::string& prefix, std::function<void(const std::string&, const std::string&)> processor);
     
     void process(int argc, char** argv) const;
 

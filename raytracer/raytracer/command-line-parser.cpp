@@ -17,15 +17,30 @@ void CommandLineParser::register_processor(const std::string& prefix, std::funct
 void CommandLineParser::register_processor(const std::string& prefix, std::function<void(const std::string&)> processor)
 {
     std::function<void(std::list<std::string>&)> wrapper = [prefix, processor](std::list<std::string>& arguments) -> void {
-        if (arguments.empty())
-        {
-            LOG(ERROR) << "Command line argument " << prefix << " expects an argument";
-            abort();
-        }
+        CHECK(!arguments.empty()) << "Command line argument " << prefix << " expects an argument";
+
         auto head = arguments.front();
         arguments.pop_front();
 
         processor(head);
+    };
+
+    register_processor(prefix, wrapper);
+}
+
+// Not for students
+void CommandLineParser::register_processor(const std::string& prefix, std::function<void(const std::string&, const std::string&)> processor)
+{
+    std::function<void(std::list<std::string>&)> wrapper = [prefix, processor](std::list<std::string>& arguments) -> void {
+        CHECK(arguments.size() < 2) << "Command line argument " << prefix << " expects two arguments";
+
+        auto first = arguments.front();
+        arguments.pop_front();
+
+        auto second = arguments.front();
+        arguments.pop_front();
+
+        processor(first, second);
     };
 
     register_processor(prefix, wrapper);

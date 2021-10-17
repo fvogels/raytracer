@@ -9,12 +9,16 @@
 #include "scripting/scripting.h"
 #include "performance/performance.h"
 #include <assert.h>
+#include <string>
+#include <map>
 
 using namespace raytracer;
 
 
 namespace
 {
+    std::map<std::string, std::string> constants;
+
     void render_script(const std::string& filename)
     {
         TIMED_SCOPE(timer, "Rendering script");
@@ -28,7 +32,7 @@ namespace
         {
             LOG(INFO) << "Rendering " << filename;
 
-            raytracer::scripting::run_script(filename);
+            raytracer::scripting::run_script(filename, constants);
         }
         else
         {
@@ -43,8 +47,13 @@ namespace
                 script += line + "\n";
             }
 
-            raytracer::scripting::run(script);
+            raytracer::scripting::run(script, constants);
         }
+    }
+
+    void define_constant(const std::string& name, const std::string& value)
+    {
+        constants[name] = value;
     }
 
     void quiet()
@@ -85,6 +94,7 @@ void process_command_line_arguments(int argc, char** argv)
     parser.register_processor("--beep", emit_beep);
     parser.register_processor("--statistics", print_statistics);
     parser.register_processor("--studio", enable_3dstudio_output);
+    parser.register_processor("--define", define_constant);
 
     parser.process(argc, argv);
 

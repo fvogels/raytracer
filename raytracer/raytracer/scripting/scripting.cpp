@@ -50,11 +50,23 @@ namespace raytracer
 
 namespace
 {
-    std::shared_ptr<ChaiScript> initialize_chai()
+    void add_constants(chaiscript::ChaiScript& chai, const std::map<std::string, std::string>& constants)
+    {
+        for (const auto& pair : constants)
+        {
+            const auto& identifier = pair.first;
+            const auto& value = pair.second;
+
+            chai.add_global_const(chaiscript::const_var(value), identifier);
+        }
+    }
+
+    std::shared_ptr<ChaiScript> initialize_chai(const std::map<std::string, std::string>& constants)
     {
         auto chai = std::make_shared<ChaiScript>();
 
         create_modules(*chai);
+        add_constants(*chai, constants);
 
         return chai;
     }
@@ -85,9 +97,9 @@ namespace
 }
 
 
-void raytracer::scripting::run_script(const std::string& path)
+void raytracer::scripting::run_script(const std::string& path, const std::map<std::string, std::string>& constants)
 {
-    auto chai = initialize_chai();
+    auto chai = initialize_chai(constants);
 
     if (!file_exists(path))
     {
@@ -106,9 +118,9 @@ void raytracer::scripting::run_script(const std::string& path)
     }
 }
 
-void raytracer::scripting::run(const std::string& source)
+void raytracer::scripting::run(const std::string& source, const std::map<std::string, std::string>& constants)
 {
-    auto chai = initialize_chai();
+    auto chai = initialize_chai(constants);
 
     try
     {
