@@ -12,21 +12,22 @@ namespace
     {
     public:
         StratiefiedJitteredSampler(unsigned rows, unsigned columns)
-            : m_rows(rows), m_columns(columns) { }
+            : m_rows(rows), m_columns(columns), m_distribution(0.25, 0.75)
+        {
+            // NOP
+        }
 
         void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override
         {
             Rasterizer raster(rectangle, this->m_columns, this->m_rows);
-            std::default_random_engine generator;
-            std::uniform_real_distribution<double> distribution(0, 1);
 
             for (unsigned y = 0; y != this->m_rows; ++y)
             {
                 for (unsigned x = 0; x != this->m_columns; ++x)
                 {
                     auto subrectangle = raster[Position2D(x, y)];
-                    double rx = distribution(generator);
-                    double ry = distribution(generator);
+                    double rx = m_distribution(m_generator);
+                    double ry = m_distribution(m_generator);
                     Point2D p = subrectangle.from_relative(Point2D(rx, ry));
 
                     function(p);
@@ -36,6 +37,10 @@ namespace
 
     private:
         unsigned m_rows, m_columns;
+
+        mutable std::default_random_engine m_generator;
+
+        std::uniform_real_distribution<double> m_distribution;
     };
 }
 

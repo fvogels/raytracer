@@ -12,17 +12,17 @@ namespace
     {
     public:
         RandomSampler(unsigned sample_count)
-            : m_sample_count(sample_count) { }
+            : m_sample_count(sample_count), m_distribution(0, 1)
+        {
+            // NOP
+        }
 
         void sample(const math::Rectangle2D& rectangle, std::function<void(const math::Point2D&)> function) const override
         {
-            std::default_random_engine generator;
-            std::uniform_real_distribution<double> distribution(0, 1);
-
             for (unsigned i = 0; i != m_sample_count; ++i)
             {
-                double x = distribution(generator);
-                double y = distribution(generator);
+                double x = m_distribution(generator);
+                double y = m_distribution(generator);
                 Point2D sample = rectangle.from_relative(Point2D(x, y));
 
                 function(sample);
@@ -31,6 +31,10 @@ namespace
 
     private:
         unsigned m_sample_count;
+
+        mutable std::default_random_engine generator;
+
+        std::uniform_real_distribution<double> m_distribution;
     };
 }
 
