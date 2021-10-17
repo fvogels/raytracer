@@ -72,6 +72,25 @@ namespace
             return edge(width, height, sampler, ray_tracer, stroke_thickness, stroke_color, background_color);
         }
 
+        Renderer simple_edge(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, const Color& stroke_color, const Color& background_color) const
+        {
+            return raytracer::renderers::simple_edge(width, height, sampler, ray_tracer, create_scheduler(DEFAULT_THREAD_COUNT), stroke_color, background_color);
+        }
+
+        Renderer simple_edge_by_map(const std::map<std::string, Boxed_Value>& argument_map) const
+        {
+            START_ARGUMENTS(argument_map);
+            ARGUMENT(unsigned, width);
+            ARGUMENT(unsigned, height);
+            ARGUMENT(Sampler, sampler);
+            ARGUMENT(RayTracer, ray_tracer);
+            ARGUMENT(Color, stroke_color);
+            ARGUMENT(Color, background_color);
+            END_ARGUMENTS();
+
+            return simple_edge(width, height, sampler, ray_tracer, stroke_color, background_color);
+        }
+
         Renderer group(unsigned width, unsigned height, Sampler sampler, RayTracer ray_tracer, const Color& background_color) const
         {
             return raytracer::renderers::group(width, height, sampler, ray_tracer, create_scheduler(DEFAULT_THREAD_COUNT), background_color);
@@ -176,6 +195,8 @@ ModulePtr raytracer::scripting::_private_::create_rendering_module()
     BIND_AS(standard_by_map, standard);
     BIND_AS(edge, edge);
     BIND_AS(edge_by_map, edge);
+    BIND_AS(simple_edge, simple_edge);
+    BIND_AS(simple_edge_by_map, simple_edge);
     BIND_AS(group, group);
     BIND_AS(group_by_map, group);
     BIND_AS(cartoon, cartoon);

@@ -6,3 +6,4 @@
 #include "renderers/masking-renderer.h"
 #include "renderers/distance-renderer.h"
 #include "renderers/group-renderer.h"
+#include "renderers/simple-edge-renderer.h"
