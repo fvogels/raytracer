@@ -17,6 +17,7 @@ halfjittered(3,3)
 multijittered(1)
 multijittered(2)
 multijittered(3)
+multijittered(5)
 END
 
 

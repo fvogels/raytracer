@@ -16,3 +16,4 @@ cat test.chai | sed 's/SAMPLER/halfjittered(3,3)/' | /g/repos/ucll/3dcg/raytrace
 cat test.chai | sed 's/SAMPLER/multijittered(1)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > multijittered1.wif
 cat test.chai | sed 's/SAMPLER/multijittered(2)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > multijittered2.wif
 cat test.chai | sed 's/SAMPLER/multijittered(3)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > multijittered3.wif
+cat test.chai | sed 's/SAMPLER/multijittered(5)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > multijittered5.wif
