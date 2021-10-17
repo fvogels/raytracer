@@ -17,8 +17,10 @@ def measure_distance(rgb1, rgb2):
     return sum(distance(c1, c2) for c1, c2 in zip(rgb1, rgb2))
 
 
-files = [filename for filename in os.listdir('.') if filename.endswith('.wif')][4:]
-reference = read_rgb('multijittered5.wif')
+files = [filename for filename in os.listdir('.') if filename.endswith('.wif')]
+# reference_filename = 'multijittered5.wif'
+reference_filename = 'random25.wif'
+reference = read_rgb(reference_filename)
 
 
 metrics = [measure_distance(reference, read_rgb(file)) for file in files]

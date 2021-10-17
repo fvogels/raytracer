@@ -1,6 +1,7 @@
 cat test.chai | sed 's/SAMPLER/random(1)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > random1.wif
 cat test.chai | sed 's/SAMPLER/random(2)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > random2.wif
 cat test.chai | sed 's/SAMPLER/random(3)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > random3.wif
+cat test.chai | sed 's/SAMPLER/random(25)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > random25.wif
 cat test.chai | sed 's/SAMPLER/nrooks(1)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > nrooks1.wif
 cat test.chai | sed 's/SAMPLER/nrooks(2)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > nrooks2.wif
 cat test.chai | sed 's/SAMPLER/nrooks(3)/' | /g/repos/ucll/3dcg/raytracer/raytracer/x64/Release/raytracer.exe -s - > nrooks3.wif
