@@ -100,7 +100,7 @@ namespace math
 
         bool close_enough(const Angle& other) const
         {
-            return (value.radians() - other.radians()) < epsilon;
+            return fmod(value.radians() - other.radians(), 2 * 3.141592653589793238) < epsilon;
         }
     };
 
