@@ -525,10 +525,28 @@
     <ClCompile Include="patterns\polar-pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tasks\unbalanced-parallel-task-scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\auto-parallelization-scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\naive-parallel-scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\functions\easing\wobble-easing-function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\group-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderers\simple-edge-renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="tests\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\primitives\union\generated-union-hit-count-tests.cpp">
+    <ClCompile Include="tests\math\coordinate-system-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\animation\animation-tests.cpp">
@@ -604,9 +622,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\math\matrix\generated-translation3d-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\math\coordinate-system-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\math\generated-interval-tests.cpp">
@@ -729,28 +744,16 @@
     <ClCompile Include="tests\primitives\triangle\triangle-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\primitives\union\generated-union-hit-count-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\raytracers\v1\raytracer-v1-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tasks\unbalanced-parallel-task-scheduler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tasks\auto-parallelization-scheduler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tasks\naive-parallel-scheduler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="math\functions\easing\wobble-easing-function.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderers\group-renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderers\simple-edge-renderer.cpp">
+    <ClCompile Include="tests\util\generated-base64-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

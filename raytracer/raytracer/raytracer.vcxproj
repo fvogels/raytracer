@@ -589,6 +589,7 @@
     <ClCompile Include="tests\primitives\union-intersection\union-intersection-tests.cpp" />
     <ClCompile Include="tests\primitives\union\generated-union-hit-count-tests.cpp" />
     <ClCompile Include="tests\raytracers\v1\raytracer-v1-tests.cpp" />
+    <ClCompile Include="tests\util\generated-base64-tests.cpp" />
     <ClCompile Include="util\base64.cpp" />
     <ClCompile Include="util\beep.cpp" />
     <ClCompile Include="util\misc.cpp" />

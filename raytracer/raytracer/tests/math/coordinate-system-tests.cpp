@@ -67,8 +67,31 @@ using namespace math;
         }\
         SECTION("CylindricalY to Cartesian") \
         { \
-            CylindricalY spherical{ RADIUS, AZIMUTH, CY }; \
-            auto cartesian = convert_coordinates<Cartesian3D>(spherical); \
+            CylindricalY cylindrical{ RADIUS, AZIMUTH, CY }; \
+            auto cartesian = convert_coordinates<Cartesian3D>(cylindrical); \
+            \
+            CHECK(cartesian.x == Approx(X)); \
+            CHECK(cartesian.y == Approx(Y)); \
+            CHECK(cartesian.z == Approx(Z)); \
+        } \
+    }
+
+#define TEST_CARTESIAN3D_CYLINDRICALZ(X,Y,Z,RADIUS,AZIMUTH,CZ) \
+    TEST_CASE("[CoordinateSystems] Conversion between Cartesian (" #X ", " #Y ", " #Z ") to CylindricalZ (" #RADIUS ", " #AZIMUTH ", " #CZ ")", "[CoordinateSystems]" ) \
+    { \
+        SECTION("Cartesian to CylindricalZ") \
+        { \
+            Cartesian3D xyz{ X, Y, Z }; \
+            auto cylindrical = convert_coordinates<CylindricalZ>(xyz); \
+            \
+            CHECK(cylindrical.radius == Approx(RADIUS)); \
+            CHECK(cylindrical.azimuth == approx(AZIMUTH)); \
+            CHECK(cylindrical.z == Approx(CZ)); \
+        }\
+        SECTION("CylindricalZ to Cartesian") \
+        { \
+            CylindricalZ cylindrical{ RADIUS, AZIMUTH, CZ }; \
+            auto cartesian = convert_coordinates<Cartesian3D>(cylindrical); \
             \
             CHECK(cartesian.x == Approx(X)); \
             CHECK(cartesian.y == Approx(Y)); \
@@ -111,6 +134,14 @@ TEST_CARTESIAN3D_CYLINDRICALY(0, 0, 1, 1, -90_degrees, 0)
 TEST_CARTESIAN3D_CYLINDRICALY(0, 0, 2, 2, -90_degrees, 0)
 TEST_CARTESIAN3D_CYLINDRICALY(-1, 0, 0.00000001, 1, -180_degrees, 0)
 TEST_CARTESIAN3D_CYLINDRICALY(-1, 0, -0.00000001, 1, 180_degrees, 0)
+
+TEST_CARTESIAN3D_CYLINDRICALZ(0, 0, 0, 0, 0_degrees, 0)
+TEST_CARTESIAN3D_CYLINDRICALZ(0, 0, 1, 0, 0_degrees, 1)
+TEST_CARTESIAN3D_CYLINDRICALZ(1, 0, 0, 1, 0_degrees, 0)
+TEST_CARTESIAN3D_CYLINDRICALZ(0, 1, 0, 1, 90_degrees, 0)
+TEST_CARTESIAN3D_CYLINDRICALZ(-1, 0, 0, 1, 180_degrees, 0)
+TEST_CARTESIAN3D_CYLINDRICALZ(0, -1, 0, 1, 270_degrees, 0)
+TEST_CARTESIAN3D_CYLINDRICALZ(2, 0, 0, 2, 0_degrees, 0)
 
 TEST_TO_AND_FROM_3D(Cartesian3D)
 TEST_TO_AND_FROM_3D(Spherical)
