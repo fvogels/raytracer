@@ -756,6 +756,9 @@
     <ClCompile Include="tests\util\generated-base64-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="patterns\constant-pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imaging\bitmap.h">
@@ -1611,6 +1614,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderers\simple-edge-renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\constant-pattern.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
