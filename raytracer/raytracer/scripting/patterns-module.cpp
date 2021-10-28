@@ -143,6 +143,16 @@ namespace
             return patterns::mirror_y(pattern);
         }
 
+        Pattern2D constant2d(bool constant) const
+        {
+            return patterns::constant2d(constant);
+        }
+
+        Pattern3D constant3d(bool constant) const
+        {
+            return patterns::constant3d(constant);
+        }
+
         Pattern2D spiral(const std::map<std::string, Boxed_Value>& argument_map) const
         {
             START_ARGUMENTS(argument_map);
@@ -267,6 +277,9 @@ ModulePtr raytracer::scripting::_private_::create_pattern_module()
     BIND(mirror);
     BIND(mirror_x);
     BIND(mirror_y);
+
+    BIND(constant2d);
+    BIND(constant3d);
 
     BIND(spiral);
 #   undef BIND_AS

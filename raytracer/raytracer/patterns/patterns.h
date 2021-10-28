@@ -10,3 +10,4 @@
 #include "patterns/split-pattern.h"
 #include "patterns/mirror-pattern.h"
 #include "patterns/spiral-pattern.h"
+#include "patterns/constant-pattern.h"
