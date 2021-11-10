@@ -70,6 +70,17 @@ namespace
 
         return primitives::crop_by_box(primitive, box);
     }
+
+    Primitive smooth_triangle_vvvnnn(const math::Point3D& a, const math::Point3D& b, const math::Point3D& c, const math::Vector3D& na, const math::Vector3D& nb, const math::Vector3D& nc)
+    {
+        return primitives::smooth_triangle(a, b, c, na, nb, nc);
+    }
+
+    Primitive smooth_triangle_vnvnvn(const math::Point3D& a, const math::Vector3D& na, const math::Point3D& b, const math::Vector3D& nb, const math::Point3D& c, const math::Vector3D& nc)
+    {
+        return primitives::smooth_triangle(a, b, c, na, nb, nc);
+    }
+
 }
 
 ModulePtr raytracer::scripting::_private_::create_primitives_module()
@@ -98,6 +109,8 @@ ModulePtr raytracer::scripting::_private_::create_primitives_module()
     BIND_DIRECTLY(cone_along_y);
     BIND_DIRECTLY(cone_along_z);
     BIND_DIRECTLY(triangle);
+    BIND_HELPER_FUNCTION_AS(smooth_triangle_vvvnnn, smooth_triangle);
+    BIND_HELPER_FUNCTION_AS(smooth_triangle_vnvnvn, smooth_triangle);
     BIND_DIRECTLY(xy_disk);
     BIND_DIRECTLY(xz_disk);
     BIND_DIRECTLY(yz_disk);
