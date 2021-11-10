@@ -76,7 +76,7 @@ namespace
                         hit->position = P;
                         hit->local_position.xyz = P;
                         hit->local_position.uv = Point2D(alpha, beta);
-                        hit->normal = ray.direction.dot(normal) < 0 ? normal : -normal;
+                        hit->normal = cos_of_angle_between(ray.direction, normal) < 0 ? normal : -normal;
 
                         INCREMENT_PERFORMANCE_COUNTER(hit_count);
 
