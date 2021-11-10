@@ -37,6 +37,12 @@ namespace imaging
             : r(r), g(g), b(b) { }
 
         /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        Color(const Color& color)
+            : r(color.r), g(color.g), b(color.b) { }
+
+        /// <summary>
         /// Ensures all color components (r, g, b) are within the [0, 1] interval.
         /// If a color component is less than zero, it is set to zero.
         /// If a color component is greater than one, it is set to one.
