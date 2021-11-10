@@ -38,7 +38,7 @@ namespace
                 Point3D p = ray.at(t);
                 double r = distance(Point3D(0, 0, 0), p);
 
-                if (r < 1 && interval(0.0, hit->t).contains(t))
+                if (r < m_radius && interval(0.0, hit->t).contains(t))
                 {
                     hit->t = t;
                     hit->normal = Vector3D(0, sign(ray.origin.y()), 0);
