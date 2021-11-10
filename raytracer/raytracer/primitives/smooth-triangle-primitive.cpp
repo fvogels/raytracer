@@ -26,89 +26,80 @@ namespace
 
         bool find_first_positive_hit(const math::Ray& ray, Hit* hit) const override
         {
-            if (ray.direction.dot(m_normal) > 0)
-            {
-                return false;
-            }
-            else
-            {
-                const Vector3D& normal = m_normal;
-                double denom = normal.dot(ray.direction);
+            double denom = m_normal.dot(ray.direction);
 
-                if (denom == approx(0.0))
-                {
-                    return false;
-                }
-                else
-                {
-                    double numer = (m_a - ray.origin).dot(normal);
-                    double t = numer / denom;
+            if (denom != approx(0.0))
+            {
+                double numer = (m_a - ray.origin).dot(m_normal);
+                double t = numer / denom;
 
-                    if (0 < t && t < hit->t)
+                if (0 < t && t < hit->t)
+                {
+                    const Point3D& A = m_a;
+                    const Point3D& B = m_b;
+                    const Point3D& C = m_c;
+                    Point3D P = ray.at(t);
+
+                    Vector3D AB = B - A;
+                    Vector3D AC = C - A;
+                    Vector3D AP = P - A;
+                    Vector3D BC = C - B;
+                    Vector3D BP = P - B;
+                    Vector3D CA = A - C;
+                    Vector3D CP = P - C;
+
+                    Vector3D ABxAC = AB.cross(AC);
+                    Vector3D ABxAP = AB.cross(AP);
+                    Vector3D CAxCP = CA.cross(CP);
+                    Vector3D BCxBP = BC.cross(BP);
+
+                    double area_ABC = ABxAC.norm() / 2;
+                    double area_ABP = ABxAP.norm() / 2;
+                    double area_BCP = BCxBP.norm() / 2;
+
+                    bool p_is_left_of_ab = ABxAP.dot(m_normal) > 0;
+                    bool p_is_left_of_bc = BCxBP.dot(m_normal) > 0;
+                    bool p_is_left_of_ca = CAxCP.dot(m_normal) > 0;
+
+                    if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
                     {
-                        const Point3D& A = m_a;
-                        const Point3D& B = m_b;
-                        const Point3D& C = m_c;
-                        Point3D P = ray.at(t);
-
-                        Vector3D AB = B - A;
-                        Vector3D AC = C - A;
-                        Vector3D AP = P - A;
-                        Vector3D BC = C - B;
-                        Vector3D BP = P - B;
-                        Vector3D CA = A - C;
-                        Vector3D CP = P - C;
-
-                        Vector3D ABxAC = AB.cross(AC);
-                        Vector3D ABxAP = AB.cross(AP);
-                        Vector3D CAxCP = CA.cross(CP);
-                        Vector3D BCxBP = BC.cross(BP);
-
-                        double area_ABC = ABxAC.norm() / 2;
-                        double area_ABP = ABxAP.norm() / 2;
-                        double area_BCP = BCxBP.norm() / 2;
-
-                        bool p_is_left_of_ab = ABxAP.dot(normal) > 0;
-                        bool p_is_left_of_bc = BCxBP.dot(normal) > 0;
-                        bool p_is_left_of_ca = CAxCP.dot(normal) > 0;
-
                         double gamma = area_ABP / area_ABC;
                         double alpha = area_BCP / area_ABC;
                         double beta = 1 - alpha - gamma;
 
-                        if (p_is_left_of_ab && p_is_left_of_bc && p_is_left_of_ca)
-                        {
-                            assert(alpha + beta + gamma == approx(1.0));
-                            assert(alpha * (A - Point3D(0, 0, 0)) + beta * (B - Point3D(0, 0, 0)) + gamma * (C - Point3D(0, 0, 0)) == approx(P - Point3D(0, 0, 0)));
-                            assert(0 <= alpha);
-                            assert(0 <= beta);
-                            assert(0 <= gamma);
+                        assert(alpha + beta + gamma == approx(1.0));
+                        assert(0 <= alpha && alpha <= 1);
+                        assert(0 <= beta && beta <= 1);
+                        assert(0 <= gamma && gamma<= 1);
 
-                            hit->t = t;
-                            hit->position = P;
-                            hit->local_position.xyz = P;
-                            hit->local_position.uv = Point2D(alpha, beta);
-                            hit->normal = (alpha * m_na + beta * m_nb + gamma * m_nc).normalized();
+                        auto normal = (alpha * m_na + beta * m_nb + gamma * m_nc).normalized();
 
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
+                        hit->t = t;
+                        hit->position = P;
+                        hit->local_position.xyz = P;
+                        hit->local_position.uv = Point2D(alpha, beta);
+                        hit->normal = cos_of_angle_between(ray.direction, normal) < 0 ? normal : -normal;
+
+                        return true;
                     }
                 }
             }
+
+            return false;
         }
 
-        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray&) const override
+        std::vector<std::shared_ptr<Hit>> find_all_hits(const math::Ray& ray) const override
         {
-            LOG(ERROR) << "Not yet implemented";
-            abort();
+            auto hit = std::make_shared<Hit>();
+
+            if (find_first_positive_hit(ray, &*hit))
+            {
+                return std::vector<std::shared_ptr<Hit>> { hit };
+            }
+            else
+            {
+                return std::vector<std::shared_ptr<Hit>>();
+            }
         }
 
         math::Box bounding_box() const override
