@@ -122,19 +122,31 @@ namespace
         }
 
         template<typename T>
+        Animation<T> loop(Animation<T> animation) const
+        {
+            return animation::loop(animation);
+        }
+
+        template<typename T>
         Animation<T> cyclic(Animation<T> animation) const
         {
             auto forward = animation;
             auto backward = invert(forward);
             auto forward_backward = sequence(forward, backward);
 
-            return loop(forward_backward);
+            return animation::loop(forward_backward);
         }
 
         template<typename T>
         Animation<T> limit(Animation<T> animation, Duration duration) const
         {
             return animation::limit(animation, duration);
+        }
+
+        template<typename T>
+        Animation<T> sequence(Animation<T> animation1, Animation<T> animation2) const
+        {
+            return animation::sequence(animation1, animation2);
         }
 
         template<typename T>
@@ -189,9 +201,18 @@ ModulePtr raytracer::scripting::_private_::create_animation_module()
     BIND_AS(animation_seq, animate);
     BIND_AS(angle_animation, animate);
     BIND_AS(lissajous_by_map, lissajous);
+    BIND_AS(loop<double>, loop);
+    BIND_AS(loop<Point3D>, loop);
+    BIND_AS(loop<Angle>, loop);
     BIND_AS(cyclic<double>, cyclic);
     BIND_AS(cyclic<Point3D>, cyclic);
     BIND_AS(cyclic<Angle>, cyclic);
+    BIND_AS(cyclic<double>, cycle);
+    BIND_AS(cyclic<Point3D>, cycle);
+    BIND_AS(cyclic<Angle>, cycle);
+    BIND_AS(sequence<double>, sequence);
+    BIND_AS(sequence<Point3D>, sequence);
+    BIND_AS(sequence<Angle>, sequence);
     BIND_AS(ease_animation<double>, ease);
     BIND_AS(ease_animation<Point3D>, ease);
     BIND_AS(ease_animation<Angle>, ease);

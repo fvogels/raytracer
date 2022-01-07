@@ -32,4 +32,7 @@ namespace math
     inline Quaternion& operator -=(Quaternion& q1, const Quaternion& q2) { return q1 = q1 - q2; }
     inline Quaternion& operator *=(Quaternion& q1, double f) { return q1 = q1 * f; }
     inline Quaternion& operator /=(Quaternion& q1, double f) { return q1 = q1 / f; }
+
+    bool operator ==(const Quaternion& q1, const Quaternion& q2);
+    bool operator !=(const Quaternion& q1, const Quaternion& q2);
 }

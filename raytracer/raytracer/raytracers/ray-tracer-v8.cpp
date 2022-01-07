@@ -58,21 +58,21 @@ Color raytracer::raytracers::_private_::RayTracerV8::compute_refraction(const Sc
         if (refract(v, n, n1, n2, &refracted_direction))
         {
             const Point3D refracted_origin = hit.position + 0.000001 * refracted_direction;
-            const Ray refracted_ray(refracted_origin, refracted_direction);
+            const Ray first_refracted_ray(refracted_origin, refracted_direction);
 
             Hit refracted_hit;
-            if (!scene.root->find_first_positive_hit(refracted_ray, &refracted_hit))
+            if (!scene.root->find_first_positive_hit(first_refracted_ray, &refracted_hit))
             {
                 return colors::black();
             }
             else
             {
-                const Vector3D v = refracted_ray.direction;
+                const Vector3D v = first_refracted_ray.direction;
                 Vector3D n = refracted_hit.normal;
                 const double n1 = material_properties.refractive_index;
                 const double n2 = 1;
 
-                if (refracted_ray.direction.dot(n) > 0)
+                if (first_refracted_ray.direction.dot(n) > 0)
                 {
                     n = -n;
                 }
@@ -82,9 +82,9 @@ Color raytracer::raytracers::_private_::RayTracerV8::compute_refraction(const Sc
                 if (refract(v, n, n1, n2, &refracted_direction))
                 {
                     const Point3D refracted_origin = refracted_hit.position + 0.000001 * refracted_direction;
-                    const Ray refracted_ray(refracted_origin, refracted_direction);
+                    const Ray second_refracted_ray(refracted_origin, refracted_direction);
 
-                    return trace(scene, refracted_ray, material_properties.transparency * weight).color * weight;
+                    return trace(scene, second_refracted_ray, material_properties.transparency * weight).color * weight;
                 }
                 else
                 {
