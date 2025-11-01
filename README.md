@@ -55,6 +55,8 @@ pipeline( scene_animation(scene_at, seconds(5)),
 
 ![Reflection and Refraction](./demo/spheres.png)
 
+Please ignore the image compression artefacts.
+
 ```chai
 def scene_at(now)
 {
